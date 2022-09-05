@@ -15,11 +15,13 @@ def crawl_team(url):
 
     try:
         bs = BeautifulSoup(html, 'html.parser')
-        cl_teams = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : 'セントラル・リーグ'}).parent.next_sibling.next_sibling.find_all('a')
-        pl_teams = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : 'パシフィック・リーグ'}).parent.next_sibling.next_sibling.find_all('a')
+        league_list = ['セントラル・リーグ', 'パシフィック・リーグ']
+        teams = []
+        for league in league_list:
+            teams += bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : league}).parent.next_sibling.next_sibling.find_all('a')
 
-        all_teams = cl_teams + pl_teams
-        for team in all_teams:
+        for team in teams:
+            # print(team.get_text(), '-------------')
             team_url = team.attrs['href']
             crawl_all_player(url=team_url)
             time.sleep(5)
@@ -45,6 +47,7 @@ def crawl_player_per_pos(url, pos):
         bs = BeautifulSoup(html, 'html.parser')        
         players = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : pos}).parent.next_sibling.next_sibling.find_all('a')
         for player in players:
+            # print(player.get_text())
             # TODO 各選手のページに遷移し、データを取得
             None
     except AttributeError as e:
