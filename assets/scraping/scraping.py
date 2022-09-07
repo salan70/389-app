@@ -25,7 +25,7 @@ class Scraping:
             for team in teams:
                 print(team.get_text(), '-------------')
                 team_url = team.attrs['href']
-                self.crawl_all_player(url=team_url)
+                self.__crawl_all_player(url=team_url)
                 time.sleep(5)
 
         except AttributeError as e:
@@ -33,13 +33,13 @@ class Scraping:
 
         return None
 
-    def crawl_all_player(self, url):
+    def __crawl_all_player(self, url):
         pos_list = ['投手', '捕手', '内野手', '外野手']
         for pos in pos_list:
-            self.crawl_player_per_pos(url=url, pos=pos)
+            self.__crawl_player_per_pos(url=url, pos=pos)
 
 
-    def crawl_player_per_pos(self, url, pos):
+    def __crawl_player_per_pos(self, url, pos):
         try:
             html = urlopen('https://ja.wikipedia.org{}'.format(url))
         except HTTPError as e:
