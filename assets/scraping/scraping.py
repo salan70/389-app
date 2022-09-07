@@ -23,7 +23,7 @@ class Scraping:
                 teams += bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : league}).parent.next_sibling.next_sibling.find_all('a')
 
             for team in teams:
-                print(team.get_text(), '-------------')
+                # print(team.get_text(), '-------------')
                 team_url = team.attrs['href']
                 self.__crawl_all_player(url=team_url)
                 time.sleep(5)
@@ -49,7 +49,7 @@ class Scraping:
             bs = BeautifulSoup(html, 'html.parser')        
             players = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : pos}).parent.next_sibling.next_sibling.find_all('a')
             for player in players:
-                print(player.get_text())
+                # print(player.get_text())
                 # TODO 各選手のページに遷移し、データを取得
                 None
         except AttributeError as e:
