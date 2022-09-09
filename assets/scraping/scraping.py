@@ -69,6 +69,7 @@ class Scraping:
             search_word = 'O'
             data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word)
 
+            # data_flame[0]のほうが良い？
             for data in data_flame:
                 print(data)
         except:
