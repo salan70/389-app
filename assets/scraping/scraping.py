@@ -29,7 +29,7 @@ class Scraping:
                 # print(team.get_text(), '-------------')
                 team_url = team.attrs['href']
                 self.__crawl_all_player(url=team_url)
-                time.sleep(3)
+                time.sleep(2)
 
         except AttributeError as e:
             return e
@@ -53,12 +53,13 @@ class Scraping:
             bs = BeautifulSoup(html, 'html.parser')        
             players = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : pos}).parent.next_sibling.next_sibling.find_all('a')
             for player in players:
+                # print(player.get_text())
                 player_url = player.attrs['href']
                 self.__get_hitter_data(url=player_url)
 
                 # TODO playersへのinsert
                 # TODO 
-                time.sleep(3)
+                time.sleep(2)
 
         except AttributeError as e:
             return e
@@ -76,10 +77,12 @@ class Scraping:
                 print(data)
 
             # TODO player_idをdfに追加
-            # TODO idをdfに追加 
+            # TODO idをdfに追加
             return True
         except:
             return False
+
+
 
 scraping = Scraping()
 teams = scraping.crawl_team(url='https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%97%E3%83%AD%E9%87%8E%E7%90%83%E9%81%B8%E6%89%8B%E4%B8%80%E8%A6%A7')
