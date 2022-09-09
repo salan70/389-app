@@ -55,7 +55,7 @@ class Scraping:
             for player in players:
                 player_url = player.attrs['href']
                 # print(player.get_text())
-                self.__get_hitter_data(plane_url=player_url)
+                self.__get_hitter_data(url=player_url)
                 time.sleep(3)
 
         except AttributeError as e:
@@ -63,12 +63,11 @@ class Scraping:
 
         return None
 
-    def __get_hitter_data(self, plane_url):
+    def __get_hitter_data(self, url):
         try:
-            formated_url = 'https://ja.wikipedia.org{}'.format(plane_url)
             # 'O':OPSのO
             search_word = 'O'
-            data_flame = pd.read_html(formated_url, match=search_word)
+            data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word)
 
             for data in data_flame:
                 print(data)
