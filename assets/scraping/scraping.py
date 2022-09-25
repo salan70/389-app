@@ -26,7 +26,7 @@ class Scraping:
                 teams += bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : league}).parent.next_sibling.next_sibling.find_all('a')
 
             for team in teams:
-                # print(team.get_text(), '-------------')
+                print(team.get_text(), '-------------')
                 team_url = team.attrs['href']
                 self.__crawl_all_player(url=team_url)
                 time.sleep(2)
@@ -38,7 +38,7 @@ class Scraping:
 
     def __crawl_all_player(self, url):
         # pos_list = ['投手', '捕手', '内野手', '外野手']
-        pos_list = ['捕手']
+        pos_list = ['外野手']
         for pos in pos_list:
             self.__crawl_player_per_pos(url=url, pos=pos)
 
@@ -68,8 +68,9 @@ class Scraping:
 
     def __get_hitter_data(self, url):
         try:
-            # 'O':OPSのO
-            search_word = 'O'
+            # '犠':犠打や犠飛の犠
+            # 野手の成績を取得するために設定
+            search_word = '犠'
             data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word)
 
             # data_flame[0]のほうが良い？
