@@ -1,11 +1,10 @@
 import 'package:logger/logger.dart';
 import 'package:universal_html/controller.dart';
-import 'package:universal_html/html.dart';
 
 class Scraping {
   final logger = Logger();
 
-  fetchCatcher(String url) async {
+  Future<List<Catcher>> fetchCatcher(String url) async {
     final controller = WindowController();
     await controller.openHttp(uri: Uri.parse(url));
 
@@ -13,23 +12,25 @@ class Scraping {
         '#mw-content-text > div.mw-parser-output > table:nth-child(17) > tbody > tr';
     final elementList = controller.window!.document.querySelectorAll(selector);
 
-    final List<List<String?>> catcherList = [];
+    final List<Catcher> catcherList = [];
 
     for (final element in elementList) {
       final catcher = element.querySelector('> td > a');
       if (catcher != null) {
+        final name = catcher.title!;
+
         final url = catcher.attributes['href']!;
         final hometown = await fetchHometown(url);
 
-        catcherList.add([catcher.title!, hometown]);
-        await Future.delayed(const Duration(seconds: 5));
+        catcherList.add(Catcher(name, hometown));
+        await Future.delayed(const Duration(seconds: 3));
       }
     }
 
-    logger.i(['finish', catcherList]);
+    return catcherList;
   }
 
-  Future<String?> fetchHometown(String url) async {
+  Future<String> fetchHometown(String url) async {
     final controller = WindowController();
     await controller.openHttp(uri: Uri.parse('https://ja.wikipedia.org$url'));
 
@@ -39,9 +40,16 @@ class Scraping {
     final elementList = controller.window!.document.querySelectorAll(selector);
 
     for (final element in elementList) {
-      return element.querySelector(' > a')!.title;
+      return element.querySelector(' > a')!.title!;
     }
 
-    return null;
+    return '';
   }
+}
+
+class Catcher {
+  final String name;
+  final String hometown;
+
+  Catcher(this.name, this.hometown);
 }
