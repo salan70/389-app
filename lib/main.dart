@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'スクレイピングのサンプルアプリ'),
     );
   }
 }
@@ -31,17 +31,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   final _scraping = Scraping();
   final _url =
       'https://ja.wikipedia.org/wiki/%E5%BA%83%E5%B3%B6%E6%9D%B1%E6%B4%8B%E3%82%AB%E3%83%BC%E3%83%97%E3%81%AE%E9%81%B8%E6%89%8B%E4%B8%80%E8%A6%A7';
 
-  void _incrementCounter() {
-    setState(() {
-      _scraping.fetchCatcher(_url);
-      _counter++;
-    });
-  }
+  List<Catcher> _catcherList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -49,24 +43,41 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: ListView.builder(
+        itemCount: _catcherList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.centerLeft,
+            height: 64,
+            decoration: const BoxDecoration(
+              border: Border(
+                  bottom: BorderSide(
+                color: Colors.black12,
+              )),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            child: Column(
+              children: [
+                Text(_catcherList[index].name),
+                Text(_catcherList[index].hometown),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: TextButton(
+        onPressed: () async {
+          final tmpCatcherList = await _scraping.fetchCatcher(_url);
+          setState(() {
+            _catcherList = tmpCatcherList;
+          });
+        },
+        child: const Text(
+          '広島のキャッチャーをスクレイピング',
+          style: TextStyle(
+            color: Colors.red,
+          ),
+        ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
