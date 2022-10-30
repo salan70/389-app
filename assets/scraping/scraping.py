@@ -41,13 +41,15 @@ class Scraping:
         # pos_list = ['捕手', '内野手', '外野手']
         pos_list = ['捕手']
         for pos in pos_list:
+            test = self.__crawl_player_per_pos(url=url, pos=pos)
             print('~~~~~~~~~~~~~~ Result ~~~~~~~~~~~~~~~')
-            print(self.__crawl_player_per_pos(url=url, pos=pos))
+            print(test)
             print('~~~~~~~~~~~~~~ Result ~~~~~~~~~~~~~~~')
 
 
     def __crawl_player_per_pos(self, url, pos):
-        hitter_data_df = []
+        is_first = True
+        hitter_data_df = pd.DataFrame()
 
         try:
             html = urlopen('https://ja.wikipedia.org{}'.format(url))
@@ -57,12 +59,13 @@ class Scraping:
         try:
             bs = BeautifulSoup(html, 'html.parser')        
             players = bs.find('div', {'id' : 'bodyContent'}).find('span', {'id' : pos}).parent.next_sibling.next_sibling.find_all('a')
+
             for player in players:
                 print(player.get_text())
                 player_url = player.attrs['href']
 
                 # dfにinsert
-                hitter_data_df.append(self.__get_hitter_data(url=player_url))
+                hitter_data_df = pd.concat([hitter_data_df, self.__get_hitter_data(url=player_url)])
 
                 print('----------------next----------------')
                 time.sleep(2)
@@ -82,9 +85,10 @@ class Scraping:
             # 野手の成績を取得するために設定（wikipediaの表だと犠と打の間に改行が入るため、1文字で指定）
             search_word = '犠'
 
-            data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word ,header=0)
+            data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word ,header=None)[0]
+            print(data_flame)
 
-            return data_flame[0]
+            return data_flame
 
             # TODO player_idをdfに追加
             # TODO idをdfに追加
