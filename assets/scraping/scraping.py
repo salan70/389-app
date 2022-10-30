@@ -38,13 +38,17 @@ class Scraping:
 
     def __crawl_all_player(self, url):
         # pos_list = ['投手', '捕手', '内野手', '外野手']
-        pos_list = ['捕手', '内野手', '外野手']
-        # pos_list = ['外野手']
+        # pos_list = ['捕手', '内野手', '外野手']
+        pos_list = ['捕手']
         for pos in pos_list:
-            self.__crawl_player_per_pos(url=url, pos=pos)
+            print('~~~~~~~~~~~~~~ Result ~~~~~~~~~~~~~~~')
+            print(self.__crawl_player_per_pos(url=url, pos=pos))
+            print('~~~~~~~~~~~~~~ Result ~~~~~~~~~~~~~~~')
 
 
     def __crawl_player_per_pos(self, url, pos):
+        hitter_data_df = []
+
         try:
             html = urlopen('https://ja.wikipedia.org{}'.format(url))
         except HTTPError as e:
@@ -56,12 +60,14 @@ class Scraping:
             for player in players:
                 print(player.get_text())
                 player_url = player.attrs['href']
-                self.__get_hitter_data(url=player_url)
 
-                # TODO playersへのinsert
-                # TODO 
+                # dfにinsert
+                hitter_data_df.append(self.__get_hitter_data(url=player_url))
+
                 print('----------------next----------------')
                 time.sleep(2)
+            
+            return hitter_data_df
 
         except AttributeError as e:
             return e
@@ -69,6 +75,8 @@ class Scraping:
         return None
 
     def __get_hitter_data(self, url):
+        hitter_data_df = []
+
         try:
             # '犠':犠打や犠飛の犠
             # 野手の成績を取得するために設定（wikipediaの表だと犠と打の間に改行が入るため、1文字で指定）
@@ -76,14 +84,13 @@ class Scraping:
 
             data_flame = pd.read_html('https://ja.wikipedia.org{}'.format(url), match=search_word ,header=0)
 
-            print(data_flame[0])
+            return data_flame[0]
 
             # TODO player_idをdfに追加
             # TODO idをdfに追加
             return True
         except:
-            return False
-
+            return None
 
 
 scraping = Scraping()
