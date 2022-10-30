@@ -48,7 +48,6 @@ class Scraping:
 
 
     def __crawl_player_per_pos(self, url, pos):
-        is_first = True
         hitter_data_df = pd.DataFrame()
 
         try:
@@ -75,8 +74,6 @@ class Scraping:
         except AttributeError as e:
             return e
 
-        return None
-
     def __get_hitter_data(self, url):
         hitter_data_df = []
 
@@ -92,7 +89,6 @@ class Scraping:
 
             # TODO player_idをdfに追加
             # TODO idをdfに追加
-            return True
         except:
             return None
 
