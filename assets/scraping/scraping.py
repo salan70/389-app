@@ -12,6 +12,10 @@ import time
 import datetime
 import uuid
 
+# 本ファイルを実行して作成できるのは、「hitter_basic.csv」と「hitter_data.csv」の2つ。
+# 作成したものは両方とも、加工が必要。（主に不要なデータ（行）の削除）
+# 加工はGoogleスプレットシートで実施し、加工したファイルは../csv_from_google_spread_sheetに格納している。
+
 class Scraping:
 
     # 「日本のプロ野球選手一覧」ページから、各球団の「〇〇（球団名）の選手一覧」ページに遷移する
