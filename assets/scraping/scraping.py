@@ -30,8 +30,8 @@ class Scraping:
 
         try:
             bs = BeautifulSoup(html, 'html.parser')
-            # league_list = ['セントラル・リーグ', 'パシフィック・リーグ']
-            league_list = ['パシフィック・リーグ']
+            league_list = ['セントラル・リーグ', 'パシフィック・リーグ']
+            # league_list = ['パシフィック・リーグ']
             teams = []
             for league in league_list:
                 teams += bs.find('div', {'id': 'bodyContent'}).find(
@@ -56,8 +56,8 @@ class Scraping:
             os.makedirs(f'csv/{output_datetime}')
 
             # csvへの変換、書き出し
-            hitter_basic_df.to_csv(f'csv/{output_datetime}/p_league_hitter_basic.csv')
-            hitter_data_df.to_csv(f'csv/{output_datetime}/p_league_hitter_data.csv')
+            hitter_basic_df.to_csv(f'csv/{output_datetime}/hitter_basic.csv')
+            hitter_data_df.to_csv(f'csv/{output_datetime}/hitter_data.csv')
 
         except AttributeError as e:
             return e
@@ -70,8 +70,8 @@ class Scraping:
         hitter_data_df = pd.DataFrame()
 
         # pos_list = ['投手', '捕手', '内野手', '外野手']
-        # pos_list = ['捕手', '内野手', '外野手']
-        pos_list = ['捕手']
+        pos_list = ['捕手', '内野手', '外野手']
+        # pos_list = ['捕手']
         for pos in pos_list:
             new_hitter_basic_df, new_hitter_data_df = self.__crawl_player_per_pos(url=url, pos=pos, team=team)
             
