@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Hitter _$HitterFromJson(Map<String, dynamic> json) {
+  return _Hitter.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Hitter {
   String get id => throw _privateConstructorUsedError;
@@ -21,6 +25,7 @@ mixin _$Hitter {
   String get team => throw _privateConstructorUsedError;
   bool get hasData => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HitterCopyWith<Hitter> get copyWith => throw _privateConstructorUsedError;
 }
@@ -118,13 +123,16 @@ class __$$_HitterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Hitter with DiagnosticableTreeMixin implements _Hitter {
   const _$_Hitter(
       {required this.id,
       required this.name,
       required this.team,
       required this.hasData});
+
+  factory _$_Hitter.fromJson(Map<String, dynamic> json) =>
+      _$$_HitterFromJson(json);
 
   @override
   final String id;
@@ -162,6 +170,7 @@ class _$_Hitter with DiagnosticableTreeMixin implements _Hitter {
             (identical(other.hasData, hasData) || other.hasData == hasData));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, team, hasData);
 
@@ -170,6 +179,13 @@ class _$_Hitter with DiagnosticableTreeMixin implements _Hitter {
   @pragma('vm:prefer-inline')
   _$$_HitterCopyWith<_$_Hitter> get copyWith =>
       __$$_HitterCopyWithImpl<_$_Hitter>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_HitterToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Hitter implements Hitter {
@@ -178,6 +194,8 @@ abstract class _Hitter implements Hitter {
       required final String name,
       required final String team,
       required final bool hasData}) = _$_Hitter;
+
+  factory _Hitter.fromJson(Map<String, dynamic> json) = _$_Hitter.fromJson;
 
   @override
   String get id;
