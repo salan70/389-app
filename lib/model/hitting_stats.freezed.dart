@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'hitter_stats.dart';
+part of 'hitting_stats.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$HitterStats {
+mixin _$HittingStats {
   String get playerId => throw _privateConstructorUsedError;
   String get year => throw _privateConstructorUsedError; // 年度
   String get team => throw _privateConstructorUsedError; // 球団
@@ -44,15 +44,15 @@ mixin _$HitterStats {
   String get ops => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HitterStatsCopyWith<HitterStats> get copyWith =>
+  $HittingStatsCopyWith<HittingStats> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterStatsCopyWith<$Res> {
-  factory $HitterStatsCopyWith(
-          HitterStats value, $Res Function(HitterStats) then) =
-      _$HitterStatsCopyWithImpl<$Res, HitterStats>;
+abstract class $HittingStatsCopyWith<$Res> {
+  factory $HittingStatsCopyWith(
+          HittingStats value, $Res Function(HittingStats) then) =
+      _$HittingStatsCopyWithImpl<$Res, HittingStats>;
   @useResult
   $Res call(
       {String playerId,
@@ -84,9 +84,9 @@ abstract class $HitterStatsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HitterStatsCopyWithImpl<$Res, $Val extends HitterStats>
-    implements $HitterStatsCopyWith<$Res> {
-  _$HitterStatsCopyWithImpl(this._value, this._then);
+class _$HittingStatsCopyWithImpl<$Res, $Val extends HittingStats>
+    implements $HittingStatsCopyWith<$Res> {
+  _$HittingStatsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -233,11 +233,11 @@ class _$HitterStatsCopyWithImpl<$Res, $Val extends HitterStats>
 }
 
 /// @nodoc
-abstract class _$$_HitterStatsCopyWith<$Res>
-    implements $HitterStatsCopyWith<$Res> {
-  factory _$$_HitterStatsCopyWith(
-          _$_HitterStats value, $Res Function(_$_HitterStats) then) =
-      __$$_HitterStatsCopyWithImpl<$Res>;
+abstract class _$$_HittingStatsCopyWith<$Res>
+    implements $HittingStatsCopyWith<$Res> {
+  factory _$$_HittingStatsCopyWith(
+          _$_HittingStats value, $Res Function(_$_HittingStats) then) =
+      __$$_HittingStatsCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -270,11 +270,11 @@ abstract class _$$_HitterStatsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HitterStatsCopyWithImpl<$Res>
-    extends _$HitterStatsCopyWithImpl<$Res, _$_HitterStats>
-    implements _$$_HitterStatsCopyWith<$Res> {
-  __$$_HitterStatsCopyWithImpl(
-      _$_HitterStats _value, $Res Function(_$_HitterStats) _then)
+class __$$_HittingStatsCopyWithImpl<$Res>
+    extends _$HittingStatsCopyWithImpl<$Res, _$_HittingStats>
+    implements _$$_HittingStatsCopyWith<$Res> {
+  __$$_HittingStatsCopyWithImpl(
+      _$_HittingStats _value, $Res Function(_$_HittingStats) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -307,7 +307,7 @@ class __$$_HitterStatsCopyWithImpl<$Res>
     Object? slg = null,
     Object? ops = null,
   }) {
-    return _then(_$_HitterStats(
+    return _then(_$_HittingStats(
       playerId: null == playerId
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
@@ -418,8 +418,8 @@ class __$$_HitterStatsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HitterStats with DiagnosticableTreeMixin implements _HitterStats {
-  const _$_HitterStats(
+class _$_HittingStats implements _HittingStats {
+  const _$_HittingStats(
       {required this.playerId,
       required this.year,
       required this.team,
@@ -525,48 +525,15 @@ class _$_HitterStats with DiagnosticableTreeMixin implements _HitterStats {
   final String ops;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HitterStats(playerId: $playerId, year: $year, team: $team, games: $games, pa: $pa, atBats: $atBats, runs: $runs, hits: $hits, twoB: $twoB, threeB: $threeB, hr: $hr, tb: $tb, rbi: $rbi, sb: $sb, cs: $cs, sac: $sac, sf: $sf, bb: $bb, ibb: $ibb, hbp: $hbp, so: $so, gidp: $gidp, avg: $avg, obp: $obp, slg: $slg, ops: $ops)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'HitterStats'))
-      ..add(DiagnosticsProperty('playerId', playerId))
-      ..add(DiagnosticsProperty('year', year))
-      ..add(DiagnosticsProperty('team', team))
-      ..add(DiagnosticsProperty('games', games))
-      ..add(DiagnosticsProperty('pa', pa))
-      ..add(DiagnosticsProperty('atBats', atBats))
-      ..add(DiagnosticsProperty('runs', runs))
-      ..add(DiagnosticsProperty('hits', hits))
-      ..add(DiagnosticsProperty('twoB', twoB))
-      ..add(DiagnosticsProperty('threeB', threeB))
-      ..add(DiagnosticsProperty('hr', hr))
-      ..add(DiagnosticsProperty('tb', tb))
-      ..add(DiagnosticsProperty('rbi', rbi))
-      ..add(DiagnosticsProperty('sb', sb))
-      ..add(DiagnosticsProperty('cs', cs))
-      ..add(DiagnosticsProperty('sac', sac))
-      ..add(DiagnosticsProperty('sf', sf))
-      ..add(DiagnosticsProperty('bb', bb))
-      ..add(DiagnosticsProperty('ibb', ibb))
-      ..add(DiagnosticsProperty('hbp', hbp))
-      ..add(DiagnosticsProperty('so', so))
-      ..add(DiagnosticsProperty('gidp', gidp))
-      ..add(DiagnosticsProperty('avg', avg))
-      ..add(DiagnosticsProperty('obp', obp))
-      ..add(DiagnosticsProperty('slg', slg))
-      ..add(DiagnosticsProperty('ops', ops));
+  String toString() {
+    return 'HittingStats(playerId: $playerId, year: $year, team: $team, games: $games, pa: $pa, atBats: $atBats, runs: $runs, hits: $hits, twoB: $twoB, threeB: $threeB, hr: $hr, tb: $tb, rbi: $rbi, sb: $sb, cs: $cs, sac: $sac, sf: $sf, bb: $bb, ibb: $ibb, hbp: $hbp, so: $so, gidp: $gidp, avg: $avg, obp: $obp, slg: $slg, ops: $ops)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterStats &&
+            other is _$_HittingStats &&
             (identical(other.playerId, playerId) ||
                 other.playerId == playerId) &&
             (identical(other.year, year) || other.year == year) &&
@@ -630,12 +597,12 @@ class _$_HitterStats with DiagnosticableTreeMixin implements _HitterStats {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterStatsCopyWith<_$_HitterStats> get copyWith =>
-      __$$_HitterStatsCopyWithImpl<_$_HitterStats>(this, _$identity);
+  _$$_HittingStatsCopyWith<_$_HittingStats> get copyWith =>
+      __$$_HittingStatsCopyWithImpl<_$_HittingStats>(this, _$identity);
 }
 
-abstract class _HitterStats implements HitterStats {
-  const factory _HitterStats(
+abstract class _HittingStats implements HittingStats {
+  const factory _HittingStats(
       {required final String playerId,
       required final String year,
       required final String team,
@@ -661,7 +628,7 @@ abstract class _HitterStats implements HitterStats {
       required final String avg,
       required final String obp,
       required final String slg,
-      required final String ops}) = _$_HitterStats;
+      required final String ops}) = _$_HittingStats;
 
   @override
   String get playerId;
@@ -717,6 +684,6 @@ abstract class _HitterStats implements HitterStats {
   String get ops;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterStatsCopyWith<_$_HitterStats> get copyWith =>
+  _$$_HittingStatsCopyWith<_$_HittingStats> get copyWith =>
       throw _privateConstructorUsedError;
 }
