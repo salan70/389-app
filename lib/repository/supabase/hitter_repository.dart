@@ -6,6 +6,12 @@ import 'package:baseball_quiz_app/model/hitter_search_filter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HitterRepository {
+  HitterRepository({
+    required this.supabase,
+  });
+
+  final Supabase supabase;
+
   //TODO エラーハンドリング
   /*TODO
   HitterSearchFilterを引数、HitterQuizUiを返り値とする関数を作成する
@@ -21,11 +27,11 @@ class HitterRepository {
 
    */
 
-  Future fetchHitter(Supabase supabase, HitterSearchFilter searchFilter) async {
+  Future fetchHitter(HitterSearchFilter searchFilter) async {
+    // NOTE responseという変数名が気に食わない
     final response = await supabase.client
         .from('hitter_table')
-        // TODO 最終的には取得するのid,球団,名前だけでいいかも
-        .select('*, hitting_stats_table!inner(*)')
+        .select('id, name, team, has_data, hitting_stats_table!inner(*)')
         .eq('has_data', true)
         .filter('team', 'in', searchFilter.teamList)
         .gte('hitting_stats_table.試合', searchFilter.minGames)
@@ -34,10 +40,13 @@ class HitterRepository {
 
     // TODO 空の際の処理検討
 
-    // TODO ランダムで1件選ぶ
+    // ランダムで1件抽出
     final random = Random();
+    // NOTE randomElemという変数名が気に食わない
     final randomElem = response[random.nextInt(response.length)];
 
-    return randomElem;
+    final hitter = Hitter.fromJson(randomElem);
+
+    return hitter;
   }
 }
