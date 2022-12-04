@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:baseball_quiz_app/model/hitter.dart';
-import 'package:baseball_quiz_app/model/hitter_search_filter.dart';
-import 'package:baseball_quiz_app/model/hitting_stats.dart';
-import 'package:baseball_quiz_app/model/ui/hitter_quiz_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../model/hitter.dart';
+import '../../model/hitter_search_filter.dart';
+import '../../model/hitting_stats.dart';
+import '../../model/ui/hitter_quiz_ui.dart';
 
 //TODO providerの実装
 class HitterRepository {

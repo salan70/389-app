@@ -1,5 +1,6 @@
-import 'package:baseball_quiz_app/model/hitting_stats.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../hitting_stats.dart';
 
 part 'hitter_quiz_ui.freezed.dart';
 
