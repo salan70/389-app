@@ -10,7 +10,7 @@ _$_Hitter _$$_HitterFromJson(Map<String, dynamic> json) => _$_Hitter(
       id: json['id'] as String,
       name: json['name'] as String,
       team: json['team'] as String,
-      hasData: json['has_data'] as bool,
+      hasData: json['hasData'] as bool,
     );
 
 Map<String, dynamic> _$$_HitterToJson(_$_Hitter instance) => <String, dynamic>{
