@@ -1,35 +1,41 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'hitting_stats.freezed.dart';
+part 'hitting_stats.g.dart';
 
 @freezed
 class HittingStats with _$HittingStats {
   const factory HittingStats({
     required String playerId,
-    required String year, // 年度
-    required String team, // 球団
-    required int games, // 試合
-    required int pa, // 打席
-    required int atBats, // 打数
-    required int runs, // 得点
-    required int hits, // 安打
-    required int twoB, // 2塁打
-    required int threeB, // 3塁打
-    required int hr, // 本塁打
-    required int tb, // 塁打
-    required int rbi, // 打点
-    required int sb, // 盗塁
-    required int cs, // 盗塁死
-    required int sac, // 犠打
-    required int sf, // 犠飛
-    required int bb, // 四球
-    required int ibb, // 敬遠
-    required int hbp, // 死球
-    required int so, // 三振
-    required int gidp, // 併殺打
-    required String avg, // 打率
-    required String obp, // 出塁率
-    required String slg, // 長打率
-    required String ops, // OPS
+    @JsonKey(name: '年度') required String year,
+    @JsonKey(name: '球団') required String team,
+    @JsonKey(name: '試合') required int games,
+    @JsonKey(name: '打席') required int pa,
+    @JsonKey(name: '打数') required int atBats,
+    @JsonKey(name: '得点') required int runs,
+    @JsonKey(name: '安打') required int hits,
+    @JsonKey(name: '二塁打') required int twoB,
+    @JsonKey(name: '三塁打') required int threeB,
+    @JsonKey(name: '本塁打') required int hr,
+    @JsonKey(name: '塁打') required int tb,
+    @JsonKey(name: '打点') required int rbi,
+    @JsonKey(name: '盗塁') required int sb,
+    @JsonKey(name: '盗塁死') required int cs,
+    @JsonKey(name: '犠打') required int sac,
+    @JsonKey(name: '犠飛') required int sf,
+    @JsonKey(name: '四球') required int bb,
+    @JsonKey(name: '敬遠') required int ibb,
+    @JsonKey(name: '死球') required int hbp,
+    @JsonKey(name: '三振') required int so,
+    @JsonKey(name: '併殺打') required int gidp,
+    @JsonKey(name: '打率') required String avg,
+    @JsonKey(name: '出塁率') required String obp,
+    @JsonKey(name: '長打率') required String slg,
+    @JsonKey(name: 'OPS') required String ops,
   }) = _HittingStats;
+
+  factory HittingStats.fromJson(Map<String, dynamic> json) =>
+      _$HittingStatsFromJson(json);
 }

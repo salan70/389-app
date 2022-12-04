@@ -14,35 +14,65 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+HittingStats _$HittingStatsFromJson(Map<String, dynamic> json) {
+  return _HittingStats.fromJson(json);
+}
+
 /// @nodoc
 mixin _$HittingStats {
   String get playerId => throw _privateConstructorUsedError;
-  String get year => throw _privateConstructorUsedError; // 年度
-  String get team => throw _privateConstructorUsedError; // 球団
-  int get games => throw _privateConstructorUsedError; // 試合
-  int get pa => throw _privateConstructorUsedError; // 打席
-  int get atBats => throw _privateConstructorUsedError; // 打数
-  int get runs => throw _privateConstructorUsedError; // 得点
-  int get hits => throw _privateConstructorUsedError; // 安打
-  int get twoB => throw _privateConstructorUsedError; // 2塁打
-  int get threeB => throw _privateConstructorUsedError; // 3塁打
-  int get hr => throw _privateConstructorUsedError; // 本塁打
-  int get tb => throw _privateConstructorUsedError; // 塁打
-  int get rbi => throw _privateConstructorUsedError; // 打点
-  int get sb => throw _privateConstructorUsedError; // 盗塁
-  int get cs => throw _privateConstructorUsedError; // 盗塁死
-  int get sac => throw _privateConstructorUsedError; // 犠打
-  int get sf => throw _privateConstructorUsedError; // 犠飛
-  int get bb => throw _privateConstructorUsedError; // 四球
-  int get ibb => throw _privateConstructorUsedError; // 敬遠
-  int get hbp => throw _privateConstructorUsedError; // 死球
-  int get so => throw _privateConstructorUsedError; // 三振
-  int get gidp => throw _privateConstructorUsedError; // 併殺打
-  String get avg => throw _privateConstructorUsedError; // 打率
-  String get obp => throw _privateConstructorUsedError; // 出塁率
-  String get slg => throw _privateConstructorUsedError; // 長打率
+  @JsonKey(name: '年度')
+  String get year => throw _privateConstructorUsedError;
+  @JsonKey(name: '球団')
+  String get team => throw _privateConstructorUsedError;
+  @JsonKey(name: '試合')
+  int get games => throw _privateConstructorUsedError;
+  @JsonKey(name: '打席')
+  int get pa => throw _privateConstructorUsedError;
+  @JsonKey(name: '打数')
+  int get atBats => throw _privateConstructorUsedError;
+  @JsonKey(name: '得点')
+  int get runs => throw _privateConstructorUsedError;
+  @JsonKey(name: '安打')
+  int get hits => throw _privateConstructorUsedError;
+  @JsonKey(name: '二塁打')
+  int get twoB => throw _privateConstructorUsedError;
+  @JsonKey(name: '三塁打')
+  int get threeB => throw _privateConstructorUsedError;
+  @JsonKey(name: '本塁打')
+  int get hr => throw _privateConstructorUsedError;
+  @JsonKey(name: '塁打')
+  int get tb => throw _privateConstructorUsedError;
+  @JsonKey(name: '打点')
+  int get rbi => throw _privateConstructorUsedError;
+  @JsonKey(name: '盗塁')
+  int get sb => throw _privateConstructorUsedError;
+  @JsonKey(name: '盗塁死')
+  int get cs => throw _privateConstructorUsedError;
+  @JsonKey(name: '犠打')
+  int get sac => throw _privateConstructorUsedError;
+  @JsonKey(name: '犠飛')
+  int get sf => throw _privateConstructorUsedError;
+  @JsonKey(name: '四球')
+  int get bb => throw _privateConstructorUsedError;
+  @JsonKey(name: '敬遠')
+  int get ibb => throw _privateConstructorUsedError;
+  @JsonKey(name: '死球')
+  int get hbp => throw _privateConstructorUsedError;
+  @JsonKey(name: '三振')
+  int get so => throw _privateConstructorUsedError;
+  @JsonKey(name: '併殺打')
+  int get gidp => throw _privateConstructorUsedError;
+  @JsonKey(name: '打率')
+  String get avg => throw _privateConstructorUsedError;
+  @JsonKey(name: '出塁率')
+  String get obp => throw _privateConstructorUsedError;
+  @JsonKey(name: '長打率')
+  String get slg => throw _privateConstructorUsedError;
+  @JsonKey(name: 'OPS')
   String get ops => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HittingStatsCopyWith<HittingStats> get copyWith =>
       throw _privateConstructorUsedError;
@@ -56,31 +86,31 @@ abstract class $HittingStatsCopyWith<$Res> {
   @useResult
   $Res call(
       {String playerId,
-      String year,
-      String team,
-      int games,
-      int pa,
-      int atBats,
-      int runs,
-      int hits,
-      int twoB,
-      int threeB,
-      int hr,
-      int tb,
-      int rbi,
-      int sb,
-      int cs,
-      int sac,
-      int sf,
-      int bb,
-      int ibb,
-      int hbp,
-      int so,
-      int gidp,
-      String avg,
-      String obp,
-      String slg,
-      String ops});
+      @JsonKey(name: '年度') String year,
+      @JsonKey(name: '球団') String team,
+      @JsonKey(name: '試合') int games,
+      @JsonKey(name: '打席') int pa,
+      @JsonKey(name: '打数') int atBats,
+      @JsonKey(name: '得点') int runs,
+      @JsonKey(name: '安打') int hits,
+      @JsonKey(name: '二塁打') int twoB,
+      @JsonKey(name: '三塁打') int threeB,
+      @JsonKey(name: '本塁打') int hr,
+      @JsonKey(name: '塁打') int tb,
+      @JsonKey(name: '打点') int rbi,
+      @JsonKey(name: '盗塁') int sb,
+      @JsonKey(name: '盗塁死') int cs,
+      @JsonKey(name: '犠打') int sac,
+      @JsonKey(name: '犠飛') int sf,
+      @JsonKey(name: '四球') int bb,
+      @JsonKey(name: '敬遠') int ibb,
+      @JsonKey(name: '死球') int hbp,
+      @JsonKey(name: '三振') int so,
+      @JsonKey(name: '併殺打') int gidp,
+      @JsonKey(name: '打率') String avg,
+      @JsonKey(name: '出塁率') String obp,
+      @JsonKey(name: '長打率') String slg,
+      @JsonKey(name: 'OPS') String ops});
 }
 
 /// @nodoc
@@ -242,31 +272,31 @@ abstract class _$$_HittingStatsCopyWith<$Res>
   @useResult
   $Res call(
       {String playerId,
-      String year,
-      String team,
-      int games,
-      int pa,
-      int atBats,
-      int runs,
-      int hits,
-      int twoB,
-      int threeB,
-      int hr,
-      int tb,
-      int rbi,
-      int sb,
-      int cs,
-      int sac,
-      int sf,
-      int bb,
-      int ibb,
-      int hbp,
-      int so,
-      int gidp,
-      String avg,
-      String obp,
-      String slg,
-      String ops});
+      @JsonKey(name: '年度') String year,
+      @JsonKey(name: '球団') String team,
+      @JsonKey(name: '試合') int games,
+      @JsonKey(name: '打席') int pa,
+      @JsonKey(name: '打数') int atBats,
+      @JsonKey(name: '得点') int runs,
+      @JsonKey(name: '安打') int hits,
+      @JsonKey(name: '二塁打') int twoB,
+      @JsonKey(name: '三塁打') int threeB,
+      @JsonKey(name: '本塁打') int hr,
+      @JsonKey(name: '塁打') int tb,
+      @JsonKey(name: '打点') int rbi,
+      @JsonKey(name: '盗塁') int sb,
+      @JsonKey(name: '盗塁死') int cs,
+      @JsonKey(name: '犠打') int sac,
+      @JsonKey(name: '犠飛') int sf,
+      @JsonKey(name: '四球') int bb,
+      @JsonKey(name: '敬遠') int ibb,
+      @JsonKey(name: '死球') int hbp,
+      @JsonKey(name: '三振') int so,
+      @JsonKey(name: '併殺打') int gidp,
+      @JsonKey(name: '打率') String avg,
+      @JsonKey(name: '出塁率') String obp,
+      @JsonKey(name: '長打率') String slg,
+      @JsonKey(name: 'OPS') String ops});
 }
 
 /// @nodoc
@@ -417,111 +447,115 @@ class __$$_HittingStatsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_HittingStats implements _HittingStats {
   const _$_HittingStats(
       {required this.playerId,
-      required this.year,
-      required this.team,
-      required this.games,
-      required this.pa,
-      required this.atBats,
-      required this.runs,
-      required this.hits,
-      required this.twoB,
-      required this.threeB,
-      required this.hr,
-      required this.tb,
-      required this.rbi,
-      required this.sb,
-      required this.cs,
-      required this.sac,
-      required this.sf,
-      required this.bb,
-      required this.ibb,
-      required this.hbp,
-      required this.so,
-      required this.gidp,
-      required this.avg,
-      required this.obp,
-      required this.slg,
-      required this.ops});
+      @JsonKey(name: '年度') required this.year,
+      @JsonKey(name: '球団') required this.team,
+      @JsonKey(name: '試合') required this.games,
+      @JsonKey(name: '打席') required this.pa,
+      @JsonKey(name: '打数') required this.atBats,
+      @JsonKey(name: '得点') required this.runs,
+      @JsonKey(name: '安打') required this.hits,
+      @JsonKey(name: '二塁打') required this.twoB,
+      @JsonKey(name: '三塁打') required this.threeB,
+      @JsonKey(name: '本塁打') required this.hr,
+      @JsonKey(name: '塁打') required this.tb,
+      @JsonKey(name: '打点') required this.rbi,
+      @JsonKey(name: '盗塁') required this.sb,
+      @JsonKey(name: '盗塁死') required this.cs,
+      @JsonKey(name: '犠打') required this.sac,
+      @JsonKey(name: '犠飛') required this.sf,
+      @JsonKey(name: '四球') required this.bb,
+      @JsonKey(name: '敬遠') required this.ibb,
+      @JsonKey(name: '死球') required this.hbp,
+      @JsonKey(name: '三振') required this.so,
+      @JsonKey(name: '併殺打') required this.gidp,
+      @JsonKey(name: '打率') required this.avg,
+      @JsonKey(name: '出塁率') required this.obp,
+      @JsonKey(name: '長打率') required this.slg,
+      @JsonKey(name: 'OPS') required this.ops});
+
+  factory _$_HittingStats.fromJson(Map<String, dynamic> json) =>
+      _$$_HittingStatsFromJson(json);
 
   @override
   final String playerId;
   @override
+  @JsonKey(name: '年度')
   final String year;
-// 年度
   @override
+  @JsonKey(name: '球団')
   final String team;
-// 球団
   @override
+  @JsonKey(name: '試合')
   final int games;
-// 試合
   @override
+  @JsonKey(name: '打席')
   final int pa;
-// 打席
   @override
+  @JsonKey(name: '打数')
   final int atBats;
-// 打数
   @override
+  @JsonKey(name: '得点')
   final int runs;
-// 得点
   @override
+  @JsonKey(name: '安打')
   final int hits;
-// 安打
   @override
+  @JsonKey(name: '二塁打')
   final int twoB;
-// 2塁打
   @override
+  @JsonKey(name: '三塁打')
   final int threeB;
-// 3塁打
   @override
+  @JsonKey(name: '本塁打')
   final int hr;
-// 本塁打
   @override
+  @JsonKey(name: '塁打')
   final int tb;
-// 塁打
   @override
+  @JsonKey(name: '打点')
   final int rbi;
-// 打点
   @override
+  @JsonKey(name: '盗塁')
   final int sb;
-// 盗塁
   @override
+  @JsonKey(name: '盗塁死')
   final int cs;
-// 盗塁死
   @override
+  @JsonKey(name: '犠打')
   final int sac;
-// 犠打
   @override
+  @JsonKey(name: '犠飛')
   final int sf;
-// 犠飛
   @override
+  @JsonKey(name: '四球')
   final int bb;
-// 四球
   @override
+  @JsonKey(name: '敬遠')
   final int ibb;
-// 敬遠
   @override
+  @JsonKey(name: '死球')
   final int hbp;
-// 死球
   @override
+  @JsonKey(name: '三振')
   final int so;
-// 三振
   @override
+  @JsonKey(name: '併殺打')
   final int gidp;
-// 併殺打
   @override
+  @JsonKey(name: '打率')
   final String avg;
-// 打率
   @override
+  @JsonKey(name: '出塁率')
   final String obp;
-// 出塁率
   @override
+  @JsonKey(name: '長打率')
   final String slg;
-// 長打率
   @override
+  @JsonKey(name: 'OPS')
   final String ops;
 
   @override
@@ -563,6 +597,7 @@ class _$_HittingStats implements _HittingStats {
             (identical(other.ops, ops) || other.ops == ops));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -599,88 +634,123 @@ class _$_HittingStats implements _HittingStats {
   @pragma('vm:prefer-inline')
   _$$_HittingStatsCopyWith<_$_HittingStats> get copyWith =>
       __$$_HittingStatsCopyWithImpl<_$_HittingStats>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_HittingStatsToJson(
+      this,
+    );
+  }
 }
 
 abstract class _HittingStats implements HittingStats {
   const factory _HittingStats(
       {required final String playerId,
-      required final String year,
-      required final String team,
-      required final int games,
-      required final int pa,
-      required final int atBats,
-      required final int runs,
-      required final int hits,
-      required final int twoB,
-      required final int threeB,
-      required final int hr,
-      required final int tb,
-      required final int rbi,
-      required final int sb,
-      required final int cs,
-      required final int sac,
-      required final int sf,
-      required final int bb,
-      required final int ibb,
-      required final int hbp,
-      required final int so,
-      required final int gidp,
-      required final String avg,
-      required final String obp,
-      required final String slg,
-      required final String ops}) = _$_HittingStats;
+      @JsonKey(name: '年度') required final String year,
+      @JsonKey(name: '球団') required final String team,
+      @JsonKey(name: '試合') required final int games,
+      @JsonKey(name: '打席') required final int pa,
+      @JsonKey(name: '打数') required final int atBats,
+      @JsonKey(name: '得点') required final int runs,
+      @JsonKey(name: '安打') required final int hits,
+      @JsonKey(name: '二塁打') required final int twoB,
+      @JsonKey(name: '三塁打') required final int threeB,
+      @JsonKey(name: '本塁打') required final int hr,
+      @JsonKey(name: '塁打') required final int tb,
+      @JsonKey(name: '打点') required final int rbi,
+      @JsonKey(name: '盗塁') required final int sb,
+      @JsonKey(name: '盗塁死') required final int cs,
+      @JsonKey(name: '犠打') required final int sac,
+      @JsonKey(name: '犠飛') required final int sf,
+      @JsonKey(name: '四球') required final int bb,
+      @JsonKey(name: '敬遠') required final int ibb,
+      @JsonKey(name: '死球') required final int hbp,
+      @JsonKey(name: '三振') required final int so,
+      @JsonKey(name: '併殺打') required final int gidp,
+      @JsonKey(name: '打率') required final String avg,
+      @JsonKey(name: '出塁率') required final String obp,
+      @JsonKey(name: '長打率') required final String slg,
+      @JsonKey(name: 'OPS') required final String ops}) = _$_HittingStats;
+
+  factory _HittingStats.fromJson(Map<String, dynamic> json) =
+      _$_HittingStats.fromJson;
 
   @override
   String get playerId;
   @override
+  @JsonKey(name: '年度')
   String get year;
-  @override // 年度
+  @override
+  @JsonKey(name: '球団')
   String get team;
-  @override // 球団
+  @override
+  @JsonKey(name: '試合')
   int get games;
-  @override // 試合
+  @override
+  @JsonKey(name: '打席')
   int get pa;
-  @override // 打席
+  @override
+  @JsonKey(name: '打数')
   int get atBats;
-  @override // 打数
+  @override
+  @JsonKey(name: '得点')
   int get runs;
-  @override // 得点
+  @override
+  @JsonKey(name: '安打')
   int get hits;
-  @override // 安打
+  @override
+  @JsonKey(name: '二塁打')
   int get twoB;
-  @override // 2塁打
+  @override
+  @JsonKey(name: '三塁打')
   int get threeB;
-  @override // 3塁打
+  @override
+  @JsonKey(name: '本塁打')
   int get hr;
-  @override // 本塁打
+  @override
+  @JsonKey(name: '塁打')
   int get tb;
-  @override // 塁打
+  @override
+  @JsonKey(name: '打点')
   int get rbi;
-  @override // 打点
+  @override
+  @JsonKey(name: '盗塁')
   int get sb;
-  @override // 盗塁
+  @override
+  @JsonKey(name: '盗塁死')
   int get cs;
-  @override // 盗塁死
+  @override
+  @JsonKey(name: '犠打')
   int get sac;
-  @override // 犠打
+  @override
+  @JsonKey(name: '犠飛')
   int get sf;
-  @override // 犠飛
+  @override
+  @JsonKey(name: '四球')
   int get bb;
-  @override // 四球
+  @override
+  @JsonKey(name: '敬遠')
   int get ibb;
-  @override // 敬遠
+  @override
+  @JsonKey(name: '死球')
   int get hbp;
-  @override // 死球
+  @override
+  @JsonKey(name: '三振')
   int get so;
-  @override // 三振
+  @override
+  @JsonKey(name: '併殺打')
   int get gidp;
-  @override // 併殺打
+  @override
+  @JsonKey(name: '打率')
   String get avg;
-  @override // 打率
+  @override
+  @JsonKey(name: '出塁率')
   String get obp;
-  @override // 出塁率
+  @override
+  @JsonKey(name: '長打率')
   String get slg;
-  @override // 長打率
+  @override
+  @JsonKey(name: 'OPS')
   String get ops;
   @override
   @JsonKey(ignore: true)
