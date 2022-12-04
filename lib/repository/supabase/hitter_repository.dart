@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:baseball_quiz_app/model/hitter.dart';
 import 'package:baseball_quiz_app/model/hitter_search_filter.dart';
 import 'package:baseball_quiz_app/model/hitting_stats.dart';
+import 'package:baseball_quiz_app/model/ui/hitter_quiz_ui.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HitterRepository {
@@ -50,6 +51,7 @@ class HitterRepository {
     return hitter;
   }
 
+  // playerIdから打撃成績のListを取得する
   Future<List<HittingStats>> fetchHittingStats(String playerId) async {
     final List<HittingStats> statsList = [];
 
@@ -64,5 +66,16 @@ class HitterRepository {
     }
 
     return statsList;
+  }
+
+  // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
+  HitterQuizUi toHitterQuizUi(Hitter hitter, List<HittingStats> statsList) {
+    final hitterQuizUi = HitterQuizUi(
+        id: hitter.id,
+        name: hitter.name,
+        team: hitter.team,
+        hittingStatsList: statsList);
+
+    return hitterQuizUi;
   }
 }
