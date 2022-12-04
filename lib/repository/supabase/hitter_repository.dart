@@ -27,9 +27,9 @@ class HitterRepository {
 
    */
 
-  Future fetchHitter(HitterSearchFilter searchFilter) async {
+  Future<Hitter> fetchHitter(HitterSearchFilter searchFilter) async {
     // NOTE responseという変数名が気に食わない
-    final response = await supabase.client
+    final responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, has_data, hitting_stats_table!inner(*)')
         .eq('has_data', true)
@@ -42,10 +42,9 @@ class HitterRepository {
 
     // ランダムで1件抽出
     final random = Random();
-    // NOTE randomElemという変数名が気に食わない
-    final randomElem = response[random.nextInt(response.length)];
+    final randomResponse = responses[random.nextInt(responses.length)];
 
-    final hitter = Hitter.fromJson(randomElem);
+    final hitter = Hitter.fromJson(randomResponse);
 
     return hitter;
   }
