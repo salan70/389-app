@@ -16,21 +16,22 @@ class HitterRepository {
 
   //TODO エラーハンドリング要検討
 
-  Future<HitterQuizUi?> searchHitter(HitterSearchFilter searchFilter) async {
-    final hitter = await fetchHitter(searchFilter);
+  Future<HitterQuizUi?> implSearchHitter(
+      HitterSearchFilter searchFilter) async {
+    final hitter = await _fetchHitter(searchFilter);
 
     // 検索条件に合致する選手がいない場合、nullを返す
     if (hitter == null) {
       return null;
     }
 
-    final statsList = await fetchHittingStats(hitter.id);
-    final quizUi = toHitterQuizUi(hitter, statsList);
+    final statsList = await _fetchHittingStats(hitter.id);
+    final quizUi = _toHitterQuizUi(hitter, statsList);
 
     return quizUi;
   }
 
-  Future<Hitter?> fetchHitter(HitterSearchFilter searchFilter) async {
+  Future<Hitter?> _fetchHitter(HitterSearchFilter searchFilter) async {
     final responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
@@ -58,7 +59,7 @@ class HitterRepository {
   }
 
   // playerIdから打撃成績のListを取得する
-  Future<List<HittingStats>> fetchHittingStats(String playerId) async {
+  Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final List<HittingStats> statsList = [];
 
     final responses = await supabase.client
@@ -75,7 +76,7 @@ class HitterRepository {
   }
 
   // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
-  HitterQuizUi toHitterQuizUi(Hitter hitter, List<HittingStats> statsList) {
+  HitterQuizUi _toHitterQuizUi(Hitter hitter, List<HittingStats> statsList) {
     final hitterQuizUi = HitterQuizUi(
         id: hitter.id,
         name: hitter.name,
