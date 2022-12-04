@@ -13,6 +13,5 @@ class Hitter with _$Hitter {
     required bool hasData,
   }) = _Hitter;
 
-  //TODO fromJson実装
   factory Hitter.fromJson(Map<String, dynamic> json) => _$HitterFromJson(json);
 }

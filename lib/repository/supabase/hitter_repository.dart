@@ -17,6 +17,7 @@ class HitterRepository {
 
   //TODO エラーハンドリング要検討
 
+  //NOTE この処理ViewModelでやるほうが良いかも
   Future<HitterQuizUi?> implSearchHitter(
       HitterSearchFilter searchFilter) async {
     final hitter = await _fetchHitter(searchFilter);
