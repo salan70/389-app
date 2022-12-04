@@ -1,11 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
 
-part 'hitter_stats.freezed.dart';
+part 'hitting_stats.freezed.dart';
 
 @freezed
-class HitterStats with _$HitterStats {
-  const factory HitterStats({
+class HittingStats with _$HittingStats {
+  const factory HittingStats({
     required String playerId,
     required String year, // 年度
     required String team, // 球団
@@ -32,5 +31,5 @@ class HitterStats with _$HitterStats {
     required String obp, // 出塁率
     required String slg, // 長打率
     required String ops, // OPS
-  }) = _HitterStats;
+  }) = _HittingStats;
 }
