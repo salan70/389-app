@@ -3,12 +3,13 @@ import 'dart:math';
 
 import 'package:baseball_quiz_app/model/hitter.dart';
 import 'package:baseball_quiz_app/model/hitter_search_filter.dart';
+import 'package:baseball_quiz_app/model/hitting_stats.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HitterRepository {
-  HitterRepository({
-    required this.supabase,
-  });
+  HitterRepository(
+    this.supabase,
+  );
 
   final Supabase supabase;
 
@@ -47,5 +48,21 @@ class HitterRepository {
     final hitter = Hitter.fromJson(randomResponse);
 
     return hitter;
+  }
+
+  Future<List<HittingStats>> fetchHittingStats(String playerId) async {
+    final List<HittingStats> statsList = [];
+
+    final responses = await supabase.client
+        .from('hitting_stats_table')
+        .select('*')
+        .eq('playerId', playerId);
+
+    for (final response in responses) {
+      final stats = HittingStats.fromJson(response);
+      statsList.add(stats);
+    }
+
+    return statsList;
   }
 }
