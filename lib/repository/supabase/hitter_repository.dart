@@ -31,8 +31,8 @@ class HitterRepository {
     // NOTE responseという変数名が気に食わない
     final responses = await supabase.client
         .from('hitter_table')
-        .select('id, name, team, has_data, hitting_stats_table!inner(*)')
-        .eq('has_data', true)
+        .select('id, name, team, hasData, hitting_stats_table!inner(*)')
+        .eq('hasData', true)
         .filter('team', 'in', searchFilter.teamList)
         .gte('hitting_stats_table.試合', searchFilter.minGames)
         .gte('hitting_stats_table.安打', searchFilter.minHits)
