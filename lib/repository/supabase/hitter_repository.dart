@@ -1,4 +1,7 @@
 //TODO providerの実装
+import 'dart:math';
+
+import 'package:baseball_quiz_app/model/hitter.dart';
 import 'package:baseball_quiz_app/model/hitter_search_filter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -29,6 +32,12 @@ class HitterRepository {
         .gte('hitting_stats_table.安打', searchFilter.minHits)
         .gte('hitting_stats_table.打席', searchFilter.minPa);
 
-    return response;
+    // TODO 空の際の処理検討
+
+    // TODO ランダムで1件選ぶ
+    final random = Random();
+    final randomElem = response[random.nextInt(response.length)];
+
+    return randomElem;
   }
 }
