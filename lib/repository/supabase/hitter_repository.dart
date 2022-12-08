@@ -5,9 +5,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_filter.dart';
 import '../../model/hitting_stats.dart';
-import '../../model/ui/hitter_quiz_ui.dart';
 
-//TODO providerの実装
+//TODO エラーハンドリング要検討
 class HitterRepository {
   HitterRepository(
     this.supabase,
@@ -15,25 +14,7 @@ class HitterRepository {
 
   final Supabase supabase;
 
-  //TODO エラーハンドリング要検討
-
-  //NOTE この処理ViewModelでやるほうが良いかも
-  Future<HitterQuizUi?> implSearchHitter(
-      HitterSearchFilter searchFilter) async {
-    final hitter = await _fetchHitter(searchFilter);
-
-    // 検索条件に合致する選手がいない場合、nullを返す
-    if (hitter == null) {
-      return null;
-    }
-
-    final statsList = await _fetchHittingStats(hitter.id);
-    final quizUi = _toHitterQuizUi(hitter, statsList);
-
-    return quizUi;
-  }
-
-  Future<Hitter?> _fetchHitter(HitterSearchFilter searchFilter) async {
+  Future<Hitter?> fetchHitter(HitterSearchFilter searchFilter) async {
     final responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
@@ -61,7 +42,7 @@ class HitterRepository {
   }
 
   // playerIdから打撃成績のListを取得する
-  Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
+  Future<List<HittingStats>> fetchHittingStats(String playerId) async {
     final List<HittingStats> statsList = [];
 
     final responses = await supabase.client
@@ -75,16 +56,5 @@ class HitterRepository {
     }
 
     return statsList;
-  }
-
-  // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
-  HitterQuizUi _toHitterQuizUi(Hitter hitter, List<HittingStats> statsList) {
-    final hitterQuizUi = HitterQuizUi(
-        id: hitter.id,
-        name: hitter.name,
-        team: hitter.team,
-        hittingStatsList: statsList);
-
-    return hitterQuizUi;
   }
 }
