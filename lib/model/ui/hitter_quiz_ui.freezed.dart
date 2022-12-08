@@ -18,8 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HitterQuizUi {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get team => throw _privateConstructorUsedError;
-  List<HittingStats> get hittingStatsList => throw _privateConstructorUsedError;
+  List<StatsType> get statsLabels => throw _privateConstructorUsedError;
+  List<Map<String, String>> get statsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HitterQuizUiCopyWith<HitterQuizUi> get copyWith =>
@@ -35,8 +35,8 @@ abstract class $HitterQuizUiCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      String team,
-      List<HittingStats> hittingStatsList});
+      List<StatsType> statsLabels,
+      List<Map<String, String>> statsList});
 }
 
 /// @nodoc
@@ -54,8 +54,8 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? team = null,
-    Object? hittingStatsList = null,
+    Object? statsLabels = null,
+    Object? statsList = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -66,14 +66,14 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as String,
-      hittingStatsList: null == hittingStatsList
-          ? _value.hittingStatsList
-          : hittingStatsList // ignore: cast_nullable_to_non_nullable
-              as List<HittingStats>,
+      statsLabels: null == statsLabels
+          ? _value.statsLabels
+          : statsLabels // ignore: cast_nullable_to_non_nullable
+              as List<StatsType>,
+      statsList: null == statsList
+          ? _value.statsList
+          : statsList // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, String>>,
     ) as $Val);
   }
 }
@@ -89,8 +89,8 @@ abstract class _$$_HitterQuizUiCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      String team,
-      List<HittingStats> hittingStatsList});
+      List<StatsType> statsLabels,
+      List<Map<String, String>> statsList});
 }
 
 /// @nodoc
@@ -106,8 +106,8 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? team = null,
-    Object? hittingStatsList = null,
+    Object? statsLabels = null,
+    Object? statsList = null,
   }) {
     return _then(_$_HitterQuizUi(
       id: null == id
@@ -118,14 +118,14 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      team: null == team
-          ? _value.team
-          : team // ignore: cast_nullable_to_non_nullable
-              as String,
-      hittingStatsList: null == hittingStatsList
-          ? _value._hittingStatsList
-          : hittingStatsList // ignore: cast_nullable_to_non_nullable
-              as List<HittingStats>,
+      statsLabels: null == statsLabels
+          ? _value._statsLabels
+          : statsLabels // ignore: cast_nullable_to_non_nullable
+              as List<StatsType>,
+      statsList: null == statsList
+          ? _value._statsList
+          : statsList // ignore: cast_nullable_to_non_nullable
+              as List<Map<String, String>>,
     ));
   }
 }
@@ -136,26 +136,32 @@ class _$_HitterQuizUi implements _HitterQuizUi {
   const _$_HitterQuizUi(
       {required this.id,
       required this.name,
-      required this.team,
-      required final List<HittingStats> hittingStatsList})
-      : _hittingStatsList = hittingStatsList;
+      required final List<StatsType> statsLabels,
+      required final List<Map<String, String>> statsList})
+      : _statsLabels = statsLabels,
+        _statsList = statsList;
 
   @override
   final String id;
   @override
   final String name;
+  final List<StatsType> _statsLabels;
   @override
-  final String team;
-  final List<HittingStats> _hittingStatsList;
-  @override
-  List<HittingStats> get hittingStatsList {
+  List<StatsType> get statsLabels {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_hittingStatsList);
+    return EqualUnmodifiableListView(_statsLabels);
+  }
+
+  final List<Map<String, String>> _statsList;
+  @override
+  List<Map<String, String>> get statsList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_statsList);
   }
 
   @override
   String toString() {
-    return 'HitterQuizUi(id: $id, name: $name, team: $team, hittingStatsList: $hittingStatsList)';
+    return 'HitterQuizUi(id: $id, name: $name, statsLabels: $statsLabels, statsList: $statsList)';
   }
 
   @override
@@ -165,14 +171,19 @@ class _$_HitterQuizUi implements _HitterQuizUi {
             other is _$_HitterQuizUi &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.team, team) || other.team == team) &&
             const DeepCollectionEquality()
-                .equals(other._hittingStatsList, _hittingStatsList));
+                .equals(other._statsLabels, _statsLabels) &&
+            const DeepCollectionEquality()
+                .equals(other._statsList, _statsList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, team,
-      const DeepCollectionEquality().hash(_hittingStatsList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      const DeepCollectionEquality().hash(_statsLabels),
+      const DeepCollectionEquality().hash(_statsList));
 
   @JsonKey(ignore: true)
   @override
@@ -185,17 +196,17 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   const factory _HitterQuizUi(
       {required final String id,
       required final String name,
-      required final String team,
-      required final List<HittingStats> hittingStatsList}) = _$_HitterQuizUi;
+      required final List<StatsType> statsLabels,
+      required final List<Map<String, String>> statsList}) = _$_HitterQuizUi;
 
   @override
   String get id;
   @override
   String get name;
   @override
-  String get team;
+  List<StatsType> get statsLabels;
   @override
-  List<HittingStats> get hittingStatsList;
+  List<Map<String, String>> get statsList;
   @override
   @JsonKey(ignore: true)
   _$$_HitterQuizUiCopyWith<_$_HitterQuizUi> get copyWith =>
