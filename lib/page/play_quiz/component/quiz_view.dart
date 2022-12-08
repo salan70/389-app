@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../constant/stats_type.dart';
 import '../play_quiz_view_model.dart';
 
 class QuizView extends ConsumerWidget {
@@ -20,15 +21,17 @@ class QuizView extends ConsumerWidget {
             itemCount: data!.statsList.length,
             itemBuilder: (_, index) {
               final stats = data.statsList[index];
+              final selectedStatsList = ref.watch(selectedStatsListProvider);
+
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Row(
                   children: [
                     Expanded(child: Center(child: Text(stats['年度']!))),
-                    Expanded(child: Center(child: Text(stats['OPS']!))),
-                    Expanded(child: Center(child: Text(stats['打率']!))),
-                    Expanded(child: Center(child: Text(stats['出塁率']!))),
-                    Expanded(child: Center(child: Text(stats['本塁打']!))),
+                    for (final selectedStats in selectedStatsList)
+                      Expanded(
+                          child:
+                              Center(child: Text(stats[selectedStats.name]!))),
                   ],
                 ),
               );

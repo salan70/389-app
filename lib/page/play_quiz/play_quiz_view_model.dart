@@ -16,12 +16,12 @@ final hitterQuizUiProvider = FutureProvider.autoDispose((ref) {
   return PlayQuizViewModel(ref).implSearchHitter(searchFilter);
 });
 
-final selectedStatsLabelsProvider = Provider((ref) {
+final selectedStatsListProvider = Provider((ref) {
   List<StatsType> selectedStats = [
     StatsType.team,
     StatsType.avg,
     StatsType.hr,
-    StatsType.rbi,
+    StatsType.ops,
   ];
   return selectedStats;
 });
@@ -51,7 +51,7 @@ class PlayQuizViewModel {
 
   // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(Hitter hitter, List<HittingStats> rowStatsList) {
-    final selectedStatsLabels = ref.watch(selectedStatsLabelsProvider);
+    final selectedStatsLabels = ref.watch(selectedStatsListProvider);
 
     final List<Map<String, String>> statsListForUi = [];
 
