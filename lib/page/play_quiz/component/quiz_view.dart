@@ -10,33 +10,60 @@ class QuizView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizUi = ref.watch(hitterQuizUiProvider);
+    final selectedStatsList = ref.watch(selectedStatsListProvider);
 
-    return hitterQuizUi.when(
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, stack) => Text('Error: $err'),
-      data: (data) {
-        return ListView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: data!.statsList.length,
-            itemBuilder: (_, index) {
-              final stats = data.statsList[index];
-              final selectedStatsList = ref.watch(selectedStatsListProvider);
-
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  children: [
-                    Expanded(child: Center(child: Text(stats['年度']!))),
-                    for (final selectedStats in selectedStatsList)
-                      Expanded(
-                          child:
-                              Center(child: Text(stats[selectedStats.name]!))),
-                  ],
+    return Column(
+      children: [
+        Row(
+          children: [
+            const Expanded(
+              child: Center(
+                child: Text('年度'),
+              ),
+            ),
+            for (final selectedStats in selectedStatsList)
+              Expanded(
+                child: Center(
+                  child: Text(selectedStats.name),
                 ),
-              );
-            });
-      },
+              ),
+          ],
+        ),
+        hitterQuizUi.when(
+          loading: () => const Center(
+            child: CircularProgressIndicator(),
+          ),
+          error: (err, _) => Text('Error: $err'),
+          data: (data) {
+            return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: data!.statsList.length,
+                itemBuilder: (_, index) {
+                  final stats = data.statsList[index];
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(stats['年度']!),
+                          ),
+                        ),
+                        for (final selectedStats in selectedStatsList)
+                          Expanded(
+                            child: Center(
+                              child: Text(stats[selectedStats.name]!),
+                            ),
+                          ),
+                      ],
+                    ),
+                  );
+                });
+          },
+        ),
+      ],
     );
   }
 }
