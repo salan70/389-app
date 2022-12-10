@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HitterQuizUi {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  List<StatsType> get statsLabels => throw _privateConstructorUsedError;
+  List<StatsType> get selectedStatsList => throw _privateConstructorUsedError;
   List<Map<String, String>> get statsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $HitterQuizUiCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      List<StatsType> statsLabels,
+      List<StatsType> selectedStatsList,
       List<Map<String, String>> statsList});
 }
 
@@ -54,7 +54,7 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? statsLabels = null,
+    Object? selectedStatsList = null,
     Object? statsList = null,
   }) {
     return _then(_value.copyWith(
@@ -66,9 +66,9 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      statsLabels: null == statsLabels
-          ? _value.statsLabels
-          : statsLabels // ignore: cast_nullable_to_non_nullable
+      selectedStatsList: null == selectedStatsList
+          ? _value.selectedStatsList
+          : selectedStatsList // ignore: cast_nullable_to_non_nullable
               as List<StatsType>,
       statsList: null == statsList
           ? _value.statsList
@@ -89,7 +89,7 @@ abstract class _$$_HitterQuizUiCopyWith<$Res>
   $Res call(
       {String id,
       String name,
-      List<StatsType> statsLabels,
+      List<StatsType> selectedStatsList,
       List<Map<String, String>> statsList});
 }
 
@@ -106,7 +106,7 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? statsLabels = null,
+    Object? selectedStatsList = null,
     Object? statsList = null,
   }) {
     return _then(_$_HitterQuizUi(
@@ -118,9 +118,9 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      statsLabels: null == statsLabels
-          ? _value._statsLabels
-          : statsLabels // ignore: cast_nullable_to_non_nullable
+      selectedStatsList: null == selectedStatsList
+          ? _value._selectedStatsList
+          : selectedStatsList // ignore: cast_nullable_to_non_nullable
               as List<StatsType>,
       statsList: null == statsList
           ? _value._statsList
@@ -136,20 +136,20 @@ class _$_HitterQuizUi implements _HitterQuizUi {
   const _$_HitterQuizUi(
       {required this.id,
       required this.name,
-      required final List<StatsType> statsLabels,
+      required final List<StatsType> selectedStatsList,
       required final List<Map<String, String>> statsList})
-      : _statsLabels = statsLabels,
+      : _selectedStatsList = selectedStatsList,
         _statsList = statsList;
 
   @override
   final String id;
   @override
   final String name;
-  final List<StatsType> _statsLabels;
+  final List<StatsType> _selectedStatsList;
   @override
-  List<StatsType> get statsLabels {
+  List<StatsType> get selectedStatsList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_statsLabels);
+    return EqualUnmodifiableListView(_selectedStatsList);
   }
 
   final List<Map<String, String>> _statsList;
@@ -161,7 +161,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
 
   @override
   String toString() {
-    return 'HitterQuizUi(id: $id, name: $name, statsLabels: $statsLabels, statsList: $statsList)';
+    return 'HitterQuizUi(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsList: $statsList)';
   }
 
   @override
@@ -172,7 +172,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
-                .equals(other._statsLabels, _statsLabels) &&
+                .equals(other._selectedStatsList, _selectedStatsList) &&
             const DeepCollectionEquality()
                 .equals(other._statsList, _statsList));
   }
@@ -182,7 +182,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
       runtimeType,
       id,
       name,
-      const DeepCollectionEquality().hash(_statsLabels),
+      const DeepCollectionEquality().hash(_selectedStatsList),
       const DeepCollectionEquality().hash(_statsList));
 
   @JsonKey(ignore: true)
@@ -196,7 +196,7 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   const factory _HitterQuizUi(
       {required final String id,
       required final String name,
-      required final List<StatsType> statsLabels,
+      required final List<StatsType> selectedStatsList,
       required final List<Map<String, String>> statsList}) = _$_HitterQuizUi;
 
   @override
@@ -204,7 +204,7 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   @override
   String get name;
   @override
-  List<StatsType> get statsLabels;
+  List<StatsType> get selectedStatsList;
   @override
   List<Map<String, String>> get statsList;
   @override
