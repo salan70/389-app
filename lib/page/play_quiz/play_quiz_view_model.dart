@@ -81,7 +81,6 @@ class PlayQuizViewModel {
           }
         },
         error: (_, error) {
-          // TODO ロガーに変える
           logger.e('$error');
         },
         loading: () {});
