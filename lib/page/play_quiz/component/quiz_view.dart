@@ -1,7 +1,5 @@
-import 'package:baseball_quiz_app/model/ui/quiz_coordinate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../constant/stats_type.dart';
 import '../play_quiz_view_model.dart';
