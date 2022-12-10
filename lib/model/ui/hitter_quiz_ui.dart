@@ -8,7 +8,7 @@ class HitterQuizUi with _$HitterQuizUi {
   const factory HitterQuizUi({
     required String id,
     required String name,
-    required List<StatsType> statsLabels,
+    required List<StatsType> selectedStatsList,
     required List<Map<String, String>> statsList,
   }) = _HitterQuizUi;
 }

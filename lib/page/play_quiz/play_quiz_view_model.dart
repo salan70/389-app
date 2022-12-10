@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:baseball_quiz_app/constant/stats_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../model/hitter.dart';
 import '../../model/hitter_search_filter.dart';
@@ -7,7 +10,7 @@ import '../../model/hitting_stats.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 import '../../repository/supabase/supabase_repository_providers.dart';
 
-final hitterQuizUiProvider = FutureProvider.autoDispose((ref) {
+final hitterQuizUiProvider = FutureProvider((ref) {
   const searchFilter = HitterSearchFilter(
       teamList: ['千葉ロッテマリーンズ', '阪神タイガース', '読売ジャイアンツ'],
       minGames: 0,
@@ -24,6 +27,18 @@ final selectedStatsListProvider = Provider((ref) {
     StatsType.ops,
   ];
   return selectedStats;
+});
+
+final openedIdListProvider = StateProvider<List<String>>((ref) {
+  return [];
+});
+
+final id2DListProvider = Provider<List<List<String>>>((ref) {
+  return PlayQuizViewModel(ref).createId2DList();
+});
+
+final playQuizViewModelProvider = StateProvider((ref) {
+  return PlayQuizViewModel(ref);
 });
 
 class PlayQuizViewModel {
@@ -49,9 +64,67 @@ class PlayQuizViewModel {
     return quizUi;
   }
 
+  List<List<String>> createId2DList() {
+    final List<List<String>> idList = [];
+
+    final hitterQuizUi = ref.watch(hitterQuizUiProvider);
+    const uuid = Uuid();
+
+    hitterQuizUi.when(
+        data: (data) {
+          for (int cIdx = 0; cIdx < data!.statsList.length; cIdx++) {
+            idList.add([]);
+            for (int rIdx = 0; rIdx < data.selectedStatsList.length; rIdx++) {
+              idList[cIdx].add(uuid.v4());
+            }
+          }
+        },
+        error: (_, error) {
+          // TODO ロガーに変える
+          print('cause error in createClosedIdList: $error');
+        },
+        loading: () {});
+
+    return idList;
+  }
+
+  void addId() {
+    final id2DList = ref.watch(id2DListProvider);
+    final openedIdList = ref.watch(openedIdListProvider);
+
+    // id2DList[0]について、id2DListの各Listの長さは全て同じとなる。
+    // 確実に値が入っている[0]を指定
+    if (id2DList.isEmpty || id2DList[0].isEmpty) {
+      return;
+    }
+
+    // 全てのidがopenedIdListに追加されている場合
+    final openedIdListIsFill =
+        openedIdList.length == (id2DList.length * id2DList[0].length);
+    if (openedIdListIsFill) {
+      return;
+    }
+
+    final openedIdListNotifier = ref.watch(openedIdListProvider.notifier);
+
+    final random = Random();
+
+    while (true) {
+      final cIx = random.nextInt(id2DList.length);
+      final rIx = random.nextInt(id2DList[cIx].length);
+
+      if (!openedIdList.contains(id2DList[cIx][rIx])) {
+        openedIdList.add(id2DList[cIx][rIx]);
+        // openedIdListを再生成し、代入
+        openedIdListNotifier.state = [...openedIdList];
+        return;
+      }
+    }
+  }
+
   // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(Hitter hitter, List<HittingStats> rowStatsList) {
-    final selectedStatsLabels = ref.watch(selectedStatsListProvider);
+    final selectedStatsList = ref.watch(selectedStatsListProvider);
 
     final List<Map<String, String>> statsListForUi = [];
 
@@ -63,7 +136,7 @@ class PlayQuizViewModel {
     final hitterQuizUi = HitterQuizUi(
         id: hitter.id,
         name: hitter.name,
-        statsLabels: selectedStatsLabels,
+        selectedStatsList: selectedStatsList,
         statsList: statsListForUi);
 
     return hitterQuizUi;
