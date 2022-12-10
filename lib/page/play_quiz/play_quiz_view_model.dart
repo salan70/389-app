@@ -37,7 +37,7 @@ final id2DListProvider = Provider<List<List<String>>>((ref) {
   return PlayQuizViewModel(ref).createId2DList();
 });
 
-final playQuizViewModelProvider = StateProvider((ref) {
+final playQuizViewModelProvider = StateProvider.autoDispose((ref) {
   return PlayQuizViewModel(ref);
 });
 
@@ -122,7 +122,7 @@ class PlayQuizViewModel {
       final strVal = value.toString();
 
       if (statsOnProbability.contains(key)) {
-        statsForUi[key] = _toStringForProbability(strVal);
+        statsForUi[key] = _formatStatsValue(strVal);
       } else {
         statsForUi[key] = strVal;
       }
@@ -132,7 +132,7 @@ class PlayQuizViewModel {
   }
 
   // NOTE 関数名や、関数内の変数名納得いってない
-  String _toStringForProbability(String str) {
+  String _formatStatsValue(String str) {
     final doubleVal = double.tryParse(str);
 
     // 「.---」など、double型に変換できない場合
@@ -167,6 +167,22 @@ class PlayQuizViewModel {
         // openedIdListを再生成し、代入
         openedIdListNotifier.state = [...openedIdList];
         return;
+      }
+    }
+  }
+
+  void addAllId() {
+    final id2DList = ref.watch(id2DListProvider);
+    final openedIdList = ref.watch(openedIdListProvider);
+    final openedIdListNotifier = ref.watch(openedIdListProvider.notifier);
+
+    for (var idList in id2DList) {
+      for (var id in idList) {
+        if (!openedIdList.contains(id)) {
+          openedIdList.add(id);
+          // openedIdListを再生成し、代入
+          openedIdListNotifier.state = [...openedIdList];
+        }
       }
     }
   }
