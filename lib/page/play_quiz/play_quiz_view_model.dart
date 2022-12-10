@@ -88,40 +88,6 @@ class PlayQuizViewModel {
     return idList;
   }
 
-  void addId() {
-    final id2DList = ref.watch(id2DListProvider);
-    final openedIdList = ref.watch(openedIdListProvider);
-
-    // id2DList[0]について、id2DListの各Listの長さは全て同じとなる。
-    // 確実に値が入っている[0]を指定
-    if (id2DList.isEmpty || id2DList[0].isEmpty) {
-      return;
-    }
-
-    // 全てのidがopenedIdListに追加されている場合
-    final openedIdListIsFill =
-        openedIdList.length == (id2DList.length * id2DList[0].length);
-    if (openedIdListIsFill) {
-      return;
-    }
-
-    final openedIdListNotifier = ref.watch(openedIdListProvider.notifier);
-
-    final random = Random();
-
-    while (true) {
-      final cIx = random.nextInt(id2DList.length);
-      final rIx = random.nextInt(id2DList[cIx].length);
-
-      if (!openedIdList.contains(id2DList[cIx][rIx])) {
-        openedIdList.add(id2DList[cIx][rIx]);
-        // openedIdListを再生成し、代入
-        openedIdListNotifier.state = [...openedIdList];
-        return;
-      }
-    }
-  }
-
   // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(Hitter hitter, List<HittingStats> rowStatsList) {
     final selectedStatsList = ref.watch(selectedStatsListProvider);
@@ -183,5 +149,45 @@ class PlayQuizViewModel {
 
     // 率が1未満の場合、「0.XXX」の「0」を取り除く
     return fixedVal.substring(1);
+  }
+
+  void addId() {
+    final id2DList = ref.watch(id2DListProvider);
+    final openedIdList = ref.watch(openedIdListProvider);
+    final openedIdListNotifier = ref.watch(openedIdListProvider.notifier);
+
+    final random = Random();
+
+    while (true) {
+      final cIx = random.nextInt(id2DList.length);
+      final rIx = random.nextInt(id2DList[cIx].length);
+
+      if (!openedIdList.contains(id2DList[cIx][rIx])) {
+        openedIdList.add(id2DList[cIx][rIx]);
+        // openedIdListを再生成し、代入
+        openedIdListNotifier.state = [...openedIdList];
+        return;
+      }
+    }
+  }
+
+  bool canAddId() {
+    final id2DList = ref.watch(id2DListProvider);
+    final openedIdList = ref.watch(openedIdListProvider);
+
+    // id2DList[0]について、id2DListの各Listの長さは全て同じとなる。
+    // 確実に値が入っている[0]を指定
+    if (id2DList.isEmpty || id2DList[0].isEmpty) {
+      return false;
+    }
+
+    // 全てのidがopenedIdListに追加されている場合
+    final openedIdListIsFill =
+        openedIdList.length == (id2DList.length * id2DList[0].length);
+    if (openedIdListIsFill) {
+      return false;
+    }
+
+    return true;
   }
 }
