@@ -33,8 +33,11 @@ class OpenStatsButton extends ConsumerWidget {
     final viewModel = ref.watch(playQuizViewModelProvider);
     return TextButton(
       onPressed: () {
-        // TODO 成績を開ける
-        viewModel.addId();
+        if (viewModel.canAddId()) {
+          viewModel.addId();
+        } else {
+          // TODO Buttonを非活性にする
+        }
       },
       child: const Text('次の成績を表示'),
     );
