@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:baseball_quiz_app/constant/stats_type.dart';
+import 'package:baseball_quiz_app/util/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
@@ -81,7 +82,7 @@ class PlayQuizViewModel {
         },
         error: (_, error) {
           // TODO ロガーに変える
-          print('cause error in createClosedIdList: $error');
+          logger.e('$error');
         },
         loading: () {});
 
