@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'component/input_answer_view.dart';
 import 'component/quiz_event_buttons_view.dart';
 import 'component/quiz_view.dart';
 
@@ -17,6 +18,7 @@ class PlayQuizView extends ConsumerWidget {
         children: const [
           QuizView(),
           QuizEventButtons(),
+          InputAnswer(),
         ],
       ),
     );
