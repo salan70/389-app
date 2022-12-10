@@ -27,7 +27,7 @@ enum StatsType {
 }
 
 extension StatsTypeExt on StatsType {
-  String get name {
+  String get label {
     switch (this) {
       case StatsType.year:
         return '年度';

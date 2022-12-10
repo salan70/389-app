@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constant/stats_type.dart';
 import '../play_quiz_view_model.dart';
 
 class QuizView extends ConsumerWidget {
@@ -31,7 +32,7 @@ class QuizView extends ConsumerWidget {
                 for (final selectedStats in selectedStatsList)
                   Expanded(
                     child: Center(
-                      child: Text(selectedStats.name),
+                      child: Text(selectedStats.label),
                     ),
                   ),
               ],
@@ -60,7 +61,7 @@ class QuizView extends ConsumerWidget {
                           alignment: Alignment.center,
                           child: (openedIdList.contains(idList[rIdx]))
                               ? Text(
-                                  stats[data.selectedStatsList[rIdx].name]!,
+                                  stats[data.selectedStatsList[rIdx].label]!,
                                 )
                               : Container(
                                   color: Colors.grey,
