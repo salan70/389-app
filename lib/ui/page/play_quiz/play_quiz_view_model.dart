@@ -5,11 +5,11 @@ import 'package:baseball_quiz_app/util/logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../model/hitter.dart';
-import '../../model/hitter_search_filter.dart';
-import '../../model/hitting_stats.dart';
-import '../../model/ui/hitter_quiz_ui.dart';
-import '../../repository/supabase/supabase_repository_providers.dart';
+import '../../../model/hitter.dart';
+import '../../../model/hitter_search_filter.dart';
+import '../../../model/hitting_stats.dart';
+import '../../../model/ui/hitter_quiz_ui.dart';
+import '../../../repository/supabase/supabase_repository_providers.dart';
 
 final hitterQuizUiProvider = FutureProvider((ref) {
   const searchFilter = HitterSearchFilter(
