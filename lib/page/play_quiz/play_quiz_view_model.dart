@@ -164,7 +164,7 @@ class PlayQuizViewModel {
 
       if (!openedIdList.contains(id2DList[cIx][rIx])) {
         openedIdList.add(id2DList[cIx][rIx]);
-        // openedIdListを再生成し、代入
+        // openedIdListを再生成し、代入する
         openedIdListNotifier.state = [...openedIdList];
         return;
       }
@@ -176,11 +176,12 @@ class PlayQuizViewModel {
     final openedIdList = ref.watch(openedIdListProvider);
     final openedIdListNotifier = ref.watch(openedIdListProvider.notifier);
 
+    // 1つ1つ処理していく
     for (var idList in id2DList) {
       for (var id in idList) {
         if (!openedIdList.contains(id)) {
           openedIdList.add(id);
-          // openedIdListを再生成し、代入
+          // openedIdListを再生成し、代入する
           openedIdListNotifier.state = [...openedIdList];
         }
       }
@@ -197,7 +198,6 @@ class PlayQuizViewModel {
       return false;
     }
 
-    // 全てのidがopenedIdListに追加されている場合
     final openedIdListIsFill =
         openedIdList.length == (id2DList.length * id2DList[0].length);
     if (openedIdListIsFill) {
