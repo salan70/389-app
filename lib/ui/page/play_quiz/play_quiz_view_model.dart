@@ -111,10 +111,10 @@ class PlayQuizViewModel {
   // NOTE 関数名や、関数内の変数名納得いってない
   Map<String, String> _toStatsForUi(Map<String, dynamic> rowStats) {
     final List<String> statsOnProbability = [
-      StatsType.avg.name,
-      StatsType.obp.name,
-      StatsType.slg.name,
-      StatsType.ops.name,
+      StatsType.avg.label,
+      StatsType.obp.label,
+      StatsType.slg.label,
+      StatsType.ops.label,
     ];
     final Map<String, String> statsForUi = {};
 
