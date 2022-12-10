@@ -16,30 +16,45 @@ class PlayQuizView extends ConsumerWidget {
       body: Column(
         children: const [
           QuizView(),
-          OpenStatsButton(),
+          QuizEventButtons(),
         ],
       ),
     );
   }
 }
 
-class OpenStatsButton extends ConsumerWidget {
-  const OpenStatsButton({
+class QuizEventButtons extends ConsumerWidget {
+  const QuizEventButtons({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(playQuizViewModelProvider);
-    return TextButton(
-      onPressed: () {
-        if (viewModel.canAddId()) {
-          viewModel.addId();
-        } else {
-          // TODO Buttonを非活性にする
-        }
-      },
-      child: const Text('次の成績を表示'),
+    return Row(
+      children: [
+        TextButton(
+          onPressed: () {
+            if (viewModel.canAddId()) {
+              viewModel.addId();
+            } else {
+              // TODO Buttonを非活性にする
+            }
+          },
+          child: const Text('次の成績を表示'),
+        ),
+        TextButton(
+          onPressed: () {
+            // TODO 本当に良いか確認するダイアログ表示させる
+            if (viewModel.canAddId()) {
+              viewModel.addAllId();
+            } else {
+              // TODO Buttonを非活性にする
+            }
+          },
+          child: const Text('全ての成績を表示'),
+        ),
+      ],
     );
   }
 }
