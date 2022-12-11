@@ -23,6 +23,7 @@ dependencies:
   json_annotation: ^4.7.0
   roggle: ^0.3.0
   supabase_flutter: ^1.2.2
+  textfield_search: ^0.10.0
   uuid: ^3.0.7
 
 dev_dependencies:
