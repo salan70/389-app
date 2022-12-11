@@ -576,6 +576,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  roggle:
+    dependency: "direct main"
+    description:
+      name: roggle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
   rxdart:
     dependency: transitive
     description:
@@ -693,6 +700,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.12"
+  textfield_search:
+    dependency: "direct main"
+    description:
+      name: textfield_search
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.10.0"
   timing:
     dependency: transitive
     description:
@@ -777,6 +791,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+  uuid:
+    dependency: "direct main"
+    description:
+      name: uuid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.7"
   vector_math:
     dependency: transitive
     description:
