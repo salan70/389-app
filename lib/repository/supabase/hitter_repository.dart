@@ -7,11 +7,15 @@ import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_filter.dart';
 import '../../model/hitting_stats.dart';
+import '../../model/ui/hitter_map.dart';
 
 final hitterRepositoryProvider = riverpod.Provider((ref) {
   final supabase = ref.watch(supabaseProvider);
   return HitterRepository(supabase);
 });
+
+final allHitterListProvider = riverpod.Provider(
+    (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter());
 
 //TODO エラーハンドリング要検討
 class HitterRepository {
@@ -65,14 +69,14 @@ class HitterRepository {
     return statsList;
   }
 
-  Future<List<Hitter>> fetchAllHitter() async {
+  Future<List<HitterMap>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
 
-    final allHitterList = <Hitter>[];
+    final allHitterList = <HitterMap>[];
 
     for (var response in responses) {
-      final hitter = Hitter.fromJson(response);
-      allHitterList.add(hitter);
+      final hitterMap = HitterMap.fromJson(response);
+      allHitterList.add(hitterMap);
     }
 
     return allHitterList;

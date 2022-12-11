@@ -50,7 +50,7 @@ class TextButtonWidget extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PlayQuizView()),
+          MaterialPageRoute(builder: (context) => const PlayQuizPage()),
         );
       },
     );

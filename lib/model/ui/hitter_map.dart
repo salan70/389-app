@@ -8,7 +8,7 @@ part 'hitter_map.g.dart';
 @freezed
 class HitterMap with _$HitterMap {
   const factory HitterMap({
-    required String name,
+    @JsonKey(name: 'name') required String label,
     required String id,
   }) = _HitterMap;
 

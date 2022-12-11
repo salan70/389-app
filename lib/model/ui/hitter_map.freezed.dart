@@ -20,7 +20,8 @@ HitterMap _$HitterMapFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$HitterMap {
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
+  String get label => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $HitterMapCopyWith<$Res> {
   factory $HitterMapCopyWith(HitterMap value, $Res Function(HitterMap) then) =
       _$HitterMapCopyWithImpl<$Res, HitterMap>;
   @useResult
-  $Res call({String name, String id});
+  $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
@@ -50,13 +51,13 @@ class _$HitterMapCopyWithImpl<$Res, $Val extends HitterMap>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? label = null,
     Object? id = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -73,7 +74,7 @@ abstract class _$$_HitterMapCopyWith<$Res> implements $HitterMapCopyWith<$Res> {
       __$$_HitterMapCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String id});
+  $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
@@ -87,13 +88,13 @@ class __$$_HitterMapCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? label = null,
     Object? id = null,
   }) {
     return _then(_$_HitterMap(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
               as String,
       id: null == id
           ? _value.id
@@ -106,19 +107,21 @@ class __$$_HitterMapCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_HitterMap implements _HitterMap {
-  const _$_HitterMap({required this.name, required this.id});
+  const _$_HitterMap(
+      {@JsonKey(name: 'name') required this.label, required this.id});
 
   factory _$_HitterMap.fromJson(Map<String, dynamic> json) =>
       _$$_HitterMapFromJson(json);
 
   @override
-  final String name;
+  @JsonKey(name: 'name')
+  final String label;
   @override
   final String id;
 
   @override
   String toString() {
-    return 'HitterMap(name: $name, id: $id)';
+    return 'HitterMap(label: $label, id: $id)';
   }
 
   @override
@@ -126,13 +129,13 @@ class _$_HitterMap implements _HitterMap {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HitterMap &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.label, label) || other.label == label) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, id);
+  int get hashCode => Object.hash(runtimeType, label, id);
 
   @JsonKey(ignore: true)
   @override
@@ -150,13 +153,15 @@ class _$_HitterMap implements _HitterMap {
 
 abstract class _HitterMap implements HitterMap {
   const factory _HitterMap(
-      {required final String name, required final String id}) = _$_HitterMap;
+      {@JsonKey(name: 'name') required final String label,
+      required final String id}) = _$_HitterMap;
 
   factory _HitterMap.fromJson(Map<String, dynamic> json) =
       _$_HitterMap.fromJson;
 
   @override
-  String get name;
+  @JsonKey(name: 'name')
+  String get label;
   @override
   String get id;
   @override
