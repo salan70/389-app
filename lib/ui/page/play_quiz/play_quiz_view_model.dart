@@ -9,7 +9,7 @@ import '../../../model/hitter.dart';
 import '../../../model/hitter_search_filter.dart';
 import '../../../model/hitting_stats.dart';
 import '../../../model/ui/hitter_quiz_ui.dart';
-import '../../../repository/supabase/supabase_repository_providers.dart';
+import '../../../repository/supabase/hitter_repository.dart';
 
 final hitterQuizUiProvider = FutureProvider((ref) {
   const searchFilter = HitterSearchFilter(
@@ -18,6 +18,7 @@ final hitterQuizUiProvider = FutureProvider((ref) {
       minHits: 0,
       minPa: 0);
   return PlayQuizViewModel(ref).implSearchHitter(searchFilter);
+  // return ref.watch(playQuizViewModelProvider).implSearchHitter(searchFilter);
 });
 
 final selectedStatsListProvider = Provider((ref) {
@@ -35,12 +36,11 @@ final openedIdListProvider = StateProvider<List<String>>((ref) {
 });
 
 final id2DListProvider = Provider<List<List<String>>>((ref) {
+  // return ref.watch(playQuizViewModelProvider).createId2DList();
   return PlayQuizViewModel(ref).createId2DList();
 });
 
-final playQuizViewModelProvider = StateProvider.autoDispose((ref) {
-  return PlayQuizViewModel(ref);
-});
+final playQuizViewModelProvider = Provider((ref) => PlayQuizViewModel(ref));
 
 class PlayQuizViewModel {
   PlayQuizViewModel(
@@ -52,7 +52,7 @@ class PlayQuizViewModel {
   Future<HitterQuizUi?> implSearchHitter(
       HitterSearchFilter searchFilter) async {
     final hitterRepository = ref.watch(hitterRepositoryProvider);
-    final hitter = await hitterRepository.fetchHitter(searchFilter);
+    final hitter = await hitterRepository.searchHitter(searchFilter);
 
     // 検索条件に合致する選手がいない場合、nullを返す
     if (hitter == null) {

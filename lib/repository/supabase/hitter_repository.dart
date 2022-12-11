@@ -1,10 +1,17 @@
 import 'dart:math';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_filter.dart';
 import '../../model/hitting_stats.dart';
+
+final hitterRepositoryProvider = riverpod.Provider((ref) {
+  final supabase = ref.watch(supabaseProvider);
+  return HitterRepository(supabase);
+});
 
 //TODO エラーハンドリング要検討
 class HitterRepository {
@@ -14,7 +21,7 @@ class HitterRepository {
 
   final Supabase supabase;
 
-  Future<Hitter?> fetchHitter(HitterSearchFilter searchFilter) async {
+  Future<Hitter?> searchHitter(HitterSearchFilter searchFilter) async {
     final responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
@@ -56,5 +63,18 @@ class HitterRepository {
     }
 
     return statsList;
+  }
+
+  Future<List<Hitter>> fetchAllHitter() async {
+    final responses = await supabase.client.from('hitter_table').select('*');
+
+    final allHitterList = <Hitter>[];
+
+    for (var response in responses) {
+      final hitter = Hitter.fromJson(response);
+      allHitterList.add(hitter);
+    }
+
+    return allHitterList;
   }
 }
