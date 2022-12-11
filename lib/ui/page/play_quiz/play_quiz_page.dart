@@ -14,12 +14,15 @@ class PlayQuizView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('プレイ'),
       ),
-      body: Column(
-        children: const [
-          QuizView(),
-          QuizEventButtons(),
-          InputAnswer(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: const [
+            QuizView(),
+            QuizEventButtons(),
+            InputAnswer(),
+          ],
+        ),
       ),
     );
   }
