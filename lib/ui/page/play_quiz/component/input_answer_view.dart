@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/model/ui/hitter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
+import '../../../../model/ui/hitter_map.dart';
 import 'input_answer_view_model.dart';
 
 class InputAnswer extends ConsumerWidget {
