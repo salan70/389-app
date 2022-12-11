@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constant/stats_type.dart';
-import '../play_quiz_view_model.dart';
+import 'quiz_event_buttons_view_model.dart';
+import 'quiz_view_model.dart';
 
 class QuizView extends ConsumerWidget {
   const QuizView({Key? key}) : super(key: key);

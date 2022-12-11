@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../play_quiz_view_model.dart';
+import 'quiz_event_buttons_view_model.dart';
 
 class QuizEventButtons extends ConsumerWidget {
   const QuizEventButtons({
@@ -10,7 +10,7 @@ class QuizEventButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(playQuizViewModelProvider);
+    final viewModel = ref.watch(quizEventButtonsViewModelProvider);
     return Row(
       children: [
         TextButton(
