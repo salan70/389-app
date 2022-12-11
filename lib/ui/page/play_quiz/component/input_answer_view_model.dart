@@ -2,9 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_map.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
+import '../play_quiz_view_model.dart';
 
-final inputAnswerViewModelProvider = StateProvider.autoDispose((ref) {
+final inputAnswerViewModelProvider = Provider.autoDispose((ref) {
   return InputAnswerViewModel(ref);
+});
+
+final selectedHitterIdProvider = StateProvider((ref) {
+  return '';
 });
 
 class InputAnswerViewModel {
@@ -26,5 +31,15 @@ class InputAnswerViewModel {
     }
 
     return hitterListAfterSearch;
+  }
+
+  bool judgeQuizResult() {
+    final selectedHitterId = ref.watch(selectedHitterIdProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiProvider);
+
+    if (selectedHitterId == hitterQuizUi.value!.id) {
+      return true;
+    }
+    return false;
   }
 }
