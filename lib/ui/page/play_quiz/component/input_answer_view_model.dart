@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_map.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
+//TODO 別のviewModelに依存しちゃってるのよくないから治す
 import '../play_quiz_view_model.dart';
 
 final inputAnswerViewModelProvider = Provider.autoDispose((ref) {
