@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../repository/supabase/hitter_repository.dart';
 import '../play_quiz_view_model.dart';
 
 class QuizEventButtons extends ConsumerWidget {
