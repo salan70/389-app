@@ -35,6 +35,7 @@ class QuizViewModel {
 
   final Ref ref;
 
+  // TODO searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
       HitterSearchFilter searchFilter) async {
     final hitterRepository = ref.watch(hitterRepositoryProvider);

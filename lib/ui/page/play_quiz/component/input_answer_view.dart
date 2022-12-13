@@ -12,6 +12,7 @@ class InputAnswer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ScrollController();
     final textEditingController = TextEditingController();
+
     final viewModel = ref.watch(inputAnswerViewModelProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
