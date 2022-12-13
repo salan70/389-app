@@ -11,12 +11,13 @@ final openedIdListProvider = StateProvider<List<String>>((ref) {
 });
 
 final id2DListProvider = Provider<List<List<String>>>((ref) {
-  // return ref.watch(playQuizViewModelProvider).createId2DList();
+  // TODO ref.watchの形にしたい
+  // return ref.watch(quizEventButtonsViewModelProvider).createId2DList();
   return QuizEventButtonsViewModel(ref).createId2DList();
 });
 
 final quizEventButtonsViewModelProvider =
-    Provider((ref) => QuizEventButtonsViewModel(ref));
+    Provider(QuizEventButtonsViewModel.new);
 
 class QuizEventButtonsViewModel {
   QuizEventButtonsViewModel(
