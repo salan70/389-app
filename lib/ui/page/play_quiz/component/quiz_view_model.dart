@@ -13,8 +13,7 @@ final hitterQuizUiProvider = FutureProvider((ref) {
       minGames: 0,
       minHits: 0,
       minPa: 0);
-  return QuizViewModel(ref).implSearchHitter(searchFilter);
-  // return ref.watch(playQuizViewModelProvider).implSearchHitter(searchFilter);
+  return ref.watch(quizViewModelProvider).implSearchHitter(searchFilter);
 });
 
 final selectedStatsListProvider = Provider((ref) {
@@ -27,7 +26,7 @@ final selectedStatsListProvider = Provider((ref) {
   return selectedStats;
 });
 
-final quizViewModelProvider = Provider((ref) => QuizViewModel(ref));
+final quizViewModelProvider = Provider(QuizViewModel.new);
 
 class QuizViewModel {
   QuizViewModel(
