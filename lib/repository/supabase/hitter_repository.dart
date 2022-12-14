@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../Infrastructure/supabase/supabase_providers.dart';
-import '../../constant/stats_type.dart';
+import '../../constant/hitting_stats/probability_stats.dart';
+import '../../constant/hitting_stats/stats_type.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_filter.dart';
 import '../../model/hitting_stats.dart';
@@ -24,6 +25,7 @@ final hitterQuizUiProvider = FutureProvider((ref) {
     StatsType.hr,
     StatsType.ops,
   ];
+
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
         selectedStats,
         searchFilter,
@@ -37,7 +39,8 @@ final hitterRepositoryProvider = riverpod.Provider((ref) {
 });
 
 final allHitterListProvider = riverpod.Provider(
-    (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter());
+  (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
+);
 
 //TODO エラーハンドリング要検討
 class HitterRepository {
@@ -150,18 +153,12 @@ class HitterRepository {
 
   // NOTE 関数名や、関数内の変数名納得いってない
   Map<String, String> _toStatsForUi(Map<String, dynamic> rowStats) {
-    final List<String> statsOnProbability = [
-      StatsType.avg.label,
-      StatsType.obp.label,
-      StatsType.slg.label,
-      StatsType.ops.label,
-    ];
     final Map<String, String> statsForUi = {};
 
     rowStats.forEach((key, value) {
       final strVal = value.toString();
 
-      if (statsOnProbability.contains(key)) {
+      if (probabilityStats.contains(key)) {
         statsForUi[key] = _formatStatsValue(strVal);
       } else {
         statsForUi[key] = strVal;
