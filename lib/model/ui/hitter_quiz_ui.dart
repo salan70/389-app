@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/constant/stats_type.dart';
+import 'package:baseball_quiz_app/constant/hitting_stats/stats_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'hitter_quiz_ui.freezed.dart';
@@ -8,7 +8,7 @@ class HitterQuizUi with _$HitterQuizUi {
   const factory HitterQuizUi({
     required String id,
     required String name,
-    required List<StatsType> selectedStatsList,
+    required List<StatsType> selectedStatsTypeList,
     required List<Map<String, String>> statsList,
   }) = _HitterQuizUi;
 }

@@ -86,7 +86,7 @@ class HitterRepository {
     final hitterQuizUi = HitterQuizUi(
         id: hitter.id,
         name: hitter.name,
-        selectedStatsList: searchCondition.selectedStatsList,
+        selectedStatsTypeList: searchCondition.selectedStatsList,
         statsList: statsListForUi);
 
     return hitterQuizUi;
