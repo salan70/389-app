@@ -36,7 +36,9 @@ class QuizEventButtonsViewModel {
         data: (data) {
           for (int cIdx = 0; cIdx < data!.statsList.length; cIdx++) {
             idList.add([]);
-            for (int rIdx = 0; rIdx < data.selectedStatsList.length; rIdx++) {
+            for (int rIdx = 0;
+                rIdx < data.selectedStatsTypeList.length;
+                rIdx++) {
               idList[cIdx].add(uuid.v4());
             }
           }
