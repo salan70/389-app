@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'hitter_search_filter.dart';
+part of 'hitter_search_condition.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,30 +15,37 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$HitterSearchFilter {
+mixin _$HitterSearchCondition {
   List<String> get teamList => throw _privateConstructorUsedError;
   int get minGames => throw _privateConstructorUsedError;
   int get minHits => throw _privateConstructorUsedError;
-  int get minPa => throw _privateConstructorUsedError;
+  int get minPa => throw _privateConstructorUsedError; // pa: 打席数
+  List<StatsType> get selectedStatsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HitterSearchFilterCopyWith<HitterSearchFilter> get copyWith =>
+  $HitterSearchConditionCopyWith<HitterSearchCondition> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterSearchFilterCopyWith<$Res> {
-  factory $HitterSearchFilterCopyWith(
-          HitterSearchFilter value, $Res Function(HitterSearchFilter) then) =
-      _$HitterSearchFilterCopyWithImpl<$Res, HitterSearchFilter>;
+abstract class $HitterSearchConditionCopyWith<$Res> {
+  factory $HitterSearchConditionCopyWith(HitterSearchCondition value,
+          $Res Function(HitterSearchCondition) then) =
+      _$HitterSearchConditionCopyWithImpl<$Res, HitterSearchCondition>;
   @useResult
-  $Res call({List<String> teamList, int minGames, int minHits, int minPa});
+  $Res call(
+      {List<String> teamList,
+      int minGames,
+      int minHits,
+      int minPa,
+      List<StatsType> selectedStatsList});
 }
 
 /// @nodoc
-class _$HitterSearchFilterCopyWithImpl<$Res, $Val extends HitterSearchFilter>
-    implements $HitterSearchFilterCopyWith<$Res> {
-  _$HitterSearchFilterCopyWithImpl(this._value, this._then);
+class _$HitterSearchConditionCopyWithImpl<$Res,
+        $Val extends HitterSearchCondition>
+    implements $HitterSearchConditionCopyWith<$Res> {
+  _$HitterSearchConditionCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -52,6 +59,7 @@ class _$HitterSearchFilterCopyWithImpl<$Res, $Val extends HitterSearchFilter>
     Object? minGames = null,
     Object? minHits = null,
     Object? minPa = null,
+    Object? selectedStatsList = null,
   }) {
     return _then(_value.copyWith(
       teamList: null == teamList
@@ -70,27 +78,36 @@ class _$HitterSearchFilterCopyWithImpl<$Res, $Val extends HitterSearchFilter>
           ? _value.minPa
           : minPa // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedStatsList: null == selectedStatsList
+          ? _value.selectedStatsList
+          : selectedStatsList // ignore: cast_nullable_to_non_nullable
+              as List<StatsType>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_HitterSearchFilterCopyWith<$Res>
-    implements $HitterSearchFilterCopyWith<$Res> {
-  factory _$$_HitterSearchFilterCopyWith(_$_HitterSearchFilter value,
-          $Res Function(_$_HitterSearchFilter) then) =
-      __$$_HitterSearchFilterCopyWithImpl<$Res>;
+abstract class _$$_HitterSearchConditionCopyWith<$Res>
+    implements $HitterSearchConditionCopyWith<$Res> {
+  factory _$$_HitterSearchConditionCopyWith(_$_HitterSearchCondition value,
+          $Res Function(_$_HitterSearchCondition) then) =
+      __$$_HitterSearchConditionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String> teamList, int minGames, int minHits, int minPa});
+  $Res call(
+      {List<String> teamList,
+      int minGames,
+      int minHits,
+      int minPa,
+      List<StatsType> selectedStatsList});
 }
 
 /// @nodoc
-class __$$_HitterSearchFilterCopyWithImpl<$Res>
-    extends _$HitterSearchFilterCopyWithImpl<$Res, _$_HitterSearchFilter>
-    implements _$$_HitterSearchFilterCopyWith<$Res> {
-  __$$_HitterSearchFilterCopyWithImpl(
-      _$_HitterSearchFilter _value, $Res Function(_$_HitterSearchFilter) _then)
+class __$$_HitterSearchConditionCopyWithImpl<$Res>
+    extends _$HitterSearchConditionCopyWithImpl<$Res, _$_HitterSearchCondition>
+    implements _$$_HitterSearchConditionCopyWith<$Res> {
+  __$$_HitterSearchConditionCopyWithImpl(_$_HitterSearchCondition _value,
+      $Res Function(_$_HitterSearchCondition) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,8 +117,9 @@ class __$$_HitterSearchFilterCopyWithImpl<$Res>
     Object? minGames = null,
     Object? minHits = null,
     Object? minPa = null,
+    Object? selectedStatsList = null,
   }) {
-    return _then(_$_HitterSearchFilter(
+    return _then(_$_HitterSearchCondition(
       teamList: null == teamList
           ? _value._teamList
           : teamList // ignore: cast_nullable_to_non_nullable
@@ -118,19 +136,25 @@ class __$$_HitterSearchFilterCopyWithImpl<$Res>
           ? _value.minPa
           : minPa // ignore: cast_nullable_to_non_nullable
               as int,
+      selectedStatsList: null == selectedStatsList
+          ? _value._selectedStatsList
+          : selectedStatsList // ignore: cast_nullable_to_non_nullable
+              as List<StatsType>,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_HitterSearchFilter implements _HitterSearchFilter {
-  const _$_HitterSearchFilter(
+class _$_HitterSearchCondition implements _HitterSearchCondition {
+  const _$_HitterSearchCondition(
       {required final List<String> teamList,
       required this.minGames,
       required this.minHits,
-      required this.minPa})
-      : _teamList = teamList;
+      required this.minPa,
+      required final List<StatsType> selectedStatsList})
+      : _teamList = teamList,
+        _selectedStatsList = selectedStatsList;
 
   final List<String> _teamList;
   @override
@@ -145,42 +169,59 @@ class _$_HitterSearchFilter implements _HitterSearchFilter {
   final int minHits;
   @override
   final int minPa;
+// pa: 打席数
+  final List<StatsType> _selectedStatsList;
+// pa: 打席数
+  @override
+  List<StatsType> get selectedStatsList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedStatsList);
+  }
 
   @override
   String toString() {
-    return 'HitterSearchFilter(teamList: $teamList, minGames: $minGames, minHits: $minHits, minPa: $minPa)';
+    return 'HitterSearchCondition(teamList: $teamList, minGames: $minGames, minHits: $minHits, minPa: $minPa, selectedStatsList: $selectedStatsList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterSearchFilter &&
+            other is _$_HitterSearchCondition &&
             const DeepCollectionEquality().equals(other._teamList, _teamList) &&
             (identical(other.minGames, minGames) ||
                 other.minGames == minGames) &&
             (identical(other.minHits, minHits) || other.minHits == minHits) &&
-            (identical(other.minPa, minPa) || other.minPa == minPa));
+            (identical(other.minPa, minPa) || other.minPa == minPa) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedStatsList, _selectedStatsList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_teamList), minGames, minHits, minPa);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_teamList),
+      minGames,
+      minHits,
+      minPa,
+      const DeepCollectionEquality().hash(_selectedStatsList));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterSearchFilterCopyWith<_$_HitterSearchFilter> get copyWith =>
-      __$$_HitterSearchFilterCopyWithImpl<_$_HitterSearchFilter>(
+  _$$_HitterSearchConditionCopyWith<_$_HitterSearchCondition> get copyWith =>
+      __$$_HitterSearchConditionCopyWithImpl<_$_HitterSearchCondition>(
           this, _$identity);
 }
 
-abstract class _HitterSearchFilter implements HitterSearchFilter {
-  const factory _HitterSearchFilter(
-      {required final List<String> teamList,
-      required final int minGames,
-      required final int minHits,
-      required final int minPa}) = _$_HitterSearchFilter;
+abstract class _HitterSearchCondition implements HitterSearchCondition {
+  const factory _HitterSearchCondition(
+          {required final List<String> teamList,
+          required final int minGames,
+          required final int minHits,
+          required final int minPa,
+          required final List<StatsType> selectedStatsList}) =
+      _$_HitterSearchCondition;
 
   @override
   List<String> get teamList;
@@ -190,8 +231,10 @@ abstract class _HitterSearchFilter implements HitterSearchFilter {
   int get minHits;
   @override
   int get minPa;
+  @override // pa: 打席数
+  List<StatsType> get selectedStatsList;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterSearchFilterCopyWith<_$_HitterSearchFilter> get copyWith =>
+  _$$_HitterSearchConditionCopyWith<_$_HitterSearchCondition> get copyWith =>
       throw _privateConstructorUsedError;
 }
