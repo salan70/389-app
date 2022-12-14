@@ -136,13 +136,13 @@ class HitterRepository {
     return statsList;
   }
 
-  Future<List<HitterMap>> fetchAllHitter() async {
+  Future<List<HitterIdByName>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
 
-    final allHitterList = <HitterMap>[];
+    final allHitterList = <HitterIdByName>[];
 
     for (var response in responses) {
-      final hitterMap = HitterMap.fromJson(response);
+      final hitterMap = HitterIdByName.fromJson(response);
       allHitterList.add(hitterMap);
     }
 

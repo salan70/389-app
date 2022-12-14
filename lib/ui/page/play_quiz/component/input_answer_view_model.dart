@@ -19,9 +19,9 @@ class InputAnswerViewModel {
   final Ref ref;
 
   // TODO 関数名もっといいの検討
-  Future<List<HitterMap>> searchHitter(String searchWord) async {
+  Future<List<HitterIdByName>> searchHitter(String searchWord) async {
     final allHitterList = await ref.watch(allHitterListProvider);
-    final hitterListAfterSearch = <HitterMap>[];
+    final hitterListAfterSearch = <HitterIdByName>[];
 
     for (var hitter in allHitterList) {
       if (hitter.label.contains(searchWord)) {
