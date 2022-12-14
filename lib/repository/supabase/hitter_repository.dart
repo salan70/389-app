@@ -157,7 +157,7 @@ class HitterRepository {
       final strVal = value.toString();
 
       if (probabilityStats.contains(key)) {
-        statsForUi[key] = _formatStatsValue(strVal);
+        statsForUi[key] = _formatStats(strVal);
       } else {
         statsForUi[key] = strVal;
       }
@@ -166,8 +166,7 @@ class HitterRepository {
     return statsForUi;
   }
 
-  // NOTE 関数名や、関数内の変数名納得いってない
-  String _formatStatsValue(String str) {
+  String _formatStats(String str) {
     final doubleVal = double.tryParse(str);
 
     // 「.---」など、double型に変換できない場合
