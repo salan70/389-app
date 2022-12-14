@@ -14,34 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-HitterMap _$HitterMapFromJson(Map<String, dynamic> json) {
-  return _HitterMap.fromJson(json);
+HitterIdByName _$HitterIdByNameFromJson(Map<String, dynamic> json) {
+  return _HitterIdByName.fromJson(json);
 }
 
 /// @nodoc
-mixin _$HitterMap {
+mixin _$HitterIdByName {
   @JsonKey(name: 'name')
   String get label => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $HitterMapCopyWith<HitterMap> get copyWith =>
+  $HitterIdByNameCopyWith<HitterIdByName> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterMapCopyWith<$Res> {
-  factory $HitterMapCopyWith(HitterMap value, $Res Function(HitterMap) then) =
-      _$HitterMapCopyWithImpl<$Res, HitterMap>;
+abstract class $HitterIdByNameCopyWith<$Res> {
+  factory $HitterIdByNameCopyWith(
+          HitterIdByName value, $Res Function(HitterIdByName) then) =
+      _$HitterIdByNameCopyWithImpl<$Res, HitterIdByName>;
   @useResult
   $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
-class _$HitterMapCopyWithImpl<$Res, $Val extends HitterMap>
-    implements $HitterMapCopyWith<$Res> {
-  _$HitterMapCopyWithImpl(this._value, this._then);
+class _$HitterIdByNameCopyWithImpl<$Res, $Val extends HitterIdByName>
+    implements $HitterIdByNameCopyWith<$Res> {
+  _$HitterIdByNameCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -68,21 +69,22 @@ class _$HitterMapCopyWithImpl<$Res, $Val extends HitterMap>
 }
 
 /// @nodoc
-abstract class _$$_HitterMapCopyWith<$Res> implements $HitterMapCopyWith<$Res> {
-  factory _$$_HitterMapCopyWith(
-          _$_HitterMap value, $Res Function(_$_HitterMap) then) =
-      __$$_HitterMapCopyWithImpl<$Res>;
+abstract class _$$_HitterIdByNameCopyWith<$Res>
+    implements $HitterIdByNameCopyWith<$Res> {
+  factory _$$_HitterIdByNameCopyWith(
+          _$_HitterIdByName value, $Res Function(_$_HitterIdByName) then) =
+      __$$_HitterIdByNameCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
-class __$$_HitterMapCopyWithImpl<$Res>
-    extends _$HitterMapCopyWithImpl<$Res, _$_HitterMap>
-    implements _$$_HitterMapCopyWith<$Res> {
-  __$$_HitterMapCopyWithImpl(
-      _$_HitterMap _value, $Res Function(_$_HitterMap) _then)
+class __$$_HitterIdByNameCopyWithImpl<$Res>
+    extends _$HitterIdByNameCopyWithImpl<$Res, _$_HitterIdByName>
+    implements _$$_HitterIdByNameCopyWith<$Res> {
+  __$$_HitterIdByNameCopyWithImpl(
+      _$_HitterIdByName _value, $Res Function(_$_HitterIdByName) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -91,7 +93,7 @@ class __$$_HitterMapCopyWithImpl<$Res>
     Object? label = null,
     Object? id = null,
   }) {
-    return _then(_$_HitterMap(
+    return _then(_$_HitterIdByName(
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -106,12 +108,12 @@ class __$$_HitterMapCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_HitterMap implements _HitterMap {
-  const _$_HitterMap(
+class _$_HitterIdByName implements _HitterIdByName {
+  const _$_HitterIdByName(
       {@JsonKey(name: 'name') required this.label, required this.id});
 
-  factory _$_HitterMap.fromJson(Map<String, dynamic> json) =>
-      _$$_HitterMapFromJson(json);
+  factory _$_HitterIdByName.fromJson(Map<String, dynamic> json) =>
+      _$$_HitterIdByNameFromJson(json);
 
   @override
   @JsonKey(name: 'name')
@@ -121,14 +123,14 @@ class _$_HitterMap implements _HitterMap {
 
   @override
   String toString() {
-    return 'HitterMap(label: $label, id: $id)';
+    return 'HitterIdByName(label: $label, id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterMap &&
+            other is _$_HitterIdByName &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.id, id) || other.id == id));
   }
@@ -140,24 +142,24 @@ class _$_HitterMap implements _HitterMap {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterMapCopyWith<_$_HitterMap> get copyWith =>
-      __$$_HitterMapCopyWithImpl<_$_HitterMap>(this, _$identity);
+  _$$_HitterIdByNameCopyWith<_$_HitterIdByName> get copyWith =>
+      __$$_HitterIdByNameCopyWithImpl<_$_HitterIdByName>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HitterMapToJson(
+    return _$$_HitterIdByNameToJson(
       this,
     );
   }
 }
 
-abstract class _HitterMap implements HitterMap {
-  const factory _HitterMap(
+abstract class _HitterIdByName implements HitterIdByName {
+  const factory _HitterIdByName(
       {@JsonKey(name: 'name') required final String label,
-      required final String id}) = _$_HitterMap;
+      required final String id}) = _$_HitterIdByName;
 
-  factory _HitterMap.fromJson(Map<String, dynamic> json) =
-      _$_HitterMap.fromJson;
+  factory _HitterIdByName.fromJson(Map<String, dynamic> json) =
+      _$_HitterIdByName.fromJson;
 
   @override
   @JsonKey(name: 'name')
@@ -166,6 +168,6 @@ abstract class _HitterMap implements HitterMap {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterMapCopyWith<_$_HitterMap> get copyWith =>
+  _$$_HitterIdByNameCopyWith<_$_HitterIdByName> get copyWith =>
       throw _privateConstructorUsedError;
 }

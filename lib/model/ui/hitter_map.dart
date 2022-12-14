@@ -6,12 +6,12 @@ part 'hitter_map.freezed.dart';
 part 'hitter_map.g.dart';
 
 @freezed
-class HitterMap with _$HitterMap {
-  const factory HitterMap({
+class HitterIdByName with _$HitterIdByName {
+  const factory HitterIdByName({
     @JsonKey(name: 'name') required String label,
     required String id,
-  }) = _HitterMap;
+  }) = _HitterIdByName;
 
-  factory HitterMap.fromJson(Map<String, dynamic> json) =>
-      _$HitterMapFromJson(json);
+  factory HitterIdByName.fromJson(Map<String, dynamic> json) =>
+      _$HitterIdByNameFromJson(json);
 }

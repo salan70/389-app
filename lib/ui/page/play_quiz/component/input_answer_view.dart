@@ -31,7 +31,7 @@ class InputAnswer extends ConsumerWidget {
           future: () async {
             return await viewModel.searchHitter(textEditingController.text);
           },
-          getSelectedValue: (HitterMap value) {
+          getSelectedValue: (HitterIdByName value) {
             selectedHitterIdNotifier.state = value.id;
           },
         ),
