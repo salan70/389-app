@@ -8,26 +8,25 @@ import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
 import '../../constant/hitting_stats/stats_type.dart';
 import '../../model/hitter.dart';
-import '../../model/hitter_search_filter.dart';
+import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
 import '../../model/ui/hitter_map.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 
 final hitterQuizUiProvider = FutureProvider((ref) {
-  const searchFilter = HitterSearchFilter(
+  const searchFilter = HitterSearchCondition(
       teamList: ['千葉ロッテマリーンズ', '阪神タイガース', '読売ジャイアンツ'],
       minGames: 0,
       minHits: 0,
-      minPa: 0);
-  const selectedStats = <StatsType>[
-    StatsType.team,
-    StatsType.avg,
-    StatsType.hr,
-    StatsType.ops,
-  ];
+      minPa: 0,
+      selectedStatsList: [
+        StatsType.team,
+        StatsType.avg,
+        StatsType.hr,
+        StatsType.ops,
+      ]);
 
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
-        selectedStats,
         searchFilter,
       );
 });
@@ -52,10 +51,9 @@ class HitterRepository {
 
   // TODO searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
-    List<StatsType> selectedStatsList,
-    HitterSearchFilter searchFilter,
+    HitterSearchCondition searchCondition,
   ) async {
-    final hitter = await _searchHitter(searchFilter);
+    final hitter = await _searchHitter(searchCondition);
 
     // 検索条件に合致する選手がいない場合、nullを返す
     if (hitter == null) {
@@ -65,8 +63,8 @@ class HitterRepository {
     final statsList = await _fetchHittingStats(hitter.id);
     final quizUi = _toHitterQuizUi(
       hitter,
-      selectedStatsList,
       statsList,
+      searchCondition,
     );
 
     return quizUi;
@@ -75,8 +73,8 @@ class HitterRepository {
   // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(
     Hitter hitter,
-    List<StatsType> selectedStatsList,
     List<HittingStats> rowStatsList,
+    HitterSearchCondition searchCondition,
   ) {
     final List<Map<String, String>> statsListForUi = [];
 
@@ -88,21 +86,21 @@ class HitterRepository {
     final hitterQuizUi = HitterQuizUi(
         id: hitter.id,
         name: hitter.name,
-        selectedStatsList: selectedStatsList,
+        selectedStatsList: searchCondition.selectedStatsList,
         statsList: statsListForUi);
 
     return hitterQuizUi;
   }
 
-  Future<Hitter?> _searchHitter(HitterSearchFilter searchFilter) async {
+  Future<Hitter?> _searchHitter(HitterSearchCondition searchCondition) async {
     final responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
         .eq('hasData', true)
-        .filter('team', 'in', searchFilter.teamList)
-        .gte('hitting_stats_table.試合', searchFilter.minGames)
-        .gte('hitting_stats_table.安打', searchFilter.minHits)
-        .gte('hitting_stats_table.打席', searchFilter.minPa);
+        .filter('team', 'in', searchCondition.teamList)
+        .gte('hitting_stats_table.試合', searchCondition.minGames)
+        .gte('hitting_stats_table.安打', searchCondition.minHits)
+        .gte('hitting_stats_table.打席', searchCondition.minPa);
 
     // NOTE 以降の処理、諸々別の関数でやったほうが良いかも
 
