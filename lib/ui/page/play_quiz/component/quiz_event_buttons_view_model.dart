@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../../repository/supabase/hitter_repository.dart';
 import '../../../../util/logger.dart';
-import 'quiz_view_model.dart';
 
 final openedIdListProvider = StateProvider<List<String>>((ref) {
   return [];
