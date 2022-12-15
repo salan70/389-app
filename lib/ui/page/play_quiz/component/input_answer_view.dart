@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../../model/ui/hitter_map.dart';
+import '../../../../model/ui/hitter_id_by_name.dart';
 import 'input_answer_view_model.dart';
 
 class InputAnswer extends ConsumerWidget {
