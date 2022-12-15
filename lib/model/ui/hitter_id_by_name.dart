@@ -2,8 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'hitter_map.freezed.dart';
-part 'hitter_map.g.dart';
+part 'hitter_id_by_name.freezed.dart';
+part 'hitter_id_by_name.g.dart';
 
 @freezed
 class HitterIdByName with _$HitterIdByName {

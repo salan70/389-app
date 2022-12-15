@@ -10,7 +10,7 @@ import '../../constant/hitting_stats/stats_type.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
-import '../../model/ui/hitter_map.dart';
+import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 
 final hitterQuizUiProvider = FutureProvider((ref) {
