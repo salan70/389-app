@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
-import '../../constant/hitting_stats/stats_type.dart';
+import '../../mock_data/hitter_search_condition_mock.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
@@ -14,17 +14,7 @@ import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 
 final hitterQuizUiProvider = FutureProvider((ref) {
-  const searchFilter = HitterSearchCondition(
-      teamList: ['千葉ロッテマリーンズ', '阪神タイガース', '読売ジャイアンツ'],
-      minGames: 0,
-      minHits: 0,
-      minPa: 0,
-      selectedStatsList: [
-        StatsType.team,
-        StatsType.avg,
-        StatsType.hr,
-        StatsType.ops,
-      ]);
+  final searchFilter = HitterSearchConditionMock().data1;
 
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
         searchFilter,
