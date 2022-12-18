@@ -20,7 +20,8 @@ mixin _$HitterQuizUi {
   String get name => throw _privateConstructorUsedError;
   List<StatsType> get selectedStatsTypeList =>
       throw _privateConstructorUsedError;
-  List<Map<String, String>> get statsList => throw _privateConstructorUsedError;
+  List<Map<String, StatsValue>> get statsList =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HitterQuizUiCopyWith<HitterQuizUi> get copyWith =>
@@ -37,7 +38,7 @@ abstract class $HitterQuizUiCopyWith<$Res> {
       {String id,
       String name,
       List<StatsType> selectedStatsTypeList,
-      List<Map<String, String>> statsList});
+      List<Map<String, StatsValue>> statsList});
 }
 
 /// @nodoc
@@ -74,7 +75,7 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
       statsList: null == statsList
           ? _value.statsList
           : statsList // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, String>>,
+              as List<Map<String, StatsValue>>,
     ) as $Val);
   }
 }
@@ -91,7 +92,7 @@ abstract class _$$_HitterQuizUiCopyWith<$Res>
       {String id,
       String name,
       List<StatsType> selectedStatsTypeList,
-      List<Map<String, String>> statsList});
+      List<Map<String, StatsValue>> statsList});
 }
 
 /// @nodoc
@@ -126,7 +127,7 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
       statsList: null == statsList
           ? _value._statsList
           : statsList // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, String>>,
+              as List<Map<String, StatsValue>>,
     ));
   }
 }
@@ -138,7 +139,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
       {required this.id,
       required this.name,
       required final List<StatsType> selectedStatsTypeList,
-      required final List<Map<String, String>> statsList})
+      required final List<Map<String, StatsValue>> statsList})
       : _selectedStatsTypeList = selectedStatsTypeList,
         _statsList = statsList;
 
@@ -153,9 +154,9 @@ class _$_HitterQuizUi implements _HitterQuizUi {
     return EqualUnmodifiableListView(_selectedStatsTypeList);
   }
 
-  final List<Map<String, String>> _statsList;
+  final List<Map<String, StatsValue>> _statsList;
   @override
-  List<Map<String, String>> get statsList {
+  List<Map<String, StatsValue>> get statsList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_statsList);
   }
@@ -195,10 +196,11 @@ class _$_HitterQuizUi implements _HitterQuizUi {
 
 abstract class _HitterQuizUi implements HitterQuizUi {
   const factory _HitterQuizUi(
-      {required final String id,
-      required final String name,
-      required final List<StatsType> selectedStatsTypeList,
-      required final List<Map<String, String>> statsList}) = _$_HitterQuizUi;
+          {required final String id,
+          required final String name,
+          required final List<StatsType> selectedStatsTypeList,
+          required final List<Map<String, StatsValue>> statsList}) =
+      _$_HitterQuizUi;
 
   @override
   String get id;
@@ -207,7 +209,7 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   @override
   List<StatsType> get selectedStatsTypeList;
   @override
-  List<Map<String, String>> get statsList;
+  List<Map<String, StatsValue>> get statsList;
   @override
   @JsonKey(ignore: true)
   _$$_HitterQuizUiCopyWith<_$_HitterQuizUi> get copyWith =>
