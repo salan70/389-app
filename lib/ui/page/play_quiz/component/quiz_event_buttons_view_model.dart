@@ -1,9 +1,6 @@
 import 'dart:math';
 
-import 'package:baseball_quiz_app/constant/hitting_stats/stats_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../repository/supabase/hitter_repository.dart';
 
 final closedStatsIdListProvider = StateProvider<List<String>>((ref) {
   return [];
@@ -30,15 +27,15 @@ class QuizEventButtonsViewModel {
   }
 
   void removeAll() {
-    final openedIdListNotifier = ref.watch(closedStatsIdListProvider.notifier);
+    final closedIdListNotifier = ref.watch(closedStatsIdListProvider.notifier);
 
-    openedIdListNotifier.state = [];
+    closedIdListNotifier.state = [];
   }
 
   bool canRemove() {
-    final openedIdList = ref.watch(closedStatsIdListProvider);
+    final closedIdList = ref.watch(closedStatsIdListProvider);
 
-    if (openedIdList == []) {
+    if (closedIdList.isEmpty) {
       return false;
     }
     return true;
