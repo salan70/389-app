@@ -22,13 +22,13 @@ class QuizEventButtonsViewModel {
 
     final random = Random();
     final removeIdx = random.nextInt(closedIdList.length);
+
     closedIdList.removeAt(removeIdx);
     notifier.state = [...closedIdList];
   }
 
   void removeAll() {
     final closedIdListNotifier = ref.watch(closedStatsIdListProvider.notifier);
-
     closedIdListNotifier.state = [];
   }
 
@@ -38,6 +38,7 @@ class QuizEventButtonsViewModel {
     if (closedIdList.isEmpty) {
       return false;
     }
+
     return true;
   }
 }
