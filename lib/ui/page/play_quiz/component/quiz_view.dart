@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../constant/hitting_stats/stats_type.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
 import 'quiz_event_buttons_view_model.dart';
+import 'quiz_view_model.dart';
 
 class QuizView extends ConsumerWidget {
   const QuizView({Key? key}) : super(key: key);
@@ -11,8 +12,8 @@ class QuizView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizUi = ref.watch(hitterQuizUiProvider);
-    final id2DList = ref.watch(id2DListProvider);
-    final openedIdList = ref.watch(openedIdListProvider);
+    final closedIdList = ref.watch(closedStatsIdListProvider);
+    final viewModel = ref.watch(quizViewModelProvider);
 
     return hitterQuizUi.when(
       loading: () => const Center(
@@ -20,6 +21,7 @@ class QuizView extends ConsumerWidget {
       ),
       error: (err, _) => Text('Error: $err'),
       data: (data) {
+        // viewModel.addAllStatsId(data!);
         final selectedStatsList = data!.selectedStatsTypeList;
         return Column(
           children: [
@@ -44,14 +46,13 @@ class QuizView extends ConsumerWidget {
               itemCount: data.statsList.length,
               itemBuilder: (_, cIdx) {
                 final stats = data.statsList[cIdx];
-                final idList = id2DList[cIdx];
 
                 return Row(
                   children: [
                     Expanded(
                       child: Center(
                         child: Text(
-                          stats['年度']!,
+                          stats['年度']!.data,
                         ),
                       ),
                     ),
@@ -60,10 +61,12 @@ class QuizView extends ConsumerWidget {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
-                          child: (openedIdList.contains(idList[rIdx]))
+                          child: (!closedIdList.contains(
+                            stats[data.selectedStatsTypeList[rIdx].label]!.id,
+                          ))
                               ? Text(
-                                  stats[
-                                      data.selectedStatsTypeList[rIdx].label]!,
+                                  stats[data.selectedStatsTypeList[rIdx].label]!
+                                      .data,
                                 )
                               : Container(
                                   color: Colors.grey,
@@ -76,6 +79,12 @@ class QuizView extends ConsumerWidget {
                 );
               },
             ),
+            TextButton(
+              onPressed: () {
+                viewModel.addAllStatsId(hitterQuizUi.value!);
+              },
+              child: const Text('隠す'),
+            )
           ],
         );
       },
