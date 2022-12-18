@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
@@ -12,12 +13,16 @@ import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
 import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
+import '../../model/ui/stats_value.dart';
+
+// TODO: 別のところに移動する
+final searchConditionProvider =
+    StateProvider((_) => HitterSearchConditionMock().data1);
 
 final hitterQuizUiProvider = FutureProvider((ref) {
-  final searchFilter = HitterSearchConditionMock().data1;
-
+  final searchCondition = ref.watch(searchConditionProvider);
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
-        searchFilter,
+        searchCondition,
       );
 });
 
@@ -31,7 +36,7 @@ final allHitterListProvider = riverpod.Provider(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 
-//TODO エラーハンドリング要検討
+// TODO エラーハンドリング要検討
 class HitterRepository {
   HitterRepository(
     this.supabase,
@@ -66,7 +71,7 @@ class HitterRepository {
     List<HittingStats> rowStatsList,
     HitterSearchCondition searchCondition,
   ) {
-    final List<Map<String, String>> statsListForUi = [];
+    final List<Map<String, StatsValue>> statsListForUi = [];
 
     for (final rowStats in rowStatsList) {
       final statsForUi = _toStatsForUi(rowStats.stats);
@@ -140,23 +145,31 @@ class HitterRepository {
   }
 
   // NOTE 関数名や、関数内の変数名納得いってない
-  Map<String, String> _toStatsForUi(Map<String, dynamic> rowStats) {
-    final Map<String, String> statsForUi = {};
+  Map<String, StatsValue> _toStatsForUi(Map<String, dynamic> rowStats) {
+    final Map<String, StatsValue> statsForUi = {};
 
     rowStats.forEach((key, value) {
       final strVal = value.toString();
-
-      if (probabilityStats.contains(key)) {
-        statsForUi[key] = _formatStats(strVal);
-      } else {
-        statsForUi[key] = strVal;
-      }
+      statsForUi[key] = _formatStatsValue(key, strVal);
     });
 
     return statsForUi;
   }
 
-  String _formatStats(String str) {
+  StatsValue _formatStatsValue(String key, String value) {
+    // TODO この関数でuuidはめる処理するのキモいからなんとかする
+    final id = const Uuid().v4();
+
+    if (probabilityStats.contains(key)) {
+      final data = _formatStatsData(value);
+      return StatsValue(id: id, data: data);
+    }
+
+    final data = value;
+    return StatsValue(id: id, data: data);
+  }
+
+  String _formatStatsData(String str) {
     final doubleVal = double.tryParse(str);
 
     // 「.---」など、double型に変換できない場合
