@@ -11,6 +11,7 @@ class HitterQuizUi with _$HitterQuizUi {
     required String id,
     required String name,
     required List<StatsType> selectedStatsTypeList,
-    required List<Map<String, StatsValue>> statsList,
+    required List<Map<String, StatsValue>> statsMapList,
+    required List<String> closedStatsIdList,
   }) = _HitterQuizUi;
 }
