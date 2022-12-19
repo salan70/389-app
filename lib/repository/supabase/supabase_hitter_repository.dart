@@ -21,6 +21,7 @@ import '../../model/ui/stats_value.dart';
 final searchConditionProvider = StateProvider<HitterSearchCondition>(
     (_) => HitterSearchConditionMock().data1);
 
+// hitterQuizUiStateProvider内でしか呼ばない
 final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
   final searchCondition = ref.watch(searchConditionProvider);
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
