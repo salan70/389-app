@@ -16,7 +16,7 @@ import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 
-// TODO: 別のところに移動する
+// TODO(me): 別のところに移動する
 final searchConditionProvider =
     StateProvider((_) => HitterSearchConditionMock().data1);
 
@@ -31,7 +31,7 @@ final hitterQuizUiStateProvider = StateProvider((ref) {
   return ref.watch(hitterQuizUiProvider);
 });
 
-// TODO repositoryのinterface実装して、そこに移動する
+// TODO(me): repositoryのinterface実装して、そこに移動する
 final hitterRepositoryProvider = riverpod.Provider((ref) {
   final supabase = ref.watch(supabaseProvider);
   return HitterRepository(supabase);
@@ -41,7 +41,7 @@ final allHitterListProvider = riverpod.Provider(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 
-// TODO エラーハンドリング要検討
+// TODO(me): エラーハンドリング要検討
 class HitterRepository {
   HitterRepository(
     this.supabase,
@@ -50,7 +50,7 @@ class HitterRepository {
   final Supabase supabase;
   final List<String> _closedStatsIdList = [];
 
-  // TODO searchFilter、引数ではなくproviderで受け取ったほうが良さそう
+  // TODO(me): searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
     HitterSearchCondition searchCondition,
   ) async {
@@ -77,7 +77,7 @@ class HitterRepository {
     List<HittingStats> rowStatsList,
     HitterSearchCondition searchCondition,
   ) {
-    final List<Map<String, StatsValue>> statsListForUi = [];
+    final statsListForUi = <Map<String, StatsValue>>[];
 
     for (final rowStats in rowStatsList) {
       final statsForUi = _toStatsForUi(rowStats.stats, searchCondition);
@@ -125,7 +125,7 @@ class HitterRepository {
 
   // playerIdから打撃成績のListを取得する
   Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
-    final List<HittingStats> statsList = [];
+    final statsList = <HittingStats>[];
 
     final responses = await supabase.client
         .from('hitting_stats_table')
@@ -146,7 +146,7 @@ class HitterRepository {
 
     final allHitterList = <HitterIdByName>[];
 
-    for (var response in responses) {
+    for (final response in responses) {
       final hitterMap = HitterIdByName.fromJson(response);
       allHitterList.add(hitterMap);
     }
@@ -159,12 +159,12 @@ class HitterRepository {
     Map<String, dynamic> rowStats,
     HitterSearchCondition searchCondition,
   ) {
-    final Map<String, StatsValue> statsForUi = {};
+    final statsForUi = <String, StatsValue>{};
 
     final selectedStatsList = searchCondition.selectedStatsList;
 
     // selectedLabelListを作成
-    final selectedLabelList = [];
+    final selectedLabelList = <String>[];
     for (final selectedStats in selectedStatsList) {
       selectedLabelList.add(selectedStats.label);
     }

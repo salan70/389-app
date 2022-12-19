@@ -5,7 +5,7 @@ import '../../../../constant/hitting_stats/stats_type.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
 
 class QuizView extends ConsumerWidget {
-  const QuizView({Key? key}) : super(key: key);
+  const QuizView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,19 +44,20 @@ class QuizView extends ConsumerWidget {
                     for (final selectedStatsType in selectedStatsTypeList)
                       Expanded(
                         child: Container(
-                            padding: const EdgeInsets.all(4),
-                            alignment: Alignment.center,
-                            child: (closedStatsIdList.contains(
-                              statsMap[selectedStatsType.label]!.id,
-                            ))
-                                ? Container(
-                                    color: Colors.grey,
-                                    width: double.infinity,
-                                    child: const Text(''),
-                                  )
-                                : Text(
-                                    statsMap[selectedStatsType.label]!.data,
-                                  )),
+                          padding: const EdgeInsets.all(4),
+                          alignment: Alignment.center,
+                          child: (closedStatsIdList.contains(
+                            statsMap[selectedStatsType.label]!.id,
+                          ))
+                              ? Container(
+                                  color: Colors.grey,
+                                  width: double.infinity,
+                                  child: const Text(''),
+                                )
+                              : Text(
+                                  statsMap[selectedStatsType.label]!.data,
+                                ),
+                        ),
                       ),
                   ],
                 );
