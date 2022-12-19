@@ -19,4 +19,19 @@ class HitterSearchConditionMock {
       StatsType.ops,
     ],
   );
+
+  final data2 = const HitterSearchCondition(
+    teamList: [
+      '千葉ロッテマリーンズ',
+      '阪神タイガース',
+      '読売ジャイアンツ',
+    ],
+    minGames: 0,
+    minHits: 0,
+    minPa: 0,
+    selectedStatsList: [
+      StatsType.year,
+      StatsType.team,
+    ],
+  );
 }
