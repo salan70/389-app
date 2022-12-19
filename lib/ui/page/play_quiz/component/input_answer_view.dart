@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../../model/ui/hitter_map.dart';
+import '../../../../model/ui/hitter_id_by_name.dart';
 import 'input_answer_view_model.dart';
 
 class InputAnswer extends ConsumerWidget {
@@ -12,6 +12,7 @@ class InputAnswer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ScrollController();
     final textEditingController = TextEditingController();
+
     final viewModel = ref.watch(inputAnswerViewModelProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
@@ -30,7 +31,7 @@ class InputAnswer extends ConsumerWidget {
           future: () async {
             return await viewModel.searchHitter(textEditingController.text);
           },
-          getSelectedValue: (HitterMap value) {
+          getSelectedValue: (HitterIdByName value) {
             selectedHitterIdNotifier.state = value.id;
           },
         ),
