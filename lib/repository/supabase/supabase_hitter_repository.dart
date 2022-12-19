@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
+import '../hitter_repository.dart';
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
 import '../../constant/hitting_stats/stats_type.dart';
@@ -32,25 +33,20 @@ final hitterQuizUiStateProvider =
   return ref.watch(hitterQuizUiFutureProvider);
 });
 
-// TODO(me): repositoryのinterface実装して、そこに移動する
-final hitterRepositoryProvider = riverpod.Provider<HitterRepository>((ref) {
-  final supabase = ref.watch(supabaseProvider);
-  return HitterRepository(supabase);
-});
-
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 
 // TODO(me): エラーハンドリング要検討
-class HitterRepository {
-  HitterRepository(
+class SupabaseHitterRepository implements HitterRepository {
+  SupabaseHitterRepository(
     this.supabase,
   );
 
   final Supabase supabase;
   final List<String> _closedStatsIdList = [];
 
+  @override
   Future<HitterQuizUi?> implSearchHitter(
     HitterSearchCondition searchCondition,
   ) async {
@@ -141,6 +137,7 @@ class HitterRepository {
   }
 
   // 解答を入力するテキストフィールドの検索用
+  @override
   Future<List<HitterIdByName>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
 

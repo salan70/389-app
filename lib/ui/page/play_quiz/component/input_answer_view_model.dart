@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
-import '../../../../repository/supabase/hitter_repository.dart';
+import '../../../../repository/supabase/supabase_hitter_repository.dart';
 
 final inputAnswerViewModelProvider =
     Provider<InputAnswerViewModel>(InputAnswerViewModel.new);
