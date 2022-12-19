@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
 
-final inputAnswerViewModelProvider = Provider(InputAnswerViewModel.new);
+final inputAnswerViewModelProvider =
+    Provider<InputAnswerViewModel>(InputAnswerViewModel.new);
 
-final selectedHitterIdProvider = StateProvider((_) => '');
+final selectedHitterIdProvider = StateProvider<String>((_) => '');
 
 class InputAnswerViewModel {
   InputAnswerViewModel(
@@ -30,7 +31,7 @@ class InputAnswerViewModel {
 
   bool judgeQuizResult() {
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
-    final hitterQuizUi = ref.watch(hitterQuizUiProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
 
     if (selectedHitterId == hitterQuizUi.value!.id) {
       return true;

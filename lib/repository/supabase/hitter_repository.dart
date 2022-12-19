@@ -17,27 +17,28 @@ import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 
 // TODO(me): 別のところに移動する
-final searchConditionProvider =
-    StateProvider((_) => HitterSearchConditionMock().data1);
+final searchConditionProvider = StateProvider<HitterSearchCondition>(
+    (_) => HitterSearchConditionMock().data1);
 
-final hitterQuizUiProvider = FutureProvider((ref) {
+final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
   final searchCondition = ref.watch(searchConditionProvider);
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
         searchCondition,
       );
 });
 
-final hitterQuizUiStateProvider = StateProvider((ref) {
-  return ref.watch(hitterQuizUiProvider);
+final hitterQuizUiStateProvider =
+    StateProvider<AsyncValue<HitterQuizUi?>>((ref) {
+  return ref.watch(hitterQuizUiFutureProvider);
 });
 
 // TODO(me): repositoryのinterface実装して、そこに移動する
-final hitterRepositoryProvider = riverpod.Provider((ref) {
+final hitterRepositoryProvider = riverpod.Provider<HitterRepository>((ref) {
   final supabase = ref.watch(supabaseProvider);
   return HitterRepository(supabase);
 });
 
-final allHitterListProvider = riverpod.Provider(
+final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 

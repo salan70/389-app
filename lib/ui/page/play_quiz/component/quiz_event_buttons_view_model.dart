@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../repository/supabase/hitter_repository.dart';
 
 final quizEventButtonsViewModelProvider =
-    Provider(QuizEventButtonsViewModel.new);
+    Provider<QuizEventButtonsViewModel>(QuizEventButtonsViewModel.new);
 
 class QuizEventButtonsViewModel {
   QuizEventButtonsViewModel(
