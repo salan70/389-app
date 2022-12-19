@@ -48,7 +48,7 @@ class HitterRepository {
   );
 
   final Supabase supabase;
-  final List<String> _statsIdList = [];
+  final List<String> _closedStatsIdList = [];
 
   // TODO searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
@@ -89,7 +89,7 @@ class HitterRepository {
       name: hitter.name,
       selectedStatsTypeList: searchCondition.selectedStatsList,
       statsMapList: statsListForUi,
-      closedStatsIdList: _statsIdList,
+      closedStatsIdList: _closedStatsIdList,
     );
 
     return hitterQuizUi;
@@ -182,7 +182,11 @@ class HitterRepository {
 
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
-    _statsIdList.add(id);
+
+    // 年度のidは最初から開けておくため、closedStatsIdListには含めない
+    if (key != '年度') {
+      _closedStatsIdList.add(id);
+    }
 
     if (probabilityStats.contains(key)) {
       final data = _formatStatsData(value);
