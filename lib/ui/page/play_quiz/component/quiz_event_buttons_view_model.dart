@@ -14,9 +14,7 @@ class QuizEventButtonsViewModel {
 
   final Ref ref;
 
-  // TODO: この関数がうまく動かない
   void removeRandom() {
-    print('in removeRandom');
     final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
     final notifier = ref.watch(hitterQuizUiStateProvider.notifier);
 
@@ -24,14 +22,19 @@ class QuizEventButtonsViewModel {
       final closedStatsIdList = value!.closedStatsIdList;
       final random = Random();
       final removeIdx = random.nextInt(closedStatsIdList.length);
-      print('remove before: ${closedStatsIdList.length}');
 
-      print(closedStatsIdList.removeAt(removeIdx));
-      // closedStatsIdList.removeAt(removeIdx);
-      print('remove after: ${closedStatsIdList.length}');
+      // removeIdx以外のindexのIdをremovedListに追加していく
+      final removedList = [];
+      for (var i = 0; i < closedStatsIdList.length; i++) {
+        if (i != removeIdx) {
+          removedList.add(closedStatsIdList[i]);
+        }
+      }
+
       notifier.state = AsyncData(
         value.copyWith(
-          closedStatsIdList: [...closedStatsIdList],
+          // closedStatsIdList: [...closedStatsIdList],
+          closedStatsIdList: [...removedList],
         ),
       );
     });
