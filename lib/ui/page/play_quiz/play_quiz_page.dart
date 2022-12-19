@@ -6,7 +6,7 @@ import 'component/quiz_event_buttons_view.dart';
 import 'component/quiz_view.dart';
 
 class PlayQuizPage extends ConsumerWidget {
-  const PlayQuizPage({Key? key}) : super(key: key);
+  const PlayQuizPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -16,7 +16,7 @@ class PlayQuizPage extends ConsumerWidget {
           title: const Text('プレイ'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: const [
               QuizView(),

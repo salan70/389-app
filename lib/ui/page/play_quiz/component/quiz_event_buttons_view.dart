@@ -5,8 +5,8 @@ import 'quiz_event_buttons_view_model.dart';
 
 class QuizEventButtons extends ConsumerWidget {
   const QuizEventButtons({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,18 +19,18 @@ class QuizEventButtons extends ConsumerWidget {
             if (viewModel.canRemove()) {
               viewModel.removeRandom();
             } else {
-              // TODO Buttonを非活性にする（UIの見た目完成次第実装）
+              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
           },
           child: const Text('次の成績を表示'),
         ),
         TextButton(
           onPressed: () {
-            // TODO 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
+            // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
             if (viewModel.canRemove()) {
               viewModel.removeAll();
             } else {
-              // TODO Buttonを非活性にする（UIの見た目完成次第実装）
+              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
           },
           child: const Text('全ての成績を表示'),
