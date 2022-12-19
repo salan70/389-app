@@ -50,7 +50,6 @@ class HitterRepository {
   final Supabase supabase;
   final List<String> _closedStatsIdList = [];
 
-  // TODO(me): searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
     HitterSearchCondition searchCondition,
   ) async {
