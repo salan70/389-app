@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
+import '../hitter_repository.dart';
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
 import '../../constant/hitting_stats/stats_type.dart';
@@ -17,40 +18,36 @@ import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 
 // TODO(me): 別のところに移動する
-final searchConditionProvider =
-    StateProvider((_) => HitterSearchConditionMock().data1);
+final searchConditionProvider = StateProvider<HitterSearchCondition>(
+    (_) => HitterSearchConditionMock().data1);
 
-final hitterQuizUiProvider = FutureProvider((ref) {
+// hitterQuizUiStateProvider内でしか呼ばない
+final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
   final searchCondition = ref.watch(searchConditionProvider);
   return ref.watch(hitterRepositoryProvider).implSearchHitter(
         searchCondition,
       );
 });
 
-final hitterQuizUiStateProvider = StateProvider((ref) {
-  return ref.watch(hitterQuizUiProvider);
+final hitterQuizUiStateProvider =
+    StateProvider<AsyncValue<HitterQuizUi?>>((ref) {
+  return ref.watch(hitterQuizUiFutureProvider);
 });
 
-// TODO(me): repositoryのinterface実装して、そこに移動する
-final hitterRepositoryProvider = riverpod.Provider((ref) {
-  final supabase = ref.watch(supabaseProvider);
-  return HitterRepository(supabase);
-});
-
-final allHitterListProvider = riverpod.Provider(
+final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 
 // TODO(me): エラーハンドリング要検討
-class HitterRepository {
-  HitterRepository(
+class SupabaseHitterRepository implements HitterRepository {
+  SupabaseHitterRepository(
     this.supabase,
   );
 
   final Supabase supabase;
   final List<String> _closedStatsIdList = [];
 
-  // TODO(me): searchFilter、引数ではなくproviderで受け取ったほうが良さそう
+  @override
   Future<HitterQuizUi?> implSearchHitter(
     HitterSearchCondition searchCondition,
   ) async {
@@ -141,6 +138,7 @@ class HitterRepository {
   }
 
   // 解答を入力するテキストフィールドの検索用
+  @override
   Future<List<HitterIdByName>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
 

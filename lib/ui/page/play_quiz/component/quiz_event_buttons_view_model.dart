@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../repository/supabase/hitter_repository.dart';
+import '../../../../repository/supabase/supabase_hitter_repository.dart';
 
 final quizEventButtonsViewModelProvider =
-    Provider(QuizEventButtonsViewModel.new);
+    Provider<QuizEventButtonsViewModel>(QuizEventButtonsViewModel.new);
 
 class QuizEventButtonsViewModel {
   QuizEventButtonsViewModel(

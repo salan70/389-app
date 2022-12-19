@@ -3,6 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'Infrastructure/supabase/supabase_providers.dart';
+import 'repository/hitter_repository.dart';
+import 'repository/supabase/supabase_hitter_repository.dart';
 import 'ui/page/play_quiz/play_quiz_page.dart';
 
 void main() async {
@@ -17,7 +20,20 @@ void main() async {
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [
+        hitterRepositoryProvider.overrideWith(
+          (ref) {
+            return SupabaseHitterRepository(
+              ref.watch(supabaseProvider),
+            );
+          },
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
