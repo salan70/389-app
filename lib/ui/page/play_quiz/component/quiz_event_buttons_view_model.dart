@@ -2,9 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final closedStatsIdListProvider = StateProvider<List<String>>((ref) {
-  return [];
-});
+import '../../../../repository/supabase/hitter_repository.dart';
 
 final quizEventButtonsViewModelProvider =
     Provider(QuizEventButtonsViewModel.new);
@@ -16,29 +14,52 @@ class QuizEventButtonsViewModel {
 
   final Ref ref;
 
+  // TODO: この関数がうまく動かない
   void removeRandom() {
-    final closedIdList = ref.watch(closedStatsIdListProvider);
-    final notifier = ref.watch(closedStatsIdListProvider.notifier);
+    print('in removeRandom');
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    final notifier = ref.watch(hitterQuizUiStateProvider.notifier);
 
-    final random = Random();
-    final removeIdx = random.nextInt(closedIdList.length);
+    hitterQuizUi.whenData((value) {
+      final closedStatsIdList = value!.closedStatsIdList;
+      final random = Random();
+      final removeIdx = random.nextInt(closedStatsIdList.length);
+      print('remove before: ${closedStatsIdList.length}');
 
-    closedIdList.removeAt(removeIdx);
-    notifier.state = [...closedIdList];
+      print(closedStatsIdList.removeAt(removeIdx));
+      // closedStatsIdList.removeAt(removeIdx);
+      print('remove after: ${closedStatsIdList.length}');
+      notifier.state = AsyncData(
+        value.copyWith(
+          closedStatsIdList: [...closedStatsIdList],
+        ),
+      );
+    });
   }
 
   void removeAll() {
-    final closedIdListNotifier = ref.watch(closedStatsIdListProvider.notifier);
-    closedIdListNotifier.state = [];
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    final notifier = ref.watch(hitterQuizUiStateProvider.notifier);
+
+    hitterQuizUi.whenData((value) {
+      notifier.state = AsyncData(
+        value!.copyWith(
+          closedStatsIdList: [],
+        ),
+      );
+    });
   }
 
   bool canRemove() {
-    final closedIdList = ref.watch(closedStatsIdListProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    var canRemove = false;
 
-    if (closedIdList.isEmpty) {
-      return false;
-    }
+    hitterQuizUi.whenData((value) {
+      if (value!.closedStatsIdList.isNotEmpty) {
+        canRemove = true;
+      }
+    });
 
-    return true;
+    return canRemove;
   }
 }

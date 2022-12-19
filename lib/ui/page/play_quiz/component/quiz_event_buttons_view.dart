@@ -11,13 +11,19 @@ class QuizEventButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewModel = ref.watch(quizEventButtonsViewModelProvider);
+
     return Row(
       children: [
         TextButton(
           onPressed: () {
+            print('tap removeRandom button');
+            print('${viewModel.canRemove()}');
             if (viewModel.canRemove()) {
+              print('start removeRandom');
               viewModel.removeRandom();
+              print('finish removeRandom');
             } else {
+              print('else in removeRandom button');
               // TODO Buttonを非活性にする（UIの見た目完成次第実装）
             }
           },

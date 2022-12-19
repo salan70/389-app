@@ -7,6 +7,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
+import '../../constant/hitting_stats/stats_type.dart';
 import '../../mock_data/hitter_search_condition_mock.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_condition.dart';
@@ -26,6 +27,10 @@ final hitterQuizUiProvider = FutureProvider((ref) {
       );
 });
 
+final hitterQuizUiStateProvider = StateProvider((ref) {
+  return ref.watch(hitterQuizUiProvider);
+});
+
 // TODO repositoryのinterface実装して、そこに移動する
 final hitterRepositoryProvider = riverpod.Provider((ref) {
   final supabase = ref.watch(supabaseProvider);
@@ -43,6 +48,7 @@ class HitterRepository {
   );
 
   final Supabase supabase;
+  final List<String> _statsIdList = [];
 
   // TODO searchFilter、引数ではなくproviderで受け取ったほうが良さそう
   Future<HitterQuizUi?> implSearchHitter(
@@ -74,19 +80,22 @@ class HitterRepository {
     final List<Map<String, StatsValue>> statsListForUi = [];
 
     for (final rowStats in rowStatsList) {
-      final statsForUi = _toStatsForUi(rowStats.stats);
+      final statsForUi = _toStatsForUi(rowStats.stats, searchCondition);
       statsListForUi.add(statsForUi);
     }
 
     final hitterQuizUi = HitterQuizUi(
-        id: hitter.id,
-        name: hitter.name,
-        selectedStatsTypeList: searchCondition.selectedStatsList,
-        statsList: statsListForUi);
+      id: hitter.id,
+      name: hitter.name,
+      selectedStatsTypeList: searchCondition.selectedStatsList,
+      statsMapList: statsListForUi,
+      closedStatsIdList: _statsIdList,
+    );
 
     return hitterQuizUi;
   }
 
+  // 条件に合う選手を1人検索する
   Future<Hitter?> _searchHitter(HitterSearchCondition searchCondition) async {
     final responses = await supabase.client
         .from('hitter_table')
@@ -131,6 +140,7 @@ class HitterRepository {
     return statsList;
   }
 
+  // 解答を入力するテキストフィールドの検索用
   Future<List<HitterIdByName>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
 
@@ -145,20 +155,34 @@ class HitterRepository {
   }
 
   // NOTE 関数名や、関数内の変数名納得いってない
-  Map<String, StatsValue> _toStatsForUi(Map<String, dynamic> rowStats) {
+  Map<String, StatsValue> _toStatsForUi(
+    Map<String, dynamic> rowStats,
+    HitterSearchCondition searchCondition,
+  ) {
     final Map<String, StatsValue> statsForUi = {};
 
+    final selectedStatsList = searchCondition.selectedStatsList;
+
+    // selectedLabelListを作成
+    final selectedLabelList = [];
+    for (final selectedStats in selectedStatsList) {
+      selectedLabelList.add(selectedStats.label);
+    }
+
     rowStats.forEach((key, value) {
-      final strVal = value.toString();
-      statsForUi[key] = _formatStatsValue(key, strVal);
+      // selectedLabelListに含まれる成績のみMap型として追加
+      if (selectedLabelList.contains(key)) {
+        final strVal = value.toString();
+        statsForUi[key] = _formatStatsValue(key, strVal);
+      }
     });
 
     return statsForUi;
   }
 
   StatsValue _formatStatsValue(String key, String value) {
-    // TODO この関数でuuidはめる処理するのキモいからなんとかする
     final id = const Uuid().v4();
+    _statsIdList.add(id);
 
     if (probabilityStats.contains(key)) {
       final data = _formatStatsData(value);
@@ -169,6 +193,7 @@ class HitterRepository {
     return StatsValue(id: id, data: data);
   }
 
+  /// String型の値を「.346」といった率を表示する形式に変換
   String _formatStatsData(String str) {
     final doubleVal = double.tryParse(str);
 

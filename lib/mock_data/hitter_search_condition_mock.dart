@@ -12,6 +12,7 @@ class HitterSearchConditionMock {
       minHits: 0,
       minPa: 0,
       selectedStatsList: [
+        StatsType.year,
         StatsType.team,
         StatsType.avg,
         StatsType.hr,
