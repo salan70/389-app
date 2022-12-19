@@ -1,7 +1,7 @@
 include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
-    - lib/repository/supabase/hitter_repository.dart
+    - lib/repository/supabase/supabase_hitter_repository.dart
   errors:
     missing_required_param: warning
     missing_return: warning
