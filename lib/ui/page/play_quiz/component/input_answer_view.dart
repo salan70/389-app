@@ -6,7 +6,7 @@ import '../../../../model/ui/hitter_id_by_name.dart';
 import 'input_answer_view_model.dart';
 
 class InputAnswer extends ConsumerWidget {
-  const InputAnswer({Key? key}) : super(key: key);
+  const InputAnswer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,8 +28,8 @@ class InputAnswer extends ConsumerWidget {
             controller: scrollController,
             theme: const ScrollbarThemeData(),
           ),
-          future: () async {
-            return await viewModel.searchHitter(textEditingController.text);
+          future: () {
+            return viewModel.searchHitter(textEditingController.text);
           },
           getSelectedValue: (HitterIdByName value) {
             selectedHitterIdNotifier.state = value.id;
@@ -37,7 +37,7 @@ class InputAnswer extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
-            // TODO 結果のダイアログを表示
+            // TODO(me): 結果のダイアログを表示
             final result = viewModel.judgeQuizResult();
           },
           child: const Text('回答する'),
