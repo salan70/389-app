@@ -24,7 +24,7 @@ class QuizEventButtonsViewModel {
       final removeIdx = random.nextInt(closedStatsIdList.length);
 
       // removeIdx以外のindexのIdをremovedListに追加していく
-      final removedList = [];
+      final removedList = <String>[];
       for (var i = 0; i < closedStatsIdList.length; i++) {
         if (i != removeIdx) {
           removedList.add(closedStatsIdList[i]);

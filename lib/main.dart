@@ -1,5 +1,5 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // .envの読み込み
-  await dotenv.load(fileName: ".env");
+  await dotenv.load();
 
   // Supabaseの初期化
   await Supabase.initialize(
@@ -21,7 +21,7 @@ void main() async {
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -40,8 +40,8 @@ class MyApp extends ConsumerWidget {
 
 class TextButtonWidget extends StatelessWidget {
   const TextButtonWidget({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,9 @@ class TextButtonWidget extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const PlayQuizPage()),
+          MaterialPageRoute<Widget>(
+            builder: (_) => const PlayQuizPage(),
+          ),
         );
       },
     );
