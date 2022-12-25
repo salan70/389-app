@@ -5,8 +5,8 @@ import 'package:textfield_search/textfield_search.dart';
 import '../../../../model/ui/hitter_id_by_name.dart';
 import 'input_answer_view_model.dart';
 
-class InputAnswer extends ConsumerWidget {
-  const InputAnswer({super.key});
+class InputAnswerWidget extends ConsumerWidget {
+  const InputAnswerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
