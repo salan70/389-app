@@ -16,7 +16,6 @@ class ChoseTeamWidget extends ConsumerWidget {
 
     return SmartSelect.multiple(
       title: '球団',
-      placeholder: 'タップして選択',
       selectedValue: searchCondition.teamList,
       choiceGrouped: true,
       choiceItems: S2Choice.listFrom<String, Map<String, String>>(
@@ -34,17 +33,11 @@ class ChoseTeamWidget extends ConsumerWidget {
         return S2Tile.fromState(
           state,
           hideValue: true,
-          // trailing: const Icon(Icons.add_circle_outline),
-          // leading: const CircleAvatar(
-          //   backgroundImage: NetworkImage(
-          //     'https://source.unsplash.com/xsGxhtAsfSA/100x100',
-          //   ),
-          // ),
           body: S2TileChips(
             chipColor: Theme.of(context).primaryColor,
-            chipLength: state.selected.length,
+            chipLength: searchCondition.teamList.length,
             chipLabelBuilder: (context, index) {
-              return Text(state.selected.choice![index].title!);
+              return Text(searchCondition.teamList[index]);
             },
             chipOnDelete: viewModel.removeTeam,
             placeholder: Container(),
