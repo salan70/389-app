@@ -30,6 +30,27 @@ class ChoseTeamWidget extends ConsumerWidget {
       onChange: (selectedList) {
         viewModel.saveTeamList(selectedList.value);
       },
+      tileBuilder: (context, state) {
+        return S2Tile.fromState(
+          state,
+          hideValue: true,
+          // trailing: const Icon(Icons.add_circle_outline),
+          // leading: const CircleAvatar(
+          //   backgroundImage: NetworkImage(
+          //     'https://source.unsplash.com/xsGxhtAsfSA/100x100',
+          //   ),
+          // ),
+          body: S2TileChips(
+            chipColor: Theme.of(context).primaryColor,
+            chipLength: state.selected.length,
+            chipLabelBuilder: (context, index) {
+              return Text(state.selected.choice![index].title!);
+            },
+            chipOnDelete: viewModel.removeTeam,
+            placeholder: Container(),
+          ),
+        );
+      },
     );
   }
 }
