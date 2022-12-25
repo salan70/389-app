@@ -9,7 +9,7 @@ import '../hitter_repository.dart';
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
 import '../../constant/hitting_stats/stats_type.dart';
-import '../../mock_data/hitter_search_condition_mock.dart';
+import '../../mock/hitter_search_condition_mock.dart';
 import '../../model/hitter.dart';
 import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
