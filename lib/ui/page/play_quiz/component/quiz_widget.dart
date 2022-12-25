@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../constant/hitting_stats/stats_type.dart';
 import '../../../../repository/supabase/supabase_hitter_repository.dart';
 
-class QuizView extends ConsumerWidget {
-  const QuizView({super.key});
+class QuizWidget extends ConsumerWidget {
+  const QuizWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

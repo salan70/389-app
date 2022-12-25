@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'quiz_event_buttons_view_model.dart';
 
-class QuizEventButtons extends ConsumerWidget {
-  const QuizEventButtons({
+class QuizEventButtonsWidget extends ConsumerWidget {
+  const QuizEventButtonsWidget({
     super.key,
   });
 

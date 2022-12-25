@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'component/input_answer_view.dart';
-import 'component/quiz_event_buttons_view.dart';
-import 'component/quiz_view.dart';
+import 'component/input_answer_widget.dart';
+import 'component/quiz_event_buttons_widget.dart';
+import 'component/quiz_widget.dart';
 
 class PlayQuizPage extends ConsumerWidget {
   const PlayQuizPage({super.key});
@@ -19,9 +19,9 @@ class PlayQuizPage extends ConsumerWidget {
           padding: const EdgeInsets.all(8),
           child: Column(
             children: const [
-              QuizView(),
-              QuizEventButtons(),
-              InputAnswer(),
+              QuizWidget(),
+              QuizEventButtonsWidget(),
+              InputAnswerWidget(),
             ],
           ),
         ),
