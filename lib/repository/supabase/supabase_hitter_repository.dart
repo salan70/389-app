@@ -16,14 +16,11 @@ import '../../model/hitting_stats.dart';
 import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
+import '../../state/hitter_search_condition_state.dart';
 
-// TODO(me): 別のところに移動する
-final searchConditionProvider = StateProvider<HitterSearchCondition>(
-    (_) => HitterSearchConditionMock().data1);
-
-// hitterQuizUiStateProvider内でしか呼ばない
+// hitterQuizUiStateProvider内でしか呼ばないこと
 final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
-  final searchCondition = ref.watch(searchConditionProvider);
+  final searchCondition = ref.watch(hitterSearchConditionProvider);
   return ref.watch(hitterRepositoryProvider).createHitterQuizUi(
         searchCondition,
       );
