@@ -7,6 +7,7 @@ import 'Infrastructure/supabase/supabase_providers.dart';
 import 'repository/hitter_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'ui/page/play_quiz/play_quiz_page.dart';
+import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,12 +63,12 @@ class TextButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: const Text('プレイする'),
+      child: const Text('クイズの設定をする'),
       onPressed: () {
         Navigator.push(
           context,
           MaterialPageRoute<Widget>(
-            builder: (_) => const PlayQuizPage(),
+            builder: (_) => const PrepareQuizPage(),
           ),
         );
       },
