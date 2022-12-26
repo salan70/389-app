@@ -68,8 +68,6 @@ class ChoiceCard extends ConsumerWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          // TODO(me): addかremoveか判別する関数実装
-          // TODO(me): removeする関数実装
           // TODO(me): 5個までしか登録できない関数実行（年度あわせて）
           viewModel.tapStats(tappedStats);
         },

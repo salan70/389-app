@@ -17,11 +17,13 @@ class ChoseStatsTypeViewModel {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
 
-    final isContained = selectedStatsList.contains(tappedStats);
-
-    if (isContained) {
+    if (selectedStatsList.contains(tappedStats)) {
       _removeStats(tappedStats);
-    } else {
+      return;
+    }
+
+    const maxCapacity = 5;
+    if (selectedStatsList.length < maxCapacity) {
       _addStats(tappedStats);
     }
   }
