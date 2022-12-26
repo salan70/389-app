@@ -82,3 +82,5 @@ extension StatsTypeExt on StatsType {
     }
   }
 }
+
+const statsTypeList = StatsType.values;
