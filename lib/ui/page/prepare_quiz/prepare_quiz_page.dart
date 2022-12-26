@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../play_quiz/play_quiz_page.dart';
+import 'component/chose_stats_type_widget.dart';
 import 'component/chose_team_widget.dart';
 
 class PrepareQuizPage extends ConsumerWidget {
@@ -16,9 +17,10 @@ class PrepareQuizPage extends ConsumerWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(8),
-          child: Column(
+          child: ListView(
             children: [
               const ChoseTeamWidget(),
+              const ChoseStatsTypeWidget(),
               TextButton(
                 onPressed: () {
                   Navigator.push(
