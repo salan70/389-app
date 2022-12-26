@@ -4,7 +4,7 @@ import '../../../../constant/hitting_stats/stats_type.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 
 final choseStatsTypeViewModelProvider =
-    Provider<ChoseStatsTypeViewModel>(ChoseStatsTypeViewModel.new);
+    Provider.autoDispose<ChoseStatsTypeViewModel>(ChoseStatsTypeViewModel.new);
 
 class ChoseStatsTypeViewModel {
   ChoseStatsTypeViewModel(

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 
 final choseTeamViewModelProvider =
-    Provider<ChoseTeamViewModel>(ChoseTeamViewModel.new);
+    Provider.autoDispose<ChoseTeamViewModel>(ChoseTeamViewModel.new);
 
 class ChoseTeamViewModel {
   ChoseTeamViewModel(
