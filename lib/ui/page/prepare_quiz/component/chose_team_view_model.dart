@@ -22,6 +22,16 @@ class ChoseTeamViewModel {
     notifier.state = searchCondition.copyWith(teamList: teamList);
   }
 
+  // 球団を取り除けるか判別する
+  // 選択中のteamListの長さが2以上の場合に取り除ける
+  // （取り除くとteamListが空になる場合取り除けない）
+  bool canRemoveTeam() {
+    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    final teamList = searchCondition.teamList;
+
+    return teamList.length > 1;
+  }
+
   // 選択した球団を取り除く
   void removeTeam(int selectedIndex) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
