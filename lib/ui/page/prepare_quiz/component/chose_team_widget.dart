@@ -39,7 +39,11 @@ class ChoseTeamWidget extends ConsumerWidget {
             chipLabelBuilder: (context, index) {
               return Text(searchCondition.teamList[index]);
             },
-            chipOnDelete: viewModel.removeTeam,
+            chipOnDelete: (index) {
+              if (viewModel.canRemoveTeam()) {
+                viewModel.removeTeam(index);
+              }
+            },
             placeholder: Container(),
           ),
         );
