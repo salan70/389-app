@@ -43,8 +43,8 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
         );
       },
       choiceBuilder: (context, state, choice) {
-        final selectedStats = choice.value! as StatsType;
-        return ChoiceCard(selectedStats: selectedStats);
+        final tappedStats = choice.value! as StatsType;
+        return ChoiceCard(tappedStats: tappedStats);
       },
     );
   }
@@ -53,10 +53,10 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
 class ChoiceCard extends ConsumerWidget {
   const ChoiceCard({
     super.key,
-    required this.selectedStats,
+    required this.tappedStats,
   });
 
-  final StatsType selectedStats;
+  final StatsType tappedStats;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -69,16 +69,15 @@ class ChoiceCard extends ConsumerWidget {
       child: InkWell(
         onTap: () {
           // TODO(me): addかremoveか判別する関数実装
-          // TODO(me): addする関数実装
           // TODO(me): removeする関数実装
           // TODO(me): 5個までしか登録できない関数実行（年度あわせて）
-          viewModel.addStats(selectedStats);
+          viewModel.tapStats(tappedStats);
         },
         child: Container(
           padding: const EdgeInsets.all(7),
-          color: selectedStatsList.contains(selectedStats) ? Colors.blue : null,
+          color: selectedStatsList.contains(tappedStats) ? Colors.blue : null,
           child: Text(
-            selectedStats.label,
+            tappedStats.label,
             textAlign: TextAlign.center,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

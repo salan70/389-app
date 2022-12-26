@@ -13,8 +13,21 @@ class ChoseStatsTypeViewModel {
 
   final Ref ref;
 
+  void tapStats(StatsType tappedStats) {
+    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    final selectedStatsList = searchCondition.selectedStatsList;
+
+    final isContained = selectedStatsList.contains(tappedStats);
+
+    if (isContained) {
+      _removeStats(tappedStats);
+    } else {
+      _addStats(tappedStats);
+    }
+  }
+
   // 選択した成績をリストに追加する
-  void addStats(StatsType selectedStats) {
+  void _addStats(StatsType tappedStats) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final notifier = ref.watch(hitterSearchConditionProvider.notifier);
 
@@ -23,28 +36,29 @@ class ChoseStatsTypeViewModel {
     // teamListに対してadd()が使えない（immutableだから？）ため、
     // 以下のようにselectedStatsを作成
     searchCondition.selectedStatsList.forEach(selectedStatsList.add);
-    selectedStatsList.add(selectedStats);
+    selectedStatsList.add(tappedStats);
 
     notifier.state =
         searchCondition.copyWith(selectedStatsList: selectedStatsList);
   }
 
   // 選択した球団を取り除く
-  void removeTeam(int selectedIndex) {
+  void _removeStats(StatsType tappedStats) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final notifier = ref.watch(hitterSearchConditionProvider.notifier);
 
-    final teamList = searchCondition.teamList;
+    final selectedStatsList = searchCondition.selectedStatsList;
 
     // teamListに対してremoveAt()が使えない（immutableだから？）ため、
     // 以下のようにremovedTeamListを作成
-    final removedTeamList = <String>[];
-    for (final team in teamList) {
-      if (team != teamList[selectedIndex]) {
-        removedTeamList.add(team);
+    final removedStatsList = <StatsType>[];
+    for (final stats in selectedStatsList) {
+      if (stats != tappedStats) {
+        removedStatsList.add(stats);
       }
     }
 
-    notifier.state = searchCondition.copyWith(teamList: removedTeamList);
+    notifier.state =
+        searchCondition.copyWith(selectedStatsList: removedStatsList);
   }
 }
