@@ -6,7 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'Infrastructure/supabase/supabase_providers.dart';
 import 'repository/hitter_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
-import 'ui/page/play_quiz/play_quiz_page.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 
 void main() async {
