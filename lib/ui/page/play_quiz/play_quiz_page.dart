@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,10 +19,21 @@ class PlayQuizPage extends ConsumerWidget {
         body: Padding(
           padding: const EdgeInsets.all(8),
           child: Column(
-            children: const [
-              QuizWidget(),
-              QuizEventButtonsWidget(),
-              InputAnswerWidget(),
+            children: [
+              const QuizWidget(),
+              const QuizEventButtonsWidget(),
+              const InputAnswerWidget(),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => const MyApp(),
+                    ),
+                  );
+                },
+                child: const Text('TOPへ戻る'),
+              )
             ],
           ),
         ),
