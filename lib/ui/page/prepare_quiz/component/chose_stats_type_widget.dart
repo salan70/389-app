@@ -13,6 +13,11 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
+    final errorTextForSelectedStatsList =
+        ref.watch(errorTextForSelectedStatsListProvider);
+    final viewModel = ref.watch(choseStatsTypeViewModelProvider);
+
+    print('rebuild now');
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -24,8 +29,19 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
+      modalConfirm: true,
       onChange: (selectedList) {
-        // viewModel.saveTeamList(selectedList.value);
+        viewModel.saveStatsList();
+      },
+      // 返すテキストが空（''）の場合のみ、modalを閉じれる?
+      modalValidation: (choice) {
+        // TODO(me): 更新されない問題なんとかする
+        final selectedStatsList = choice.value! as List<StatsType>;
+        print('in modalValidation: $selectedStatsList ,');
+        // print('in modalValidation: $errorTextForSelectedStatsList ,');
+        // return selectedStatsList.length == 5 ? '' : 'エラー';
+
+        return errorTextForSelectedStatsList;
       },
       tileBuilder: (context, state) {
         return S2Tile.fromState(
@@ -68,7 +84,6 @@ class ChoiceCard extends ConsumerWidget {
     return Card(
       child: InkWell(
         onTap: () {
-          // TODO(me): 5個までしか登録できない関数実行（年度あわせて）
           viewModel.tapStats(tappedStats);
         },
         child: Container(
