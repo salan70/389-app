@@ -35,6 +35,7 @@ class ChoseStatsTypeViewModel {
     notifier.state = searchCondition.copyWith(selectedStatsList: selectedList);
   }
 
+  // 成績をタップ時に状態（選択/未選択）を変更できるか判別
   bool canChangeState({
     required int selectedLength,
     required bool isSelected,
