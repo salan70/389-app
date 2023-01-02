@@ -1,17 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constant/hitting_stats/stats_type.dart';
+import '../../../../constant/setting.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 
 final choseStatsTypeViewModelProvider =
     Provider.autoDispose<ChoseStatsTypeViewModel>(ChoseStatsTypeViewModel.new);
-
-final errorTextForSelectedStatsListProvider =
-    StateProvider.autoDispose<String>((ref) {
-  return ref
-      .watch(choseStatsTypeViewModelProvider)
-      .outputErrorTextForSelectedStatsListValidation();
-});
 
 class ChoseStatsTypeViewModel {
   ChoseStatsTypeViewModel(
@@ -29,32 +23,31 @@ class ChoseStatsTypeViewModel {
       return;
     }
 
-    const maxCapacity = 5;
-    if (selectedStatsList.length < maxCapacity) {
+    if (selectedStatsList.length < mustSelectStatsTypeNum) {
       _addStats(tappedStats);
     }
   }
 
-  void saveStatsList() {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
+  void saveStatsList(List<StatsType> selectedList) {
     final notifier = ref.watch(hitterSearchConditionProvider.notifier);
-    final statsList = searchCondition.selectedStatsList;
+    final searchCondition = ref.watch(hitterSearchConditionProvider);
 
-    notifier.state = searchCondition.copyWith(selectedStatsList: statsList);
+    notifier.state = searchCondition.copyWith(selectedStatsList: selectedList);
   }
 
-  // TODO(me): 関数名長すぎるから修正する
-  String outputErrorTextForSelectedStatsListValidation() {
-    final isValid = _isValidSelectedStatsList();
-    // 5をconstとして定義する（MAX_CAN_SELECT_STATS_TYPE的な）
-    const errorText = '成績を5つ選んでください';
-    return isValid ? '' : errorText;
-  }
+  bool canChangeState({
+    required int selectedLength,
+    required bool isSelected,
+  }) {
+    if (selectedLength == mustSelectStatsTypeNum && isSelected) {
+      return true;
+    }
 
-  bool _isValidSelectedStatsList() {
-    final selectedStatsList =
-        ref.watch(hitterSearchConditionProvider).selectedStatsList;
-    return selectedStatsList.length == 5;
+    if (selectedLength < mustSelectStatsTypeNum) {
+      return true;
+    }
+
+    return false;
   }
 
   // 選択した成績をリストに追加する

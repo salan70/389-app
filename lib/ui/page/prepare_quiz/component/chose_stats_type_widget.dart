@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constant/hitting_stats/stats_type.dart';
+import '../../../../constant/setting.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import 'chose_stats_type_view_model.dart';
 
@@ -13,11 +14,7 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
-    final errorTextForSelectedStatsList =
-        ref.watch(errorTextForSelectedStatsListProvider);
     final viewModel = ref.watch(choseStatsTypeViewModelProvider);
-
-    print('rebuild now');
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -29,19 +26,15 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
-      modalConfirm: true,
-      onChange: (selectedList) {
-        viewModel.saveStatsList();
+      onChange: (selectedObject) {
+        final selectedList = selectedObject.value as List<StatsType>;
+        viewModel.saveStatsList(selectedList);
       },
-      // 返すテキストが空（''）の場合のみ、modalを閉じれる?
-      modalValidation: (choice) {
-        // TODO(me): 更新されない問題なんとかする
-        final selectedStatsList = choice.value! as List<StatsType>;
-        print('in modalValidation: $selectedStatsList ,');
-        // print('in modalValidation: $errorTextForSelectedStatsList ,');
-        // return selectedStatsList.length == 5 ? '' : 'エラー';
-
-        return errorTextForSelectedStatsList;
+      // 返すテキストが空（''）の場合のみ、modalを閉じれる
+      modalValidation: (chosen) {
+        // TODO(me): バリデーションの処理をviewModelに移す？
+        final isValid = chosen.length == mustSelectStatsTypeNum;
+        return isValid ? '' : errorForSelectStatsTypeValidation;
       },
       tileBuilder: (context, state) {
         return S2Tile.fromState(
@@ -53,14 +46,11 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
             chipLabelBuilder: (context, index) {
               return Text(selectedStatsList[index].label);
             },
-            // chipOnDelete: viewModel.removeTeam,
-            placeholder: Container(),
           ),
         );
       },
-      choiceBuilder: (context, state, choice) {
-        final tappedStats = choice.value! as StatsType;
-        return ChoiceCard(tappedStats: tappedStats);
+      choiceBuilder: (_, state, choice) {
+        return ChoiceCard(state: state, choice: choice);
       },
     );
   }
@@ -69,26 +59,35 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
 class ChoiceCard extends ConsumerWidget {
   const ChoiceCard({
     super.key,
-    required this.tappedStats,
+    required this.state,
+    required this.choice,
   });
 
-  final StatsType tappedStats;
+  final S2MultiState<Object?> state;
+  final S2Choice<Object?> choice;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
     final viewModel = ref.watch(choseStatsTypeViewModelProvider);
-
-    final selectedStatsList = searchCondition.selectedStatsList;
+    final tappedStats = choice.value! as StatsType;
 
     return Card(
       child: InkWell(
         onTap: () {
-          viewModel.tapStats(tappedStats);
+          final isSelected = choice.selected;
+
+          final canChangeState = viewModel.canChangeState(
+            selectedLength: state.selection!.length,
+            isSelected: isSelected,
+          );
+
+          if (canChangeState) {
+            choice.select?.call(!isSelected);
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(7),
-          color: selectedStatsList.contains(tappedStats) ? Colors.blue : null,
+          color: choice.selected ? Colors.blue : null,
           child: Text(
             tappedStats.label,
             textAlign: TextAlign.center,
