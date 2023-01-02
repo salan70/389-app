@@ -44,7 +44,6 @@ class ChoseTeamWidget extends ConsumerWidget {
                 viewModel.removeTeam(index);
               }
             },
-            placeholder: Container(),
           ),
         );
       },
