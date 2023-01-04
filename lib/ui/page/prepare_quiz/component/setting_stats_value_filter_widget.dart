@@ -22,14 +22,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           children: [
             const Text('最低通算試合数'),
             DropdownButton<int>(
-              items: minGamesOptionList
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: Text('$e'),
-                    ),
-                  )
-                  .toList(),
+              items: statsFilterDropdownMenu(minGamesOptionList),
               onChanged: (int? value) {
                 notifier.state = searchCondition.copyWith(minGames: value!);
               },
@@ -43,14 +36,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           children: [
             const Text('最低通算ヒット数'),
             DropdownButton<int>(
-              items: minHitsOptionList
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: Text('$e'),
-                    ),
-                  )
-                  .toList(),
+              items: statsFilterDropdownMenu(minHitsOptionList),
               onChanged: (int? value) {
                 notifier.state = searchCondition.copyWith(minHits: value!);
               },
@@ -64,14 +50,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           children: [
             const Text('最低通算ホームラン数'),
             DropdownButton<int>(
-              items: minHrOptionList
-                  .map(
-                    (e) => DropdownMenuItem(
-                      value: e,
-                      child: Text('$e'),
-                    ),
-                  )
-                  .toList(),
+              items: statsFilterDropdownMenu(minHrOptionList),
               onChanged: (int? value) {
                 notifier.state = searchCondition.copyWith(minHr: value!);
               },
@@ -81,5 +60,16 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  List<DropdownMenuItem<int>> statsFilterDropdownMenu(List<int> intItemList) {
+    return intItemList
+        .map(
+          (e) => DropdownMenuItem(
+            value: e,
+            child: Text('$e'),
+          ),
+        )
+        .toList();
   }
 }
