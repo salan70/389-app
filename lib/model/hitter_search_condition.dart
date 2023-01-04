@@ -10,7 +10,7 @@ class HitterSearchCondition with _$HitterSearchCondition {
     required List<String> teamList,
     required int minGames,
     required int minHits,
-    required int minPa, // pa: 打席数
+    required int minHr,
     required List<StatsType> selectedStatsList,
   }) = _HitterSearchCondition;
 }
