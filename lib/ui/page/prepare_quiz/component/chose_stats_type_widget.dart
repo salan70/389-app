@@ -18,6 +18,11 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
 
     return SmartSelect.multiple(
       title: '出題する成績',
+      modalHeaderStyle: S2ModalHeaderStyle(
+        errorStyle: TextStyle(
+          color: Theme.of(context).errorColor,
+        ),
+      ),
       selectedValue: selectedStatsList,
       choiceItems: S2Choice.listFrom<StatsType, void>(
         source: statsTypeList,
@@ -35,6 +40,7 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
         final isValid = viewModel.isValidSelectedStatsList(chosen.length);
         return isValid ? '' : errorForSelectStatsTypeValidation;
       },
+      // modal表示前画面の、選択している成績のUI
       tileBuilder: (context, state) {
         return S2Tile.fromState(
           state,
@@ -48,6 +54,7 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
           ),
         );
       },
+      // modal内の成績のUI
       choiceBuilder: (_, state, choice) {
         return ChoiceCard(state: state, choice: choice);
       },
