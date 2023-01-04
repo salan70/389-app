@@ -9,7 +9,7 @@ final hitterSearchConditionProvider = StateProvider<HitterSearchCondition>(
     teamList: ['千葉ロッテマリーンズ'],
     minGames: 0,
     minHits: 0,
-    minPa: 0,
+    minHr: 0,
     selectedStatsList: [
       StatsType.year,
       StatsType.team,
