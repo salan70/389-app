@@ -32,8 +32,7 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        // TODO(me): バリデーションの処理をviewModelに移す？
-        final isValid = chosen.length == mustSelectStatsTypeNum;
+        final isValid = viewModel.isValidSelectedStatsList(chosen.length);
         return isValid ? '' : errorForSelectStatsTypeValidation;
       },
       tileBuilder: (context, state) {

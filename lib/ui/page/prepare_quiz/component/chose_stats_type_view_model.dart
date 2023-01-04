@@ -36,4 +36,8 @@ class ChoseStatsTypeViewModel {
 
     return false;
   }
+
+  bool isValidSelectedStatsList(int listLength) {
+    return listLength == mustSelectStatsTypeNum;
+  }
 }
