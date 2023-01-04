@@ -19,7 +19,7 @@ mixin _$HitterSearchCondition {
   List<String> get teamList => throw _privateConstructorUsedError;
   int get minGames => throw _privateConstructorUsedError;
   int get minHits => throw _privateConstructorUsedError;
-  int get minPa => throw _privateConstructorUsedError; // pa: 打席数
+  int get minHr => throw _privateConstructorUsedError; // pa: 打席数
   List<StatsType> get selectedStatsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $HitterSearchConditionCopyWith<$Res> {
       {List<String> teamList,
       int minGames,
       int minHits,
-      int minPa,
+      int minHr,
       List<StatsType> selectedStatsList});
 }
 
@@ -58,7 +58,7 @@ class _$HitterSearchConditionCopyWithImpl<$Res,
     Object? teamList = null,
     Object? minGames = null,
     Object? minHits = null,
-    Object? minPa = null,
+    Object? minHr = null,
     Object? selectedStatsList = null,
   }) {
     return _then(_value.copyWith(
@@ -74,9 +74,9 @@ class _$HitterSearchConditionCopyWithImpl<$Res,
           ? _value.minHits
           : minHits // ignore: cast_nullable_to_non_nullable
               as int,
-      minPa: null == minPa
-          ? _value.minPa
-          : minPa // ignore: cast_nullable_to_non_nullable
+      minHr: null == minHr
+          ? _value.minHr
+          : minHr // ignore: cast_nullable_to_non_nullable
               as int,
       selectedStatsList: null == selectedStatsList
           ? _value.selectedStatsList
@@ -98,7 +98,7 @@ abstract class _$$_HitterSearchConditionCopyWith<$Res>
       {List<String> teamList,
       int minGames,
       int minHits,
-      int minPa,
+      int minHr,
       List<StatsType> selectedStatsList});
 }
 
@@ -116,7 +116,7 @@ class __$$_HitterSearchConditionCopyWithImpl<$Res>
     Object? teamList = null,
     Object? minGames = null,
     Object? minHits = null,
-    Object? minPa = null,
+    Object? minHr = null,
     Object? selectedStatsList = null,
   }) {
     return _then(_$_HitterSearchCondition(
@@ -132,9 +132,9 @@ class __$$_HitterSearchConditionCopyWithImpl<$Res>
           ? _value.minHits
           : minHits // ignore: cast_nullable_to_non_nullable
               as int,
-      minPa: null == minPa
-          ? _value.minPa
-          : minPa // ignore: cast_nullable_to_non_nullable
+      minHr: null == minHr
+          ? _value.minHr
+          : minHr // ignore: cast_nullable_to_non_nullable
               as int,
       selectedStatsList: null == selectedStatsList
           ? _value._selectedStatsList
@@ -151,7 +151,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
       {required final List<String> teamList,
       required this.minGames,
       required this.minHits,
-      required this.minPa,
+      required this.minHr,
       required final List<StatsType> selectedStatsList})
       : _teamList = teamList,
         _selectedStatsList = selectedStatsList;
@@ -168,7 +168,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
   @override
   final int minHits;
   @override
-  final int minPa;
+  final int minHr;
 // pa: 打席数
   final List<StatsType> _selectedStatsList;
 // pa: 打席数
@@ -180,7 +180,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
 
   @override
   String toString() {
-    return 'HitterSearchCondition(teamList: $teamList, minGames: $minGames, minHits: $minHits, minPa: $minPa, selectedStatsList: $selectedStatsList)';
+    return 'HitterSearchCondition(teamList: $teamList, minGames: $minGames, minHits: $minHits, minHr: $minHr, selectedStatsList: $selectedStatsList)';
   }
 
   @override
@@ -192,7 +192,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
             (identical(other.minGames, minGames) ||
                 other.minGames == minGames) &&
             (identical(other.minHits, minHits) || other.minHits == minHits) &&
-            (identical(other.minPa, minPa) || other.minPa == minPa) &&
+            (identical(other.minHr, minHr) || other.minHr == minHr) &&
             const DeepCollectionEquality()
                 .equals(other._selectedStatsList, _selectedStatsList));
   }
@@ -203,7 +203,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
       const DeepCollectionEquality().hash(_teamList),
       minGames,
       minHits,
-      minPa,
+      minHr,
       const DeepCollectionEquality().hash(_selectedStatsList));
 
   @JsonKey(ignore: true)
@@ -219,7 +219,7 @@ abstract class _HitterSearchCondition implements HitterSearchCondition {
           {required final List<String> teamList,
           required final int minGames,
           required final int minHits,
-          required final int minPa,
+          required final int minHr,
           required final List<StatsType> selectedStatsList}) =
       _$_HitterSearchCondition;
 
@@ -230,7 +230,7 @@ abstract class _HitterSearchCondition implements HitterSearchCondition {
   @override
   int get minHits;
   @override
-  int get minPa;
+  int get minHr;
   @override // pa: 打席数
   List<StatsType> get selectedStatsList;
   @override

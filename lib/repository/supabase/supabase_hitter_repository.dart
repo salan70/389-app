@@ -103,7 +103,7 @@ class SupabaseHitterRepository implements HitterRepository {
         .filter('team', 'in', searchCondition.teamList)
         .gte('hitting_stats_table.試合', searchCondition.minGames)
         .gte('hitting_stats_table.安打', searchCondition.minHits)
-        .gte('hitting_stats_table.打席', searchCondition.minPa);
+        .gte('hitting_stats_table.本塁打', searchCondition.minHr);
 
     // NOTE: 空の際の処理、あんまり納得してない
     // 検索条件に合致する選手がいない場合、nullを返す
