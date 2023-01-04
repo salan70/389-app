@@ -21,8 +21,8 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
       selectedValue: selectedStatsList,
       choiceItems: S2Choice.listFrom<StatsType, void>(
         source: statsTypeList,
-        value: (index, item) => statsTypeList[index],
-        title: (index, item) => statsTypeList[index].label,
+        value: (index, _) => statsTypeList[index],
+        title: (index, _) => statsTypeList[index].label,
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
@@ -42,7 +42,7 @@ class ChoseStatsTypeWidget extends ConsumerWidget {
           body: S2TileChips(
             chipColor: Theme.of(context).primaryColor,
             chipLength: selectedStatsList.length,
-            chipLabelBuilder: (context, index) {
+            chipLabelBuilder: (_, index) {
               return Text(selectedStatsList[index].label);
             },
           ),
