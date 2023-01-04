@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../play_quiz/play_quiz_page.dart';
 import 'component/chose_stats_type_widget.dart';
 import 'component/chose_team_widget.dart';
+import 'component/setting_stats_value_filter_widget.dart';
 
 class PrepareQuizPage extends ConsumerWidget {
   const PrepareQuizPage({super.key});
@@ -20,6 +21,7 @@ class PrepareQuizPage extends ConsumerWidget {
           child: ListView(
             children: [
               const ChoseTeamWidget(),
+              const SettingStatsValueFilterWidget(),
               const ChoseStatsTypeWidget(),
               TextButton(
                 onPressed: () {
