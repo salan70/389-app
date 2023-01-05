@@ -9,22 +9,19 @@ import '../hitter_repository.dart';
 import '../../Infrastructure/supabase/supabase_providers.dart';
 import '../../constant/hitting_stats/probability_stats.dart';
 import '../../constant/hitting_stats/stats_type.dart';
-import '../../mock_data/hitter_search_condition_mock.dart';
+import '../../mock/hitter_search_condition_mock.dart';
 import '../../model/hitter.dart';
-import '../../model/hitter_search_condition.dart';
 import '../../model/hitting_stats.dart';
+import '../../model/typeadapter/hitter_search_condition.dart';
 import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
+import '../../state/hitter_search_condition_state.dart';
 
-// TODO(me): 別のところに移動する
-final searchConditionProvider = StateProvider<HitterSearchCondition>(
-    (_) => HitterSearchConditionMock().data1);
-
-// hitterQuizUiStateProvider内でしか呼ばない
+// hitterQuizUiStateProvider内でしか呼ばないこと
 final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
-  final searchCondition = ref.watch(searchConditionProvider);
-  return ref.watch(hitterRepositoryProvider).implSearchHitter(
+  final searchCondition = ref.watch(hitterSearchConditionProvider);
+  return ref.watch(hitterRepositoryProvider).createHitterQuizUi(
         searchCondition,
       );
 });
@@ -34,6 +31,7 @@ final hitterQuizUiStateProvider =
   return ref.watch(hitterQuizUiFutureProvider);
 });
 
+// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
@@ -48,17 +46,21 @@ class SupabaseHitterRepository implements HitterRepository {
   final List<String> _closedStatsIdList = [];
 
   @override
-  Future<HitterQuizUi?> implSearchHitter(
+  Future<HitterQuizUi?> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   ) async {
+    // 検索条件に合う選手を1人取得
     final hitter = await _searchHitter(searchCondition);
 
-    // 検索条件に合致する選手がいない場合、nullを返す
+    // 検索条件に合う選手がいない場合、nullを返す
     if (hitter == null) {
       return null;
     }
 
+    // 取得した選手の成績を取得
     final statsList = await _fetchHittingStats(hitter.id);
+
+    // HitterQuizUi型に変換
     final quizUi = _toHitterQuizUi(
       hitter,
       statsList,
@@ -77,14 +79,14 @@ class SupabaseHitterRepository implements HitterRepository {
     final statsListForUi = <Map<String, StatsValue>>[];
 
     for (final rowStats in rowStatsList) {
-      final statsForUi = _toStatsForUi(rowStats.stats, searchCondition);
-      statsListForUi.add(statsForUi);
+      final statsMap = _toStatsMap(rowStats.stats, searchCondition);
+      statsListForUi.add(statsMap);
     }
 
     final hitterQuizUi = HitterQuizUi(
       id: hitter.id,
       name: hitter.name,
-      selectedStatsTypeList: searchCondition.selectedStatsList,
+      selectedStatsList: searchCondition.selectedStatsList,
       statsMapList: statsListForUi,
       closedStatsIdList: _closedStatsIdList,
     );
@@ -101,11 +103,9 @@ class SupabaseHitterRepository implements HitterRepository {
         .filter('team', 'in', searchCondition.teamList)
         .gte('hitting_stats_table.試合', searchCondition.minGames)
         .gte('hitting_stats_table.安打', searchCondition.minHits)
-        .gte('hitting_stats_table.打席', searchCondition.minPa);
+        .gte('hitting_stats_table.本塁打', searchCondition.minHr);
 
-    // NOTE 以降の処理、諸々別の関数でやったほうが良いかも
-
-    // NOTE 空の際の処理、あんまり納得行ってない
+    // NOTE: 空の際の処理、あんまり納得してない
     // 検索条件に合致する選手がいない場合、nullを返す
     if (responses == []) {
       return null;
@@ -152,8 +152,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return allHitterList;
   }
 
-  // NOTE 関数名や、関数内の変数名納得いってない
-  Map<String, StatsValue> _toStatsForUi(
+  Map<String, StatsValue> _toStatsMap(
     Map<String, dynamic> rowStats,
     HitterSearchCondition searchCondition,
   ) {
@@ -164,7 +163,7 @@ class SupabaseHitterRepository implements HitterRepository {
     // selectedLabelListを作成
     final selectedLabelList = <String>[];
     for (final selectedStats in selectedStatsList) {
-      selectedLabelList.add(selectedStats.label);
+      selectedLabelList.add(selectedStats);
     }
 
     rowStats.forEach((key, value) {
@@ -195,11 +194,11 @@ class SupabaseHitterRepository implements HitterRepository {
     return StatsValue(id: id, data: data);
   }
 
-  /// String型の値を「.346」といった率を表示する形式に変換
+  // String型の値を「.346」といった率を表示する形式に変換
   String _formatStatsData(String str) {
+    // double型に変換できない場合（「.---」など）、nullが入る
     final doubleVal = double.tryParse(str);
 
-    // 「.---」など、double型に変換できない場合
     if (doubleVal == null) {
       return str;
     }
@@ -207,11 +206,11 @@ class SupabaseHitterRepository implements HitterRepository {
     // 小数点以下3桁を表示
     final fixedVal = doubleVal.toStringAsFixed(3);
 
-    if (doubleVal >= 1) {
-      return fixedVal;
+    // 0.XXXの場合、先頭の0を除いて返す（例：0.300 -> .300を返す）
+    if (fixedVal.startsWith('0')) {
+      return fixedVal.substring(1);
     }
 
-    // 率が1未満の場合、「0.XXX」の「0」を取り除く
-    return fixedVal.substring(1);
+    return fixedVal;
   }
 }

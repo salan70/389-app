@@ -1,8 +1,8 @@
 import '../constant/hitting_stats/stats_type.dart';
-import '../model/hitter_search_condition.dart';
+import '../model/typeadapter/hitter_search_condition.dart';
 
 class HitterSearchConditionMock {
-  final data1 = const HitterSearchCondition(
+  final data1 = HitterSearchCondition(
     teamList: [
       '千葉ロッテマリーンズ',
       '阪神タイガース',
@@ -10,17 +10,17 @@ class HitterSearchConditionMock {
     ],
     minGames: 0,
     minHits: 0,
-    minPa: 0,
+    minHr: 0,
     selectedStatsList: [
-      StatsType.year,
-      StatsType.team,
-      StatsType.avg,
-      StatsType.hr,
-      StatsType.ops,
+      StatsType.year.label,
+      StatsType.team.label,
+      StatsType.avg.label,
+      StatsType.hr.label,
+      StatsType.ops.label,
     ],
   );
 
-  final data2 = const HitterSearchCondition(
+  final data2 = HitterSearchCondition(
     teamList: [
       '千葉ロッテマリーンズ',
       '阪神タイガース',
@@ -28,10 +28,10 @@ class HitterSearchConditionMock {
     ],
     minGames: 0,
     minHits: 0,
-    minPa: 0,
+    minHr: 0,
     selectedStatsList: [
-      StatsType.year,
-      StatsType.team,
+      StatsType.year.label,
+      StatsType.team.label,
     ],
   );
 }
