@@ -1,1 +1,0 @@
-const hitterSearchConditionBox = 'hitterSearchConditionBox';
