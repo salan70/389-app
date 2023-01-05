@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constant/setting.dart';
+import '../../../../constant/hitter_search_condition_constant.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import 'chose_team_view_model.dart';
 
@@ -12,7 +12,6 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final notifier = ref.watch(hitterSearchConditionProvider.notifier);
-    final viewModel = ref.watch(choseTeamViewModelProvider);
 
     return Column(
       children: [

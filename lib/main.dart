@@ -5,7 +5,11 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Infrastructure/supabase/supabase_providers.dart';
+import 'constant/hitter_search_condition_constant.dart';
+import 'model/typeadapter/hitter_search_condition.dart';
 import 'repository/hitter_repository.dart';
+import 'repository/hitter_search_condition_repository.dart';
+import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 
@@ -17,6 +21,9 @@ void main() async {
 
   // Hiveの初期化
   await Hive.initFlutter();
+  Hive.registerAdapter(HitterSearchConditionAdapter());
+  final hitterSearchConditionBox =
+      await Hive.openBox<HitterSearchCondition>(hitterSearchConditionBoxKey);
 
   // Supabaseの初期化
   await Supabase.initialize(
@@ -31,6 +38,13 @@ void main() async {
           (ref) {
             return SupabaseHitterRepository(
               ref.watch(supabaseProvider),
+            );
+          },
+        ),
+        hitterSearchConditionRepositoryProvider.overrideWith(
+          (ref) {
+            return HiveHitterSearchConditionRepository(
+              hitterSearchConditionBox,
             );
           },
         ),
