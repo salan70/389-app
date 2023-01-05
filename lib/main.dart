@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Infrastructure/supabase/supabase_providers.dart';
@@ -13,6 +14,9 @@ void main() async {
 
   // .envの読み込み
   await dotenv.load();
+
+  // Hiveの初期化
+  await Hive.initFlutter();
 
   // Supabaseの初期化
   await Supabase.initialize(
