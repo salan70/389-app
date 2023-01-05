@@ -1,5 +1,5 @@
 import '../constant/hitting_stats/stats_type.dart';
-import '../model/hitter_search_condition.dart';
+import '../model/typeadapter/hitter_search_condition.dart';
 
 class HitterSearchConditionMock {
   final data1 = const HitterSearchCondition(
