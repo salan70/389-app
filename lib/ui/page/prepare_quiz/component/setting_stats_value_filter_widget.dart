@@ -21,6 +21,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('最低通算試合数'),
+            const SizedBox(width: 16),
             DropdownButton<int>(
               items: statsFilterDropdownMenu(minGamesOptionList),
               onChanged: (int? value) {
@@ -35,6 +36,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('最低通算ヒット数'),
+            const SizedBox(width: 16),
             DropdownButton<int>(
               items: statsFilterDropdownMenu(minHitsOptionList),
               onChanged: (int? value) {
@@ -49,6 +51,7 @@ class SettingStatsValueFilterWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('最低通算ホームラン数'),
+            const SizedBox(width: 16),
             DropdownButton<int>(
               items: statsFilterDropdownMenu(minHrOptionList),
               onChanged: (int? value) {
