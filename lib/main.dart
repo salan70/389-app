@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Infrastructure/supabase/supabase_providers.dart';
+import 'constant/hitter_search_condition_constant.dart';
+import 'model/typeadapter/hitter_search_condition.dart';
 import 'repository/hitter_repository.dart';
+import 'repository/hitter_search_condition_repository.dart';
+import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
-import 'ui/page/play_quiz/play_quiz_page.dart';
+import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // .envの読み込み
   await dotenv.load();
+
+  // Hiveの初期化
+  await Hive.initFlutter();
+  Hive.registerAdapter(HitterSearchConditionAdapter());
+  final hitterSearchConditionBox =
+      await Hive.openBox<HitterSearchCondition>(hitterSearchConditionBoxKey);
 
   // Supabaseの初期化
   await Supabase.initialize(
@@ -27,6 +38,13 @@ void main() async {
           (ref) {
             return SupabaseHitterRepository(
               ref.watch(supabaseProvider),
+            );
+          },
+        ),
+        hitterSearchConditionRepositoryProvider.overrideWith(
+          (ref) {
+            return HiveHitterSearchConditionRepository(
+              hitterSearchConditionBox,
             );
           },
         ),
@@ -62,12 +80,12 @@ class TextButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: const Text('プレイする'),
+      child: const Text('クイズの設定をする'),
       onPressed: () {
         Navigator.push(
           context,
           MaterialPageRoute<Widget>(
-            builder: (_) => const PlayQuizPage(),
+            builder: (_) => const PrepareQuizPage(),
           ),
         );
       },
