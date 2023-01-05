@@ -21,7 +21,7 @@ class HitterSearchConditionAdapter extends TypeAdapter<HitterSearchCondition> {
       minGames: fields[1] as int,
       minHits: fields[3] as int,
       minHr: fields[4] as int,
-      selectedStatsList: (fields[5] as List).cast<StatsType>(),
+      selectedStatsList: (fields[5] as List).cast<String>(),
     );
   }
 

@@ -25,7 +25,7 @@ mixin _$HitterSearchCondition {
   @HiveField(4)
   int get minHr => throw _privateConstructorUsedError;
   @HiveField(5)
-  List<StatsType> get selectedStatsList => throw _privateConstructorUsedError;
+  List<String> get selectedStatsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HitterSearchConditionCopyWith<HitterSearchCondition> get copyWith =>
@@ -43,7 +43,7 @@ abstract class $HitterSearchConditionCopyWith<$Res> {
       @HiveField(1) int minGames,
       @HiveField(3) int minHits,
       @HiveField(4) int minHr,
-      @HiveField(5) List<StatsType> selectedStatsList});
+      @HiveField(5) List<String> selectedStatsList});
 }
 
 /// @nodoc
@@ -86,7 +86,7 @@ class _$HitterSearchConditionCopyWithImpl<$Res,
       selectedStatsList: null == selectedStatsList
           ? _value.selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
-              as List<StatsType>,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -104,7 +104,7 @@ abstract class _$$_HitterSearchConditionCopyWith<$Res>
       @HiveField(1) int minGames,
       @HiveField(3) int minHits,
       @HiveField(4) int minHr,
-      @HiveField(5) List<StatsType> selectedStatsList});
+      @HiveField(5) List<String> selectedStatsList});
 }
 
 /// @nodoc
@@ -144,7 +144,7 @@ class __$$_HitterSearchConditionCopyWithImpl<$Res>
       selectedStatsList: null == selectedStatsList
           ? _value._selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
-              as List<StatsType>,
+              as List<String>,
     ));
   }
 }
@@ -157,7 +157,7 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
       @HiveField(1) required this.minGames,
       @HiveField(3) required this.minHits,
       @HiveField(4) required this.minHr,
-      @HiveField(5) required final List<StatsType> selectedStatsList})
+      @HiveField(5) required final List<String> selectedStatsList})
       : _teamList = teamList,
         _selectedStatsList = selectedStatsList;
 
@@ -178,10 +178,10 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
   @override
   @HiveField(4)
   final int minHr;
-  final List<StatsType> _selectedStatsList;
+  final List<String> _selectedStatsList;
   @override
   @HiveField(5)
-  List<StatsType> get selectedStatsList {
+  List<String> get selectedStatsList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedStatsList);
   }
@@ -228,7 +228,7 @@ abstract class _HitterSearchCondition implements HitterSearchCondition {
           @HiveField(1) required final int minGames,
           @HiveField(3) required final int minHits,
           @HiveField(4) required final int minHr,
-          @HiveField(5) required final List<StatsType> selectedStatsList}) =
+          @HiveField(5) required final List<String> selectedStatsList}) =
       _$_HitterSearchCondition;
 
   @override
@@ -245,7 +245,7 @@ abstract class _HitterSearchCondition implements HitterSearchCondition {
   int get minHr;
   @override
   @HiveField(5)
-  List<StatsType> get selectedStatsList;
+  List<String> get selectedStatsList;
   @override
   @JsonKey(ignore: true)
   _$$_HitterSearchConditionCopyWith<_$_HitterSearchCondition> get copyWith =>

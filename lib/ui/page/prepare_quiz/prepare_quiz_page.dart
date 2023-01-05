@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../repository/hitter_search_condition_repository.dart';
 import '../../../state/hitter_search_condition_state.dart';
 import '../play_quiz/play_quiz_page.dart';
-import 'component/chose_stats_type_widget.dart';
 import 'component/chose_team_widget.dart';
+import 'component/select_stats_widget.dart';
 import 'component/setting_stats_value_filter_widget.dart';
 
 class PrepareQuizPage extends ConsumerWidget {
@@ -28,7 +28,7 @@ class PrepareQuizPage extends ConsumerWidget {
             children: [
               const ChoseTeamWidget(),
               const SettingStatsValueFilterWidget(),
-              const ChoseStatsTypeWidget(),
+              const SelectStatsWidget(),
               TextButton(
                 onPressed: () {
                   // hitterSearchConditionをローカルDBへ保存

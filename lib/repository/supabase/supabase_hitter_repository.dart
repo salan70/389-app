@@ -86,7 +86,7 @@ class SupabaseHitterRepository implements HitterRepository {
     final hitterQuizUi = HitterQuizUi(
       id: hitter.id,
       name: hitter.name,
-      selectedStatsTypeList: searchCondition.selectedStatsList,
+      selectedStatsList: searchCondition.selectedStatsList,
       statsMapList: statsListForUi,
       closedStatsIdList: _closedStatsIdList,
     );
@@ -163,7 +163,7 @@ class SupabaseHitterRepository implements HitterRepository {
     // selectedLabelListを作成
     final selectedLabelList = <String>[];
     for (final selectedStats in selectedStatsList) {
-      selectedLabelList.add(selectedStats.label);
+      selectedLabelList.add(selectedStats);
     }
 
     rowStats.forEach((key, value) {

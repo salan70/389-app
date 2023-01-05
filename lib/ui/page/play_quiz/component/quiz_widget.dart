@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constant/hitting_stats/stats_type.dart';
 import '../../../../repository/supabase/supabase_hitter_repository.dart';
 
 class QuizWidget extends ConsumerWidget {
@@ -18,15 +17,15 @@ class QuizWidget extends ConsumerWidget {
       error: (err, _) => Text('Error: $err'),
       data: (data) {
         // viewModel.addAllStatsId(data!);
-        final selectedStatsTypeList = data!.selectedStatsTypeList;
+        final selectedStatsList = data!.selectedStatsList;
         return Column(
           children: [
             Row(
               children: [
-                for (final selectedStatsType in selectedStatsTypeList)
+                for (final selectedStats in selectedStatsList)
                   Expanded(
                     child: Center(
-                      child: Text(selectedStatsType.label),
+                      child: Text(selectedStats),
                     ),
                   ),
               ],
@@ -41,13 +40,13 @@ class QuizWidget extends ConsumerWidget {
 
                 return Row(
                   children: [
-                    for (final selectedStatsType in selectedStatsTypeList)
+                    for (final selectedStats in selectedStatsList)
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
                           child: (closedStatsIdList.contains(
-                            statsMap[selectedStatsType.label]!.id,
+                            statsMap[selectedStats]!.id,
                           ))
                               ? Container(
                                   color: Colors.grey,
@@ -55,7 +54,7 @@ class QuizWidget extends ConsumerWidget {
                                   child: const Text(''),
                                 )
                               : Text(
-                                  statsMap[selectedStatsType.label]!.data,
+                                  statsMap[selectedStats]!.data,
                                 ),
                         ),
                       ),
