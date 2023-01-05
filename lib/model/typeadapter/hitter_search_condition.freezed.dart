@@ -16,10 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HitterSearchCondition {
+  @HiveField(0)
   List<String> get teamList => throw _privateConstructorUsedError;
+  @HiveField(1)
   int get minGames => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get minHits => throw _privateConstructorUsedError;
-  int get minHr => throw _privateConstructorUsedError; // pa: 打席数
+  @HiveField(4)
+  int get minHr => throw _privateConstructorUsedError;
+  @HiveField(5)
   List<StatsType> get selectedStatsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,11 +39,11 @@ abstract class $HitterSearchConditionCopyWith<$Res> {
       _$HitterSearchConditionCopyWithImpl<$Res, HitterSearchCondition>;
   @useResult
   $Res call(
-      {List<String> teamList,
-      int minGames,
-      int minHits,
-      int minHr,
-      List<StatsType> selectedStatsList});
+      {@HiveField(0) List<String> teamList,
+      @HiveField(1) int minGames,
+      @HiveField(3) int minHits,
+      @HiveField(4) int minHr,
+      @HiveField(5) List<StatsType> selectedStatsList});
 }
 
 /// @nodoc
@@ -95,11 +100,11 @@ abstract class _$$_HitterSearchConditionCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {List<String> teamList,
-      int minGames,
-      int minHits,
-      int minHr,
-      List<StatsType> selectedStatsList});
+      {@HiveField(0) List<String> teamList,
+      @HiveField(1) int minGames,
+      @HiveField(3) int minHits,
+      @HiveField(4) int minHr,
+      @HiveField(5) List<StatsType> selectedStatsList});
 }
 
 /// @nodoc
@@ -148,31 +153,34 @@ class __$$_HitterSearchConditionCopyWithImpl<$Res>
 
 class _$_HitterSearchCondition implements _HitterSearchCondition {
   const _$_HitterSearchCondition(
-      {required final List<String> teamList,
-      required this.minGames,
-      required this.minHits,
-      required this.minHr,
-      required final List<StatsType> selectedStatsList})
+      {@HiveField(0) required final List<String> teamList,
+      @HiveField(1) required this.minGames,
+      @HiveField(3) required this.minHits,
+      @HiveField(4) required this.minHr,
+      @HiveField(5) required final List<StatsType> selectedStatsList})
       : _teamList = teamList,
         _selectedStatsList = selectedStatsList;
 
   final List<String> _teamList;
   @override
+  @HiveField(0)
   List<String> get teamList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_teamList);
   }
 
   @override
+  @HiveField(1)
   final int minGames;
   @override
+  @HiveField(3)
   final int minHits;
   @override
+  @HiveField(4)
   final int minHr;
-// pa: 打席数
   final List<StatsType> _selectedStatsList;
-// pa: 打席数
   @override
+  @HiveField(5)
   List<StatsType> get selectedStatsList {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedStatsList);
@@ -216,22 +224,27 @@ class _$_HitterSearchCondition implements _HitterSearchCondition {
 
 abstract class _HitterSearchCondition implements HitterSearchCondition {
   const factory _HitterSearchCondition(
-          {required final List<String> teamList,
-          required final int minGames,
-          required final int minHits,
-          required final int minHr,
-          required final List<StatsType> selectedStatsList}) =
+          {@HiveField(0) required final List<String> teamList,
+          @HiveField(1) required final int minGames,
+          @HiveField(3) required final int minHits,
+          @HiveField(4) required final int minHr,
+          @HiveField(5) required final List<StatsType> selectedStatsList}) =
       _$_HitterSearchCondition;
 
   @override
+  @HiveField(0)
   List<String> get teamList;
   @override
+  @HiveField(1)
   int get minGames;
   @override
+  @HiveField(3)
   int get minHits;
   @override
+  @HiveField(4)
   int get minHr;
-  @override // pa: 打席数
+  @override
+  @HiveField(5)
   List<StatsType> get selectedStatsList;
   @override
   @JsonKey(ignore: true)

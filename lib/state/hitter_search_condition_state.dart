@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constant/hitting_stats/stats_type.dart';
-import '../model/hitter_search_condition.dart';
+import '../model/typeadapter/hitter_search_condition.dart';
 
 // TODO(me): 初期値をHiveで取得するようにする
 final hitterSearchConditionProvider = StateProvider<HitterSearchCondition>(

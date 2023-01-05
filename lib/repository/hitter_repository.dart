@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../model/hitter_search_condition.dart';
+import '../model/typeadapter/hitter_search_condition.dart';
 import '../model/ui/hitter_id_by_name.dart';
 import '../model/ui/hitter_quiz_ui.dart';
 
