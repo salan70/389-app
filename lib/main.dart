@@ -13,23 +13,18 @@ import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // .envの読み込み
   await dotenv.load();
 
-  // Hiveの初期化
-  await Hive.initFlutter();
-  Hive.registerAdapter(HitterSearchConditionAdapter());
+  // 初期化関連
+  await initialize();
+
+  // HiveのBoxをopen
   final hitterSearchConditionBox =
       await Hive.openBox<HitterSearchCondition>(hitterSearchConditionBoxKey);
-
-  // Supabaseの初期化
-  await Supabase.initialize(
-    url: dotenv.env['SUPABASE_URL']!,
-    anonKey: dotenv.env['SUPABASE_API_KEY']!,
-  );
 
   runApp(
     ProviderScope(
@@ -51,6 +46,18 @@ void main() async {
       ],
       child: const MyApp(),
     ),
+  );
+}
+
+Future<void> initialize() async {
+  // Hiveの初期化
+  await Hive.initFlutter();
+  Hive.registerAdapter(HitterSearchConditionAdapter());
+
+  // Supabaseの初期化
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL']!,
+    anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
 }
 
