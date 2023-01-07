@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/odatetsuo/AndroidStudioProjects/baseball_quiz_app/ios/dev.xcconfig">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/odatetsuo/AndroidStudioProjects/baseball_quiz_app/ios/Flutter/prod.xcconfig">
+   </FileRef>
+   <FileRef
       location = "group:Runner.xcodeproj">
    </FileRef>
    <FileRef
