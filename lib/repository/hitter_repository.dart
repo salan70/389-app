@@ -9,11 +9,11 @@ final hitterRepositoryProvider = Provider<HitterRepository>(
 );
 
 abstract class HitterRepository {
-  // 検索条件に合う野手を1人取得し、HitterQuizUi型を返す
+  /// 検索条件に合う野手を1人取得し、HitterQuizUi型を返す
   Future<HitterQuizUi?> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   );
 
-  // 登録されている全ての野手を取得する
+  /// 登録されている全ての野手を取得する
   Future<List<HitterIdByName>> fetchAllHitter();
 }
