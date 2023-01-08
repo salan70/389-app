@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:520205708013:ios:047ad8768e8897e0937ae4",
-  "FIREBASE_PROJECT_ID": "baseball-quiz-app-prod",
-  "GCM_SENDER_ID": "520205708013"
+  "GOOGLE_APP_ID": "1:1087712569948:ios:cd764630abc3f112cf5499",
+  "FIREBASE_PROJECT_ID": "baseball-quiz-app-dev",
+  "GCM_SENDER_ID": "1087712569948"
 }
