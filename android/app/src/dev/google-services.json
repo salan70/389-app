@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087712569948:android:b651d3ef2765ae07cf5499",
+        "android_client_info": {
+          "package_name": "com.toda.baseball_quiz_app.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087712569948-51ih4mdrg4g3hnt6agjo3ji7c8kvnsmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmyATSqmIJZIwL6l8XNDSYBXWqy2NImFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087712569948-51ih4mdrg4g3hnt6agjo3ji7c8kvnsmm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1087712569948-ur8cj5bnca4h2aep7ah1r18f96v6sver.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.toda.baseballQuizApp.dev"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
