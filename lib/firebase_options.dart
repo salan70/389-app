@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDYxpQ3-jshNQDKzC75DnG9um8QrOTdM2g',
-    appId: '1:520205708013:android:02ab787327b43e13937ae4',
-    messagingSenderId: '520205708013',
-    projectId: 'baseball-quiz-app-prod',
-    storageBucket: 'baseball-quiz-app-prod.appspot.com',
+    apiKey: 'AIzaSyAmyATSqmIJZIwL6l8XNDSYBXWqy2NImFU',
+    appId: '1:1087712569948:android:6169c9267e02829fcf5499',
+    messagingSenderId: '1087712569948',
+    projectId: 'baseball-quiz-app-dev',
+    storageBucket: 'baseball-quiz-app-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6pncPA3MbDBfYcc8NRI-p81vbhXa3KJY',
-    appId: '1:520205708013:ios:047ad8768e8897e0937ae4',
-    messagingSenderId: '520205708013',
-    projectId: 'baseball-quiz-app-prod',
-    storageBucket: 'baseball-quiz-app-prod.appspot.com',
-    iosClientId: '520205708013-b39t7cqbb85ogvsg4frpun6jcq3bs0eh.apps.googleusercontent.com',
+    apiKey: 'AIzaSyApAVBYLgjO3eH0zTgSruAUeELgENc5cGI',
+    appId: '1:1087712569948:ios:cd764630abc3f112cf5499',
+    messagingSenderId: '1087712569948',
+    projectId: 'baseball-quiz-app-dev',
+    storageBucket: 'baseball-quiz-app-dev.appspot.com',
+    iosClientId: '1087712569948-ur8cj5bnca4h2aep7ah1r18f96v6sver.apps.googleusercontent.com',
     iosBundleId: 'com.toda.baseballQuizApp.dev',
   );
 }
