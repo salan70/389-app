@@ -21,18 +21,6 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-// Firebaseのflavor設定関連
-task selectGoogleServicesJson(type: Copy) {
-    from "src/${dartEnvironmentVariables.FLAVOR}/google-services.json"
-    into './'
-}
-
-tasks.whenTaskAdded { task ->
-    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
-        task.dependsOn selectGoogleServicesJson
-    }
-}
-
 apply plugin: 'com.android.application'
 // START: FlutterFire Configuration
 apply plugin: 'com.google.gms.google-services'
@@ -52,6 +40,18 @@ if (project.hasProperty('dart-defines')) {
                 def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
                 [(pair.first()): pair.last()]
             }
+}
+
+// Firebaseのflavor設定関連
+task selectGoogleServicesJson(type: Copy) {
+    from "src/${dartEnvironmentVariables.FLAVOR}/google-services.json"
+    into './'
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'processDebugGoogleServices' || task.name == 'processReleaseGoogleServices') {
+        task.dependsOn selectGoogleServicesJson
+    }
 }
 
 android {
