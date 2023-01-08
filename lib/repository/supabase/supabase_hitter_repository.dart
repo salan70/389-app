@@ -18,7 +18,7 @@ import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 import '../../state/hitter_search_condition_state.dart';
 
-// hitterQuizUiStateProvider内でしか呼ばないこと
+/// hitterQuizUiStateProvider内でしか呼ばないこと
 final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
   final searchCondition = ref.watch(hitterSearchConditionProvider);
   return ref.watch(hitterRepositoryProvider).createHitterQuizUi(
@@ -31,7 +31,7 @@ final hitterQuizUiStateProvider =
   return ref.watch(hitterQuizUiFutureProvider);
 });
 
-// 全野手のIDと名前のリストを返すプロバイダー
+/// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
@@ -70,7 +70,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return quizUi;
   }
 
-  // Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
+  /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(
     Hitter hitter,
     List<HittingStats> rowStatsList,
@@ -94,7 +94,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return hitterQuizUi;
   }
 
-  // 条件に合う選手を1人検索する
+  /// 条件に合う選手を1人検索する
   Future<Hitter?> _searchHitter(HitterSearchCondition searchCondition) async {
     final responses = await supabase.client
         .from('hitter_table')
@@ -120,7 +120,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return hitter;
   }
 
-  // playerIdから打撃成績のListを取得する
+  /// playerIdから打撃成績のListを取得する
   Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
 
@@ -137,7 +137,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return statsList;
   }
 
-  // 解答を入力するテキストフィールドの検索用
+  /// 解答を入力するテキストフィールドの検索用
   @override
   Future<List<HitterIdByName>> fetchAllHitter() async {
     final responses = await supabase.client.from('hitter_table').select('*');
@@ -194,7 +194,7 @@ class SupabaseHitterRepository implements HitterRepository {
     return StatsValue(id: id, data: data);
   }
 
-  // String型の値を「.346」といった率を表示する形式に変換
+  /// String型の値を「.346」といった率を表示する形式に変換
   String _formatStatsData(String str) {
     // double型に変換できない場合（「.---」など）、nullが入る
     final doubleVal = double.tryParse(str);
