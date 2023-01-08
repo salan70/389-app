@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520205708013",
+    "project_id": "baseball-quiz-app-prod",
+    "storage_bucket": "baseball-quiz-app-prod.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520205708013:android:02ab787327b43e13937ae4",
+        "android_client_info": {
+          "package_name": "com.toda.baseball_quiz_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520205708013-375pt8c8up1468lk5sa517lkmtl2bfk8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYxpQ3-jshNQDKzC75DnG9um8QrOTdM2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520205708013-375pt8c8up1468lk5sa517lkmtl2bfk8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
