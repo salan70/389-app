@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:520205708013:android:02ab787327b43e13937ae4",
+        "mobilesdk_app_id": "1:520205708013:android:67ed07ebc2d539a5937ae4",
         "android_client_info": {
           "package_name": "com.toda.baseball_quiz_app"
         }
@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "520205708013-b39t7cqbb85ogvsg4frpun6jcq3bs0eh.apps.googleusercontent.com",
+              "client_id": "520205708013-60qqj0946mpt9ktufc33km3ajnfdnhih.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.toda.baseballQuizApp.dev"
+                "bundle_id": "com.toda.baseballQuizApp.prod"
               }
             }
           ]
