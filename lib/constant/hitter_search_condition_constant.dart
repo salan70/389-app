@@ -1,7 +1,7 @@
 import '../model/typeadapter/hitter_search_condition.dart';
 import 'hitting_stats/stats_type.dart';
 
-// hitterSearchConditionを格納するHiveのBox名
+/// hitterSearchConditionを格納するHiveのBox名
 const hitterSearchConditionBoxKey = 'hitterSearchConditionBox';
 
 final defaultHittingSearchCondition = HitterSearchCondition(
@@ -25,8 +25,9 @@ final defaultHittingSearchCondition = HitterSearchCondition(
   ],
 );
 
-// 出題する成績の選択数
-// この数ちょうどでなくてはならない
+/// 出題する成績の選択数
+///
+/// この数ちょうどでなくてはならない
 const mustSelectStatsNum = 5;
 
 const errorForSelectStatsValidation = '成績を$mustSelectStatsNumつ選択してください';
