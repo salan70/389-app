@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IncorrectDialog extends ConsumerWidget {
+class IncorrectDialog extends StatelessWidget {
   const IncorrectDialog({super.key, required this.selectedHitter});
 
   // Providerで保持するほうが良いかも？
   final String selectedHitter;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('残念...'),
       content: Text('$selectedHitter選手ではありません'),
@@ -22,6 +21,7 @@ class IncorrectDialog extends ConsumerWidget {
         TextButton(
           child: const Text('もう一度回答する'),
           onPressed: () {
+            // TODO(me): ここに動画の広告入れたい
             Navigator.of(context).pop();
           },
         ),
