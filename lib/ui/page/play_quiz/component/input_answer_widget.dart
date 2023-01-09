@@ -8,6 +8,8 @@ import '../../quiz_result/quiz_result_page.dart';
 import 'incorrect_dialog.dart';
 import 'input_answer_view_model.dart';
 
+// TODO(me): class名変える
+// Inputだけでなく、回答もしている
 class InputAnswerWidget extends ConsumerWidget {
   const InputAnswerWidget({super.key});
 
@@ -45,15 +47,6 @@ class InputAnswerWidget extends ConsumerWidget {
             // あるいは、押したら回答が無効な旨を表示する
 
             final isCorrect = quizUsecase.judgeQuizResult();
-
-            // デバッグ用処理
-            // TODO(me): デバッグ不要になり次第削除する
-            final resultText = isCorrect ? '正解！' : '残念でしたー😜';
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(resultText),
-              ),
-            );
 
             // TODO(me): 結果表示までちょっとじらす（ローディング表示？）
 
