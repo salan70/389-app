@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
+import '../../quiz_result/quiz_result_page.dart';
 import 'incorrect_dialog.dart';
 import 'input_answer_view_model.dart';
 
@@ -52,9 +53,16 @@ class InputAnswerWidget extends ConsumerWidget {
               ),
             );
 
+            // TODO(me): 結果表示までちょっとじらす（ローディング表示？）
+
             // 正解の場合
             if (isCorrect) {
-              // TODO(me): 結果画面へ遷移
+              await Navigator.push(
+                context,
+                MaterialPageRoute<Widget>(
+                  builder: (_) => const QuizResultPage(),
+                ),
+              );
             }
             // 不正解の場合
             else {
