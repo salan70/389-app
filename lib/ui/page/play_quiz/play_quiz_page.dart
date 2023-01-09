@@ -23,6 +23,7 @@ class PlayQuizPage extends ConsumerWidget {
               const QuizWidget(),
               const QuizEventButtonsWidget(),
               const InputAnswerWidget(),
+              // TODO(me): 諦めるボタンにする（componentに）
               TextButton(
                 onPressed: () {
                   Navigator.push(
