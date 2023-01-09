@@ -34,7 +34,7 @@ class PlayQuizPage extends ConsumerWidget {
                   );
                 },
                 child: const Text('TOPへ戻る'),
-              )
+              ),
             ],
           ),
         ),
