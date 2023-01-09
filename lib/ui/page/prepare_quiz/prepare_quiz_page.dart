@@ -29,6 +29,7 @@ class PrepareQuizPage extends ConsumerWidget {
               const ChoseTeamWidget(),
               const SettingStatsValueFilterWidget(),
               const SelectStatsWidget(),
+              // TODO(me): componentに切り出す
               TextButton(
                 onPressed: () {
                   // hitterSearchConditionをローカルDBへ保存
