@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../quiz_result/quiz_result_page.dart';
+
 class IncorrectDialog extends StatelessWidget {
   const IncorrectDialog({super.key, required this.selectedHitter});
 
@@ -14,8 +16,14 @@ class IncorrectDialog extends StatelessWidget {
       actions: <Widget>[
         TextButton(
           child: const Text('諦める'),
-          onPressed: () {
+          onPressed: () async {
             // TODO(me): 結果画面へ遷移
+            await Navigator.push(
+              context,
+              MaterialPageRoute<Widget>(
+                builder: (_) => const QuizResultPage(),
+              ),
+            );
           },
         ),
         TextButton(
