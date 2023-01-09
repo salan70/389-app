@@ -28,14 +28,4 @@ class InputAnswerViewModel {
 
     return hitterListAfterSearch;
   }
-
-  bool judgeQuizResult() {
-    final selectedHitterId = ref.watch(selectedHitterIdProvider);
-    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
-
-    if (selectedHitterId == hitterQuizUi.value!.id) {
-      return true;
-    }
-    return false;
-  }
 }
