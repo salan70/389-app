@@ -24,6 +24,8 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     final hitterQuizUi = state.value;
     final hiddenStatsIdList = hitterQuizUi!.hiddenStatsIdList;
 
+    print('test: ${hitterQuizUi.hiddenStatsIdList.length}');
+
     final hiddenIdx = Random().nextInt(hiddenStatsIdList.length);
 
     // hiddenStatsIdList.removeAt(removeIdx)と同様の結果になる処理

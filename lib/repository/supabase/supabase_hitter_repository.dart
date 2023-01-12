@@ -36,6 +36,12 @@ class SupabaseHitterRepository implements HitterRepository {
   Future<HitterQuizUi?> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   ) async {
+    // _hiddenStatsIdListを空にする
+    // SupabaseHitterRepositoryのインスタンスが既に生成されている場合、
+    // 既存の_hiddenStatsIdListに上書きされるため。
+    // TODO(me): 本当はメンバ変数として保持したくない
+    _hiddenStatsIdList.clear();
+
     // 検索条件に合う選手を1人取得
     final hitter = await _searchHitter(searchCondition);
 
@@ -167,6 +173,8 @@ class SupabaseHitterRepository implements HitterRepository {
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
+    // TODO(me): 年度はそもそもStatsValueとして保持しないようにする
+    // そうすれば_hiddenStatsIdListをメンバ変数として保持しなくて良くなると思われる
     // 年度のidは最初から開けておくため、hiddenStatsIdListには含めない
     if (key != '年度') {
       _hiddenStatsIdList.add(id);
