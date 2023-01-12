@@ -21,7 +21,7 @@ mixin _$HitterQuizUi {
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
   List<Map<String, StatsValue>> get statsMapList =>
       throw _privateConstructorUsedError;
-  List<String> get closedStatsIdList => throw _privateConstructorUsedError;
+  List<String> get hiddenStatsIdList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HitterQuizUiCopyWith<HitterQuizUi> get copyWith =>
@@ -39,7 +39,7 @@ abstract class $HitterQuizUiCopyWith<$Res> {
       String name,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
-      List<String> closedStatsIdList});
+      List<String> hiddenStatsIdList});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
     Object? name = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
-    Object? closedStatsIdList = null,
+    Object? hiddenStatsIdList = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -78,9 +78,9 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
           ? _value.statsMapList
           : statsMapList // ignore: cast_nullable_to_non_nullable
               as List<Map<String, StatsValue>>,
-      closedStatsIdList: null == closedStatsIdList
-          ? _value.closedStatsIdList
-          : closedStatsIdList // ignore: cast_nullable_to_non_nullable
+      hiddenStatsIdList: null == hiddenStatsIdList
+          ? _value.hiddenStatsIdList
+          : hiddenStatsIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ) as $Val);
   }
@@ -99,7 +99,7 @@ abstract class _$$_HitterQuizUiCopyWith<$Res>
       String name,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
-      List<String> closedStatsIdList});
+      List<String> hiddenStatsIdList});
 }
 
 /// @nodoc
@@ -117,7 +117,7 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
     Object? name = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
-    Object? closedStatsIdList = null,
+    Object? hiddenStatsIdList = null,
   }) {
     return _then(_$_HitterQuizUi(
       id: null == id
@@ -136,9 +136,9 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
           ? _value._statsMapList
           : statsMapList // ignore: cast_nullable_to_non_nullable
               as List<Map<String, StatsValue>>,
-      closedStatsIdList: null == closedStatsIdList
-          ? _value._closedStatsIdList
-          : closedStatsIdList // ignore: cast_nullable_to_non_nullable
+      hiddenStatsIdList: null == hiddenStatsIdList
+          ? _value._hiddenStatsIdList
+          : hiddenStatsIdList // ignore: cast_nullable_to_non_nullable
               as List<String>,
     ));
   }
@@ -152,10 +152,10 @@ class _$_HitterQuizUi implements _HitterQuizUi {
       required this.name,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
-      required final List<String> closedStatsIdList})
+      required final List<String> hiddenStatsIdList})
       : _selectedStatsList = selectedStatsList,
         _statsMapList = statsMapList,
-        _closedStatsIdList = closedStatsIdList;
+        _hiddenStatsIdList = hiddenStatsIdList;
 
   @override
   final String id;
@@ -175,16 +175,16 @@ class _$_HitterQuizUi implements _HitterQuizUi {
     return EqualUnmodifiableListView(_statsMapList);
   }
 
-  final List<String> _closedStatsIdList;
+  final List<String> _hiddenStatsIdList;
   @override
-  List<String> get closedStatsIdList {
+  List<String> get hiddenStatsIdList {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_closedStatsIdList);
+    return EqualUnmodifiableListView(_hiddenStatsIdList);
   }
 
   @override
   String toString() {
-    return 'HitterQuizUi(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, closedStatsIdList: $closedStatsIdList)';
+    return 'HitterQuizUi(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, hiddenStatsIdList: $hiddenStatsIdList)';
   }
 
   @override
@@ -199,7 +199,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
             const DeepCollectionEquality()
                 .equals(other._statsMapList, _statsMapList) &&
             const DeepCollectionEquality()
-                .equals(other._closedStatsIdList, _closedStatsIdList));
+                .equals(other._hiddenStatsIdList, _hiddenStatsIdList));
   }
 
   @override
@@ -209,7 +209,7 @@ class _$_HitterQuizUi implements _HitterQuizUi {
       name,
       const DeepCollectionEquality().hash(_selectedStatsList),
       const DeepCollectionEquality().hash(_statsMapList),
-      const DeepCollectionEquality().hash(_closedStatsIdList));
+      const DeepCollectionEquality().hash(_hiddenStatsIdList));
 
   @JsonKey(ignore: true)
   @override
@@ -224,7 +224,7 @@ abstract class _HitterQuizUi implements HitterQuizUi {
       required final String name,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
-      required final List<String> closedStatsIdList}) = _$_HitterQuizUi;
+      required final List<String> hiddenStatsIdList}) = _$_HitterQuizUi;
 
   @override
   String get id;
@@ -235,7 +235,7 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   @override
   List<Map<String, StatsValue>> get statsMapList;
   @override
-  List<String> get closedStatsIdList;
+  List<String> get hiddenStatsIdList;
   @override
   @JsonKey(ignore: true)
   _$$_HitterQuizUiCopyWith<_$_HitterQuizUi> get copyWith =>
