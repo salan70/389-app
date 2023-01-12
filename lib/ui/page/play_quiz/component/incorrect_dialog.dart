@@ -17,7 +17,6 @@ class IncorrectDialog extends StatelessWidget {
         TextButton(
           child: const Text('諦める'),
           onPressed: () async {
-            // TODO(me): 結果画面へ遷移
             await Navigator.push(
               context,
               MaterialPageRoute<Widget>(
