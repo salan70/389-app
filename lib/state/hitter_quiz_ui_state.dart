@@ -22,38 +22,37 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
 
   void openRandom() {
     final hitterQuizUi = state.value;
+    final hiddenStatsIdList = hitterQuizUi!.hiddenStatsIdList;
 
-    final closedStatsIdList = hitterQuizUi!.closedStatsIdList;
-    final random = Random();
-    final removeIdx = random.nextInt(closedStatsIdList.length);
+    final hiddenIdx = Random().nextInt(hiddenStatsIdList.length);
 
-    // removeIdx以外のindexのIdをremovedListに追加していく
-    final removedList = <String>[];
-    for (var i = 0; i < closedStatsIdList.length; i++) {
-      if (i != removeIdx) {
-        removedList.add(closedStatsIdList[i]);
+    // hiddenStatsIdList.removeAt(removeIdx)と同様の結果になる処理
+    // hiddenStatsIdListがimmutable上記関数を使用できないため、下記のように書いている
+    final removedHiddenList = <String>[];
+    for (var i = 0; i < hiddenStatsIdList.length; i++) {
+      if (i != hiddenIdx) {
+        removedHiddenList.add(hiddenStatsIdList[i]);
       }
     }
 
     state = AsyncData(
       hitterQuizUi.copyWith(
-        closedStatsIdList: [...removedList],
+        hiddenStatsIdList: [...removedHiddenList],
       ),
     );
   }
 
   void openAll() {
     final hitterQuizUi = state.value;
-
     state = AsyncData(
       hitterQuizUi!.copyWith(
-        closedStatsIdList: [],
+        hiddenStatsIdList: [],
       ),
     );
   }
 
   bool canOpen() {
     final hitterQuizUi = state.value;
-    return hitterQuizUi!.closedStatsIdList.isNotEmpty;
+    return hitterQuizUi!.hiddenStatsIdList.isNotEmpty;
   }
 }
