@@ -11,18 +11,18 @@ class ChoseTeamWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    final teamList = ref.watch(hitterSearchConditionProvider).teamList;
     final viewModel = ref.watch(choseTeamViewModelProvider);
 
     return SmartSelect.multiple(
       title: '球団',
-      selectedValue: searchCondition.teamList,
+      selectedValue: teamList,
       choiceGrouped: true,
       choiceItems: S2Choice.listFrom<String, Map<String, String>>(
-        source: teamList,
-        value: (index, item) => item['name']!,
-        title: (index, item) => item['name']!,
-        group: (index, item) => item['league']!,
+        source: defaultTeamList,
+        value: (_, item) => item['name']!,
+        title: (_, item) => item['name']!,
+        group: (_, item) => item['league']!,
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
@@ -35,9 +35,9 @@ class ChoseTeamWidget extends ConsumerWidget {
           hideValue: true,
           body: S2TileChips(
             chipColor: Theme.of(context).primaryColor,
-            chipLength: searchCondition.teamList.length,
-            chipLabelBuilder: (context, index) {
-              return Text(searchCondition.teamList[index]);
+            chipLength: teamList.length,
+            chipLabelBuilder: (_, index) {
+              return Text(teamList[index]);
             },
             chipOnDelete: (index) {
               if (viewModel.canRemoveTeam()) {
