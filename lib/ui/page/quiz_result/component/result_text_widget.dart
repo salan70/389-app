@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../repository/supabase/supabase_hitter_repository.dart';
+import '../../../../state/hitter_quiz_ui_state.dart';
 import '../../../../usecase/quiz_usecase.dart';
 
 class ResultTextWidget extends ConsumerWidget {
@@ -33,7 +33,7 @@ class InCorrectText extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // TODO(me): エラーハンドリング（.when系？）
-    final answer = ref.watch(hitterQuizUiStateProvider).value!.name;
+    final answer = ref.watch(hitterQuizUiNotifierProvider).value!.name;
 
     return Text('残念...\n正解は、$answer選手でした。');
   }

@@ -18,19 +18,6 @@ import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 import '../../state/hitter_search_condition_state.dart';
 
-/// hitterQuizUiStateProvider内でしか呼ばないこと
-final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
-  final searchCondition = ref.watch(hitterSearchConditionProvider);
-  return ref.watch(hitterRepositoryProvider).createHitterQuizUi(
-        searchCondition,
-      );
-});
-
-final hitterQuizUiStateProvider =
-    StateProvider<AsyncValue<HitterQuizUi?>>((ref) {
-  return ref.watch(hitterQuizUiFutureProvider);
-});
-
 /// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
