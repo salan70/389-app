@@ -36,7 +36,7 @@ class QuizWidget extends ConsumerWidget {
               itemCount: data.statsMapList.length,
               itemBuilder: (_, cIdx) {
                 final statsMap = data.statsMapList[cIdx];
-                final closedStatsIdList = data.hiddenStatsIdList;
+                final hiddenStatsIdList = data.hiddenStatsIdList;
 
                 return Row(
                   children: [
@@ -45,7 +45,7 @@ class QuizWidget extends ConsumerWidget {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
-                          child: (closedStatsIdList.contains(
+                          child: (hiddenStatsIdList.contains(
                             statsMap[selectedStats]!.id,
                           ))
                               ? Container(
