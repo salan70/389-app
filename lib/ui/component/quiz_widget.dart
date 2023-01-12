@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../repository/supabase/supabase_hitter_repository.dart';
+import '../../state/hitter_quiz_ui_state.dart';
 
 class QuizWidget extends ConsumerWidget {
   const QuizWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
 
     return hitterQuizUi.when(
       loading: () => const Center(

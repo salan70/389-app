@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'quiz_event_buttons_view_model.dart';
+import '../../../../state/hitter_quiz_ui_state.dart';
 
 class QuizEventButtonsWidget extends ConsumerWidget {
   const QuizEventButtonsWidget({
@@ -10,7 +10,7 @@ class QuizEventButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(quizEventButtonsViewModelProvider);
+    final viewModel = ref.watch(hitterQuizUiNotifierProvider.notifier);
 
     return Row(
       children: [
