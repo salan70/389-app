@@ -24,13 +24,13 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     final hitterQuizUi = state.value;
     final hiddenStatsIdList = hitterQuizUi!.hiddenStatsIdList;
 
-    final hiddenIdx = Random().nextInt(hiddenStatsIdList.length);
+    final hiddenIndex = Random().nextInt(hiddenStatsIdList.length);
 
     // hiddenStatsIdList.removeAt(removeIdx)と同様の結果になる処理
     // hiddenStatsIdListがimmutable上記関数を使用できないため、下記のように書いている
     final removedHiddenList = <String>[];
     for (var i = 0; i < hiddenStatsIdList.length; i++) {
-      if (i != hiddenIdx) {
+      if (i != hiddenIndex) {
         removedHiddenList.add(hiddenStatsIdList[i]);
       }
     }

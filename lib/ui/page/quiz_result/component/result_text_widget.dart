@@ -9,7 +9,7 @@ class ResultTextWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isCorrect = ref.watch(quizUsecaseProvider).judgeQuizResult();
+    final isCorrect = ref.watch(quizUsecaseProvider).isCorrectHitterQuiz();
 
     return SizedBox(
       height: 64,
