@@ -1,4 +1,4 @@
-final teamList = <Map<String, String>>[
+const defaultTeamList = <Map<String, String>>[
   {'name': 'オリックス・バファローズ', 'league': 'パ・リーグ'},
   {'name': '福岡ソフトバンクホークス', 'league': 'パ・リーグ'},
   {'name': '埼玉西武ライオンズ', 'league': 'パ・リーグ'},
