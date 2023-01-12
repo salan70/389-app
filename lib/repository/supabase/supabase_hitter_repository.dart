@@ -18,19 +18,6 @@ import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 import '../../state/hitter_search_condition_state.dart';
 
-/// hitterQuizUiStateProvider内でしか呼ばないこと
-final hitterQuizUiFutureProvider = FutureProvider<HitterQuizUi?>((ref) {
-  final searchCondition = ref.watch(hitterSearchConditionProvider);
-  return ref.watch(hitterRepositoryProvider).createHitterQuizUi(
-        searchCondition,
-      );
-});
-
-final hitterQuizUiStateProvider =
-    StateProvider<AsyncValue<HitterQuizUi?>>((ref) {
-  return ref.watch(hitterQuizUiFutureProvider);
-});
-
 /// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
@@ -43,12 +30,18 @@ class SupabaseHitterRepository implements HitterRepository {
   );
 
   final Supabase supabase;
-  final List<String> _closedStatsIdList = [];
+  final List<String> _hiddenStatsIdList = [];
 
   @override
   Future<HitterQuizUi?> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   ) async {
+    // _hiddenStatsIdListを空にする
+    // SupabaseHitterRepositoryのインスタンスが既に生成されている場合、
+    // 既存の_hiddenStatsIdListに上書きされるため。
+    // TODO(me): 本当はメンバ変数として保持したくない
+    _hiddenStatsIdList.clear();
+
     // 検索条件に合う選手を1人取得
     final hitter = await _searchHitter(searchCondition);
 
@@ -88,7 +81,7 @@ class SupabaseHitterRepository implements HitterRepository {
       name: hitter.name,
       selectedStatsList: searchCondition.selectedStatsList,
       statsMapList: statsListForUi,
-      closedStatsIdList: _closedStatsIdList,
+      hiddenStatsIdList: _hiddenStatsIdList,
     );
 
     return hitterQuizUi;
@@ -180,9 +173,11 @@ class SupabaseHitterRepository implements HitterRepository {
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
-    // 年度のidは最初から開けておくため、closedStatsIdListには含めない
+    // TODO(me): 年度はそもそもStatsValueとして保持しないようにする
+    // そうすれば_hiddenStatsIdListをメンバ変数として保持しなくて良くなると思われる
+    // 年度のidは最初から開けておくため、hiddenStatsIdListには含めない
     if (key != '年度') {
-      _closedStatsIdList.add(id);
+      _hiddenStatsIdList.add(id);
     }
 
     if (probabilityStats.contains(key)) {

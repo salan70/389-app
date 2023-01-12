@@ -1,16 +1,15 @@
 import 'package:baseball_quiz_app/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../component/quiz_widget.dart';
 import 'component/input_answer_widget.dart';
 import 'component/quiz_event_buttons_widget.dart';
 
-class PlayQuizPage extends ConsumerWidget {
+class PlayQuizPage extends StatelessWidget {
   const PlayQuizPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
