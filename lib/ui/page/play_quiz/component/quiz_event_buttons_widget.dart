@@ -16,8 +16,8 @@ class QuizEventButtonsWidget extends ConsumerWidget {
       children: [
         TextButton(
           onPressed: () {
-            if (viewModel.canRemove()) {
-              viewModel.removeRandom();
+            if (viewModel.canOpen()) {
+              viewModel.openRandom();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
@@ -27,8 +27,8 @@ class QuizEventButtonsWidget extends ConsumerWidget {
         TextButton(
           onPressed: () {
             // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
-            if (viewModel.canRemove()) {
-              viewModel.removeAll();
+            if (viewModel.canOpen()) {
+              viewModel.openAll();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
