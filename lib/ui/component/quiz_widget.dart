@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../repository/supabase/supabase_hitter_repository.dart';
+import '../../state/hitter_quiz_ui_state.dart';
 
 class QuizWidget extends ConsumerWidget {
   const QuizWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
 
     return hitterQuizUi.when(
       loading: () => const Center(
@@ -36,7 +36,7 @@ class QuizWidget extends ConsumerWidget {
               itemCount: data.statsMapList.length,
               itemBuilder: (_, cIdx) {
                 final statsMap = data.statsMapList[cIdx];
-                final closedStatsIdList = data.closedStatsIdList;
+                final hiddenStatsIdList = data.hiddenStatsIdList;
 
                 return Row(
                   children: [
@@ -45,7 +45,7 @@ class QuizWidget extends ConsumerWidget {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
-                          child: (closedStatsIdList.contains(
+                          child: (hiddenStatsIdList.contains(
                             statsMap[selectedStats]!.id,
                           ))
                               ? Container(

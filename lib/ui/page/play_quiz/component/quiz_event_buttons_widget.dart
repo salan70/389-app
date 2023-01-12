@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'quiz_event_buttons_view_model.dart';
+import '../../../../state/hitter_quiz_ui_state.dart';
 
 class QuizEventButtonsWidget extends ConsumerWidget {
   const QuizEventButtonsWidget({
@@ -10,14 +10,14 @@ class QuizEventButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(quizEventButtonsViewModelProvider);
+    final viewModel = ref.watch(hitterQuizUiNotifierProvider.notifier);
 
     return Row(
       children: [
         TextButton(
           onPressed: () {
-            if (viewModel.canRemove()) {
-              viewModel.removeRandom();
+            if (viewModel.canOpen()) {
+              viewModel.openRandom();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
@@ -27,8 +27,8 @@ class QuizEventButtonsWidget extends ConsumerWidget {
         TextButton(
           onPressed: () {
             // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
-            if (viewModel.canRemove()) {
-              viewModel.removeAll();
+            if (viewModel.canOpen()) {
+              viewModel.openAll();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
