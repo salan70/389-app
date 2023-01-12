@@ -16,7 +16,6 @@ class QuizWidget extends ConsumerWidget {
       ),
       error: (err, _) => Text('Error: $err'),
       data: (data) {
-        // viewModel.addAllStatsId(data!);
         final selectedStatsList = data!.selectedStatsList;
         return Column(
           children: [
@@ -34,8 +33,8 @@ class QuizWidget extends ConsumerWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: data.statsMapList.length,
-              itemBuilder: (_, cIdx) {
-                final statsMap = data.statsMapList[cIdx];
+              itemBuilder: (_, index) {
+                final statsMap = data.statsMapList[index];
                 final hiddenStatsIdList = data.hiddenStatsIdList;
 
                 return Row(

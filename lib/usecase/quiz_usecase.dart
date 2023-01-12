@@ -12,13 +12,11 @@ class QuizUsecase {
 
   final Ref ref;
 
-  bool judgeQuizResult() {
+  /// 正解しているか否かを返す
+  bool isCorrectHitterQuiz() {
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
 
-    if (selectedHitterId == hitterQuizUi.value!.id) {
-      return true;
-    }
-    return false;
+    return selectedHitterId == hitterQuizUi.value!.id;
   }
 }

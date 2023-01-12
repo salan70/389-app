@@ -42,11 +42,14 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      default:
-        throw UnsupportedError(
+      case TargetPlatform.fuchsia:
+        UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
         );
     }
+    throw UnsupportedError(
+      'DefaultFirebaseOptions are not supported for this platform.',
+    );
   }
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -63,7 +66,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '520205708013',
     projectId: 'baseball-quiz-app-prod',
     storageBucket: 'baseball-quiz-app-prod.appspot.com',
-    iosClientId: '520205708013-60qqj0946mpt9ktufc33km3ajnfdnhih.apps.googleusercontent.com',
+    iosClientId:
+        '520205708013-60qqj0946mpt9ktufc33km3ajnfdnhih.apps.googleusercontent.com',
     iosBundleId: 'com.toda.baseballQuizApp.prod',
   );
 }
