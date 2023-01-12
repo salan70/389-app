@@ -20,7 +20,7 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
         .createHitterQuizUi(searchCondition);
   }
 
-  void removeRandom() {
+  void openRandom() {
     final hitterQuizUi = state.value;
 
     final closedStatsIdList = hitterQuizUi!.closedStatsIdList;
@@ -42,7 +42,7 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     );
   }
 
-  void removeAll() {
+  void openAll() {
     final hitterQuizUi = state.value;
 
     state = AsyncData(
@@ -52,14 +52,8 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     );
   }
 
-  bool canRemove() {
+  bool canOpen() {
     final hitterQuizUi = state.value;
-    var canRemove = false;
-
-    if (hitterQuizUi!.closedStatsIdList.isNotEmpty) {
-      canRemove = true;
-    }
-
-    return canRemove;
+    return hitterQuizUi!.closedStatsIdList.isNotEmpty;
   }
 }
