@@ -36,7 +36,7 @@ class QuizWidget extends ConsumerWidget {
               itemCount: data.statsMapList.length,
               itemBuilder: (_, cIdx) {
                 final statsMap = data.statsMapList[cIdx];
-                final closedStatsIdList = data.closedStatsIdList;
+                final closedStatsIdList = data.hiddenStatsIdList;
 
                 return Row(
                   children: [

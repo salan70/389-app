@@ -30,7 +30,7 @@ class SupabaseHitterRepository implements HitterRepository {
   );
 
   final Supabase supabase;
-  final List<String> _closedStatsIdList = [];
+  final List<String> _hiddenStatsIdList = [];
 
   @override
   Future<HitterQuizUi?> createHitterQuizUi(
@@ -75,7 +75,7 @@ class SupabaseHitterRepository implements HitterRepository {
       name: hitter.name,
       selectedStatsList: searchCondition.selectedStatsList,
       statsMapList: statsListForUi,
-      closedStatsIdList: _closedStatsIdList,
+      hiddenStatsIdList: _hiddenStatsIdList,
     );
 
     return hitterQuizUi;
@@ -167,9 +167,9 @@ class SupabaseHitterRepository implements HitterRepository {
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
-    // 年度のidは最初から開けておくため、closedStatsIdListには含めない
+    // 年度のidは最初から開けておくため、hiddenStatsIdListには含めない
     if (key != '年度') {
-      _closedStatsIdList.add(id);
+      _hiddenStatsIdList.add(id);
     }
 
     if (probabilityStats.contains(key)) {
