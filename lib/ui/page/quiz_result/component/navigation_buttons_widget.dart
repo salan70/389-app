@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../main.dart';
+import '../../../../state/hitter_quiz_ui_state.dart';
 import '../../play_quiz/play_quiz_page.dart';
 import '../../prepare_quiz/prepare_quiz_page.dart';
 
@@ -26,6 +27,9 @@ class NavigationButtonsWidget extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
+            // 出題する選手をリセット
+            ref.invalidate(hitterQuizUiNotifierProvider);
+
             Navigator.push(
               context,
               MaterialPageRoute<Widget>(
