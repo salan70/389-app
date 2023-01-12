@@ -20,9 +20,9 @@ class ChoseTeamWidget extends ConsumerWidget {
       choiceGrouped: true,
       choiceItems: S2Choice.listFrom<String, Map<String, String>>(
         source: defaultTeamList,
-        value: (index, item) => item['name']!,
-        title: (index, item) => item['name']!,
-        group: (index, item) => item['league']!,
+        value: (_, item) => item['name']!,
+        title: (_, item) => item['name']!,
+        group: (_, item) => item['league']!,
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
@@ -36,7 +36,7 @@ class ChoseTeamWidget extends ConsumerWidget {
           body: S2TileChips(
             chipColor: Theme.of(context).primaryColor,
             chipLength: teamList.length,
-            chipLabelBuilder: (context, index) {
+            chipLabelBuilder: (_, index) {
               return Text(teamList[index]);
             },
             chipOnDelete: (index) {
