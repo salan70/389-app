@@ -104,11 +104,9 @@ class SupabaseHitterRepository implements HitterRepository {
       return null;
     }
 
-    // ランダムで1件抽出
-    final random = Random();
-    final randomResponse = responses[random.nextInt(responses.length)];
-
-    final hitter = Hitter.fromJson(randomResponse);
+    // ランダムで1人選出
+    final chosenResponse = responses[Random().nextInt(responses.length)];
+    final hitter = Hitter.fromJson(chosenResponse);
 
     return hitter;
   }
@@ -153,15 +151,9 @@ class SupabaseHitterRepository implements HitterRepository {
 
     final selectedStatsList = searchCondition.selectedStatsList;
 
-    // selectedLabelListを作成
-    final selectedLabelList = <String>[];
-    for (final selectedStats in selectedStatsList) {
-      selectedLabelList.add(selectedStats);
-    }
-
     rowStats.forEach((key, value) {
       // selectedLabelListに含まれる成績のみMap型として追加
-      if (selectedLabelList.contains(key)) {
+      if (selectedStatsList.contains(key)) {
         final strVal = value.toString();
         statsForUi[key] = _formatStatsValue(key, strVal);
       }
