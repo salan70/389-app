@@ -46,7 +46,7 @@ class InputAnswerWidget extends ConsumerWidget {
             // TODO(me): 回答が無効な値の場合、ボタンを押せなくする。
             // あるいは、押したら回答が無効な旨を表示する
 
-            final isCorrect = quizUsecase.judgeQuizResult();
+            final isCorrect = quizUsecase.isCorrectHitterQuiz();
 
             // TODO(me): 結果表示までちょっとじらす（ローディング表示？）
 
