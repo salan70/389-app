@@ -20,6 +20,16 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
         .createHitterQuizUi(searchCondition);
   }
 
+  /// 出題する選手を再抽選（再取得）
+  Future<void> refresh() async {
+    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    state = AsyncData(
+      await ref
+          .watch(hitterRepositoryProvider)
+          .createHitterQuizUi(searchCondition),
+    );
+  }
+
   /// ランダムに1つ成績を公開する
   void openRandom() {
     final hitterQuizUi = state.value;
