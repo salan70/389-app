@@ -20,6 +20,7 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
         .createHitterQuizUi(searchCondition);
   }
 
+  /// ランダムに1つ成績を公開する
   void openRandom() {
     final hitterQuizUi = state.value;
     final hiddenStatsIdList = hitterQuizUi!.hiddenStatsIdList;
@@ -42,6 +43,7 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     );
   }
 
+  /// 全ての閉じている成績を公開する
   void openAll() {
     final hitterQuizUi = state.value;
     state = AsyncData(
@@ -51,6 +53,8 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
     );
   }
 
+  /// 成績が公開可能か判別する
+  /// 閉じている成績が残っている場合、成績が公開可能とみなす
   bool canOpen() {
     final hitterQuizUi = state.value;
     return hitterQuizUi!.hiddenStatsIdList.isNotEmpty;
