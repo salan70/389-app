@@ -26,12 +26,18 @@ class NavigationButtonsWidget extends ConsumerWidget {
           child: const Text('TOPへ戻る'),
         ),
         TextButton(
-          onPressed: () {
-            // 出題する選手をリセット
-            ref.invalidate(hitterQuizUiNotifierProvider);
+          onPressed: () async {
+            // 「Do not use BuildContexts across async gaps.」
+            // というLintの警告を回避するためにnavigatorを切り出し
+            // 上記警告は、contextに対してawaitすると発生すると思われる
+            final navigator = Navigator.of(context);
 
-            Navigator.push(
-              context,
+            // 出題する選手をリセット
+            final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
+            await notifier.refresh();
+            // TODO(me): Loading中の処理を書く
+
+            await navigator.push(
               MaterialPageRoute<Widget>(
                 builder: (_) => const PlayQuizPage(),
               ),
