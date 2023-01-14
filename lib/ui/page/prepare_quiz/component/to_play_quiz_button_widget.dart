@@ -18,17 +18,23 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         ref.watch(hitterSearchConditionRepositoryProvider);
 
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         // hitterSearchConditionをローカルDBへ保存
         hitterSearchConditionRepository
             .saveHitterSearchCondition(hitterSearchCondition);
 
+        // 「Do not use BuildContexts across async gaps.」
+        // というLintの警告を回避するためにnavigatorを切り出し
+        // 上記警告は、contextに対してawaitすると発生すると思われる
+        final navigator = Navigator.of(context);
+
         // 出題する選手をリセット
-        ref.invalidate(hitterQuizUiNotifierProvider);
+        final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
+        await notifier.refresh();
+        // TODO(me): Loading中の処理を書く
 
         // 画面遷移
-        Navigator.push(
-          context,
+        await navigator.push(
           MaterialPageRoute<Widget>(
             builder: (_) => const PlayQuizPage(),
           ),
