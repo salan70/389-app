@@ -6,6 +6,7 @@ import '../model/ui/hitter_quiz_ui.dart';
 import '../repository/hitter_repository.dart';
 import 'hitter_search_condition_state.dart';
 
+// hitterQuizUiを返すプロバイダー
 final hitterQuizUiNotifierProvider =
     AsyncNotifierProvider<HitterQuizUiNotifier, HitterQuizUi?>(() {
   return HitterQuizUiNotifier();
@@ -14,20 +15,28 @@ final hitterQuizUiNotifierProvider =
 class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
   @override
   Future<HitterQuizUi?> build() {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
-    return ref
-        .watch(hitterRepositoryProvider)
-        .createHitterQuizUi(searchCondition);
+    return _fetchHitterQuizUi();
   }
 
   /// 出題する選手を再抽選（再取得）
   Future<void> refresh() async {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
-    state = AsyncData(
-      await ref
+    state = AsyncData(await _fetchHitterQuizUi());
+  }
+
+  /// HitterQuizUiを取得する
+  Future<HitterQuizUi?> _fetchHitterQuizUi() async {
+    final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
+    notifier.state = const AsyncValue.loading();
+
+    late HitterQuizUi? hitterQuizUi;
+    notifier.state = await AsyncValue.guard(() async {
+      final searchCondition = ref.watch(hitterSearchConditionProvider);
+      hitterQuizUi = await ref
           .watch(hitterRepositoryProvider)
-          .createHitterQuizUi(searchCondition),
-    );
+          .createHitterQuizUi(searchCondition);
+      return null;
+    });
+    return hitterQuizUi;
   }
 
   /// ランダムに1つ成績を公開する

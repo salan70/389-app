@@ -33,9 +33,12 @@ class NavigationButtonsWidget extends ConsumerWidget {
             final navigator = Navigator.of(context);
 
             // 出題する選手をリセット
-            final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
+            // TODO(me): QuizWidgetが更新されないようにしたい
+            // 現状だとエラーダイアログを閉じるとバグる
+            // notifier.refresh()時に、widgetの再描画がされないようにすれば
+            // バグらなくて済みそう
+            final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
             await notifier.refresh();
-            // TODO(me): Loading中の処理を書く
 
             await navigator.push(
               MaterialPageRoute<Widget>(
