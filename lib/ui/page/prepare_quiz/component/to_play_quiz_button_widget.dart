@@ -31,7 +31,6 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         // 出題する選手をリセット
         final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
         await notifier.refresh();
-        // TODO(me): Loading中の処理を書く
 
         // 画面遷移
         await navigator.push(

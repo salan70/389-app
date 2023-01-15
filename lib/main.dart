@@ -11,7 +11,12 @@ import 'repository/hitter_repository.dart';
 import 'repository/hitter_search_condition_repository.dart';
 import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
+import 'state/hitter_quiz_ui_state.dart';
+import 'state/loading_state.dart';
+import 'state/navigator_key_state.dart';
+import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
+import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,9 +69,13 @@ Future<void> initialize() async {
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // hitterQuizUiNotifierProviderの結果をハンドリングする
+    ref.handleAsyncValue<void>(
+      hitterQuizUiNotifierProvider,
+    );
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -76,6 +85,19 @@ class MyApp extends ConsumerWidget {
           primary: Color(0xFF37474F),
           error: Color(0xFFC62828),
         ),
+      ),
+      navigatorKey: ref.watch(navigatorKeyProvider),
+      builder: (context, child) => Consumer(
+        builder: (context, ref, _) {
+          final isLoading = ref.watch(loadingProvider);
+          return Stack(
+            children: [
+              child!,
+              // ローディングを表示する
+              if (isLoading) const QuizLoadingWidget(),
+            ],
+          );
+        },
       ),
       home: const Scaffold(
         body: Center(child: TextButtonWidget()),
