@@ -33,7 +33,8 @@ class NavigationButtonsWidget extends ConsumerWidget {
             final navigator = Navigator.of(context);
 
             // 出題する選手をリセット
-            final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
+            // TODO(me): QuizWidgetが更新されないようにしたい
+            final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
             await notifier.refresh();
 
             await navigator.push(
