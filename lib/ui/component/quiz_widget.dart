@@ -29,43 +29,47 @@ class QuizWidget extends ConsumerWidget {
                   ),
               ],
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: data.statsMapList.length,
-              itemBuilder: (_, index) {
-                final statsMap = data.statsMapList[index];
-                final hiddenStatsIdList = data.hiddenStatsIdList;
+            ColoredBox(
+              color: Colors.black26,
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: data.statsMapList.length,
+                itemBuilder: (_, index) {
+                  final statsMap = data.statsMapList[index];
+                  final hiddenStatsIdList = data.hiddenStatsIdList;
 
-                return Row(
-                  children: [
-                    for (final selectedStats in selectedStatsList)
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          alignment: Alignment.center,
-                          child: (hiddenStatsIdList.contains(
-                            statsMap[selectedStats]!.id,
-                          ))
-                              ? Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    borderRadius: BorderRadius.circular(4),
+                  return Row(
+                    children: [
+                      for (final selectedStats in selectedStatsList)
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            alignment: Alignment.center,
+                            child: (hiddenStatsIdList.contains(
+                              statsMap[selectedStats]!.id,
+                            ))
+                                ? Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: const Text(''),
+                                  )
+                                : FittedBox(
+                                    child: Text(
+                                      statsMap[selectedStats]!.data,
+                                    ),
                                   ),
-                                  child: const Text(''),
-                                )
-                              : FittedBox(
-                                  child: Text(
-                                    statsMap[selectedStats]!.data,
-                                  ),
-                                ),
+                          ),
                         ),
-                      ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
           ],
         );

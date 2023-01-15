@@ -74,8 +74,7 @@ class MyApp extends ConsumerWidget {
         dialogBackgroundColor: const Color(0xFFFFF8E1),
         colorScheme: const ColorScheme.light(
           primary: Color(0xFF37474F),
-          // error: Color(0xFFC62828),
-          error: Colors.green,
+          error: Color(0xFFC62828),
         ),
       ),
       home: const Scaffold(

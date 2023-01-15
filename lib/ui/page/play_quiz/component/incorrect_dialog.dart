@@ -15,7 +15,10 @@ class IncorrectDialog extends StatelessWidget {
       content: Text('$selectedHitter選手ではありません'),
       actions: <Widget>[
         TextButton(
-          child: const Text('諦める'),
+          child: Text(
+            '諦める',
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
           onPressed: () async {
             await Navigator.push(
               context,
