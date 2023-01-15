@@ -9,25 +9,36 @@ class QuizLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
+    return const ColoredBox(
       color: Colors.black26,
       child: Center(
-        child: Dialog(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                // The loading indicator
-                CircularProgressIndicator(),
-                SizedBox(
-                  height: 24,
-                ),
-                // Some text
-                Text('Loading...')
-              ],
+        child: LoadingDialog(),
+      ),
+    );
+  }
+}
+
+class LoadingDialog extends StatelessWidget {
+  const LoadingDialog({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            // The loading indicator
+            CircularProgressIndicator(),
+            SizedBox(
+              height: 24,
             ),
-          ),
+            // Some text
+            Text('Loading...')
+          ],
         ),
       ),
     );
