@@ -56,8 +56,10 @@ class QuizWidget extends ConsumerWidget {
                                   ),
                                   child: const Text(''),
                                 )
-                              : Text(
-                                  statsMap[selectedStats]!.data,
+                              : FittedBox(
+                                  child: Text(
+                                    statsMap[selectedStats]!.data,
+                                  ),
                                 ),
                         ),
                       ),
