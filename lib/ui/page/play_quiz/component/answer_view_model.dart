@@ -3,13 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../repository/supabase/supabase_hitter_repository.dart';
 
-final inputAnswerViewModelProvider =
-    Provider<InputAnswerViewModel>(InputAnswerViewModel.new);
+final answerViewModelProvider = Provider<AnswerViewModel>(AnswerViewModel.new);
 
 final selectedHitterIdProvider = StateProvider<String>((_) => '');
 
-class InputAnswerViewModel {
-  InputAnswerViewModel(
+class AnswerViewModel {
+  AnswerViewModel(
     this.ref,
   );
 

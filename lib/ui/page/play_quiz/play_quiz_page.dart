@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../component/quiz_widget.dart';
-import 'component/input_answer_widget.dart';
+import 'component/answer_widget.dart';
 import 'component/quiz_event_buttons_widget.dart';
 import 'component/retire_button_widget.dart';
 
@@ -17,7 +17,7 @@ class PlayQuizPage extends StatelessWidget {
           children: const [
             QuizWidget(),
             QuizEventButtonsWidget(),
-            InputAnswerWidget(),
+            AnswerWidget(),
             RetireButtonWidget(),
           ],
         ),

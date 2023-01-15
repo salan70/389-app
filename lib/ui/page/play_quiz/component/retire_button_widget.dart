@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../quiz_result/quiz_result_page.dart';
 import 'retire_confirm_dialog.dart';
 
 class RetireButtonWidget extends StatelessWidget {
