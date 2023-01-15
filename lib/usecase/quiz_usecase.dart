@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/hitter_quiz_ui_state.dart';
-import '../ui/page/play_quiz/component/input_answer_view_model.dart';
+import '../ui/page/play_quiz/component/answer_view_model.dart';
 
 final quizUsecaseProvider = Provider<QuizUsecase>(QuizUsecase.new);
 

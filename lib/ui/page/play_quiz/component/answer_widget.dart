@@ -5,20 +5,18 @@ import 'package:textfield_search/textfield_search.dart';
 import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../usecase/quiz_usecase.dart';
 import '../../quiz_result/quiz_result_page.dart';
+import 'answer_view_model.dart';
 import 'incorrect_dialog.dart';
-import 'input_answer_view_model.dart';
 
-// TODO(me): class名変える
-// Inputだけでなく、回答もしている
-class InputAnswerWidget extends ConsumerWidget {
-  const InputAnswerWidget({super.key});
+class AnswerWidget extends ConsumerWidget {
+  const AnswerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ScrollController();
     final textEditingController = TextEditingController();
 
-    final viewModel = ref.watch(inputAnswerViewModelProvider);
+    final viewModel = ref.watch(answerViewModelProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
     final quizUsecase = ref.watch(quizUsecaseProvider);
