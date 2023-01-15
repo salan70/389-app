@@ -30,6 +30,7 @@ class QuizWidget extends ConsumerWidget {
               ],
             ),
             ListView.builder(
+              padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: data.statsMapList.length,
@@ -48,12 +49,18 @@ class QuizWidget extends ConsumerWidget {
                             statsMap[selectedStats]!.id,
                           ))
                               ? Container(
-                                  color: Colors.grey,
                                   width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
                                   child: const Text(''),
                                 )
-                              : Text(
-                                  statsMap[selectedStats]!.data,
+                              : FittedBox(
+                                  child: Text(
+                                    statsMap[selectedStats]!.data,
+                                  ),
                                 ),
                         ),
                       ),
