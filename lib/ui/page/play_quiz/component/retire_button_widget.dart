@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../quiz_result/quiz_result_page.dart';
+import 'retire_confirm_dialog.dart';
 
 class RetireButtonWidget extends StatelessWidget {
   const RetireButtonWidget({super.key});
@@ -8,12 +9,13 @@ class RetireButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<Widget>(
-            builder: (_) => const QuizResultPage(),
-          ),
+      onPressed: () async {
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) {
+            return const RetireConfirmDialog();
+          },
         );
       },
       child: const Text('諦める'),
