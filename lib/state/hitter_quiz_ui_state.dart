@@ -30,12 +30,6 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
 
     late HitterQuizUi? hitterQuizUi;
     notifier.state = await AsyncValue.guard(() async {
-      await Future<void>.delayed(const Duration(seconds: 3));
-      // エラー時の動作が確認できるように1/2の確率で例外を発生させる
-      if ((Random().nextInt(2) % 2).isEven) {
-        throw 'データを取得できませんでした。';
-      }
-
       final searchCondition = ref.watch(hitterSearchConditionProvider);
       hitterQuizUi = await ref
           .watch(hitterRepositoryProvider)
