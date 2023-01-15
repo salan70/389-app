@@ -70,7 +70,11 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: const Color(0xFFFFF8E1),
+        colorScheme: const ColorScheme.light(
+          background: Color(0xFFFFF8E1),
+          primary: Color(0xFF37474F),
+        ),
       ),
       home: const Scaffold(
         body: Center(child: TextButtonWidget()),
