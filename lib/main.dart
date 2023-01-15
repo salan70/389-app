@@ -13,7 +13,7 @@ import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'state/hitter_quiz_ui_state.dart';
 import 'state/loading_state.dart';
-import 'ui/component/overlay_loading_widget.dart';
+import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 import 'util/widget_ref_extension.dart';
 
@@ -92,7 +92,7 @@ class MyApp extends ConsumerWidget {
             children: [
               child!,
               // ローディングを表示する
-              if (isLoading) const OverlayLoading(),
+              if (isLoading) const QuizLoadingWidget(),
             ],
           );
         },
