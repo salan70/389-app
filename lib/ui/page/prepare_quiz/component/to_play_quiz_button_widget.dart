@@ -32,10 +32,6 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
         await notifier.refresh();
 
-        // TODO(me): エラーダイアログを閉じるとバグる
-        // notifier.refresh()時に、widgetの再描画がされないようにすれば
-        // バグらなくて済みそう
-
         // 画面遷移
         await navigator.push(
           MaterialPageRoute<Widget>(

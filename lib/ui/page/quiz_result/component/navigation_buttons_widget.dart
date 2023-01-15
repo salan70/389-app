@@ -34,6 +34,9 @@ class NavigationButtonsWidget extends ConsumerWidget {
 
             // 出題する選手をリセット
             // TODO(me): QuizWidgetが更新されないようにしたい
+            // 現状だとエラーダイアログを閉じるとバグる
+            // notifier.refresh()時に、widgetの再描画がされないようにすれば
+            // バグらなくて済みそう
             final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
             await notifier.refresh();
 

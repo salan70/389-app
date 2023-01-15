@@ -32,7 +32,6 @@ class InCorrectText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO(me): エラーハンドリング（.when系？）
     final answer = ref.watch(hitterQuizUiNotifierProvider).value!.name;
 
     return Text('残念...\n正解は、$answer選手でした。');
