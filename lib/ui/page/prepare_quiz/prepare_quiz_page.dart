@@ -10,21 +10,16 @@ class PrepareQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('プレイ'),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView(
-            children: const [
-              ChoseTeamWidget(),
-              SettingStatsValueFilterWidget(),
-              SelectStatsWidget(),
-              ToPlayQuizButtonWidget(),
-            ],
-          ),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: ListView(
+          children: const [
+            ChoseTeamWidget(),
+            SettingStatsValueFilterWidget(),
+            SelectStatsWidget(),
+            ToPlayQuizButtonWidget(),
+          ],
         ),
       ),
     );

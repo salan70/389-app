@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../quiz_result/quiz_result_page.dart';
+import 'retire_confirm_dialog.dart';
 
 class IncorrectDialog extends StatelessWidget {
   const IncorrectDialog({super.key, required this.selectedHitter});
@@ -15,13 +15,17 @@ class IncorrectDialog extends StatelessWidget {
       content: Text('$selectedHitter選手ではありません'),
       actions: <Widget>[
         TextButton(
-          child: const Text('諦める'),
+          child: Text(
+            '諦める',
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
           onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute<Widget>(
-                builder: (_) => const QuizResultPage(),
-              ),
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                return const RetireConfirmDialog();
+              },
             );
           },
         ),
