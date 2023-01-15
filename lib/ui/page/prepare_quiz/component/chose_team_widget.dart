@@ -26,6 +26,15 @@ class ChoseTeamWidget extends ConsumerWidget {
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
+      modalStyle: S2ModalStyle(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
+      modalHeaderStyle: S2ModalHeaderStyle(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
+      groupHeaderStyle: S2GroupHeaderStyle(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      ),
       onChange: (selectedList) {
         viewModel.saveTeamList(selectedList.value);
       },

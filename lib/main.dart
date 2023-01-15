@@ -71,9 +71,11 @@ class MyApp extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFFFF8E1),
+        dialogBackgroundColor: const Color(0xFFFFF8E1),
         colorScheme: const ColorScheme.light(
-          background: Color(0xFFFFF8E1),
           primary: Color(0xFF37474F),
+          // error: Color(0xFFC62828),
+          error: Colors.green,
         ),
       ),
       home: const Scaffold(
