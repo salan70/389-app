@@ -18,6 +18,7 @@ class QuizLoadingWidget extends StatelessWidget {
   }
 }
 
+/// ローディング中であることを知らせるダイアログ
 class LoadingDialog extends StatelessWidget {
   const LoadingDialog({
     super.key,

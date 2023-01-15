@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/loading_state.dart';
+import '../state/navigator_key_state.dart';
+import '../ui/component/ErrorDialog.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
 /// 参考
@@ -29,12 +31,11 @@ extension WidgetRefEx on WidgetRef {
             error: (e, _) async {
               loadingNotifier.hide();
 
-              // TODO(me): エラーダイアログ作る
-              // エラーが発生したらエラーダイアログを表示する
-              // await showDialog<void>(
-              //   context: read(navigatorKeyProvider).currentContext!,
-              //   builder: (context) => ErrorDialog(error: e),
-              // );
+              // エラーダイアログを表示
+              await showDialog<void>(
+                context: read(navigatorKeyProvider).currentContext!,
+                builder: (context) => ErrorDialog(error: e),
+              );
             },
             loading: loadingNotifier.show,
           );

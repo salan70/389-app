@@ -13,6 +13,7 @@ import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'state/hitter_quiz_ui_state.dart';
 import 'state/loading_state.dart';
+import 'state/navigator_key_state.dart';
 import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
 import 'util/widget_ref_extension.dart';
@@ -85,6 +86,7 @@ class MyApp extends ConsumerWidget {
           error: Color(0xFFC62828),
         ),
       ),
+      navigatorKey: ref.watch(navigatorKeyProvider),
       builder: (context, child) => Consumer(
         builder: (context, ref, _) {
           final isLoading = ref.watch(loadingProvider);
