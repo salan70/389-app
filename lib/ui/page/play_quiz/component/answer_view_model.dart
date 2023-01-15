@@ -14,8 +14,7 @@ class AnswerViewModel {
 
   final Ref ref;
 
-  // TODO(me): 関数名もっといいの検討
-  Future<List<HitterIdByName>> searchHitter(String searchWord) async {
+  Future<List<HitterIdByName>> filterHitter(String searchWord) async {
     final allHitterList = await ref.watch(allHitterListProvider);
     final hitterListAfterSearch = <HitterIdByName>[];
 

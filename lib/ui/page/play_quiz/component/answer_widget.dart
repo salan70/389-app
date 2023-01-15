@@ -33,7 +33,7 @@ class AnswerWidget extends ConsumerWidget {
             theme: const ScrollbarThemeData(),
           ),
           future: () {
-            return viewModel.searchHitter(textEditingController.text);
+            return viewModel.filterHitter(textEditingController.text);
           },
           getSelectedValue: (HitterIdByName value) {
             selectedHitterIdNotifier.state = value.id;
