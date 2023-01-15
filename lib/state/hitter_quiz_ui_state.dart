@@ -24,11 +24,19 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
   }
 
   /// HitterQuizUiを取得する
-  Future<HitterQuizUi?> _fetchHitterQuizUi() {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
-    return ref
-        .watch(hitterRepositoryProvider)
-        .createHitterQuizUi(searchCondition);
+  Future<HitterQuizUi?> _fetchHitterQuizUi() async {
+    final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
+    notifier.state = const AsyncValue.loading();
+
+    late HitterQuizUi? hitterQuizUi;
+    notifier.state = await AsyncValue.guard(() async {
+      final searchCondition = ref.watch(hitterSearchConditionProvider);
+      hitterQuizUi = await ref
+          .watch(hitterRepositoryProvider)
+          .createHitterQuizUi(searchCondition);
+      return null;
+    });
+    return hitterQuizUi;
   }
 
   /// ランダムに1つ成績を公開する

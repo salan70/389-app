@@ -35,7 +35,6 @@ class NavigationButtonsWidget extends ConsumerWidget {
             // 出題する選手をリセット
             final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
             await notifier.refresh();
-            // TODO(me): Loading中の処理を書く
 
             await navigator.push(
               MaterialPageRoute<Widget>(
