@@ -10,11 +10,9 @@ class QuizWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
 
-    return hitterQuizUi.when(
-      loading: () => const Center(
-        child: CircularProgressIndicator(),
-      ),
-      error: (err, _) => Text('Error: $err'),
+    return hitterQuizUi.maybeWhen(
+      // TODO(me): 空のWidgetを共通componentとして定義したい
+      orElse: Container.new,
       data: (data) {
         final selectedStatsList = data!.selectedStatsList;
         return Column(
