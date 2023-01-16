@@ -82,7 +82,7 @@ class MyApp extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.rocknRollOneTextTheme(),
-        backgroundColor: backgroundColor,
+        canvasColor: backgroundColor,
         scaffoldBackgroundColor: backgroundColor,
         dialogBackgroundColor: backgroundColor,
         colorScheme: const ColorScheme.light(
