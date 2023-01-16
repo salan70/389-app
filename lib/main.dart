@@ -17,7 +17,7 @@ import 'state/hitter_quiz_ui_state.dart';
 import 'state/loading_state.dart';
 import 'state/navigator_key_state.dart';
 import 'ui/component/quiz_loading_widget.dart';
-import 'ui/page/prepare_quiz/prepare_quiz_page.dart';
+import 'ui/page/top/top_page.dart';
 import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
@@ -103,30 +103,7 @@ class MyApp extends ConsumerWidget {
           );
         },
       ),
-      home: const Scaffold(
-        body: Center(child: TextButtonWidget()),
-      ),
-    );
-  }
-}
-
-class TextButtonWidget extends StatelessWidget {
-  const TextButtonWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      child: const Text('クイズの設定をする'),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute<Widget>(
-            builder: (_) => const PrepareQuizPage(),
-          ),
-        );
-      },
+      home: const TopPage(),
     );
   }
 }
