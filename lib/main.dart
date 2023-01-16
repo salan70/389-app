@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Infrastructure/supabase/supabase_providers.dart';
+import 'constant/color_constant.dart';
 import 'constant/hitter_search_condition_constant.dart';
 import 'model/typeadapter/hitter_search_condition.dart';
 import 'repository/hitter_repository.dart';
@@ -81,11 +82,12 @@ class MyApp extends ConsumerWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.rocknRollOneTextTheme(),
-        scaffoldBackgroundColor: const Color(0xFFFFF8E1),
-        dialogBackgroundColor: const Color(0xFFFFF8E1),
+        backgroundColor: backgroundColor,
+        scaffoldBackgroundColor: backgroundColor,
+        dialogBackgroundColor: backgroundColor,
         colorScheme: const ColorScheme.light(
-          primary: Color(0xFF37474F),
-          error: Color(0xFFC62828),
+          primary: primaryColor,
+          error: errorColor,
         ),
       ),
       navigatorKey: ref.watch(navigatorKeyProvider),
