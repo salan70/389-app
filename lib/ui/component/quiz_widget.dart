@@ -8,7 +8,7 @@ class QuizWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
 
     return hitterQuizUi.maybeWhen(
       // TODO(me): 空のWidgetを共通componentとして定義したい
