@@ -16,7 +16,9 @@ class QuizResultPage extends StatelessWidget {
         child: Column(
           children: const [
             ResultTextWidget(),
-            QuizWidget(),
+            QuizWidget(
+              willUpdate: false,
+            ),
             NavigationButtonsWidget(),
             ShareButtonWidget(),
           ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../repository/hitter_search_condition_repository.dart';
-import '../../../../state/hitter_quiz_ui_state.dart';
+import '../../../../state/hitter_quiz_ui_service.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
@@ -28,9 +28,8 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         // 上記警告は、contextに対してawaitすると発生すると思われる
         final navigator = Navigator.of(context);
 
-        // 出題する選手をリセット
-        final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
-        await notifier.refresh();
+        // 出題する選手を取得
+        await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
 
         // 画面遷移
         await navigator.push(
