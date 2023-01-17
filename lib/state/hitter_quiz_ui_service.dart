@@ -77,9 +77,7 @@ class HitterQuizUiService {
   /// 成績が公開可能か判別する
   /// 閉じている成績が残っている場合、成績が公開可能とみなす
   bool canOpen() {
-    final notifier = ref.read(hitterQuizUiStateProvider.notifier);
-    final hitterQuizUi = notifier.state.value;
-
+    final hitterQuizUi = ref.read(hitterQuizUiStateProvider).value;
     return hitterQuizUi!.hiddenStatsIdList.isNotEmpty;
   }
 }

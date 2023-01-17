@@ -14,10 +14,10 @@ class SelectStatsViewModel {
   final Ref ref;
 
   void saveStatsList(List<String> selectedList) {
-    final notifier = ref.read(hitterSearchConditionProvider.notifier);
-    final searchCondition = ref.read(hitterSearchConditionProvider);
+    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
 
-    notifier.state = searchCondition.copyWith(selectedStatsList: selectedList);
+    searchCondition.state =
+        searchCondition.state.copyWith(selectedStatsList: selectedList);
   }
 
   /// 成績をタップ時に状態（選択/未選択）を変更できるか判別
