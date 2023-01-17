@@ -14,8 +14,8 @@ class SelectStatsViewModel {
   final Ref ref;
 
   void saveStatsList(List<String> selectedList) {
-    final notifier = ref.watch(hitterSearchConditionProvider.notifier);
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    final notifier = ref.read(hitterSearchConditionProvider.notifier);
+    final searchCondition = ref.read(hitterSearchConditionProvider);
 
     notifier.state = searchCondition.copyWith(selectedStatsList: selectedList);
   }

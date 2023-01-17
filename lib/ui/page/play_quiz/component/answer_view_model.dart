@@ -16,7 +16,7 @@ class AnswerViewModel {
   final Ref ref;
 
   Future<List<HitterIdByName>> filterHitter(String searchWord) async {
-    final allHitterList = await ref.watch(allHitterListProvider);
+    final allHitterList = await ref.read(allHitterListProvider);
     final hitterListAfterSearch = <HitterIdByName>[];
 
     for (final hitter in allHitterList) {
