@@ -27,12 +27,14 @@ class CorrectText extends StatelessWidget {
   }
 }
 
+/// hitterQuizUiStateProviderをref.readしている
+/// 上記プロバイダーを更新しても、このWidgetは再描画されないことに注意
 class InCorrectText extends ConsumerWidget {
   const InCorrectText({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final answer = ref.watch(hitterQuizUiStateProvider).value!.name;
+    final answer = ref.read(hitterQuizUiStateProvider).value!.name;
 
     return Text('残念...\n正解は、$answer選手でした。');
   }

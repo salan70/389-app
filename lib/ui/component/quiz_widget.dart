@@ -3,19 +3,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../state/hitter_quiz_ui_state.dart';
 
+/// Quizの画面を表示するWidget
+/// willUpdateがtrueの場合、このhitterQuizUiStateProviderをwatch（監視）される
+/// falseの場合、hitterQuizUiStateProviderをreadする
+/// （プロバイダーが更新されても再描画されない）。
 class QuizWidget extends ConsumerWidget {
-  const QuizWidget({super.key});
+  const QuizWidget({super.key, required this.willUpdate});
+
+  final bool willUpdate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
-    print('test ${hitterQuizUi.value}');
+    final hitterQuizUi = willUpdate
+        ? ref.watch(hitterQuizUiStateProvider)
+        : ref.read(hitterQuizUiStateProvider);
 
     return hitterQuizUi.maybeWhen(
       // TODO(me): 空のWidgetを共通componentとして定義したい
       orElse: Container.new,
       data: (data) {
-        print('test ${hitterQuizUi.value}');
         final selectedStatsList = data!.selectedStatsList;
         return Column(
           children: [
