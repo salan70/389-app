@@ -9,11 +9,13 @@ class QuizWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
+    print('test ${hitterQuizUi.value}');
 
     return hitterQuizUi.maybeWhen(
       // TODO(me): 空のWidgetを共通componentとして定義したい
       orElse: Container.new,
       data: (data) {
+        print('test ${hitterQuizUi.value}');
         final selectedStatsList = data!.selectedStatsList;
         return Column(
           children: [

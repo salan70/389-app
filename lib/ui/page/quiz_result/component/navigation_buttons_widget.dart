@@ -37,8 +37,7 @@ class NavigationButtonsWidget extends ConsumerWidget {
             // 現状だとエラーダイアログを閉じるとバグる
             // notifier.refresh()時に、widgetの再描画がされないようにすれば
             // バグらなくて済みそう
-            final hitterQuizUiService = ref.read(hitterQuizUiServiceProvider);
-            await hitterQuizUiService.fetchHitterQuizUi();
+            await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
 
             await navigator.push(
               MaterialPageRoute<Widget>(
