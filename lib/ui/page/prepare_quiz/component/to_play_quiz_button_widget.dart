@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../repository/hitter_search_condition_repository.dart';
-import '../../../../state/hitter_quiz_ui_state.dart';
+import '../../../../state/hitter_quiz_ui_service.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
