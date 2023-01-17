@@ -15,7 +15,9 @@ class PlayQuizPage extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: ListView(
           children: const [
-            QuizWidget(),
+            QuizWidget(
+              willUpdate: true,
+            ),
             QuizEventButtonsWidget(),
             AnswerWidget(),
             RetireButtonWidget(),
