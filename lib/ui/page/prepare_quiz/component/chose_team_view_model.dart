@@ -14,30 +14,23 @@ class ChoseTeamViewModel {
 
   /// 選択した球団のリストを保存する
   void saveTeamList(List<Object?> selectedList) {
-    final searchCondition = ref.read(hitterSearchConditionProvider);
-    final notifier = ref.read(hitterSearchConditionProvider.notifier);
-
+    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
     final teamList = selectedList.cast<String>();
 
-    notifier.state = searchCondition.copyWith(teamList: teamList);
+    searchCondition.state = searchCondition.state.copyWith(teamList: teamList);
   }
 
   /// 球団を取り除けるか判別する
   /// 選択中のteamListの長さが2以上の場合に取り除ける
   /// （取り除くとteamListが空になる場合取り除けない）
   bool canRemoveTeam() {
-    final searchCondition = ref.read(hitterSearchConditionProvider);
-    final teamList = searchCondition.teamList;
-
-    return teamList.length > 1;
+    return ref.read(hitterSearchConditionProvider).teamList.length > 1;
   }
 
   /// 選択した球団を取り除く
   void removeTeam(int selectedIndex) {
-    final searchCondition = ref.read(hitterSearchConditionProvider);
-    final notifier = ref.read(hitterSearchConditionProvider.notifier);
-
-    final teamList = searchCondition.teamList;
+    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
+    final teamList = searchCondition.state.teamList;
 
     // teamListに対してremoveAt()が使えない（immutableだから？）ため、
     // 以下のようにremovedTeamListを作成
@@ -48,6 +41,7 @@ class ChoseTeamViewModel {
       }
     }
 
-    notifier.state = searchCondition.copyWith(teamList: removedTeamList);
+    searchCondition.state =
+        searchCondition.state.copyWith(teamList: removedTeamList);
   }
 }
