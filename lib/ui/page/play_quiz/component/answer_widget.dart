@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
-import '../../../../usecase/quiz_usecase.dart';
+import '../../../../state/is_correct_quiz.state.dart';
 import '../../quiz_result/quiz_result_page.dart';
 import 'answer_view_model.dart';
 import 'incorrect_dialog.dart';
@@ -19,7 +19,8 @@ class AnswerWidget extends ConsumerWidget {
     final viewModel = ref.watch(answerViewModelProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
-    final quizUsecase = ref.watch(quizUsecaseProvider);
+
+    final isCorrectNotifier = ref.watch(isCorrectQuizStateProvider.notifier);
 
     return Column(
       children: [
@@ -44,12 +45,12 @@ class AnswerWidget extends ConsumerWidget {
             // TODO(me): 回答が無効な値の場合、ボタンを押せなくする。
             // あるいは、押したら回答が無効な旨を表示する
 
-            final isCorrect = quizUsecase.isCorrectHitterQuiz();
+            isCorrectNotifier.state = viewModel.isCorrectHitterQuiz();
 
             // TODO(me): 結果表示までちょっとじらす（ローディング表示？）
 
             // 正解の場合
-            if (isCorrect) {
+            if (isCorrectNotifier.state) {
               await Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(

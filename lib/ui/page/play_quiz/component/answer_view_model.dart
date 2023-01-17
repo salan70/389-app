@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../repository/supabase/supabase_hitter_repository.dart';
+import '../../../../state/hitter_quiz_ui_state.dart';
 
 final answerViewModelProvider = Provider<AnswerViewModel>(AnswerViewModel.new);
 
@@ -25,5 +26,13 @@ class AnswerViewModel {
     }
 
     return hitterListAfterSearch;
+  }
+
+  /// 正解しているか否かを返す
+  bool isCorrectHitterQuiz() {
+    final selectedHitterId = ref.read(selectedHitterIdProvider);
+    final hitterQuizUi = ref.read(hitterQuizUiStateProvider);
+
+    return selectedHitterId == hitterQuizUi.value!.id;
   }
 }
