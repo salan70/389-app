@@ -10,14 +10,14 @@ class QuizEventButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(hitterQuizUiNotifierProvider.notifier);
+    final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
 
     return Row(
       children: [
         TextButton(
           onPressed: () {
-            if (viewModel.canOpen()) {
-              viewModel.openRandom();
+            if (hitterQuizUiService.canOpen()) {
+              hitterQuizUiService.openRandom();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
@@ -27,8 +27,8 @@ class QuizEventButtonsWidget extends ConsumerWidget {
         TextButton(
           onPressed: () {
             // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
-            if (viewModel.canOpen()) {
-              viewModel.openAll();
+            if (hitterQuizUiService.canOpen()) {
+              hitterQuizUiService.openAll();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }

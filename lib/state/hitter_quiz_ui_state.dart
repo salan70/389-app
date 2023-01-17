@@ -1,31 +1,32 @@
 import 'dart:math';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../model/ui/hitter_quiz_ui.dart';
 import '../repository/hitter_repository.dart';
 import 'hitter_search_condition_state.dart';
 
-// hitterQuizUiを返すプロバイダー
-final hitterQuizUiNotifierProvider =
-    AsyncNotifierProvider<HitterQuizUiNotifier, HitterQuizUi?>(() {
-  return HitterQuizUiNotifier();
-});
+// hitterQuizUiをAsyncValueとして返すプロバイダー
+final hitterQuizUiStateProvider = StateProvider<AsyncValue<HitterQuizUi?>>(
+  (_) => const AsyncValue.data(null),
+);
 
-class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
-  @override
-  Future<HitterQuizUi?> build() {
-    return _fetchHitterQuizUi();
-  }
+/// HitterQuizUiサービスプロバイダー
+final hitterQuizUiServiceProvider = Provider(
+  HitterQuizUiService.new,
+);
 
-  /// 出題する選手を再抽選（再取得）
-  Future<void> refresh() async {
-    state = AsyncData(await _fetchHitterQuizUi());
-  }
+/// HitterQuizUiサービス
+///
+/// HitterQuizUiに関する操作を提供する
+/// Widget から呼ばれ、各 Repository や State を操作するロジックを実装する
+class HitterQuizUiService {
+  HitterQuizUiService(this.ref);
+  final Ref ref;
 
-  /// HitterQuizUiを取得する
-  Future<HitterQuizUi?> _fetchHitterQuizUi() async {
-    final notifier = ref.read(hitterQuizUiNotifierProvider.notifier);
+  /// 出題する選手を取得する
+  Future<void> fetchHitterQuizUi() async {
+    final notifier = ref.read(hitterQuizUiStateProvider.notifier);
+
     notifier.state = const AsyncValue.loading();
 
     late HitterQuizUi? hitterQuizUi;
@@ -36,12 +37,14 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
           .createHitterQuizUi(searchCondition);
       return null;
     });
-    return hitterQuizUi;
+
+    notifier.state = AsyncData(hitterQuizUi);
   }
 
   /// ランダムに1つ成績を公開する
   void openRandom() {
-    final hitterQuizUi = state.value;
+    final notifier = ref.read(hitterQuizUiStateProvider.notifier);
+    final hitterQuizUi = notifier.state.value;
     final hiddenStatsIdList = hitterQuizUi!.hiddenStatsIdList;
 
     final hiddenIndex = Random().nextInt(hiddenStatsIdList.length);
@@ -55,7 +58,7 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
       }
     }
 
-    state = AsyncData(
+    notifier.state = AsyncData(
       hitterQuizUi.copyWith(
         hiddenStatsIdList: [...removedHiddenList],
       ),
@@ -64,8 +67,10 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
 
   /// 全ての閉じている成績を公開する
   void openAll() {
-    final hitterQuizUi = state.value;
-    state = AsyncData(
+    final notifier = ref.read(hitterQuizUiStateProvider.notifier);
+    final hitterQuizUi = notifier.state.value;
+
+    notifier.state = AsyncData(
       hitterQuizUi!.copyWith(
         hiddenStatsIdList: [],
       ),
@@ -75,7 +80,9 @@ class HitterQuizUiNotifier extends AsyncNotifier<HitterQuizUi?> {
   /// 成績が公開可能か判別する
   /// 閉じている成績が残っている場合、成績が公開可能とみなす
   bool canOpen() {
-    final hitterQuizUi = state.value;
+    final notifier = ref.read(hitterQuizUiStateProvider.notifier);
+    final hitterQuizUi = notifier.state.value;
+
     return hitterQuizUi!.hiddenStatsIdList.isNotEmpty;
   }
 }

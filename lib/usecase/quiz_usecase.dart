@@ -15,7 +15,7 @@ class QuizUsecase {
   /// 正解しているか否かを返す
   bool isCorrectHitterQuiz() {
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
-    final hitterQuizUi = ref.watch(hitterQuizUiNotifierProvider);
+    final hitterQuizUi = ref.watch(hitterQuizUiStateProvider);
 
     return selectedHitterId == hitterQuizUi.value!.id;
   }

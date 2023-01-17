@@ -75,7 +75,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // hitterQuizUiNotifierProviderの結果をハンドリングする
     ref.handleAsyncValue<void>(
-      hitterQuizUiNotifierProvider,
+      hitterQuizUiStateProvider,
     );
 
     return MaterialApp(

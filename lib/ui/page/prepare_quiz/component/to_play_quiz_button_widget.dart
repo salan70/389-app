@@ -28,9 +28,9 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         // 上記警告は、contextに対してawaitすると発生すると思われる
         final navigator = Navigator.of(context);
 
-        // 出題する選手をリセット
-        final notifier = ref.watch(hitterQuizUiNotifierProvider.notifier);
-        await notifier.refresh();
+        // 出題する選手を取得
+        final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
+        await hitterQuizUiService.fetchHitterQuizUi();
 
         // 画面遷移
         await navigator.push(
