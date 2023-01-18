@@ -23,8 +23,10 @@ dependencies:
   hive_flutter: ^1.1.0
   json_annotation: ^4.7.0
   logger: ^1.1.0
+  path_provider: ^2.0.11
   pedantic_mono: ^1.20.1
   roggle: ^0.3.0
+  share_extend: ^2.0.0
   supabase_flutter: ^1.2.2
   textfield_search: ^0.10.0
   universal_html: ^2.0.8
