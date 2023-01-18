@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../component/quiz_widget.dart';
 import 'component/navigation_buttons_widget.dart';
+import 'component/result_quiz_widget.dart';
 import 'component/result_text_widget.dart';
 import 'component/share_button_widget.dart';
 
@@ -16,9 +16,7 @@ class QuizResultPage extends StatelessWidget {
         child: Column(
           children: const [
             ResultTextWidget(),
-            QuizWidget(
-              willUpdate: false,
-            ),
+            ResultQuizWidget(),
             NavigationButtonsWidget(),
             ShareButtonWidget(),
           ],

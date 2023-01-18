@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../state/loading_state.dart';
-import '../state/navigator_key_state.dart';
+import '../state/navigator_key_providers.dart';
 import '../ui/component/error_dialog.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
