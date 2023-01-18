@@ -6,3 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 final navigatorKeyProvider = Provider(
   (_) => GlobalKey<NavigatorState>(),
 );
+
+/// クイズ結果WidgetのGlobalKeyを返すプロバイダー
+/// クイズ結果Widgetを画像化するために使用
+final resultQuizWidgetKeyProvider = Provider.autoDispose(
+  (_) => GlobalKey(),
+);

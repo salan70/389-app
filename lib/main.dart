@@ -15,7 +15,7 @@ import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
 import 'state/hitter_quiz_ui_state.dart';
 import 'state/loading_state.dart';
-import 'state/navigator_key_state.dart';
+import 'state/navigator_key_providers.dart';
 import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/top/top_page.dart';
 import 'util/widget_ref_extension.dart';
@@ -88,6 +88,7 @@ class MyApp extends ConsumerWidget {
         colorScheme: const ColorScheme.light(
           primary: primaryColor,
           error: errorColor,
+          background: backgroundColor,
         ),
       ),
       navigatorKey: ref.watch(navigatorKeyProvider),
