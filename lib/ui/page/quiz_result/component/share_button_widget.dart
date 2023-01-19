@@ -18,7 +18,6 @@ class ShareButtonWidget extends ConsumerWidget {
     return Center(
       child: TextButton(
         onPressed: () {
-          // TODO(me): シェア機能実装する
           viewModel.shareImageAndText('result_quiz_widget', globalKey);
         },
         child: const Text('クイズをシェア！'),

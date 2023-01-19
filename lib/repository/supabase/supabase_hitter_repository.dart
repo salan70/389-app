@@ -17,6 +17,7 @@ import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
 import '../../model/ui/stats_value.dart';
 import '../../state/hitter_search_condition_state.dart';
+import '../../util/exception/supabase_exception.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
@@ -33,7 +34,7 @@ class SupabaseHitterRepository implements HitterRepository {
   final List<String> _hiddenStatsIdList = [];
 
   @override
-  Future<HitterQuizUi?> createHitterQuizUi(
+  Future<HitterQuizUi> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   ) async {
     // _hiddenStatsIdListを空にする
@@ -44,11 +45,6 @@ class SupabaseHitterRepository implements HitterRepository {
 
     // 検索条件に合う選手を1人取得
     final hitter = await _searchHitter(searchCondition);
-
-    // 検索条件に合う選手がいない場合、nullを返す
-    if (hitter == null) {
-      return null;
-    }
 
     // 取得した選手の成績を取得
     final statsList = await _fetchHittingStats(hitter.id);
@@ -88,8 +84,9 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// 条件に合う選手を1人検索する
-  Future<Hitter?> _searchHitter(HitterSearchCondition searchCondition) async {
-    final responses = await supabase.client
+  Future<Hitter> _searchHitter(HitterSearchCondition searchCondition) async {
+    print('in searchHitter');
+    final List<dynamic> responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
         .eq('hasData', true)
@@ -98,10 +95,9 @@ class SupabaseHitterRepository implements HitterRepository {
         .gte('hitting_stats_table.安打', searchCondition.minHits)
         .gte('hitting_stats_table.本塁打', searchCondition.minHr);
 
-    // NOTE: 空の際の処理、あんまり納得してない
-    // 検索条件に合致する選手がいない場合、nullを返す
-    if (responses == []) {
-      return null;
+    // 検索条件に合致する選手がいない場合、例外を返す
+    if (responses.isEmpty) {
+      throw SupabaseException.notFound();
     }
 
     // ランダムで1人選出
