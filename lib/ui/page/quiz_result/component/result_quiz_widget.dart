@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../state/navigator_key_providers.dart';
 import '../../../component/quiz_widget.dart';
 
-class ResultQuizWidget extends ConsumerWidget {
-  const ResultQuizWidget({super.key});
+class ResultQuizWidget extends StatelessWidget {
+  const ResultQuizWidget({
+    super.key,
+    required this.globalKey,
+  });
+
+  final GlobalKey globalKey;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final shareKey = ref.watch(resultQuizWidgetKeyProvider);
-
+  Widget build(BuildContext context) {
     return RepaintBoundary(
-      key: shareKey,
+      key: globalKey,
       child: ColoredBox(
         color: Theme.of(context).colorScheme.background,
         child: const QuizWidget(
