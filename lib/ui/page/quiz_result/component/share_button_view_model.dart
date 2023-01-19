@@ -20,6 +20,31 @@ class ShareButtonViewModel {
 
   final Ref ref;
 
+  /// ディレクトへのパスを取得し、シェアする
+  Future<void> shareImageAndText(String text, GlobalKey globalKey) async {
+    //shareする際のテキスト
+    try {
+      final bytes = await _exportToImage(globalKey);
+
+      //byte data→Uint8List
+      final widgetImageBytes =
+          bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
+
+      //App directoryファイルに保存
+      final applicationDocumentsFile =
+          await _getApplicationDocumentsFile(text, widgetImageBytes);
+
+      final path = applicationDocumentsFile.path;
+
+      // TODO(me): share時のtextいい感じにして、constantとして定義する
+      // アプリのURLつけたいからリリース直前？
+      await Share.shareXFiles([XFile(path)], text: '正解しました！ #38Q ');
+      await applicationDocumentsFile.delete();
+    } on Exception catch (error) {
+      logger.e(error);
+    }
+  }
+
   /// Widgetを画像化する
   /// 参考：
   /// https://zenn.dev/gold_panzee54/articles/210516-flutter-widget-to-image-share#1.-widget%E3%82%92%E7%94%BB%E5%83%8F%E5%8C%96%E3%81%99%E3%82%8B
@@ -51,30 +76,5 @@ class ShareButtonViewModel {
     }
     final file = await exportFile.writeAsBytes(imageData);
     return file;
-  }
-
-  /// ディレクトへのパスを取得し、シェアする
-  Future<void> shareImageAndText(String text, GlobalKey globalKey) async {
-    //shareする際のテキスト
-    try {
-      final bytes = await _exportToImage(globalKey);
-
-      //byte data→Uint8List
-      final widgetImageBytes =
-          bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
-
-      //App directoryファイルに保存
-      final applicationDocumentsFile =
-          await _getApplicationDocumentsFile(text, widgetImageBytes);
-
-      final path = applicationDocumentsFile.path;
-
-      // TODO(me): share時のtextいい感じにして、constantとして定義する
-      // アプリのURLつけたいからリリース直前？
-      await Share.shareXFiles([XFile(path)], text: '正解しました！ #38Q ');
-      await applicationDocumentsFile.delete();
-    } on Exception catch (error) {
-      logger.e(error);
-    }
   }
 }
