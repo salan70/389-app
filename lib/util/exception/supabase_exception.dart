@@ -1,17 +1,36 @@
 import 'base_exception.dart';
 
-/// Supabase関連の処理に使用する例外型。
-class ApiException extends AppException implements Exception {
-  const ApiException({
-    super.message,
-    super.defaultMessage = 'エラーが発生しました。',
-  });
+class SupabaseException extends AppException {
+  const SupabaseException._([
+    super.message = 'database exception',
+    SupabaseExceptionCode? code,
+  ]) : code = code ?? SupabaseExceptionCode.unknown;
+
+  /// データが見つからない
+  factory SupabaseException.notFound() => const SupabaseException._(
+        '選手が見つかりませんでした。',
+        SupabaseExceptionCode.notFound,
+      );
+
+  /// 不明なエラー
+  factory SupabaseException.unknown() => const SupabaseException._(
+        'An unknown error has occurred.',
+        SupabaseExceptionCode.unknown,
+      );
+
+  /// エラーコード
+  final SupabaseExceptionCode code;
+
+  @override
+  String toString() => 'SupabaseExceptionCode[${code.name}]: $message';
 }
 
-/// 選手を検索時、検索結果が0だった際の例外
-class NotFoundPlayerException extends ApiException {
-  const NotFoundPlayerException({super.message})
-      : super(
-          defaultMessage: '選手が見つかりませんでした。',
-        );
+/// データベース関連の例外のエラーコード
+enum SupabaseExceptionCode {
+  /// データが見つからない
+  notFound,
+
+  /// 不明なエラー
+  unknown,
+  ;
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../util/error_message.dart';
+
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({
@@ -16,7 +18,7 @@ class ErrorDialog extends StatelessWidget {
         'エラー',
         style: TextStyle(color: Theme.of(context).colorScheme.error),
       ),
-      content: Text(error.toString()),
+      content: Text(error.errorMessage),
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),

@@ -26,7 +26,7 @@ class HitterQuizUiService {
 
     notifier.state = const AsyncValue.loading();
 
-    late HitterQuizUi? hitterQuizUi;
+    late HitterQuizUi hitterQuizUi;
     notifier.state = await AsyncValue.guard(() async {
       final searchCondition = ref.watch(hitterSearchConditionProvider);
       hitterQuizUi = await ref
