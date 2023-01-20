@@ -30,6 +30,10 @@ final defaultHittingSearchCondition = HitterSearchCondition(
 /// この数ちょうどでなくてはならない
 const mustSelectStatsNum = 5;
 
+const minChoseTeamNum = 1;
+
+const errorForChoseTeamValidation = '球団を$minChoseTeamNumつ以上選択してください';
+
 const errorForSelectStatsValidation = '成績を$mustSelectStatsNumつ選択してください';
 
 const minGamesOptionList = [0, 100, 300, 500, 1000];
