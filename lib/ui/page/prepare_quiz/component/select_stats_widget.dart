@@ -19,6 +19,7 @@ class SelectStatsWidget extends ConsumerWidget {
     return SmartSelect.multiple(
       title: '出題する成績',
       modalHeaderStyle: S2ModalHeaderStyle(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         errorStyle: TextStyle(
           color: Theme.of(context).errorColor,
         ),
@@ -77,8 +78,16 @@ class ChoiceCard extends ConsumerWidget {
     final viewModel = ref.watch(selectStatsViewModelProvider);
     final tappedStats = choice.value! as String;
 
-    return Card(
-      child: InkWell(
+    return Container(
+      padding: const EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
+      margin: const EdgeInsets.only(top: 4, bottom: 4),
+      decoration: BoxDecoration(
+        color: choice.selected
+            ? Theme.of(context).primaryColor.withOpacity(0.2)
+            : Theme.of(context).disabledColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: GestureDetector(
         onTap: () {
           final isSelected = choice.selected;
 
@@ -91,15 +100,10 @@ class ChoiceCard extends ConsumerWidget {
             choice.select?.call(!isSelected);
           }
         },
-        child: Container(
-          padding: const EdgeInsets.all(7),
-          color: choice.selected ? Colors.blue : null,
-          child: Text(
-            tappedStats,
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+        child: Text(
+          tappedStats,
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
     );
