@@ -2,6 +2,7 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constant/hitter_search_condition_constant.dart';
 import '../../../../constant/team_list.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import 'chose_team_view_model.dart';
@@ -31,12 +32,20 @@ class ChoseTeamWidget extends ConsumerWidget {
       ),
       modalHeaderStyle: S2ModalHeaderStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        errorStyle: TextStyle(
+          color: Theme.of(context).errorColor,
+        ),
       ),
       groupHeaderStyle: S2GroupHeaderStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       onChange: (selectedList) {
         viewModel.saveTeamList(selectedList.value);
+      },
+      // 返すテキストが空（''）の場合のみ、modalを閉じれる
+      modalValidation: (chosen) {
+        final isValid = viewModel.isValidChoseTeamList(chosen.length);
+        return isValid ? '' : errorForChoseTeamValidation;
       },
       tileBuilder: (context, state) {
         return S2Tile.fromState(

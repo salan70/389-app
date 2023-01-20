@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constant/hitter_search_condition_constant.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 
 final choseTeamViewModelProvider =
@@ -43,5 +44,9 @@ class ChoseTeamViewModel {
 
     searchCondition.state =
         searchCondition.state.copyWith(teamList: removedTeamList);
+  }
+
+  bool isValidChoseTeamList(int listLength) {
+    return listLength >= minChoseTeamNum;
   }
 }
