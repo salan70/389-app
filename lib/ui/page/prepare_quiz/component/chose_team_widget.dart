@@ -27,6 +27,9 @@ class ChoseTeamWidget extends ConsumerWidget {
       ),
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
+      choiceStyle: const S2ChoiceStyle(
+        showCheckmark: false,
+      ),
       modalStyle: S2ModalStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
