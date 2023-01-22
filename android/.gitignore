@@ -14,3 +14,6 @@ key.properties
 
 # Firebaseのflavor設定関連
 **/android/app/google-services.json
+
+# アプリアイコンの設定関連
+**/android/app/src/main/res/mipmap*/
