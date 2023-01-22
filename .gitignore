@@ -49,4 +49,4 @@ pubspec.lock
 
 # fvm related
 .fvm/flutter_sdk
-#/.env
+/.env
