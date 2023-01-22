@@ -10,7 +10,6 @@ class QuizEventButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('build!!!!!!!!!!!!!!!!!!!!!!!');
     final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
 
     return Row(
