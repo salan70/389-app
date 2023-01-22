@@ -17,3 +17,13 @@ key.properties
 
 # アプリアイコンの設定関連
 **/android/app/src/main/res/mipmap*/
+/app/src/main/res/mipmap-hdpi/ic_launcher.png
+/app/src/main/res/mipmap-mdpi/ic_launcher.png
+/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+/app/src/main/res/drawable-hdpi/ic_launcher_foreground.png
+/app/src/main/res/drawable-mdpi/ic_launcher_foreground.png
+/app/src/main/res/drawable-xhdpi/ic_launcher_foreground.png
+/app/src/main/res/drawable-xxhdpi/ic_launcher_foreground.png
+/app/src/main/res/drawable-xxxhdpi/ic_launcher_foreground.png
