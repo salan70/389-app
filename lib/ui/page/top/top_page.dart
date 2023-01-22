@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 import '../prepare_quiz/prepare_quiz_page.dart';
@@ -16,8 +17,8 @@ class TopPage extends StatelessWidget {
             children: [
               TextButton(
                 child: const Text('クイズの設定をする'),
-                onPressed: () {
-                  Navigator.push(
+                onPressed: () async {
+                  await Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
                       builder: (_) => const PrepareQuizPage(),
