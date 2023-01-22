@@ -43,6 +43,15 @@ if (project.hasProperty('dart-defines')) {
             }
 }
 
+// アプリアイコンの設定
+task copySources(type: Copy) {
+    from "src/${dartEnvironmentVariables.FLAVOR}/res"
+    into 'src/main/res'
+}
+tasks.whenTaskAdded { task ->
+    task.dependsOn copySources
+}
+
 // Firebaseのflavor設定関連
 task selectGoogleServicesJson(type: Copy) {
     from "src/${dartEnvironmentVariables.FLAVOR}/google-services.json"
