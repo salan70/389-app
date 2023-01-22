@@ -37,6 +37,8 @@ class AnswerWidget extends ConsumerWidget {
             return viewModel.filterHitter(textEditingController.text);
           },
           getSelectedValue: (HitterIdByName value) {
+            // 回答入力用のTextFieldのフォーカスを外す
+            FocusManager.instance.primaryFocus?.unfocus();
             selectedHitterIdNotifier.state = value.id;
           },
         ),

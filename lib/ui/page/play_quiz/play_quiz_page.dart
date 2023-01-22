@@ -13,15 +13,19 @@ class PlayQuizPage extends StatelessWidget {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8),
-        child: ListView(
-          children: const [
-            QuizWidget(
-              willUpdate: true,
-            ),
-            QuizEventButtonsWidget(),
-            AnswerWidget(),
-            RetireButtonWidget(),
-          ],
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          behavior: HitTestBehavior.opaque,
+          child: ListView(
+            children: const [
+              QuizWidget(
+                willUpdate: true,
+              ),
+              QuizEventButtonsWidget(),
+              AnswerWidget(),
+              RetireButtonWidget(),
+            ],
+          ),
         ),
       ),
     );
