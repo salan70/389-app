@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>286103265357-l2m1viqfnh1na0qmkd93lda24kgo8aqf.apps.googleusercontent.com</string>
+	<string>763083161403-ieug7j3dprf30nch85b3ek7a07eoe9rs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.286103265357-l2m1viqfnh1na0qmkd93lda24kgo8aqf</string>
+	<string>com.googleusercontent.apps.763083161403-ieug7j3dprf30nch85b3ek7a07eoe9rs</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAcnJP2CvtTlBaIDYlDxSYcJK1QAbYySxE</string>
+	<string>AIzaSyBOEAP7l_eOnp5Whs58N7CTA4qIQMlWigQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>286103265357</string>
+	<string>763083161403</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.toda.baseballQuizApp</string>
+	<string>com.toda.baseballQuizApp.dev</string>
 	<key>PROJECT_ID</key>
-	<string>bq-389-prod</string>
+	<string>bq-389-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>bq-389-prod.appspot.com</string>
+	<string>bq-389-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:286103265357:ios:b3b95fb0bc69d6bf62bc04</string>
+	<string>1:763083161403:ios:b0c0e723244296db75c11e</string>
 </dict>
 </plist>
