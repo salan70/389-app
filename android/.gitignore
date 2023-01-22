@@ -17,3 +17,4 @@ key.properties
 
 # アプリアイコンの設定関連
 /app/src/main/res/
+/app/google-services.json
