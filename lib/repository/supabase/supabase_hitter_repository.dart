@@ -85,7 +85,6 @@ class SupabaseHitterRepository implements HitterRepository {
 
   /// 条件に合う選手を1人検索する
   Future<Hitter> _searchHitter(HitterSearchCondition searchCondition) async {
-    print('in searchHitter');
     final List<dynamic> responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
