@@ -10,12 +10,16 @@ class QuizEventButtonsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print('build!!!!!!!!!!!!!!!!!!!!!!!');
     final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
 
     return Row(
       children: [
         TextButton(
           onPressed: () {
+            // 回答入力用のTextFieldのフォーカスを外す
+            FocusManager.instance.primaryFocus?.unfocus();
+
             if (hitterQuizUiService.canOpen()) {
               hitterQuizUiService.openRandom();
             } else {
@@ -26,6 +30,9 @@ class QuizEventButtonsWidget extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
+            // 回答入力用のTextFieldのフォーカスを外す
+            FocusManager.instance.primaryFocus?.unfocus();
+
             // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
             if (hitterQuizUiService.canOpen()) {
               hitterQuizUiService.openAll();
