@@ -1,37 +1,37 @@
 {
   "project_info": {
-    "project_number": "520205708013",
-    "project_id": "baseball-quiz-app-prod",
-    "storage_bucket": "baseball-quiz-app-prod.appspot.com"
+    "project_number": "286103265357",
+    "project_id": "bq-389-prod",
+    "storage_bucket": "bq-389-prod.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:520205708013:android:67ed07ebc2d539a5937ae4",
+        "mobilesdk_app_id": "1:286103265357:android:8af7c2cced67a69362bc04",
         "android_client_info": {
           "package_name": "com.toda.baseball_quiz_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "520205708013-375pt8c8up1468lk5sa517lkmtl2bfk8.apps.googleusercontent.com",
+          "client_id": "286103265357-dgllg9m7fhe8q25vovj3ecqdftq7ar3e.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYxpQ3-jshNQDKzC75DnG9um8QrOTdM2g"
+          "current_key": "AIzaSyDkZNKZ2kmgiM0USPKeUNtRNHjmQPwlyeQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "520205708013-375pt8c8up1468lk5sa517lkmtl2bfk8.apps.googleusercontent.com",
+              "client_id": "286103265357-dgllg9m7fhe8q25vovj3ecqdftq7ar3e.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "520205708013-60qqj0946mpt9ktufc33km3ajnfdnhih.apps.googleusercontent.com",
+              "client_id": "286103265357-6ut5a1ehf0g8304eavo2l9m05hq746u6.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.toda.baseballQuizApp.prod"

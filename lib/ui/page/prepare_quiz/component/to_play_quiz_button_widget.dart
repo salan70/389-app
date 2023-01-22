@@ -31,6 +31,7 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
         // 出題する選手を取得
         await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
 
+        throw Exception();
         // 画面遷移
         await navigator.push(
           MaterialPageRoute<Widget>(
