@@ -11,10 +11,7 @@ environment:
 dependencies:
   # 選択フォームの作成に使用
   awesome_select: ^6.0.0
-  cloud_firestore: ^4.3.1
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.4.1
-  firebase_crashlytics: ^3.0.11
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2
@@ -25,6 +22,7 @@ dependencies:
   hive_flutter: ^1.1.0
   json_annotation: ^4.7.0
   logger: ^1.1.0
+  package_info_plus: ^3.0.2
   path_provider: ^2.0.11
   pedantic_mono: ^1.20.1
   roggle: ^0.3.0
@@ -33,6 +31,12 @@ dependencies:
   textfield_search: ^0.10.0
   universal_html: ^2.0.8
   uuid: ^3.0.7
+
+  # Firebase関連
+  cloud_firestore: ^4.3.1
+  firebase_core: ^2.4.1
+  firebase_crashlytics: ^3.0.11
+  firebase_messaging: ^14.2.1
 
 dev_dependencies:
   build_runner: ^2.3.2
