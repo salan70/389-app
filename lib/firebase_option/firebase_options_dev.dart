@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -42,32 +42,29 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
-      case TargetPlatform.fuchsia:
-        UnsupportedError(
+      default:
+        throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
         );
     }
-    throw UnsupportedError(
-      'DefaultFirebaseOptions are not supported for this platform.',
-    );
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDYxpQ3-jshNQDKzC75DnG9um8QrOTdM2g',
-    appId: '1:520205708013:android:02ab787327b43e13937ae4',
-    messagingSenderId: '520205708013',
-    projectId: 'baseball-quiz-app-prod',
-    storageBucket: 'baseball-quiz-app-prod.appspot.com',
+    apiKey: 'AIzaSyAmyATSqmIJZIwL6l8XNDSYBXWqy2NImFU',
+    appId: '1:1087712569948:android:fb58b74c1ed341ffcf5499',
+    messagingSenderId: '1087712569948',
+    projectId: 'baseball-quiz-app-dev',
+    storageBucket: 'baseball-quiz-app-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB6pncPA3MbDBfYcc8NRI-p81vbhXa3KJY',
-    appId: '1:520205708013:ios:b26f4f4e627e697f937ae4',
-    messagingSenderId: '520205708013',
-    projectId: 'baseball-quiz-app-prod',
-    storageBucket: 'baseball-quiz-app-prod.appspot.com',
+    apiKey: 'AIzaSyApAVBYLgjO3eH0zTgSruAUeELgENc5cGI',
+    appId: '1:1087712569948:ios:78000f269206c9fdcf5499',
+    messagingSenderId: '1087712569948',
+    projectId: 'baseball-quiz-app-dev',
+    storageBucket: 'baseball-quiz-app-dev.appspot.com',
     iosClientId:
-        '520205708013-60qqj0946mpt9ktufc33km3ajnfdnhih.apps.googleusercontent.com',
-    iosBundleId: 'com.toda.baseballQuizApp.prod',
+        '1087712569948-ur8cj5bnca4h2aep7ah1r18f96v6sver.apps.googleusercontent.com',
+    iosBundleId: 'com.toda.baseballQuizApp.dev',
   );
 }
