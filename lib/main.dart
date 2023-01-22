@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'Infrastructure/supabase/supabase_providers.dart';
 import 'constant/color_constant.dart';
 import 'constant/hitter_search_condition_constant.dart';
-import 'firebase_option//firebase_options_dev.dart' as dev;
 import 'model/typeadapter/hitter_search_condition.dart';
 import 'repository/hitter_repository.dart';
 import 'repository/hitter_search_condition_repository.dart';
