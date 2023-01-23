@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../prepare_quiz/prepare_quiz_page.dart';
+import 'component/to_play_quiz_from_top_widget.dart';
+import 'component/to_prepare_quiz_button_widget.dart';
+import 'component/to_setting_button_widget.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({super.key});
@@ -9,21 +11,23 @@ class TopPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(left: 8, top: 80, right: 8, bottom: 8),
+        padding:
+            const EdgeInsets.only(left: 40, top: 160, right: 40, bottom: 160),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                child: const Text('クイズの設定をする'),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute<Widget>(
-                      builder: (_) => const PrepareQuizPage(),
-                    ),
-                  );
-                },
+              const Align(
+                alignment: Alignment.topRight,
+                child: ToSettingButtonWidget(),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    ToPrepareQuizButtonWidget(),
+                    ToPlayQuizFromTopWidget(),
+                  ],
+                ),
               ),
             ],
           ),
