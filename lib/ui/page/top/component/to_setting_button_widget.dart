@@ -12,7 +12,10 @@ class ToSettingButtonWidget extends StatelessWidget {
       onPressed: () {
         // TODO(me): 設定画面へ遷移させる
       },
-      icon: const Icon(Icons.settings_rounded),
+      icon: const Icon(
+        Icons.settings_rounded,
+        size: 32,
+      ),
     );
   }
 }
