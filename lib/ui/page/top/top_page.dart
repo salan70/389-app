@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../prepare_quiz/prepare_quiz_page.dart';
+import '../prepare_quiz/component/to_play_quiz_button_widget.dart';
+import 'component/to_prepare_quiz_button_widget.dart';
+import 'component/to_setting_button_widget.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({super.key});
@@ -12,19 +14,10 @@ class TopPage extends StatelessWidget {
         padding: const EdgeInsets.only(left: 8, top: 80, right: 8, bottom: 8),
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                child: const Text('クイズの設定をする'),
-                onPressed: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute<Widget>(
-                      builder: (_) => const PrepareQuizPage(),
-                    ),
-                  );
-                },
-              ),
+            children: const [
+              ToSettingButtonWidget(),
+              ToPrepareQuizButtonWidget(),
+              ToPlayQuizButtonWidget(),
             ],
           ),
         ),
