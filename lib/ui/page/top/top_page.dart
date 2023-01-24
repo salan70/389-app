@@ -10,26 +10,28 @@ class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding:
-            const EdgeInsets.only(left: 40, top: 160, right: 40, bottom: 160),
-        child: Center(
-          child: Column(
-            children: [
-              const Align(
-                alignment: Alignment.topRight,
-                child: ToSettingButtonWidget(),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    ToPrepareQuizButtonWidget(),
-                    ToPlayQuizFromTopWidget(),
-                  ],
+      body: SafeArea(
+        child: Padding(
+          padding:
+              const EdgeInsets.only(left: 40, top: 160, right: 40, bottom: 160),
+          child: Center(
+            child: Column(
+              children: [
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: ToSettingButtonWidget(),
                 ),
-              ),
-            ],
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      ToPrepareQuizButtonWidget(),
+                      ToPlayQuizFromTopWidget(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
