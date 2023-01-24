@@ -17,7 +17,7 @@ class QuizResultPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 8, top: 80, right: 8, bottom: 8),
+          padding: const EdgeInsets.only(left: 8, top: 40, right: 8, bottom: 8),
           child: Column(
             children: [
               const ResultTextWidget(),
