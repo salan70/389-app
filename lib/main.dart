@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -77,6 +78,9 @@ Future<void> initialize() async {
   // トークンの取得（デバッグ用）
   final token = await messaging.getToken();
   logger.i('🐯 FCM TOKEN: $token');
+
+  // AdMob
+  await MobileAds.instance.initialize();
 
   // Hiveの初期化
   await Hive.initFlutter();
