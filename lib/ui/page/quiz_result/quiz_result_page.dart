@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'component/navigation_buttons_widget.dart';
 import 'component/result_quiz_widget.dart';
@@ -10,6 +11,8 @@ class QuizResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
     // 本当はProviderで参照したかった。。
     final globalKey = GlobalKey();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'component/to_play_quiz_from_top_widget.dart';
 import 'component/to_prepare_quiz_button_widget.dart';
@@ -9,6 +10,7 @@ class TopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       body: SafeArea(
         child: Padding(
