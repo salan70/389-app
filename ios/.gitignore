@@ -36,3 +36,5 @@ Runner/GeneratedPluginRegistrant.*
 # Flavor関係
 **/ios/Flutter/DartDefines.xcconfig
 **/ios/GoogleService-Info.plist
+/Flutter/DartDefines.xcconfig
+/GoogleService-Info.plist
