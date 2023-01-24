@@ -24,6 +24,9 @@ class PlayQuizPage extends StatelessWidget {
               QuizEventButtonsWidget(),
               AnswerWidget(),
               RetireButtonWidget(),
+              SizedBox(
+                height: 200,
+              ),
             ],
           ),
         ),
