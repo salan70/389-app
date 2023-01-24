@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../component/quiz_widget.dart';
 import 'component/answer_widget.dart';
@@ -10,6 +11,7 @@ class PlayQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8),
