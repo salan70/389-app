@@ -11,20 +11,22 @@ class PlayQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          behavior: HitTestBehavior.opaque,
-          child: ListView(
-            children: const [
-              QuizWidget(
-                willUpdate: true,
-              ),
-              QuizEventButtonsWidget(),
-              AnswerWidget(),
-              RetireButtonWidget(),
-            ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            behavior: HitTestBehavior.opaque,
+            child: ListView(
+              children: const [
+                QuizWidget(
+                  willUpdate: true,
+                ),
+                QuizEventButtonsWidget(),
+                AnswerWidget(),
+                RetireButtonWidget(),
+              ],
+            ),
           ),
         ),
       ),
