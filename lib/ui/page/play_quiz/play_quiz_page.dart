@@ -13,22 +13,23 @@ class PlayQuizPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            behavior: HitTestBehavior.opaque,
-            child: ListView(
-              children: const [
-                QuizWidget(
-                  willUpdate: true,
-                ),
-                QuizEventButtonsWidget(),
-                AnswerWidget(),
-                RetireButtonWidget(),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          behavior: HitTestBehavior.opaque,
+          child: ListView(
+            children: const [
+              QuizWidget(
+                willUpdate: true,
+              ),
+              QuizEventButtonsWidget(),
+              AnswerWidget(),
+              RetireButtonWidget(),
+              SizedBox(
+                height: 200,
+              ),
+            ],
           ),
         ),
       ),
