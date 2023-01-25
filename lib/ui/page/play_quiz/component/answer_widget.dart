@@ -47,9 +47,6 @@ class AnswerWidget extends ConsumerWidget {
           onPressed: textEditingController.text == ''
               ? null
               : () async {
-                  // TODO(me): 回答が無効な値の場合、ボタンを押せなくする。
-                  // あるいは、押したら回答が無効な旨を表示する
-
                   // 「Do not use BuildContexts across async gaps.」
                   // というLintの警告を回避するためにnavigatorを切り出し
                   // 上記警告は、contextに対してawaitすると発生すると思われる
