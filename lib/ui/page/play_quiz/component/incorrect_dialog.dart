@@ -32,7 +32,6 @@ class IncorrectDialog extends StatelessWidget {
         TextButton(
           child: const Text('もう一度回答する'),
           onPressed: () {
-            // TODO(me): ここに動画の広告入れたい
             Navigator.of(context).pop();
           },
         ),
