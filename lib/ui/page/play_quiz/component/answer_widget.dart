@@ -9,11 +9,22 @@ import '../../quiz_result/quiz_result_page.dart';
 import 'answer_view_model.dart';
 import 'incorrect_dialog.dart';
 
-class AnswerWidget extends ConsumerWidget {
+class AnswerWidget extends ConsumerStatefulWidget {
   const AnswerWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AnswerWidget> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<AnswerWidget> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(answerTextFieldProvider).clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final scrollController = ScrollController();
     final textEditingController = ref.watch(answerTextFieldProvider);
 
