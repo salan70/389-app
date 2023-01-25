@@ -15,9 +15,11 @@ class AnswerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final scrollController = ScrollController();
-    final textEditingController = TextEditingController();
+    final textEditingController = ref.watch(answerTextFieldProvider);
 
     final viewModel = ref.watch(answerViewModelProvider);
+
+    final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
 
@@ -35,6 +37,7 @@ class AnswerWidget extends ConsumerWidget {
             theme: const ScrollbarThemeData(),
           ),
           future: () {
+            selectedHitterIdNotifier.state = '';
             return viewModel.filterHitter(textEditingController.text);
           },
           getSelectedValue: (HitterIdByName value) {
@@ -44,7 +47,7 @@ class AnswerWidget extends ConsumerWidget {
           },
         ),
         TextButton(
-          onPressed: textEditingController.text == ''
+          onPressed: selectedHitterId == ''
               ? null
               : () async {
                   // 「Do not use BuildContexts across async gaps.」

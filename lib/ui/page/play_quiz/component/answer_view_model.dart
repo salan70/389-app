@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
@@ -10,6 +11,8 @@ import '../../../../state/loading_state.dart';
 final answerViewModelProvider = Provider<AnswerViewModel>(AnswerViewModel.new);
 
 final selectedHitterIdProvider = StateProvider<String>((_) => '');
+
+final answerTextFieldProvider = StateProvider((ref) => TextEditingController());
 
 class AnswerViewModel {
   AnswerViewModel(
