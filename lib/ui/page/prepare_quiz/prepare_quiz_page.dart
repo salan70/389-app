@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../component/admob_widget.dart';
 import 'component/chose_team_widget.dart';
 import 'component/select_stats_widget.dart';
 import 'component/setting_stats_value_filter_widget.dart';
@@ -18,6 +19,8 @@ class PrepareQuizPage extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           child: ListView(
             children: const [
+              BannerAdWidget(),
+              SizedBox(height: 16),
               ChoseTeamWidget(),
               SettingStatsValueFilterWidget(),
               SelectStatsWidget(),
