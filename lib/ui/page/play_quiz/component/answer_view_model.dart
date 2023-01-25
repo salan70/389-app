@@ -12,7 +12,8 @@ final answerViewModelProvider = Provider<AnswerViewModel>(AnswerViewModel.new);
 
 final selectedHitterIdProvider = StateProvider<String>((_) => '');
 
-final answerTextFieldProvider = StateProvider((ref) => TextEditingController());
+final answerTextFieldProvider =
+    StateProvider.autoDispose((ref) => TextEditingController());
 
 class AnswerViewModel {
   AnswerViewModel(
