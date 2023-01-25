@@ -71,9 +71,10 @@ class AnswerWidget extends ConsumerWidget {
             }
             // 不正解の場合
             else {
-              // interstitial広告を表示
-              await interstitialAd.showAd();
-
+              if (viewModel.isShownAds()) {
+                // interstitial広告を表示
+                await interstitialAd.showAd();
+              }
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
