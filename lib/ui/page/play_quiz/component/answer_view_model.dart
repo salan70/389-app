@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
@@ -44,5 +46,11 @@ class AnswerViewModel {
     loadingNotifier.show();
     await Future<void>.delayed(const Duration(seconds: 3));
     loadingNotifier.hide();
+  }
+
+  /// 広告を表示するかどうかを返す
+  /// 50%の確率で広告を表示する
+  bool isShownAds() {
+    return Random().nextBool();
   }
 }
