@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../component/admob_widget.dart';
 import 'component/navigation_buttons_widget.dart';
 import 'component/result_quiz_widget.dart';
 import 'component/result_text_widget.dart';
@@ -20,17 +21,15 @@ class QuizResultPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 8, top: 40, right: 8, bottom: 8),
+          padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
           child: Column(
             children: [
+              const BannerAdWidget(),
+              const SizedBox(height: 16),
               const ResultTextWidget(),
-              ResultQuizWidget(
-                globalKey: globalKey,
-              ),
+              ResultQuizWidget(globalKey: globalKey),
               const NavigationButtonsWidget(),
-              ShareButtonWidget(
-                globalKey: globalKey,
-              ),
+              ShareButtonWidget(globalKey: globalKey),
             ],
           ),
         ),
