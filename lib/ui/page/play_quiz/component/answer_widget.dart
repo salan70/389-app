@@ -9,15 +9,28 @@ import '../../quiz_result/quiz_result_page.dart';
 import 'answer_view_model.dart';
 import 'incorrect_dialog.dart';
 
-class AnswerWidget extends ConsumerWidget {
+class AnswerWidget extends ConsumerStatefulWidget {
   const AnswerWidget({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AnswerWidget> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends ConsumerState<AnswerWidget> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(answerTextFieldProvider).clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final scrollController = ScrollController();
-    final textEditingController = TextEditingController();
+    final textEditingController = ref.watch(answerTextFieldProvider);
 
     final viewModel = ref.watch(answerViewModelProvider);
+
+    final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final selectedHitterIdNotifier =
         ref.watch(selectedHitterIdProvider.notifier);
 
@@ -35,6 +48,7 @@ class AnswerWidget extends ConsumerWidget {
             theme: const ScrollbarThemeData(),
           ),
           future: () {
+            selectedHitterIdNotifier.state = '';
             return viewModel.filterHitter(textEditingController.text);
           },
           getSelectedValue: (HitterIdByName value) {
@@ -44,7 +58,7 @@ class AnswerWidget extends ConsumerWidget {
           },
         ),
         TextButton(
-          onPressed: textEditingController.text == ''
+          onPressed: selectedHitterId == ''
               ? null
               : () async {
                   // 「Do not use BuildContexts across async gaps.」
