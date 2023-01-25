@@ -4,6 +4,7 @@ import 'package:textfield_search/textfield_search.dart';
 
 import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../state/is_correct_quiz.state.dart';
+import '../../../../util/admob.dart';
 import '../../quiz_result/quiz_result_page.dart';
 import 'answer_view_model.dart';
 import 'incorrect_dialog.dart';
@@ -47,14 +48,22 @@ class AnswerWidget extends ConsumerWidget {
             // TODO(me): 回答が無効な値の場合、ボタンを押せなくする。
             // あるいは、押したら回答が無効な旨を表示する
 
+            // 「Do not use BuildContexts across async gaps.」
+            // というLintの警告を回避するためにnavigatorを切り出し
+            // 上記警告は、contextに対してawaitすると発生すると思われる
+            final navigator = Navigator.of(context);
+
+            // interstitial広告を作成
+            final interstitialAd = MyInterstitialAd();
+            await interstitialAd.createAd();
+
             isCorrectNotifier.state = viewModel.isCorrectHitterQuiz();
 
-            // TODO(me): 結果表示までちょっとじらす（ローディング表示？）
+            await viewModel.waitResult();
 
             // 正解の場合
             if (isCorrectNotifier.state) {
-              await Navigator.push(
-                context,
+              await navigator.push(
                 MaterialPageRoute<Widget>(
                   builder: (_) => const QuizResultPage(),
                 ),
@@ -62,6 +71,9 @@ class AnswerWidget extends ConsumerWidget {
             }
             // 不正解の場合
             else {
+              // interstitial広告を表示
+              await interstitialAd.showAd();
+
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
