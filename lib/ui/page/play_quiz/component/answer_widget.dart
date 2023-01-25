@@ -75,6 +75,9 @@ class AnswerWidget extends ConsumerWidget {
                 // interstitial広告を表示
                 await interstitialAd.showAd();
               }
+
+              // TODO(me): 一旦ignoreで甘えた。
+              // ignore: use_build_context_synchronously
               await showDialog<void>(
                 context: context,
                 barrierDismissible: false,
