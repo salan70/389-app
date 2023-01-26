@@ -20,6 +20,7 @@ class SelectStatsViewModel {
         searchCondition.state.copyWith(selectedStatsList: selectedList);
   }
 
+  // TODO(me): UT作る
   /// 成績をタップ時に状態（選択/未選択）を変更できるか判別
   bool canChangeState({
     required int selectedLength,
@@ -36,6 +37,7 @@ class SelectStatsViewModel {
     return false;
   }
 
+  // TODO(me): UT作る
   bool isValidSelectedStatsList(int listLength) {
     return listLength == mustSelectStatsNum;
   }
