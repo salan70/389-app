@@ -10,14 +10,18 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'Infrastructure/firebase/firebase_providers.dart';
 import 'Infrastructure/supabase/supabase_providers.dart';
 import 'constant/color_constant.dart';
 import 'constant/hitter_search_condition_constant.dart';
 import 'model/typeadapter/hitter_search_condition.dart';
+import 'repository/auth_repository.dart';
+import 'repository/firebase/firebase_auth_repository.dart';
 import 'repository/hitter_repository.dart';
 import 'repository/hitter_search_condition_repository.dart';
 import 'repository/hive/hive_hitter_search_condition_repository.dart';
 import 'repository/supabase/supabase_hitter_repository.dart';
+import 'state/auth_service.dart';
 import 'state/hitter_quiz_ui_state.dart';
 import 'state/key_providers.dart';
 import 'state/loading_state.dart';
@@ -55,6 +59,11 @@ Future<void> main() async {
             );
           },
         ),
+        authRepositoryProvider.overrideWith((ref) {
+          return FirebaseAuthRepository(
+            ref.watch(firebaseAuthProvider),
+          );
+        }),
       ],
       child: const MyApp(),
     ),
@@ -79,7 +88,7 @@ Future<void> initialize() async {
   final token = await messaging.getToken();
   logger.i('🐯 FCM TOKEN: $token');
 
-  // AdMob
+  // AdMobの初期化
   await MobileAds.instance.initialize();
 
   // Hiveの初期化
@@ -102,6 +111,9 @@ class MyApp extends ConsumerWidget {
     ref.handleAsyncValue<void>(
       hitterQuizUiStateProvider,
     );
+
+    // Userを作成
+    ref.read(authServiceProvider).createUser();
 
     return MaterialApp(
       title: 'Flutter Demo',
