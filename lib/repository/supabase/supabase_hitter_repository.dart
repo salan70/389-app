@@ -59,6 +59,8 @@ class SupabaseHitterRepository implements HitterRepository {
     return quizUi;
   }
 
+  // TODO(me): UT作る
+  // TODO(me): Util > Converterとかに移動させる
   /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(
     Hitter hitter,
@@ -85,6 +87,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   /// 条件に合う選手を1人検索する
   Future<Hitter> _searchHitter(HitterSearchCondition searchCondition) async {
+    // TODO(me): エラーハンドリング
     final List<dynamic> responses = await supabase.client
         .from('hitter_table')
         .select('id, name, team, hasData, hitting_stats_table!inner(*)')
@@ -110,6 +113,7 @@ class SupabaseHitterRepository implements HitterRepository {
   Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
 
+    // TODO(me): エラーハンドリング
     final responses = await supabase.client
         .from('hitting_stats_table')
         .select('*')
@@ -126,6 +130,7 @@ class SupabaseHitterRepository implements HitterRepository {
   /// 解答を入力するテキストフィールドの検索用
   @override
   Future<List<HitterIdByName>> fetchAllHitter() async {
+    // TODO(me): エラーハンドリング
     final responses = await supabase.client.from('hitter_table').select('*');
 
     final allHitterList = <HitterIdByName>[];
@@ -138,6 +143,8 @@ class SupabaseHitterRepository implements HitterRepository {
     return allHitterList;
   }
 
+  // TODO(me): UT作る
+  // TODO(me): Util > Converterとかに移動させる
   Map<String, StatsValue> _toStatsMap(
     Map<String, dynamic> rowStats,
     HitterSearchCondition searchCondition,
@@ -157,6 +164,8 @@ class SupabaseHitterRepository implements HitterRepository {
     return statsForUi;
   }
 
+  // TODO(me): UT作る
+  // TODO(me): Util > Converterとかに移動させる
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
@@ -176,6 +185,8 @@ class SupabaseHitterRepository implements HitterRepository {
     return StatsValue(id: id, data: data);
   }
 
+  // TODO(me): UT作る
+  // TODO(me): Util > Converterとかに移動させる
   /// String型の値を「.346」といった率を表示する形式に変換
   String _formatStatsData(String str) {
     // double型に変換できない場合（「.---」など）、nullが入る
