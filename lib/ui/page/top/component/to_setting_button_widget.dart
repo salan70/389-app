@@ -11,6 +11,7 @@ class ToSettingButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton.icon(
       onPressed: () {
+        // TODO(me): 設定画面へ遷移させる
         showDialog<void>(
           context: context,
           builder: (context) => const SettingDialog(),
