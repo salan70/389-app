@@ -36,7 +36,6 @@ class SelectStatsViewModel {
     return false;
   }
 
-  // TODO(me): UT作る
   bool isValidSelectedStatsList(int listLength) {
     return listLength == mustSelectStatsNum;
   }
