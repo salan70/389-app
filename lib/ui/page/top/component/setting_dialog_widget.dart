@@ -27,7 +27,7 @@ class SettingDialog extends ConsumerWidget {
                 height: 24,
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: viewModel.sendInquiry,
                 icon: const Icon(Icons.mail_outline_rounded),
                 label: const Text('お問い合わせ'),
               ),
