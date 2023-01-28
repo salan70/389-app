@@ -20,7 +20,9 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
   @override
   void initState() {
     super.initState();
-    ref.read(answerTextFieldProvider).clear();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(answerTextFieldProvider).clear();
+    });
   }
 
   @override
