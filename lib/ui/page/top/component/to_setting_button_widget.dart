@@ -19,7 +19,10 @@ class ToSettingButtonWidget extends StatelessWidget {
       icon: const Icon(
         Icons.info_outline_rounded,
       ),
-      label: const Text('その他'),
+      label: Text(
+        'その他',
+        style: Theme.of(context).textTheme.headline6,
+      ),
     );
   }
 }

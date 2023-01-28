@@ -28,7 +28,9 @@ class TopPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       ToPrepareQuizButtonWidget(),
+                      SizedBox(height: 8),
                       ToPlayQuizFromTopWidget(),
+                      SizedBox(height: 80),
                     ],
                   ),
                 ),
