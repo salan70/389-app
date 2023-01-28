@@ -1,5 +1,7 @@
 import 'dart:math';
+import 'dart:developer' as developer;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -45,7 +47,7 @@ class SupabaseHitterRepository implements HitterRepository {
     _hiddenStatsIdList.clear();
 
     // 検索条件に合う選手を1人取得
-    final hitter = await _searchHitter(searchCondition);
+    final hitter = await searchHitter(searchCondition);
 
     // 取得した選手の成績を取得
     final statsList = await _fetchHittingStats(hitter.id);
@@ -62,6 +64,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   // TODO(me): UT作る
   /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
+  @visibleForTesting
   HitterQuizUi _toHitterQuizUi(
     Hitter hitter,
     List<HittingStats> rowStatsList,
@@ -70,7 +73,7 @@ class SupabaseHitterRepository implements HitterRepository {
     final statsListForUi = <Map<String, StatsValue>>[];
 
     for (final rowStats in rowStatsList) {
-      final statsMap = _toStatsMap(rowStats.stats, searchCondition);
+      final statsMap = toStatsMap(rowStats.stats, searchCondition);
       statsListForUi.add(statsMap);
     }
 
@@ -86,7 +89,7 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// 条件に合う選手を1人検索する
-  Future<Hitter> _searchHitter(HitterSearchCondition searchCondition) async {
+  Future<Hitter> searchHitter(HitterSearchCondition searchCondition) async {
     try {
       final List<dynamic> responses = await supabase.client
           .from('hitter_table')
@@ -114,7 +117,7 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// playerIdから打撃成績のListを取得する
-  Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
+  Future<List<HittingStats>> fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
     try {
       final responses = await supabase.client
@@ -154,7 +157,8 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  Map<String, StatsValue> _toStatsMap(
+  @visibleForTesting
+  Map<String, StatsValue> toStatsMap(
     Map<String, dynamic> rowStats,
     HitterSearchCondition searchCondition,
   ) {
@@ -166,7 +170,7 @@ class SupabaseHitterRepository implements HitterRepository {
       // selectedLabelListに含まれる成績のみMap型として追加
       if (selectedStatsList.contains(key)) {
         final strVal = value.toString();
-        statsForUi[key] = _formatStatsValue(key, strVal);
+        statsForUi[key] = formatStatsValue(key, strVal);
       }
     });
 
@@ -174,7 +178,8 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  StatsValue _formatStatsValue(String key, String value) {
+  @visibleForTesting
+  StatsValue formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
     // TODO(me): 年度はそもそもStatsValueとして保持しないようにする
@@ -185,7 +190,7 @@ class SupabaseHitterRepository implements HitterRepository {
     }
 
     if (probabilityStats.contains(key)) {
-      final data = _formatStatsData(value);
+      final data = formatStatsData(value);
       return StatsValue(id: id, data: data);
     }
 
@@ -195,7 +200,8 @@ class SupabaseHitterRepository implements HitterRepository {
 
   // TODO(me): UT作る
   /// String型の値を「.346」といった率を表示する形式に変換
-  String _formatStatsData(String str) {
+  @visibleForTesting
+  String formatStatsData(String str) {
     // double型に変換できない場合（「.---」など）、nullが入る
     final doubleVal = double.tryParse(str);
 
