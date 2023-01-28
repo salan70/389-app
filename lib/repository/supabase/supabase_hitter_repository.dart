@@ -50,10 +50,10 @@ class SupabaseHitterRepository implements HitterRepository {
     final hitter = await searchHitter(searchCondition);
 
     // 取得した選手の成績を取得
-    final statsList = await _fetchHittingStats(hitter.id);
+    final statsList = await fetchHittingStats(hitter.id);
 
     // HitterQuizUi型に変換
-    final quizUi = _toHitterQuizUi(
+    final quizUi = toHitterQuizUi(
       hitter,
       statsList,
       searchCondition,
@@ -62,18 +62,17 @@ class SupabaseHitterRepository implements HitterRepository {
     return quizUi;
   }
 
-  // TODO(me): UT作る
   /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   @visibleForTesting
-  HitterQuizUi _toHitterQuizUi(
+  HitterQuizUi toHitterQuizUi(
     Hitter hitter,
     List<HittingStats> rowStatsList,
     HitterSearchCondition searchCondition,
   ) {
     final statsListForUi = <Map<String, StatsValue>>[];
 
-    for (final rowStats in rowStatsList) {
-      final statsMap = toStatsMap(rowStats.stats, searchCondition);
+    for (final rawStats in rowStatsList) {
+      final statsMap = toStatsMap(rawStats.stats, searchCondition);
       statsListForUi.add(statsMap);
     }
 
@@ -156,17 +155,17 @@ class SupabaseHitterRepository implements HitterRepository {
     }
   }
 
-  // TODO(me): UT作る
+  /// 1年ごとの成績を変換する
   @visibleForTesting
   Map<String, StatsValue> toStatsMap(
-    Map<String, dynamic> rowStats,
+    Map<String, dynamic> rawStats,
     HitterSearchCondition searchCondition,
   ) {
     final statsForUi = <String, StatsValue>{};
 
     final selectedStatsList = searchCondition.selectedStatsList;
 
-    rowStats.forEach((key, value) {
+    rawStats.forEach((key, value) {
       // selectedLabelListに含まれる成績のみMap型として追加
       if (selectedStatsList.contains(key)) {
         final strVal = value.toString();
@@ -177,7 +176,6 @@ class SupabaseHitterRepository implements HitterRepository {
     return statsForUi;
   }
 
-  // TODO(me): UT作る
   @visibleForTesting
   StatsValue formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
@@ -189,16 +187,17 @@ class SupabaseHitterRepository implements HitterRepository {
       _hiddenStatsIdList.add(id);
     }
 
+    late String data;
+
     if (probabilityStats.contains(key)) {
-      final data = formatStatsData(value);
-      return StatsValue(id: id, data: data);
+      data = formatStatsData(value);
+    } else {
+      data = value;
     }
 
-    final data = value;
     return StatsValue(id: id, data: data);
   }
 
-  // TODO(me): UT作る
   /// String型の値を「.346」といった率を表示する形式に変換
   @visibleForTesting
   String formatStatsData(String str) {
