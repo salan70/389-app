@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../constant/text_in_app.dart';
 import '../../../../util/logger.dart';
 
 final shareButtonViewModelProvider =
@@ -36,9 +37,7 @@ class ShareButtonViewModel {
 
       final path = applicationDocumentsFile.path;
 
-      // TODO(me): share時のtextいい感じにして、constantとして定義する
-      // アプリのURLつけたいからリリース直前？
-      await Share.shareXFiles([XFile(path)], text: '正解しました！ #38Q ');
+      await Share.shareXFiles([XFile(path)], text: shareText);
       await applicationDocumentsFile.delete();
     } on Exception catch (error) {
       logger.e(error);
