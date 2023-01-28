@@ -9,20 +9,25 @@ class RetireButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
-      onPressed: () async {
-        final notifier = ref.read(isCorrectQuizStateProvider.notifier);
-        notifier.state = false;
+    return Center(
+      child: SizedBox(
+        width: 120,
+        child: TextButton(
+          onPressed: () async {
+            final notifier = ref.read(isCorrectQuizStateProvider.notifier);
+            notifier.state = false;
 
-        await showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) {
-            return const RetireConfirmDialog();
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                return const RetireConfirmDialog();
+              },
+            );
           },
-        );
-      },
-      child: const Text('諦める'),
+          child: const Text('諦める'),
+        ),
+      ),
     );
   }
 }
