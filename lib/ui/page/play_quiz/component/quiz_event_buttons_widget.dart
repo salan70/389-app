@@ -20,9 +20,13 @@ class QuizEventButtonsWidget extends ConsumerWidget {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
 
-            // TODO(me): 本当に良いか確認するダイアログ表示させる（UIの見た目完成次第実装）
             if (hitterQuizUiService.canOpen()) {
-              hitterQuizUiService.openAll();
+              showDialog<void>(
+                context: context,
+                builder: (_) {
+                  return const ConfirmOpenAllDialog();
+                },
+              );
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
@@ -42,6 +46,37 @@ class QuizEventButtonsWidget extends ConsumerWidget {
           },
           child: const Text('次の成績を表示'),
         ),
+      ],
+    );
+  }
+}
+
+class ConfirmOpenAllDialog extends ConsumerWidget {
+  const ConfirmOpenAllDialog({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
+
+    return AlertDialog(
+      title: const Text('確認'),
+      content: const Text('本当に全ての成績を表示しますか？'),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('いいえ'),
+          onPressed: () => Navigator.pop(context),
+        ),
+        TextButton(
+            onPressed: () {
+              hitterQuizUiService.openAll();
+              Navigator.pop(context);
+            },
+            child: Text(
+              'はい',
+              style: TextStyle(
+                color: Theme.of(context).errorColor,
+              ),
+            )),
       ],
     );
   }
