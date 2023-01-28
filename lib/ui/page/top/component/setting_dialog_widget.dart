@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SettingDialog extends StatelessWidget {
+import '../../../../constant/url.dart';
+import 'setting_dialog_view_model.dart';
+
+class SettingDialog extends ConsumerWidget {
   const SettingDialog({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.watch(settingDialogViewModelProvider);
+
     return Dialog(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -29,7 +35,9 @@ class SettingDialog extends StatelessWidget {
                 height: 16,
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  viewModel.launchUrlInBrowser(termsUrl);
+                },
                 icon: const Icon(Icons.description_rounded),
                 label: const Text('利用規約'),
               ),
@@ -37,7 +45,9 @@ class SettingDialog extends StatelessWidget {
                 height: 16,
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  viewModel.launchUrlInBrowser(privacyPolicyUrl);
+                },
                 icon: const Icon(Icons.person_rounded),
                 label: const Text('プライバシーポリシー'),
               ),
