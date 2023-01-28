@@ -11,9 +11,11 @@ class ResultTextWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isCorrect = ref.watch(isCorrectQuizStateProvider);
 
-    return SizedBox(
-      height: 64,
-      child: isCorrect ? const CorrectText() : const InCorrectText(),
+    return Center(
+      child: SizedBox(
+        height: 64,
+        child: isCorrect ? const CorrectText() : const InCorrectText(),
+      ),
     );
   }
 }
@@ -36,6 +38,11 @@ class InCorrectText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final answer = ref.read(hitterQuizUiStateProvider).value!.name;
 
-    return Text('残念...\n正解は、$answer選手でした。');
+    return Column(
+      children: [
+        const Text('残念...'),
+        Text('正解は、$answer選手でした。'),
+      ],
+    );
   }
 }

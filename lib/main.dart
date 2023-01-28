@@ -126,7 +126,30 @@ class MyApp extends ConsumerWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        textTheme: GoogleFonts.rocknRollOneTextTheme(),
+        textTheme: GoogleFonts.rocknRollOneTextTheme().copyWith(
+          bodyText2: GoogleFonts.rocknRollOneTextTheme().bodyText2?.copyWith(
+                fontSize: 16,
+              ),
+          button: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+                fontSize: 16,
+              ),
+          // subtitle1: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          //       color: Colors.red,
+          //     ),
+          // subtitle2: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          //       color: Colors.green,
+          //     ),
+          headline5: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+                color: primaryColor,
+              ),
+          // headline6: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          //       color: Colors.blue,
+          //     ),
+          // headline4: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          //       color: Colors.white10,
+          //     ),
+        ),
+        // ボタン
         primaryColor: highlightColor,
         canvasColor: backgroundColor,
         scaffoldBackgroundColor: backgroundColor,
