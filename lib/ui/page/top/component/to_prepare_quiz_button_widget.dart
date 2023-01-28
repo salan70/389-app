@@ -10,7 +10,12 @@ class ToPrepareQuizButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      child: const Text('クイズの条件を設定'),
+      child: FittedBox(
+        child: Text(
+          'クイズの条件を設定',
+          style: Theme.of(context).textTheme.headline5,
+        ),
+      ),
       onPressed: () async {
         await Navigator.push(
           context,

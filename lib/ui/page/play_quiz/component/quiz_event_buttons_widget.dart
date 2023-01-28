@@ -13,20 +13,8 @@ class QuizEventButtonsWidget extends ConsumerWidget {
     final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
 
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextButton(
-          onPressed: () {
-            // 回答入力用のTextFieldのフォーカスを外す
-            FocusManager.instance.primaryFocus?.unfocus();
-
-            if (hitterQuizUiService.canOpen()) {
-              hitterQuizUiService.openRandom();
-            } else {
-              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
-            }
-          },
-          child: const Text('次の成績を表示'),
-        ),
         TextButton(
           onPressed: () {
             // 回答入力用のTextFieldのフォーカスを外す
@@ -40,6 +28,19 @@ class QuizEventButtonsWidget extends ConsumerWidget {
             }
           },
           child: const Text('全ての成績を表示'),
+        ),
+        TextButton(
+          onPressed: () {
+            // 回答入力用のTextFieldのフォーカスを外す
+            FocusManager.instance.primaryFocus?.unfocus();
+
+            if (hitterQuizUiService.canOpen()) {
+              hitterQuizUiService.openRandom();
+            } else {
+              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
+            }
+          },
+          child: const Text('次の成績を表示'),
         ),
       ],
     );
