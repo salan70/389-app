@@ -52,3 +52,5 @@ pubspec.lock
 /.env
 /lib/env_content.txt
 /env_content.txt
+/auth/supabase_authentication.hive
+/auth/supabase_authentication.lock
