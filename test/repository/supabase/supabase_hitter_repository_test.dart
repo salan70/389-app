@@ -2,6 +2,7 @@ import 'package:baseball_quiz_app/constant/hitting_stats/probability_stats.dart'
 import 'package:baseball_quiz_app/repository/supabase/supabase_hitter_repository.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -17,12 +18,10 @@ void main() async {
       return '.';
     });
 
-    const url = 'https://mlagsvwbrqwsjtoquekb.supabase.co';
-    const anonKey =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sYWdzdndicnF3c2p0b3F1ZWtiIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjI1MzE5NzksImV4cCI6MTk3ODEwNzk3OX0.laYLd-Dw5dpKzXYDGrvzw6L-C8TdNMER3tBuH9qh4gU';
+    await dotenv.load();
     await Supabase.initialize(
-      url: url,
-      anonKey: anonKey,
+      url: dotenv.env['SUPABASE_URL']!,
+      anonKey: dotenv.env['SUPABASE_API_KEY']!,
     );
     repository = SupabaseHitterRepository(Supabase.instance);
   });
