@@ -67,16 +67,17 @@ class ConfirmOpenAllDialog extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
         ),
         TextButton(
-            onPressed: () {
-              hitterQuizUiService.openAll();
-              Navigator.pop(context);
-            },
-            child: Text(
-              'はい',
-              style: TextStyle(
-                color: Theme.of(context).errorColor,
-              ),
-            )),
+          onPressed: () {
+            hitterQuizUiService.openAll();
+            Navigator.pop(context);
+          },
+          child: Text(
+            'はい',
+            style: TextStyle(
+              color: Theme.of(context).errorColor,
+            ),
+          ),
+        ),
       ],
     );
   }
