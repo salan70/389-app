@@ -32,9 +32,6 @@ import 'util/widget_ref_extension.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // .envの読み込み
-  await dotenv.load();
-
   // 初期化関連
   await initialize();
 
@@ -72,6 +69,9 @@ Future<void> main() async {
 
 Future<void> initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // .envの読み込み
+  await dotenv.load();
 
   // Firebaseの初期化
   await Firebase.initializeApp();
