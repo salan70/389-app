@@ -133,21 +133,9 @@ class MyApp extends ConsumerWidget {
           button: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
                 fontSize: 16,
               ),
-          // subtitle1: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-          //       color: Colors.red,
-          //     ),
-          // subtitle2: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-          //       color: Colors.green,
-          //     ),
           headline5: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
                 color: primaryColor,
               ),
-          // headline6: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-          //       color: Colors.blue,
-          //     ),
-          // headline4: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-          //       color: Colors.white10,
-          //     ),
         ),
         // ボタン
         primaryColor: highlightColor,
