@@ -172,9 +172,13 @@ const dummyHitterQuizUi = HitterQuizUi(
     },
     {
       '年度': StatsValue(
-          id: '2b38195c-7a4a-46cc-b58b-cf2e949937b8', data: 'NPB：2年'),
+        id: '2b38195c-7a4a-46cc-b58b-cf2e949937b8',
+        data: 'NPB：2年',
+      ),
       '球団': StatsValue(
-          id: '4ca86053-0985-4c99-8890-3e05e075b158', data: 'NPB：2年'),
+        id: '4ca86053-0985-4c99-8890-3e05e075b158',
+        data: 'NPB：2年',
+      ),
       '本塁打': StatsValue(id: '3647eae3-d0e4-4302-8338-01f5d7dd60f1', data: '46'),
       '打率':
           StatsValue(id: '7cdcec0c-b86c-464e-a2b2-03c70488fbc8', data: '.302'),
