@@ -8,6 +8,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../dummy_data/dummy_hitter.dart';
 
+// TODO(me): GitHub Actionsで実行できるようにする
+/// GitHub Actionsで実行するとエラーになるため、
+/// flutter testで実行されないよう、ファイル名の末尾をtestじゃなくしている。
 void main() async {
   late SupabaseHitterRepository repository;
 
