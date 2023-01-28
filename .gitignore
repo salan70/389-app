@@ -54,3 +54,4 @@ pubspec.lock
 /env_content.txt
 /auth/supabase_authentication.hive
 /auth/supabase_authentication.lock
+/coverage/
