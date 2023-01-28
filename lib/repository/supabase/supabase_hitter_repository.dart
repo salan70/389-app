@@ -61,7 +61,6 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  // TODO(me): Util > Converterとかに移動させる
   /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
   HitterQuizUi _toHitterQuizUi(
     Hitter hitter,
@@ -155,7 +154,6 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  // TODO(me): Util > Converterとかに移動させる
   Map<String, StatsValue> _toStatsMap(
     Map<String, dynamic> rowStats,
     HitterSearchCondition searchCondition,
@@ -176,7 +174,6 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  // TODO(me): Util > Converterとかに移動させる
   StatsValue _formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
@@ -197,7 +194,6 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   // TODO(me): UT作る
-  // TODO(me): Util > Converterとかに移動させる
   /// String型の値を「.346」といった率を表示する形式に変換
   String _formatStatsData(String str) {
     // double型に変換できない場合（「.---」など）、nullが入る
