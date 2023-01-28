@@ -111,7 +111,7 @@ class SupabaseHitterRepository implements HitterRepository {
       return hitter;
     } catch (e) {
       logger.e(e);
-      throw SupabaseException.unknown();
+      throw e;
     }
   }
 
