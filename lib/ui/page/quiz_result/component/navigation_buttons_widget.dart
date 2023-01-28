@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../state/hitter_quiz_ui_service.dart';
-import '../../play_quiz/play_quiz_page.dart';
 import '../../prepare_quiz/prepare_quiz_page.dart';
 import '../../top/top_page.dart';
 
