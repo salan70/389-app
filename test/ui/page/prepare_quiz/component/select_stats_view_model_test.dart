@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('canChangeState', () {
-    test('選択可能上限数 かつ すでに選択されている', () {
+    test('選択可能上限数と同じ かつ すでに選択されている', () {
       final result = ProviderContainer()
           .read(selectStatsViewModelProvider)
           .canChangeState(selectedLength: mustSelectStatsNum, isSelected: true);
@@ -13,7 +13,7 @@ void main() {
       expect(true, result);
     });
 
-    test('選択可能上限数 かつ 選択されていない', () {
+    test('選択可能上限数と同じ かつ 選択されていない', () {
       final result =
           ProviderContainer().read(selectStatsViewModelProvider).canChangeState(
                 selectedLength: mustSelectStatsNum,
@@ -34,13 +34,42 @@ void main() {
     });
 
     // 実際のアプリではこのケースにならない想定
-    test('選択可能上限数より高い', () {
+    test('選択可能上限数より多い', () {
       final result =
           ProviderContainer().read(selectStatsViewModelProvider).canChangeState(
                 selectedLength: mustSelectStatsNum + 1,
                 isSelected: false,
               );
 
+      expect(false, result);
+    });
+  });
+
+  group('isValidSelectedStatsList', () {
+    test('選択可能上限数と同じ', () {
+      final result = ProviderContainer()
+          .read(selectStatsViewModelProvider)
+          .isValidSelectedStatsList(
+            mustSelectStatsNum,
+          );
+      expect(true, result);
+    });
+
+    test('選択可能上限数より多い', () {
+      final result = ProviderContainer()
+          .read(selectStatsViewModelProvider)
+          .isValidSelectedStatsList(
+            mustSelectStatsNum + 1,
+          );
+      expect(false, result);
+    });
+
+    test('選択可能上限数より多い', () {
+      final result = ProviderContainer()
+          .read(selectStatsViewModelProvider)
+          .isValidSelectedStatsList(
+            mustSelectStatsNum - 1,
+          );
       expect(false, result);
     });
   });
