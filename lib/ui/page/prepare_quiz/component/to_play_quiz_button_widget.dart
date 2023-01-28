@@ -17,28 +17,33 @@ class ToPlayQuizButtonWidget extends ConsumerWidget {
     final hitterSearchConditionRepository =
         ref.watch(hitterSearchConditionRepositoryProvider);
 
-    return TextButton(
-      onPressed: () async {
-        // hitterSearchConditionをローカルDBへ保存
-        hitterSearchConditionRepository
-            .saveHitterSearchCondition(hitterSearchCondition);
+    return Center(
+      child: SizedBox(
+        width: 120,
+        child: TextButton(
+          onPressed: () async {
+            // hitterSearchConditionをローカルDBへ保存
+            hitterSearchConditionRepository
+                .saveHitterSearchCondition(hitterSearchCondition);
 
-        // 「Do not use BuildContexts across async gaps.」
-        // というLintの警告を回避するためにnavigatorを切り出し
-        // 上記警告は、contextに対してawaitすると発生すると思われる
-        final navigator = Navigator.of(context);
+            // 「Do not use BuildContexts across async gaps.」
+            // というLintの警告を回避するためにnavigatorを切り出し
+            // 上記警告は、contextに対してawaitすると発生すると思われる
+            final navigator = Navigator.of(context);
 
-        // 出題する選手を取得
-        await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
+            // 出題する選手を取得
+            await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
 
-        // 画面遷移
-        await navigator.push(
-          MaterialPageRoute<Widget>(
-            builder: (_) => const PlayQuizPage(),
-          ),
-        );
-      },
-      child: const Text('クイズへ'),
+            // 画面遷移
+            await navigator.push(
+              MaterialPageRoute<Widget>(
+                builder: (_) => const PlayQuizPage(),
+              ),
+            );
+          },
+          child: const Text('クイズへ'),
+        ),
+      ),
     );
   }
 }
