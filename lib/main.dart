@@ -2,6 +2,7 @@ import 'package:baseball_quiz_app/util/logger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -77,8 +78,15 @@ Future<void> initialize() async {
   await Firebase.initializeApp();
 
   // Firebase Crashlytics
-  // Flutterフレームワーク内でスローされたすべてのエラーを送信する
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FlutterError.onError = (errorDetails) {
+    // Flutterフレームワーク内でスローされたすべてのエラーを送信する
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+  // Flutterフレームワークで処理されないエラーを送信する
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
 
   // FCM の通知権限リクエスト
   final messaging = FirebaseMessaging.instance;
