@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../component/admob_widget.dart';
 import 'component/chose_team_widget.dart';
+import 'component/notes_widget.dart';
 import 'component/select_stats_widget.dart';
 import 'component/setting_stats_value_filter_widget.dart';
 import 'component/to_play_quiz_button_widget.dart';
@@ -28,6 +29,8 @@ class PrepareQuizPage extends StatelessWidget {
               SelectStatsWidget(),
               SizedBox(height: 16),
               ToPlayQuizButtonWidget(),
+              SizedBox(height: 16),
+              NotesWidget(),
               SizedBox(height: 80),
             ],
           ),
