@@ -1,6 +1,8 @@
 PODS:
   - app_links (0.0.1):
     - Flutter
+  - app_tracking_transparency (0.0.1):
+    - Flutter
   - cloud_firestore (4.3.1):
     - Firebase/Firestore (= 10.3.0)
     - firebase_core
@@ -146,6 +148,7 @@ PODS:
 
 DEPENDENCIES:
   - app_links (from `.symlinks/plugins/app_links/ios`)
+  - app_tracking_transparency (from `.symlinks/plugins/app_tracking_transparency/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -181,6 +184,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   app_links:
     :path: ".symlinks/plugins/app_links/ios"
+  app_tracking_transparency:
+    :path: ".symlinks/plugins/app_tracking_transparency/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   device_info_plus:
@@ -216,6 +221,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   app_links: ab4ba54d10a13d45825336bc9707b5eadee81191
+  app_tracking_transparency: 5b1745ef9ade815f7455cb6a0848349589afb7c5
   cloud_firestore: 5e5bb98722f66e820bf1aa7b3c98ffc9b2450ffb
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
   Firebase: f92fc551ead69c94168d36c2b26188263860acd9
