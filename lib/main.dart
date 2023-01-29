@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/util/logger.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -28,6 +28,7 @@ import 'state/key_providers.dart';
 import 'state/loading_state.dart';
 import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/top/top_page.dart';
+import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
@@ -96,9 +97,6 @@ Future<void> initialize() async {
   final token = await messaging.getToken();
   logger.i('🐯 FCM TOKEN: $token');
 
-  // AdMobの初期化
-  await MobileAds.instance.initialize();
-
   // Hiveの初期化
   await Hive.initFlutter();
   Hive.registerAdapter(HitterSearchConditionAdapter());
@@ -110,11 +108,33 @@ Future<void> initialize() async {
   );
 }
 
-class MyApp extends ConsumerWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<MyApp> createState() => _MyApp();
+}
+
+class _MyApp extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // main()だとうまく表示されないため、
+      // MyAppのinitState()に記載
+      // ATTをダイアログ表示
+      // AdMobの初期化より前に実行する必要がある
+      if (await AppTrackingTransparency.trackingAuthorizationStatus ==
+          TrackingStatus.notDetermined) {
+        await AppTrackingTransparency.requestTrackingAuthorization();
+      }
+      // AdMobの初期化
+      await MobileAds.instance.initialize();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     // hitterQuizUiNotifierProviderの結果をハンドリングする
     ref.handleAsyncValue<void>(
       hitterQuizUiStateProvider,
