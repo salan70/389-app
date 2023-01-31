@@ -1,6 +1,15 @@
 {
   "hosting": [
     {
+      "target": "389-app-ads",
+      "public": "public/app_ads",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ]
+    },
+    {
       "target": "389-privacy-policy",
       "public": "public/privacy_policy",
       "ignore": [
