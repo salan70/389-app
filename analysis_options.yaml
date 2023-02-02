@@ -1,7 +1,6 @@
 include: package:flutter_lints/flutter.yaml
 analyzer:
   exclude:
-    - lib/repository/supabase/supabase_hitter_repository.dart
     - "**/*.g.dart"
     - "**/*.freezed.dart"
   errors:

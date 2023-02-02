@@ -13,6 +13,7 @@ class ChoseTeamViewModel {
 
   final Ref ref;
 
+  // TODO(me): テスト書くことを検討する
   /// 選択した球団のリストを保存する
   void saveTeamList(List<Object?> selectedList) {
     final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
@@ -21,6 +22,7 @@ class ChoseTeamViewModel {
     searchCondition.state = searchCondition.state.copyWith(teamList: teamList);
   }
 
+  // TODO(me): テスト書く
   /// 球団を取り除けるか判別する
   /// 選択中のteamListの長さが2以上の場合に取り除ける
   /// （取り除くとteamListが空になる場合取り除けない）
@@ -28,11 +30,13 @@ class ChoseTeamViewModel {
     return ref.read(hitterSearchConditionProvider).teamList.length > 1;
   }
 
+  // TODO(me): テスト書くことを検討する
   /// 選択した球団を取り除く
   void removeTeam(int selectedIndex) {
     final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
     final teamList = searchCondition.state.teamList;
 
+    // TODO(me): ここの処理を関数として抽出して、テスト書く
     // teamListに対してremoveAt()が使えない（immutableだから？）ため、
     // 以下のようにremovedTeamListを作成
     final removedTeamList = <String>[];
