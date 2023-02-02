@@ -21,6 +21,7 @@ class AnswerViewModel {
 
   final Ref ref;
 
+  // TODO(me): テスト書くことを検討する
   Future<List<HitterIdByName>> filterHitter(String searchWord) async {
     final allHitterList = await ref.read(allHitterListProvider);
     final hitterListAfterSearch = <HitterIdByName>[];
@@ -34,6 +35,7 @@ class AnswerViewModel {
     return hitterListAfterSearch;
   }
 
+  // TODO(me): テスト書く
   /// 正解しているか否かを返す
   bool isCorrectHitterQuiz() {
     final selectedHitterId = ref.read(selectedHitterIdProvider);

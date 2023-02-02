@@ -1,26 +1,17 @@
 import 'dart:math';
-import 'dart:developer' as developer;
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 
-import '../hitter_repository.dart';
-import '../../Infrastructure/supabase/supabase_providers.dart';
-import '../../constant/hitting_stats/probability_stats.dart';
-import '../../constant/hitting_stats/stats_type.dart';
-import '../../mock/hitter_search_condition_mock.dart';
 import '../../model/hitter.dart';
 import '../../model/hitting_stats.dart';
 import '../../model/typeadapter/hitter_search_condition.dart';
 import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
-import '../../model/ui/stats_value.dart';
-import '../../state/hitter_search_condition_state.dart';
 import '../../util/exception/supabase_exception.dart';
 import '../../util/logger.dart';
+import '../hitter_repository.dart';
+import 'supabase_hitter_converter.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
@@ -34,18 +25,11 @@ class SupabaseHitterRepository implements HitterRepository {
   );
 
   final Supabase supabase;
-  final List<String> _hiddenStatsIdList = [];
 
   @override
   Future<HitterQuizUi> createHitterQuizUi(
     HitterSearchCondition searchCondition,
   ) async {
-    // _hiddenStatsIdListを空にする
-    // SupabaseHitterRepositoryのインスタンスが既に生成されている場合、
-    // 既存の_hiddenStatsIdListに上書きされるため。
-    // TODO(me): 本当はメンバ変数として保持したくない
-    _hiddenStatsIdList.clear();
-
     // 検索条件に合う選手を1人取得
     final hitter = await searchHitter(searchCondition);
 
@@ -53,51 +37,29 @@ class SupabaseHitterRepository implements HitterRepository {
     final statsList = await fetchHittingStats(hitter.id);
 
     // HitterQuizUi型に変換
-    final quizUi = toHitterQuizUi(
+    final quizUi = SupabaseHitterConverter().toHitterQuizUi(
       hitter,
       statsList,
-      searchCondition,
+      searchCondition.selectedStatsList,
     );
 
     return quizUi;
   }
 
-  /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
-  @visibleForTesting
-  HitterQuizUi toHitterQuizUi(
-    Hitter hitter,
-    List<HittingStats> rowStatsList,
-    HitterSearchCondition searchCondition,
-  ) {
-    final statsListForUi = <Map<String, StatsValue>>[];
-
-    for (final rawStats in rowStatsList) {
-      final statsMap = toStatsMap(rawStats.stats, searchCondition);
-      statsListForUi.add(statsMap);
-    }
-
-    final hitterQuizUi = HitterQuizUi(
-      id: hitter.id,
-      name: hitter.name,
-      selectedStatsList: searchCondition.selectedStatsList,
-      statsMapList: statsListForUi,
-      hiddenStatsIdList: _hiddenStatsIdList,
-    );
-
-    return hitterQuizUi;
-  }
-
   /// 条件に合う選手を1人検索する
   Future<Hitter> searchHitter(HitterSearchCondition searchCondition) async {
     try {
-      final List<dynamic> responses = await supabase.client
-          .from('hitter_table')
-          .select('id, name, team, hasData, hitting_stats_table!inner(*)')
-          .eq('hasData', true)
-          .filter('team', 'in', searchCondition.teamList)
-          .gte('hitting_stats_table.試合', searchCondition.minGames)
-          .gte('hitting_stats_table.安打', searchCondition.minHits)
-          .gte('hitting_stats_table.本塁打', searchCondition.minHr);
+      final responses = await supabase.client
+              .from('hitter_table')
+              .select<dynamic>(
+                'id, name, team, hasData, hitting_stats_table!inner(*)',
+              )
+              .eq('hasData', true)
+              .filter('team', 'in', searchCondition.teamList)
+              .gte('hitting_stats_table.試合', searchCondition.minGames)
+              .gte('hitting_stats_table.安打', searchCondition.minHits)
+              .gte('hitting_stats_table.本塁打', searchCondition.minHr)
+          as List<dynamic>;
 
       // 検索条件に合致する選手がいない場合、例外を返す
       if (responses.isEmpty) {
@@ -105,13 +67,14 @@ class SupabaseHitterRepository implements HitterRepository {
       }
 
       // ランダムで1人選出
-      final chosenResponse = responses[Random().nextInt(responses.length)];
+      final chosenResponse =
+          responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
       final hitter = Hitter.fromJson(chosenResponse);
 
       return hitter;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e(e);
-      throw e;
+      throw SupabaseException.unknown();
     }
   }
 
@@ -121,16 +84,16 @@ class SupabaseHitterRepository implements HitterRepository {
     try {
       final responses = await supabase.client
           .from('hitting_stats_table')
-          .select('*')
-          .eq('playerId', playerId);
+          .select<dynamic>()
+          .eq('playerId', playerId) as List<dynamic>;
 
       for (final response in responses) {
-        final stats = HittingStats.fromJson(response);
+        final stats = HittingStats.fromJson(response as Map<String, dynamic>);
         statsList.add(stats);
       }
 
       return statsList;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e(e);
       throw SupabaseException.unknown();
     }
@@ -140,82 +103,21 @@ class SupabaseHitterRepository implements HitterRepository {
   @override
   Future<List<HitterIdByName>> fetchAllHitter() async {
     try {
-      final responses = await supabase.client.from('hitter_table').select('*');
+      final responses = await supabase.client
+          .from('hitter_table')
+          .select<dynamic>() as List<dynamic>;
 
       final allHitterList = <HitterIdByName>[];
       for (final response in responses) {
-        final hitterMap = HitterIdByName.fromJson(response);
+        final hitterMap = HitterIdByName.fromJson(
+          response as Map<String, dynamic>,
+        );
         allHitterList.add(hitterMap);
       }
-
       return allHitterList;
-    } catch (e) {
+    } on Exception catch (e) {
       logger.e(e);
       throw SupabaseException.unknown();
     }
-  }
-
-  /// 1年ごとの成績を変換する
-  @visibleForTesting
-  Map<String, StatsValue> toStatsMap(
-    Map<String, dynamic> rawStats,
-    HitterSearchCondition searchCondition,
-  ) {
-    final statsForUi = <String, StatsValue>{};
-
-    final selectedStatsList = searchCondition.selectedStatsList;
-
-    rawStats.forEach((key, value) {
-      // selectedLabelListに含まれる成績のみMap型として追加
-      if (selectedStatsList.contains(key)) {
-        final strVal = value.toString();
-        statsForUi[key] = formatStatsValue(key, strVal);
-      }
-    });
-
-    return statsForUi;
-  }
-
-  @visibleForTesting
-  StatsValue formatStatsValue(String key, String value) {
-    final id = const Uuid().v4();
-
-    // TODO(me): 年度はそもそもStatsValueとして保持しないようにする
-    // そうすれば_hiddenStatsIdListをメンバ変数として保持しなくて良くなると思われる
-    // 年度のidは最初から開けておくため、hiddenStatsIdListには含めない
-    if (key != '年度') {
-      _hiddenStatsIdList.add(id);
-    }
-
-    late String data;
-
-    if (probabilityStats.contains(key)) {
-      data = formatStatsData(value);
-    } else {
-      data = value;
-    }
-
-    return StatsValue(id: id, data: data);
-  }
-
-  /// String型の値を「.346」といった率を表示する形式に変換
-  @visibleForTesting
-  String formatStatsData(String str) {
-    // double型に変換できない場合（「.---」など）、nullが入る
-    final doubleVal = double.tryParse(str);
-
-    if (doubleVal == null) {
-      return str;
-    }
-
-    // 小数点以下3桁を表示
-    final fixedVal = doubleVal.toStringAsFixed(3);
-
-    // 0.XXXの場合、先頭の0を除いて返す（例：0.300 -> .300を返す）
-    if (fixedVal.startsWith('0')) {
-      return fixedVal.substring(1);
-    }
-
-    return fixedVal;
   }
 }

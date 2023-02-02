@@ -81,6 +81,7 @@ class SettingDialogViewModel {
     Exception('Could not send inquiry');
   }
 
+  // TODO(me): テスト書く
   String? _encodeQueryParameters(Map<String, String> params) {
     return params.entries
         .map(
