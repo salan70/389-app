@@ -1,40 +1,19 @@
 import 'package:baseball_quiz_app/constant/hitting_stats/probability_stats.dart';
-import 'package:baseball_quiz_app/repository/supabase/supabase_hitter_repository.dart';
+import 'package:baseball_quiz_app/repository/supabase/supabase_hitter_converter.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../dummy_data/dummy_hitter.dart';
 
-// TODO(me): GitHub Actionsで実行できるようにする
-/// GitHub Actionsで実行するとエラーになるため、
-/// flutter testで実行されないよう、ファイル名の末尾をtestじゃなくしている。
 void main() async {
-  late SupabaseHitterRepository repository;
-
-  setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
-    const channel = MethodChannel('plugins.flutter.io/path_provider_macos');
-    channel.setMockMethodCallHandler((methodCall) async {
-      return '.';
-    });
-
-    await dotenv.load();
-    await Supabase.initialize(
-      url: dotenv.env['SUPABASE_URL']!,
-      anonKey: dotenv.env['SUPABASE_API_KEY']!,
-    );
-    repository = SupabaseHitterRepository(Supabase.instance);
-  });
+  final converter = SupabaseHitterConverter();
 
   group('toHitterQuizUi', () {
     test('正常系', () {
-      final result = repository.toHitterQuizUi(
+      final result = converter.toHitterQuizUi(
         dummyHitter,
         dummyHittingStatsList,
-        dummyHitterSearchCondition,
+        dummyHitterSearchCondition.selectedStatsList,
       );
       expect(dummyHitterQuizUi.id, result.id);
       expect(dummyHitterQuizUi.name, result.name);
@@ -52,9 +31,9 @@ void main() async {
 
   group('toStatsMap', () {
     test('正常系', () {
-      final statsMap = repository.toStatsMap(
+      final statsMap = converter.toStatsMap(
         dummyHittingStats.stats,
-        dummyHitterSearchCondition,
+        dummyHitterSearchCondition.selectedStatsList,
       );
       final resultKeys = statsMap.keys.toList();
 
@@ -74,7 +53,7 @@ void main() async {
     test('keyの値がprobabilityStatsに入っている場合', () {
       const key = '打率';
       const value = '.333';
-      final result = repository.formatStatsValue(
+      final result = converter.formatStatsValue(
         key,
         value,
       );
@@ -94,7 +73,7 @@ void main() async {
     test('keyの値がprobabilityStatsに入っていない場合', () {
       const key = '球団';
       const value = 'DeNA';
-      final result = repository.formatStatsValue(
+      final result = converter.formatStatsValue(
         key,
         value,
       );
@@ -115,7 +94,7 @@ void main() async {
   group('formatStatsData', () {
     test('double型に変換できない場合 1', () {
       const data = '.---';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect(data, result);
@@ -123,7 +102,7 @@ void main() async {
 
     test('double型に変換できない場合 2', () {
       const data = '---';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect(data, result);
@@ -131,7 +110,7 @@ void main() async {
 
     test('double型に変換できない場合 3', () {
       const data = '.300';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect(data, result);
@@ -139,7 +118,7 @@ void main() async {
 
     test('1.0未満の場合 1', () {
       const data = '0.300';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect('.300', result);
@@ -147,7 +126,7 @@ void main() async {
 
     test('1.0未満の場合 2', () {
       const data = '0.999';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect('.999', result);
@@ -155,7 +134,7 @@ void main() async {
 
     test('1.0未満の場合 3', () {
       const data = '0.000';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect('.000', result);
@@ -163,7 +142,7 @@ void main() async {
 
     test('1.0以上の場合 1', () {
       const data = '1.000';
-      final result = repository.formatStatsData(
+      final result = converter.formatStatsData(
         data,
       );
       expect('1.000', result);

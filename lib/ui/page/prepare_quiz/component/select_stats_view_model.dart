@@ -13,6 +13,7 @@ class SelectStatsViewModel {
 
   final Ref ref;
 
+  // TODO(me): テスト書くことを検討する
   void saveStatsList(List<String> selectedList) {
     final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
 
