@@ -1,20 +1,17 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
 
-import '../../constant/hitting_stats/probability_stats.dart';
 import '../../model/hitter.dart';
 import '../../model/hitting_stats.dart';
 import '../../model/typeadapter/hitter_search_condition.dart';
 import '../../model/ui/hitter_id_by_name.dart';
 import '../../model/ui/hitter_quiz_ui.dart';
-import '../../model/ui/stats_value.dart';
 import '../../util/exception/supabase_exception.dart';
 import '../../util/logger.dart';
 import '../hitter_repository.dart';
+import 'supabase_hitter_converter.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー
 final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
@@ -40,47 +37,13 @@ class SupabaseHitterRepository implements HitterRepository {
     final statsList = await fetchHittingStats(hitter.id);
 
     // HitterQuizUi型に変換
-    final quizUi = toHitterQuizUi(
+    final quizUi = SupabaseHitterConverter().toHitterQuizUi(
       hitter,
       statsList,
       searchCondition.selectedStatsList,
     );
 
     return quizUi;
-  }
-
-  /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換
-  @visibleForTesting
-  HitterQuizUi toHitterQuizUi(
-    Hitter hitter,
-    List<HittingStats> rowStatsList,
-    List<String> selectedStatsList,
-  ) {
-    final statsListForUi = <Map<String, StatsValue>>[];
-    final hiddenStatsIdList = <String>[];
-
-    for (final rawStats in rowStatsList) {
-      final statsMap = toStatsMap(rawStats.stats, selectedStatsList);
-      statsListForUi.add(statsMap);
-
-      // TODO(me): 関数として抽出
-      for (final selectedStats in selectedStatsList) {
-        if (selectedStats != '年度') {
-          final id = statsMap[selectedStats]!.id;
-          hiddenStatsIdList.add(id);
-        }
-      }
-    }
-
-    final hitterQuizUi = HitterQuizUi(
-      id: hitter.id,
-      name: hitter.name,
-      selectedStatsList: selectedStatsList,
-      statsMapList: statsListForUi,
-      hiddenStatsIdList: hiddenStatsIdList,
-    );
-
-    return hitterQuizUi;
   }
 
   /// 条件に合う選手を1人検索する
@@ -156,57 +119,5 @@ class SupabaseHitterRepository implements HitterRepository {
       logger.e(e);
       throw SupabaseException.unknown();
     }
-  }
-
-  /// 1年ごとの成績を変換する
-  @visibleForTesting
-  Map<String, StatsValue> toStatsMap(
-    Map<String, dynamic> rawStats,
-    List<String> selectedStatsList,
-  ) {
-    final statsForUi = <String, StatsValue>{};
-
-    rawStats.forEach((key, value) {
-      // selectedLabelListに含まれる成績のみMap型として追加
-      if (selectedStatsList.contains(key)) {
-        final strVal = value.toString();
-        statsForUi[key] = formatStatsValue(key, strVal);
-      }
-    });
-
-    return statsForUi;
-  }
-
-  @visibleForTesting
-  StatsValue formatStatsValue(String key, String value) {
-    late String data;
-    if (probabilityStats.contains(key)) {
-      data = formatStatsData(value);
-    } else {
-      data = value;
-    }
-
-    return StatsValue(id: const Uuid().v4(), data: data);
-  }
-
-  /// String型の値を「.346」といった率を表示する形式に変換
-  @visibleForTesting
-  String formatStatsData(String str) {
-    // double型に変換できない場合（「.---」など）、nullが入る
-    final doubleVal = double.tryParse(str);
-
-    if (doubleVal == null) {
-      return str;
-    }
-
-    // 小数点以下3桁を表示
-    final fixedVal = doubleVal.toStringAsFixed(3);
-
-    // 0.XXXの場合、先頭の0を除いて返す（例：0.300 -> .300を返す）
-    if (fixedVal.startsWith('0')) {
-      return fixedVal.substring(1);
-    }
-
-    return fixedVal;
   }
 }
