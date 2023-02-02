@@ -111,7 +111,7 @@ class SupabaseHitterRepository implements HitterRepository {
       return hitter;
     } catch (e) {
       logger.e(e);
-      throw e;
+      throw SupabaseException.unknown();
     }
   }
 
@@ -180,8 +180,6 @@ class SupabaseHitterRepository implements HitterRepository {
   StatsValue formatStatsValue(String key, String value) {
     final id = const Uuid().v4();
 
-    // TODO(me): 年度はそもそもStatsValueとして保持しないようにする
-    // そうすれば_hiddenStatsIdListをメンバ変数として保持しなくて良くなると思われる
     // 年度のidは最初から開けておくため、hiddenStatsIdListには含めない
     if (key != '年度') {
       _hiddenStatsIdList.add(id);
