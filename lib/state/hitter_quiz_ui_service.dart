@@ -38,6 +38,7 @@ class HitterQuizUiService {
     notifier.state = AsyncData(hitterQuizUi);
   }
 
+  // TODO(me): テスト書くことを検討する
   /// ランダムに1つ成績を公開する
   void openRandom() {
     final notifier = ref.read(hitterQuizUiStateProvider.notifier);
@@ -46,6 +47,7 @@ class HitterQuizUiService {
 
     final hiddenIndex = Random().nextInt(hiddenStatsIdList.length);
 
+    // TODO(me): ここの処理を関数として抽出して、テスト書く
     // hiddenStatsIdList.removeAt(removeIdx)と同様の結果になる処理
     // hiddenStatsIdListがimmutable上記関数を使用できないため、下記のように書いている
     final removedHiddenList = <String>[];
@@ -62,6 +64,7 @@ class HitterQuizUiService {
     );
   }
 
+  // TODO(me): テスト書くことを検討する
   /// 全ての閉じている成績を公開する
   void openAll() {
     final notifier = ref.read(hitterQuizUiStateProvider.notifier);
@@ -74,6 +77,7 @@ class HitterQuizUiService {
     );
   }
 
+  // TODO(me): テスト書く
   /// 成績が公開可能か判別する
   /// 閉じている成績が残っている場合、成績が公開可能とみなす
   bool canOpen() {
