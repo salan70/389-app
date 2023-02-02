@@ -34,7 +34,7 @@ void main() async {
       final result = repository.toHitterQuizUi(
         dummyHitter,
         dummyHittingStatsList,
-        dummyHitterSearchCondition,
+        dummyHitterSearchCondition.selectedStatsList,
       );
       expect(dummyHitterQuizUi.id, result.id);
       expect(dummyHitterQuizUi.name, result.name);
@@ -54,7 +54,7 @@ void main() async {
     test('正常系', () {
       final statsMap = repository.toStatsMap(
         dummyHittingStats.stats,
-        dummyHitterSearchCondition,
+        dummyHitterSearchCondition.selectedStatsList,
       );
       final resultKeys = statsMap.keys.toList();
 
