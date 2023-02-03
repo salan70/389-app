@@ -1,5 +1,5 @@
-import 'package:baseball_quiz_app/constant/hitter_search_condition_constant.dart';
 import 'package:baseball_quiz_app/ui/page/prepare_quiz/component/chose_team_view_model.dart';
+import 'package:baseball_quiz_app/util/constant/hitter_search_condition_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
