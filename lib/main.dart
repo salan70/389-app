@@ -13,8 +13,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'Infrastructure/firebase/firebase_providers.dart';
 import 'Infrastructure/supabase/supabase_providers.dart';
-import 'constant/color_constant.dart';
-import 'constant/hitter_search_condition_constant.dart';
 import 'model/typeadapter/hitter_search_condition.dart';
 import 'repository/auth_repository.dart';
 import 'repository/firebase/firebase_auth_repository.dart';
@@ -28,6 +26,8 @@ import 'state/key_providers.dart';
 import 'state/loading_state.dart';
 import 'ui/component/quiz_loading_widget.dart';
 import 'ui/page/top/top_page.dart';
+import 'util/constant/color_constant.dart';
+import 'util/constant/hitter_search_condition_constant.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
 
