@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../state/hitter_search_condition_state.dart';
@@ -41,8 +42,9 @@ class PrepareQuizViewModel {
   }
 
   /// 引数のteamListから引数のIndexを除いたlistを作成する
-  /// teamListに対してremoveAt()が使えない（immutableだから？）ため、
-  /// この関数を使う
+  /// searchCondition.state.teamListに対してremoveAt()が
+  /// 使えない（immutableだから？）ため、この関数を使う
+  @visibleForTesting
   List<String> createRemovedTeamList(List<String> teamList, int removeIndex) {
     if (teamList.length <= removeIndex) {
       // ここに入ることはない想定
