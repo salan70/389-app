@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'share_button_view_model.dart';
+import '../quiz_result_view_model.dart';
 
 class ShareButtonWidget extends ConsumerWidget {
   const ShareButtonWidget({
@@ -13,7 +13,7 @@ class ShareButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(shareButtonViewModelProvider);
+    final viewModel = ref.watch(quizResultViewModelProvider);
 
     return Center(
       child: TextButton(
