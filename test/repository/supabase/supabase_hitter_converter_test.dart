@@ -8,7 +8,7 @@ import '../../dummy_data/dummy_hitter.dart';
 void main() async {
   final converter = SupabaseHitterConverter();
 
-  group('toHitterQuizUi', () {
+  group('toHitterQuizUi関数', () {
     test('正常系', () {
       final result = converter.toHitterQuizUi(
         dummyHitter,
@@ -29,7 +29,7 @@ void main() async {
     });
   });
 
-  group('toStatsMap', () {
+  group('toStatsMap関数', () {
     test('正常系', () {
       final statsMap = converter.toStatsMap(
         dummyHittingStats.stats,
@@ -49,7 +49,7 @@ void main() async {
     });
   });
 
-  group('formatStatsValue', () {
+  group('formatStatsValue関数', () {
     test('keyの値がprobabilityStatsに入っている場合', () {
       const key = '打率';
       const value = '.333';
@@ -91,7 +91,7 @@ void main() async {
     });
   });
 
-  group('formatStatsData', () {
+  group('formatStatsData関数', () {
     test('double型に変換できない場合 1', () {
       const data = '.---';
       final result = converter.formatStatsData(

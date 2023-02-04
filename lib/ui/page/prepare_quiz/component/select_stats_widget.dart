@@ -91,7 +91,7 @@ class ChoiceCard extends ConsumerWidget {
         onTap: () {
           final isSelected = choice.selected;
 
-          final canChangeState = viewModel.canChangeState(
+          final canChangeState = viewModel.canChangeStatsState(
             selectedLength: state.selection!.length,
             isSelected: isSelected,
           );
