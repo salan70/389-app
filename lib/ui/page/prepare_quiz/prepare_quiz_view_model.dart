@@ -28,7 +28,6 @@ class PrepareQuizViewModel {
     return ref.read(hitterSearchConditionProvider).teamList.length > 1;
   }
 
-  // TODO(me): テスト書くことを検討する
   /// 選択した球団を取り除く
   void removeTeam(int selectedIndex) {
     final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
