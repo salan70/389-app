@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/constant/url.dart';
-import '../setting_dialog_view_model.dart';
+import '../top_page_view_model.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({
