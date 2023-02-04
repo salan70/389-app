@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../state/hitter_quiz_ui_service.dart';
 
-class QuizEventButtonsWidget extends ConsumerWidget {
-  const QuizEventButtonsWidget({
+class QuizEventButtons extends ConsumerWidget {
+  const QuizEventButtons({
     super.key,
   });
 
