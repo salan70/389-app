@@ -6,7 +6,7 @@ import '../../../../model/ui/hitter_id_by_name.dart';
 import '../../../../state/is_correct_quiz.state.dart';
 import '../../../../util/admob.dart';
 import '../../quiz_result/quiz_result_page.dart';
-import 'answer_view_model.dart';
+import '../play_quiz_view_model.dart';
 import 'incorrect_dialog.dart';
 
 class AnswerWidget extends ConsumerStatefulWidget {
@@ -30,7 +30,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
     final scrollController = ScrollController();
     final textEditingController = ref.watch(answerTextFieldProvider);
 
-    final viewModel = ref.watch(answerViewModelProvider);
+    final viewModel = ref.watch(playQuizViewModelProvider);
 
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final selectedHitterIdNotifier =

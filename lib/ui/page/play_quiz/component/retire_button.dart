@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/is_correct_quiz.state.dart';
 import 'retire_confirm_dialog.dart';
 
-class RetireButtonWidget extends ConsumerWidget {
-  const RetireButtonWidget({super.key});
+class RetireButton extends ConsumerWidget {
+  const RetireButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
