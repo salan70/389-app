@@ -8,14 +8,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../../util/constant/text_in_app.dart';
-import '../../../../util/logger.dart';
+import '../../../util/constant/text_in_app.dart';
+import '../../../util/logger.dart';
 
-final shareButtonViewModelProvider =
-    Provider.autoDispose<ShareButtonViewModel>(ShareButtonViewModel.new);
+final quizResultViewModelProvider =
+    Provider.autoDispose<QuizResultViewModel>(QuizResultViewModel.new);
 
-class ShareButtonViewModel {
-  ShareButtonViewModel(
+class QuizResultViewModel {
+  QuizResultViewModel(
     this.ref,
   );
 

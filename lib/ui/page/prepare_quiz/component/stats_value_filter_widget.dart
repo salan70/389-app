@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 
-class SettingStatsValueFilterWidget extends ConsumerWidget {
-  const SettingStatsValueFilterWidget({super.key});
+class StatsValueFilterWidget extends ConsumerWidget {
+  const StatsValueFilterWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
