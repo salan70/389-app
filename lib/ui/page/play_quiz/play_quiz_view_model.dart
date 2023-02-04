@@ -36,7 +36,6 @@ class PlayQuizViewModel {
     return hitterListAfterSearch;
   }
 
-  // TODO(me): テスト書く
   /// 正解しているか否かを返す
   bool isCorrectHitterQuiz() {
     final selectedHitterId = ref.read(selectedHitterIdProvider);
