@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import '../../component/admob_widget.dart';
 import '../../component/quiz_widget.dart';
 import 'component/answer_widget.dart';
-import 'component/quiz_event_buttons_widget.dart';
-import 'component/retire_button_widget.dart';
+import 'component/quiz_event_buttons.dart';
+import 'component/retire_button.dart';
 
 class PlayQuizPage extends StatelessWidget {
   const PlayQuizPage({super.key});
@@ -26,11 +26,11 @@ class PlayQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 QuizWidget(willUpdate: true),
                 SizedBox(height: 16),
-                QuizEventButtonsWidget(),
+                QuizEventButtons(),
                 SizedBox(height: 16),
                 AnswerWidget(),
                 SizedBox(height: 16),
-                RetireButtonWidget(),
+                RetireButton(),
                 SizedBox(height: 200),
               ],
             ),
