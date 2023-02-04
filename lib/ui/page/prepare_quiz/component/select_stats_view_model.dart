@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constant/hitter_search_condition_constant.dart';
 import '../../../../state/hitter_search_condition_state.dart';
+import '../../../../util/constant/hitter_search_condition_constant.dart';
 
 final selectStatsViewModelProvider =
     Provider.autoDispose<SelectStatsViewModel>(SelectStatsViewModel.new);
