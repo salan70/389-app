@@ -5,14 +5,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../repository/auth_repository.dart';
-import '../../../../util/constant/inquiry.dart';
+import '../../../repository/auth_repository.dart';
+import '../../../util/constant/inquiry.dart';
 
-final settingDialogViewModelProvider =
-    Provider.autoDispose<SettingDialogViewModel>(SettingDialogViewModel.new);
+final topPageViewModelProvider =
+    Provider.autoDispose<TopPageViewModel>(TopPageViewModel.new);
 
-class SettingDialogViewModel {
-  SettingDialogViewModel(
+class TopPageViewModel {
+  TopPageViewModel(
     this.ref,
   );
 
