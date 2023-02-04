@@ -66,6 +66,42 @@ void main() {
     });
   });
 
+  group('createRemovedTeamList関数', () {
+    final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
+
+    test('球団数:1, index:0', () {
+      final teamList = ['千葉ロッテマリーンズ'];
+      final result = viewModel.createRemovedTeamList(teamList, 0);
+      final expected = <String>[];
+
+      expect(expected, result);
+    });
+
+    test('球団数:1, index:1（Listの範囲外）', () {
+      final teamList = ['千葉ロッテマリーンズ'];
+      final result = viewModel.createRemovedTeamList(teamList, 1);
+      final expected = ['千葉ロッテマリーンズ'];
+
+      expect(expected, result);
+    });
+
+    test('球団数:2, index:1', () {
+      final teamList = ['千葉ロッテマリーンズ', '阪神タイガース'];
+      final result = viewModel.createRemovedTeamList(teamList, 1);
+      final expected = ['千葉ロッテマリーンズ'];
+
+      expect(expected, result);
+    });
+
+    test('球団数:0, index:0', () {
+      final teamList = <String>[];
+      final result = viewModel.createRemovedTeamList(teamList, 0);
+      final expected = <String>[];
+
+      expect(expected, result);
+    });
+  });
+
   group('isValidChoseTeamList関数', () {
     final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
 
