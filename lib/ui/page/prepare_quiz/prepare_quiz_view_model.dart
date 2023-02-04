@@ -14,7 +14,6 @@ class PrepareQuizViewModel {
 
   final Ref ref;
 
-  // TODO(me): テスト書くことを検討する
   /// 選択した球団のリストを保存する
   void saveTeamList(List<Object?> selectedList) {
     final searchCondition = ref.read(hitterSearchConditionProvider.notifier);

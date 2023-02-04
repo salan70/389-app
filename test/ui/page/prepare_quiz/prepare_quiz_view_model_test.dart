@@ -6,7 +6,41 @@ import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../../dummy_data/dummy_hitter_search_condition.dart';
+
 void main() {
+  group('saveTeamList関数', () {
+    test('teamListの要素が3つ', () {
+      final teamList = ['千葉ロッテマリーンズ', '阪神タイガース', '読売ジャイアンツ'];
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition1,
+          ),
+        ],
+      );
+      container.read(prepareQuizViewModelProvider).saveTeamList(teamList);
+      final result = container.read(hitterSearchConditionProvider);
+
+      expect(teamList, result.teamList);
+    });
+
+    test('teamListが空', () {
+      final teamList = <String>[];
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition1,
+          ),
+        ],
+      );
+      container.read(prepareQuizViewModelProvider).saveTeamList(teamList);
+      final result = container.read(hitterSearchConditionProvider);
+
+      expect(teamList, result.teamList);
+    });
+  });
+
   group('canRemoveTeam関数', () {
     test('選択中のteamListの長さが1', () {
       final hitterSearchCondition = HitterSearchCondition(
