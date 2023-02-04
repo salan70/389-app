@@ -212,7 +212,7 @@ void main() {
     final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
 
     test('選択可能上限数と同じ かつ すでに選択されている', () {
-      final result = viewModel.canChangeState(
+      final result = viewModel.canChangeStatsState(
         selectedLength: mustSelectStatsNum,
         isSelected: true,
       );
@@ -220,7 +220,7 @@ void main() {
     });
 
     test('選択可能上限数と同じ かつ 選択されていない', () {
-      final result = viewModel.canChangeState(
+      final result = viewModel.canChangeStatsState(
         selectedLength: mustSelectStatsNum,
         isSelected: false,
       );
@@ -228,7 +228,7 @@ void main() {
     });
 
     test('選択可能上限数未満', () {
-      final result = viewModel.canChangeState(
+      final result = viewModel.canChangeStatsState(
         selectedLength: mustSelectStatsNum - 1,
         isSelected: false,
       );
@@ -237,7 +237,7 @@ void main() {
 
     // 実際のアプリではこのケースにならない想定
     test('選択可能上限数より多い', () {
-      final result = viewModel.canChangeState(
+      final result = viewModel.canChangeStatsState(
         selectedLength: mustSelectStatsNum + 1,
         isSelected: false,
       );
