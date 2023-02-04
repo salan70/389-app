@@ -22,7 +22,6 @@ class PlayQuizViewModel {
 
   final Ref ref;
 
-  // TODO(me): テスト書くことを検討する
   Future<List<HitterIdByName>> filterHitter(String searchWord) async {
     final allHitterList = await ref.read(allHitterListProvider);
     final hitterListAfterSearch = <HitterIdByName>[];
