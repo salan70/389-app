@@ -6,8 +6,8 @@ import '../../../../state/hitter_quiz_ui_service.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
-class ToPlayQuizButtonWidget extends ConsumerWidget {
-  const ToPlayQuizButtonWidget({
+class ToPlayQuizButton extends ConsumerWidget {
+  const ToPlayQuizButton({
     super.key,
   });
 
