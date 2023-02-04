@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constant/url.dart';
+import '../../../../util/constant/url.dart';
 import 'setting_dialog_view_model.dart';
 
 class SettingDialog extends ConsumerWidget {
