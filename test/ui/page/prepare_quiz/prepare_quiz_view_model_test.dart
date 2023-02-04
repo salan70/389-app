@@ -41,6 +41,58 @@ void main() {
     });
   });
 
+  group('removeTeam関数', () {
+    // アプリプレイ時には、このケースにならない想定
+    test('球団数:1, index:0', () {
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition1,
+          ),
+        ],
+      );
+      container.read(prepareQuizViewModelProvider).removeTeam(0);
+
+      final result = container.read(hitterSearchConditionProvider);
+      final expected = <String>[];
+
+      expect(expected, result.teamList);
+    });
+
+    test('球団数:2, index:1', () {
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition2,
+          ),
+        ],
+      );
+      container.read(prepareQuizViewModelProvider).removeTeam(1);
+
+      final result = container.read(hitterSearchConditionProvider);
+      final expected = ['千葉ロッテマリーンズ'];
+
+      expect(expected, result.teamList);
+    });
+
+    // アプリプレイ時には、このケースにならない想定
+    test('球団数:2, index:2（Listの範囲外）', () {
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition2,
+          ),
+        ],
+      );
+      container.read(prepareQuizViewModelProvider).removeTeam(2);
+
+      final result = container.read(hitterSearchConditionProvider);
+      final expected = ['千葉ロッテマリーンズ', '阪神タイガース'];
+
+      expect(expected, result.teamList);
+    });
+  });
+
   group('canRemoveTeam関数', () {
     test('選択中のteamListの長さが1', () {
       final hitterSearchCondition = HitterSearchCondition(
@@ -111,6 +163,7 @@ void main() {
       expect(expected, result);
     });
 
+    // アプリプレイ時には、このケースにならない想定
     test('球団数:1, index:1（Listの範囲外）', () {
       final teamList = ['千葉ロッテマリーンズ'];
       final result = viewModel.createRemovedTeamList(teamList, 1);
