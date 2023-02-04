@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 
 import '../../component/admob_widget.dart';
 import 'component/chose_team_widget.dart';
-import 'component/notes_widget.dart';
+import 'component/notes_text.dart';
 import 'component/select_stats_widget.dart';
-import 'component/setting_stats_value_filter_widget.dart';
-import 'component/to_play_quiz_button_widget.dart';
+import 'component/stats_value_filter_widget.dart';
+import 'component/to_play_quiz_button.dart';
 
 class PrepareQuizPage extends StatelessWidget {
   const PrepareQuizPage({super.key});
@@ -24,13 +24,13 @@ class PrepareQuizPage extends StatelessWidget {
               SizedBox(height: 16),
               ChoseTeamWidget(),
               SizedBox(height: 16),
-              SettingStatsValueFilterWidget(),
+              StatsValueFilterWidget(),
               SizedBox(height: 16),
               SelectStatsWidget(),
               SizedBox(height: 16),
-              ToPlayQuizButtonWidget(),
+              ToPlayQuizButton(),
               SizedBox(height: 16),
-              NotesWidget(),
+              NotesText(),
               SizedBox(height: 80),
             ],
           ),
