@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_quiz_ui_service.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
-class ReplayButtonWidget extends ConsumerWidget {
-  const ReplayButtonWidget({
+class ReplayButton extends ConsumerWidget {
+  const ReplayButton({
     super.key,
   });
 
