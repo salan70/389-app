@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 import '../../../../util/constant/team_list.dart';
-import 'chose_team_view_model.dart';
+import '../prepare_quiz_view_model.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
   const ChoseTeamWidget({super.key});
@@ -13,7 +13,7 @@ class ChoseTeamWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final teamList = ref.watch(hitterSearchConditionProvider).teamList;
-    final viewModel = ref.watch(choseTeamViewModelProvider);
+    final viewModel = ref.watch(prepareQuizViewModelProvider);
 
     return SmartSelect.multiple(
       title: '球団',

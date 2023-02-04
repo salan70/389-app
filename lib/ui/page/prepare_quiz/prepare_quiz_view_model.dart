@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 
-final choseTeamViewModelProvider =
-    Provider.autoDispose<ChoseTeamViewModel>(ChoseTeamViewModel.new);
+final prepareQuizViewModelProvider =
+    Provider.autoDispose<PrepareQuizViewModel>(PrepareQuizViewModel.new);
 
-class ChoseTeamViewModel {
-  ChoseTeamViewModel(
+class PrepareQuizViewModel {
+  PrepareQuizViewModel(
     this.ref,
   );
 
@@ -52,5 +52,33 @@ class ChoseTeamViewModel {
 
   bool isValidChoseTeamList(int listLength) {
     return listLength >= minChoseTeamNum;
+  }
+
+  // TODO(me): テスト書くことを検討する
+  void saveStatsList(List<String> selectedList) {
+    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
+
+    searchCondition.state =
+        searchCondition.state.copyWith(selectedStatsList: selectedList);
+  }
+
+  /// 成績をタップ時に状態（選択/未選択）を変更できるか判別
+  bool canChangeState({
+    required int selectedLength,
+    required bool isSelected,
+  }) {
+    if (selectedLength == mustSelectStatsNum && isSelected) {
+      return true;
+    }
+
+    if (selectedLength < mustSelectStatsNum) {
+      return true;
+    }
+
+    return false;
+  }
+
+  bool isValidSelectedStatsList(int listLength) {
+    return listLength == mustSelectStatsNum;
   }
 }
