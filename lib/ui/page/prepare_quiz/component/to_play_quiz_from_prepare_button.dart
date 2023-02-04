@@ -13,17 +13,16 @@ class ToPlayQuizFromPrepareButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterSearchCondition = ref.watch(hitterSearchConditionProvider);
-    final hitterSearchConditionRepository =
-        ref.watch(hitterSearchConditionRepositoryProvider);
-
     return Center(
       child: SizedBox(
         width: 120,
         child: TextButton(
           onPressed: () async {
             // hitterSearchConditionをローカルDBへ保存
-            hitterSearchConditionRepository
+            final hitterSearchCondition = ref.read(
+              hitterSearchConditionProvider,
+            );
+            ref.read(hitterSearchConditionRepositoryProvider)
                 .saveHitterSearchCondition(hitterSearchCondition);
 
             // 「Do not use BuildContexts across async gaps.」
