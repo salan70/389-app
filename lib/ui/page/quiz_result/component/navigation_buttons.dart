@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../prepare_quiz/prepare_quiz_page.dart';
 import '../../top/top_page.dart';
 
-class NavigationButtonsWidget extends ConsumerWidget {
-  const NavigationButtonsWidget({super.key});
+class NavigationButtons extends ConsumerWidget {
+  const NavigationButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

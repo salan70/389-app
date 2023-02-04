@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_quiz_ui_state.dart';
 import '../../../../state/is_correct_quiz.state.dart';
 
-class ResultTextWidget extends ConsumerWidget {
-  const ResultTextWidget({super.key});
+class ResultText extends ConsumerWidget {
+  const ResultText({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
