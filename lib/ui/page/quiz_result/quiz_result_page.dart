@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../component/admob_widget.dart';
-import 'component/navigation_buttons_widget.dart';
-import 'component/replay_button_widget.dart';
+import 'component/navigation_buttons.dart';
+import 'component/replay_button.dart';
 import 'component/result_quiz_widget.dart';
-import 'component/result_text_widget.dart';
-import 'component/share_button_widget.dart';
+import 'component/result_text.dart';
+import 'component/share_button.dart';
 
 class QuizResultPage extends StatelessWidget {
   const QuizResultPage({super.key});
@@ -27,15 +27,15 @@ class QuizResultPage extends StatelessWidget {
             children: [
               const BannerAdWidget(),
               const SizedBox(height: 16),
-              const ResultTextWidget(),
+              const ResultText(),
               const SizedBox(height: 16),
               ResultQuizWidget(globalKey: globalKey),
               const SizedBox(height: 8),
-              const ReplayButtonWidget(),
+              const ReplayButton(),
               const SizedBox(height: 8),
-              ShareButtonWidget(globalKey: globalKey),
+              ShareButton(globalKey: globalKey),
               const SizedBox(height: 8),
-              const NavigationButtonsWidget(),
+              const NavigationButtons(),
               const SizedBox(height: 80),
             ],
           ),

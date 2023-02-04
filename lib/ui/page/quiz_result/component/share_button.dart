@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../quiz_result_view_model.dart';
 
-class ShareButtonWidget extends ConsumerWidget {
-  const ShareButtonWidget({
+class ShareButton extends ConsumerWidget {
+  const ShareButton({
     super.key,
     required this.globalKey,
   });
