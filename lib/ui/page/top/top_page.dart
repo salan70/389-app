@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../component/admob_widget.dart';
-import 'component/to_play_quiz_from_top_widget.dart';
-import 'component/to_prepare_quiz_button_widget.dart';
-import 'component/to_setting_button_widget.dart';
+import 'component/to_play_quiz_from_top_button.dart';
+import 'component/to_prepare_quiz_button.dart';
+import 'component/to_setting_button.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({super.key});
@@ -21,15 +21,15 @@ class TopPage extends StatelessWidget {
               children: [
                 const Align(
                   alignment: Alignment.topRight,
-                  child: ToSettingButtonWidget(),
+                  child: ToSettingButton(),
                 ),
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      ToPrepareQuizButtonWidget(),
+                      ToPrepareQuizButton(),
                       SizedBox(height: 8),
-                      ToPlayQuizFromTopWidget(),
+                      ToPlayQuizFromTopButton(),
                       SizedBox(height: 80),
                     ],
                   ),

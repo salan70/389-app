@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../prepare_quiz/prepare_quiz_page.dart';
 
-class ToPrepareQuizButtonWidget extends StatelessWidget {
-  const ToPrepareQuizButtonWidget({
+class ToPrepareQuizButton extends StatelessWidget {
+  const ToPrepareQuizButton({
     super.key,
   });
 

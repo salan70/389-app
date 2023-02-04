@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'setting_dialog_widget.dart';
+import 'setting_dialog.dart';
 
-class ToSettingButtonWidget extends StatelessWidget {
-  const ToSettingButtonWidget({
+class ToSettingButton extends StatelessWidget {
+  const ToSettingButton({
     super.key,
   });
 
