@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../state/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 import '../../../../util/constant/hitting_stats/stats_type.dart';
-import 'select_stats_view_model.dart';
+import '../prepare_quiz_view_model.dart';
 
 class SelectStatsWidget extends ConsumerWidget {
   const SelectStatsWidget({super.key});
@@ -14,7 +14,7 @@ class SelectStatsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
-    final viewModel = ref.watch(selectStatsViewModelProvider);
+    final viewModel = ref.watch(prepareQuizViewModelProvider);
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -75,7 +75,7 @@ class ChoiceCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(selectStatsViewModelProvider);
+    final viewModel = ref.watch(prepareQuizViewModelProvider);
     final tappedStats = choice.value! as String;
 
     return Container(
