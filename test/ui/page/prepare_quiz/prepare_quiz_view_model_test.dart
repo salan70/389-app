@@ -208,7 +208,30 @@ void main() {
     });
   });
 
-  group('canChangeState関数', () {
+  group('saveStatsList関数', () {
+    test('5つの成績を指定', () {
+      final container = ProviderContainer(
+        overrides: [
+          hitterSearchConditionProvider.overrideWith(
+            (ref) => dummyHitterSearchCondition1,
+          ),
+        ],
+      );
+      final statsList = [
+        StatsType.year.label,
+        StatsType.team.label,
+        StatsType.avg.label,
+        StatsType.hr.label,
+        StatsType.atBats.label,
+      ];
+      container.read(prepareQuizViewModelProvider).saveStatsList(statsList);
+      final result = container.read(hitterSearchConditionProvider);
+
+      expect(statsList, result.selectedStatsList);
+    });
+  });
+
+  group('canChangeStatsState関数', () {
     final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
 
     test('選択可能上限数と同じ かつ すでに選択されている', () {
