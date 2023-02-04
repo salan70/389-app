@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
 
-  group('isValidChoseTeamList', () {
+  group('isValidChoseTeamList関数', () {
     test('最小値-1', () {
       final result = viewModel.isValidChoseTeamList(minChoseTeamNum - 1);
       expect(false, result);
@@ -23,7 +23,7 @@ void main() {
     });
   });
 
-  group('canChangeState', () {
+  group('canChangeState関数', () {
     test('選択可能上限数と同じ かつ すでに選択されている', () {
       final result = viewModel.canChangeState(
         selectedLength: mustSelectStatsNum,
@@ -58,7 +58,7 @@ void main() {
     });
   });
 
-  group('isValidSelectedStatsList', () {
+  group('isValidSelectedStatsList関数', () {
     test('選択可能上限数と同じ', () {
       final result = viewModel.isValidSelectedStatsList(mustSelectStatsNum);
       expect(true, result);
