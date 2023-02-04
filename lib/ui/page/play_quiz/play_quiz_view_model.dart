@@ -8,14 +8,15 @@ import '../../../../repository/supabase/supabase_hitter_repository.dart';
 import '../../../../state/hitter_quiz_ui_state.dart';
 import '../../../../state/loading_state.dart';
 
-final answerViewModelProvider = Provider<AnswerViewModel>(AnswerViewModel.new);
+final playQuizViewModelProvider =
+    Provider<PlayQuizViewModel>(PlayQuizViewModel.new);
 
 final selectedHitterIdProvider = StateProvider<String>((_) => '');
 
 final answerTextFieldProvider = StateProvider((ref) => TextEditingController());
 
-class AnswerViewModel {
-  AnswerViewModel(
+class PlayQuizViewModel {
+  PlayQuizViewModel(
     this.ref,
   );
 
