@@ -133,6 +133,8 @@ class _MyApp extends ConsumerState<MyApp> {
       // AdMobの初期化より前に実行する必要がある
       if (await AppTrackingTransparency.trackingAuthorizationStatus ==
           TrackingStatus.notDetermined) {
+        // ATTダイアログがうまく表示されない場合があるため、待機処理を追加
+        await Future<void>.delayed(const Duration(milliseconds: 200));
         await AppTrackingTransparency.requestTrackingAuthorization();
       }
       // AdMobの初期化
