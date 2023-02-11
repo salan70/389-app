@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz_ui_service.dart';
+import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
 
 class QuizEventButtons extends ConsumerWidget {
   const QuizEventButtons({
