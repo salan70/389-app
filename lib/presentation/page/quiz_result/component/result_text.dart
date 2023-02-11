@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz_ui_state.dart';
+import '../../../../application/hitter_quiz/hitter_quiz_ui_state.dart';
 import '../../../../application/is_correct_quiz.state.dart';
 
 class ResultText extends ConsumerWidget {

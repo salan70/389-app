@@ -12,8 +12,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'application/auth_service.dart';
-import 'application/hitter_quiz_ui_state.dart';
+import 'application/auth/auth_service.dart';
+import 'application/hitter_quiz/hitter_quiz_ui_state.dart';
 import 'application/key_providers.dart';
 import 'application/loading_state.dart';
 import 'domain/base_repository/auth_repository.dart';
