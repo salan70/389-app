@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../application/hitter_quiz_ui_service.dart';
+import '../../../../application/hitter_search_condition_state.dart';
 import '../../../../repository/hitter_search_condition_repository.dart';
-import '../../../../state/hitter_quiz_ui_service.dart';
-import '../../../../state/hitter_search_condition_state.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
 class ToPlayQuizFromPrepareButton extends ConsumerWidget {
@@ -22,7 +22,8 @@ class ToPlayQuizFromPrepareButton extends ConsumerWidget {
             final hitterSearchCondition = ref.read(
               hitterSearchConditionProvider,
             );
-            ref.read(hitterSearchConditionRepositoryProvider)
+            ref
+                .read(hitterSearchConditionRepositoryProvider)
                 .saveHitterSearchCondition(hitterSearchCondition);
 
             // 「Do not use BuildContexts across async gaps.」

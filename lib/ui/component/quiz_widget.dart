@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../state/hitter_quiz_ui_state.dart';
+import '../../application/hitter_quiz_ui_state.dart';
 
 /// Quizの画面を表示するWidget
 /// willUpdateがtrueの場合、このhitterQuizUiStateProviderをwatch（監視）される
