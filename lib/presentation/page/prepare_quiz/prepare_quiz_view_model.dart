@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
+import '../../../application/hitter_search_condition/hitter_search_condition_state.dart';
 
 final prepareQuizViewModelProvider =
     Provider.autoDispose<PrepareQuizViewModel>(PrepareQuizViewModel.new);
