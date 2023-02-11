@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../repository/auth_repository.dart';
+import '../domain/base_repository/auth_repository.dart';
 
 /// authサービスプロバイダー
 final authServiceProvider = Provider(
