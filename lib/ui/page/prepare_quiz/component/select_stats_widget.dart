@@ -2,7 +2,7 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../state/hitter_search_condition_state.dart';
+import '../../../../application/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 import '../../../../util/constant/hitting_stats/stats_type.dart';
 import '../prepare_quiz_view_model.dart';

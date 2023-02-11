@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../model/ui/hitter_quiz_ui.dart';
+import '../domain/ui/hitter_quiz_ui.dart';
 import '../repository/hitter_repository.dart';
 import 'hitter_quiz_ui_state.dart';
 import 'hitter_search_condition_state.dart';

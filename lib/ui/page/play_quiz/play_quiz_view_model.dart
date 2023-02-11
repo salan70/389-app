@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../model/ui/hitter_id_by_name.dart';
+import '../../../../application/hitter_quiz_ui_state.dart';
+import '../../../../application/loading_state.dart';
+import '../../../../domain/ui/hitter_id_by_name.dart';
 import '../../../../repository/supabase/supabase_hitter_repository.dart';
-import '../../../../state/hitter_quiz_ui_state.dart';
-import '../../../../state/loading_state.dart';
 
 final playQuizViewModelProvider =
     Provider<PlayQuizViewModel>(PlayQuizViewModel.new);
