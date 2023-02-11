@@ -1,5 +1,5 @@
-import 'package:baseball_quiz_app/model/typeadapter/hitter_search_condition.dart';
-import 'package:baseball_quiz_app/state/hitter_search_condition_state.dart';
+import 'package:baseball_quiz_app/application/hitter_search_condition_state.dart';
+import 'package:baseball_quiz_app/domain/typeadapter/hitter_search_condition.dart';
 import 'package:baseball_quiz_app/ui/page/prepare_quiz/prepare_quiz_view_model.dart';
 import 'package:baseball_quiz_app/util/constant/hitter_search_condition_constant.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';

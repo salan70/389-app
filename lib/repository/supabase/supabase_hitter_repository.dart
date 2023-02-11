@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../model/hitter.dart';
-import '../../model/hitting_stats.dart';
-import '../../model/typeadapter/hitter_search_condition.dart';
-import '../../model/ui/hitter_id_by_name.dart';
-import '../../model/ui/hitter_quiz_ui.dart';
+import '../../domain/hitter.dart';
+import '../../domain/hitting_stats.dart';
+import '../../domain/typeadapter/hitter_search_condition.dart';
+import '../../domain/ui/hitter_id_by_name.dart';
+import '../../domain/ui/hitter_quiz_ui.dart';
 import '../../util/exception/supabase_exception.dart';
 import '../../util/logger.dart';
 import '../hitter_repository.dart';
