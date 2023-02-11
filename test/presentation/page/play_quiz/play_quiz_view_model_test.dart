@@ -1,7 +1,7 @@
 import 'package:baseball_quiz_app/application/hitter_quiz_ui_state.dart';
 import 'package:baseball_quiz_app/domain/ui/hitter_id_by_name.dart';
+import 'package:baseball_quiz_app/infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'package:baseball_quiz_app/presentation/page/play_quiz/play_quiz_view_model.dart';
-import 'package:baseball_quiz_app/repository/supabase/supabase_hitter_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 

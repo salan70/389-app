@@ -3,14 +3,14 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../domain/hitter.dart';
-import '../../domain/hitting_stats.dart';
-import '../../domain/typeadapter/hitter_search_condition.dart';
-import '../../domain/ui/hitter_id_by_name.dart';
-import '../../domain/ui/hitter_quiz_ui.dart';
-import '../../util/exception/supabase_exception.dart';
-import '../../util/logger.dart';
-import '../hitter_repository.dart';
+import '../../../domain/base_repository/hitter_repository.dart';
+import '../../../domain/hitter.dart';
+import '../../../domain/hitting_stats.dart';
+import '../../../domain/typeadapter/hitter_search_condition.dart';
+import '../../../domain/ui/hitter_id_by_name.dart';
+import '../../../domain/ui/hitter_quiz_ui.dart';
+import '../../../util/exception/supabase_exception.dart';
+import '../../../util/logger.dart';
 import 'supabase_hitter_converter.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー

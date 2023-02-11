@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../repository/auth_repository.dart';
+import '../../../domain/base_repository/auth_repository.dart';
 import '../../../util/constant/inquiry.dart';
 
 final topPageViewModelProvider =
