@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../application/key_providers.dart';
 import '../application/loading_state.dart';
-import '../ui/component/error_dialog.dart';
+import '../presentation/component/error_dialog.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
 /// 参考
