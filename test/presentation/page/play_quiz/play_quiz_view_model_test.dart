@@ -1,5 +1,5 @@
 import 'package:baseball_quiz_app/application/hitter_quiz/hitter_quiz_state.dart';
-import 'package:baseball_quiz_app/domain/entity/hitter_id_by_name.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'package:baseball_quiz_app/presentation/page/play_quiz/play_quiz_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,10 +10,10 @@ import '../../../dummy_data/dummy_hitter.dart';
 void main() {
   group('filterHitter関数', () {
     final hitterList = [
-      const HitterIdByName(label: '坂本勇人（捕手）', id: '1'),
-      const HitterIdByName(label: '坂本勇人（内野手）', id: '2'),
-      const HitterIdByName(label: 'レオネス・マーティン', id: '3'),
-      const HitterIdByName(label: 'T-岡田', id: '4'),
+      const Hitter(label: '坂本勇人（捕手）', id: '1'),
+      const Hitter(label: '坂本勇人（内野手）', id: '2'),
+      const Hitter(label: 'レオネス・マーティン', id: '3'),
+      const Hitter(label: 'T-岡田', id: '4'),
     ];
 
     test('5文字（カタカナ）, 1選手に該当', () async {
@@ -30,7 +30,7 @@ void main() {
           .filterHitter(searchWord);
 
       final expected = [
-        const HitterIdByName(label: 'レオネス・マーティン', id: '3'),
+        const Hitter(label: 'レオネス・マーティン', id: '3'),
       ];
 
       expect(expected, result);
@@ -50,8 +50,8 @@ void main() {
           .filterHitter(searchWord);
 
       final expected = [
-        const HitterIdByName(label: '坂本勇人（捕手）', id: '1'),
-        const HitterIdByName(label: '坂本勇人（内野手）', id: '2'),
+        const Hitter(label: '坂本勇人（捕手）', id: '1'),
+        const Hitter(label: '坂本勇人（内野手）', id: '2'),
       ];
 
       expect(expected, result);
@@ -71,7 +71,7 @@ void main() {
           .filterHitter(searchWord);
 
       final expected = [
-        const HitterIdByName(label: 'T-岡田', id: '4'),
+        const Hitter(label: 'T-岡田', id: '4'),
       ];
 
       expect(expected, result);
@@ -90,7 +90,7 @@ void main() {
           .read(playQuizViewModelProvider)
           .filterHitter(searchWord);
 
-      final expected = <HitterIdByName>[];
+      final expected = <Hitter>[];
 
       expect(expected, result);
     });

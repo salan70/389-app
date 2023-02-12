@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/loading_state.dart';
 import '../../../application/hitter_quiz/hitter_quiz_state.dart';
-import '../../../domain/entity/hitter_id_by_name.dart';
+import '../../../domain/entity/hitter.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 
 final playQuizViewModelProvider =
@@ -22,9 +22,9 @@ class PlayQuizViewModel {
 
   final Ref ref;
 
-  Future<List<HitterIdByName>> filterHitter(String searchWord) async {
+  Future<List<Hitter>> filterHitter(String searchWord) async {
     final allHitterList = await ref.read(allHitterListProvider);
-    final hitterListAfterSearch = <HitterIdByName>[];
+    final hitterListAfterSearch = <Hitter>[];
 
     for (final hitter in allHitterList) {
       if (hitter.label.contains(searchWord)) {

@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../entity/hitter_id_by_name.dart';
+import '../entity/hitter.dart';
 import '../entity/hitter_quiz.dart';
 import '../entity/hitter_search_condition.dart';
 
@@ -15,5 +15,5 @@ abstract class HitterRepository {
   );
 
   /// 登録されている全ての野手を取得する
-  Future<List<HitterIdByName>> fetchAllHitter();
+  Future<List<Hitter>> fetchAllHitter();
 }
