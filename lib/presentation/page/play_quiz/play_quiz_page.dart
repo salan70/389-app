@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../component/admob_widget.dart';
+import '../../component/banner_ad_widget.dart';
 import '../../component/quiz_widget.dart';
 import 'component/answer_widget.dart';
 import 'component/quiz_event_buttons.dart';
