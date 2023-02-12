@@ -9,8 +9,8 @@ import '../../../domain/entity/hitter_search_condition.dart';
 import '../../../domain/repository/hitter_repository.dart';
 import '../../../util/exception/supabase_exception.dart';
 import '../../../util/logger.dart';
-import 'entity/hitter.dart';
 import 'entity/hitting_stats.dart';
+import 'entity/supabase_hitter.dart';
 import 'supabase_hitter_converter.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー
@@ -31,14 +31,14 @@ class SupabaseHitterRepository implements HitterRepository {
     HitterSearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
-    final hitter = await searchHitter(searchCondition);
+    final supabaseHitter = await searchHitter(searchCondition);
 
     // 取得した選手の成績を取得
-    final statsList = await fetchHittingStats(hitter.id);
+    final statsList = await fetchHittingStats(supabaseHitter.id);
 
     // HitterQuiz型に変換
     final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
-      hitter,
+      supabaseHitter,
       statsList,
       searchCondition.selectedStatsList,
     );
@@ -47,7 +47,8 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// 条件に合う選手を1人検索する
-  Future<Hitter> searchHitter(HitterSearchCondition searchCondition) async {
+  Future<SupabaseHitter> searchHitter(
+      HitterSearchCondition searchCondition) async {
     try {
       final responses = await supabase.client
               .from('hitter_table')
@@ -69,9 +70,9 @@ class SupabaseHitterRepository implements HitterRepository {
       // ランダムで1人選出
       final chosenResponse =
           responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
-      final hitter = Hitter.fromJson(chosenResponse);
+      final supabaseHitter = SupabaseHitter.fromJson(chosenResponse);
 
-      return hitter;
+      return supabaseHitter;
     } on SupabaseException catch (e) {
       logger.e(e);
       rethrow;
