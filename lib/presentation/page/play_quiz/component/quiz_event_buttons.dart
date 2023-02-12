@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
+import '../../../../application/hitter_quiz/hitter_quiz_service.dart';
 
 class QuizEventButtons extends ConsumerWidget {
   const QuizEventButtons({
@@ -10,7 +10,7 @@ class QuizEventButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
+    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,7 +20,7 @@ class QuizEventButtons extends ConsumerWidget {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
 
-            if (hitterQuizUiService.canOpen()) {
+            if (hitterQuizService.canOpen()) {
               showDialog<void>(
                 context: context,
                 builder: (_) {
@@ -38,8 +38,8 @@ class QuizEventButtons extends ConsumerWidget {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
 
-            if (hitterQuizUiService.canOpen()) {
-              hitterQuizUiService.openRandom();
+            if (hitterQuizService.canOpen()) {
+              hitterQuizService.openRandom();
             } else {
               // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
@@ -56,7 +56,7 @@ class ConfirmOpenAllDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUiService = ref.watch(hitterQuizUiServiceProvider);
+    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     return AlertDialog(
       title: const Text('確認'),
@@ -68,7 +68,7 @@ class ConfirmOpenAllDialog extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
-            hitterQuizUiService.openAll();
+            hitterQuizService.openAll();
             Navigator.pop(context);
           },
           child: Text(

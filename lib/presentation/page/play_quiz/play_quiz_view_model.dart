@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/loading_state.dart';
-import '../../../application/hitter_quiz/hitter_quiz_ui_state.dart';
+import '../../../application/hitter_quiz/hitter_quiz_state.dart';
 import '../../../domain/entity/hitter_id_by_name.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 
@@ -38,9 +38,9 @@ class PlayQuizViewModel {
   /// 正解しているか否かを返す
   bool isCorrectHitterQuiz() {
     final selectedHitterId = ref.read(selectedHitterIdProvider);
-    final hitterQuizUi = ref.read(hitterQuizUiStateProvider);
+    final hitterQuiz = ref.read(hitterQuizStateProvider);
 
-    return selectedHitterId == hitterQuizUi.value!.id;
+    return selectedHitterId == hitterQuiz.value!.id;
   }
 
   /// 結果表示までじらすための処理

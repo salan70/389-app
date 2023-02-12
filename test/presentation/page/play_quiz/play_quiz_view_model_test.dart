@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/application/hitter_quiz/hitter_quiz_ui_state.dart';
+import 'package:baseball_quiz_app/application/hitter_quiz/hitter_quiz_state.dart';
 import 'package:baseball_quiz_app/domain/entity/hitter_id_by_name.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'package:baseball_quiz_app/presentation/page/play_quiz/play_quiz_view_model.dart';
@@ -98,8 +98,8 @@ void main() {
     test('不正解している', () {
       final container = ProviderContainer(
         overrides: [
-          hitterQuizUiStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuizUi),
+          hitterQuizStateProvider.overrideWith(
+            (ref) => const AsyncData(dummyHitterQuiz),
           ),
           selectedHitterIdProvider.overrideWith(
             (ref) => 'incorrect Id',
@@ -116,8 +116,8 @@ void main() {
     test('正解している', () {
       final container = ProviderContainer(
         overrides: [
-          hitterQuizUiStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuizUi),
+          hitterQuizStateProvider.overrideWith(
+            (ref) => const AsyncData(dummyHitterQuiz),
           ),
           selectedHitterIdProvider.overrideWith(
             (ref) => '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
@@ -132,8 +132,8 @@ void main() {
     test('不正解している', () {
       final container = ProviderContainer(
         overrides: [
-          hitterQuizUiStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuizUi),
+          hitterQuizStateProvider.overrideWith(
+            (ref) => const AsyncData(dummyHitterQuiz),
           ),
           selectedHitterIdProvider.overrideWith(
             (ref) => 'incorrect Id',
