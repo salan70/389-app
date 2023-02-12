@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'hitter_id_by_name.dart';
+part of 'hitter.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,35 +14,33 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-HitterIdByName _$HitterIdByNameFromJson(Map<String, dynamic> json) {
-  return _HitterIdByName.fromJson(json);
+Hitter _$HitterFromJson(Map<String, dynamic> json) {
+  return _Hitter.fromJson(json);
 }
 
 /// @nodoc
-mixin _$HitterIdByName {
+mixin _$Hitter {
   @JsonKey(name: 'name')
   String get label => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $HitterIdByNameCopyWith<HitterIdByName> get copyWith =>
-      throw _privateConstructorUsedError;
+  $HitterCopyWith<Hitter> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterIdByNameCopyWith<$Res> {
-  factory $HitterIdByNameCopyWith(
-          HitterIdByName value, $Res Function(HitterIdByName) then) =
-      _$HitterIdByNameCopyWithImpl<$Res, HitterIdByName>;
+abstract class $HitterCopyWith<$Res> {
+  factory $HitterCopyWith(Hitter value, $Res Function(Hitter) then) =
+      _$HitterCopyWithImpl<$Res, Hitter>;
   @useResult
   $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
-class _$HitterIdByNameCopyWithImpl<$Res, $Val extends HitterIdByName>
-    implements $HitterIdByNameCopyWith<$Res> {
-  _$HitterIdByNameCopyWithImpl(this._value, this._then);
+class _$HitterCopyWithImpl<$Res, $Val extends Hitter>
+    implements $HitterCopyWith<$Res> {
+  _$HitterCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -69,22 +67,19 @@ class _$HitterIdByNameCopyWithImpl<$Res, $Val extends HitterIdByName>
 }
 
 /// @nodoc
-abstract class _$$_HitterIdByNameCopyWith<$Res>
-    implements $HitterIdByNameCopyWith<$Res> {
-  factory _$$_HitterIdByNameCopyWith(
-          _$_HitterIdByName value, $Res Function(_$_HitterIdByName) then) =
-      __$$_HitterIdByNameCopyWithImpl<$Res>;
+abstract class _$$_HitterCopyWith<$Res> implements $HitterCopyWith<$Res> {
+  factory _$$_HitterCopyWith(_$_Hitter value, $Res Function(_$_Hitter) then) =
+      __$$_HitterCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
-class __$$_HitterIdByNameCopyWithImpl<$Res>
-    extends _$HitterIdByNameCopyWithImpl<$Res, _$_HitterIdByName>
-    implements _$$_HitterIdByNameCopyWith<$Res> {
-  __$$_HitterIdByNameCopyWithImpl(
-      _$_HitterIdByName _value, $Res Function(_$_HitterIdByName) _then)
+class __$$_HitterCopyWithImpl<$Res>
+    extends _$HitterCopyWithImpl<$Res, _$_Hitter>
+    implements _$$_HitterCopyWith<$Res> {
+  __$$_HitterCopyWithImpl(_$_Hitter _value, $Res Function(_$_Hitter) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +88,7 @@ class __$$_HitterIdByNameCopyWithImpl<$Res>
     Object? label = null,
     Object? id = null,
   }) {
-    return _then(_$_HitterIdByName(
+    return _then(_$_Hitter(
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -108,12 +103,12 @@ class __$$_HitterIdByNameCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_HitterIdByName implements _HitterIdByName {
-  const _$_HitterIdByName(
+class _$_Hitter implements _Hitter {
+  const _$_Hitter(
       {@JsonKey(name: 'name') required this.label, required this.id});
 
-  factory _$_HitterIdByName.fromJson(Map<String, dynamic> json) =>
-      _$$_HitterIdByNameFromJson(json);
+  factory _$_Hitter.fromJson(Map<String, dynamic> json) =>
+      _$$_HitterFromJson(json);
 
   @override
   @JsonKey(name: 'name')
@@ -123,14 +118,14 @@ class _$_HitterIdByName implements _HitterIdByName {
 
   @override
   String toString() {
-    return 'HitterIdByName(label: $label, id: $id)';
+    return 'Hitter(label: $label, id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterIdByName &&
+            other is _$_Hitter &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.id, id) || other.id == id));
   }
@@ -142,24 +137,23 @@ class _$_HitterIdByName implements _HitterIdByName {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterIdByNameCopyWith<_$_HitterIdByName> get copyWith =>
-      __$$_HitterIdByNameCopyWithImpl<_$_HitterIdByName>(this, _$identity);
+  _$$_HitterCopyWith<_$_Hitter> get copyWith =>
+      __$$_HitterCopyWithImpl<_$_Hitter>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HitterIdByNameToJson(
+    return _$$_HitterToJson(
       this,
     );
   }
 }
 
-abstract class _HitterIdByName implements HitterIdByName {
-  const factory _HitterIdByName(
+abstract class _Hitter implements Hitter {
+  const factory _Hitter(
       {@JsonKey(name: 'name') required final String label,
-      required final String id}) = _$_HitterIdByName;
+      required final String id}) = _$_Hitter;
 
-  factory _HitterIdByName.fromJson(Map<String, dynamic> json) =
-      _$_HitterIdByName.fromJson;
+  factory _Hitter.fromJson(Map<String, dynamic> json) = _$_Hitter.fromJson;
 
   @override
   @JsonKey(name: 'name')
@@ -168,6 +162,6 @@ abstract class _HitterIdByName implements HitterIdByName {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterIdByNameCopyWith<_$_HitterIdByName> get copyWith =>
+  _$$_HitterCopyWith<_$_Hitter> get copyWith =>
       throw _privateConstructorUsedError;
 }
