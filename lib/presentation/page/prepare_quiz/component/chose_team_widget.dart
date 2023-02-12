@@ -2,18 +2,18 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
-import '../../../../util/constant/hitter_search_condition_constant.dart';
+import '../../../../application/quiz/search_condition/search_condition_service.dart';
+import '../../../../application/quiz/search_condition/search_condition_state.dart';
+import '../../../../util/constant/search_condition_constant.dart';
 import '../../../../util/constant/team_list.dart';
-import '../prepare_quiz_view_model.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
   const ChoseTeamWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final teamList = ref.watch(hitterSearchConditionProvider).teamList;
-    final viewModel = ref.watch(prepareQuizViewModelProvider);
+    final teamList = ref.watch(searchConditionProvider).teamList;
+    final searchConditionService = ref.watch(searchConditionServiceProvider);
 
     return SmartSelect.multiple(
       title: '球団',
@@ -43,11 +43,12 @@ class ChoseTeamWidget extends ConsumerWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       onChange: (selectedList) {
-        viewModel.saveTeamList(selectedList.value);
+        searchConditionService.saveTeamList(selectedList.value);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid = viewModel.isValidChoseTeamList(chosen.length);
+        final isValid =
+            searchConditionService.isValidChoseTeamList(chosen.length);
         return isValid ? '' : errorForChoseTeamValidation;
       },
       tileBuilder: (context, state) {
@@ -61,8 +62,8 @@ class ChoseTeamWidget extends ConsumerWidget {
               return Text(teamList[index]);
             },
             chipOnDelete: (index) {
-              if (viewModel.canRemoveTeam()) {
-                viewModel.removeTeam(index);
+              if (searchConditionService.canRemoveTeam()) {
+                searchConditionService.removeTeam(index);
               }
             },
           ),

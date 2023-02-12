@@ -1,10 +1,10 @@
-import 'package:baseball_quiz_app/domain/hitter.dart';
-import 'package:baseball_quiz_app/domain/hitting_stats.dart';
-import 'package:baseball_quiz_app/domain/typeadapter/hitter_search_condition.dart';
-import 'package:baseball_quiz_app/domain/ui/hitter_quiz_ui.dart';
-import 'package:baseball_quiz_app/domain/ui/stats_value.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter_quiz.dart';
+import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
+import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
+import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitting_stats.dart';
+import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/supabase_hitter.dart';
 
-const dummyHitter = Hitter(
+const dummyHitter = SupabaseHitter(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
   team: '横浜DeNAベイスターズ',
@@ -135,7 +135,7 @@ final dummyHittingStatsList = [
   )
 ];
 
-const dummyHitterSearchCondition = HitterSearchCondition(
+const dummySearchCondition = SearchCondition(
   teamList: ['横浜DeNAベイスターズ'],
   minGames: 100,
   minHits: 100,
@@ -143,7 +143,7 @@ const dummyHitterSearchCondition = HitterSearchCondition(
   selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],
 );
 
-const dummyHitterQuizUi = HitterQuizUi(
+const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
   selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],

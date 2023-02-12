@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../../application/is_correct_quiz.state.dart';
-import '../../../../domain/ui/hitter_id_by_name.dart';
-import '../../../../util/admob.dart';
+import '../../../../application/admob/interstitial_ad_service.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../application/widget/widget_state.dart';
+import '../../../../domain/entity/hitter.dart';
 import '../../quiz_result/quiz_result_page.dart';
-import '../play_quiz_view_model.dart';
 import 'incorrect_dialog.dart';
 
 class AnswerWidget extends ConsumerStatefulWidget {
@@ -30,7 +31,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
     final scrollController = ScrollController();
     final textEditingController = ref.watch(answerTextFieldProvider);
 
-    final viewModel = ref.watch(playQuizViewModelProvider);
+    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final selectedHitterIdNotifier =
@@ -51,9 +52,9 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
           ),
           future: () {
             selectedHitterIdNotifier.state = '';
-            return viewModel.filterHitter(textEditingController.text);
+            return hitterQuizService.searchHitter(textEditingController.text);
           },
-          getSelectedValue: (HitterIdByName value) {
+          getSelectedValue: (Hitter value) {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
             selectedHitterIdNotifier.state = value.id;
@@ -72,12 +73,14 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     final navigator = Navigator.of(context);
 
                     // interstitial広告を作成
-                    final interstitialAd = MyInterstitialAd();
-                    await interstitialAd.createAd();
+                    final interstitialAdService =
+                        ref.read(interstitialAdServiceProvider);
+                    await interstitialAdService.createAd();
 
-                    isCorrectNotifier.state = viewModel.isCorrectHitterQuiz();
+                    isCorrectNotifier.state =
+                        hitterQuizService.isCorrectHitterQuiz();
 
-                    await viewModel.waitResult();
+                    await interstitialAdService.waitResult();
 
                     // 正解の場合
                     if (isCorrectNotifier.state) {
@@ -89,9 +92,9 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     }
                     // 不正解の場合
                     else {
-                      if (viewModel.isShownAds()) {
+                      if (interstitialAdService.isShownAds()) {
                         // interstitial広告を表示
-                        await interstitialAd.showAd();
+                        await interstitialAdService.showAd();
                       }
 
                       // TODO(me): 一旦ignoreで甘えた。
