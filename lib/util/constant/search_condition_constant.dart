@@ -1,10 +1,10 @@
-import '../../domain/entity/hitter_search_condition.dart';
+import '../../domain/entity/search_condition.dart';
 import 'hitting_stats/stats_type.dart';
 
-/// hitterSearchConditionを格納するHiveのBox名
-const hitterSearchConditionBoxKey = 'hitterSearchConditionBox';
+/// searchConditionを格納するHiveのBox名
+const searchConditionBoxKey = 'searchConditionBox';
 
-final defaultHittingSearchCondition = HitterSearchCondition(
+final defaultSearchCondition = SearchCondition(
   teamList: [
     'オリックス・バファローズ',
     '福岡ソフトバンクホークス',

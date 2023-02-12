@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../util/constant/hitter_search_condition_constant.dart';
-import 'hitter_search_condition_state.dart';
+import '../../../util/constant/search_condition_constant.dart';
+import 'search_condition_state.dart';
 
-final hitterSearchConditionServiceProvider =
-    Provider.autoDispose<HitterSearchConditionService>(
-  HitterSearchConditionService.new,
+final searchConditionServiceProvider =
+    Provider.autoDispose<SearchConditionService>(
+  SearchConditionService.new,
 );
 
-class HitterSearchConditionService {
-  HitterSearchConditionService(
+class SearchConditionService {
+  SearchConditionService(
     this.ref,
   );
 
@@ -18,7 +18,7 @@ class HitterSearchConditionService {
 
   /// 選択した球団のリストを保存する
   void saveTeamList(List<Object?> selectedList) {
-    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
+    final searchCondition = ref.read(searchConditionProvider.notifier);
     final teamList = selectedList.cast<String>();
     searchCondition.state = searchCondition.state.copyWith(teamList: teamList);
   }
@@ -27,12 +27,12 @@ class HitterSearchConditionService {
   /// 選択中のteamListの長さが2以上の場合に取り除ける
   /// （取り除くとteamListが空になる場合取り除けない）
   bool canRemoveTeam() {
-    return ref.read(hitterSearchConditionProvider).teamList.length > 1;
+    return ref.read(searchConditionProvider).teamList.length > 1;
   }
 
   /// 選択した球団を取り除く
   void removeTeam(int selectedIndex) {
-    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
+    final searchCondition = ref.read(searchConditionProvider.notifier);
 
     final teamList = searchCondition.state.teamList;
     final removedTeamList = createRemovedTeamList(teamList, selectedIndex);
@@ -65,7 +65,7 @@ class HitterSearchConditionService {
   }
 
   void saveStatsList(List<String> selectedList) {
-    final searchCondition = ref.read(hitterSearchConditionProvider.notifier);
+    final searchCondition = ref.read(searchConditionProvider.notifier);
     searchCondition.state =
         searchCondition.state.copyWith(selectedStatsList: selectedList);
   }

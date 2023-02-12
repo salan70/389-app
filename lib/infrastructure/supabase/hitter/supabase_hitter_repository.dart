@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
-import '../../../domain/entity/hitter_search_condition.dart';
+import '../../../domain/entity/search_condition.dart';
 import '../../../domain/repository/hitter_repository.dart';
 import '../../../util/exception/supabase_exception.dart';
 import '../../../util/logger.dart';
@@ -28,7 +28,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   @override
   Future<HitterQuiz> createHitterQuiz(
-    HitterSearchCondition searchCondition,
+    SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
     final supabaseHitter = await searchHitter(searchCondition);
@@ -48,7 +48,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   /// 条件に合う選手を1人検索する
   Future<SupabaseHitter> searchHitter(
-    HitterSearchCondition searchCondition,
+    SearchCondition searchCondition,
   ) async {
     try {
       final responses = await supabase.client
