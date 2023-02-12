@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/entity/hitter_quiz.dart';
+import '../../../domain/entity/hitter_quiz.dart';
 
 /// hitterQuizをAsyncValueとして返す
 final hitterQuizStateProvider = StateProvider<AsyncValue<HitterQuiz?>>(

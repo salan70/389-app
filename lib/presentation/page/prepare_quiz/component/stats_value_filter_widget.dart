@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/search_condition/search_condition_state.dart';
+import '../../../../application/quiz/search_condition/search_condition_state.dart';
 import '../../../../util/constant/search_condition_constant.dart';
 
 class StatsValueFilterWidget extends ConsumerWidget {

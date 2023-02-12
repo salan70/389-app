@@ -13,8 +13,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'application/auth/auth_service.dart';
-import 'application/hitter_quiz/hitter_quiz_state.dart';
 import 'application/loading/loading_state.dart';
+import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import 'application/widget/widget_state.dart';
 import 'domain/entity/search_condition.dart';
 import 'domain/repository/auth_repository.dart';
