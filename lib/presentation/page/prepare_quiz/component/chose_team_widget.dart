@@ -2,10 +2,10 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../application/hitter_search_condition/hitter_search_condition_service.dart';
 import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 import '../../../../util/constant/team_list.dart';
-import '../prepare_quiz_view_model.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
   const ChoseTeamWidget({super.key});
@@ -13,7 +13,8 @@ class ChoseTeamWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final teamList = ref.watch(hitterSearchConditionProvider).teamList;
-    final viewModel = ref.watch(prepareQuizViewModelProvider);
+    final hitterSearchConditionService =
+        ref.watch(hitterSearchConditionServiceProvider);
 
     return SmartSelect.multiple(
       title: '球団',
@@ -43,11 +44,12 @@ class ChoseTeamWidget extends ConsumerWidget {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       onChange: (selectedList) {
-        viewModel.saveTeamList(selectedList.value);
+        hitterSearchConditionService.saveTeamList(selectedList.value);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid = viewModel.isValidChoseTeamList(chosen.length);
+        final isValid =
+            hitterSearchConditionService.isValidChoseTeamList(chosen.length);
         return isValid ? '' : errorForChoseTeamValidation;
       },
       tileBuilder: (context, state) {
@@ -61,8 +63,8 @@ class ChoseTeamWidget extends ConsumerWidget {
               return Text(teamList[index]);
             },
             chipOnDelete: (index) {
-              if (viewModel.canRemoveTeam()) {
-                viewModel.removeTeam(index);
+              if (hitterSearchConditionService.canRemoveTeam()) {
+                hitterSearchConditionService.removeTeam(index);
               }
             },
           ),

@@ -2,10 +2,10 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../application/hitter_search_condition/hitter_search_condition_service.dart';
 import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
 import '../../../../util/constant/hitter_search_condition_constant.dart';
 import '../../../../util/constant/hitting_stats/stats_type.dart';
-import '../prepare_quiz_view_model.dart';
 
 class SelectStatsWidget extends ConsumerWidget {
   const SelectStatsWidget({super.key});
@@ -14,7 +14,8 @@ class SelectStatsWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchCondition = ref.watch(hitterSearchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
-    final viewModel = ref.watch(prepareQuizViewModelProvider);
+    final hitterSearchConditionService =
+        ref.watch(hitterSearchConditionServiceProvider);
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -34,11 +35,12 @@ class SelectStatsWidget extends ConsumerWidget {
       choiceType: S2ChoiceType.chips,
       onChange: (selectedObject) {
         final selectedList = selectedObject.value as List<String>;
-        viewModel.saveStatsList(selectedList);
+        hitterSearchConditionService.saveStatsList(selectedList);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid = viewModel.isValidSelectedStatsList(chosen.length);
+        final isValid = hitterSearchConditionService
+            .isValidSelectedStatsList(chosen.length);
         return isValid ? '' : errorForSelectStatsValidation;
       },
       // modal表示前画面の、選択している成績のUI
@@ -75,7 +77,8 @@ class ChoiceCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(prepareQuizViewModelProvider);
+    final hitterSearchConditionService =
+        ref.watch(hitterSearchConditionServiceProvider);
     final tappedStats = choice.value! as String;
 
     return Container(
@@ -91,7 +94,8 @@ class ChoiceCard extends ConsumerWidget {
         onTap: () {
           final isSelected = choice.selected;
 
-          final canChangeState = viewModel.canChangeStatsState(
+          final canChangeState =
+              hitterSearchConditionService.canChangeStatsState(
             selectedLength: state.selection!.length,
             isSelected: isSelected,
           );

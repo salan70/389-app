@@ -1,6 +1,6 @@
+import 'package:baseball_quiz_app/application/hitter_search_condition/hitter_search_condition_service.dart';
 import 'package:baseball_quiz_app/application/hitter_search_condition/hitter_search_condition_state.dart';
 import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
-import 'package:baseball_quiz_app/presentation/page/prepare_quiz/prepare_quiz_view_model.dart';
 import 'package:baseball_quiz_app/util/constant/hitter_search_condition_constant.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +19,9 @@ void main() {
           ),
         ],
       );
-      container.read(prepareQuizViewModelProvider).saveTeamList(teamList);
+      container
+          .read(hitterSearchConditionServiceProvider)
+          .saveTeamList(teamList);
       final result = container.read(hitterSearchConditionProvider);
 
       expect(teamList, result.teamList);
@@ -34,7 +36,9 @@ void main() {
           ),
         ],
       );
-      container.read(prepareQuizViewModelProvider).saveTeamList(teamList);
+      container
+          .read(hitterSearchConditionServiceProvider)
+          .saveTeamList(teamList);
       final result = container.read(hitterSearchConditionProvider);
 
       expect(teamList, result.teamList);
@@ -51,7 +55,7 @@ void main() {
           ),
         ],
       );
-      container.read(prepareQuizViewModelProvider).removeTeam(0);
+      container.read(hitterSearchConditionServiceProvider).removeTeam(0);
 
       final result = container.read(hitterSearchConditionProvider);
       final expected = <String>[];
@@ -67,7 +71,7 @@ void main() {
           ),
         ],
       );
-      container.read(prepareQuizViewModelProvider).removeTeam(1);
+      container.read(hitterSearchConditionServiceProvider).removeTeam(1);
 
       final result = container.read(hitterSearchConditionProvider);
       final expected = ['千葉ロッテマリーンズ'];
@@ -84,7 +88,7 @@ void main() {
           ),
         ],
       );
-      container.read(prepareQuizViewModelProvider).removeTeam(2);
+      container.read(hitterSearchConditionServiceProvider).removeTeam(2);
 
       final result = container.read(hitterSearchConditionProvider);
       final expected = ['千葉ロッテマリーンズ', '阪神タイガース'];
@@ -118,7 +122,7 @@ void main() {
         ],
       );
       final result =
-          container.read(prepareQuizViewModelProvider).canRemoveTeam();
+          container.read(hitterSearchConditionServiceProvider).canRemoveTeam();
       expect(false, result);
     });
 
@@ -147,13 +151,14 @@ void main() {
         ],
       );
       final result =
-          container.read(prepareQuizViewModelProvider).canRemoveTeam();
+          container.read(hitterSearchConditionServiceProvider).canRemoveTeam();
       expect(true, result);
     });
   });
 
   group('createRemovedTeamList関数', () {
-    final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
+    final viewModel =
+        ProviderContainer().read(hitterSearchConditionServiceProvider);
 
     test('球団数:1, index:0', () {
       final teamList = ['千葉ロッテマリーンズ'];
@@ -190,7 +195,8 @@ void main() {
   });
 
   group('isValidChoseTeamList関数', () {
-    final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
+    final viewModel =
+        ProviderContainer().read(hitterSearchConditionServiceProvider);
 
     test('最小値-1', () {
       final result = viewModel.isValidChoseTeamList(minChoseTeamNum - 1);
@@ -224,7 +230,9 @@ void main() {
         StatsType.hr.label,
         StatsType.atBats.label,
       ];
-      container.read(prepareQuizViewModelProvider).saveStatsList(statsList);
+      container
+          .read(hitterSearchConditionServiceProvider)
+          .saveStatsList(statsList);
       final result = container.read(hitterSearchConditionProvider);
 
       expect(statsList, result.selectedStatsList);
@@ -232,7 +240,8 @@ void main() {
   });
 
   group('canChangeStatsState関数', () {
-    final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
+    final viewModel =
+        ProviderContainer().read(hitterSearchConditionServiceProvider);
 
     test('選択可能上限数と同じ かつ すでに選択されている', () {
       final result = viewModel.canChangeStatsState(
@@ -269,7 +278,8 @@ void main() {
   });
 
   group('isValidSelectedStatsList関数', () {
-    final viewModel = ProviderContainer().read(prepareQuizViewModelProvider);
+    final viewModel =
+        ProviderContainer().read(hitterSearchConditionServiceProvider);
 
     test('選択可能上限数と同じ', () {
       final result = viewModel.isValidSelectedStatsList(mustSelectStatsNum);
