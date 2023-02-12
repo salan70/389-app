@@ -8,22 +8,22 @@ import '../../dummy_data/dummy_hitter.dart';
 void main() async {
   final converter = SupabaseHitterConverter();
 
-  group('toHitterQuizUi関数', () {
+  group('toHitterQuiz関数', () {
     test('正常系', () {
-      final result = converter.toHitterQuizUi(
+      final result = converter.toHitterQuiz(
         dummyHitter,
         dummyHittingStatsList,
         dummyHitterSearchCondition.selectedStatsList,
       );
-      expect(dummyHitterQuizUi.id, result.id);
-      expect(dummyHitterQuizUi.name, result.name);
-      expect(dummyHitterQuizUi.selectedStatsList, result.selectedStatsList);
+      expect(dummyHitterQuiz.id, result.id);
+      expect(dummyHitterQuiz.name, result.name);
+      expect(dummyHitterQuiz.selectedStatsList, result.selectedStatsList);
 
       // idがランダムに振られるため、完全に一致させることができない
       // そのため、lengthを比べている
-      expect(dummyHitterQuizUi.statsMapList.length, result.statsMapList.length);
+      expect(dummyHitterQuiz.statsMapList.length, result.statsMapList.length);
       expect(
-        dummyHitterQuizUi.hiddenStatsIdList.length,
+        dummyHitterQuiz.hiddenStatsIdList.length,
         result.hiddenStatsIdList.length,
       );
     });

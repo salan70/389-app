@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'hitter_quiz_ui.dart';
+part of 'hitter_quiz.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$HitterQuizUi {
+mixin _$HitterQuiz {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
@@ -24,15 +24,15 @@ mixin _$HitterQuizUi {
   List<String> get hiddenStatsIdList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HitterQuizUiCopyWith<HitterQuizUi> get copyWith =>
+  $HitterQuizCopyWith<HitterQuiz> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterQuizUiCopyWith<$Res> {
-  factory $HitterQuizUiCopyWith(
-          HitterQuizUi value, $Res Function(HitterQuizUi) then) =
-      _$HitterQuizUiCopyWithImpl<$Res, HitterQuizUi>;
+abstract class $HitterQuizCopyWith<$Res> {
+  factory $HitterQuizCopyWith(
+          HitterQuiz value, $Res Function(HitterQuiz) then) =
+      _$HitterQuizCopyWithImpl<$Res, HitterQuiz>;
   @useResult
   $Res call(
       {String id,
@@ -43,9 +43,9 @@ abstract class $HitterQuizUiCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
-    implements $HitterQuizUiCopyWith<$Res> {
-  _$HitterQuizUiCopyWithImpl(this._value, this._then);
+class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
+    implements $HitterQuizCopyWith<$Res> {
+  _$HitterQuizCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -87,11 +87,11 @@ class _$HitterQuizUiCopyWithImpl<$Res, $Val extends HitterQuizUi>
 }
 
 /// @nodoc
-abstract class _$$_HitterQuizUiCopyWith<$Res>
-    implements $HitterQuizUiCopyWith<$Res> {
-  factory _$$_HitterQuizUiCopyWith(
-          _$_HitterQuizUi value, $Res Function(_$_HitterQuizUi) then) =
-      __$$_HitterQuizUiCopyWithImpl<$Res>;
+abstract class _$$_HitterQuizCopyWith<$Res>
+    implements $HitterQuizCopyWith<$Res> {
+  factory _$$_HitterQuizCopyWith(
+          _$_HitterQuiz value, $Res Function(_$_HitterQuiz) then) =
+      __$$_HitterQuizCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -103,11 +103,11 @@ abstract class _$$_HitterQuizUiCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HitterQuizUiCopyWithImpl<$Res>
-    extends _$HitterQuizUiCopyWithImpl<$Res, _$_HitterQuizUi>
-    implements _$$_HitterQuizUiCopyWith<$Res> {
-  __$$_HitterQuizUiCopyWithImpl(
-      _$_HitterQuizUi _value, $Res Function(_$_HitterQuizUi) _then)
+class __$$_HitterQuizCopyWithImpl<$Res>
+    extends _$HitterQuizCopyWithImpl<$Res, _$_HitterQuiz>
+    implements _$$_HitterQuizCopyWith<$Res> {
+  __$$_HitterQuizCopyWithImpl(
+      _$_HitterQuiz _value, $Res Function(_$_HitterQuiz) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -119,7 +119,7 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
     Object? statsMapList = null,
     Object? hiddenStatsIdList = null,
   }) {
-    return _then(_$_HitterQuizUi(
+    return _then(_$_HitterQuiz(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ class __$$_HitterQuizUiCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HitterQuizUi implements _HitterQuizUi {
-  const _$_HitterQuizUi(
+class _$_HitterQuiz implements _HitterQuiz {
+  const _$_HitterQuiz(
       {required this.id,
       required this.name,
       required final List<String> selectedStatsList,
@@ -184,14 +184,14 @@ class _$_HitterQuizUi implements _HitterQuizUi {
 
   @override
   String toString() {
-    return 'HitterQuizUi(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, hiddenStatsIdList: $hiddenStatsIdList)';
+    return 'HitterQuiz(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, hiddenStatsIdList: $hiddenStatsIdList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterQuizUi &&
+            other is _$_HitterQuiz &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality()
@@ -214,17 +214,17 @@ class _$_HitterQuizUi implements _HitterQuizUi {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterQuizUiCopyWith<_$_HitterQuizUi> get copyWith =>
-      __$$_HitterQuizUiCopyWithImpl<_$_HitterQuizUi>(this, _$identity);
+  _$$_HitterQuizCopyWith<_$_HitterQuiz> get copyWith =>
+      __$$_HitterQuizCopyWithImpl<_$_HitterQuiz>(this, _$identity);
 }
 
-abstract class _HitterQuizUi implements HitterQuizUi {
-  const factory _HitterQuizUi(
+abstract class _HitterQuiz implements HitterQuiz {
+  const factory _HitterQuiz(
       {required final String id,
       required final String name,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
-      required final List<String> hiddenStatsIdList}) = _$_HitterQuizUi;
+      required final List<String> hiddenStatsIdList}) = _$_HitterQuiz;
 
   @override
   String get id;
@@ -238,6 +238,6 @@ abstract class _HitterQuizUi implements HitterQuizUi {
   List<String> get hiddenStatsIdList;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterQuizUiCopyWith<_$_HitterQuizUi> get copyWith =>
+  _$$_HitterQuizCopyWith<_$_HitterQuiz> get copyWith =>
       throw _privateConstructorUsedError;
 }

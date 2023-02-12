@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../domain/entity/hitter_quiz_ui.dart';
+import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/stats_value.dart';
 import '../../../util/constant/hitting_stats/probability_stats.dart';
 import 'entity/hitter.dart';
 import 'entity/hitting_stats.dart';
 
 class SupabaseHitterConverter {
-  /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換する
-  HitterQuizUi toHitterQuizUi(
+  /// Hitter型, HittingStats型（List）からHitterQuiz型へ変換する
+  HitterQuiz toHitterQuiz(
     Hitter hitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
@@ -30,7 +30,7 @@ class SupabaseHitterConverter {
       }
     }
 
-    final hitterQuizUi = HitterQuizUi(
+    final hitterQuiz = HitterQuiz(
       id: hitter.id,
       name: hitter.name,
       selectedStatsList: selectedStatsList,
@@ -38,7 +38,7 @@ class SupabaseHitterConverter {
       hiddenStatsIdList: hiddenStatsIdList,
     );
 
-    return hitterQuizUi;
+    return hitterQuiz;
   }
 
   /// 1年ごとの成績を変換する

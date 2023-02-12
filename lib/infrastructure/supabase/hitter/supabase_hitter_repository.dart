@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../domain/entity/hitter_id_by_name.dart';
-import '../../../domain/entity/hitter_quiz_ui.dart';
+import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/hitter_search_condition.dart';
 import '../../../domain/repository/hitter_repository.dart';
 import '../../../util/exception/supabase_exception.dart';
@@ -27,7 +27,7 @@ class SupabaseHitterRepository implements HitterRepository {
   final Supabase supabase;
 
   @override
-  Future<HitterQuizUi> createHitterQuizUi(
+  Future<HitterQuiz> createHitterQuiz(
     HitterSearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
@@ -36,14 +36,14 @@ class SupabaseHitterRepository implements HitterRepository {
     // 取得した選手の成績を取得
     final statsList = await fetchHittingStats(hitter.id);
 
-    // HitterQuizUi型に変換
-    final quizUi = SupabaseHitterConverter().toHitterQuizUi(
+    // HitterQuiz型に変換
+    final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
       hitter,
       statsList,
       searchCondition.selectedStatsList,
     );
 
-    return quizUi;
+    return hitterQuiz;
   }
 
   /// 条件に合う選手を1人検索する
