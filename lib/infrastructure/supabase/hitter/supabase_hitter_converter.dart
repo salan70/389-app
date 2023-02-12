@@ -4,13 +4,13 @@ import 'package:uuid/uuid.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/stats_value.dart';
 import '../../../util/constant/hitting_stats/probability_stats.dart';
-import 'entity/hitter.dart';
 import 'entity/hitting_stats.dart';
+import 'entity/supabase_hitter.dart';
 
 class SupabaseHitterConverter {
   /// Hitter型, HittingStats型（List）からHitterQuiz型へ変換する
   HitterQuiz toHitterQuiz(
-    Hitter hitter,
+    SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
   ) {
@@ -31,8 +31,8 @@ class SupabaseHitterConverter {
     }
 
     final hitterQuiz = HitterQuiz(
-      id: hitter.id,
-      name: hitter.name,
+      id: supabaseHitter.id,
+      name: supabaseHitter.name,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       hiddenStatsIdList: hiddenStatsIdList,
