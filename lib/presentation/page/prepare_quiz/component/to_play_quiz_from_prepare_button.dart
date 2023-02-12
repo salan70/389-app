@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
 import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
-import '../../../../domain/base_repository/hitter_search_condition_repository.dart';
+import '../../../../domain/repository/hitter_search_condition_repository.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
 class ToPlayQuizFromPrepareButton extends ConsumerWidget {
