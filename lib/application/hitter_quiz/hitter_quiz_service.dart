@@ -2,8 +2,10 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/entity/hitter.dart';
 import '../../domain/entity/hitter_quiz.dart';
 import '../../domain/repository/hitter_repository.dart';
+import '../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import '../search_condition/search_condition_state.dart';
 import 'hitter_quiz_state.dart';
 
@@ -64,6 +66,14 @@ class HitterQuizService {
     );
   }
 
+  // TODO(me): テスト書く
+  /// 成績が公開可能か判別する
+  /// 閉じている成績が残っている場合、成績が公開可能とみなす
+  bool canOpen() {
+    final hitterQuiz = ref.read(hitterQuizStateProvider).value;
+    return hitterQuiz!.hiddenStatsIdList.isNotEmpty;
+  }
+
   // TODO(me): テスト書くことを検討する
   /// 全ての閉じている成績を公開する
   void openAll() {
@@ -77,11 +87,25 @@ class HitterQuizService {
     );
   }
 
-  // TODO(me): テスト書く
-  /// 成績が公開可能か判別する
-  /// 閉じている成績が残っている場合、成績が公開可能とみなす
-  bool canOpen() {
-    final hitterQuiz = ref.read(hitterQuizStateProvider).value;
-    return hitterQuiz!.hiddenStatsIdList.isNotEmpty;
+  /// 選手名で検索する
+  Future<List<Hitter>> searchHitter(String searchWord) async {
+    final allHitterList = await ref.read(allHitterListProvider);
+    final hitterListAfterSearch = <Hitter>[];
+
+    for (final hitter in allHitterList) {
+      if (hitter.label.contains(searchWord)) {
+        hitterListAfterSearch.add(hitter);
+      }
+    }
+
+    return hitterListAfterSearch;
+  }
+
+  /// 正解しているか否かを返す
+  bool isCorrectHitterQuiz() {
+    final selectedHitterId = ref.read(selectedHitterIdProvider);
+    final hitterQuiz = ref.read(hitterQuizStateProvider);
+
+    return selectedHitterId == hitterQuiz.value!.id;
   }
 }
