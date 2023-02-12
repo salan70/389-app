@@ -72,6 +72,9 @@ class SupabaseHitterRepository implements HitterRepository {
       final hitter = Hitter.fromJson(chosenResponse);
 
       return hitter;
+    } on SupabaseException catch (e) {
+      logger.e(e);
+      rethrow;
     } on Exception catch (e) {
       logger.e(e);
       throw SupabaseException.unknown();
