@@ -6,7 +6,7 @@ import 'package:baseball_quiz_app/util/constant/search_condition_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../dummy_data/dummy_hitter_search_condition.dart';
+import '../../../dummy_data/dummy_search_condition.dart';
 
 void main() {
   group('saveTeamList関数', () {
