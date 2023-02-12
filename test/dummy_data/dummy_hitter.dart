@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/domain/entity/hitter_quiz_ui.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter_quiz.dart';
 import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
 import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitter.dart';
@@ -143,7 +143,7 @@ const dummyHitterSearchCondition = HitterSearchCondition(
   selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],
 );
 
-const dummyHitterQuizUi = HitterQuizUi(
+const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
   selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],

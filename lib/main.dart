@@ -13,7 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'application/auth/auth_service.dart';
-import 'application/hitter_quiz/hitter_quiz_ui_state.dart';
+import 'application/hitter_quiz/hitter_quiz_state.dart';
 import 'application/key_providers.dart';
 import 'application/loading_state.dart';
 import 'domain/entity/hitter_search_condition.dart';
@@ -144,9 +144,9 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // hitterQuizUiNotifierProviderの結果をハンドリングする
+    // NotifierProviderの結果をハンドリングする
     ref.handleAsyncValue<void>(
-      hitterQuizUiStateProvider,
+      hitterQuizStateProvider,
     );
 
     // Userを作成
