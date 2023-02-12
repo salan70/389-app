@@ -14,8 +14,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'application/auth/auth_service.dart';
 import 'application/hitter_quiz/hitter_quiz_state.dart';
-import 'application/key_providers.dart';
 import 'application/loading_state.dart';
+import 'application/widget_state.dart';
 import 'domain/entity/hitter_search_condition.dart';
 import 'domain/repository/auth_repository.dart';
 import 'domain/repository/hitter_repository.dart';

@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/loading_state.dart';
@@ -10,10 +9,6 @@ import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart'
 
 final playQuizViewModelProvider =
     Provider<PlayQuizViewModel>(PlayQuizViewModel.new);
-
-final selectedHitterIdProvider = StateProvider<String>((_) => '');
-
-final answerTextFieldProvider = StateProvider((ref) => TextEditingController());
 
 class PlayQuizViewModel {
   PlayQuizViewModel(
