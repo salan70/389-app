@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../../application/is_correct_quiz.state.dart';
+import '../../../../application/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../application/widget_state.dart';
 import '../../../../domain/entity/hitter.dart';
 import '../../../../util/admob.dart';
 import '../../quiz_result/quiz_result_page.dart';
