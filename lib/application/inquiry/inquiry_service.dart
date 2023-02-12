@@ -8,27 +8,16 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../domain/base_repository/auth_repository.dart';
 import '../../../util/constant/inquiry.dart';
 
-final topPageViewModelProvider =
-    Provider.autoDispose<TopPageViewModel>(TopPageViewModel.new);
+final inquiryServiceProvider =
+    Provider.autoDispose<InquiryService>(InquiryService.new);
 
-class TopPageViewModel {
-  TopPageViewModel(
+/// お問い合わせ関連の処理を行うサービスクラス
+class InquiryService {
+  InquiryService(
     this.ref,
   );
 
   final Ref ref;
-
-  Future<void> launchUrlInBrowser(String url) async {
-    final uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
-      return;
-    }
-    throw Exception('Could not launch $url');
-  }
 
   // お問い合わせを送る
   Future<void> sendInquiry() async {
@@ -55,6 +44,8 @@ class TopPageViewModel {
     final appVersion = packageInfo.version;
 
     // ユーザーIDを取得
+    // TODO ユーザーIDを、firebaseAuthのものではなく、別で作成したものを使うようにする
+    // uidの中から一部抜粋するのあり
     final uid = ref.read(authRepositoryProvider).getCurrentUser()?.uid;
 
     const subject = '【タイトルをご記載ください】 /.389';
