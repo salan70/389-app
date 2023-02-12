@@ -61,6 +61,8 @@ class SupabaseHitterRepository implements HitterRepository {
               .gte('hitting_stats_table.本塁打', searchCondition.minHr)
           as List<dynamic>;
 
+      print(responses);
+
       // 検索条件に合致する選手がいない場合、例外を返す
       if (responses.isEmpty) {
         throw SupabaseException.notFound();
@@ -72,6 +74,9 @@ class SupabaseHitterRepository implements HitterRepository {
       final hitter = Hitter.fromJson(chosenResponse);
 
       return hitter;
+    } on SupabaseException catch (e) {
+      logger.e(e);
+      rethrow;
     } on Exception catch (e) {
       logger.e(e);
       throw SupabaseException.unknown();

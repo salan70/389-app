@@ -9,7 +9,7 @@ extension ObjectHelper on Object {
         case SupabaseExceptionCode.notFound:
           return 'データが見つかりませんでした。';
         case SupabaseExceptionCode.unknown:
-          return '不明なエラーが発生しました。';
+          return '不明なエラーが発生しました。nnnn';
       }
     }
     return toString();
