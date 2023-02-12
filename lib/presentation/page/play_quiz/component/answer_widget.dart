@@ -8,7 +8,6 @@ import '../../../../application/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../application/widget/widget_state.dart';
 import '../../../../domain/entity/hitter.dart';
 import '../../quiz_result/quiz_result_page.dart';
-import '../play_quiz_view_model.dart';
 import 'incorrect_dialog.dart';
 
 class AnswerWidget extends ConsumerStatefulWidget {
@@ -32,7 +31,6 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
     final scrollController = ScrollController();
     final textEditingController = ref.watch(answerTextFieldProvider);
 
-    final viewModel = ref.watch(playQuizViewModelProvider);
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
@@ -75,13 +73,14 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     final navigator = Navigator.of(context);
 
                     // interstitial広告を作成
-                    final interstitialAd = InterstitialAdService();
-                    await interstitialAd.createAd();
+                    final interstitialAdService =
+                        ref.read(interstitialAdServiceProvider);
+                    await interstitialAdService.createAd();
 
                     isCorrectNotifier.state =
                         hitterQuizService.isCorrectHitterQuiz();
 
-                    await viewModel.waitResult();
+                    await interstitialAdService.waitResult();
 
                     // 正解の場合
                     if (isCorrectNotifier.state) {
@@ -93,9 +92,9 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     }
                     // 不正解の場合
                     else {
-                      if (viewModel.isShownAds()) {
+                      if (interstitialAdService.isShownAds()) {
                         // interstitial広告を表示
-                        await interstitialAd.showAd();
+                        await interstitialAdService.showAd();
                       }
 
                       // TODO(me): 一旦ignoreで甘えた。
