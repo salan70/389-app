@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../domain/base_repository/hitter_search_condition_repository.dart';
-import '../../domain/typeadapter/hitter_search_condition.dart';
+import '../../domain/entity/hitter_search_condition.dart';
+import '../../domain/repository/hitter_search_condition_repository.dart';
 import '../../util/constant/hitter_search_condition_constant.dart';
 
 class HiveHitterSearchConditionRepository

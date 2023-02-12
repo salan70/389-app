@@ -1,4 +1,4 @@
-import '../../domain/typeadapter/hitter_search_condition.dart';
+import '../../domain/entity/hitter_search_condition.dart';
 import 'hitting_stats/stats_type.dart';
 
 /// hitterSearchConditionを格納するHiveのBox名

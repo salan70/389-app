@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../domain/hitter.dart';
-import '../../../domain/hitting_stats.dart';
-import '../../../domain/ui/hitter_quiz_ui.dart';
-import '../../../domain/ui/stats_value.dart';
+import '../../../domain/entity/hitter_quiz_ui.dart';
+import '../../../domain/entity/stats_value.dart';
 import '../../../util/constant/hitting_stats/probability_stats.dart';
+import 'entity/hitter.dart';
+import 'entity/hitting_stats.dart';
 
 class SupabaseHitterConverter {
   /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換する
