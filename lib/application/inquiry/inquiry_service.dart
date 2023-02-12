@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../domain/base_repository/auth_repository.dart';
-import '../../../util/constant/inquiry.dart';
 
 final inquiryServiceProvider =
     Provider.autoDispose<InquiryService>(InquiryService.new);
@@ -19,14 +17,14 @@ class InquiryService {
 
   final Ref ref;
 
-  // お問い合わせを送る
-  Future<void> sendInquiry() async {
-    // TODO(me): この処理関数として抽出したい
+  /// お問い合わせメールの本文を作成する
+  Future<String> createInquiryBody() async {
     // 端末関連の情報を取得
     final deviceInfo = DeviceInfoPlugin();
     late String os;
     late String? osVersion;
     late String? device;
+
     if (Platform.isIOS) {
       final iosInfo = await deviceInfo.iosInfo;
       os = 'iOS';
@@ -43,42 +41,13 @@ class InquiryService {
     final packageInfo = await PackageInfo.fromPlatform();
     final appVersion = packageInfo.version;
 
-    // ユーザーIDを取得
-    // TODO ユーザーIDを、firebaseAuthのものではなく、別で作成したものを使うようにする
-    // uidの中から一部抜粋するのあり
-    final uid = ref.read(authRepositoryProvider).getCurrentUser()?.uid;
+    // uidをユーザー側に知られるのはリスクがありそうなため、
+    // uidの一部を抜粋したものをidとする
+    final id =
+        ref.read(authRepositoryProvider).getCurrentUser()?.uid.substring(5, 14);
 
-    const subject = '【タイトルをご記載ください】 /.389';
-    final body = 'こちらにお問い合わせ内容をご記載ください\n\n\n\n\n'
+    return 'こちらにお問い合わせ内容をご記載ください\n\n\n\n\n'
         '\n※調査のため、以下の情報は消さないようお願いします。'
-        '$device, $os, $osVersion, $appVersion, $uid';
-
-    final uri = Uri(
-      scheme: 'mailto',
-      path: mailAddress, // お問い合わせ先
-      query: _encodeQueryParameters(<String, String>{
-        'subject': subject,
-        'body': body,
-      }),
-    );
-
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(
-        uri,
-        mode: LaunchMode.externalApplication,
-      );
-      return;
-    }
-    Exception('Could not send inquiry');
-  }
-
-  // TODO(me): テスト書く
-  String? _encodeQueryParameters(Map<String, String> params) {
-    return params.entries
-        .map(
-          (e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}',
-        )
-        .join('&');
+        '$device, $os, $osVersion, $appVersion, $id';
   }
 }
