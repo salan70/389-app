@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
 class ReplayButton extends ConsumerWidget {
@@ -18,7 +18,7 @@ class ReplayButton extends ConsumerWidget {
         // 上記警告は、contextに対してawaitすると発生すると思われる
         final navigator = Navigator.of(context);
 
-        await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
+        await ref.read(hitterQuizServiceProvider).fetchHitterQuiz();
 
         await navigator.push(
           MaterialPageRoute<Widget>(

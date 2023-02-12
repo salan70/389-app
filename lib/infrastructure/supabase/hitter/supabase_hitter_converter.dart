@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../domain/hitter.dart';
-import '../../../domain/hitting_stats.dart';
-import '../../../domain/ui/hitter_quiz_ui.dart';
-import '../../../domain/ui/stats_value.dart';
+import '../../../domain/entity/hitter_quiz.dart';
+import '../../../domain/entity/stats_value.dart';
 import '../../../util/constant/hitting_stats/probability_stats.dart';
+import 'entity/hitting_stats.dart';
+import 'entity/supabase_hitter.dart';
 
 class SupabaseHitterConverter {
-  /// Hitter型, HittingStats型（List）からHitterQuizUi型へ変換する
-  HitterQuizUi toHitterQuizUi(
-    Hitter hitter,
+  /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
+  HitterQuiz toHitterQuiz(
+    SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
   ) {
@@ -30,15 +30,15 @@ class SupabaseHitterConverter {
       }
     }
 
-    final hitterQuizUi = HitterQuizUi(
-      id: hitter.id,
-      name: hitter.name,
+    final hitterQuiz = HitterQuiz(
+      id: supabaseHitter.id,
+      name: supabaseHitter.name,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       hiddenStatsIdList: hiddenStatsIdList,
     );
 
-    return hitterQuizUi;
+    return hitterQuiz;
   }
 
   /// 1年ごとの成績を変換する

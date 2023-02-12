@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
-import '../../../../util/constant/hitter_search_condition_constant.dart';
+import '../../../../application/quiz/search_condition/search_condition_state.dart';
+import '../../../../util/constant/search_condition_constant.dart';
 
 class StatsValueFilterWidget extends ConsumerWidget {
   const StatsValueFilterWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
-    final notifier = ref.watch(hitterSearchConditionProvider.notifier);
+    final searchCondition = ref.watch(searchConditionProvider);
+    final notifier = ref.watch(searchConditionProvider.notifier);
 
     final size = MediaQuery.of(context).size;
 

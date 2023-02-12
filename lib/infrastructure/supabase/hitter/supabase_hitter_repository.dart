@@ -3,18 +3,18 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../domain/base_repository/hitter_repository.dart';
-import '../../../domain/hitter.dart';
-import '../../../domain/hitting_stats.dart';
-import '../../../domain/typeadapter/hitter_search_condition.dart';
-import '../../../domain/ui/hitter_id_by_name.dart';
-import '../../../domain/ui/hitter_quiz_ui.dart';
+import '../../../domain/entity/hitter.dart';
+import '../../../domain/entity/hitter_quiz.dart';
+import '../../../domain/entity/search_condition.dart';
+import '../../../domain/repository/hitter_repository.dart';
 import '../../../util/exception/supabase_exception.dart';
 import '../../../util/logger.dart';
+import 'entity/hitting_stats.dart';
+import 'entity/supabase_hitter.dart';
 import 'supabase_hitter_converter.dart';
 
 /// 全野手のIDと名前のリストを返すプロバイダー
-final allHitterListProvider = riverpod.Provider<Future<List<HitterIdByName>>>(
+final allHitterListProvider = riverpod.Provider<Future<List<Hitter>>>(
   (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
 );
 
@@ -27,27 +27,29 @@ class SupabaseHitterRepository implements HitterRepository {
   final Supabase supabase;
 
   @override
-  Future<HitterQuizUi> createHitterQuizUi(
-    HitterSearchCondition searchCondition,
+  Future<HitterQuiz> createHitterQuiz(
+    SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
-    final hitter = await searchHitter(searchCondition);
+    final supabaseHitter = await searchHitter(searchCondition);
 
     // 取得した選手の成績を取得
-    final statsList = await fetchHittingStats(hitter.id);
+    final statsList = await fetchHittingStats(supabaseHitter.id);
 
-    // HitterQuizUi型に変換
-    final quizUi = SupabaseHitterConverter().toHitterQuizUi(
-      hitter,
+    // HitterQuiz型に変換
+    final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
+      supabaseHitter,
       statsList,
       searchCondition.selectedStatsList,
     );
 
-    return quizUi;
+    return hitterQuiz;
   }
 
   /// 条件に合う選手を1人検索する
-  Future<Hitter> searchHitter(HitterSearchCondition searchCondition) async {
+  Future<SupabaseHitter> searchHitter(
+    SearchCondition searchCondition,
+  ) async {
     try {
       final responses = await supabase.client
               .from('hitter_table')
@@ -69,9 +71,9 @@ class SupabaseHitterRepository implements HitterRepository {
       // ランダムで1人選出
       final chosenResponse =
           responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
-      final hitter = Hitter.fromJson(chosenResponse);
+      final supabaseHitter = SupabaseHitter.fromJson(chosenResponse);
 
-      return hitter;
+      return supabaseHitter;
     } on SupabaseException catch (e) {
       logger.e(e);
       rethrow;
@@ -103,16 +105,17 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// 解答を入力するテキストフィールドの検索用
+  /// 全選手の名前とIDを取得する
   @override
-  Future<List<HitterIdByName>> fetchAllHitter() async {
+  Future<List<Hitter>> fetchAllHitter() async {
     try {
       final responses = await supabase.client
           .from('hitter_table')
           .select<dynamic>() as List<dynamic>;
 
-      final allHitterList = <HitterIdByName>[];
+      final allHitterList = <Hitter>[];
       for (final response in responses) {
-        final hitterMap = HitterIdByName.fromJson(
+        final hitterMap = Hitter.fromJson(
           response as Map<String, dynamic>,
         );
         allHitterList.add(hitterMap);
