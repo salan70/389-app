@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/loading_state.dart';
 import '../../../application/hitter_quiz/hitter_quiz_state.dart';
+import '../../../application/loading/loading_state.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 
