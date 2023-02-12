@@ -8,14 +8,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../../util/constant/text_in_app.dart';
-import '../../../util/logger.dart';
+import '../../util/constant/text_in_app.dart';
+import '../../util/logger.dart';
 
-final quizResultViewModelProvider =
-    Provider.autoDispose<QuizResultViewModel>(QuizResultViewModel.new);
+final shareQuizResultServiceProvider =
+    Provider.autoDispose<ShareQuizResultService>(ShareQuizResultService.new);
 
-class QuizResultViewModel {
-  QuizResultViewModel(
+/// お問い合わせ関連の処理を行うサービスクラス
+class ShareQuizResultService {
+  ShareQuizResultService(
     this.ref,
   );
 
@@ -23,15 +24,15 @@ class QuizResultViewModel {
 
   /// ディレクトへのパスを取得し、シェアする
   Future<void> shareImageAndText(String text, GlobalKey globalKey) async {
-    //shareする際のテキスト
+    // shareする際のテキスト
     try {
       final bytes = await _exportToImage(globalKey);
 
-      //byte data→Uint8List
+      // byte data→Uint8List
       final widgetImageBytes =
           bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
 
-      //App directoryファイルに保存
+      // App directoryファイルに保存
       final applicationDocumentsFile =
           await _getApplicationDocumentsFile(text, widgetImageBytes);
 
