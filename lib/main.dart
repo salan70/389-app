@@ -16,19 +16,19 @@ import 'application/auth/auth_service.dart';
 import 'application/hitter_quiz/hitter_quiz_state.dart';
 import 'application/loading/loading_state.dart';
 import 'application/widget/widget_state.dart';
-import 'domain/entity/hitter_search_condition.dart';
+import 'domain/entity/search_condition.dart';
 import 'domain/repository/auth_repository.dart';
 import 'domain/repository/hitter_repository.dart';
-import 'domain/repository/hitter_search_condition_repository.dart';
+import 'domain/repository/search_condition_repository.dart';
 import 'infrastructure/firebase/auth/firebase_auth_repository.dart';
 import 'infrastructure/firebase/firebase_providers.dart';
-import 'infrastructure/hive/hive_hitter_search_condition_repository.dart';
+import 'infrastructure/hive/hive_search_condition_repository.dart';
 import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
 import 'presentation/component/quiz_loading_widget.dart';
 import 'presentation/page/top/top_page.dart';
 import 'util/constant/color_constant.dart';
-import 'util/constant/hitter_search_condition_constant.dart';
+import 'util/constant/search_condition_constant.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
 
@@ -39,8 +39,8 @@ Future<void> main() async {
   await initialize();
 
   // HiveのBoxをopen
-  final hitterSearchConditionBox =
-      await Hive.openBox<HitterSearchCondition>(hitterSearchConditionBoxKey);
+  final searchConditionBox =
+      await Hive.openBox<SearchCondition>(searchConditionBoxKey);
 
   runApp(
     ProviderScope(
@@ -52,10 +52,10 @@ Future<void> main() async {
             );
           },
         ),
-        hitterSearchConditionRepositoryProvider.overrideWith(
+        searchConditionRepositoryProvider.overrideWith(
           (ref) {
-            return HiveHitterSearchConditionRepository(
-              hitterSearchConditionBox,
+            return HiveSearchConditionRepository(
+              searchConditionBox,
             );
           },
         ),
@@ -106,7 +106,7 @@ Future<void> initialize() async {
 
   // Hiveの初期化
   await Hive.initFlutter();
-  Hive.registerAdapter(HitterSearchConditionAdapter());
+  Hive.registerAdapter(SearchConditionAdapter());
 
   // Supabaseの初期化
   await Supabase.initialize(
