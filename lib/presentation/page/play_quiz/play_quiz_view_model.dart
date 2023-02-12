@@ -44,7 +44,7 @@ class PlayQuizViewModel {
   }
 
   /// 結果表示までじらすための処理
-  /// interstitial広告が表示されるために時間を稼ぐという狙いもある
+  /// interstitial広告が表示されるために時間を稼ぐという意図もある
   Future<void> waitResult() async {
     final loadingNotifier = ref.read(loadingProvider.notifier);
     loadingNotifier.show();
