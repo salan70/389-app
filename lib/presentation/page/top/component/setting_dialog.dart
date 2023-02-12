@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/inquiry/inquiry_service.dart';
-import '../../../../application/web_to/web_to_service.dart';
+import '../../../../application/url_launcher/url_launcher_service.dart';
+import '../../../../util/constant/inquiry.dart';
 import '../../../../util/constant/url.dart';
 
 class SettingDialog extends ConsumerWidget {
@@ -13,7 +14,7 @@ class SettingDialog extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inquiryService = ref.watch(inquiryServiceProvider);
-    final webToService = ref.watch(webToServiceProvider);
+    final urlLauncherService = ref.watch(urlLauncherServiceProvider);
 
     return Dialog(
       child: SingleChildScrollView(
@@ -29,7 +30,10 @@ class SettingDialog extends ConsumerWidget {
                 height: 24,
               ),
               TextButton.icon(
-                onPressed: inquiryService.sendInquiry,
+                onPressed: () async {
+                  final body = await inquiryService.createInquiryBody();
+                  await urlLauncherService.launchMail(inquirySubject, body);
+                },
                 icon: const Icon(Icons.mail_outline_rounded),
                 label: const Text('お問い合わせ'),
               ),
@@ -38,7 +42,7 @@ class SettingDialog extends ConsumerWidget {
               ),
               TextButton.icon(
                 onPressed: () {
-                  webToService.launchUrlInBrowser(termsUrl);
+                  urlLauncherService.launchBrowser(termsUrl);
                 },
                 icon: const Icon(Icons.description_rounded),
                 label: const Text('利用規約'),
@@ -48,7 +52,7 @@ class SettingDialog extends ConsumerWidget {
               ),
               TextButton.icon(
                 onPressed: () {
-                  webToService.launchUrlInBrowser(privacyPolicyUrl);
+                  urlLauncherService.launchBrowser(privacyPolicyUrl);
                 },
                 icon: const Icon(Icons.person_rounded),
                 label: const Text('プライバシーポリシー'),
