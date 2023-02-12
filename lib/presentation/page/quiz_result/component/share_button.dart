@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../quiz_result_view_model.dart';
+import '../../../../application/share_quiz_result/share_quiz_result_service.dart';
 
 class ShareButton extends ConsumerWidget {
   const ShareButton({
@@ -13,12 +13,15 @@ class ShareButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(quizResultViewModelProvider);
+    final shareQuizResultService = ref.watch(shareQuizResultServiceProvider);
 
     return Center(
       child: TextButton(
         onPressed: () {
-          viewModel.shareImageAndText('result_quiz_widget', globalKey);
+          shareQuizResultService.shareImageAndText(
+            'result_quiz_widget',
+            globalKey,
+          );
         },
         child: const Text('クイズをシェア！'),
       ),
