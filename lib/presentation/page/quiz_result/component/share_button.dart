@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/share_quiz_result/share_quiz_result_service.dart';
+import '../../../../application/quiz/share_quiz_result/share_quiz_result_service.dart';
 
 class ShareButton extends ConsumerWidget {
   const ShareButton({

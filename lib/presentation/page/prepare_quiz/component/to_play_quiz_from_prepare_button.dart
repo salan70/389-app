@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../application/search_condition/search_condition_state.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../application/quiz/search_condition/search_condition_state.dart';
 import '../../../../domain/repository/search_condition_repository.dart';
 import '../../play_quiz/play_quiz_page.dart';
 

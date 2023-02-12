@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 import '../../../../application/admob/interstitial_ad_service.dart';
-import '../../../../application/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../application/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../application/widget/widget_state.dart';
 import '../../../../domain/entity/hitter.dart';
 import '../../quiz_result/quiz_result_page.dart';

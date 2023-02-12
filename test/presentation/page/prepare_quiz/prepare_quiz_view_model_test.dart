@@ -1,5 +1,5 @@
-import 'package:baseball_quiz_app/application/search_condition/search_condition_service.dart';
-import 'package:baseball_quiz_app/application/search_condition/search_condition_state.dart';
+import 'package:baseball_quiz_app/application/quiz/search_condition/search_condition_service.dart';
+import 'package:baseball_quiz_app/application/quiz/search_condition/search_condition_state.dart';
 import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
 import 'package:baseball_quiz_app/util/constant/search_condition_constant.dart';
