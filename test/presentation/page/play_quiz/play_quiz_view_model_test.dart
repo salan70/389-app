@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/application/hitter_quiz/hitter_quiz_service.dart';
 import 'package:baseball_quiz_app/application/hitter_quiz/hitter_quiz_state.dart';
 import 'package:baseball_quiz_app/domain/entity/hitter.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/supabase_hitter_repository.dart';
@@ -26,8 +27,8 @@ void main() {
       );
       const searchWord = 'マーティン';
       final result = await container
-          .read(playQuizViewModelProvider)
-          .filterHitter(searchWord);
+          .read(hitterQuizServiceProvider)
+          .searchHitter(searchWord);
 
       final expected = [
         const Hitter(label: 'レオネス・マーティン', id: '3'),
@@ -46,8 +47,8 @@ void main() {
       );
       const searchWord = '坂本';
       final result = await container
-          .read(playQuizViewModelProvider)
-          .filterHitter(searchWord);
+          .read(hitterQuizServiceProvider)
+          .searchHitter(searchWord);
 
       final expected = [
         const Hitter(label: '坂本勇人（捕手）', id: '1'),
@@ -67,8 +68,8 @@ void main() {
       );
       const searchWord = 'T';
       final result = await container
-          .read(playQuizViewModelProvider)
-          .filterHitter(searchWord);
+          .read(hitterQuizServiceProvider)
+          .searchHitter(searchWord);
 
       final expected = [
         const Hitter(label: 'T-岡田', id: '4'),
@@ -87,8 +88,8 @@ void main() {
       );
       const searchWord = '神';
       final result = await container
-          .read(playQuizViewModelProvider)
-          .filterHitter(searchWord);
+          .read(hitterQuizServiceProvider)
+          .searchHitter(searchWord);
 
       final expected = <Hitter>[];
 
@@ -107,7 +108,7 @@ void main() {
         ],
       );
       final result =
-          container.read(playQuizViewModelProvider).isCorrectHitterQuiz();
+          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
       expect(false, result);
     });
   });
@@ -125,7 +126,7 @@ void main() {
         ],
       );
       final result =
-          container.read(playQuizViewModelProvider).isCorrectHitterQuiz();
+          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
       expect(true, result);
     });
 
@@ -141,7 +142,7 @@ void main() {
         ],
       );
       final result =
-          container.read(playQuizViewModelProvider).isCorrectHitterQuiz();
+          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
       expect(false, result);
     });
   });

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
+import '../../../../application/admob/interstitial_ad_service.dart';
+import '../../../../application/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../application/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../application/widget/widget_state.dart';
 import '../../../../domain/entity/hitter.dart';
-import '../../../../util/admob.dart';
 import '../../quiz_result/quiz_result_page.dart';
 import '../play_quiz_view_model.dart';
 import 'incorrect_dialog.dart';
@@ -32,6 +33,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
     final textEditingController = ref.watch(answerTextFieldProvider);
 
     final viewModel = ref.watch(playQuizViewModelProvider);
+    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     final selectedHitterId = ref.watch(selectedHitterIdProvider);
     final selectedHitterIdNotifier =
@@ -52,7 +54,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
           ),
           future: () {
             selectedHitterIdNotifier.state = '';
-            return viewModel.filterHitter(textEditingController.text);
+            return hitterQuizService.searchHitter(textEditingController.text);
           },
           getSelectedValue: (Hitter value) {
             // 回答入力用のTextFieldのフォーカスを外す
@@ -73,10 +75,11 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     final navigator = Navigator.of(context);
 
                     // interstitial広告を作成
-                    final interstitialAd = MyInterstitialAd();
+                    final interstitialAd = InterstitialAdService();
                     await interstitialAd.createAd();
 
-                    isCorrectNotifier.state = viewModel.isCorrectHitterQuiz();
+                    isCorrectNotifier.state =
+                        hitterQuizService.isCorrectHitterQuiz();
 
                     await viewModel.waitResult();
 

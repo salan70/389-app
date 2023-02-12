@@ -2,10 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/hitter_quiz/hitter_quiz_state.dart';
 import '../../../application/loading/loading_state.dart';
-import '../../../domain/entity/hitter.dart';
-import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 
 final playQuizViewModelProvider =
     Provider<PlayQuizViewModel>(PlayQuizViewModel.new);
@@ -16,27 +13,6 @@ class PlayQuizViewModel {
   );
 
   final Ref ref;
-
-  Future<List<Hitter>> filterHitter(String searchWord) async {
-    final allHitterList = await ref.read(allHitterListProvider);
-    final hitterListAfterSearch = <Hitter>[];
-
-    for (final hitter in allHitterList) {
-      if (hitter.label.contains(searchWord)) {
-        hitterListAfterSearch.add(hitter);
-      }
-    }
-
-    return hitterListAfterSearch;
-  }
-
-  /// 正解しているか否かを返す
-  bool isCorrectHitterQuiz() {
-    final selectedHitterId = ref.read(selectedHitterIdProvider);
-    final hitterQuiz = ref.read(hitterQuizStateProvider);
-
-    return selectedHitterId == hitterQuiz.value!.id;
-  }
 
   /// 結果表示までじらすための処理
   /// interstitial広告が表示されるために時間を稼ぐという意図もある
