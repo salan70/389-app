@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../application/inquiry/inquiry_service.dart';
+import '../../../../application/web_to/web_to_service.dart';
 import '../../../../util/constant/url.dart';
-import '../top_page_view_model.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({
@@ -11,7 +12,8 @@ class SettingDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewModel = ref.watch(topPageViewModelProvider);
+    final inquiryService = ref.watch(inquiryServiceProvider);
+    final webToService = ref.watch(webToServiceProvider);
 
     return Dialog(
       child: SingleChildScrollView(
@@ -27,7 +29,7 @@ class SettingDialog extends ConsumerWidget {
                 height: 24,
               ),
               TextButton.icon(
-                onPressed: viewModel.sendInquiry,
+                onPressed: inquiryService.sendInquiry,
                 icon: const Icon(Icons.mail_outline_rounded),
                 label: const Text('お問い合わせ'),
               ),
@@ -36,7 +38,7 @@ class SettingDialog extends ConsumerWidget {
               ),
               TextButton.icon(
                 onPressed: () {
-                  viewModel.launchUrlInBrowser(termsUrl);
+                  webToService.launchUrlInBrowser(termsUrl);
                 },
                 icon: const Icon(Icons.description_rounded),
                 label: const Text('利用規約'),
@@ -46,7 +48,7 @@ class SettingDialog extends ConsumerWidget {
               ),
               TextButton.icon(
                 onPressed: () {
-                  viewModel.launchUrlInBrowser(privacyPolicyUrl);
+                  webToService.launchUrlInBrowser(privacyPolicyUrl);
                 },
                 icon: const Icon(Icons.person_rounded),
                 label: const Text('プライバシーポリシー'),
