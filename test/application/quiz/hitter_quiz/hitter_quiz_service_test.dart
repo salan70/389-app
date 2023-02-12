@@ -1,4 +1,3 @@
-import 'package:baseball_quiz_app/application/admob/interstitial_ad_service.dart';
 import 'package:baseball_quiz_app/application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import 'package:baseball_quiz_app/application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import 'package:baseball_quiz_app/domain/entity/hitter.dart';
@@ -144,14 +143,6 @@ void main() {
       final result =
           container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
       expect(false, result);
-    });
-  });
-
-  group('isShownAds関数', () {
-    test('bool型を返すか確認', () {
-      final result =
-          ProviderContainer().read(interstitialAdServiceProvider).isShownAds();
-      expect(bool, result.runtimeType);
     });
   });
 }
