@@ -8,7 +8,7 @@ import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
 class SupabaseHitterConverter {
-  /// Hitter型, HittingStats型（List）からHitterQuiz型へ変換する
+  /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
   HitterQuiz toHitterQuiz(
     SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
