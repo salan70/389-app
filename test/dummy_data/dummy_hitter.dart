@@ -1,5 +1,5 @@
 import 'package:baseball_quiz_app/domain/entity/hitter_quiz.dart';
-import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
+import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
 import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitting_stats.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/supabase_hitter.dart';
@@ -135,7 +135,7 @@ final dummyHittingStatsList = [
   )
 ];
 
-const dummyHitterSearchCondition = HitterSearchCondition(
+const dummySearchCondition = SearchCondition(
   teamList: ['横浜DeNAベイスターズ'],
   minGames: 100,
   minHits: 100,

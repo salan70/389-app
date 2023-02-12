@@ -13,7 +13,7 @@ void main() async {
       final result = converter.toHitterQuiz(
         dummyHitter,
         dummyHittingStatsList,
-        dummyHitterSearchCondition.selectedStatsList,
+        dummySearchCondition.selectedStatsList,
       );
       expect(dummyHitterQuiz.id, result.id);
       expect(dummyHitterQuiz.name, result.name);
@@ -33,13 +33,13 @@ void main() async {
     test('正常系', () {
       final statsMap = converter.toStatsMap(
         dummyHittingStats.stats,
-        dummyHitterSearchCondition.selectedStatsList,
+        dummySearchCondition.selectedStatsList,
       );
       final resultKeys = statsMap.keys.toList();
 
       final deepEquals = const DeepCollectionEquality.unordered().equals;
       final result =
-          deepEquals(resultKeys, dummyHitterSearchCondition.selectedStatsList);
+          deepEquals(resultKeys, dummySearchCondition.selectedStatsList);
 
       // selectedStatsListに入っているものと一致する成績を格納しているか確認（順不同）
       expect(

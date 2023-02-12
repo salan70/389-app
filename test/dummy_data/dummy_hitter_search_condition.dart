@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
+import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
 
 /// 1つの球団を選択しているダミーデータ
-final dummyHitterSearchCondition1 = HitterSearchCondition(
+final dummySearchCondition1 = SearchCondition(
   teamList: [
     '千葉ロッテマリーンズ',
   ],
@@ -19,7 +19,7 @@ final dummyHitterSearchCondition1 = HitterSearchCondition(
 );
 
 /// 2つの球団を選択しているダミーデータ
-final dummyHitterSearchCondition2 = HitterSearchCondition(
+final dummySearchCondition2 = SearchCondition(
   teamList: [
     '千葉ロッテマリーンズ',
     '阪神タイガース',

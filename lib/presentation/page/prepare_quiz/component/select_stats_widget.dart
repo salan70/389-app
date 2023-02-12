@@ -2,20 +2,19 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_search_condition/hitter_search_condition_service.dart';
-import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
-import '../../../../util/constant/hitter_search_condition_constant.dart';
+import '../../../../application/search_condition/search_condition_service.dart';
+import '../../../../application/search_condition/search_condition_state.dart';
 import '../../../../util/constant/hitting_stats/stats_type.dart';
+import '../../../../util/constant/search_condition_constant.dart';
 
 class SelectStatsWidget extends ConsumerWidget {
   const SelectStatsWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(hitterSearchConditionProvider);
+    final searchCondition = ref.watch(searchConditionProvider);
     final selectedStatsList = searchCondition.selectedStatsList;
-    final hitterSearchConditionService =
-        ref.watch(hitterSearchConditionServiceProvider);
+    final searchConditionService = ref.watch(searchConditionServiceProvider);
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -35,12 +34,12 @@ class SelectStatsWidget extends ConsumerWidget {
       choiceType: S2ChoiceType.chips,
       onChange: (selectedObject) {
         final selectedList = selectedObject.value as List<String>;
-        hitterSearchConditionService.saveStatsList(selectedList);
+        searchConditionService.saveStatsList(selectedList);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid = hitterSearchConditionService
-            .isValidSelectedStatsList(chosen.length);
+        final isValid =
+            searchConditionService.isValidSelectedStatsList(chosen.length);
         return isValid ? '' : errorForSelectStatsValidation;
       },
       // modal表示前画面の、選択している成績のUI
@@ -77,8 +76,7 @@ class ChoiceCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterSearchConditionService =
-        ref.watch(hitterSearchConditionServiceProvider);
+    final searchConditionService = ref.watch(searchConditionServiceProvider);
     final tappedStats = choice.value! as String;
 
     return Container(
@@ -94,8 +92,7 @@ class ChoiceCard extends ConsumerWidget {
         onTap: () {
           final isSelected = choice.selected;
 
-          final canChangeState =
-              hitterSearchConditionService.canChangeStatsState(
+          final canChangeState = searchConditionService.canChangeStatsState(
             selectedLength: state.selection!.length,
             isSelected: isSelected,
           );

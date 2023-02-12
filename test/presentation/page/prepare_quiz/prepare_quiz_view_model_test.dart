@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/application/hitter_search_condition/hitter_search_condition_service.dart';
-import 'package:baseball_quiz_app/application/hitter_search_condition/hitter_search_condition_state.dart';
-import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
-import 'package:baseball_quiz_app/util/constant/hitter_search_condition_constant.dart';
+import 'package:baseball_quiz_app/application/search_condition/search_condition_service.dart';
+import 'package:baseball_quiz_app/application/search_condition/search_condition_state.dart';
+import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
+import 'package:baseball_quiz_app/util/constant/search_condition_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -14,15 +14,13 @@ void main() {
       final teamList = ['千葉ロッテマリーンズ', '阪神タイガース', '読売ジャイアンツ'];
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition1,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition1,
           ),
         ],
       );
-      container
-          .read(hitterSearchConditionServiceProvider)
-          .saveTeamList(teamList);
-      final result = container.read(hitterSearchConditionProvider);
+      container.read(searchConditionServiceProvider).saveTeamList(teamList);
+      final result = container.read(searchConditionProvider);
 
       expect(teamList, result.teamList);
     });
@@ -31,15 +29,13 @@ void main() {
       final teamList = <String>[];
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition1,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition1,
           ),
         ],
       );
-      container
-          .read(hitterSearchConditionServiceProvider)
-          .saveTeamList(teamList);
-      final result = container.read(hitterSearchConditionProvider);
+      container.read(searchConditionServiceProvider).saveTeamList(teamList);
+      final result = container.read(searchConditionProvider);
 
       expect(teamList, result.teamList);
     });
@@ -50,14 +46,14 @@ void main() {
     test('球団数:1, index:0', () {
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition1,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition1,
           ),
         ],
       );
-      container.read(hitterSearchConditionServiceProvider).removeTeam(0);
+      container.read(searchConditionServiceProvider).removeTeam(0);
 
-      final result = container.read(hitterSearchConditionProvider);
+      final result = container.read(searchConditionProvider);
       final expected = <String>[];
 
       expect(expected, result.teamList);
@@ -66,14 +62,14 @@ void main() {
     test('球団数:2, index:1', () {
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition2,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition2,
           ),
         ],
       );
-      container.read(hitterSearchConditionServiceProvider).removeTeam(1);
+      container.read(searchConditionServiceProvider).removeTeam(1);
 
-      final result = container.read(hitterSearchConditionProvider);
+      final result = container.read(searchConditionProvider);
       final expected = ['千葉ロッテマリーンズ'];
 
       expect(expected, result.teamList);
@@ -83,14 +79,14 @@ void main() {
     test('球団数:2, index:2（Listの範囲外）', () {
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition2,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition2,
           ),
         ],
       );
-      container.read(hitterSearchConditionServiceProvider).removeTeam(2);
+      container.read(searchConditionServiceProvider).removeTeam(2);
 
-      final result = container.read(hitterSearchConditionProvider);
+      final result = container.read(searchConditionProvider);
       final expected = ['千葉ロッテマリーンズ', '阪神タイガース'];
 
       expect(expected, result.teamList);
@@ -99,7 +95,7 @@ void main() {
 
   group('canRemoveTeam関数', () {
     test('選択中のteamListの長さが1', () {
-      final hitterSearchCondition = HitterSearchCondition(
+      final searchCondition = SearchCondition(
         teamList: [
           '千葉ロッテマリーンズ',
         ],
@@ -116,18 +112,18 @@ void main() {
       );
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => hitterSearchCondition,
+          searchConditionProvider.overrideWith(
+            (ref) => searchCondition,
           ),
         ],
       );
       final result =
-          container.read(hitterSearchConditionServiceProvider).canRemoveTeam();
+          container.read(searchConditionServiceProvider).canRemoveTeam();
       expect(false, result);
     });
 
     test('選択中のteamListの長さが2', () {
-      final hitterSearchCondition = HitterSearchCondition(
+      final searchCondition = SearchCondition(
         teamList: [
           '千葉ロッテマリーンズ',
           '阪神タイガース',
@@ -145,20 +141,19 @@ void main() {
       );
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => hitterSearchCondition,
+          searchConditionProvider.overrideWith(
+            (ref) => searchCondition,
           ),
         ],
       );
       final result =
-          container.read(hitterSearchConditionServiceProvider).canRemoveTeam();
+          container.read(searchConditionServiceProvider).canRemoveTeam();
       expect(true, result);
     });
   });
 
   group('createRemovedTeamList関数', () {
-    final viewModel =
-        ProviderContainer().read(hitterSearchConditionServiceProvider);
+    final viewModel = ProviderContainer().read(searchConditionServiceProvider);
 
     test('球団数:1, index:0', () {
       final teamList = ['千葉ロッテマリーンズ'];
@@ -195,8 +190,7 @@ void main() {
   });
 
   group('isValidChoseTeamList関数', () {
-    final viewModel =
-        ProviderContainer().read(hitterSearchConditionServiceProvider);
+    final viewModel = ProviderContainer().read(searchConditionServiceProvider);
 
     test('最小値-1', () {
       final result = viewModel.isValidChoseTeamList(minChoseTeamNum - 1);
@@ -218,8 +212,8 @@ void main() {
     test('5つの成績を指定', () {
       final container = ProviderContainer(
         overrides: [
-          hitterSearchConditionProvider.overrideWith(
-            (ref) => dummyHitterSearchCondition1,
+          searchConditionProvider.overrideWith(
+            (ref) => dummySearchCondition1,
           ),
         ],
       );
@@ -230,18 +224,15 @@ void main() {
         StatsType.hr.label,
         StatsType.atBats.label,
       ];
-      container
-          .read(hitterSearchConditionServiceProvider)
-          .saveStatsList(statsList);
-      final result = container.read(hitterSearchConditionProvider);
+      container.read(searchConditionServiceProvider).saveStatsList(statsList);
+      final result = container.read(searchConditionProvider);
 
       expect(statsList, result.selectedStatsList);
     });
   });
 
   group('canChangeStatsState関数', () {
-    final viewModel =
-        ProviderContainer().read(hitterSearchConditionServiceProvider);
+    final viewModel = ProviderContainer().read(searchConditionServiceProvider);
 
     test('選択可能上限数と同じ かつ すでに選択されている', () {
       final result = viewModel.canChangeStatsState(
@@ -278,8 +269,7 @@ void main() {
   });
 
   group('isValidSelectedStatsList関数', () {
-    final viewModel =
-        ProviderContainer().read(hitterSearchConditionServiceProvider);
+    final viewModel = ProviderContainer().read(searchConditionServiceProvider);
 
     test('選択可能上限数と同じ', () {
       final result = viewModel.isValidSelectedStatsList(mustSelectStatsNum);

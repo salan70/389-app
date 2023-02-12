@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entity/hitter_quiz.dart';
 import '../../domain/repository/hitter_repository.dart';
-import '../hitter_search_condition/hitter_search_condition_state.dart';
+import '../search_condition/search_condition_state.dart';
 import 'hitter_quiz_state.dart';
 
 /// HitterQuizサービスプロバイダー
@@ -28,7 +28,7 @@ class HitterQuizService {
 
     late HitterQuiz hitterQuiz;
     notifier.state = await AsyncValue.guard(() async {
-      final searchCondition = ref.watch(hitterSearchConditionProvider);
+      final searchCondition = ref.watch(searchConditionProvider);
       hitterQuiz = await ref
           .watch(hitterRepositoryProvider)
           .createHitterQuiz(searchCondition);
