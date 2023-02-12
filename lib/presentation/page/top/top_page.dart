@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../component/admob_widget.dart';
+import '../../component/banner_ad_widget.dart';
 import 'component/to_play_quiz_from_top_button.dart';
 import 'component/to_prepare_quiz_button.dart';
 import 'component/to_setting_button.dart';

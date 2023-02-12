@@ -1,29 +1,17 @@
 import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'logger.dart';
+final bannerAdServiceProvider = Provider.autoDispose(
+  (_) => BannerAdService(),
+);
 
-class MyBannerAd {
-  Future<BannerAd> createBannerAd() async {
-    return BannerAd(
-      adUnitId: await _selectBannerId(),
-      size: AdSize.banner,
-      request: const AdRequest(
-        nonPersonalizedAds: true,
-      ),
-      listener: BannerAdListener(
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          ad.dispose();
-          logger.e(error);
-        },
-      ),
-    );
-  }
-
-  Future<String> _selectBannerId() async {
+/// bannerAd関連の処理を行うサービスクラス
+class BannerAdService {
+  /// バナーIDを取得する
+  Future<String> fetchBannerId() async {
     final packageInfo = await PackageInfo.fromPlatform();
     final appName = packageInfo.appName;
 
