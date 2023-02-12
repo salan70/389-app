@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/loading_state.dart';
-import '../../../../domain/ui/hitter_id_by_name.dart';
 import '../../../application/hitter_quiz/hitter_quiz_ui_state.dart';
+import '../../../domain/entity/hitter_id_by_name.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 
 final playQuizViewModelProvider =

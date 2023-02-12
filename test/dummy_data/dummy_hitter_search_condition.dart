@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/domain/typeadapter/hitter_search_condition.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
 
 /// 1つの球団を選択しているダミーデータ

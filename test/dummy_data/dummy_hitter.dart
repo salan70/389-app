@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/domain/hitter.dart';
-import 'package:baseball_quiz_app/domain/hitting_stats.dart';
-import 'package:baseball_quiz_app/domain/typeadapter/hitter_search_condition.dart';
-import 'package:baseball_quiz_app/domain/ui/hitter_quiz_ui.dart';
-import 'package:baseball_quiz_app/domain/ui/stats_value.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter_quiz_ui.dart';
+import 'package:baseball_quiz_app/domain/entity/hitter_search_condition.dart';
+import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
+import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitter.dart';
+import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitting_stats.dart';
 
 const dummyHitter = Hitter(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../domain/base_repository/auth_repository.dart';
+import '../../../domain/repository/auth_repository.dart';
 import '../../../util/exception/auth_exception.dart';
 import '../../../util/logger.dart';
 
