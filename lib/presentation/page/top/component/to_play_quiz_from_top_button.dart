@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
 class ToPlayQuizFromTopButton extends ConsumerWidget {
@@ -25,7 +25,7 @@ class ToPlayQuizFromTopButton extends ConsumerWidget {
         final navigator = Navigator.of(context);
 
         // 出題する選手を取得
-        await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
+        await ref.read(hitterQuizServiceProvider).fetchHitterQuiz();
 
         await navigator.push(
           MaterialPageRoute<Widget>(

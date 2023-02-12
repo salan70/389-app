@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_ui_state.dart';
-import '../../../../application/is_correct_quiz.state.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 
 class ResultText extends ConsumerWidget {
   const ResultText({super.key});
@@ -29,14 +28,14 @@ class CorrectText extends StatelessWidget {
   }
 }
 
-/// hitterQuizUiStateProviderをref.readしている
+/// hitterQuizStateProviderをref.readしている
 /// 上記プロバイダーを更新しても、このWidgetは再描画されないことに注意
 class InCorrectText extends ConsumerWidget {
   const InCorrectText({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final answer = ref.read(hitterQuizUiStateProvider).value!.name;
+    final answer = ref.read(hitterQuizStateProvider).value!.name;
 
     return Column(
       children: [

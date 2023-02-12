@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/hitter_quiz/hitter_quiz_ui_service.dart';
-import '../../../../application/hitter_search_condition/hitter_search_condition_state.dart';
-import '../../../../domain/base_repository/hitter_search_condition_repository.dart';
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../application/quiz/search_condition/search_condition_state.dart';
+import '../../../../domain/repository/search_condition_repository.dart';
 import '../../play_quiz/play_quiz_page.dart';
 
 class ToPlayQuizFromPrepareButton extends ConsumerWidget {
@@ -18,13 +18,13 @@ class ToPlayQuizFromPrepareButton extends ConsumerWidget {
         width: 120,
         child: TextButton(
           onPressed: () async {
-            // hitterSearchConditionをローカルDBへ保存
-            final hitterSearchCondition = ref.read(
-              hitterSearchConditionProvider,
+            // searchConditionをローカルDBへ保存
+            final searchCondition = ref.read(
+              searchConditionProvider,
             );
             ref
-                .read(hitterSearchConditionRepositoryProvider)
-                .saveHitterSearchCondition(hitterSearchCondition);
+                .read(searchConditionRepositoryProvider)
+                .saveSearchCondition(searchCondition);
 
             // 「Do not use BuildContexts across async gaps.」
             // というLintの警告を回避するためにnavigatorを切り出し
@@ -32,7 +32,7 @@ class ToPlayQuizFromPrepareButton extends ConsumerWidget {
             final navigator = Navigator.of(context);
 
             // 出題する選手を取得
-            await ref.read(hitterQuizUiServiceProvider).fetchHitterQuizUi();
+            await ref.read(hitterQuizServiceProvider).fetchHitterQuiz();
 
             // 画面遷移
             await navigator.push(

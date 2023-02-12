@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../application/hitter_quiz/hitter_quiz_ui_state.dart';
+import '../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 
 /// Quizの画面を表示するWidget
-/// willUpdateがtrueの場合、このhitterQuizUiStateProviderをwatch（監視）される
-/// falseの場合、hitterQuizUiStateProviderをreadする
+/// willUpdateがtrueの場合、このhitterQuizStateProviderをwatch（監視）される
+/// falseの場合、hitterQuizStateProviderをreadする
 /// （プロバイダーが更新されても再描画されない）。
 class QuizWidget extends ConsumerWidget {
   const QuizWidget({super.key, required this.willUpdate});
@@ -14,11 +14,11 @@ class QuizWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizUi = willUpdate
-        ? ref.watch(hitterQuizUiStateProvider)
-        : ref.read(hitterQuizUiStateProvider);
+    final hitterQuiz = willUpdate
+        ? ref.watch(hitterQuizStateProvider)
+        : ref.read(hitterQuizStateProvider);
 
-    return hitterQuizUi.maybeWhen(
+    return hitterQuiz.maybeWhen(
       // TODO(me): 空のWidgetを共通componentとして定義したい
       orElse: Container.new,
       data: (data) {
