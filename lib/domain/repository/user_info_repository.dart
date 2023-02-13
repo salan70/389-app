@@ -1,3 +1,6 @@
+// ignore_for_file: one_member_abstracts
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userInfoRepositoryProvider = Provider<UserInfoRepository>(
@@ -5,12 +8,6 @@ final userInfoRepositoryProvider = Provider<UserInfoRepository>(
 );
 
 abstract class UserInfoRepository {
-  /// ユーザー情報を作成
-  Future<void> createUserInfo();
-
-  /// ユーザー情報を取得
-  Future<void> fetchUserInfo();
-
-  /// ユーザー情報を削除
-  Future<void> deleteUserInfo();
+  /// ユーザー情報を作成する
+  Future<void> updateUserInfo(User user);
 }
