@@ -12,16 +12,18 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'application/auth/auth_service.dart';
 import 'application/loading/loading_state.dart';
 import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
+import 'application/user/user_service.dart';
 import 'application/widget/widget_state.dart';
 import 'domain/entity/search_condition.dart';
 import 'domain/repository/auth_repository.dart';
 import 'domain/repository/hitter_repository.dart';
 import 'domain/repository/search_condition_repository.dart';
+import 'domain/repository/user_info_repository.dart';
 import 'infrastructure/firebase/auth/firebase_auth_repository.dart';
 import 'infrastructure/firebase/firebase_providers.dart';
+import 'infrastructure/firebase/user_info/firebase_user_info_repository.dart';
 import 'infrastructure/hive/hive_search_condition_repository.dart';
 import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
@@ -59,11 +61,20 @@ Future<void> main() async {
             );
           },
         ),
-        authRepositoryProvider.overrideWith((ref) {
-          return FirebaseAuthRepository(
-            ref.watch(firebaseAuthProvider),
-          );
-        }),
+        authRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseAuthRepository(
+              ref.watch(firebaseAuthProvider),
+            );
+          },
+        ),
+        userInfoRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseUserInfoRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
       ],
       child: const MyApp(),
     ),
@@ -150,7 +161,7 @@ class _MyApp extends ConsumerState<MyApp> {
     );
 
     // Userを作成
-    ref.read(authServiceProvider).createUser();
+    ref.read(userServiceProvider).login();
 
     return MaterialApp(
       title: 'Flutter Demo',
