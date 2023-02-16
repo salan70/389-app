@@ -12,7 +12,7 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
   Future<void> updateUserInfo(User user) async {
     await firestore.collection('users').doc(user.uid).set(<String, dynamic>{
       'createdAt': user.metadata.creationTime,
-      'updatedAt': DateTime.now(),
+      'updatedAt': FieldValue.serverTimestamp(),
     });
   }
 }
