@@ -18,7 +18,9 @@ class ReplayButton extends ConsumerWidget {
         // 上記警告は、contextに対してawaitすると発生すると思われる
         final navigator = Navigator.of(context);
 
-        await ref.read(hitterQuizServiceProvider).fetchHitterQuiz();
+        await ref
+            .read(hitterQuizServiceProvider)
+            .fetchHitterQuizBySearchCondition();
 
         await navigator.push(
           MaterialPageRoute<Widget>(
