@@ -33,7 +33,7 @@ class HitterQuizService {
       final searchCondition = ref.watch(searchConditionProvider);
       hitterQuiz = await ref
           .watch(hitterRepositoryProvider)
-          .createHitterQuiz(searchCondition);
+          .fetchHitterQuizBySearchCondition(searchCondition);
       return null;
     });
 
