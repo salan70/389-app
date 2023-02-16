@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../util/constant/text_in_app.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/play_quiz/answer_widget.dart';
 import '../../component/play_quiz/quiz_event_buttons.dart';
@@ -28,9 +29,9 @@ class PlayQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 QuizEventButtons(),
                 SizedBox(height: 16),
-                AnswerWidget(retireConfirmText: '本当に諦めますか？'),
+                AnswerWidget(retireConfirmText: normalQuizRetireConfirmText),
                 SizedBox(height: 16),
-                RetireButton(retireConfirmText: '本当に諦めますか？'),
+                RetireButton(retireConfirmText: normalQuizRetireConfirmText),
                 SizedBox(height: 200),
               ],
             ),
