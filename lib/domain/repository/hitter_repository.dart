@@ -9,9 +9,15 @@ final hitterRepositoryProvider = Provider<HitterRepository>(
 );
 
 abstract class HitterRepository {
-  /// 検索条件に合う野手を1人取得し、HitterQuiz型を返す
-  Future<HitterQuiz> createHitterQuiz(
+  /// 検索条件に合う野手を1人取得し、HitterQuiz型で返す
+  Future<HitterQuiz> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
+  );
+
+  /// IDで野手を1人取得し、HitterQuiz型で返す
+  Future<HitterQuiz> fetchHitterQuizById(
+    SearchCondition searchCondition,
+    String id,
   );
 
   /// 登録されている全ての野手を取得する

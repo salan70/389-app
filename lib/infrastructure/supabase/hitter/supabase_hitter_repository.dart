@@ -27,27 +27,29 @@ class SupabaseHitterRepository implements HitterRepository {
   final Supabase supabase;
 
   @override
-  Future<HitterQuiz> createHitterQuiz(
+  Future<HitterQuiz> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
-    final supabaseHitter = await _searchHitter(searchCondition);
+    final supabaseHitter =
+        await _searchHitterBySearchCondition(searchCondition);
 
-    // 取得した選手の成績を取得
-    final statsList = await _fetchHittingStats(supabaseHitter.id);
-
-    // HitterQuiz型に変換
-    final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
-      supabaseHitter,
-      statsList,
-      searchCondition.selectedStatsList,
-    );
-
-    return hitterQuiz;
+    return _createHitterQuiz(supabaseHitter, searchCondition);
   }
 
-  /// 条件に合う選手を1人検索する
-  Future<SupabaseHitter> _searchHitter(
+  @override
+  Future<HitterQuiz> fetchHitterQuizById(
+    SearchCondition searchCondition,
+    String id,
+  ) async {
+    // 検索条件に合う選手を1人取得
+    final supabaseHitter = await _searchHitterById(id);
+
+    return _createHitterQuiz(supabaseHitter, searchCondition);
+  }
+
+  /// 検索条件で選手で検索し、ランダムで1人返す
+  Future<SupabaseHitter> _searchHitterBySearchCondition(
     SearchCondition searchCondition,
   ) async {
     try {
@@ -81,6 +83,53 @@ class SupabaseHitterRepository implements HitterRepository {
       logger.e(e);
       throw SupabaseException.unknown();
     }
+  }
+
+  /// IDで選手を検索する
+  Future<SupabaseHitter> _searchHitterById(String id) async {
+    try {
+      final responses = await supabase.client
+          .from('hitter_table')
+          .select<dynamic>(
+            'id, name, team, hasData',
+          )
+          .eq('hasData', true)
+          .eq('id', id) as List<dynamic>;
+
+      // 検索条件に合致する選手がいない場合、例外を返す
+      if (responses.isEmpty) {
+        throw SupabaseException.notFound();
+      }
+
+      final supabaseHitter =
+          SupabaseHitter.fromJson(responses as Map<String, dynamic>);
+
+      return supabaseHitter;
+    } on SupabaseException catch (e) {
+      logger.e(e);
+      rethrow;
+    } on Exception catch (e) {
+      logger.e(e);
+      throw SupabaseException.unknown();
+    }
+  }
+
+  /// SupabaseHitterとSearchConditionからHitterQuizを作成する
+  Future<HitterQuiz> _createHitterQuiz(
+    SupabaseHitter supabaseHitter,
+    SearchCondition searchCondition,
+  ) async {
+    // 取得した選手の成績を取得
+    final statsList = await _fetchHittingStats(supabaseHitter.id);
+
+    // HitterQuiz型に変換
+    final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
+      supabaseHitter,
+      statsList,
+      searchCondition.selectedStatsList,
+    );
+
+    return hitterQuiz;
   }
 
   /// playerIdから打撃成績のListを取得する
