@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../../application/admob/interstitial_ad_service.dart';
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
-import '../../../../application/widget/widget_state.dart';
-import '../../../../domain/entity/hitter.dart';
-import '../../quiz_result/quiz_result_page.dart';
+import '../../../../../application/admob/interstitial_ad_service.dart';
+import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../../application/widget/widget_state.dart';
+import '../../../../../domain/entity/hitter.dart';
+import '../../page/quiz_result/quiz_result_page.dart';
 import 'incorrect_dialog.dart';
 
 class AnswerWidget extends ConsumerStatefulWidget {
-  const AnswerWidget({super.key});
+  const AnswerWidget({super.key, required this.retireConfirmText});
+
+  final String retireConfirmText;
 
   @override
   ConsumerState<AnswerWidget> createState() => _MyHomePageState();
@@ -105,6 +107,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                         builder: (_) {
                           return IncorrectDialog(
                             selectedHitter: textEditingController.text,
+                            retireConfirmText: widget.retireConfirmText,
                           );
                         },
                       );

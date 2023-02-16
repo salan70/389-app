@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../play_quiz/play_quiz_page.dart';
+import '../../play_daily_quiz/play_daily_quiz_page.dart';
 
-class ToPlayQuizFromTopButton extends ConsumerWidget {
-  const ToPlayQuizFromTopButton({
+class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
+  const ToPlayDailyQuizFromTopButton({
     super.key,
   });
 
@@ -14,7 +14,7 @@ class ToPlayQuizFromTopButton extends ConsumerWidget {
     return TextButton(
       child: FittedBox(
         child: Text(
-          '保存されている条件でプレイ！',
+          '今日の1問',
           style: Theme.of(context).textTheme.headline5,
         ),
       ),
@@ -25,13 +25,11 @@ class ToPlayQuizFromTopButton extends ConsumerWidget {
         final navigator = Navigator.of(context);
 
         // 出題する選手を取得
-        await ref
-            .read(hitterQuizServiceProvider)
-            .fetchHitterQuizBySearchCondition();
+        await ref.read(hitterQuizServiceProvider).fetchHitterQuizById();
 
         await navigator.push(
           MaterialPageRoute<Widget>(
-            builder: (_) => const PlayQuizPage(),
+            builder: (_) => const PlayDailyQuizPage(),
           ),
         );
       },

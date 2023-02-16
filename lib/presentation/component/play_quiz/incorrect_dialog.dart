@@ -3,10 +3,15 @@ import 'package:flutter/material.dart';
 import 'retire_confirm_dialog.dart';
 
 class IncorrectDialog extends StatelessWidget {
-  const IncorrectDialog({super.key, required this.selectedHitter});
+  const IncorrectDialog({
+    super.key,
+    required this.selectedHitter,
+    required this.retireConfirmText,
+  });
 
   // Providerで保持するほうが良いかも？
   final String selectedHitter;
+  final String retireConfirmText;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class IncorrectDialog extends StatelessWidget {
               context: context,
               barrierDismissible: false,
               builder: (_) {
-                return const RetireConfirmDialog();
+                return RetireConfirmDialog(confirmText: retireConfirmText);
               },
             );
           },
