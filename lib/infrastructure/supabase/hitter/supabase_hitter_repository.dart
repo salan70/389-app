@@ -102,7 +102,7 @@ class SupabaseHitterRepository implements HitterRepository {
       }
 
       final supabaseHitter =
-          SupabaseHitter.fromJson(responses as Map<String, dynamic>);
+          SupabaseHitter.fromJson(responses[0] as Map<String, dynamic>);
 
       return supabaseHitter;
     } on SupabaseException catch (e) {
