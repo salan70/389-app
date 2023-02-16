@@ -31,10 +31,10 @@ class SupabaseHitterRepository implements HitterRepository {
     SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
-    final supabaseHitter = await searchHitter(searchCondition);
+    final supabaseHitter = await _searchHitter(searchCondition);
 
     // 取得した選手の成績を取得
-    final statsList = await fetchHittingStats(supabaseHitter.id);
+    final statsList = await _fetchHittingStats(supabaseHitter.id);
 
     // HitterQuiz型に変換
     final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
@@ -47,7 +47,7 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// 条件に合う選手を1人検索する
-  Future<SupabaseHitter> searchHitter(
+  Future<SupabaseHitter> _searchHitter(
     SearchCondition searchCondition,
   ) async {
     try {
@@ -84,7 +84,7 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   /// playerIdから打撃成績のListを取得する
-  Future<List<HittingStats>> fetchHittingStats(String playerId) async {
+  Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
     try {
       final responses = await supabase.client
