@@ -22,8 +22,8 @@ class HitterQuizService {
   HitterQuizService(this.ref);
   final Ref ref;
 
-  /// 出題する選手を取得する
-  Future<void> fetchHitterQuiz() async {
+  /// 検索条件をもとに出題する選手を取得する
+  Future<void> fetchHitterQuizBySearchCondition() async {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
@@ -34,6 +34,27 @@ class HitterQuizService {
       hitterQuiz = await ref
           .watch(hitterRepositoryProvider)
           .fetchHitterQuizBySearchCondition(searchCondition);
+      return null;
+    });
+
+    notifier.state = AsyncData(hitterQuiz);
+  }
+
+  /// IDをもとに出題する選手を取得する
+  /// 今日の1問用
+  Future<void> fetchHitterQuizById() async {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+
+    notifier.state = const AsyncValue.loading();
+
+    late HitterQuiz hitterQuiz;
+    notifier.state = await AsyncValue.guard(() async {
+      final searchCondition = ref.watch(searchConditionProvider);
+      hitterQuiz =
+          await ref.watch(hitterRepositoryProvider).fetchHitterQuizById(
+                searchCondition,
+                '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
+              );
       return null;
     });
 

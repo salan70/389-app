@@ -32,7 +32,9 @@ class ToPlayQuizFromPrepareButton extends ConsumerWidget {
             final navigator = Navigator.of(context);
 
             // 出題する選手を取得
-            await ref.read(hitterQuizServiceProvider).fetchHitterQuiz();
+            await ref
+                .read(hitterQuizServiceProvider)
+                .fetchHitterQuizBySearchCondition();
 
             // 画面遷移
             await navigator.push(

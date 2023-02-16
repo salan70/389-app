@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../../quiz_result/quiz_result_page.dart';
+import '../../page/quiz_result/quiz_result_page.dart';
 
 class RetireConfirmDialog extends StatelessWidget {
-  const RetireConfirmDialog({super.key});
+  const RetireConfirmDialog({super.key, required this.confirmText});
+
+  final String confirmText;
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('確認'),
-      content: const Text('本当に諦めますか？'),
+      content: Text(confirmText),
       actions: <Widget>[
         TextButton(
           child: const Text(
