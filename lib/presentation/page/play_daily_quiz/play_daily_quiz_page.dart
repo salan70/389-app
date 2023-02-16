@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../util/constant/text_in_app.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/play_quiz/answer_widget.dart';
 import '../../component/play_quiz/quiz_event_buttons.dart';
@@ -29,11 +30,11 @@ class PlayDailyQuizPage extends StatelessWidget {
                 QuizEventButtons(),
                 SizedBox(height: 16),
                 AnswerWidget(
-                  retireConfirmText: '「今日の1問」は1度諦めると2度とプレイできません。\n本当に諦めますか？',
+                  retireConfirmText: dailyQuizRetireConfirmText,
                 ),
                 SizedBox(height: 16),
                 RetireButton(
-                  retireConfirmText: '「今日の1問」は1度諦めると2度とプレイできません。\n本当に諦めますか？',
+                  retireConfirmText: dailyQuizRetireConfirmText,
                 ),
                 SizedBox(height: 200),
               ],
