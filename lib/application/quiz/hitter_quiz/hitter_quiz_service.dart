@@ -129,4 +129,15 @@ class HitterQuizService {
 
     return selectedHitterId == hitterQuiz.value!.id;
   }
+
+  void addIncorrectCount() {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+    final hitterQuiz = notifier.state.value;
+
+    notifier.state = AsyncData(
+      hitterQuiz!.copyWith(
+        incorrectCount: hitterQuiz.incorrectCount + 1,
+      ),
+    );
+  }
 }
