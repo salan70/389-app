@@ -94,8 +94,10 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
                     }
                     // 不正解の場合
                     else {
+                      hitterQuizService.addIncorrectCount();
+
+                      // interstitial広告を確率で表示
                       if (interstitialAdService.isShownAds()) {
-                        // interstitial広告を表示
                         await interstitialAdService.showAd();
                       }
 
