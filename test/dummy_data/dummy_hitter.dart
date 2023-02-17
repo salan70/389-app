@@ -200,4 +200,5 @@ const dummyHitterQuiz = HitterQuiz(
     '7cdcec0c-b86c-464e-a2b2-03c70488fbc8',
     'de48b02c-7707-4f8c-a302-9ba09ad4a05d'
   ],
+  isCorrectCount: 0,
 );

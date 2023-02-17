@@ -25,13 +25,16 @@ class PlayDailyQuizPage extends StatelessWidget {
             child: ListView(
               children: const [
                 //TODO: ライフ機能
-                //TODO: Androidのバックキー制御
+                //TODO: Androidのバックキー制御（iOSも対応必要）
                 //TODO: Firestoreに保存したデータを取得し、デイリークイズを作成する
                 //TODO: サーバー時間から、デイリークイズに使用するデータを取得する
-                //TODO: プレイ状況/結果をFirestoreに保存
+                //TODO: プレイ状況/結果（正誤、成績公開数、不正解数）をFirestoreに保存
+
+                /// 軽微そうなやつ
                 //TODO: 共通化したWidgetで、文字列などの切り分けが必要ないか確認
                 //TODO: デイリークイズ用の結果画面を用意
                 //TODO: デイリークイズ用のシェア機能を用意（文言変えるだけっぽそう）
+                //TODO: クイズ正解時に花吹雪出す
                 BannerAdWidget(),
                 SizedBox(height: 16),
                 LifeWidget(),
