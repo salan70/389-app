@@ -36,6 +36,7 @@ class SupabaseHitterConverter {
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       hiddenStatsIdList: hiddenStatsIdList,
+      isCorrectCount: 0,
     );
 
     return hitterQuiz;
