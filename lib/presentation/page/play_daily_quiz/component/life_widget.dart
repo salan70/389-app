@@ -18,7 +18,7 @@ class LifeWidget extends ConsumerWidget {
           orElse: Container.new,
           data: (data) {
             Icon favoriteIcon(int borderCount) {
-              if (data!.isCorrectCount < borderCount) {
+              if (data!.incorrectCount < borderCount) {
                 return const Icon(Icons.favorite_rounded);
               }
               return const Icon(Icons.favorite_border_rounded);
