@@ -19,25 +19,28 @@ class QuizResultPage extends StatelessWidget {
     // 本当はProviderで参照したかった。。
     final globalKey = GlobalKey();
 
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8, right: 8),
-          child: ListView(
-            children: [
-              const BannerAdWidget(),
-              const SizedBox(height: 16),
-              const ResultText(),
-              const SizedBox(height: 16),
-              ResultQuizWidget(globalKey: globalKey),
-              const SizedBox(height: 8),
-              const ReplayButton(),
-              const SizedBox(height: 8),
-              ShareButton(globalKey: globalKey),
-              const SizedBox(height: 8),
-              const NavigationButtons(),
-              const SizedBox(height: 80),
-            ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8),
+            child: ListView(
+              children: [
+                const BannerAdWidget(),
+                const SizedBox(height: 16),
+                const ResultText(),
+                const SizedBox(height: 16),
+                ResultQuizWidget(globalKey: globalKey),
+                const SizedBox(height: 8),
+                const ReplayButton(),
+                const SizedBox(height: 8),
+                ShareButton(globalKey: globalKey),
+                const SizedBox(height: 8),
+                const NavigationButtons(),
+                const SizedBox(height: 80),
+              ],
+            ),
           ),
         ),
       ),
