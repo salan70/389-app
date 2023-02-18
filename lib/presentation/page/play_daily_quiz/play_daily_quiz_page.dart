@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../util/constant/text_in_app.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/play_quiz/answer_widget.dart';
 import '../../component/play_quiz/quiz_event_buttons.dart';
@@ -15,6 +14,9 @@ class PlayDailyQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    const dailyQuizRetireConfirmText = '「今日の1問」は1度諦めると2度とプレイできません。\n本当に諦めますか？';
+    const maxCanIncorrectCountInDailyQuiz = 2;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -24,8 +26,8 @@ class PlayDailyQuizPage extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             child: ListView(
               children: const [
-                //TODO: 最後のライフを消費する際、確認ダイアログを表示させる
-                //TODO: 最後のライフを消費した際に強制的に結果画面へ遷移させる
+                //TODO: 画面遷移をroutes定義する方法にする
+                //TODO: 1日1回しかプレイできなくする
                 //TODO: Androidのバックキー制御（iOSも対応必要）
 
                 //TODO: Firestoreに保存したデータを取得し、デイリークイズを作成する
@@ -45,7 +47,10 @@ class PlayDailyQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 QuizEventButtons(),
                 SizedBox(height: 16),
-                AnswerWidget(retireConfirmText: dailyQuizRetireConfirmText),
+                AnswerWidget(
+                  retireConfirmText: dailyQuizRetireConfirmText,
+                  maxCanIncorrectCount: maxCanIncorrectCountInDailyQuiz,
+                ),
                 SizedBox(height: 16),
                 RetireButton(retireConfirmText: dailyQuizRetireConfirmText),
                 SizedBox(height: 200),

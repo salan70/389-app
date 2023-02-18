@@ -130,6 +130,7 @@ class HitterQuizService {
     return selectedHitterId == hitterQuiz.value!.id;
   }
 
+  /// 不正解数を1増やす
   void addIncorrectCount() {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
     final hitterQuiz = notifier.state.value;
@@ -139,5 +140,15 @@ class HitterQuizService {
         incorrectCount: hitterQuiz.incorrectCount + 1,
       ),
     );
+  }
+
+  /// 最後の回答かどうかを返す
+  bool isFinalAnswer(int? maxCanIncorrectCount) {
+    if (maxCanIncorrectCount == null) {
+      return false;
+    }
+
+    final hitterQuiz = ref.read(hitterQuizStateProvider);
+    return hitterQuiz.value!.incorrectCount == maxCanIncorrectCount;
   }
 }
