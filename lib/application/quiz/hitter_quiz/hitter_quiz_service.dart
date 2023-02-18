@@ -142,6 +142,7 @@ class HitterQuizService {
     );
   }
 
+  // TODO(me): UT書く
   /// 最後の回答かどうかを返す
   bool isFinalAnswer(int? maxCanIncorrectCount) {
     if (maxCanIncorrectCount == null) {

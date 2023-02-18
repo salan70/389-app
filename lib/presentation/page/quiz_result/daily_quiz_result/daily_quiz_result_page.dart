@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../util/constant/url.dart';
 import '../../../component/banner_ad_widget.dart';
 import '../component/result_quiz_widget.dart';
 import '../component/result_text.dart';
@@ -13,6 +14,7 @@ class DailyQuizResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    const shareText = '#389quiz #今日の1問\n$storeUrl';
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
     // 本当はProviderで参照したかった。。
@@ -32,7 +34,7 @@ class DailyQuizResultPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 ResultQuizWidget(globalKey: globalKey),
                 const SizedBox(height: 8),
-                ShareButton(globalKey: globalKey),
+                ShareButton(globalKey: globalKey, shareText: shareText),
                 const SizedBox(height: 8),
                 const ToTopButton(),
                 const SizedBox(height: 80),
