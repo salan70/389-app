@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
-import 'retire_confirm_dialog.dart';
+import '../../page/quiz_result/quiz_result_page.dart';
+import '../confirm_dialog.dart';
 
 class RetireButton extends ConsumerWidget {
   const RetireButton({super.key, required this.retireConfirmText});
@@ -23,7 +24,10 @@ class RetireButton extends ConsumerWidget {
               context: context,
               barrierDismissible: false,
               builder: (_) {
-                return RetireConfirmDialog(confirmText: retireConfirmText);
+                return ConfirmDialog(
+                  confirmText: retireConfirmText,
+                  nextWidget: const QuizResultPage(),
+                );
               },
             );
           },

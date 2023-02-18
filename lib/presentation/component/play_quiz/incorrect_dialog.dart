@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'retire_confirm_dialog.dart';
+import '../../page/quiz_result/quiz_result_page.dart';
+import '../confirm_dialog.dart';
 
 class IncorrectDialog extends StatelessWidget {
   const IncorrectDialog({
@@ -29,7 +30,10 @@ class IncorrectDialog extends StatelessWidget {
               context: context,
               barrierDismissible: false,
               builder: (_) {
-                return RetireConfirmDialog(confirmText: retireConfirmText);
+                return ConfirmDialog(
+                  confirmText: retireConfirmText,
+                  nextWidget: const QuizResultPage(),
+                );
               },
             );
           },
