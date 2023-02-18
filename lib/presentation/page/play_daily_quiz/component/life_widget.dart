@@ -29,7 +29,7 @@ class LifeWidget extends ConsumerWidget {
               children: [
                 favoriteIcon(1),
                 favoriteIcon(2),
-                favoriteIcon(3),
+                const Icon(Icons.favorite_rounded),
               ],
             );
           },

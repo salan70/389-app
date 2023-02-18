@@ -4,11 +4,11 @@ class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({
     super.key,
     required this.confirmText,
-    required this.nextWidget,
+    required this.onPressedYes,
   });
 
   final String confirmText;
-  final Widget nextWidget;
+  final VoidCallback onPressedYes;
 
   @override
   Widget build(BuildContext context) {
@@ -25,18 +25,11 @@ class ConfirmDialog extends StatelessWidget {
           },
         ),
         TextButton(
+          onPressed: onPressedYes,
           child: Text(
             'はい',
             style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
-          onPressed: () async {
-            await Navigator.push(
-              context,
-              MaterialPageRoute<Widget>(
-                builder: (_) => nextWidget,
-              ),
-            );
-          },
         ),
       ],
     );

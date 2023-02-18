@@ -32,7 +32,13 @@ class IncorrectDialog extends StatelessWidget {
               builder: (_) {
                 return ConfirmDialog(
                   confirmText: retireConfirmText,
-                  nextWidget: const QuizResultPage(),
+                  onPressedYes: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute<Widget>(
+                        builder: (_) => const QuizResultPage(),
+                      ),
+                    );
+                  },
                 );
               },
             );
