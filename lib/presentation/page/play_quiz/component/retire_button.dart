@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
-import '../../page/quiz_result/quiz_result_page.dart';
-import '../confirm_dialog.dart';
+import '../../../component/confirm_dialog.dart';
 
 class RetireButton extends ConsumerWidget {
-  const RetireButton({super.key, required this.retireConfirmText});
+  const RetireButton({
+    super.key,
+    required this.retireConfirmText,
+    required this.resultPage,
+  });
 
   final String retireConfirmText;
+  final Widget resultPage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +33,7 @@ class RetireButton extends ConsumerWidget {
                   onPressedYes: () {
                     Navigator.of(context).push(
                       MaterialPageRoute<Widget>(
-                        builder: (_) => const QuizResultPage(),
+                        builder: (_) => resultPage,
                       ),
                     );
                   },

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../play_normal_quiz/play_normal_quiz_page.dart';
+import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
 class ReplayButton extends ConsumerWidget {
   const ReplayButton({
