@@ -7,8 +7,8 @@ import '../../component/play_quiz/quiz_event_buttons.dart';
 import '../../component/play_quiz/retire_button.dart';
 import '../../component/quiz_widget.dart';
 
-class PlayQuizPage extends StatelessWidget {
-  const PlayQuizPage({super.key});
+class PlayNormalQuizPage extends StatelessWidget {
+  const PlayNormalQuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
