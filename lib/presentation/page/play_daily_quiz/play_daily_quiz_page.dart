@@ -24,8 +24,10 @@ class PlayDailyQuizPage extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             child: ListView(
               children: const [
-                //TODO: ライフ機能
+                //TODO: 最後のライフを消費する際、確認ダイアログを表示させる
+                //TODO: 最後のライフを消費した際に強制的に結果画面へ遷移させる
                 //TODO: Androidのバックキー制御（iOSも対応必要）
+
                 //TODO: Firestoreに保存したデータを取得し、デイリークイズを作成する
                 //TODO: サーバー時間から、デイリークイズに使用するデータを取得する
                 //TODO: プレイ状況/結果（正誤、成績公開数、不正解数）をFirestoreに保存

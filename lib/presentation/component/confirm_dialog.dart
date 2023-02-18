@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../page/quiz_result/quiz_result_page.dart';
-
-class RetireConfirmDialog extends StatelessWidget {
-  const RetireConfirmDialog({super.key, required this.confirmText});
+class ConfirmDialog extends StatelessWidget {
+  const ConfirmDialog({
+    super.key,
+    required this.confirmText,
+    required this.nextWidget,
+  });
 
   final String confirmText;
+  final Widget nextWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class RetireConfirmDialog extends StatelessWidget {
             await Navigator.push(
               context,
               MaterialPageRoute<Widget>(
-                builder: (_) => const QuizResultPage(),
+                builder: (_) => nextWidget,
               ),
             );
           },
