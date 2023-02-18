@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../application/quiz/search_condition/search_condition_state.dart';
 import '../../../../domain/repository/search_condition_repository.dart';
-import '../../play_normal_quiz/play_normal_quiz_page.dart';
+import '../../play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
 class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget {
   const ToPlayNormalQuizFromPrepareButton({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 
 class LifeWidget extends ConsumerWidget {
   const LifeWidget({super.key});
