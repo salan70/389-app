@@ -13,6 +13,8 @@ dependencies:
   app_tracking_transparency: ^2.0.3
   awesome_select: ^6.0.0
   collection: ^1.16.0
+  # 紙吹雪を出すのに使用
+  confetti: ^0.7.0
   cupertino_icons: ^1.0.2
   device_info_plus: ^8.0.0
   flutter:
