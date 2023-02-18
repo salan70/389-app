@@ -23,7 +23,7 @@ class QuizEventButtons extends ConsumerWidget {
             if (hitterQuizService.canOpen()) {
               showDialog<void>(
                 context: context,
-                builder: (_) {
+                builder: (context) {
                   return const ConfirmOpenAllDialog();
                 },
               );

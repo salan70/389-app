@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../util/constant/text_in_app.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/play_quiz/answer_widget.dart';
 import '../../component/play_quiz/quiz_event_buttons.dart';
@@ -14,6 +13,8 @@ class PlayQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    const normalQuizRetireConfirmText = '本当に諦めますか？';
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -29,7 +30,10 @@ class PlayQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 QuizEventButtons(),
                 SizedBox(height: 16),
-                AnswerWidget(retireConfirmText: normalQuizRetireConfirmText),
+                AnswerWidget(
+                  retireConfirmText: normalQuizRetireConfirmText,
+                  maxCanIncorrectCount: null,
+                ),
                 SizedBox(height: 16),
                 RetireButton(retireConfirmText: normalQuizRetireConfirmText),
                 SizedBox(height: 200),

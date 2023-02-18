@@ -8,12 +8,19 @@ import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../domain/entity/hitter.dart';
 import '../../page/quiz_result/quiz_result_page.dart';
+import '../confirm_dialog.dart';
 import 'incorrect_dialog.dart';
 
+/// maxCanAnswerCount: 間違えれる数。制限がない場合はnullを渡す
 class AnswerWidget extends ConsumerStatefulWidget {
-  const AnswerWidget({super.key, required this.retireConfirmText});
+  const AnswerWidget({
+    super.key,
+    required this.retireConfirmText,
+    required this.maxCanIncorrectCount,
+  });
 
   final String retireConfirmText;
+  final int? maxCanIncorrectCount;
 
   @override
   ConsumerState<AnswerWidget> createState() => _MyHomePageState();
@@ -40,6 +47,59 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
         ref.watch(selectedHitterIdProvider.notifier);
 
     final isCorrectNotifier = ref.watch(isCorrectQuizStateProvider.notifier);
+
+    // TODO(me): viewでやるべきではない気がするから、
+    // application等に委譲できないか検討する
+    Future<void> submitAnswer({required bool isFinalAnswer}) async {
+      final navigator = Navigator.of(context);
+
+      // interstitial広告を作成
+      final interstitialAdService = ref.read(interstitialAdServiceProvider);
+      await interstitialAdService.createAd();
+
+      isCorrectNotifier.state = hitterQuizService.isCorrectHitterQuiz();
+
+      await interstitialAdService.waitResult();
+
+      // 正解の場合
+      if (isCorrectNotifier.state) {
+        await navigator.push(
+          MaterialPageRoute<Widget>(
+            builder: (_) => const QuizResultPage(),
+          ),
+        );
+        return;
+      }
+      // 不正解の場合
+      hitterQuizService.addIncorrectCount();
+
+      // interstitial広告を確率で表示
+      if (interstitialAdService.isShownAds()) {
+        await interstitialAdService.showAd();
+      }
+
+      // 最後の回答の場合
+      if (isFinalAnswer) {
+        await navigator.push(
+          MaterialPageRoute<Widget>(
+            builder: (_) => const QuizResultPage(),
+          ),
+        );
+        return;
+      }
+
+      // 最後の回答でない場合
+      await showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) {
+          return IncorrectDialog(
+            selectedHitter: textEditingController.text,
+            retireConfirmText: widget.retireConfirmText,
+          );
+        },
+      );
+    }
 
     return Column(
       children: [
@@ -69,51 +129,28 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
             onPressed: selectedHitterId == ''
                 ? null
                 : () async {
-                    // 「Do not use BuildContexts across async gaps.」
-                    // というLintの警告を回避するためにnavigatorを切り出し
-                    // 上記警告は、contextに対してawaitすると発生すると思われる
-                    final navigator = Navigator.of(context);
+                    // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
+                    // 確認ダイアログを表示する
+                    final isFinalAnswer = hitterQuizService
+                        .isFinalAnswer(widget.maxCanIncorrectCount);
 
-                    // interstitial広告を作成
-                    final interstitialAdService =
-                        ref.read(interstitialAdServiceProvider);
-                    await interstitialAdService.createAd();
-
-                    isCorrectNotifier.state =
-                        hitterQuizService.isCorrectHitterQuiz();
-
-                    await interstitialAdService.waitResult();
-
-                    // 正解の場合
-                    if (isCorrectNotifier.state) {
-                      await navigator.push(
-                        MaterialPageRoute<Widget>(
-                          builder: (_) => const QuizResultPage(),
-                        ),
-                      );
-                    }
-                    // 不正解の場合
-                    else {
-                      hitterQuizService.addIncorrectCount();
-
-                      // interstitial広告を確率で表示
-                      if (interstitialAdService.isShownAds()) {
-                        await interstitialAdService.showAd();
-                      }
-
-                      // TODO(me): 一旦ignoreで甘えた。
-                      // ignore: use_build_context_synchronously
+                    if (isFinalAnswer) {
                       await showDialog<void>(
                         context: context,
                         barrierDismissible: false,
                         builder: (_) {
-                          return IncorrectDialog(
-                            selectedHitter: textEditingController.text,
-                            retireConfirmText: widget.retireConfirmText,
+                          return ConfirmDialog(
+                            confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
+                            onPressedYes: () async {
+                              await submitAnswer(isFinalAnswer: true);
+                            },
                           );
                         },
                       );
+                      return;
                     }
+
+                    await submitAnswer(isFinalAnswer: false);
                   },
             child: const Text('回答する'),
           ),
