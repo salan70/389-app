@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../component/banner_ad_widget.dart';
-import '../../component/play_quiz/answer_widget.dart';
-import '../../component/play_quiz/quiz_event_buttons.dart';
-import '../../component/play_quiz/retire_button.dart';
-import '../../component/quiz_widget.dart';
+import '../../../component/banner_ad_widget.dart';
+import '../../../component/quiz_widget.dart';
+import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
+import '../component/answer_widget.dart';
+import '../component/quiz_event_buttons.dart';
+import '../component/retire_button.dart';
 
 class PlayNormalQuizPage extends StatelessWidget {
   const PlayNormalQuizPage({super.key});
@@ -33,9 +34,13 @@ class PlayNormalQuizPage extends StatelessWidget {
                 AnswerWidget(
                   retireConfirmText: normalQuizRetireConfirmText,
                   maxCanIncorrectCount: null,
+                  resultPage: NormalQuizResultPage(),
                 ),
                 SizedBox(height: 16),
-                RetireButton(retireConfirmText: normalQuizRetireConfirmText),
+                RetireButton(
+                  retireConfirmText: normalQuizRetireConfirmText,
+                  resultPage: NormalQuizResultPage(),
+                ),
                 SizedBox(height: 200),
               ],
             ),

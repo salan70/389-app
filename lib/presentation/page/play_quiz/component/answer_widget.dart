@@ -7,8 +7,7 @@ import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../domain/entity/hitter.dart';
-import '../../page/quiz_result/quiz_result_page.dart';
-import '../confirm_dialog.dart';
+import '../../../component/confirm_dialog.dart';
 import 'incorrect_dialog.dart';
 
 /// maxCanAnswerCount: 間違えれる数。制限がない場合はnullを渡す
@@ -17,10 +16,12 @@ class AnswerWidget extends ConsumerStatefulWidget {
     super.key,
     required this.retireConfirmText,
     required this.maxCanIncorrectCount,
+    required this.resultPage,
   });
 
   final String retireConfirmText;
   final int? maxCanIncorrectCount;
+  final Widget resultPage;
 
   @override
   ConsumerState<AnswerWidget> createState() => _MyHomePageState();
@@ -65,7 +66,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
       if (isCorrectNotifier.state) {
         await navigator.push(
           MaterialPageRoute<Widget>(
-            builder: (_) => const QuizResultPage(),
+            builder: (_) => widget.resultPage,
           ),
         );
         return;
@@ -82,7 +83,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
       if (isFinalAnswer) {
         await navigator.push(
           MaterialPageRoute<Widget>(
-            builder: (_) => const QuizResultPage(),
+            builder: (_) => widget.resultPage,
           ),
         );
         return;
@@ -96,6 +97,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
           return IncorrectDialog(
             selectedHitter: textEditingController.text,
             retireConfirmText: widget.retireConfirmText,
+            resultPage: widget.resultPage,
           );
         },
       );

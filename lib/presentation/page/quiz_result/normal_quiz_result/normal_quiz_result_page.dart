@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../component/banner_ad_widget.dart';
-import 'component/navigation_buttons.dart';
+import '../../../component/banner_ad_widget.dart';
+import '../component/result_quiz_widget.dart';
+import '../component/result_text.dart';
+import '../component/share_button.dart';
+import '../component/to_top_button.dart';
+import 'component/re_prepare_quiz_button.dart';
 import 'component/replay_button.dart';
-import 'component/result_quiz_widget.dart';
-import 'component/result_text.dart';
-import 'component/share_button.dart';
 
-class QuizResultPage extends StatelessWidget {
-  const QuizResultPage({super.key});
+class NormalQuizResultPage extends StatelessWidget {
+  const NormalQuizResultPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,13 @@ class QuizResultPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 ShareButton(globalKey: globalKey),
                 const SizedBox(height: 8),
-                const NavigationButtons(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: const [
+                    ToTopButton(),
+                    RePrepareQuizButton(),
+                  ],
+                ),
                 const SizedBox(height: 80),
               ],
             ),

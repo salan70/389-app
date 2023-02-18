@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../component/banner_ad_widget.dart';
-import '../../component/play_quiz/answer_widget.dart';
-import '../../component/play_quiz/quiz_event_buttons.dart';
-import '../../component/play_quiz/retire_button.dart';
-import '../../component/quiz_widget.dart';
+import '../../../component/banner_ad_widget.dart';
+import '../../../component/quiz_widget.dart';
+import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
+import '../component/answer_widget.dart';
+import '../component/quiz_event_buttons.dart';
+import '../component/retire_button.dart';
 import 'component/life_widget.dart';
 
 class PlayDailyQuizPage extends StatelessWidget {
@@ -28,15 +29,15 @@ class PlayDailyQuizPage extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: ListView(
                 children: const [
-                  //TODO: 1日1回しかプレイできなくする
-
                   //TODO: Firestoreに保存したデータを取得し、デイリークイズを作成する
                   //TODO: サーバー時間から、デイリークイズに使用するデータを取得する
+
                   //TODO: プレイ状況/結果（正誤、成績公開数、不正解数）をFirestoreに保存
+                  //TODO: 1日1回しかプレイできなくする
+                  // プレイ開始時に、Firestoreにデータを追加
 
                   /// 軽微そうなやつ
                   //TODO: 共通化したWidgetで、文字列などの切り分けが必要ないか確認
-                  //TODO: デイリークイズ用の結果画面を用意
                   //TODO: デイリークイズ用のシェア機能を用意（文言変えるだけっぽそう）
                   //TODO: クイズ正解時に花吹雪出す
                   BannerAdWidget(),
@@ -50,9 +51,13 @@ class PlayDailyQuizPage extends StatelessWidget {
                   AnswerWidget(
                     retireConfirmText: dailyQuizRetireConfirmText,
                     maxCanIncorrectCount: maxCanIncorrectCountInDailyQuiz,
+                    resultPage: DailyQuizResultPage(),
                   ),
                   SizedBox(height: 16),
-                  RetireButton(retireConfirmText: dailyQuizRetireConfirmText),
+                  RetireButton(
+                    retireConfirmText: dailyQuizRetireConfirmText,
+                    resultPage: DailyQuizResultPage(),
+                  ),
                   SizedBox(height: 200),
                 ],
               ),

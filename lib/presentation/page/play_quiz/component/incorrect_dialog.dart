@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../page/quiz_result/quiz_result_page.dart';
-import '../confirm_dialog.dart';
+import '../../../component/confirm_dialog.dart';
 
 class IncorrectDialog extends StatelessWidget {
   const IncorrectDialog({
     super.key,
     required this.selectedHitter,
     required this.retireConfirmText,
+    required this.resultPage,
   });
 
   // Providerで保持するほうが良いかも？
   final String selectedHitter;
   final String retireConfirmText;
+  final Widget resultPage;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class IncorrectDialog extends StatelessWidget {
                   onPressedYes: () {
                     Navigator.of(context).push(
                       MaterialPageRoute<Widget>(
-                        builder: (_) => const QuizResultPage(),
+                        builder: (_) => resultPage,
                       ),
                     );
                   },
