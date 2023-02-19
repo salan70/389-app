@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ntp/ntp.dart';
 
 import '../../../domain/repository/daily_quiz_repository.dart';
+import '../../../util/constant/text_in_app.dart';
 
 class FirebaseDailyQuizRepository implements DailyQuizRepository {
   FirebaseDailyQuizRepository(this.firestore);
@@ -56,10 +57,8 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   ///
   /// UT作成済み
   DateTime calculateTodayInApp(DateTime now) {
-    const borderHour = 19;
-
     final nowInApp = now.subtract(
-      const Duration(hours: borderHour),
+      const Duration(hours: borderHourForTodayInApp),
     );
     final todayInApp = DateTime(nowInApp.year, nowInApp.month, nowInApp.day);
 
