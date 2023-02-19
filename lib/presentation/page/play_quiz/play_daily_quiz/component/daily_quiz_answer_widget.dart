@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
+import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../util/constant/text_in_app.dart';
 import '../../../../component/confirm_dialog.dart';
@@ -12,9 +13,7 @@ import '../../component/answer_widget.dart';
 import '../../component/incorrect_dialog.dart';
 
 class DailyQuizAnswerWidget extends ConsumerWidget {
-  const DailyQuizAnswerWidget({
-    super.key,
-  });
+  const DailyQuizAnswerWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,8 +33,11 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
 
       isCorrectNotifier.state = hitterQuizService.isCorrectHitterQuiz();
 
+      final userService = ref.read(userServiceProvider);
+
       // 正解の場合
       if (isCorrectNotifier.state) {
+        await userService.updateDailyQuizResult();
         await navigator.push(
           MaterialPageRoute<Widget>(builder: (_) => dailyQuizResultPage),
         );
@@ -49,6 +51,7 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
 
       // 最後の回答の場合
       if (isFinalAnswer) {
+        await userService.updateDailyQuizResult();
         await navigator.push(
           MaterialPageRoute<Widget>(builder: (_) => dailyQuizResultPage),
         );

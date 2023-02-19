@@ -28,11 +28,6 @@ class PlayDailyQuizPage extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: ListView(
                 children: const [
-                  //TODO: プレイ状況/結果（正誤、成績公開数、不正解数）をFirestoreに保存
-                  // -> 開始時と終了時に更新する(users > [id] > dailyQuizResult > [id])
-                  // --> 終了時はisCorrect, showStatsCount, totalStatsCount,
-                  //     incorrectCount, updatedAtを保存
-
                   BannerAdWidget(),
                   SizedBox(height: 16),
                   LifeWidget(),
