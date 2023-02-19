@@ -16,7 +16,7 @@ abstract class HitterRepository {
 
   /// IDで野手を1人取得し、HitterQuiz型で返す
   Future<HitterQuiz> fetchHitterQuizById(
-    SearchCondition searchCondition,
+    List<String> selectedStatsList,
     String id,
   );
 
