@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/hitter_repository.dart';
@@ -42,19 +43,16 @@ class HitterQuizService {
 
   /// IDをもとに出題する選手を取得する
   /// 今日の1問用
-  Future<void> fetchHitterQuizById() async {
+  Future<void> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
 
     late HitterQuiz hitterQuiz;
     notifier.state = await AsyncValue.guard(() async {
-      final searchCondition = ref.watch(searchConditionProvider);
-      hitterQuiz =
-          await ref.watch(hitterRepositoryProvider).fetchHitterQuizById(
-                searchCondition.selectedStatsList,
-                '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
-              );
+      hitterQuiz = await ref
+          .watch(hitterRepositoryProvider)
+          .fetchHitterQuizById(dailyQuiz);
       return null;
     });
 

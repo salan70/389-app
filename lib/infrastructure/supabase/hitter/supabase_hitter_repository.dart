@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/search_condition.dart';
@@ -38,14 +39,11 @@ class SupabaseHitterRepository implements HitterRepository {
   }
 
   @override
-  Future<HitterQuiz> fetchHitterQuizById(
-    List<String> selectedStatsList,
-    String id,
-  ) async {
+  Future<HitterQuiz> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
     // 検索条件に合う選手を1人取得
-    final supabaseHitter = await _searchHitterById(id);
+    final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
 
-    return _createHitterQuiz(supabaseHitter, selectedStatsList);
+    return _createHitterQuiz(supabaseHitter, dailyQuiz.selectedStatsList);
   }
 
   /// 検索条件で選手で検索し、ランダムで1人返す

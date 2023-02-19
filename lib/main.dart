@@ -13,15 +13,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'application/loading/loading_state.dart';
+import 'application/quiz/daily_quiz/daily_quiz_state.dart';
 import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import 'application/user/user_service.dart';
 import 'application/widget/widget_state.dart';
 import 'domain/entity/search_condition.dart';
 import 'domain/repository/auth_repository.dart';
+import 'domain/repository/daily_quiz_repository.dart';
 import 'domain/repository/hitter_repository.dart';
 import 'domain/repository/search_condition_repository.dart';
 import 'domain/repository/user_info_repository.dart';
 import 'infrastructure/firebase/auth/firebase_auth_repository.dart';
+import 'infrastructure/firebase/daily_quiz/firebase_daily_quiz_repository.dart';
 import 'infrastructure/firebase/firebase_providers.dart';
 import 'infrastructure/firebase/user_info/firebase_user_info_repository.dart';
 import 'infrastructure/hive/hive_search_condition_repository.dart';
@@ -71,6 +74,13 @@ Future<void> main() async {
         userInfoRepositoryProvider.overrideWith(
           (ref) {
             return FirebaseUserInfoRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
+        dailyQuizRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseDailyQuizRepository(
               ref.watch(firestoreProvider),
             );
           },
@@ -158,6 +168,9 @@ class _MyApp extends ConsumerState<MyApp> {
     // NotifierProviderの結果をハンドリングする
     ref.handleAsyncValue<void>(
       hitterQuizStateProvider,
+    );
+    ref.handleAsyncValue<void>(
+      dailyQuizStateProvider,
     );
 
     // Userを作成

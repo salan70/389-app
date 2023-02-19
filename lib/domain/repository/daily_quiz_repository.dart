@@ -10,5 +10,5 @@ final dailyQuizRepositoryProvider = Provider<DailyQuizRepository>(
 
 abstract class DailyQuizRepository {
   /// ユーザー情報を作成する
-  Future<DailyQuiz> fetchDailyQuiz(String playerId);
+  Future<DailyQuiz> fetchDailyQuiz();
 }
