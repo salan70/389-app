@@ -14,7 +14,7 @@ class ConfirmDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('確認'),
-      content: Text(confirmText, textAlign: TextAlign.center),
+      content: Text(confirmText),
       actions: <Widget>[
         TextButton(
           child: const Text(
