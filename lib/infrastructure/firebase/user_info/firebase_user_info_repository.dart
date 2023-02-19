@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../domain/entity/quiz_result.dart';
 import '../../../domain/repository/user_info_repository.dart';
 
 class FirebaseUserInfoRepository implements UserInfoRepository {
@@ -41,6 +42,27 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
         .set(<String, dynamic>{
       'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  @override
+  Future<void> updateDailyQuiz(
+    User user,
+    String dailyQuizId,
+    QuizResult quizResult,
+  ) async {
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('dailyQuizResult')
+        .doc(dailyQuizId)
+        .set(<String, dynamic>{
+      'updatedAt': FieldValue.serverTimestamp(),
+      'playerId': quizResult.playerId,
+      'isCorrect': quizResult.isCorrect,
+      'totalStatsCount': quizResult.totalStatsCount,
+      'openStatsCount': quizResult.openStatsCount,
+      'incorrectCount': quizResult.incorrectCount,
     });
   }
 }
