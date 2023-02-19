@@ -15,7 +15,7 @@ class PlayDailyQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const dailyQuizRetireConfirmText = '「今日の1問」は1度諦めると2度とプレイできません。\n本当に諦めますか？';
+    const dailyQuizRetireConfirmText = '本当に諦めますか？\n\n※「今日の1問」は1度しか\nプレイできません。';
     const maxCanIncorrectCountInDailyQuiz = 2;
 
     return WillPopScope(
@@ -29,14 +29,14 @@ class PlayDailyQuizPage extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: ListView(
                 children: const [
-                  //TODO: Firestoreに保存したデータを取得し、デイリークイズを作成する
-                  //TODO: サーバー時間から、デイリークイズに使用するデータを取得する
                   //TODO: プレイ状況/結果（正誤、成績公開数、不正解数）をFirestoreに保存
-                  //TODO: 1日1回しかプレイできなくする
-                  // プレイ開始時に、Firestoreにデータを追加
+                  // -> 開始時と終了時に更新する(users > [id] > dailyQuizResult > [id])
+                  // ---> 1日1回しかプレイできなくする done!
+                  // ----> Top画面にて、userのdailyQuizResultを取得し、該当の
+                  //       quizIdが登録されている場合はボタンを非活性にする(TopPageのボタンのinitState)
+                  // --> 終了時はisCorrect, showStatsCount, incorrectCount,
+                  //     updatedAtを保存
 
-                  /// 軽微そうなやつ
-                  //TODO: クイズ正解時に花吹雪出す
                   BannerAdWidget(),
                   SizedBox(height: 16),
                   LifeWidget(),
