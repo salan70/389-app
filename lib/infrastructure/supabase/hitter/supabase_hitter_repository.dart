@@ -34,18 +34,18 @@ class SupabaseHitterRepository implements HitterRepository {
     final supabaseHitter =
         await _searchHitterBySearchCondition(searchCondition);
 
-    return _createHitterQuiz(supabaseHitter, searchCondition);
+    return _createHitterQuiz(supabaseHitter, searchCondition.selectedStatsList);
   }
 
   @override
   Future<HitterQuiz> fetchHitterQuizById(
-    SearchCondition searchCondition,
+    List<String> selectedStatsList,
     String id,
   ) async {
     // 検索条件に合う選手を1人取得
     final supabaseHitter = await _searchHitterById(id);
 
-    return _createHitterQuiz(supabaseHitter, searchCondition);
+    return _createHitterQuiz(supabaseHitter, selectedStatsList);
   }
 
   /// 検索条件で選手で検索し、ランダムで1人返す
@@ -117,7 +117,7 @@ class SupabaseHitterRepository implements HitterRepository {
   /// SupabaseHitterとSearchConditionからHitterQuizを作成する
   Future<HitterQuiz> _createHitterQuiz(
     SupabaseHitter supabaseHitter,
-    SearchCondition searchCondition,
+    List<String> selectedStatsList,
   ) async {
     // 取得した選手の成績を取得
     final statsList = await _fetchHittingStats(supabaseHitter.id);
@@ -126,7 +126,7 @@ class SupabaseHitterRepository implements HitterRepository {
     final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
       supabaseHitter,
       statsList,
-      searchCondition.selectedStatsList,
+      selectedStatsList,
     );
 
     return hitterQuiz;

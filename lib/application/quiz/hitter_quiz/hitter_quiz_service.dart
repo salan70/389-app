@@ -52,7 +52,7 @@ class HitterQuizService {
       final searchCondition = ref.watch(searchConditionProvider);
       hitterQuiz =
           await ref.watch(hitterRepositoryProvider).fetchHitterQuizById(
-                searchCondition,
+                searchCondition.selectedStatsList,
                 '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
               );
       return null;
