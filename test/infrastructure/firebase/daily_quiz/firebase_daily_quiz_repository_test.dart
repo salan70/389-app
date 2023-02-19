@@ -1,6 +1,5 @@
 import 'package:baseball_quiz_app/infrastructure/firebase/daily_quiz/firebase_daily_quiz_repository.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -19,10 +18,9 @@ void main() async {
     test('当日判定_2023/1/10 19:00', () {
       // Arrange
       final dateTime = DateTime(2023, 1, 10, 19);
-      final serverTimestamp = Timestamp.fromDate(dateTime);
 
       // Act
-      final actual = repository.calculateTodayInApp(serverTimestamp);
+      final actual = repository.calculateTodayInApp(dateTime);
 
       // Assert
       final expected = DateTime(2023, 1, 10);
@@ -32,10 +30,9 @@ void main() async {
     test('前日判定_2023/1/10 18:59', () {
       // Arrange
       final dateTime = DateTime(2023, 1, 10, 18, 59);
-      final serverTimestamp = Timestamp.fromDate(dateTime);
 
       // Act
-      final actual = repository.calculateTodayInApp(serverTimestamp);
+      final actual = repository.calculateTodayInApp(dateTime);
 
       // Assert
       final expected = DateTime(2023, 1, 9);

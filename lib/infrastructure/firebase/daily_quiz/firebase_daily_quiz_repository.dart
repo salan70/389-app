@@ -1,5 +1,6 @@
 import 'package:baseball_quiz_app/domain/entity/daily_quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ntp/ntp.dart';
 
 import '../../../domain/repository/daily_quiz_repository.dart';
 
@@ -9,13 +10,24 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   final FirebaseFirestore firestore;
 
   @override
-  Future<DailyQuiz> fetchDailyQuiz(String playerId) async {
-    final nowServerTimestamp = FieldValue.serverTimestamp() as Timestamp;
-    final todayInApp = calculateTodayInApp(nowServerTimestamp);
+  Future<DailyQuiz> fetchDailyQuiz() async {
+    final now = await NTP.now();
+    final startTodayInApp = calculateTodayInApp(now);
+    final endTodayInApp = DateTime(
+      startTodayInApp.year,
+      startTodayInApp.month,
+      startTodayInApp.day,
+      23,
+      59,
+      59,
+      999,
+    );
 
     final QuerySnapshot snapshot = await firestore
         .collection('dailyQuiz')
-        .where('questionedAt', isEqualTo: todayInApp)
+        .orderBy('questionedAt')
+        .startAt([Timestamp.fromDate(startTodayInApp)])
+        .endAt([Timestamp.fromDate(endTodayInApp)])
         .limit(1)
         .get();
 
@@ -25,9 +37,10 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
       }
 
       final data = document.data()! as Map<String, dynamic>;
-
       final playerId = data['playerId'] as String;
-      final selectedStatsList = data['selectedStatsList'] as List<String>;
+      final selectedStatsList = (data['selectedStatsList'] as List)
+          .map((item) => item as String)
+          .toList();
 
       return DailyQuiz(
         dailyQuizId: document.id,
@@ -42,12 +55,12 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   /// アプリ内の「今日の日付」を取得する
   ///
   /// UT作成済み
-  DateTime calculateTodayInApp(Timestamp nowServerTimestamp) {
+  DateTime calculateTodayInApp(DateTime now) {
     const borderHour = 19;
 
-    final nowInApp = nowServerTimestamp.toDate().subtract(
-          const Duration(hours: borderHour),
-        );
+    final nowInApp = now.subtract(
+      const Duration(hours: borderHour),
+    );
     final todayInApp = DateTime(nowInApp.year, nowInApp.month, nowInApp.day);
 
     return todayInApp;
