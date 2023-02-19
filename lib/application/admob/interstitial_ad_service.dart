@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -71,6 +72,13 @@ class InterstitialAdService {
     _interstitialAd = null;
   }
 
+  /// ランダムで広告を表示する
+  Future<void> randomShowAd() async {
+    if (isShownAds()) {
+      await showAd();
+    }
+  }
+
   // TODO(me): 仮置でここのクラスにおいているため、適切なクラスに移動させる
   /// 結果表示までじらすための処理
   /// interstitial広告が表示されるために時間を稼ぐという意図もある
@@ -83,6 +91,7 @@ class InterstitialAdService {
 
   /// 広告を表示するかどうかを返す
   /// 50%の確率で広告を表示する
+  @visibleForTesting
   bool isShownAds() {
     return Random().nextBool();
   }

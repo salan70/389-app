@@ -32,9 +32,7 @@ class RetireButton extends ConsumerWidget {
                   confirmText: retireConfirmText,
                   onPressedYes: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute<Widget>(
-                        builder: (_) => resultPage,
-                      ),
+                      MaterialPageRoute<Widget>(builder: (_) => resultPage),
                     );
                   },
                 );
