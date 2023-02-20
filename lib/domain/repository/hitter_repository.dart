@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../entity/daily_quiz.dart';
 import '../entity/hitter.dart';
 import '../entity/hitter_quiz.dart';
 import '../entity/search_condition.dart';
@@ -9,9 +10,14 @@ final hitterRepositoryProvider = Provider<HitterRepository>(
 );
 
 abstract class HitterRepository {
-  /// 検索条件に合う野手を1人取得し、HitterQuiz型を返す
-  Future<HitterQuiz> createHitterQuiz(
+  /// 検索条件に合う野手を1人取得し、HitterQuiz型で返す
+  Future<HitterQuiz> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
+  );
+
+  /// IDで野手を1人取得し、HitterQuiz型で返す
+  Future<HitterQuiz> fetchHitterQuizById(
+    DailyQuiz dailyQuiz,
   );
 
   /// 登録されている全ての野手を取得する
