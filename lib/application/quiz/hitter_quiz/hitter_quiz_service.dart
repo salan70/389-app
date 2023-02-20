@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/hitter_repository.dart';
@@ -22,8 +23,8 @@ class HitterQuizService {
   HitterQuizService(this.ref);
   final Ref ref;
 
-  /// 出題する選手を取得する
-  Future<void> fetchHitterQuiz() async {
+  /// 検索条件をもとに出題する選手を取得する
+  Future<void> fetchHitterQuizBySearchCondition() async {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
@@ -33,7 +34,25 @@ class HitterQuizService {
       final searchCondition = ref.watch(searchConditionProvider);
       hitterQuiz = await ref
           .watch(hitterRepositoryProvider)
-          .createHitterQuiz(searchCondition);
+          .fetchHitterQuizBySearchCondition(searchCondition);
+      return null;
+    });
+
+    notifier.state = AsyncData(hitterQuiz);
+  }
+
+  /// IDをもとに出題する選手を取得する
+  /// 今日の1問用
+  Future<void> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+
+    notifier.state = const AsyncValue.loading();
+
+    late HitterQuiz hitterQuiz;
+    notifier.state = await AsyncValue.guard(() async {
+      hitterQuiz = await ref
+          .watch(hitterRepositoryProvider)
+          .fetchHitterQuizById(dailyQuiz);
       return null;
     });
 
@@ -107,5 +126,28 @@ class HitterQuizService {
     final hitterQuiz = ref.read(hitterQuizStateProvider);
 
     return selectedHitterId == hitterQuiz.value!.id;
+  }
+
+  /// 不正解数を1増やす
+  void addIncorrectCount() {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+    final hitterQuiz = notifier.state.value;
+
+    notifier.state = AsyncData(
+      hitterQuiz!.copyWith(
+        incorrectCount: hitterQuiz.incorrectCount + 1,
+      ),
+    );
+  }
+
+  // TODO(me): UT書く
+  /// 最後の回答かどうかを返す
+  bool isFinalAnswer(int? maxCanIncorrectCount) {
+    if (maxCanIncorrectCount == null) {
+      return false;
+    }
+
+    final hitterQuiz = ref.read(hitterQuizStateProvider);
+    return hitterQuiz.value!.incorrectCount == maxCanIncorrectCount;
   }
 }

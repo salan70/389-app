@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 
 class QuizEventButtons extends ConsumerWidget {
-  const QuizEventButtons({
-    super.key,
-  });
+  const QuizEventButtons({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,12 +21,10 @@ class QuizEventButtons extends ConsumerWidget {
             if (hitterQuizService.canOpen()) {
               showDialog<void>(
                 context: context,
-                builder: (_) {
+                builder: (context) {
                   return const ConfirmOpenAllDialog();
                 },
               );
-            } else {
-              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
           },
           child: const Text('全ての成績を表示'),
@@ -40,8 +36,6 @@ class QuizEventButtons extends ConsumerWidget {
 
             if (hitterQuizService.canOpen()) {
               hitterQuizService.openRandom();
-            } else {
-              // TODO(me): Buttonを非活性にする（UIの見た目完成次第実装）
             }
           },
           child: const Text('次の成績を表示'),
@@ -73,9 +67,7 @@ class ConfirmOpenAllDialog extends ConsumerWidget {
           },
           child: Text(
             'はい',
-            style: TextStyle(
-              color: Theme.of(context).errorColor,
-            ),
+            style: TextStyle(color: Theme.of(context).errorColor),
           ),
         ),
       ],
