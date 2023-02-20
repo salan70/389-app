@@ -7,9 +7,11 @@ class ShareButton extends ConsumerWidget {
   const ShareButton({
     super.key,
     required this.globalKey,
+    required this.shareText,
   });
 
   final GlobalKey globalKey;
+  final String shareText;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,6 +23,7 @@ class ShareButton extends ConsumerWidget {
           shareQuizResultService.shareImageAndText(
             'result_quiz_widget',
             globalKey,
+            shareText,
           );
         },
         child: const Text('クイズをシェア！'),
