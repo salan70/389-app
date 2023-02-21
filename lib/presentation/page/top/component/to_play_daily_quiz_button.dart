@@ -9,30 +9,11 @@ import '../../../../util/constant/text_in_app.dart';
 import '../../../component/confirm_dialog.dart';
 import '../../play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 
-class ToPlayDailyQuizFromTopButton extends ConsumerStatefulWidget {
+class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
   const ToPlayDailyQuizFromTopButton({super.key});
 
   @override
-  ConsumerState<ToPlayDailyQuizFromTopButton> createState() =>
-      _ToPlayDailyQuizFromTopButton();
-}
-
-class _ToPlayDailyQuizFromTopButton
-    extends ConsumerState<ToPlayDailyQuizFromTopButton> {
-  bool canPlay = false;
-
-  @override
-  void initState() {
-    super.initState();
-    Future(() async {
-      await ref.read(dailyQuizServiceProvider).fetchDailyQuiz();
-      canPlay = await ref.read(userServiceProvider).canPlayDailyQuiz();
-      setState(() {});
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     const playDailyQuizConfirmText = '「今日の1問」を開始しますか？'
         '\n\n※1日1度しかプレイできません。'
         '\n※毎日$borderHourForTodayInApp時更新。'
@@ -41,73 +22,71 @@ class _ToPlayDailyQuizFromTopButton
     final dailyQuiz = ref.watch(dailyQuizStateProvider);
 
     return TextButton(
-      onPressed: canPlay
+      onPressed: () async {
+        await ref.read(dailyQuizServiceProvider).fetchDailyQuiz();
+        final canPlay = await ref.read(userServiceProvider).canPlayDailyQuiz();
+
+        if (canPlay) {
           // プレイできる場合
-          ? () async {
-              await showDialog<void>(
-                context: context,
-                barrierDismissible: false,
-                builder: (_) {
-                  return ConfirmDialog(
-                    confirmText: playDailyQuizConfirmText,
-                    onPressedYes: () async {
-                      dailyQuiz.maybeWhen(
-                        orElse: Container.new,
-                        data: (data) async {
-                          final navigator = Navigator.of(context);
+          await showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) {
+              return ConfirmDialog(
+                confirmText: playDailyQuizConfirmText,
+                onPressedYes: () async {
+                  dailyQuiz.maybeWhen(
+                    orElse: Container.new,
+                    data: (data) async {
+                      final navigator = Navigator.of(context);
 
-                          // クイズを作成
-                          await ref
-                              .read(hitterQuizServiceProvider)
-                              .fetchHitterQuizById(data!);
+                      // クイズを作成
+                      await ref
+                          .read(hitterQuizServiceProvider)
+                          .fetchHitterQuizById(data!);
 
-                          // users > dailyQuizResultを保存（新規作成）
-                          await ref
-                              .read(userServiceProvider)
-                              .createDailyQuizResult(data.dailyQuizId);
+                      // users > dailyQuizResultを保存（新規作成）
+                      await ref
+                          .read(userServiceProvider)
+                          .createDailyQuizResult(data.dailyQuizId);
 
-                          await navigator.push(
-                            MaterialPageRoute<Widget>(
-                              builder: (_) => const PlayDailyQuizPage(),
-                            ),
-                          );
-                        },
+                      await navigator.push(
+                        MaterialPageRoute<Widget>(
+                          builder: (_) => const PlayDailyQuizPage(),
+                        ),
                       );
                     },
                   );
                 },
               );
-            }
-          // プレイできない場合
-          : () async {
-              await showDialog<void>(
-                context: context,
-                barrierDismissible: false,
-                builder: (_) {
-                  return AlertDialog(
-                    title: Text(
-                      'エラー',
-                      style:
-                          TextStyle(color: Theme.of(context).colorScheme.error),
-                    ),
-                    content: const Text(
-                      '本日分はプレイ済みです。\n\n※毎日19時に更新されます。',
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
             },
+          );
+          return;
+        }
+
+        // プレイできない場合
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) {
+            return AlertDialog(
+              title: Text(
+                'エラー',
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+              content: const Text('本日分はプレイ済みです。\n\n※毎日19時に更新されます。'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      },
       child: FittedBox(
-        child: Text(
-          '今日の1問',
-          style: Theme.of(context).textTheme.headline5,
-        ),
+        child: Text('今日の1問', style: Theme.of(context).textTheme.headline5),
       ),
     );
   }
