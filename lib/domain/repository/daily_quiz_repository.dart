@@ -9,6 +9,6 @@ final dailyQuizRepositoryProvider = Provider<DailyQuizRepository>(
 );
 
 abstract class DailyQuizRepository {
-  /// ユーザー情報を作成する
+  /// dailyQuizを取得する
   Future<DailyQuiz> fetchDailyQuiz();
 }
