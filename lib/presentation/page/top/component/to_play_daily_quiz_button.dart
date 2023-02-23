@@ -19,11 +19,11 @@ class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
         '\n※毎日$borderHourForTodayInApp時更新。'
         '\n\n※プレイ中にアプリが終了された場合、不正解となります。';
 
-    final dailyQuiz = ref.watch(dailyQuizStateProvider);
-
     return TextButton(
       onPressed: () async {
         await ref.read(dailyQuizServiceProvider).fetchDailyQuiz();
+        // 値を取得してからdailyQuizStateProviderをreadする
+        final dailyQuiz = ref.read(dailyQuizStateProvider);
         final canPlay = await ref.read(userServiceProvider).canPlayDailyQuiz();
 
         if (canPlay) {
