@@ -60,7 +60,7 @@ jobs:
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate from secrets
-          echo -n "$IOS_CERTIFICATE_P12_BASE64" | base64 --decode --output $CERTIFICATE_PATH
+          echo -n "$IOS_CERTIFICATE_P12_BASE64" | base64 --decode $CERTIFICATE_PATH
 
           # create temporary keychain
           security create-keychain -p "$IOS_KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
