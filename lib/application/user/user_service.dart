@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/entity/quiz_result.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/repository/user_info_repository.dart';
+import '../quiz/daily_quiz/daily_quiz_state.dart';
+import '../quiz/hitter_quiz/hitter_quiz_state.dart';
 
 /// userInfoサービスプロバイダー
 final userServiceProvider = Provider(
@@ -35,5 +39,57 @@ class UserService {
     final userInfoRepository = ref.read(userInfoRepositoryProvider);
 
     await userInfoRepository.updateUserInfo(user!);
+  }
+
+  /// dailyQuizResultを作成する
+  Future<void> createDailyQuizResult(String dailyQuizId) async {
+    final user = ref.read(authRepositoryProvider).getCurrentUser();
+    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+    await userInfoRepository.createDailyQuiz(user!, dailyQuizId);
+  }
+
+  /// dailyQuizResultを更新する
+  Future<void> updateDailyQuizResult() async {
+    final user = ref.read(authRepositoryProvider).getCurrentUser();
+    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+    final dailyQuizId = ref.watch(dailyQuizStateProvider).value!.dailyQuizId;
+    final quizResult = createQuizResult();
+    await userInfoRepository.updateDailyQuiz(user!, dailyQuizId, quizResult);
+  }
+
+  @visibleForTesting
+  QuizResult createQuizResult() {
+    final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+
+    final totalStatsCount = hitterQuiz.statsMapList.length *
+        (hitterQuiz.selectedStatsList.length - 1);
+    final openStatsCount =
+        totalStatsCount - hitterQuiz.hiddenStatsIdList.length;
+
+    return QuizResult(
+      playerId: hitterQuiz.id,
+      isCorrect: ref.read(isCorrectQuizStateProvider),
+      totalStatsCount: totalStatsCount,
+      openStatsCount: openStatsCount,
+      incorrectCount: hitterQuiz.incorrectCount,
+    );
+  }
+
+  /// dailyQuizをプレイ可能か返す
+  Future<bool> canPlayDailyQuiz() async {
+    final dailyQuiz = ref.read(dailyQuizStateProvider);
+    if (dailyQuiz.value == null) {
+      return false;
+    }
+
+    final user = ref.read(authRepositoryProvider).getCurrentUser();
+    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+    return !await userInfoRepository.existSpecifiedDailyQuizResult(
+      user!,
+      dailyQuiz.value!.dailyQuizId,
+    );
   }
 }

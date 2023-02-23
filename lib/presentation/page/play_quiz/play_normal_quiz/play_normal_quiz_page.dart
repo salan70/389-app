@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../component/banner_ad_widget.dart';
-import '../../component/quiz_widget.dart';
-import 'component/answer_widget.dart';
-import 'component/quiz_event_buttons.dart';
-import 'component/retire_button.dart';
+import '../../../../util/constant/text_in_app.dart';
+import '../../../component/banner_ad_widget.dart';
+import '../../../component/quiz_widget.dart';
+import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
+import '../component/quiz_event_buttons.dart';
+import '../component/retire_button.dart';
+import 'component/normal_quiz_answer_widget.dart';
 
-class PlayQuizPage extends StatelessWidget {
-  const PlayQuizPage({super.key});
+class PlayNormalQuizPage extends StatelessWidget {
+  const PlayNormalQuizPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +30,12 @@ class PlayQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 QuizEventButtons(),
                 SizedBox(height: 16),
-                AnswerWidget(),
+                NormalQuizAnswerWidget(),
                 SizedBox(height: 16),
-                RetireButton(),
+                RetireButton(
+                  retireConfirmText: normalQuizRetireConfirmText,
+                  resultPage: NormalQuizResultPage(),
+                ),
                 SizedBox(height: 200),
               ],
             ),
