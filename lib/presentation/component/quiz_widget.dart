@@ -19,7 +19,6 @@ class QuizWidget extends ConsumerWidget {
         : ref.read(hitterQuizStateProvider);
 
     return hitterQuiz.maybeWhen(
-      // TODO(me): 空のWidgetを共通componentとして定義したい
       orElse: Container.new,
       data: (data) {
         final selectedStatsList = data!.selectedStatsList;
