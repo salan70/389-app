@@ -45,14 +45,14 @@ jobs:
 
       # 証明書の生成
       - name: Import Provisioning Profile
-        run: | # 複数行の run を書きたい場合はこうする 以下、Provisioning Profilesを置くべきディレクトリにデコードしている
+        run: | # 複数行の run を書きたい場合はこうする。 以下、Provisioning Profilesを置くべきディレクトリにデコードしている
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           echo -n ${{ secrets.PROVISIONING_PROFILE }} | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/389.mobileprovision
 
       # 署名をする
       # 署名をする
       - name: Import Code-Signing Certificates
-        uses: Apple-Actions/import-codesign-certs@v1 # 外部パッケージを使っている
+        uses: Apple-Actions/import-codesign-certs@v1 # 外部パッケージを使っている 
         with:
           p12-file-base64: ${{ secrets.CERTIFICATES_P12 }}
           p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
