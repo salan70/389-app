@@ -60,7 +60,7 @@ jobs:
       # ipa ファイルの出力
       - name: Create ipa file
         # GITHUB_RUN_NUMBER をビルドナンバーに指定することで被りがないようにしている。
-        run: flutter build ipa --export-options-plist=ExportOptions.plist --build-number ${GITHUB_RUN_NUMBER}
+        run: flutter build ipa --dart-define=FLAVOR=prod --export-options-plist=ExportOptions.plist --build-number ${GITHUB_RUN_NUMBER}
 
       # AppStoreConnect にアップロードする
       - name: Upload to AppStoreConnect
