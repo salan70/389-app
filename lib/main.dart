@@ -177,6 +177,7 @@ class _MyApp extends ConsumerState<MyApp> {
     ref.read(userServiceProvider).login();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.rocknRollOneTextTheme().copyWith(
