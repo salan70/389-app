@@ -36,7 +36,7 @@ class _CustomConfettiWidgetState extends ConsumerState<CustomConfettiWidget> {
       confettiController: controller,
       emissionFrequency: 0.2,
       blastDirection: 3 * pi / 2,
-      particleDrag: 0.01,
+      particleDrag: 0.001,
     );
   }
 }
