@@ -34,7 +34,7 @@ class SelectStatsWidget extends ConsumerWidget {
       choiceType: S2ChoiceType.chips,
       onChange: (selectedObject) {
         final selectedList = selectedObject.value as List<String>;
-        searchConditionService.saveStatsList(selectedList);
+        searchConditionService.saveSelectedStatsList(selectedList);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {

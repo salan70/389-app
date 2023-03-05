@@ -17,9 +17,9 @@ class SearchConditionService {
   final Ref ref;
 
   /// 選択した球団のリストを保存する
-  void saveTeamList(List<Object?> selectedList) {
+  void saveTeamList(List<Object?> selectedTeamList) {
     final searchCondition = ref.read(searchConditionProvider.notifier);
-    final teamList = selectedList.cast<String>();
+    final teamList = selectedTeamList.cast<String>();
     searchCondition.state = searchCondition.state.copyWith(teamList: teamList);
   }
 
@@ -64,10 +64,10 @@ class SearchConditionService {
     return listLength >= minChoseTeamNum;
   }
 
-  void saveStatsList(List<String> selectedList) {
+  void saveSelectedStatsList(List<String> selectedStatsList) {
     final searchCondition = ref.read(searchConditionProvider.notifier);
     searchCondition.state =
-        searchCondition.state.copyWith(selectedStatsList: selectedList);
+        searchCondition.state.copyWith(selectedStatsList: selectedStatsList);
   }
 
   /// 成績をタップ時に状態（選択/未選択）を変更できるか判別

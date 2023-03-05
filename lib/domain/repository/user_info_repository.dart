@@ -13,7 +13,7 @@ abstract class UserInfoRepository {
   /// ユーザー情報を作成する
   Future<void> updateUserInfo(User user);
 
-  /// ユーザー情報を作成する
+  /// 指定したdailyQuizの結果が存在するかどうかを返す
   Future<bool> existSpecifiedDailyQuizResult(User user, String dailyQuizId);
 
   /// dailyQuizの結果を作成する
