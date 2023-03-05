@@ -15,7 +15,6 @@ class SupabaseHitterConverter {
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
   ) {
-    print('SupabaseHitterConverter.toHitterQuiz()');
     final statsListForUi = <Map<String, StatsValue>>[];
     final statsCountList =
         createStatsCountList(rowStatsList, selectedStatsList);
@@ -55,7 +54,7 @@ class SupabaseHitterConverter {
     return hitterQuiz;
   }
 
-  /// TODO: UT作成
+  // TODO(me): UT作成
   /// 0~成績数のリストを作成する
   @visibleForTesting
   List<int> createStatsCountList(
@@ -81,7 +80,7 @@ class SupabaseHitterConverter {
     Map<String, dynamic> rawStats,
     List<String> selectedStatsList,
   ) {
-    // TODO: 変数名変える
+    // TODO(me): 変数名変える
     final statsMap = <String, String>{};
 
     rawStats.forEach((key, value) {
