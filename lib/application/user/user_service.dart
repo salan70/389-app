@@ -63,8 +63,8 @@ class UserService {
   QuizResult createQuizResult() {
     final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
 
-    final totalStatsCount = hitterQuiz.statsMapList.length *
-        (hitterQuiz.selectedStatsList.length - 1);
+    final totalStatsCount =
+        hitterQuiz.statsMapList.length * hitterQuiz.selectedStatsList.length;
     final unveilStatsCount = hitterQuiz.unveilCount;
 
     return QuizResult(
