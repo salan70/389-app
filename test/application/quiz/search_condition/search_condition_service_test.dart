@@ -103,7 +103,6 @@ void main() {
         minHits: 0,
         minHr: 0,
         selectedStatsList: [
-          StatsType.year.label,
           StatsType.team.label,
           StatsType.avg.label,
           StatsType.hr.label,
@@ -132,7 +131,6 @@ void main() {
         minHits: 0,
         minHr: 0,
         selectedStatsList: [
-          StatsType.year.label,
           StatsType.team.label,
           StatsType.avg.label,
           StatsType.hr.label,
@@ -218,13 +216,14 @@ void main() {
         ],
       );
       final statsList = [
-        StatsType.year.label,
         StatsType.team.label,
         StatsType.avg.label,
         StatsType.hr.label,
         StatsType.atBats.label,
       ];
-      container.read(searchConditionServiceProvider).saveStatsList(statsList);
+      container
+          .read(searchConditionServiceProvider)
+          .saveSelectedStatsList(statsList);
       final result = container.read(searchConditionProvider);
 
       expect(statsList, result.selectedStatsList);
