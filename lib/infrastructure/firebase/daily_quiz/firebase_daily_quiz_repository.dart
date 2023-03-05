@@ -1,5 +1,6 @@
 import 'package:baseball_quiz_app/domain/entity/daily_quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ntp/ntp.dart';
 
 import '../../../domain/repository/daily_quiz_repository.dart';
@@ -39,9 +40,8 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
 
       final data = document.data()! as Map<String, dynamic>;
       final playerId = data['playerId'] as String;
-      final selectedStatsList = (data['selectedStatsList'] as List)
-          .map((item) => item as String)
-          .toList();
+      final selectedStatsList =
+          formatSelectedStatsList(data['selectedStatsList']  as List<dynamic>);
 
       return DailyQuiz(
         dailyQuizId: document.id,
@@ -51,6 +51,18 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
     }).toList();
 
     return dailyQuizList[0];
+  }
+
+  /// selectedStatsListに年度が含まれている場合は、年度を削除する
+  @visibleForTesting
+  List<String> formatSelectedStatsList(List<dynamic> selectedStatsList) {
+    final formattedSelectedStatsList = <String>[];
+    for (final item in selectedStatsList) {
+      if (item != '年度') {
+        formattedSelectedStatsList.add(item.toString());
+      }
+    }
+    return formattedSelectedStatsList;
   }
 
   /// アプリ内の「今日の日付」を取得する

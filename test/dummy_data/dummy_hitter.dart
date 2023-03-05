@@ -140,65 +140,34 @@ const dummySearchCondition = SearchCondition(
   minGames: 100,
   minHits: 100,
   minHr: 10,
-  selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],
+  selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
 );
 
 const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
-  selectedStatsList: ['年度', '球団', '打率', '本塁打', 'OPS'],
+  yearList: ['2021', '2022', 'NPB：2年'],
+  selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
   statsMapList: [
     {
-      '年度':
-          StatsValue(id: 'a6c8e4c9-a760-4961-b794-db387e5a57f0', data: '2021'),
-      '球団':
-          StatsValue(id: 'c5934786-5ba8-4f2d-810d-2e1d4efb56bc', data: 'DeNA'),
-      '本塁打': StatsValue(id: '57e75233-1f17-441e-9bbf-5d4bc0d794bc', data: '22'),
-      '打率':
-          StatsValue(id: '1eef5e1a-74a5-4bce-a85f-2f7c9eb8bf5f', data: '.314'),
-      'OPS':
-          StatsValue(id: '5ba7aa8b-11b0-4a20-9d07-5f02751dde28', data: '.890')
+      '球団': StatsValue(unveilOrder: 12, data: 'DeNA'),
+      '本塁打': StatsValue(unveilOrder: 11, data: '22'),
+      '打率': StatsValue(unveilOrder: 10, data: '.314'),
+      'OPS': StatsValue(unveilOrder: 9, data: '.890')
     },
     {
-      '年度':
-          StatsValue(id: '98d48a72-bc1a-4344-b485-f49870a2085d', data: '2022'),
-      '球団':
-          StatsValue(id: '71166687-c520-45f3-ae97-bff3aac59da3', data: 'DeNA'),
-      '本塁打': StatsValue(id: '468dd439-2d4c-4a84-b14a-754b647b7975', data: '24'),
-      '打率':
-          StatsValue(id: '08c4b792-1011-4cfc-b66f-287b6de6d992', data: '.291'),
-      'OPS':
-          StatsValue(id: 'a2ae8dfb-b059-4f5f-b82b-7de727727e8f', data: '.861')
+      '球団': StatsValue(unveilOrder: 8, data: 'DeNA'),
+      '本塁打': StatsValue(unveilOrder: 7, data: '24'),
+      '打率': StatsValue(unveilOrder: 6, data: '.291'),
+      'OPS': StatsValue(unveilOrder: 5, data: '.861')
     },
     {
-      '年度': StatsValue(
-        id: '2b38195c-7a4a-46cc-b58b-cf2e949937b8',
-        data: 'NPB：2年',
-      ),
-      '球団': StatsValue(
-        id: '4ca86053-0985-4c99-8890-3e05e075b158',
-        data: 'NPB：2年',
-      ),
-      '本塁打': StatsValue(id: '3647eae3-d0e4-4302-8338-01f5d7dd60f1', data: '46'),
-      '打率':
-          StatsValue(id: '7cdcec0c-b86c-464e-a2b2-03c70488fbc8', data: '.302'),
-      'OPS':
-          StatsValue(id: 'de48b02c-7707-4f8c-a302-9ba09ad4a05d', data: '.876')
+      '球団': StatsValue(unveilOrder: 4, data: 'NPB：2年'),
+      '本塁打': StatsValue(unveilOrder: 0, data: '46'),
+      '打率': StatsValue(unveilOrder: 1, data: '.302'),
+      'OPS': StatsValue(unveilOrder: 2, data: '.876')
     }
   ],
-  hiddenStatsIdList: [
-    'c5934786-5ba8-4f2d-810d-2e1d4efb56bc',
-    '57e75233-1f17-441e-9bbf-5d4bc0d794bc',
-    '1eef5e1a-74a5-4bce-a85f-2f7c9eb8bf5f',
-    '5ba7aa8b-11b0-4a20-9d07-5f02751dde28',
-    '71166687-c520-45f3-ae97-bff3aac59da3',
-    '468dd439-2d4c-4a84-b14a-754b647b7975',
-    '08c4b792-1011-4cfc-b66f-287b6de6d992',
-    'a2ae8dfb-b059-4f5f-b82b-7de727727e8f',
-    '4ca86053-0985-4c99-8890-3e05e075b158',
-    '3647eae3-d0e4-4302-8338-01f5d7dd60f1',
-    '7cdcec0c-b86c-464e-a2b2-03c70488fbc8',
-    'de48b02c-7707-4f8c-a302-9ba09ad4a05d'
-  ],
+  unveilCount: 0,
   incorrectCount: 0,
 );

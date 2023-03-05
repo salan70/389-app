@@ -1,5 +1,6 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/stats_value.dart';
@@ -15,62 +16,89 @@ class SupabaseHitterConverter {
     List<String> selectedStatsList,
   ) {
     final statsListForUi = <Map<String, StatsValue>>[];
-    final hiddenStatsIdList = <String>[];
+    final statsCountList =
+        createStatsCountList(rowStatsList, selectedStatsList);
+    final yearList = <String>[];
 
     for (final rawStats in rowStatsList) {
       final statsMap = toStatsMap(rawStats.stats, selectedStatsList);
-      statsListForUi.add(statsMap);
+      final statsForUi = <String, StatsValue>{};
 
       // TODO(me): 関数として抽出
+      // 選択された成績に該当するデータを格納する
       for (final selectedStats in selectedStatsList) {
-        if (selectedStats != '年度') {
-          final id = statsMap[selectedStats]!.id;
-          hiddenStatsIdList.add(id);
-        }
+        final removeIndex = Random().nextInt(statsCountList.length);
+        final unveilOrder = statsCountList.removeAt(removeIndex);
+        final statsValue = StatsValue(
+          unveilOrder: unveilOrder,
+          data: statsMap[selectedStats]!,
+        );
+        statsForUi[selectedStats] = statsValue;
       }
+      statsListForUi.add(statsForUi);
+
+      final year = rawStats.stats['年度'] as String;
+      yearList.add(year);
     }
 
     final hitterQuiz = HitterQuiz(
       id: supabaseHitter.id,
       name: supabaseHitter.name,
+      yearList: yearList,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
-      hiddenStatsIdList: hiddenStatsIdList,
+      unveilCount: 0,
       incorrectCount: 0,
     );
 
     return hitterQuiz;
   }
 
+  // TODO(me): UT作成
+  /// 0~成績数のリストを作成する
+  @visibleForTesting
+  List<int> createStatsCountList(
+    List<HittingStats> rowStatsList,
+    List<String> selectedStatsList,
+  ) {
+    final statsCountList = <int>[];
+
+    final rowStatsCount = rowStatsList.length;
+    final selectedStatsCount = selectedStatsList.length;
+    final totalCount = rowStatsCount * selectedStatsCount;
+
+    for (var i = 0; i < totalCount; i++) {
+      statsCountList.add(i);
+    }
+
+    return statsCountList;
+  }
+
   /// 1年ごとの成績を変換する
   @visibleForTesting
-  Map<String, StatsValue> toStatsMap(
+  Map<String, String> toStatsMap(
     Map<String, dynamic> rawStats,
     List<String> selectedStatsList,
   ) {
-    final statsForUi = <String, StatsValue>{};
+    // TODO(me): 変数名変える
+    final statsMap = <String, String>{};
 
     rawStats.forEach((key, value) {
       // selectedLabelListに含まれる成績のみMap型として追加する
       if (selectedStatsList.contains(key)) {
-        final strVal = value.toString();
-        statsForUi[key] = formatStatsValue(key, strVal);
+        statsMap[key] = formatStatsValue(key, value.toString());
       }
     });
 
-    return statsForUi;
+    return statsMap;
   }
 
   @visibleForTesting
-  StatsValue formatStatsValue(String key, String value) {
-    late String data;
+  String formatStatsValue(String key, String value) {
     if (probabilityStats.contains(key)) {
-      data = formatStatsData(value);
-    } else {
-      data = value;
+      return formatStatsData(value);
     }
-
-    return StatsValue(id: const Uuid().v4(), data: data);
+    return value;
   }
 
   /// String型の値を「.346」といった率を表示する形式に変換

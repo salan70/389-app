@@ -63,16 +63,15 @@ class UserService {
   QuizResult createQuizResult() {
     final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
 
-    final totalStatsCount = hitterQuiz.statsMapList.length *
-        (hitterQuiz.selectedStatsList.length - 1);
-    final openStatsCount =
-        totalStatsCount - hitterQuiz.hiddenStatsIdList.length;
+    final totalStatsCount =
+        hitterQuiz.statsMapList.length * hitterQuiz.selectedStatsList.length;
+    final unveilStatsCount = hitterQuiz.unveilCount;
 
     return QuizResult(
       playerId: hitterQuiz.id,
       isCorrect: ref.read(isCorrectQuizStateProvider),
       totalStatsCount: totalStatsCount,
-      openStatsCount: openStatsCount,
+      openStatsCount: unveilStatsCount,
       incorrectCount: hitterQuiz.incorrectCount,
     );
   }
