@@ -29,26 +29,30 @@ class NormalQuizResultPage extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: ListView(
+            child: Stack(
               children: [
-                const BannerAdWidget(),
-                const SizedBox(height: 16),
-                const ResultText(),
-                const SizedBox(height: 16),
-                ResultQuizWidget(globalKey: globalKey),
-                const SizedBox(height: 8),
-                const ReplayButton(),
-                const SizedBox(height: 8),
-                ShareButton(globalKey: globalKey, shareText: shareText),
-                const SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    ToTopButton(),
-                    RePrepareQuizButton(),
+                ListView(
+                  children: [
+                    const BannerAdWidget(),
+                    const SizedBox(height: 16),
+                    const ResultText(),
+                    const SizedBox(height: 16),
+                    ResultQuizWidget(globalKey: globalKey),
+                    const SizedBox(height: 8),
+                    const ReplayButton(),
+                    const SizedBox(height: 8),
+                    ShareButton(globalKey: globalKey, shareText: shareText),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const [
+                        ToTopButton(),
+                        RePrepareQuizButton(),
+                      ],
+                    ),
+                    const SizedBox(height: 80),
                   ],
                 ),
-                const SizedBox(height: 80),
                 const Align(
                   alignment: Alignment.bottomCenter,
                   child: CustomConfettiWidget(),

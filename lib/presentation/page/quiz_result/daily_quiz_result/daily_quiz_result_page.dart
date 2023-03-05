@@ -25,26 +25,30 @@ class DailyQuizResultPage extends StatelessWidget {
       onWillPop: () async => false,
       child: Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
-            child: ListView(
-              children: [
-                const BannerAdWidget(),
-                const SizedBox(height: 16),
-                const ResultText(),
-                const SizedBox(height: 16),
-                ResultQuizWidget(globalKey: globalKey),
-                const SizedBox(height: 8),
-                ShareButton(globalKey: globalKey, shareText: shareText),
-                const SizedBox(height: 8),
-                const ToTopButton(),
-                const SizedBox(height: 80),
-                const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomConfettiWidget(),
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: ListView(
+                  children: [
+                    const BannerAdWidget(),
+                    const SizedBox(height: 16),
+                    const ResultText(),
+                    const SizedBox(height: 16),
+                    ResultQuizWidget(globalKey: globalKey),
+                    const SizedBox(height: 8),
+                    ShareButton(globalKey: globalKey, shareText: shareText),
+                    const SizedBox(height: 8),
+                    const ToTopButton(),
+                    const SizedBox(height: 80),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child: CustomConfettiWidget(),
+              ),
+            ],
           ),
         ),
       ),
