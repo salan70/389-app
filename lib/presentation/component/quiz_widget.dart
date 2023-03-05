@@ -8,13 +8,13 @@ import '../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 /// falseの場合、hitterQuizStateProviderをreadする
 /// （プロバイダーが更新されても再描画されない）。
 class QuizWidget extends ConsumerWidget {
-  const QuizWidget({super.key, required this.willUpdate});
+  const QuizWidget({super.key, required this.willRebuild});
 
-  final bool willUpdate;
+  final bool willRebuild;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuiz = willUpdate
+    final hitterQuiz = willRebuild
         ? ref.watch(hitterQuizStateProvider)
         : ref.read(hitterQuizStateProvider);
 
@@ -26,6 +26,11 @@ class QuizWidget extends ConsumerWidget {
           children: [
             Row(
               children: [
+                const Expanded(
+                  child: Center(
+                    child: Text('年度'),
+                  ),
+                ),
                 for (final selectedStats in selectedStatsList)
                   Expanded(
                     child: Center(
@@ -40,20 +45,36 @@ class QuizWidget extends ConsumerWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: data.statsMapList.length,
               itemBuilder: (_, index) {
+                final year = data.yearList[index];
                 final statsMap = data.statsMapList[index];
-                final hiddenStatsIdList = data.hiddenStatsIdList;
+                final unveilCount = data.unveilCount;
 
                 return Row(
                   children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+                        alignment: Alignment.center,
+                        child: FittedBox(
+                          child: Text(
+                            year,
+                          ),
+                        ),
+                      ),
+                    ),
                     for (final selectedStats in selectedStatsList)
                       Expanded(
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           alignment: Alignment.center,
-                          child: (hiddenStatsIdList.contains(
-                            statsMap[selectedStats]!.id,
-                          ))
-                              ? Container(
+                          child: (statsMap[selectedStats]!.unveilOrder <
+                                  unveilCount)
+                              ? FittedBox(
+                                  child: Text(
+                                    statsMap[selectedStats]!.data,
+                                  ),
+                                )
+                              : Container(
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     color:
@@ -61,11 +82,6 @@ class QuizWidget extends ConsumerWidget {
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: const Text(''),
-                                )
-                              : FittedBox(
-                                  child: Text(
-                                    statsMap[selectedStats]!.data,
-                                  ),
                                 ),
                         ),
                       ),

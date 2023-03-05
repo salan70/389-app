@@ -26,7 +26,7 @@ class PlayNormalQuizPage extends StatelessWidget {
               children: const [
                 BannerAdWidget(),
                 SizedBox(height: 16),
-                QuizWidget(willUpdate: true),
+                QuizWidget(willRebuild: true),
                 SizedBox(height: 16),
                 QuizEventButtons(),
                 SizedBox(height: 16),

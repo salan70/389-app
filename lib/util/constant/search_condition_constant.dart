@@ -17,7 +17,6 @@ final defaultSearchCondition = SearchCondition(
   minHits: 300,
   minHr: 50,
   selectedStatsList: [
-    StatsType.year.label,
     StatsType.team.label,
     StatsType.avg.label,
     StatsType.hr.label,
@@ -28,7 +27,7 @@ final defaultSearchCondition = SearchCondition(
 /// 出題する成績の選択数
 ///
 /// この数ちょうどでなくてはならない
-const mustSelectStatsNum = 5;
+const mustSelectStatsNum = 4;
 
 const minChoseTeamNum = 1;
 
