@@ -17,15 +17,10 @@ void main() async {
       );
       expect(dummyHitterQuiz.id, result.id);
       expect(dummyHitterQuiz.name, result.name);
+      expect(dummyHitterQuiz.yearList, result.yearList);
       expect(dummyHitterQuiz.selectedStatsList, result.selectedStatsList);
-
-      // idがランダムに振られるため、完全に一致させることができない
-      // そのため、lengthを比べている
       expect(dummyHitterQuiz.statsMapList.length, result.statsMapList.length);
-      expect(
-        dummyHitterQuiz.hiddenStatsIdList.length,
-        result.hiddenStatsIdList.length,
-      );
+      expect(dummyHitterQuiz.unveilCount, result.unveilCount);
     });
   });
 
@@ -59,15 +54,7 @@ void main() async {
       );
 
       expect(true, probabilityStats.contains(key));
-      expect(
-        value,
-        result.data,
-      );
-      // idはランダム生成されるため、型だけの確認
-      expect(
-        String,
-        result.id.runtimeType,
-      );
+      expect(value, result);
     });
 
     test('keyの値がprobabilityStatsに入っていない場合', () {
@@ -79,15 +66,7 @@ void main() async {
       );
 
       expect(false, probabilityStats.contains(key));
-      expect(
-        value,
-        result.data,
-      );
-      // idはランダム生成されるため、型だけの確認
-      expect(
-        String,
-        result.id.runtimeType,
-      );
+      expect(value, result);
     });
   });
 

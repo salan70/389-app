@@ -18,10 +18,11 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HitterQuiz {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  List<String> get yearList => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
   List<Map<String, StatsValue>> get statsMapList =>
       throw _privateConstructorUsedError;
-  List<String> get hiddenStatsIdList => throw _privateConstructorUsedError;
+  int get unveilCount => throw _privateConstructorUsedError;
   int get incorrectCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -38,9 +39,10 @@ abstract class $HitterQuizCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
-      List<String> hiddenStatsIdList,
+      int unveilCount,
       int incorrectCount});
 }
 
@@ -59,9 +61,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? yearList = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
-    Object? hiddenStatsIdList = null,
+    Object? unveilCount = null,
     Object? incorrectCount = null,
   }) {
     return _then(_value.copyWith(
@@ -73,6 +76,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      yearList: null == yearList
+          ? _value.yearList
+          : yearList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       selectedStatsList: null == selectedStatsList
           ? _value.selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
@@ -81,10 +88,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
           ? _value.statsMapList
           : statsMapList // ignore: cast_nullable_to_non_nullable
               as List<Map<String, StatsValue>>,
-      hiddenStatsIdList: null == hiddenStatsIdList
-          ? _value.hiddenStatsIdList
-          : hiddenStatsIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      unveilCount: null == unveilCount
+          ? _value.unveilCount
+          : unveilCount // ignore: cast_nullable_to_non_nullable
+              as int,
       incorrectCount: null == incorrectCount
           ? _value.incorrectCount
           : incorrectCount // ignore: cast_nullable_to_non_nullable
@@ -104,9 +111,10 @@ abstract class _$$_HitterQuizCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
-      List<String> hiddenStatsIdList,
+      int unveilCount,
       int incorrectCount});
 }
 
@@ -123,9 +131,10 @@ class __$$_HitterQuizCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? yearList = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
-    Object? hiddenStatsIdList = null,
+    Object? unveilCount = null,
     Object? incorrectCount = null,
   }) {
     return _then(_$_HitterQuiz(
@@ -137,6 +146,10 @@ class __$$_HitterQuizCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      yearList: null == yearList
+          ? _value._yearList
+          : yearList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       selectedStatsList: null == selectedStatsList
           ? _value._selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
@@ -145,10 +158,10 @@ class __$$_HitterQuizCopyWithImpl<$Res>
           ? _value._statsMapList
           : statsMapList // ignore: cast_nullable_to_non_nullable
               as List<Map<String, StatsValue>>,
-      hiddenStatsIdList: null == hiddenStatsIdList
-          ? _value._hiddenStatsIdList
-          : hiddenStatsIdList // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+      unveilCount: null == unveilCount
+          ? _value.unveilCount
+          : unveilCount // ignore: cast_nullable_to_non_nullable
+              as int,
       incorrectCount: null == incorrectCount
           ? _value.incorrectCount
           : incorrectCount // ignore: cast_nullable_to_non_nullable
@@ -163,18 +176,26 @@ class _$_HitterQuiz implements _HitterQuiz {
   const _$_HitterQuiz(
       {required this.id,
       required this.name,
+      required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
-      required final List<String> hiddenStatsIdList,
+      required this.unveilCount,
       required this.incorrectCount})
-      : _selectedStatsList = selectedStatsList,
-        _statsMapList = statsMapList,
-        _hiddenStatsIdList = hiddenStatsIdList;
+      : _yearList = yearList,
+        _selectedStatsList = selectedStatsList,
+        _statsMapList = statsMapList;
 
   @override
   final String id;
   @override
   final String name;
+  final List<String> _yearList;
+  @override
+  List<String> get yearList {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_yearList);
+  }
+
   final List<String> _selectedStatsList;
   @override
   List<String> get selectedStatsList {
@@ -189,19 +210,14 @@ class _$_HitterQuiz implements _HitterQuiz {
     return EqualUnmodifiableListView(_statsMapList);
   }
 
-  final List<String> _hiddenStatsIdList;
   @override
-  List<String> get hiddenStatsIdList {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_hiddenStatsIdList);
-  }
-
+  final int unveilCount;
   @override
   final int incorrectCount;
 
   @override
   String toString() {
-    return 'HitterQuiz(id: $id, name: $name, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, hiddenStatsIdList: $hiddenStatsIdList, incorrectCount: $incorrectCount)';
+    return 'HitterQuiz(id: $id, name: $name, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, incorrectCount: $incorrectCount)';
   }
 
   @override
@@ -211,12 +227,13 @@ class _$_HitterQuiz implements _HitterQuiz {
             other is _$_HitterQuiz &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._yearList, _yearList) &&
             const DeepCollectionEquality()
                 .equals(other._selectedStatsList, _selectedStatsList) &&
             const DeepCollectionEquality()
                 .equals(other._statsMapList, _statsMapList) &&
-            const DeepCollectionEquality()
-                .equals(other._hiddenStatsIdList, _hiddenStatsIdList) &&
+            (identical(other.unveilCount, unveilCount) ||
+                other.unveilCount == unveilCount) &&
             (identical(other.incorrectCount, incorrectCount) ||
                 other.incorrectCount == incorrectCount));
   }
@@ -226,9 +243,10 @@ class _$_HitterQuiz implements _HitterQuiz {
       runtimeType,
       id,
       name,
+      const DeepCollectionEquality().hash(_yearList),
       const DeepCollectionEquality().hash(_selectedStatsList),
       const DeepCollectionEquality().hash(_statsMapList),
-      const DeepCollectionEquality().hash(_hiddenStatsIdList),
+      unveilCount,
       incorrectCount);
 
   @JsonKey(ignore: true)
@@ -242,9 +260,10 @@ abstract class _HitterQuiz implements HitterQuiz {
   const factory _HitterQuiz(
       {required final String id,
       required final String name,
+      required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
-      required final List<String> hiddenStatsIdList,
+      required final int unveilCount,
       required final int incorrectCount}) = _$_HitterQuiz;
 
   @override
@@ -252,11 +271,13 @@ abstract class _HitterQuiz implements HitterQuiz {
   @override
   String get name;
   @override
+  List<String> get yearList;
+  @override
   List<String> get selectedStatsList;
   @override
   List<Map<String, StatsValue>> get statsMapList;
   @override
-  List<String> get hiddenStatsIdList;
+  int get unveilCount;
   @override
   int get incorrectCount;
   @override

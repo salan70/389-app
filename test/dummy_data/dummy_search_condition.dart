@@ -10,7 +10,6 @@ final dummySearchCondition1 = SearchCondition(
   minHits: 0,
   minHr: 0,
   selectedStatsList: [
-    StatsType.year.label,
     StatsType.team.label,
     StatsType.avg.label,
     StatsType.hr.label,
@@ -28,7 +27,6 @@ final dummySearchCondition2 = SearchCondition(
   minHits: 0,
   minHr: 0,
   selectedStatsList: [
-    StatsType.year.label,
     StatsType.team.label,
     StatsType.avg.label,
     StatsType.hr.label,
