@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/entity/daily_quiz.dart';
@@ -64,23 +62,9 @@ class HitterQuizService {
   void openRandom() {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
     final hitterQuiz = notifier.state.value;
-    final hiddenStatsIdList = hitterQuiz!.hiddenStatsIdList;
-
-    final hiddenIndex = Random().nextInt(hiddenStatsIdList.length);
-
-    // TODO(me): ここの処理を関数として抽出して、テスト書く
-    // hiddenStatsIdList.removeAt(removeIdx)と同様の結果になる処理
-    // hiddenStatsIdListがimmutable上記関数を使用できないため、下記のように書いている
-    final removedHiddenList = <String>[];
-    for (var i = 0; i < hiddenStatsIdList.length; i++) {
-      if (i != hiddenIndex) {
-        removedHiddenList.add(hiddenStatsIdList[i]);
-      }
-    }
-
     notifier.state = AsyncData(
-      hitterQuiz.copyWith(
-        hiddenStatsIdList: [...removedHiddenList],
+      hitterQuiz!.copyWith(
+        unveilCount: hitterQuiz.unveilCount + 1,
       ),
     );
   }
@@ -90,7 +74,10 @@ class HitterQuizService {
   /// 閉じている成績が残っている場合、成績が公開可能とみなす
   bool canOpen() {
     final hitterQuiz = ref.read(hitterQuizStateProvider).value;
-    return hitterQuiz!.hiddenStatsIdList.isNotEmpty;
+    final totalStatsCount =
+        hitterQuiz!.statsMapList.length * hitterQuiz.selectedStatsList.length;
+
+    return hitterQuiz.unveilCount < totalStatsCount;
   }
 
   // TODO(me): テスト書くことを検討する
@@ -98,10 +85,12 @@ class HitterQuizService {
   void openAll() {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
     final hitterQuiz = notifier.state.value;
+    final totalStatsCount =
+        hitterQuiz!.statsMapList.length * hitterQuiz.selectedStatsList.length;
 
     notifier.state = AsyncData(
-      hitterQuiz!.copyWith(
-        hiddenStatsIdList: [],
+      hitterQuiz.copyWith(
+        unveilCount: totalStatsCount,
       ),
     );
   }

@@ -13,10 +13,17 @@ class HiveSearchConditionRepository implements SearchConditionRepository {
 
   @override
   SearchCondition fetchSearchCondition() {
-    return box.get(
+    final searchCondition = box.get(
       searchConditionBoxKey,
       defaultValue: defaultSearchCondition,
     )!;
+
+    // selectedStatsListに年度が含まれている場合は削除して、返す
+    return searchCondition.copyWith(
+      selectedStatsList: List<String>.from(
+        searchCondition.selectedStatsList,
+      )..remove('年度'),
+    );
   }
 
   @override

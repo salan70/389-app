@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StatsValue {
-  String get id => throw _privateConstructorUsedError;
+  int get unveilOrder => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +30,7 @@ abstract class $StatsValueCopyWith<$Res> {
           StatsValue value, $Res Function(StatsValue) then) =
       _$StatsValueCopyWithImpl<$Res, StatsValue>;
   @useResult
-  $Res call({String id, String data});
+  $Res call({int unveilOrder, String data});
 }
 
 /// @nodoc
@@ -46,14 +46,14 @@ class _$StatsValueCopyWithImpl<$Res, $Val extends StatsValue>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? unveilOrder = null,
     Object? data = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      unveilOrder: null == unveilOrder
+          ? _value.unveilOrder
+          : unveilOrder // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -70,7 +70,7 @@ abstract class _$$_StatsValueCopyWith<$Res>
       __$$_StatsValueCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String data});
+  $Res call({int unveilOrder, String data});
 }
 
 /// @nodoc
@@ -84,14 +84,14 @@ class __$$_StatsValueCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? unveilOrder = null,
     Object? data = null,
   }) {
     return _then(_$_StatsValue(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
+      unveilOrder: null == unveilOrder
+          ? _value.unveilOrder
+          : unveilOrder // ignore: cast_nullable_to_non_nullable
+              as int,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
@@ -103,16 +103,16 @@ class __$$_StatsValueCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_StatsValue implements _StatsValue {
-  const _$_StatsValue({required this.id, required this.data});
+  const _$_StatsValue({required this.unveilOrder, required this.data});
 
   @override
-  final String id;
+  final int unveilOrder;
   @override
   final String data;
 
   @override
   String toString() {
-    return 'StatsValue(id: $id, data: $data)';
+    return 'StatsValue(unveilOrder: $unveilOrder, data: $data)';
   }
 
   @override
@@ -120,12 +120,13 @@ class _$_StatsValue implements _StatsValue {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_StatsValue &&
-            (identical(other.id, id) || other.id == id) &&
+            (identical(other.unveilOrder, unveilOrder) ||
+                other.unveilOrder == unveilOrder) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, data);
+  int get hashCode => Object.hash(runtimeType, unveilOrder, data);
 
   @JsonKey(ignore: true)
   @override
@@ -136,10 +137,11 @@ class _$_StatsValue implements _StatsValue {
 
 abstract class _StatsValue implements StatsValue {
   const factory _StatsValue(
-      {required final String id, required final String data}) = _$_StatsValue;
+      {required final int unveilOrder,
+      required final String data}) = _$_StatsValue;
 
   @override
-  String get id;
+  int get unveilOrder;
   @override
   String get data;
   @override
