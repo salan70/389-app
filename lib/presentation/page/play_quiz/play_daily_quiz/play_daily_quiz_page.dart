@@ -32,7 +32,7 @@ class PlayDailyQuizPage extends StatelessWidget {
                   SizedBox(height: 16),
                   LifeWidget(),
                   SizedBox(height: 16),
-                  QuizWidget(willUpdate: true),
+                  QuizWidget(willRebuild: true),
                   SizedBox(height: 16),
                   QuizEventButtons(),
                   SizedBox(height: 16),

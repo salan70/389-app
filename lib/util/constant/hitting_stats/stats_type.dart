@@ -1,5 +1,5 @@
 enum StatsType {
-  year,
+  // year,
   team,
   games,
   pa,
@@ -29,8 +29,8 @@ enum StatsType {
 extension StatsTypeExt on StatsType {
   String get label {
     switch (this) {
-      case StatsType.year:
-        return '年度';
+      // case StatsType.year:
+      //   return '年度';
       case StatsType.team:
         return '球団';
       case StatsType.games:

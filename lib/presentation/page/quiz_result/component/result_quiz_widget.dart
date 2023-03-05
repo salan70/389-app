@@ -17,7 +17,7 @@ class ResultQuizWidget extends StatelessWidget {
       child: ColoredBox(
         color: Theme.of(context).colorScheme.background,
         child: const QuizWidget(
-          willUpdate: false,
+          willRebuild: false,
         ),
       ),
     );

@@ -9,9 +9,10 @@ class HitterQuiz with _$HitterQuiz {
   const factory HitterQuiz({
     required String id,
     required String name,
+    required List<String> yearList,
     required List<String> selectedStatsList,
     required List<Map<String, StatsValue>> statsMapList,
-    required List<String> hiddenStatsIdList,
+    required int unveilCount,
     required int incorrectCount,
   }) = _HitterQuiz;
 }
