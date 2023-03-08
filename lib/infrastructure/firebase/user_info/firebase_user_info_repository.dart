@@ -61,6 +61,7 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
       'playerId': hitterQuiz.id,
       'playerName': hitterQuiz.name,
       'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
       'statsMapList': hitterQuiz.statsMapList
           .map(
             (statsMap) => statsMap.map(
@@ -92,6 +93,7 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
       'playerId': hitterQuiz.id,
       'playerName': hitterQuiz.name,
       'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
       'statsMapList': hitterQuiz.statsMapList
           .map(
             (statsMap) => statsMap.map(
