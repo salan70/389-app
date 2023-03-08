@@ -13,6 +13,7 @@ class HitterQuiz with _$HitterQuiz {
     required List<String> selectedStatsList,
     required List<Map<String, StatsValue>> statsMapList,
     required int unveilCount,
+    required bool isCorrect,
     required int incorrectCount,
   }) = _HitterQuiz;
 }

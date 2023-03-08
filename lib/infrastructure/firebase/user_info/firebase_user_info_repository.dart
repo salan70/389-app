@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../domain/entity/quiz_result.dart';
+import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/user_info_repository.dart';
 
 class FirebaseUserInfoRepository implements UserInfoRepository {
@@ -46,10 +46,10 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
   }
 
   @override
-  Future<void> updateDailyQuiz(
+  Future<void> updateDailyQuizResult(
     User user,
     String dailyQuizId,
-    QuizResult quizResult,
+    HitterQuiz hitterQuiz,
   ) async {
     await firestore
         .collection('users')
@@ -58,11 +58,30 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
         .doc(dailyQuizId)
         .set(<String, dynamic>{
       'updatedAt': FieldValue.serverTimestamp(),
-      'playerId': quizResult.playerId,
-      'isCorrect': quizResult.isCorrect,
-      'totalStatsCount': quizResult.totalStatsCount,
-      'openStatsCount': quizResult.openStatsCount,
-      'incorrectCount': quizResult.incorrectCount,
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'statsMapList': hitterQuiz.statsMapList,
+    });
+  }
+
+  @override
+  Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz) async {
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .add(<String, dynamic>{
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'statsMapList': hitterQuiz.statsMapList,
     });
   }
 }
