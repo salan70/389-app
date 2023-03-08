@@ -1,13 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/entity/quiz_result.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/repository/user_info_repository.dart';
 import '../quiz/daily_quiz/daily_quiz_state.dart';
 import '../quiz/hitter_quiz/hitter_quiz_state.dart';
 
-/// userInfoサービスプロバイダー
+/// userサービスプロバイダー
 final userServiceProvider = Provider(
   UserService.new,
 );
@@ -55,26 +53,21 @@ class UserService {
     final userInfoRepository = ref.read(userInfoRepositoryProvider);
 
     final dailyQuizId = ref.watch(dailyQuizStateProvider).value!.dailyQuizId;
-    final quizResult = createQuizResult();
-    await userInfoRepository.updateDailyQuiz(user!, dailyQuizId, quizResult);
-  }
-
-  @visibleForTesting
-  QuizResult createQuizResult() {
     final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
-
-    final totalStatsCount =
-        hitterQuiz.statsMapList.length * hitterQuiz.selectedStatsList.length;
-    final unveilStatsCount = hitterQuiz.unveilCount;
-
-    return QuizResult(
-      playerId: hitterQuiz.id,
-      isCorrect: ref.read(isCorrectQuizStateProvider),
-      totalStatsCount: totalStatsCount,
-      openStatsCount: unveilStatsCount,
-      incorrectCount: hitterQuiz.incorrectCount,
+    await userInfoRepository.updateDailyQuizResult(
+      user!,
+      dailyQuizId,
+      hitterQuiz,
     );
   }
+
+  // @visibleForTesting
+  // HitterQuiz createQuizResult() {
+  //   final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+  //   return hitterQuiz.copyWith(
+  //     isCorrect: ref.read(isCorrectQuizStateProvider),
+  //   );
+  // }
 
   /// dailyQuizをプレイ可能か返す
   Future<bool> canPlayDailyQuiz() async {

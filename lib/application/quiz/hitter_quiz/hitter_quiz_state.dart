@@ -9,8 +9,3 @@ final hitterQuizStateProvider = StateProvider<AsyncValue<HitterQuiz?>>(
 
 /// クイズの回答として選択した選手のIDを返す
 final selectedHitterIdProvider = StateProvider<String>((_) => '');
-
-/// クイズに正解しているかどうかを返す
-final isCorrectQuizStateProvider = StateProvider<bool>(
-  (_) => false,
-);

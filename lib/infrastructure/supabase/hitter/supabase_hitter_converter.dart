@@ -48,6 +48,7 @@ class SupabaseHitterConverter {
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       unveilCount: 0,
+      isCorrect: false,
       incorrectCount: 0,
     );
 

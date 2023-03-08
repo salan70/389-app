@@ -23,6 +23,7 @@ mixin _$HitterQuiz {
   List<Map<String, StatsValue>> get statsMapList =>
       throw _privateConstructorUsedError;
   int get unveilCount => throw _privateConstructorUsedError;
+  bool get isCorrect => throw _privateConstructorUsedError;
   int get incorrectCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -43,6 +44,7 @@ abstract class $HitterQuizCopyWith<$Res> {
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
       int unveilCount,
+      bool isCorrect,
       int incorrectCount});
 }
 
@@ -65,6 +67,7 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
     Object? selectedStatsList = null,
     Object? statsMapList = null,
     Object? unveilCount = null,
+    Object? isCorrect = null,
     Object? incorrectCount = null,
   }) {
     return _then(_value.copyWith(
@@ -92,6 +95,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
           ? _value.unveilCount
           : unveilCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isCorrect: null == isCorrect
+          ? _value.isCorrect
+          : isCorrect // ignore: cast_nullable_to_non_nullable
+              as bool,
       incorrectCount: null == incorrectCount
           ? _value.incorrectCount
           : incorrectCount // ignore: cast_nullable_to_non_nullable
@@ -115,6 +122,7 @@ abstract class _$$_HitterQuizCopyWith<$Res>
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
       int unveilCount,
+      bool isCorrect,
       int incorrectCount});
 }
 
@@ -135,6 +143,7 @@ class __$$_HitterQuizCopyWithImpl<$Res>
     Object? selectedStatsList = null,
     Object? statsMapList = null,
     Object? unveilCount = null,
+    Object? isCorrect = null,
     Object? incorrectCount = null,
   }) {
     return _then(_$_HitterQuiz(
@@ -162,6 +171,10 @@ class __$$_HitterQuizCopyWithImpl<$Res>
           ? _value.unveilCount
           : unveilCount // ignore: cast_nullable_to_non_nullable
               as int,
+      isCorrect: null == isCorrect
+          ? _value.isCorrect
+          : isCorrect // ignore: cast_nullable_to_non_nullable
+              as bool,
       incorrectCount: null == incorrectCount
           ? _value.incorrectCount
           : incorrectCount // ignore: cast_nullable_to_non_nullable
@@ -180,6 +193,7 @@ class _$_HitterQuiz implements _HitterQuiz {
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
       required this.unveilCount,
+      required this.isCorrect,
       required this.incorrectCount})
       : _yearList = yearList,
         _selectedStatsList = selectedStatsList,
@@ -213,11 +227,13 @@ class _$_HitterQuiz implements _HitterQuiz {
   @override
   final int unveilCount;
   @override
+  final bool isCorrect;
+  @override
   final int incorrectCount;
 
   @override
   String toString() {
-    return 'HitterQuiz(id: $id, name: $name, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, incorrectCount: $incorrectCount)';
+    return 'HitterQuiz(id: $id, name: $name, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
   }
 
   @override
@@ -234,6 +250,8 @@ class _$_HitterQuiz implements _HitterQuiz {
                 .equals(other._statsMapList, _statsMapList) &&
             (identical(other.unveilCount, unveilCount) ||
                 other.unveilCount == unveilCount) &&
+            (identical(other.isCorrect, isCorrect) ||
+                other.isCorrect == isCorrect) &&
             (identical(other.incorrectCount, incorrectCount) ||
                 other.incorrectCount == incorrectCount));
   }
@@ -247,6 +265,7 @@ class _$_HitterQuiz implements _HitterQuiz {
       const DeepCollectionEquality().hash(_selectedStatsList),
       const DeepCollectionEquality().hash(_statsMapList),
       unveilCount,
+      isCorrect,
       incorrectCount);
 
   @JsonKey(ignore: true)
@@ -264,6 +283,7 @@ abstract class _HitterQuiz implements HitterQuiz {
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
       required final int unveilCount,
+      required final bool isCorrect,
       required final int incorrectCount}) = _$_HitterQuiz;
 
   @override
@@ -278,6 +298,8 @@ abstract class _HitterQuiz implements HitterQuiz {
   List<Map<String, StatsValue>> get statsMapList;
   @override
   int get unveilCount;
+  @override
+  bool get isCorrect;
   @override
   int get incorrectCount;
   @override
