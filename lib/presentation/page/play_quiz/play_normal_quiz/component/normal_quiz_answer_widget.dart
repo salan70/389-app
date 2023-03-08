@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../util/constant/text_in_app.dart';
 import '../../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
@@ -30,6 +31,7 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
         // 正解の場合
         if (isCorrect) {
           hitterQuizService.markCorrect();
+          await ref.read(userServiceProvider).createNormalQuizResult();
           await navigator.push(
             MaterialPageRoute<Widget>(builder: (_) => normalQuizResultPage),
           );

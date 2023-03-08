@@ -27,6 +27,10 @@ class RetireButton extends ConsumerWidget {
                 return ConfirmDialog(
                   confirmText: retireConfirmText,
                   onPressedYes: () {
+                    // TODO: ここで結果を保存する
+                    // enumでQuizTypeを作成して、それで判別する。
+                    // hitterQuizにQuizTypeを格納するのもあり
+                    // こうすれば、現在引数で渡しているものも不要になるかも？
                     Navigator.of(context).push(
                       MaterialPageRoute<Widget>(builder: (_) => resultPage),
                     );
