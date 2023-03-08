@@ -67,7 +67,7 @@ class ConfirmOpenAllDialog extends ConsumerWidget {
           },
           child: Text(
             'はい',
-            style: TextStyle(color: Theme.of(context).errorColor),
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
           ),
         ),
       ],
