@@ -32,7 +32,7 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
       child: FittedBox(
         child: Text(
           '保存されている条件でプレイ！',
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
     );
