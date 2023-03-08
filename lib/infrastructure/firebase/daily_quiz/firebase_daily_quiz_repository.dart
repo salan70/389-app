@@ -68,6 +68,7 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   /// アプリ内の「今日の日付」を取得する
   ///
   /// UT作成済み
+  @visibleForTesting
   DateTime calculateTodayInApp(DateTime now) {
     final nowInApp = now.subtract(
       const Duration(hours: borderHourForTodayInApp),
