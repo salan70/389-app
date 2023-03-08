@@ -60,10 +60,23 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
       'updatedAt': FieldValue.serverTimestamp(),
       'playerId': hitterQuiz.id,
       'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
+              ),
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
       'isCorrect': hitterQuiz.isCorrect,
       'incorrectCount': hitterQuiz.incorrectCount,
-      'selectedStatsList': hitterQuiz.selectedStatsList,
-      'statsMapList': hitterQuiz.statsMapList,
     });
   }
 
@@ -78,10 +91,23 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
       'updatedAt': FieldValue.serverTimestamp(),
       'playerId': hitterQuiz.id,
       'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
+              ),
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
       'isCorrect': hitterQuiz.isCorrect,
       'incorrectCount': hitterQuiz.incorrectCount,
-      'selectedStatsList': hitterQuiz.selectedStatsList,
-      'statsMapList': hitterQuiz.statsMapList,
     });
   }
 }
