@@ -22,10 +22,21 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
     final isCorrectNotifier = ref.watch(isCorrectQuizStateProvider.notifier);
 
-    Future<void> submitAnswer({required bool isFinalAnswer}) async {
-      final navigator = Navigator.of(context);
-      const dailyQuizResultPage = DailyQuizResultPage();
+    /// クイズ終了（最終回答）時の処理
+    /// dailyQuizResultを更新し、結果ページに遷移する
+    Future<void> finishQuiz() async {
+      await ref.read(userServiceProvider).updateDailyQuizResult();
 
+      if (context.mounted) {
+        await Navigator.of(context).push(
+          MaterialPageRoute<Widget>(
+            builder: (_) => const DailyQuizResultPage(),
+          ),
+        );
+      }
+    }
+
+    Future<void> submitAnswer({required bool isFinalAnswer}) async {
       // interstitial広告を作成
       final interstitialAdService = ref.read(interstitialAdServiceProvider);
       await interstitialAdService.createAd();
@@ -33,14 +44,9 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
 
       isCorrectNotifier.state = hitterQuizService.isCorrectHitterQuiz();
 
-      final userService = ref.read(userServiceProvider);
-
       // 正解の場合
       if (isCorrectNotifier.state) {
-        await userService.updateDailyQuizResult();
-        await navigator.push(
-          MaterialPageRoute<Widget>(builder: (_) => dailyQuizResultPage),
-        );
+        await finishQuiz();
         return;
       }
       // 不正解の場合
@@ -51,25 +57,24 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
 
       // 最後の回答の場合
       if (isFinalAnswer) {
-        await userService.updateDailyQuizResult();
-        await navigator.push(
-          MaterialPageRoute<Widget>(builder: (_) => dailyQuizResultPage),
-        );
+        await finishQuiz();
         return;
       }
 
-      // 最後の回答でない場合
-      await showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (_) {
-          return IncorrectDialog(
-            selectedHitter: ref.read(answerTextFieldProvider).text,
-            retireConfirmText: dailyQuizRetireConfirmText,
-            resultPage: dailyQuizResultPage,
-          );
-        },
-      );
+      if (context.mounted) {
+        // 最後の回答でない場合
+        await showDialog<void>(
+          context: context,
+          barrierDismissible: false,
+          builder: (_) {
+            return IncorrectDialog(
+              selectedHitter: ref.read(answerTextFieldProvider).text,
+              retireConfirmText: dailyQuizRetireConfirmText,
+              resultPage: const DailyQuizResultPage(),
+            );
+          },
+        );
+      }
     }
 
     return AnswerWidget(
