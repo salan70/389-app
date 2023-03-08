@@ -21,7 +21,7 @@ class SelectStatsWidget extends ConsumerWidget {
       modalHeaderStyle: S2ModalHeaderStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         errorStyle: TextStyle(
-          color: Theme.of(context).errorColor,
+          color: Theme.of(context).colorScheme.error,
         ),
       ),
       selectedValue: selectedStatsList,
