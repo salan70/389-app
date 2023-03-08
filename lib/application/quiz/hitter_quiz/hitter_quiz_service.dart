@@ -117,6 +117,18 @@ class HitterQuizService {
     return selectedHitterId == hitterQuiz.value!.id;
   }
 
+  /// hitterQuizのisCorrectをtrueにする
+  void markCorrect() {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+    final hitterQuiz = notifier.state.value;
+
+    notifier.state = AsyncData(
+      hitterQuiz!.copyWith(
+        isCorrect: true,
+      ),
+    );
+  }
+
   /// 不正解数を1増やす
   void addIncorrectCount() {
     final notifier = ref.read(hitterQuizStateProvider.notifier);

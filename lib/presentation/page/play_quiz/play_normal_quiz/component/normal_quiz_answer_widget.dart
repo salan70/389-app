@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../util/constant/text_in_app.dart';
 import '../../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
@@ -20,18 +19,17 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
         final navigator = Navigator.of(context);
         const normalQuizResultPage = NormalQuizResultPage();
 
-        final isCorrectNotifier = ref.read(isCorrectQuizStateProvider.notifier);
-
         // interstitial広告を作成
         final interstitialAdService = ref.read(interstitialAdServiceProvider);
         await interstitialAdService.createAd();
         await interstitialAdService.waitResult();
 
-        isCorrectNotifier.state =
-            ref.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
+        final hitterQuizService = ref.read(hitterQuizServiceProvider);
+        final isCorrect = hitterQuizService.isCorrectHitterQuiz();
 
         // 正解の場合
-        if (isCorrectNotifier.state) {
+        if (isCorrect) {
+          hitterQuizService.markCorrect();
           await navigator.push(
             MaterialPageRoute<Widget>(builder: (_) => normalQuizResultPage),
           );

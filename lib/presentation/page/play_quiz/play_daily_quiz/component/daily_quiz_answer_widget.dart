@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../util/constant/text_in_app.dart';
@@ -20,7 +19,6 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
     const maxCanIncorrectCount = 2;
 
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
-    final isCorrectNotifier = ref.watch(isCorrectQuizStateProvider.notifier);
 
     /// クイズ終了（最終回答）時の処理
     /// dailyQuizResultを更新し、結果ページに遷移する
@@ -42,10 +40,11 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
       await interstitialAdService.createAd();
       await interstitialAdService.waitResult();
 
-      isCorrectNotifier.state = hitterQuizService.isCorrectHitterQuiz();
+      final isCorrect = hitterQuizService.isCorrectHitterQuiz();
 
       // 正解の場合
-      if (isCorrectNotifier.state) {
+      if (isCorrect) {
+        hitterQuizService.markCorrect();
         await finishQuiz();
         return;
       }
