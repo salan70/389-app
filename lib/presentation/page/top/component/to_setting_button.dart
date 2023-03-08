@@ -21,7 +21,7 @@ class ToSettingButton extends StatelessWidget {
       ),
       label: Text(
         'その他',
-        style: Theme.of(context).textTheme.headline6,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }

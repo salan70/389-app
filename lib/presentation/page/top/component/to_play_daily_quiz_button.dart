@@ -86,7 +86,7 @@ class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
         );
       },
       child: FittedBox(
-        child: Text('今日の1問', style: Theme.of(context).textTheme.headline5),
+        child: Text('今日の1問', style: Theme.of(context).textTheme.headlineSmall),
       ),
     );
   }
