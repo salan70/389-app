@@ -181,15 +181,16 @@ class _MyApp extends ConsumerState<MyApp> {
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.rocknRollOneTextTheme().copyWith(
-          bodyText2: GoogleFonts.rocknRollOneTextTheme().bodyText2?.copyWith(
+          bodyMedium: GoogleFonts.rocknRollOneTextTheme().bodyMedium?.copyWith(
                 fontSize: 16,
               ),
-          button: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          labelLarge: GoogleFonts.rocknRollOneTextTheme().labelLarge?.copyWith(
                 fontSize: 16,
               ),
-          headline5: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-                color: primaryColor,
-              ),
+          headlineSmall:
+              GoogleFonts.rocknRollOneTextTheme().headlineSmall?.copyWith(
+                    color: primaryColor,
+                  ),
         ),
         // ボタン
         primaryColor: highlightColor,

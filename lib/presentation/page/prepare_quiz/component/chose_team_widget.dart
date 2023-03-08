@@ -36,7 +36,7 @@ class ChoseTeamWidget extends ConsumerWidget {
       modalHeaderStyle: S2ModalHeaderStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         errorStyle: TextStyle(
-          color: Theme.of(context).errorColor,
+          color: Theme.of(context).colorScheme.error,
         ),
       ),
       groupHeaderStyle: S2GroupHeaderStyle(
