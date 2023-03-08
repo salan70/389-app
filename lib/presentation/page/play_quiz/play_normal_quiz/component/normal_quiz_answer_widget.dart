@@ -41,17 +41,19 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
         // interstitial広告を確率で表示
         await interstitialAdService.randomShowAd();
 
-        await showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) {
-            return IncorrectDialog(
-              selectedHitter: ref.read(answerTextFieldProvider).text,
-              retireConfirmText: normalQuizRetireConfirmText,
-              resultPage: normalQuizResultPage,
-            );
-          },
-        );
+        if (context.mounted) {
+          await showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) {
+              return IncorrectDialog(
+                selectedHitter: ref.read(answerTextFieldProvider).text,
+                retireConfirmText: normalQuizRetireConfirmText,
+                resultPage: normalQuizResultPage,
+              );
+            },
+          );
+        }
       },
     );
   }
