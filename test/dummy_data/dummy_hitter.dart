@@ -168,6 +168,7 @@ const dummyHitterQuiz = HitterQuiz(
       'OPS': StatsValue(unveilOrder: 2, data: '.876')
     }
   ],
+  isCorrect: false,
   unveilCount: 0,
   incorrectCount: 0,
 );
