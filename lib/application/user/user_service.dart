@@ -32,6 +32,7 @@ class UserService {
   }
 
   /// userInfoを更新する
+  /// TODO: Loading, Errorの処理を追加する
   Future<void> _updateUserInfo() async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
     final userInfoRepository = ref.read(userInfoRepositoryProvider);
@@ -40,6 +41,7 @@ class UserService {
   }
 
   /// dailyQuizResultを作成する
+  /// TODO: Loading, Errorの処理を追加する
   Future<void> createDailyQuizResult(String dailyQuizId) async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
     final userInfoRepository = ref.read(userInfoRepositoryProvider);
@@ -48,6 +50,7 @@ class UserService {
   }
 
   /// dailyQuizResultを更新する
+  /// TODO: Loading, Errorの処理を追加する
   Future<void> updateDailyQuizResult() async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
     final userInfoRepository = ref.read(userInfoRepositoryProvider);
@@ -61,15 +64,21 @@ class UserService {
     );
   }
 
-  // @visibleForTesting
-  // HitterQuiz createQuizResult() {
-  //   final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
-  //   return hitterQuiz.copyWith(
-  //     isCorrect: ref.read(isCorrectQuizStateProvider),
-  //   );
-  // }
+  /// normalQuizResultを作成する
+  /// TODO: Loading, Errorの処理を追加する
+  Future<void> createNormalQuizResult() async {
+    final user = ref.read(authRepositoryProvider).getCurrentUser();
+    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+    final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+    await userInfoRepository.createNormalQuizResult(
+      user!,
+      hitterQuiz,
+    );
+  }
 
   /// dailyQuizをプレイ可能か返す
+  /// TODO: Loading, Errorの処理を追加する?
   Future<bool> canPlayDailyQuiz() async {
     final dailyQuiz = ref.read(dailyQuizStateProvider);
     if (dailyQuiz.value == null) {
