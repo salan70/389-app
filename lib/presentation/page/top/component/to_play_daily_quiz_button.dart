@@ -28,65 +28,69 @@ class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
 
         if (canPlay) {
           // プレイできる場合
+          if (context.mounted) {
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                return ConfirmDialog(
+                  confirmText: playDailyQuizConfirmText,
+                  onPressedYes: () async {
+                    dailyQuiz.maybeWhen(
+                      orElse: Container.new,
+                      data: (data) async {
+                        final navigator = Navigator.of(context);
+
+                        // クイズを作成
+                        await ref
+                            .read(hitterQuizServiceProvider)
+                            .fetchHitterQuizById(data!);
+
+                        // users > dailyQuizResultを保存（新規作成）
+                        await ref
+                            .read(userServiceProvider)
+                            .createDailyQuizResult(data.dailyQuizId);
+
+                        await navigator.push(
+                          MaterialPageRoute<Widget>(
+                            builder: (_) => const PlayDailyQuizPage(),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            );
+            return;
+          }
+        }
+
+        // プレイできない場合
+        if (context.mounted) {
           await showDialog<void>(
             context: context,
             barrierDismissible: false,
             builder: (_) {
-              return ConfirmDialog(
-                confirmText: playDailyQuizConfirmText,
-                onPressedYes: () async {
-                  dailyQuiz.maybeWhen(
-                    orElse: Container.new,
-                    data: (data) async {
-                      final navigator = Navigator.of(context);
-
-                      // クイズを作成
-                      await ref
-                          .read(hitterQuizServiceProvider)
-                          .fetchHitterQuizById(data!);
-
-                      // users > dailyQuizResultを保存（新規作成）
-                      await ref
-                          .read(userServiceProvider)
-                          .createDailyQuizResult(data.dailyQuizId);
-
-                      await navigator.push(
-                        MaterialPageRoute<Widget>(
-                          builder: (_) => const PlayDailyQuizPage(),
-                        ),
-                      );
-                    },
-                  );
-                },
+              return AlertDialog(
+                title: Text(
+                  'エラー',
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+                content: const Text('本日分はプレイ済みです。\n\n※毎日19時に更新されます。'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('OK'),
+                  ),
+                ],
               );
             },
           );
-          return;
         }
-
-        // プレイできない場合
-        await showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) {
-            return AlertDialog(
-              title: Text(
-                'エラー',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
-              content: const Text('本日分はプレイ済みです。\n\n※毎日19時に更新されます。'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
       },
       child: FittedBox(
-        child: Text('今日の1問', style: Theme.of(context).textTheme.headline5),
+        child: Text('今日の1問', style: Theme.of(context).textTheme.headlineSmall),
       ),
     );
   }

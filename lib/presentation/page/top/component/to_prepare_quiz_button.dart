@@ -13,7 +13,7 @@ class ToPrepareQuizButton extends StatelessWidget {
       child: FittedBox(
         child: Text(
           'クイズの条件を設定',
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
       ),
       onPressed: () async {
