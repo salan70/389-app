@@ -30,6 +30,7 @@ extension WidgetRefEx on WidgetRef {
             },
             error: (e, _) async {
               loadingNotifier.hide();
+              print('testttttttt');
 
               // エラーダイアログを表示
               await showDialog<void>(

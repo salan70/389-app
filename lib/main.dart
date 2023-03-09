@@ -12,6 +12,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'application/common/common_state.dart';
 import 'application/loading/loading_state.dart';
 import 'application/quiz/daily_quiz/daily_quiz_state.dart';
 import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
@@ -171,6 +172,9 @@ class _MyApp extends ConsumerState<MyApp> {
     );
     ref.handleAsyncValue<void>(
       dailyQuizStateProvider,
+    );
+    ref.handleAsyncValue<void>(
+      commonFunctionStateProvider,
     );
 
     // Userを作成

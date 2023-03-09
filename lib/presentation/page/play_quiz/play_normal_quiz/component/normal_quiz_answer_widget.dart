@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/application/common/common_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,9 +33,14 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
         if (isCorrect) {
           hitterQuizService.markCorrect();
           await ref.read(userServiceProvider).createNormalQuizResult();
-          await navigator.push(
-            MaterialPageRoute<Widget>(builder: (_) => normalQuizResultPage),
-          );
+
+          // createNormalQuizResult()でエラーが発生しなかった場合のみ、画面遷移する
+          final functionState = ref.read(commonFunctionStateProvider);
+          if (!functionState.hasError) {
+            await navigator.push(
+              MaterialPageRoute<Widget>(builder: (_) => normalQuizResultPage),
+            );
+          }
           return;
         }
 
