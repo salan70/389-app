@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../util/constant/strings_constant.dart';
 import '../../../component/banner_ad_widget.dart';
 import '../../../component/quiz_widget.dart';
-import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../component/quiz_event_buttons.dart';
 import '../component/retire_button.dart';
 import 'component/normal_quiz_answer_widget.dart';
@@ -32,10 +30,7 @@ class PlayNormalQuizPage extends StatelessWidget {
                 SizedBox(height: 16),
                 NormalQuizAnswerWidget(),
                 SizedBox(height: 16),
-                RetireButton(
-                  retireConfirmText: normalQuizRetireConfirmText,
-                  resultPage: NormalQuizResultPage(),
-                ),
+                RetireButton(),
                 SizedBox(height: 200),
               ],
             ),
