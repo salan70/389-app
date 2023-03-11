@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HitterQuiz {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  QuizType get quizType => throw _privateConstructorUsedError;
   List<String> get yearList => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
   List<Map<String, StatsValue>> get statsMapList =>
@@ -40,6 +41,7 @@ abstract class $HitterQuizCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      QuizType quizType,
       List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
@@ -63,6 +65,7 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? quizType = null,
     Object? yearList = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
@@ -79,6 +82,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      quizType: null == quizType
+          ? _value.quizType
+          : quizType // ignore: cast_nullable_to_non_nullable
+              as QuizType,
       yearList: null == yearList
           ? _value.yearList
           : yearList // ignore: cast_nullable_to_non_nullable
@@ -118,6 +125,7 @@ abstract class _$$_HitterQuizCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      QuizType quizType,
       List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
@@ -139,6 +147,7 @@ class __$$_HitterQuizCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? quizType = null,
     Object? yearList = null,
     Object? selectedStatsList = null,
     Object? statsMapList = null,
@@ -155,6 +164,10 @@ class __$$_HitterQuizCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      quizType: null == quizType
+          ? _value.quizType
+          : quizType // ignore: cast_nullable_to_non_nullable
+              as QuizType,
       yearList: null == yearList
           ? _value._yearList
           : yearList // ignore: cast_nullable_to_non_nullable
@@ -189,6 +202,7 @@ class _$_HitterQuiz implements _HitterQuiz {
   const _$_HitterQuiz(
       {required this.id,
       required this.name,
+      required this.quizType,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
@@ -203,6 +217,8 @@ class _$_HitterQuiz implements _HitterQuiz {
   final String id;
   @override
   final String name;
+  @override
+  final QuizType quizType;
   final List<String> _yearList;
   @override
   List<String> get yearList {
@@ -233,7 +249,7 @@ class _$_HitterQuiz implements _HitterQuiz {
 
   @override
   String toString() {
-    return 'HitterQuiz(id: $id, name: $name, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
+    return 'HitterQuiz(id: $id, name: $name, quizType: $quizType, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
   }
 
   @override
@@ -243,6 +259,8 @@ class _$_HitterQuiz implements _HitterQuiz {
             other is _$_HitterQuiz &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.quizType, quizType) ||
+                other.quizType == quizType) &&
             const DeepCollectionEquality().equals(other._yearList, _yearList) &&
             const DeepCollectionEquality()
                 .equals(other._selectedStatsList, _selectedStatsList) &&
@@ -261,6 +279,7 @@ class _$_HitterQuiz implements _HitterQuiz {
       runtimeType,
       id,
       name,
+      quizType,
       const DeepCollectionEquality().hash(_yearList),
       const DeepCollectionEquality().hash(_selectedStatsList),
       const DeepCollectionEquality().hash(_statsMapList),
@@ -279,6 +298,7 @@ abstract class _HitterQuiz implements HitterQuiz {
   const factory _HitterQuiz(
       {required final String id,
       required final String name,
+      required final QuizType quizType,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
@@ -290,6 +310,8 @@ abstract class _HitterQuiz implements HitterQuiz {
   String get id;
   @override
   String get name;
+  @override
+  QuizType get quizType;
   @override
   List<String> get yearList;
   @override
