@@ -5,7 +5,7 @@ import '../../../../application/quiz/daily_quiz/daily_quiz_service.dart';
 import '../../../../application/quiz/daily_quiz/daily_quiz_state.dart';
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../application/user/user_service.dart';
-import '../../../../util/constant/text_in_app.dart';
+import '../../../../util/constant/strings_constant.dart';
 import '../../../component/confirm_dialog.dart';
 import '../../play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 

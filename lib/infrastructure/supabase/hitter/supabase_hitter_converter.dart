@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/stats_value.dart';
-import '../../../util/constant/hitting_stats/probability_stats.dart';
+import '../../../util/constant/hitting_stats_constant.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 

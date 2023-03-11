@@ -1,5 +1,5 @@
 import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
-import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
+import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 
 /// 1つの球団を選択しているダミーデータ
 final dummySearchCondition1 = SearchCondition(
