@@ -8,6 +8,7 @@ import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/search_condition.dart';
 import '../../../domain/repository/hitter_repository.dart';
+import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/exception/supabase_exception.dart';
 import '../../../util/logger.dart';
 import 'entity/hitting_stats.dart';
@@ -35,7 +36,11 @@ class SupabaseHitterRepository implements HitterRepository {
     final supabaseHitter =
         await _searchHitterBySearchCondition(searchCondition);
 
-    return _createHitterQuiz(supabaseHitter, searchCondition.selectedStatsList);
+    return _createHitterQuiz(
+      QuizType.normal,
+      supabaseHitter,
+      searchCondition.selectedStatsList,
+    );
   }
 
   @override
@@ -43,7 +48,11 @@ class SupabaseHitterRepository implements HitterRepository {
     // 検索条件に合う選手を1人取得
     final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
 
-    return _createHitterQuiz(supabaseHitter, dailyQuiz.selectedStatsList);
+    return _createHitterQuiz(
+      QuizType.daily,
+      supabaseHitter,
+      dailyQuiz.selectedStatsList,
+    );
   }
 
   /// 検索条件で選手で検索し、ランダムで1人返す
@@ -114,6 +123,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   /// SupabaseHitterとSearchConditionからHitterQuizを作成する
   Future<HitterQuiz> _createHitterQuiz(
+    QuizType quizType,
     SupabaseHitter supabaseHitter,
     List<String> selectedStatsList,
   ) async {
@@ -122,6 +132,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
     // HitterQuiz型に変換
     final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
+      quizType,
       supabaseHitter,
       statsList,
       selectedStatsList,

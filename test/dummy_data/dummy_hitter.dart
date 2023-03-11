@@ -3,6 +3,7 @@ import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
 import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/hitting_stats.dart';
 import 'package:baseball_quiz_app/infrastructure/supabase/hitter/entity/supabase_hitter.dart';
+import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 
 const dummyHitter = SupabaseHitter(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
@@ -146,6 +147,7 @@ const dummySearchCondition = SearchCondition(
 const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
+  quizType: QuizType.normal,
   yearList: ['2021', '2022', 'NPB：2年'],
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
   statsMapList: [
