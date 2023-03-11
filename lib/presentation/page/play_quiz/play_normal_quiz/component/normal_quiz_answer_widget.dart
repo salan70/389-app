@@ -6,7 +6,6 @@ import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
-import '../../../../../util/constant/strings_constant.dart';
 import '../../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../../component/answer_widget.dart';
 import '../../component/incorrect_dialog.dart';
@@ -43,6 +42,8 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
           }
           return;
         }
+        // 不正解の場合
+        hitterQuizService.addIncorrectCount();
 
         // interstitial広告を確率で表示
         await interstitialAdService.randomShowAd();
@@ -54,8 +55,6 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
             builder: (_) {
               return IncorrectDialog(
                 selectedHitter: ref.read(answerTextFieldProvider).text,
-                retireConfirmText: normalQuizRetireConfirmText,
-                resultPage: normalQuizResultPage,
               );
             },
           );

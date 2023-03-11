@@ -5,7 +5,6 @@ import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
-import '../../../../../util/constant/strings_constant.dart';
 import '../../../../component/confirm_dialog.dart';
 import '../../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../component/answer_widget.dart';
@@ -68,8 +67,6 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
           builder: (_) {
             return IncorrectDialog(
               selectedHitter: ref.read(answerTextFieldProvider).text,
-              retireConfirmText: dailyQuizRetireConfirmText,
-              resultPage: const DailyQuizResultPage(),
             );
           },
         );
