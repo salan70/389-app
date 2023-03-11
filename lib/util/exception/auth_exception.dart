@@ -1,4 +1,4 @@
-import 'base_exception.dart';
+import 'app_exception.dart';
 
 class AuthException extends AppException {
   const AuthException._([
