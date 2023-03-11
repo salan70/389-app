@@ -198,7 +198,7 @@ class __$$_HitterQuizCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HitterQuiz implements _HitterQuiz {
+class _$_HitterQuiz extends _HitterQuiz {
   const _$_HitterQuiz(
       {required this.id,
       required this.name,
@@ -211,7 +211,8 @@ class _$_HitterQuiz implements _HitterQuiz {
       required this.incorrectCount})
       : _yearList = yearList,
         _selectedStatsList = selectedStatsList,
-        _statsMapList = statsMapList;
+        _statsMapList = statsMapList,
+        super._();
 
   @override
   final String id;
@@ -294,7 +295,7 @@ class _$_HitterQuiz implements _HitterQuiz {
       __$$_HitterQuizCopyWithImpl<_$_HitterQuiz>(this, _$identity);
 }
 
-abstract class _HitterQuiz implements HitterQuiz {
+abstract class _HitterQuiz extends HitterQuiz {
   const factory _HitterQuiz(
       {required final String id,
       required final String name,
@@ -305,6 +306,7 @@ abstract class _HitterQuiz implements HitterQuiz {
       required final int unveilCount,
       required final bool isCorrect,
       required final int incorrectCount}) = _$_HitterQuiz;
+  const _HitterQuiz._() : super._();
 
   @override
   String get id;

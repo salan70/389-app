@@ -83,6 +83,16 @@ extension StatsTypeExt on StatsType {
   }
 }
 
+enum ResultRank {
+  ss,
+  s,
+  a,
+  b,
+  c,
+  // 不正解
+  incorrect,
+}
+
 const statsTypeList = StatsType.values;
 
 /// 確率系のStatsTypeのリスト
