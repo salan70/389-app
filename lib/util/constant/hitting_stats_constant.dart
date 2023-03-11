@@ -84,3 +84,11 @@ extension StatsTypeExt on StatsType {
 }
 
 const statsTypeList = StatsType.values;
+
+/// 確率系のStatsTypeのリスト
+final List<String> probabilityStats = [
+  StatsType.avg.label,
+  StatsType.obp.label,
+  StatsType.slg.label,
+  StatsType.ops.label,
+];

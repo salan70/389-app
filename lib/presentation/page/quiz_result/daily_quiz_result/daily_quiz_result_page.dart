@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../util/constant/url.dart';
+import '../../../../util/constant/strings_constant.dart';
 import '../../../component/banner_ad_widget.dart';
 import '../../../component/to_top_button.dart';
 import '../component/custom_confetti_widget.dart';
