@@ -33,7 +33,7 @@ import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
 import 'presentation/component/quiz_loading_widget.dart';
 import 'presentation/page/top/top_page.dart';
-import 'util/constant/color_constant.dart';
+import 'util/constant/colors_constant.dart';
 import 'util/constant/search_condition_constant.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';

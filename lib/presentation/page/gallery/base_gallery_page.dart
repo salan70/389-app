@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../util/constant/color_constant.dart';
+import '../../../util/constant/colors_constant.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/to_top_button.dart';
 
