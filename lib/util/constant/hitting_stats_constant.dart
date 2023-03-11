@@ -92,3 +92,8 @@ final List<String> probabilityStats = [
   StatsType.slg.label,
   StatsType.ops.label,
 ];
+
+enum QuizType {
+  normal,
+  daily,
+}

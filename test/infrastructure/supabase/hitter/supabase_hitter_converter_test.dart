@@ -11,6 +11,7 @@ void main() async {
   group('toHitterQuiz関数', () {
     test('正常系', () {
       final result = converter.toHitterQuiz(
+        QuizType.normal,
         dummyHitter,
         dummyHittingStatsList,
         dummySearchCondition.selectedStatsList,

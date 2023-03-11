@@ -11,6 +11,7 @@ import 'entity/supabase_hitter.dart';
 class SupabaseHitterConverter {
   /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
   HitterQuiz toHitterQuiz(
+    QuizType quizType,
     SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
@@ -44,6 +45,7 @@ class SupabaseHitterConverter {
     final hitterQuiz = HitterQuiz(
       id: supabaseHitter.id,
       name: supabaseHitter.name,
+      quizType: quizType,
       yearList: yearList,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
