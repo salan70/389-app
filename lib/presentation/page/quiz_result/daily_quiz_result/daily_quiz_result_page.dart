@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 
 import '../../../../util/constant/url.dart';
 import '../../../component/banner_ad_widget.dart';
+import '../../../component/to_top_button.dart';
 import '../component/custom_confetti_widget.dart';
 import '../component/result_quiz_widget.dart';
 import '../component/result_text.dart';
 import '../component/share_button.dart';
-import '../component/to_top_button.dart';
 
 class DailyQuizResultPage extends StatelessWidget {
   const DailyQuizResultPage({super.key});
