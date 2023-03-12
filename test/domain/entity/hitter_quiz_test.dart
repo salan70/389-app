@@ -12,6 +12,20 @@ void main() {
     unveilCount: 0,
   );
 
+  group('quiz.totalStatsCount', () {
+    test('20', () {
+      // Arrange
+      final hitterQuizResult = baseHitterQuizResult;
+
+      // Act
+      final result = hitterQuizResult.totalStatsCount;
+
+      // Assert
+      const expected = 20;
+      expect(expected, result);
+    });
+  });
+
   group('quiz.unveilRate', () {
     test('0(0/20)', () {
       // Arrange
