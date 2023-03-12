@@ -10,8 +10,6 @@ void main() {
     isCorrect: true,
     incorrectCount: 0,
     unveilCount: 0,
-    yearList: ['2019', '2020', '2021', '2022', 'NPB：4年'],
-    selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
   );
 
   group('quiz.unveilRate', () {
