@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../gallery/base_gallery_page.dart';
+import '../../gallery_list/base_gallery_list_page.dart';
 
 class ToGalleryButton extends StatelessWidget {
   const ToGalleryButton({super.key});
@@ -13,7 +13,7 @@ class ToGalleryButton extends StatelessWidget {
           context,
           MaterialPageRoute(
             fullscreenDialog: true,
-            builder: (context) => const BaseGalleryPage(),
+            builder: (context) => const BaseGalleryListPage(),
           ),
         );
       },

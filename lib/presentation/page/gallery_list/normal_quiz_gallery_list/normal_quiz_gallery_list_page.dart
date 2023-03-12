@@ -7,8 +7,8 @@ import '../../../../application/user/user_state.dart';
 import '../../../../domain/entity/hitter_quiz_result.dart';
 import '../../../component/async_value_handler.dart';
 
-class NormalQuizGalleryPage extends ConsumerWidget {
-  const NormalQuizGalleryPage({super.key});
+class NormalQuizGalleryListPage extends ConsumerWidget {
+  const NormalQuizGalleryListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

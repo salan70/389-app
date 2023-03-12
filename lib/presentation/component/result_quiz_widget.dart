@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../component/quiz_widget.dart';
+import 'quiz_widget.dart';
 
 class ResultQuizWidget extends StatelessWidget {
   const ResultQuizWidget({
