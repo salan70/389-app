@@ -30,9 +30,13 @@ class HitterQuizResult with _$HitterQuizResult {
 
   // TODO(me): selectedStatsListに年度が含まれた場合、年度をremoveする処理を書く'
 
+  // 表示しうる成績の数
+  int get totalStatsCount {
+    return statsMapList.length * statsMapList.first.keys.length;
+  }
+
   // 成績を表示した割合
   double get unveilRate {
-    final totalStatsCount = yearList.length * selectedStatsList.length;
     return unveilCount / totalStatsCount;
   }
 
