@@ -8,7 +8,7 @@ class ResultText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isCorrect = ref.watch(isCorrectQuizStateProvider);
+    final isCorrect = ref.read(hitterQuizStateProvider).value!.isCorrect;
 
     return Center(
       child: SizedBox(

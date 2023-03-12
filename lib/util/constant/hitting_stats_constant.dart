@@ -83,4 +83,47 @@ extension StatsTypeExt on StatsType {
   }
 }
 
+enum ResultRank {
+  ss,
+  s,
+  a,
+  b,
+  c,
+  // 不正解
+  incorrect,
+}
+
+extension ResultRankExt on ResultRank {
+  String get label {
+    switch (this) {
+      case ResultRank.ss:
+        return 'SS';
+      case ResultRank.s:
+        return 'S';
+      case ResultRank.a:
+        return 'A';
+      case ResultRank.b:
+        return 'B';
+      case ResultRank.c:
+        return 'C';
+      case ResultRank.incorrect:
+        return '不正解';
+    }
+  }
+}
+
+
 const statsTypeList = StatsType.values;
+
+/// 確率系のStatsTypeのリスト
+final List<String> probabilityStats = [
+  StatsType.avg.label,
+  StatsType.obp.label,
+  StatsType.slg.label,
+  StatsType.ops.label,
+];
+
+enum QuizType {
+  normal,
+  daily,
+}

@@ -1,13 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/entity/quiz_result.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/repository/user_info_repository.dart';
+import '../common/common_state.dart';
 import '../quiz/daily_quiz/daily_quiz_state.dart';
 import '../quiz/hitter_quiz/hitter_quiz_state.dart';
 
-/// userInfoサービスプロバイダー
+/// userサービスプロバイダー
 final userServiceProvider = Provider(
   UserService.new,
 );
@@ -43,37 +42,54 @@ class UserService {
 
   /// dailyQuizResultを作成する
   Future<void> createDailyQuizResult(String dailyQuizId) async {
-    final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+    final notifier = ref.read(commonFunctionStateProvider.notifier);
 
-    await userInfoRepository.createDailyQuiz(user!, dailyQuizId);
+    notifier.state = const AsyncValue.loading();
+
+    notifier.state = await AsyncValue.guard(() async {
+      final user = ref.read(authRepositoryProvider).getCurrentUser();
+      final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+      await userInfoRepository.createDailyQuiz(user!, dailyQuizId);
+    });
   }
 
   /// dailyQuizResultを更新する
   Future<void> updateDailyQuizResult() async {
-    final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+    final notifier = ref.read(commonFunctionStateProvider.notifier);
 
-    final dailyQuizId = ref.watch(dailyQuizStateProvider).value!.dailyQuizId;
-    final quizResult = createQuizResult();
-    await userInfoRepository.updateDailyQuiz(user!, dailyQuizId, quizResult);
+    notifier.state = const AsyncValue.loading();
+
+    notifier.state = await AsyncValue.guard(() async {
+      final user = ref.read(authRepositoryProvider).getCurrentUser();
+      final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+      final dailyQuizId = ref.watch(dailyQuizStateProvider).value!.dailyQuizId;
+      final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+      await userInfoRepository.updateDailyQuizResult(
+        user!,
+        dailyQuizId,
+        hitterQuiz,
+      );
+    });
   }
 
-  @visibleForTesting
-  QuizResult createQuizResult() {
-    final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+  /// normalQuizResultを作成する
+  Future<void> createNormalQuizResult() async {
+    final notifier = ref.read(commonFunctionStateProvider.notifier);
 
-    final totalStatsCount =
-        hitterQuiz.statsMapList.length * hitterQuiz.selectedStatsList.length;
-    final unveilStatsCount = hitterQuiz.unveilCount;
+    notifier.state = const AsyncValue.loading();
 
-    return QuizResult(
-      playerId: hitterQuiz.id,
-      isCorrect: ref.read(isCorrectQuizStateProvider),
-      totalStatsCount: totalStatsCount,
-      openStatsCount: unveilStatsCount,
-      incorrectCount: hitterQuiz.incorrectCount,
-    );
+    notifier.state = await AsyncValue.guard(() async {
+      final user = ref.read(authRepositoryProvider).getCurrentUser();
+      final userInfoRepository = ref.read(userInfoRepositoryProvider);
+
+      final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
+      await userInfoRepository.createNormalQuizResult(
+        user!,
+        hitterQuiz,
+      );
+    });
   }
 
   /// dailyQuizをプレイ可能か返す

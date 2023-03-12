@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../application/quiz/search_condition/search_condition_service.dart';
 import '../../../../application/quiz/search_condition/search_condition_state.dart';
 import '../../../../util/constant/search_condition_constant.dart';
-import '../../../../util/constant/team_list.dart';
+import '../../../../util/constant/strings_constant.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
   const ChoseTeamWidget({super.key});
@@ -20,7 +20,7 @@ class ChoseTeamWidget extends ConsumerWidget {
       selectedValue: teamList,
       choiceGrouped: true,
       choiceItems: S2Choice.listFrom<String, Map<String, String>>(
-        source: defaultTeamList,
+        source: npbTeamList,
         value: (_, item) => item['name']!,
         title: (_, item) => item['name']!,
         group: (_, item) => item['league']!,

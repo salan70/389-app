@@ -26,6 +26,8 @@ dependencies:
   google_mobile_ads: ^2.3.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  # 日付を表示用にフォーマットするために使用
+  intl: ^0.17.0
   json_annotation: ^4.7.0
   logger: ^1.1.0
   # 現在時刻をネットワークから取得するために使用
