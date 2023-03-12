@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/user_info_repository.dart';
-import '../../../util/logger.dart';
 
 class FirebaseUserInfoRepository implements UserInfoRepository {
   FirebaseUserInfoRepository(this.firestore);
@@ -12,16 +11,10 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
 
   @override
   Future<void> updateUserInfo(User user) async {
-    try {
-      await firestore.collection('users').doc(user.uid).set(<String, dynamic>{
-        'createdAt': user.metadata.creationTime,
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      // TODO(me): エラーハンドリングもうちょいいい感じにする
-    } on Exception catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+    await firestore.collection('users').doc(user.uid).set(<String, dynamic>{
+      'createdAt': user.metadata.creationTime,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
   }
 
   @override
@@ -29,39 +22,27 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
     User user,
     String dailyQuizId,
   ) async {
-    try {
-      final DocumentSnapshot snapshot = await firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('dailyQuizResult')
-          .doc(dailyQuizId)
-          .get();
+    final DocumentSnapshot snapshot = await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('dailyQuizResult')
+        .doc(dailyQuizId)
+        .get();
 
-      return snapshot.exists;
-      // TODO(me): エラーハンドリングもうちょいいい感じにする
-    } on Exception catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+    return snapshot.exists;
   }
 
   @override
   Future<void> createDailyQuiz(User user, String dailyQuizId) async {
-    try {
-      await firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('dailyQuizResult')
-          .doc(dailyQuizId)
-          .set(<String, dynamic>{
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
-      // TODO(me): エラーハンドリングもうちょいいい感じにする
-    } on Exception catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('dailyQuizResult')
+        .doc(dailyQuizId)
+        .set(<String, dynamic>{
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
   }
 
   @override
@@ -70,77 +51,65 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
     String dailyQuizId,
     HitterQuiz hitterQuiz,
   ) async {
-    try {
-      await firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('dailyQuizResult')
-          .doc(dailyQuizId)
-          .set(<String, dynamic>{
-        'updatedAt': FieldValue.serverTimestamp(),
-        'playerId': hitterQuiz.id,
-        'playerName': hitterQuiz.name,
-        'selectedStatsList': hitterQuiz.selectedStatsList,
-        'yearList': hitterQuiz.yearList,
-        'statsMapList': hitterQuiz.statsMapList
-            .map(
-              (statsMap) => statsMap.map(
-                (key, value) => MapEntry(
-                  key,
-                  {
-                    'unveilOrder': value.unveilOrder,
-                    'data': value.data,
-                  },
-                ),
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('dailyQuizResult')
+        .doc(dailyQuizId)
+        .set(<String, dynamic>{
+      'updatedAt': FieldValue.serverTimestamp(),
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
               ),
-            )
-            .toList(),
-        'unveilCount': hitterQuiz.unveilCount,
-        'isCorrect': hitterQuiz.isCorrect,
-        'incorrectCount': hitterQuiz.incorrectCount,
-      });
-      // TODO(me): エラーハンドリングもうちょいいい感じにする
-    } on Exception catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
+    });
   }
 
   @override
   Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz) async {
-    try {
-      await firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('normalQuizResult')
-          .add(<String, dynamic>{
-        'createdAt': FieldValue.serverTimestamp(),
-        'updatedAt': FieldValue.serverTimestamp(),
-        'playerId': hitterQuiz.id,
-        'playerName': hitterQuiz.name,
-        'selectedStatsList': hitterQuiz.selectedStatsList,
-        'yearList': hitterQuiz.yearList,
-        'statsMapList': hitterQuiz.statsMapList
-            .map(
-              (statsMap) => statsMap.map(
-                (key, value) => MapEntry(
-                  key,
-                  {
-                    'unveilOrder': value.unveilOrder,
-                    'data': value.data,
-                  },
-                ),
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .add(<String, dynamic>{
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
               ),
-            )
-            .toList(),
-        'unveilCount': hitterQuiz.unveilCount,
-        'isCorrect': hitterQuiz.isCorrect,
-        'incorrectCount': hitterQuiz.incorrectCount,
-      });
-      // TODO(me): エラーハンドリングもうちょいいい感じにする
-    } on Exception catch (e) {
-      logger.e(e);
-      rethrow;
-    }
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
+    });
   }
 }
