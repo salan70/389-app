@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../util/constant/colors_constant.dart';
+import '../../component/back_to_top_button.dart';
 import '../../component/banner_ad_widget.dart';
-import '../../component/to_top_button.dart';
-import 'normal_quiz_gallery/normal_quiz_gallery_page.dart';
+import 'normal_quiz_gallery_list/normal_quiz_gallery_list_page.dart';
 
-class BaseGalleryPage extends StatelessWidget {
-  const BaseGalleryPage({super.key});
+class BaseGalleryListPage extends StatelessWidget {
+  const BaseGalleryListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class BaseGalleryPage extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: <Widget>[
-                        const NormalQuizGalleryPage(),
+                        const NormalQuizGalleryListPage(),
                         Container(),
                       ],
                     ),
@@ -44,7 +44,7 @@ class BaseGalleryPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
-                  ToTopButton(),
+                  BackToTopButton(),
                   SizedBox(height: 8),
                   BannerAdWidget(),
                 ],
