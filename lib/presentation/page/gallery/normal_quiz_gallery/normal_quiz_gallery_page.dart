@@ -31,6 +31,7 @@ class NormalQuizGalleryPage extends ConsumerWidget {
                 child: Column(
                   children: [
                     Text(quizResult.resultRank.label),
+                    Text(quizResult.updatedAt.toString()),
                     // Text(quizResult),
                   ],
                 ),
