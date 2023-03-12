@@ -4,13 +4,14 @@ import 'package:flutter/foundation.dart';
 
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/stats_value.dart';
-import '../../../util/constant/hitting_stats/probability_stats.dart';
+import '../../../util/constant/hitting_stats_constant.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
 class SupabaseHitterConverter {
   /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
   HitterQuiz toHitterQuiz(
+    QuizType quizType,
     SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
@@ -44,10 +45,12 @@ class SupabaseHitterConverter {
     final hitterQuiz = HitterQuiz(
       id: supabaseHitter.id,
       name: supabaseHitter.name,
+      quizType: quizType,
       yearList: yearList,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       unveilCount: 0,
+      isCorrect: false,
       incorrectCount: 0,
     );
 

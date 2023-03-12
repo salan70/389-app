@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../domain/entity/quiz_result.dart';
+import '../../../domain/entity/hitter_quiz.dart';
+import '../../../domain/entity/hitter_quiz_result.dart';
 import '../../../domain/repository/user_info_repository.dart';
 
 class FirebaseUserInfoRepository implements UserInfoRepository {
@@ -46,10 +47,10 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
   }
 
   @override
-  Future<void> updateDailyQuiz(
+  Future<void> updateDailyQuizResult(
     User user,
     String dailyQuizId,
-    QuizResult quizResult,
+    HitterQuiz hitterQuiz,
   ) async {
     await firestore
         .collection('users')
@@ -58,11 +59,77 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
         .doc(dailyQuizId)
         .set(<String, dynamic>{
       'updatedAt': FieldValue.serverTimestamp(),
-      'playerId': quizResult.playerId,
-      'isCorrect': quizResult.isCorrect,
-      'totalStatsCount': quizResult.totalStatsCount,
-      'openStatsCount': quizResult.openStatsCount,
-      'incorrectCount': quizResult.incorrectCount,
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
+              ),
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
     });
+  }
+
+  @override
+  Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz) async {
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .add(<String, dynamic>{
+      'createdAt': FieldValue.serverTimestamp(),
+      'updatedAt': FieldValue.serverTimestamp(),
+      'playerId': hitterQuiz.id,
+      'playerName': hitterQuiz.name,
+      'selectedStatsList': hitterQuiz.selectedStatsList,
+      'yearList': hitterQuiz.yearList,
+      'statsMapList': hitterQuiz.statsMapList
+          .map(
+            (statsMap) => statsMap.map(
+              (key, value) => MapEntry(
+                key,
+                {
+                  'unveilOrder': value.unveilOrder,
+                  'data': value.data,
+                },
+              ),
+            ),
+          )
+          .toList(),
+      'unveilCount': hitterQuiz.unveilCount,
+      'isCorrect': hitterQuiz.isCorrect,
+      'incorrectCount': hitterQuiz.incorrectCount,
+    });
+  }
+
+  @override
+  Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user) async {
+    final QuerySnapshot snapshot = await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .orderBy('createdAt', descending: true)
+        .get();
+
+    final hitterQuizResultList = <HitterQuizResult>[];
+    for (final document in snapshot.docs) {
+      final hitterQuizResult =
+          HitterQuizResult.fromJson(document.data()! as Map<String, dynamic>);
+      hitterQuizResultList.add(hitterQuizResult);
+    }
+
+    return hitterQuizResultList;
   }
 }

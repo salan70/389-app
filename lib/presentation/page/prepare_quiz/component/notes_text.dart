@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../util/constant/text_in_app.dart';
+import '../../../../util/constant/strings_constant.dart';
 
 class NotesText extends StatelessWidget {
   const NotesText({super.key});

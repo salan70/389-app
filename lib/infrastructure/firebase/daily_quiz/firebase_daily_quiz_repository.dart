@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:ntp/ntp.dart';
 
 import '../../../domain/repository/daily_quiz_repository.dart';
-import '../../../util/constant/text_in_app.dart';
+import '../../../util/constant/strings_constant.dart';
 
 class FirebaseDailyQuizRepository implements DailyQuizRepository {
   FirebaseDailyQuizRepository(this.firestore);
@@ -68,6 +68,7 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   /// アプリ内の「今日の日付」を取得する
   ///
   /// UT作成済み
+  @visibleForTesting
   DateTime calculateTodayInApp(DateTime now) {
     final nowInApp = now.subtract(
       const Duration(hours: borderHourForTodayInApp),

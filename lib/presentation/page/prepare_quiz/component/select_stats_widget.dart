@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/quiz/search_condition/search_condition_service.dart';
 import '../../../../application/quiz/search_condition/search_condition_state.dart';
-import '../../../../util/constant/hitting_stats/stats_type.dart';
-import '../../../../util/constant/search_condition_constant.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../util/constant/strings_constant.dart';
 
 class SelectStatsWidget extends ConsumerWidget {
   const SelectStatsWidget({super.key});

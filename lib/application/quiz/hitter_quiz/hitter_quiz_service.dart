@@ -1,8 +1,10 @@
+import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
+import '../../../domain/entity/hitter_quiz_result.dart';
 import '../../../domain/repository/hitter_repository.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import '../search_condition/search_condition_state.dart';
@@ -117,6 +119,18 @@ class HitterQuizService {
     return selectedHitterId == hitterQuiz.value!.id;
   }
 
+  /// hitterQuizのisCorrectをtrueにする
+  void markCorrect() {
+    final notifier = ref.read(hitterQuizStateProvider.notifier);
+    final hitterQuiz = notifier.state.value;
+
+    notifier.state = AsyncData(
+      hitterQuiz!.copyWith(
+        isCorrect: true,
+      ),
+    );
+  }
+
   /// 不正解数を1増やす
   void addIncorrectCount() {
     final notifier = ref.read(hitterQuizStateProvider.notifier);
@@ -138,5 +152,24 @@ class HitterQuizService {
 
     final hitterQuiz = ref.read(hitterQuizStateProvider);
     return hitterQuiz.value!.incorrectCount == maxCanIncorrectCount;
+  }
+
+  /// HitterQuizResultからHitterQuizを作成し、hitterQuizStateに格納する
+  void fromHitterQuizResult(
+    HitterQuizResult hitterQuizResult,
+    QuizType quizType,
+  ) {
+    final hitterQuiz = HitterQuiz(
+      id: hitterQuizResult.id,
+      name: hitterQuizResult.name,
+      quizType: quizType,
+      yearList: hitterQuizResult.yearList,
+      selectedStatsList: hitterQuizResult.selectedStatsList,
+      statsMapList: hitterQuizResult.statsMapList,
+      unveilCount: hitterQuizResult.unveilCount,
+      isCorrect: hitterQuizResult.isCorrect,
+      incorrectCount: hitterQuizResult.incorrectCount,
+    );
+    ref.read(hitterQuizStateProvider.notifier).state = AsyncData(hitterQuiz);
   }
 }

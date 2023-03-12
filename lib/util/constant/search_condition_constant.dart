@@ -1,5 +1,5 @@
 import '../../domain/entity/search_condition.dart';
-import 'hitting_stats/stats_type.dart';
+import 'hitting_stats_constant.dart';
 
 /// searchConditionを格納するHiveのBox名
 const searchConditionBoxKey = 'searchConditionBox';
@@ -24,16 +24,28 @@ final defaultSearchCondition = SearchCondition(
   ],
 );
 
+// NPBの球団リスト
+const npbTeamList = <Map<String, String>>[
+  {'name': 'オリックス・バファローズ', 'league': 'パ・リーグ'},
+  {'name': '福岡ソフトバンクホークス', 'league': 'パ・リーグ'},
+  {'name': '埼玉西武ライオンズ', 'league': 'パ・リーグ'},
+  {'name': '東北楽天ゴールデンイーグルス', 'league': 'パ・リーグ'},
+  {'name': '千葉ロッテマリーンズ', 'league': 'パ・リーグ'},
+  {'name': '北海道日本ハムファイターズ', 'league': 'パ・リーグ'},
+  {'name': '東京ヤクルトスワローズ', 'league': 'セ・リーグ'},
+  {'name': '横浜DeNAベイスターズ', 'league': 'セ・リーグ'},
+  {'name': '阪神タイガース', 'league': 'セ・リーグ'},
+  {'name': '読売ジャイアンツ', 'league': 'セ・リーグ'},
+  {'name': '広島東洋カープ', 'league': 'セ・リーグ'},
+  {'name': '中日ドラゴンズ', 'league': 'セ・リーグ'},
+];
+
 /// 出題する成績の選択数
 ///
 /// この数ちょうどでなくてはならない
 const mustSelectStatsNum = 4;
 
 const minChoseTeamNum = 1;
-
-const errorForChoseTeamValidation = '球団を$minChoseTeamNumつ以上選択してください';
-
-const errorForSelectStatsValidation = '成績を$mustSelectStatsNumつ選択してください';
 
 const minGamesOptionList = [0, 100, 300, 500, 1000];
 
