@@ -11,7 +11,10 @@ class ToGalleryButton extends StatelessWidget {
       onPressed: () {
         Navigator.push<void>(
           context,
-          MaterialPageRoute(builder: (context) => const BaseGalleryPage()),
+          MaterialPageRoute(
+            fullscreenDialog: true,
+            builder: (context) => const BaseGalleryPage(),
+          ),
         );
       },
       icon: const Icon(
