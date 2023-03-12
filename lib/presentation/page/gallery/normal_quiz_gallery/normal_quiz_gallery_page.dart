@@ -31,8 +31,8 @@ class NormalQuizGalleryPage extends ConsumerWidget {
                 child: Column(
                   children: [
                     Text(quizResult.resultRank.label),
-                    Text(quizResult.updatedAt.toString()),
-                    // Text(quizResult),
+                    Text('${quizResult.formattedUpdatedAtText}にプレイ'),
+                    Text('${quizResult.unveilPercentage}%表示'),
                   ],
                 ),
               );
