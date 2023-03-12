@@ -1,11 +1,13 @@
-import 'package:baseball_quiz_app/util/constant/colors_constant.dart';
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../application/user/user_state.dart';
 import '../../../../domain/entity/hitter_quiz_result.dart';
+import '../../../../util/constant/colors_constant.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../component/async_value_handler.dart';
+import '../../gallery_detail/normal_quiz_gallery_detail_page.dart';
 
 class NormalQuizGalleryListPage extends ConsumerWidget {
   const NormalQuizGalleryListPage({super.key});
@@ -26,14 +28,28 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
             ),
             itemBuilder: (context, index) {
               final quizResult = quizResultList[index];
-              return Card(
-                color: backgroundColor,
-                child: Column(
-                  children: [
-                    Text(quizResult.resultRank.label),
-                    Text('${quizResult.formattedUpdatedAtText}にプレイ'),
-                    Text('${quizResult.unveilPercentage}%表示'),
-                  ],
+              return InkWell(
+                onTap: () {
+                  ref.read(hitterQuizServiceProvider).fromHitterQuizResult(
+                        quizResult,
+                        QuizType.normal,
+                      );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<Widget>(
+                      builder: (_) => const NormalQuizGalleryDetailPage(),
+                    ),
+                  );
+                },
+                child: Card(
+                  color: backgroundColor,
+                  child: Column(
+                    children: [
+                      Text(quizResult.resultRank.label),
+                      Text('${quizResult.formattedUpdatedAtText}にプレイ'),
+                      Text('${quizResult.unveilPercentage}%表示'),
+                    ],
+                  ),
                 ),
               );
             },
