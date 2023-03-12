@@ -12,6 +12,68 @@ void main() {
     unveilCount: 0,
   );
 
+  group('quiz.formattedUpdatedAtText', () {
+    test('2021/01/01', () {
+      // Arrange
+      final hitterQuizResult = baseHitterQuizResult.copyWith(
+        updatedAt: DateTime(2021, 1, 1, 0, 30),
+      );
+
+      // Act
+      final result = hitterQuizResult.formattedUpdatedAtText;
+
+      // Assert
+      const expected = '2021/01/01';
+      expect(expected, result);
+    });
+  });
+
+  // 四捨五入するケースのテストができてない懸念あり
+  group('quiz.unveilPercentage', () {
+    test('0', () {
+      // Arrange
+      final hitterQuizResult = baseHitterQuizResult;
+
+      // Act
+      final result = hitterQuizResult.unveilPercentage;
+
+      // Assert
+      const expected = '0';
+      expect(expected, result);
+    });
+    test('5', () {
+      // Arrange
+      final hitterQuizResult = baseHitterQuizResult.copyWith(
+        isCorrect: true,
+        incorrectCount: 0,
+        unveilCount: 1,
+      );
+
+      // Act
+      final result = hitterQuizResult.unveilPercentage;
+
+      // Assert
+      const expected = '5';
+      expect(expected, result);
+    });
+
+    test('100', () {
+      // Arrange
+      final hitterQuizResult = baseHitterQuizResult.copyWith(
+        isCorrect: true,
+        incorrectCount: 0,
+        unveilCount: 20,
+      );
+
+      // Act
+      final result = hitterQuizResult.unveilPercentage;
+
+      // Assert
+      const expected = '100';
+      expect(expected, result);
+    });
+  });
+
   group('quiz.totalStatsCount', () {
     test('20', () {
       // Arrange
