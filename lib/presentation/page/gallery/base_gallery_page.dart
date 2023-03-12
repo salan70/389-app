@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../util/constant/colors_constant.dart';
 import '../../component/banner_ad_widget.dart';
 import '../../component/to_top_button.dart';
+import 'normal_quiz_gallery/normal_quiz_gallery_page.dart';
 
 class BaseGalleryPage extends StatelessWidget {
   const BaseGalleryPage({super.key});
@@ -30,7 +31,7 @@ class BaseGalleryPage extends StatelessWidget {
                   Expanded(
                     child: TabBarView(
                       children: <Widget>[
-                        Container(),
+                        const NormalQuizGalleryPage(),
                         Container(),
                       ],
                     ),

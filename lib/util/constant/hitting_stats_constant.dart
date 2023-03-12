@@ -93,6 +93,26 @@ enum ResultRank {
   incorrect,
 }
 
+extension ResultRankExt on ResultRank {
+  String get label {
+    switch (this) {
+      case ResultRank.ss:
+        return 'SS';
+      case ResultRank.s:
+        return 'S';
+      case ResultRank.a:
+        return 'A';
+      case ResultRank.b:
+        return 'B';
+      case ResultRank.c:
+        return 'C';
+      case ResultRank.incorrect:
+        return '不正解';
+    }
+  }
+}
+
+
 const statsTypeList = StatsType.values;
 
 /// 確率系のStatsTypeのリスト
