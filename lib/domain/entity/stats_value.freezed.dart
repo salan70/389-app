@@ -14,11 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+StatsValue _$StatsValueFromJson(Map<String, dynamic> json) {
+  return _StatsValue.fromJson(json);
+}
+
 /// @nodoc
 mixin _$StatsValue {
   int get unveilOrder => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $StatsValueCopyWith<StatsValue> get copyWith =>
       throw _privateConstructorUsedError;
@@ -101,9 +106,12 @@ class __$$_StatsValueCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_StatsValue implements _StatsValue {
   const _$_StatsValue({required this.unveilOrder, required this.data});
+
+  factory _$_StatsValue.fromJson(Map<String, dynamic> json) =>
+      _$$_StatsValueFromJson(json);
 
   @override
   final int unveilOrder;
@@ -125,6 +133,7 @@ class _$_StatsValue implements _StatsValue {
             (identical(other.data, data) || other.data == data));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, unveilOrder, data);
 
@@ -133,12 +142,22 @@ class _$_StatsValue implements _StatsValue {
   @pragma('vm:prefer-inline')
   _$$_StatsValueCopyWith<_$_StatsValue> get copyWith =>
       __$$_StatsValueCopyWithImpl<_$_StatsValue>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_StatsValueToJson(
+      this,
+    );
+  }
 }
 
 abstract class _StatsValue implements StatsValue {
   const factory _StatsValue(
       {required final int unveilOrder,
       required final String data}) = _$_StatsValue;
+
+  factory _StatsValue.fromJson(Map<String, dynamic> json) =
+      _$_StatsValue.fromJson;
 
   @override
   int get unveilOrder;

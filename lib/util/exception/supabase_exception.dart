@@ -1,8 +1,8 @@
-import 'base_exception.dart';
+import 'app_exception.dart';
 
 class SupabaseException extends AppException {
   const SupabaseException._([
-    super.message = 'database exception',
+    super.message = 'supabase exception',
     SupabaseExceptionCode? code,
   ]) : code = code ?? SupabaseExceptionCode.unknown;
 

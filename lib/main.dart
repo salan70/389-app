@@ -12,6 +12,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'application/common/common_state.dart';
 import 'application/loading/loading_state.dart';
 import 'application/quiz/daily_quiz/daily_quiz_state.dart';
 import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
@@ -32,7 +33,7 @@ import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
 import 'presentation/component/quiz_loading_widget.dart';
 import 'presentation/page/top/top_page.dart';
-import 'util/constant/color_constant.dart';
+import 'util/constant/colors_constant.dart';
 import 'util/constant/search_condition_constant.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
@@ -171,6 +172,9 @@ class _MyApp extends ConsumerState<MyApp> {
     );
     ref.handleAsyncValue<void>(
       dailyQuizStateProvider,
+    );
+    ref.handleAsyncValue<void>(
+      commonFunctionStateProvider,
     );
 
     // Userを作成

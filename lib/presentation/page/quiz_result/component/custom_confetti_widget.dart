@@ -24,7 +24,7 @@ class _CustomConfettiWidgetState extends ConsumerState<CustomConfettiWidget> {
     super.initState();
 
     // 正解している場合のみ紙吹雪を出す
-    final isCorrect = ref.read(isCorrectQuizStateProvider);
+    final isCorrect = ref.read(hitterQuizStateProvider).value!.isCorrect;
     if (isCorrect) {
       controller.play();
     }

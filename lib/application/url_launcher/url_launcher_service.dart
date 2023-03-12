@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../util/constant/inquiry.dart';
+import '../../util/constant/strings_constant.dart';
+
 
 final urlLauncherServiceProvider = Provider.autoDispose(
   (_) => UrlLauncherService(),
