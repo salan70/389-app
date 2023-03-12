@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../util/constant/strings_constant.dart';
+import '../../../component/back_to_top_button.dart';
 import '../../../component/banner_ad_widget.dart';
-import '../../../component/to_top_button.dart';
+import '../../../component/result_quiz_widget.dart';
+import '../../../component/share_button.dart';
 import '../component/custom_confetti_widget.dart';
-import '../component/result_quiz_widget.dart';
 import '../component/result_text.dart';
-import '../component/share_button.dart';
 
 class DailyQuizResultPage extends StatelessWidget {
   const DailyQuizResultPage({super.key});
@@ -39,7 +39,7 @@ class DailyQuizResultPage extends StatelessWidget {
                     const SizedBox(height: 8),
                     ShareButton(globalKey: globalKey, shareText: shareText),
                     const SizedBox(height: 8),
-                    const ToTopButton(),
+                    const BackToTopButton(),
                     const SizedBox(height: 80),
                   ],
                 ),
