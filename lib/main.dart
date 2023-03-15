@@ -24,6 +24,8 @@ import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
 import 'feature/auth/infrastructure/firebase_auth_repository.dart';
+import 'feature/quiz_gallery/domain/quiz_result_repository.dart';
+import 'feature/quiz_gallery/infrastructure/firebase_quiz_result_repository.dart';
 import 'feature/search_condition/domain/search_condition.dart';
 import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
@@ -83,6 +85,13 @@ Future<void> main() async {
         dailyQuizRepositoryProvider.overrideWith(
           (ref) {
             return FirebaseDailyQuizRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
+        quizResultRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseQuizResultRepository(
               ref.watch(firestoreProvider),
             );
           },
