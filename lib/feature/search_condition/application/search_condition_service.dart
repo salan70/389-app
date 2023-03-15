@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../util/constant/search_condition_constant.dart';
+import '../constant/search_condition_constant.dart';
 import 'search_condition_state.dart';
 
 final searchConditionServiceProvider =
