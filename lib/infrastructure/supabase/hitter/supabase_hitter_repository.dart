@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/hitter_repository.dart';
+import '../../../feature/daily_quiz/domain/daily_quiz.dart';
 import '../../../feature/search_condition/domain/search_condition.dart';
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/exception/supabase_exception.dart';

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/quiz/daily_quiz/daily_quiz_service.dart';
-import '../../../../application/quiz/daily_quiz/daily_quiz_state.dart';
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../application/user/user_service.dart';
-import '../../../../feature/quiz_result/application/quiz_result_service.dart';
-import '../../../../util/constant/strings_constant.dart';
-import '../../../component/confirm_dialog.dart';
-import '../../play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
+import '../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
+import '../../../presentation/component/confirm_dialog.dart';
+import '../../../presentation/page/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
+import '../../quiz_result/application/quiz_result_service.dart';
+import '../application/daily_quiz_service.dart';
+import '../application/daily_quiz_state.dart';
+import '../util/daily_quiz_constant.dart';
 
-class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
-  const ToPlayDailyQuizFromTopButton({super.key});
+class ToPlayDailyQuizButton extends ConsumerWidget {
+  const ToPlayDailyQuizButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,10 +21,11 @@ class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
 
     return TextButton(
       onPressed: () async {
-        await ref.read(dailyQuizServiceProvider).fetchDailyQuiz();
+        final dailyQuizService = ref.read(dailyQuizServiceProvider);
+        await dailyQuizService.fetchDailyQuiz();
         // 値を取得してからdailyQuizStateProviderをreadする
         final dailyQuiz = ref.read(dailyQuizStateProvider);
-        final canPlay = await ref.read(userServiceProvider).canPlayDailyQuiz();
+        final canPlay = await dailyQuizService.canPlayDailyQuiz();
 
         if (canPlay) {
           // プレイできる場合
