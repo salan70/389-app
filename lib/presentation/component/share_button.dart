@@ -15,16 +15,14 @@ class ShareButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final shareQuizResultService = ref.watch(shareQuizResultServiceProvider);
-
     return Center(
       child: TextButton(
         onPressed: () {
-          shareQuizResultService.shareImageAndText(
-            'result_quiz_widget',
-            globalKey,
-            shareText,
-          );
+          ref.read(shareQuizResultServiceProvider).shareImageAndText(
+                'result_quiz_widget',
+                globalKey,
+                shareText,
+              );
         },
         child: const Text('クイズをシェア！'),
       ),
