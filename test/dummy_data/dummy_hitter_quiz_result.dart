@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
+import 'package:baseball_quiz_app/feature/quiz/domain/stats_value.dart';
 import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 
 final dummyHitterQuizResult = HitterQuizResult(

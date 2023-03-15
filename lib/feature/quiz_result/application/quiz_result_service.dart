@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../application/common/common_state.dart';
-import '../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
+import '../../quiz/application/hitter_quiz_state.dart';
 import '../domain/quiz_result_repository.dart';
 
 /// quizResultサービスプロバイダー

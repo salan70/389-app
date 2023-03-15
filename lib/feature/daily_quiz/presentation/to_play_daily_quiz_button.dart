@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../presentation/component/confirm_dialog.dart';
-import '../../../presentation/page/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
+import '../../../presentation/components/confirm_dialog.dart';
+import '../../quiz/application/hitter_quiz_service.dart';
+import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
 import '../application/daily_quiz_service.dart';
 import '../application/daily_quiz_state.dart';

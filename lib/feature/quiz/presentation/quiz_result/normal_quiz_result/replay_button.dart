@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../feature/quiz/application/hitter_quiz_service.dart';
-import '../../../../feature/quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
+import '../../../application/hitter_quiz_service.dart';
+import '../../play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
-class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
-  const ToPlayNormalQuizFromTopButton({
+class ReplayButton extends ConsumerWidget {
+  const ReplayButton({
     super.key,
   });
 
@@ -18,7 +18,6 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
         // 上記警告は、contextに対してawaitすると発生すると思われる
         final navigator = Navigator.of(context);
 
-        // 出題する選手を取得
         await ref
             .read(hitterQuizServiceProvider)
             .fetchHitterQuizBySearchCondition();
@@ -29,12 +28,7 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
           ),
         );
       },
-      child: FittedBox(
-        child: Text(
-          '保存されている条件でプレイ！',
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      ),
+      child: const Text('同じ条件でもう一度プレイ'),
     );
   }
 }

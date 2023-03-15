@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../presentation/component/async_value_handler.dart';
+import '../../../../presentation/components/async_value_handler.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../quiz/application/hitter_quiz_service.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/hitter_quiz_result.dart';
 import '../gallery_detail/normal_quiz_gallery_detail_page.dart';
