@@ -1,12 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final urlLauncherServiceProvider = Provider.autoDispose(
-  (_) => UrlLauncherService(),
-);
+final browserServiceProvider = Provider.autoDispose((_) => BrowserService());
 
-/// URL起動を行うサービスクラス
-class UrlLauncherService {
+/// ブラウザ起動を行うサービスクラス
+class BrowserService {
   /// 外部ブラウザを起動する
   Future<void> launchBrowser(String url) async {
     final uri = Uri.parse(url);
