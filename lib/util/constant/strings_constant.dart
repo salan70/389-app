@@ -2,9 +2,6 @@ import '../../feature/search_condition/util/constant/search_condition_constant.d
 
 /// 本ファイルでは、アプリ内で表示するテキストや、使用するURL、メールアドレスを定義する。
 
-/// アプリ内の1日が更新される時間
-const borderHourForTodayInApp = 19;
-
 /// デイリークイズを諦める際の確認テキスト
 const dailyQuizRetireConfirmText = '本当に諦めますか？\n\n※「今日の1問」は1度しか\nプレイできません。';
 
