@@ -29,4 +29,7 @@ abstract class QuizResultRepository {
 
   /// normalQuizResultをリストで取得する
   Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user);
+
+  /// 指定したdailyQuizの結果が存在するかどうかを返す
+  Future<bool> existSpecifiedDailyQuizResult(User user, String dailyQuizId);
 }

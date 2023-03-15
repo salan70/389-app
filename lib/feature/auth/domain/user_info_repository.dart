@@ -10,7 +10,4 @@ final userInfoRepositoryProvider = Provider<UserInfoRepository>(
 abstract class UserInfoRepository {
   /// ユーザー情報を作成する
   Future<void> updateUserInfo(User user);
-
-  /// 指定したdailyQuizの結果が存在するかどうかを返す
-  Future<bool> existSpecifiedDailyQuizResult(User user, String dailyQuizId);
 }

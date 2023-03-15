@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/repository/user_info_repository.dart';
 import '../domain/auth_repository.dart';
+import '../domain/user_info_repository.dart';
 
 /// userサービスプロバイダー
 final authServiceProvider = Provider(AuthService.new);
