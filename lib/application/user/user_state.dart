@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entity/hitter_quiz_result.dart';
-import '../../domain/repository/auth_repository.dart';
 import '../../domain/repository/user_info_repository.dart';
+import '../../feature/auth/domain/auth_repository.dart';
 
 /// nomalQuizResultListを返すプロバイダー
 final normalQuizResultListStateProvider =
