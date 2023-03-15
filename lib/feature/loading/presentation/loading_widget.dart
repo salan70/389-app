@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// HitterQuizのローディング時に表示
+/// ローディング時に表示
 /// 二度押しを防止したいときなどに使用するオーバーレイローディング
-class QuizLoadingWidget extends StatelessWidget {
-  const QuizLoadingWidget({
+class LoadingWidget extends StatelessWidget {
+  const LoadingWidget({
     super.key,
   });
 
