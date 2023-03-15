@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/repository/user_info_repository.dart';
 import '../../feature/auth/domain/auth_repository.dart';
+import '../../feature/quiz_result/domain/quiz_result_repository.dart';
 import '../quiz/daily_quiz/daily_quiz_state.dart';
 
 /// userサービスプロバイダー
@@ -23,7 +23,7 @@ class UserService {
     }
 
     final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final userInfoRepository = ref.read(userInfoRepositoryProvider);
+    final userInfoRepository = ref.read(quizResultRepositoryProvider);
 
     return !await userInfoRepository.existSpecifiedDailyQuizResult(
       user!,

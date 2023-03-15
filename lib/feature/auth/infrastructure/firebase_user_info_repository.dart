@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../domain/repository/user_info_repository.dart';
+import '../domain/user_info_repository.dart';
 
 class FirebaseUserInfoRepository implements UserInfoRepository {
   FirebaseUserInfoRepository(this.firestore);
@@ -14,20 +14,5 @@ class FirebaseUserInfoRepository implements UserInfoRepository {
       'createdAt': user.metadata.creationTime,
       'updatedAt': FieldValue.serverTimestamp(),
     });
-  }
-
-  @override
-  Future<bool> existSpecifiedDailyQuizResult(
-    User user,
-    String dailyQuizId,
-  ) async {
-    final DocumentSnapshot snapshot = await firestore
-        .collection('users')
-        .doc(user.uid)
-        .collection('dailyQuizResult')
-        .doc(dailyQuizId)
-        .get();
-
-    return snapshot.exists;
   }
 }

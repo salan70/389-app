@@ -108,4 +108,19 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
 
     return hitterQuizResultList;
   }
+
+  @override
+  Future<bool> existSpecifiedDailyQuizResult(
+    User user,
+    String dailyQuizId,
+  ) async {
+    final DocumentSnapshot snapshot = await firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('dailyQuizResult')
+        .doc(dailyQuizId)
+        .get();
+
+    return snapshot.exists;
+  }
 }
