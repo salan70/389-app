@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/application/admob/interstitial_ad_service.dart';
+import 'package:baseball_quiz_app/feature/admob/application/interstitial_ad_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 

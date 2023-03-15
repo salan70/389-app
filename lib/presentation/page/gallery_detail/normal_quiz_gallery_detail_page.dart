@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../util/constant/strings_constant.dart';
-import '../../component/banner_ad_widget.dart';
+import '../../../feature/admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
 

@@ -7,8 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import '../../util/logger.dart';
-import '../loading/loading_state.dart';
+import '../../../application/loading/loading_state.dart';
+import '../../../util/logger.dart';
 
 final interstitialAdServiceProvider = Provider(
   InterstitialAdService.new,

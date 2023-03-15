@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import '../../util/admob.dart';
-import '../../util/logger.dart';
+import '../../../util/logger.dart';
+import '../application/banner_ad_service.dart';
 
 class BannerAdWidget extends ConsumerWidget {
   const BannerAdWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final futureBannerAd = MyBannerAd().createBannerAd();
+    final futureBannerAd = BannerAdService().createBannerAd();
 
     return FutureBuilder(
       future: futureBannerAd,
