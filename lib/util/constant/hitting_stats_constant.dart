@@ -112,7 +112,6 @@ extension ResultRankExt on ResultRank {
   }
 }
 
-
 const statsTypeList = StatsType.values;
 
 /// 確率系のStatsTypeのリスト
