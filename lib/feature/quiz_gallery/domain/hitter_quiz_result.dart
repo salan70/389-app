@@ -3,9 +3,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
-import '../../util/constant/hitting_stats_constant.dart';
-import '../../util/json_converter.dart';
-import 'stats_value.dart';
+import '../../../domain/entity/stats_value.dart';
+import '../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/json_converter.dart';
 
 part 'hitter_quiz_result.freezed.dart';
 part 'hitter_quiz_result.g.dart';
