@@ -1,4 +1,4 @@
-import '../../domain/entity/search_condition.dart';
+import '../../feature/search_condition/domain/search_condition.dart';
 import 'hitting_stats_constant.dart';
 
 /// searchConditionを格納するHiveのBox名

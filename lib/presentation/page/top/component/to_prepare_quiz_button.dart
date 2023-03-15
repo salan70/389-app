@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../prepare_quiz/prepare_quiz_page.dart';
+import '../../../../feature/search_condition/presentation/prepare_quiz_page.dart';
 
 class ToPrepareQuizButton extends StatelessWidget {
   const ToPrepareQuizButton({
