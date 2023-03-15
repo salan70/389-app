@@ -1,4 +1,4 @@
-import '../../feature/search_condition/util/constant/search_condition_constant.dart';
+import '../../feature/search_condition/util/search_condition_constant.dart';
 
 /// 本ファイルでは、アプリ内で表示するテキストや、使用するURL、メールアドレスを定義する。
 

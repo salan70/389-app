@@ -6,7 +6,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../auth/domain/auth_repository.dart';
-import '../util/constant/inquiry_constant.dart';
+import '../util/inquiry_constant.dart';
 
 final inquiryServiceProvider =
     Provider.autoDispose<InquiryService>(InquiryService.new);
