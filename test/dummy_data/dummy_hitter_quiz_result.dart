@@ -1,5 +1,5 @@
 import 'package:baseball_quiz_app/domain/entity/stats_value.dart';
-import 'package:baseball_quiz_app/feature/quiz_gallery/domain/hitter_quiz_result.dart';
+import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 
 final dummyHitterQuizResult = HitterQuizResult(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',

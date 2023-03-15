@@ -5,7 +5,7 @@ import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/hitter_repository.dart';
-import '../../../feature/quiz_gallery/domain/hitter_quiz_result.dart';
+import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
 import '../../../feature/search_condition/application/search_condition_state.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'hitter_quiz_state.dart';
