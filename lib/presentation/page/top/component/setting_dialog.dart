@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/inquiry/inquiry_service.dart';
 import '../../../../application/url_launcher/url_launcher_service.dart';
+import '../../../../feature/inquiry/presentation/inquiry_button.dart';
 import '../../../../util/constant/strings_constant.dart';
 
 class SettingDialog extends ConsumerWidget {
-  const SettingDialog({
-    super.key,
-  });
+  const SettingDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final inquiryService = ref.watch(inquiryServiceProvider);
     final urlLauncherService = ref.watch(urlLauncherServiceProvider);
 
     return Dialog(
@@ -28,14 +25,7 @@ class SettingDialog extends ConsumerWidget {
               const SizedBox(
                 height: 24,
               ),
-              TextButton.icon(
-                onPressed: () async {
-                  final body = await inquiryService.createInquiryBody();
-                  await urlLauncherService.launchMail(inquirySubject, body);
-                },
-                icon: const Icon(Icons.mail_outline_rounded),
-                label: const Text('お問い合わせ'),
-              ),
+              const InquiryButton(),
               const SizedBox(
                 height: 16,
               ),
