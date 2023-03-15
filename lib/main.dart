@@ -33,11 +33,11 @@ import 'feature/search_condition/domain/search_condition.dart';
 import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/search_condition/util/search_condition_constant.dart';
-import 'util/firebase_providers.dart';
 import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
 import 'presentation/page/top/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/firebase_providers.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
 
