@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../presentation/component/back_to_top_button.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
-import 'normal_quiz_gallery_list/normal_quiz_gallery_list_page.dart';
+import 'normal_quiz_gallery_list_page.dart';
 
 class BaseGalleryListPage extends StatelessWidget {
   const BaseGalleryListPage({super.key});
