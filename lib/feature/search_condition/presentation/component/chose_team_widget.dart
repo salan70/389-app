@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../util/constant/strings_constant.dart';
 import '../../application/search_condition_service.dart';
 import '../../application/search_condition_state.dart';
-import '../../util/constant/search_condition_constant.dart';
+import '../../util/search_condition_constant.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
   const ChoseTeamWidget({super.key});

@@ -2,7 +2,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../domain/search_condition.dart';
 import '../domain/search_condition_repository.dart';
-import '../util/constant/search_condition_constant.dart';
+import '../util/search_condition_constant.dart';
 
 class HiveSearchConditionRepository implements SearchConditionRepository {
   HiveSearchConditionRepository(

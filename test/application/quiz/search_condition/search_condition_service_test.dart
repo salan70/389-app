@@ -1,7 +1,7 @@
 import 'package:baseball_quiz_app/feature/search_condition/application/search_condition_service.dart';
 import 'package:baseball_quiz_app/feature/search_condition/application/search_condition_state.dart';
 import 'package:baseball_quiz_app/feature/search_condition/domain/search_condition.dart';
-import 'package:baseball_quiz_app/feature/search_condition/util/constant/search_condition_constant.dart';
+import 'package:baseball_quiz_app/feature/search_condition/util/search_condition_constant.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
