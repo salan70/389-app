@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../presentation/components/async_value_handler.dart';
+import '../../../../common_widget/async_value_handler.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../quiz/application/hitter_quiz_service.dart';

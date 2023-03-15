@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../../presentation/components/back_to_top_button.dart';
+import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';

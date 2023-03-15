@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../application/widget/widget_state.dart';
+import '../common_widget/error_dialog.dart';
 import '../feature/loading/application/loading_state.dart';
-import '../presentation/components/error_dialog.dart';
+import 'widget_state.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
 /// 参考
