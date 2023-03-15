@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../feature/search_condition/domain/search_condition.dart';
 import '../entity/daily_quiz.dart';
 import '../entity/hitter.dart';
 import '../entity/hitter_quiz.dart';
-import '../entity/search_condition.dart';
 
 final hitterRepositoryProvider = Provider<HitterRepository>(
   (ref) => throw UnimplementedError('Provider was not initialized'),

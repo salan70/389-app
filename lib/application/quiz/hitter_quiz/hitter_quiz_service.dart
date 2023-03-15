@@ -6,8 +6,8 @@ import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/entity/hitter_quiz_result.dart';
 import '../../../domain/repository/hitter_repository.dart';
+import '../../../feature/search_condition/application/search_condition_state.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
-import '../search_condition/search_condition_state.dart';
 import 'hitter_quiz_state.dart';
 
 /// HitterQuizサービスプロバイダー
