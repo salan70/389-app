@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../feature/admob/application/interstitial_ad_service.dart';
+import '../../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../../component/answer_widget.dart';
 import '../../component/incorrect_dialog.dart';
@@ -31,7 +31,7 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
         // 正解の場合
         if (isCorrect) {
           hitterQuizService.markCorrect();
-          await ref.read(userServiceProvider).createNormalQuizResult();
+          await ref.read(quizResultServiceProvider).createNormalQuizResult();
 
           // createNormalQuizResult()でエラーが発生しなかった場合のみ、画面遷移する
           final functionState = ref.read(commonFunctionStateProvider);

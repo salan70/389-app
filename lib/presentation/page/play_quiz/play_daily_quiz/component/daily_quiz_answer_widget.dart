@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
-import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../feature/admob/application/interstitial_ad_service.dart';
+import '../../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../../../component/confirm_dialog.dart';
 import '../../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../component/answer_widget.dart';
@@ -22,7 +22,7 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
     /// クイズ終了（最終回答）時の処理
     /// dailyQuizResultを更新し、結果ページに遷移する
     Future<void> finishQuiz() async {
-      await ref.read(userServiceProvider).updateDailyQuizResult();
+      await ref.read(quizResultServiceProvider).updateDailyQuizResult();
 
       if (context.mounted) {
         await Navigator.of(context).push(
