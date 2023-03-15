@@ -15,12 +15,6 @@ const errorForChoseTeamValidation = '球団を$minChoseTeamNumつ以上選択し
 
 const errorForSelectStatsValidation = '成績を$mustSelectStatsNumつ選択してください';
 
-/// 利用規約のURL
-const termsUrl = 'https://389-terms.web.app/';
-
-/// プライバシーポリシーのURL
-const privacyPolicyUrl = 'https://389-privacy-policy.web.app/';
-
 /// AppStoreのURL
 const storeUrl =
     'https://apps.apple.com/us/app/389-%E3%83%97%E3%83%AD%E9%87%8E%E7%90%83%E6%88%90%E7%B8%BE%E3%82%AF%E3%82%A4%E3%82%BA/id1668555651';

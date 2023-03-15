@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../application/url_launcher/url_launcher_service.dart';
+import '../../../../feature/browser/presentation/to_privacy_policy_button.dart';
+import '../../../../feature/browser/presentation/to_term_button.dart';
 import '../../../../feature/inquiry/presentation/inquiry_button.dart';
-import '../../../../util/constant/strings_constant.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final urlLauncherService = ref.watch(urlLauncherServiceProvider);
-
     return Dialog(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -29,23 +27,11 @@ class SettingDialog extends ConsumerWidget {
               const SizedBox(
                 height: 16,
               ),
-              TextButton.icon(
-                onPressed: () {
-                  urlLauncherService.launchBrowser(termsUrl);
-                },
-                icon: const Icon(Icons.description_rounded),
-                label: const Text('利用規約'),
-              ),
+              const ToTermButton(),
               const SizedBox(
                 height: 16,
               ),
-              TextButton.icon(
-                onPressed: () {
-                  urlLauncherService.launchBrowser(privacyPolicyUrl);
-                },
-                icon: const Icon(Icons.person_rounded),
-                label: const Text('プライバシーポリシー'),
-              ),
+              const ToPrivacyPolicyButton(),
               const SizedBox(
                 height: 16,
               ),
