@@ -5,6 +5,7 @@ import '../../../../application/quiz/daily_quiz/daily_quiz_service.dart';
 import '../../../../application/quiz/daily_quiz/daily_quiz_state.dart';
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../application/user/user_service.dart';
+import '../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../../../util/constant/strings_constant.dart';
 import '../../../component/confirm_dialog.dart';
 import '../../play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
@@ -48,7 +49,7 @@ class ToPlayDailyQuizFromTopButton extends ConsumerWidget {
 
                         // users > dailyQuizResultを保存（新規作成）
                         await ref
-                            .read(userServiceProvider)
+                            .read(quizResultServiceProvider)
                             .createDailyQuizResult(data.dailyQuizId);
 
                         await navigator.push(

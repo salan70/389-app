@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
-import '../../../../application/user/user_service.dart';
+import '../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/constant/strings_constant.dart';
 import '../../../component/confirm_dialog.dart';
@@ -48,12 +48,13 @@ class IncorrectDialog extends ConsumerWidget {
                     return ConfirmDialog(
                       confirmText: retireConfirmText,
                       onPressedYes: () async {
-                        final userService = ref.read(userServiceProvider);
+                        final quizResultService =
+                            ref.read(quizResultServiceProvider);
 
                         if (quizType == QuizType.normal) {
-                          await userService.createNormalQuizResult();
+                          await quizResultService.createNormalQuizResult();
                         } else {
-                          await userService.updateDailyQuizResult();
+                          await quizResultService.updateDailyQuizResult();
                         }
 
                         if (context.mounted) {
