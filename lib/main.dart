@@ -13,7 +13,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'application/common/common_state.dart';
-import 'application/loading/loading_state.dart';
 import 'application/quiz/daily_quiz/daily_quiz_state.dart';
 import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import 'application/widget/widget_state.dart';
@@ -24,6 +23,7 @@ import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
 import 'feature/auth/infrastructure/firebase_auth_repository.dart';
+import 'feature/loading/application/loading_state.dart';
 import 'feature/quiz_result/domain/quiz_result_repository.dart';
 import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart';
 import 'feature/search_condition/domain/search_condition.dart';
@@ -35,7 +35,7 @@ import 'infrastructure/firebase/firebase_providers.dart';
 import 'infrastructure/firebase/user_info/firebase_user_info_repository.dart';
 import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
 import 'infrastructure/supabase/supabase_providers.dart';
-import 'presentation/component/quiz_loading_widget.dart';
+import 'feature/loading/presentation/loading_widget.dart';
 import 'presentation/page/top/top_page.dart';
 import 'util/constant/colors_constant.dart';
 import 'util/logger.dart';
@@ -225,7 +225,7 @@ class _MyApp extends ConsumerState<MyApp> {
             children: [
               child!,
               // ローディングを表示する
-              if (isLoading) const QuizLoadingWidget(),
+              if (isLoading) const LoadingWidget(),
             ],
           );
         },
