@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../feature/quiz_result/presentation/gallery_list/base_gallery_list_page.dart';
+import '../../../quiz_result/presentation/gallery_list/base_gallery_list_page.dart';
 
 class ToGalleryButton extends StatelessWidget {
   const ToGalleryButton({super.key});

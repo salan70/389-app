@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../feature/browser/presentation/to_privacy_policy_button.dart';
-import '../../../../feature/browser/presentation/to_term_button.dart';
-import '../../../../feature/inquiry/presentation/inquiry_button.dart';
+import '../../../browser/presentation/to_privacy_policy_button.dart';
+import '../../../browser/presentation/to_term_button.dart';
+import '../../../inquiry/presentation/inquiry_button.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({super.key});
