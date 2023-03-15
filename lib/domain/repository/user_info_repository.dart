@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../entity/hitter_quiz.dart';
-import '../entity/hitter_quiz_result.dart';
 
 final userInfoRepositoryProvider = Provider<UserInfoRepository>(
   (ref) => throw UnimplementedError('Provider was not initialized'),
@@ -29,7 +28,4 @@ abstract class UserInfoRepository {
 
   /// normalQuizの結果を作成する
   Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz);
-
-  /// normalQuizResultをリストで取得する
-  Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user);
 }
