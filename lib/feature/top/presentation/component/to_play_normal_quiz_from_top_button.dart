@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../feature/quiz/application/hitter_quiz_service.dart';
-import '../../../../feature/quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
+import '../../../quiz/application/hitter_quiz_service.dart';
+import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
 class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
   const ToPlayNormalQuizFromTopButton({
