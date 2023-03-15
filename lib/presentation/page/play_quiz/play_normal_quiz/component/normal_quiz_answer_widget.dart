@@ -2,10 +2,10 @@ import 'package:baseball_quiz_app/application/common/common_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../application/admob/interstitial_ad_service.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/user/user_service.dart';
 import '../../../../../application/widget/widget_state.dart';
+import '../../../../../feature/admob/application/interstitial_ad_service.dart';
 import '../../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../../component/answer_widget.dart';
 import '../../component/incorrect_dialog.dart';

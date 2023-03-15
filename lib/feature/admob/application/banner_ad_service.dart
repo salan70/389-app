@@ -1,12 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
-import 'logger.dart';
+import '../../../util/logger.dart';
 
-class MyBannerAd {
+final bannerAdServiceProvider = Provider.autoDispose(
+  (_) => BannerAdService(),
+);
+
+/// BannerAd関連の処理を行うサービスクラス
+///
+/// Widgetを返しており、application層には不適切かもしれない。。
+// TODO(me): presentation層への移動などを検討する
+class BannerAdService {
   Future<BannerAd> createBannerAd() async {
     return BannerAd(
       adUnitId: await _selectBannerId(),
