@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../feature/admob/presentation/banner_ad_widget.dart';
-import '../../../feature/daily_quiz/presentation/to_play_daily_quiz_button.dart';
+import '../../admob/presentation/banner_ad_widget.dart';
+import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
 import 'component/to_gallery_button.dart';
 import 'component/to_play_normal_quiz_from_top_button.dart';
 import 'component/to_prepare_quiz_button.dart';
