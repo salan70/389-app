@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../feature/admob/presentation/banner_ad_widget.dart';
+import '../../../feature/daily_quiz/presentation/to_play_daily_quiz_button.dart';
 import 'component/to_gallery_button.dart';
-import 'component/to_play_daily_quiz_button.dart';
 import 'component/to_play_normal_quiz_from_top_button.dart';
 import 'component/to_prepare_quiz_button.dart';
 import 'component/to_setting_button.dart';
@@ -34,7 +34,7 @@ class TopPage extends StatelessWidget {
                       SizedBox(height: 8),
                       ToPlayNormalQuizFromTopButton(),
                       SizedBox(height: 8),
-                      ToPlayDailyQuizFromTopButton(),
+                      ToPlayDailyQuizButton(),
                       SizedBox(height: 8),
                       ToGalleryButton(),
                       SizedBox(height: 80),

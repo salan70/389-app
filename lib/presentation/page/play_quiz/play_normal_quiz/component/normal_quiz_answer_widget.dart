@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/application/common/common_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../application/common/common_state.dart';
 import '../../../../../application/quiz/hitter_quiz/hitter_quiz_service.dart';
 import '../../../../../application/widget/widget_state.dart';
 import '../../../../../feature/admob/application/interstitial_ad_service.dart';

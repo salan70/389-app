@@ -1,10 +1,10 @@
-import 'package:baseball_quiz_app/domain/entity/daily_quiz.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ntp/ntp.dart';
 
-import '../../../domain/repository/daily_quiz_repository.dart';
-import '../../../util/constant/strings_constant.dart';
+import '../domain/daily_quiz.dart';
+import '../domain/daily_quiz_repository.dart';
+import '../util/daily_quiz_constant.dart';
 
 class FirebaseDailyQuizRepository implements DailyQuizRepository {
   FirebaseDailyQuizRepository(this.firestore);
@@ -41,7 +41,7 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
       final data = document.data()! as Map<String, dynamic>;
       final playerId = data['playerId'] as String;
       final selectedStatsList =
-          formatSelectedStatsList(data['selectedStatsList']  as List<dynamic>);
+          formatSelectedStatsList(data['selectedStatsList'] as List<dynamic>);
 
       return DailyQuiz(
         dailyQuizId: document.id,

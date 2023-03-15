@@ -2,7 +2,7 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../entity/daily_quiz.dart';
+import 'daily_quiz.dart';
 
 final dailyQuizRepositoryProvider = Provider<DailyQuizRepository>(
   (ref) => throw UnimplementedError('Provider was not initialized'),

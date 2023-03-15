@@ -1,13 +1,13 @@
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/entity/daily_quiz.dart';
 import '../../../domain/entity/hitter.dart';
 import '../../../domain/entity/hitter_quiz.dart';
 import '../../../domain/repository/hitter_repository.dart';
+import '../../../feature/daily_quiz/domain/daily_quiz.dart';
 import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
 import '../../../feature/search_condition/application/search_condition_state.dart';
 import '../../../infrastructure/supabase/hitter/supabase_hitter_repository.dart';
+import '../../../util/constant/hitting_stats_constant.dart';
 import 'hitter_quiz_state.dart';
 
 /// HitterQuizサービスプロバイダー

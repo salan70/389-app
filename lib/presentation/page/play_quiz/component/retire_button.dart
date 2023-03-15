@@ -1,9 +1,9 @@
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../application/quiz/hitter_quiz/hitter_quiz_state.dart';
 import '../../../../feature/quiz_result/application/quiz_result_service.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/constant/strings_constant.dart';
 import '../../../component/confirm_dialog.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
