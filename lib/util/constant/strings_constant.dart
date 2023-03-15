@@ -15,12 +15,6 @@ const errorForChoseTeamValidation = '球団を$minChoseTeamNumつ以上選択し
 
 const errorForSelectStatsValidation = '成績を$mustSelectStatsNumつ選択してください';
 
-/// お問い合わせメールのタイトル
-const inquirySubject = '【タイトルをご記載ください】/.389';
-
-/// 運営のメールアドレス
-const mailAddress = '389.app@gmail.com';
-
 /// 利用規約のURL
 const termsUrl = 'https://389-terms.web.app/';
 

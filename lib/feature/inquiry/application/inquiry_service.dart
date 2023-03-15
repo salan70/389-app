@@ -3,19 +3,34 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../../feature/auth/domain/auth_repository.dart';
+import '../../auth/domain/auth_repository.dart';
+import '../util/constant/inquiry_constant.dart';
 
 final inquiryServiceProvider =
     Provider.autoDispose<InquiryService>(InquiryService.new);
 
 /// お問い合わせ関連の処理を行うサービスクラス
 class InquiryService {
-  InquiryService(
-    this.ref,
-  );
+  InquiryService(this.ref);
 
   final Ref ref;
+
+  /// メールアプリを起動する
+  Future<void> launchMail(String body) async {
+    final uri = Uri(
+      scheme: 'mailto',
+      path: mailAddress,
+      queryParameters: {'subject': subject, 'body': body},
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+      return;
+    }
+    Exception('Could not send inquiry');
+  }
 
   /// お問い合わせメールの本文を作成する
   Future<String> createInquiryBody() async {
