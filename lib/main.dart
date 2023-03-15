@@ -12,8 +12,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'application/common/common_state.dart';
-import 'application/widget/widget_state.dart';
 import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/domain/user_info_repository.dart';
@@ -36,10 +34,12 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/search_condition/util/search_condition_constant.dart';
 import 'feature/top/presentation/top_page.dart';
+import 'util/common_state.dart';
 import 'util/constant/colors_constant.dart';
 import 'util/firebase_providers.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
+import 'util/widget_state.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

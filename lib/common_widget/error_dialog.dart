@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../util/error_message.dart';
+import '../util/error_message.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
