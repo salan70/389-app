@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../application/common/common_state.dart';
-import '../../../../../application/widget/widget_state.dart';
+import '../../../../../util/common_state.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
+import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_service.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../component/answer_widget.dart';
