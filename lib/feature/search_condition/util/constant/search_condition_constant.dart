@@ -1,5 +1,5 @@
-import '../../../util/constant/hitting_stats_constant.dart';
-import '../domain/search_condition.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../domain/search_condition.dart';
 
 /// searchConditionを格納するHiveのBox名
 const searchConditionBoxKey = 'searchConditionBox';
