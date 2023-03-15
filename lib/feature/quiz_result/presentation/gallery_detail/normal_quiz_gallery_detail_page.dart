@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../util/constant/strings_constant.dart';
-import '../../../../presentation/component/result_quiz_widget.dart';
-import '../../../../presentation/component/share_button.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
+import '../../../quiz/presentation/component/result_quiz_widget.dart';
+import '../../../quiz/presentation/component/share_button.dart';
 
 class NormalQuizGalleryDetailPage extends StatelessWidget {
   const NormalQuizGalleryDetailPage({super.key});

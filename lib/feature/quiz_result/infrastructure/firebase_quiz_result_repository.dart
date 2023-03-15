@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../domain/entity/hitter_quiz.dart';
+import '../../quiz/domain/hitter_quiz.dart';
 import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 
