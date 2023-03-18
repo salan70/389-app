@@ -5,19 +5,18 @@ import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
+import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_state.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 
 class IncorrectDialog extends ConsumerWidget {
-  const IncorrectDialog({super.key, required this.selectedHitter});
-
-  // Providerで保持するほうが良いかも？
-  final String selectedHitter;
+  const IncorrectDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuiz = ref.watch(hitterQuizStateProvider);
+    final submittedHitter = ref.watch(submittedHitterProvider);
 
     return hitterQuiz.maybeWhen(
       orElse: Container.new,
@@ -25,7 +24,8 @@ class IncorrectDialog extends ConsumerWidget {
         final quizType = data!.quizType;
         return AlertDialog(
           title: const Text('残念...'),
-          content: Text('$selectedHitter選手ではありません'),
+          // submittedHitterがnullの場合、このダイアログは表示されない想定
+          content: Text('${submittedHitter!.label}選手ではありません}'),
           actions: <Widget>[
             TextButton(
               child: Text(
