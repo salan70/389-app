@@ -6,23 +6,19 @@ import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_service.dart';
 import '../../../domain/hitter.dart';
 
-class AnswerWidget extends ConsumerStatefulWidget {
-  const AnswerWidget({super.key, required this.onSubmittedAnswer});
+class AnswerWidget extends ConsumerWidget {
+  AnswerWidget({super.key, required this.onSubmittedAnswer});
 
   final VoidCallback onSubmittedAnswer;
-
-  @override
-  ConsumerState<AnswerWidget> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends ConsumerState<AnswerWidget> {
   final textEditingController = TextEditingController();
   final scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
-    final submittedHitter = ref.watch(submittedHitterProvider.notifier);
+    final submittedHitter = ref.watch(submittedHitterProvider);
+    final submittedHitterNotifier =
+        ref.watch(submittedHitterProvider.notifier);
 
     return Column(
       children: [
@@ -36,13 +32,13 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
             theme: const ScrollbarThemeData(),
           ),
           future: () {
-            submittedHitter.state = null;
+            submittedHitterNotifier.state = null;
             return hitterQuizService.searchHitter(textEditingController.text);
           },
           getSelectedValue: (Hitter value) {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
-            submittedHitter.state = value;
+            submittedHitterNotifier.state = value;
           },
         ),
         const SizedBox(height: 16),
@@ -50,7 +46,7 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
           width: 120,
           child: TextButton(
             onPressed:
-                submittedHitter.state == null ? null : widget.onSubmittedAnswer,
+                submittedHitter == null ? null : onSubmittedAnswer,
             child: const Text('回答する'),
           ),
         ),

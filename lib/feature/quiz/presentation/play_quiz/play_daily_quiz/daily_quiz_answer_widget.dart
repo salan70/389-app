@@ -22,6 +22,8 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
     /// クイズ終了（最終回答）時の処理
     /// dailyQuizResultを更新し、結果ページに遷移する
     Future<void> finishQuiz() async {
+      // submittedHitterProviderを明示的にdisposeする
+      ref.invalidate(submittedHitterProvider);
       await ref.read(quizResultServiceProvider).updateDailyQuizResult();
 
       if (context.mounted) {
@@ -65,9 +67,7 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
           context: context,
           barrierDismissible: false,
           builder: (_) {
-            return IncorrectDialog(
-              selectedHitter: ref.read(answerTextFieldProvider).text,
-            );
+            return const IncorrectDialog();
           },
         );
       }

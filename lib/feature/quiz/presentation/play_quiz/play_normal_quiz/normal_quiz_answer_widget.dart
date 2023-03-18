@@ -30,6 +30,9 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
 
         // 正解の場合
         if (isCorrect) {
+          // submittedHitterProviderを明示的にdisposeする
+          ref.invalidate(submittedHitterProvider);
+
           hitterQuizService.markCorrect();
           await ref.read(quizResultServiceProvider).createNormalQuizResult();
 
@@ -53,9 +56,7 @@ class NormalQuizAnswerWidget extends ConsumerWidget {
             context: context,
             barrierDismissible: false,
             builder: (_) {
-              return IncorrectDialog(
-                selectedHitter: ref.read(answerTextFieldProvider).text,
-              );
+              return const IncorrectDialog();
             },
           );
         }

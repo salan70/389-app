@@ -5,6 +5,7 @@ import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
+import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_state.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
@@ -48,6 +49,9 @@ class RetireButton extends ConsumerWidget {
                         } else {
                           await quizResultService.updateDailyQuizResult();
                         }
+
+                        // submittedHitterProviderを明示的にdisposeする
+                        ref.invalidate(submittedHitterProvider);
 
                         if (context.mounted) {
                           await Navigator.of(context).push(
