@@ -4,9 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../util/constant/hitting_stats_constant.dart';
-import '../../../../../util/exception/supabase_exception.dart';
 import '../../../../../util/logger.dart';
 import '../../../daily_quiz/domain/daily_quiz.dart';
+import '../../../error/util/exception/supabase_exception.dart';
 import '../../../search_condition/domain/search_condition.dart';
 import '../../domain/hitter.dart';
 import '../../domain/hitter_quiz.dart';

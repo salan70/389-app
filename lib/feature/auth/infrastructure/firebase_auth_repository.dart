@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../util/exception/auth_exception.dart';
 import '../../../util/logger.dart';
+import '../../error/util/exception/auth_exception.dart';
 import '../domain/auth_repository.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
