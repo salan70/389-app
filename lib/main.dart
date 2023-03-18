@@ -4,12 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -224,20 +218,6 @@ class _MyApp extends ConsumerState<MyApp> {
           background: backgroundColor,
         ),
       ),
-      navigatorKey: ref.watch(navigatorKeyProvider),
-      builder: (context, child) => Consumer(
-        builder: (context, ref, _) {
-          final isLoading = ref.watch(loadingProvider);
-          return Stack(
-            children: [
-              child!,
-              // ローディングを表示する
-              if (isLoading) const LoadingWidget(),
-            ],
-          );
-        },
-      ),
-      home: const TopPage(),
       navigatorKey: ref.watch(navigatorKeyProvider),
       builder: (context, child) => Consumer(
         builder: (context, ref, _) {
