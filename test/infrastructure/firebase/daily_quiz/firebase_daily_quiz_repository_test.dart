@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/infrastructure/firebase/daily_quiz/firebase_daily_quiz_repository.dart';
+import 'package:baseball_quiz_app/feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
 
