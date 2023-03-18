@@ -27,6 +27,7 @@ import 'feature/quiz/application/hitter_quiz_state.dart';
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase/supabase_hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase/supabase_providers.dart';
+import 'feature/quiz_result/application/quiz_result_state.dart';
 import 'feature/quiz_result/domain/quiz_result_repository.dart';
 import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart';
 import 'feature/search_condition/domain/search_condition.dart';
@@ -34,12 +35,10 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/search_condition/util/search_condition_constant.dart';
 import 'feature/top/presentation/top_page.dart';
-import 'util/common_state.dart';
 import 'util/constant/colors_constant.dart';
-import 'util/firebase_providers.dart';
+import 'util/firebase_provider.dart';
 import 'util/logger.dart';
 import 'util/widget_ref_extension.dart';
-import 'util/widget_state.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -176,7 +175,9 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // NotifierProviderの結果をハンドリングする
+    // AsyncValueを返すStateProviderの結果をハンドリングする
+    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも
+    // Providerによっては複数のWidgetで使用するためここで書いている
     ref.handleAsyncValue<void>(
       hitterQuizStateProvider,
     );
@@ -184,7 +185,7 @@ class _MyApp extends ConsumerState<MyApp> {
       dailyQuizStateProvider,
     );
     ref.handleAsyncValue<void>(
-      commonFunctionStateProvider,
+      quizResultFunctionStateProvider,
     );
 
     // Userを作成

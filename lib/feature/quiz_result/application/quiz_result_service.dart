@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../util/common_state.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_state.dart';
 import '../domain/quiz_result_repository.dart';
+import 'quiz_result_state.dart';
 
 /// quizResultサービスプロバイダー
 final quizResultServiceProvider = Provider(
@@ -19,7 +19,7 @@ class QuizResultService {
 
   /// dailyQuizResultを作成する
   Future<void> createDailyQuizResult(String dailyQuizId) async {
-    final notifier = ref.read(commonFunctionStateProvider.notifier);
+    final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
 
@@ -33,7 +33,7 @@ class QuizResultService {
 
   /// dailyQuizResultを更新する
   Future<void> updateDailyQuizResult() async {
-    final notifier = ref.read(commonFunctionStateProvider.notifier);
+    final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
 
@@ -55,7 +55,7 @@ class QuizResultService {
 
   /// normalQuizResultを作成する
   Future<void> createNormalQuizResult() async {
-    final notifier = ref.read(commonFunctionStateProvider.notifier);
+    final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
 

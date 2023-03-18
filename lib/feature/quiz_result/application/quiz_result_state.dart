@@ -11,3 +11,8 @@ final normalQuizResultListStateProvider =
         ref.read(authRepositoryProvider).getCurrentUser()!,
       );
 });
+
+/// クイズ結果関連の関数の処理状態をAsyncValueとして返すプロバイダー
+final quizResultFunctionStateProvider = StateProvider<AsyncValue<void>>(
+  (_) => const AsyncValue.data(null),
+);
