@@ -6,6 +6,3 @@ import '../domain/hitter_quiz.dart';
 final hitterQuizStateProvider = StateProvider<AsyncValue<HitterQuiz?>>(
   (_) => const AsyncValue.data(null),
 );
-
-/// クイズの回答として選択した選手のIDを返す
-final selectedHitterIdProvider = StateProvider<String>((_) => '');

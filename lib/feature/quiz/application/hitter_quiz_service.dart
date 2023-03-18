@@ -8,6 +8,7 @@ import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
 import '../domain/hitter_repository.dart';
 import '../infrastructure/supabase/supabase_hitter_repository.dart';
+import 'answer_state.dart';
 import 'hitter_quiz_state.dart';
 
 /// HitterQuizサービスプロバイダー
@@ -113,10 +114,13 @@ class HitterQuizService {
 
   /// 正解しているか否かを返す
   bool isCorrectHitterQuiz() {
-    final selectedHitterId = ref.read(selectedHitterIdProvider);
+    final submittedHitter = ref.read(submittedHitterProvider);
+    if (submittedHitter == null) {
+      return false;
+    }
     final hitterQuiz = ref.read(hitterQuizStateProvider);
 
-    return selectedHitterId == hitterQuiz.value!.id;
+    return submittedHitter.id == hitterQuiz.value!.id;
   }
 
   /// hitterQuizのisCorrectをtrueにする
