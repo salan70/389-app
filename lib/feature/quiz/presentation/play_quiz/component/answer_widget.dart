@@ -4,7 +4,6 @@ import 'package:textfield_search/textfield_search.dart';
 
 import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_service.dart';
-import '../../../application/hitter_quiz_state.dart';
 import '../../../domain/hitter.dart';
 
 class AnswerWidget extends ConsumerStatefulWidget {
@@ -17,23 +16,13 @@ class AnswerWidget extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<AnswerWidget> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(answerTextFieldProvider).clear();
-    });
-  }
+  final textEditingController = TextEditingController();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = ScrollController();
-    final textEditingController = ref.watch(answerTextFieldProvider);
-
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
-    final selectedHitterId = ref.watch(selectedHitterIdProvider);
-    final selectedHitterIdNotifier =
-        ref.watch(selectedHitterIdProvider.notifier);
+    final submittedHitter = ref.watch(submittedHitterProvider.notifier);
 
     return Column(
       children: [
@@ -47,20 +36,21 @@ class _MyHomePageState extends ConsumerState<AnswerWidget> {
             theme: const ScrollbarThemeData(),
           ),
           future: () {
-            selectedHitterIdNotifier.state = '';
+            submittedHitter.state = null;
             return hitterQuizService.searchHitter(textEditingController.text);
           },
           getSelectedValue: (Hitter value) {
             // 回答入力用のTextFieldのフォーカスを外す
             FocusManager.instance.primaryFocus?.unfocus();
-            selectedHitterIdNotifier.state = value.id;
+            submittedHitter.state = value;
           },
         ),
         const SizedBox(height: 16),
         SizedBox(
           width: 120,
           child: TextButton(
-            onPressed: selectedHitterId == '' ? null : widget.onSubmittedAnswer,
+            onPressed:
+                submittedHitter.state == null ? null : widget.onSubmittedAnswer,
             child: const Text('回答する'),
           ),
         ),
