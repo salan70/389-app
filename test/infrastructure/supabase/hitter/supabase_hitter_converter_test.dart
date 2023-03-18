@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/infrastructure/supabase/hitter/supabase_hitter_converter.dart';
+import 'package:baseball_quiz_app/feature/quiz/infrastructure/supabase/supabase_hitter_converter.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
