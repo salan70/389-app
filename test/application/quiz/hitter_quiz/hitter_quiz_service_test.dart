@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/quiz/application/answer_state.dart';
 import 'package:baseball_quiz_app/feature/quiz/application/hitter_quiz_service.dart';
 import 'package:baseball_quiz_app/feature/quiz/application/hitter_quiz_state.dart';
 import 'package:baseball_quiz_app/feature/quiz/domain/hitter.dart';
@@ -94,22 +95,6 @@ void main() {
 
       expect(expected, result);
     });
-
-    test('不正解している', () {
-      final container = ProviderContainer(
-        overrides: [
-          hitterQuizStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuiz),
-          ),
-          selectedHitterIdProvider.overrideWith(
-            (ref) => 'incorrect Id',
-          ),
-        ],
-      );
-      final result =
-          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
-      expect(false, result);
-    });
   });
 
   group('isCorrectHitterQuiz関数', () {
@@ -119,8 +104,11 @@ void main() {
           hitterQuizStateProvider.overrideWith(
             (ref) => const AsyncData(dummyHitterQuiz),
           ),
-          selectedHitterIdProvider.overrideWith(
-            (ref) => '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
+          submittedHitterProvider.overrideWith(
+            (ref) => const Hitter(
+              label: '牧秀悟',
+              id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
+            ),
           ),
         ],
       );
@@ -135,8 +123,24 @@ void main() {
           hitterQuizStateProvider.overrideWith(
             (ref) => const AsyncData(dummyHitterQuiz),
           ),
-          selectedHitterIdProvider.overrideWith(
-            (ref) => 'incorrect Id',
+          submittedHitterProvider.overrideWith(
+            (ref) => const Hitter(label: '牧秀悟', id: 'incorrect Id'),
+          ),
+        ],
+      );
+      final result =
+          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
+      expect(false, result);
+    });
+
+    test('null', () {
+      final container = ProviderContainer(
+        overrides: [
+          hitterQuizStateProvider.overrideWith(
+            (ref) => const AsyncData(dummyHitterQuiz),
+          ),
+          submittedHitterProvider.overrideWith(
+            (ref) => null,
           ),
         ],
       );
