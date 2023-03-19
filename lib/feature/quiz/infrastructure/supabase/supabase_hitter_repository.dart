@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../util/constant/hitting_stats_constant.dart';
@@ -14,11 +13,6 @@ import '../../domain/hitter_repository.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 import 'supabase_hitter_converter.dart';
-
-/// 全野手のIDと名前のリストを返すプロバイダー
-final allHitterListProvider = riverpod.Provider<Future<List<Hitter>>>(
-  (ref) => ref.watch(hitterRepositoryProvider).fetchAllHitter(),
-);
 
 // TODO(me): エラーハンドリング要検討
 class SupabaseHitterRepository implements HitterRepository {
