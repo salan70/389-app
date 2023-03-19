@@ -1,7 +1,7 @@
 import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../dummy_data/dummy_hitter_quiz_result.dart';
+import '../../../dummy_data/dummy_hitter_quiz_result.dart';
 
 void main() {
   // ベースとなるhitterQuiz（公開しうる成績の総数は20）

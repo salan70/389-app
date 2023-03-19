@@ -3,7 +3,7 @@ import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../dummy_data/dummy_hitter.dart';
+import '../../../../dummy_data/dummy_hitter.dart';
 
 void main() async {
   final converter = SupabaseHitterConverter();
