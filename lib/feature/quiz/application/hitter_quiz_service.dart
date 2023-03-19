@@ -7,7 +7,6 @@ import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
 import '../domain/hitter_repository.dart';
-import '../infrastructure/supabase/supabase_hitter_repository.dart';
 import 'answer_state.dart';
 import 'hitter_quiz_state.dart';
 
