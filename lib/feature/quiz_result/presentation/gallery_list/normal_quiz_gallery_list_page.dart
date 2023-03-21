@@ -15,7 +15,7 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueHandler(
-      value: ref.watch(normalQuizResultListStateProvider),
+      value: ref.watch(normalQuizResultListProvider),
       builder: (List<HitterQuizResult> quizResultList) {
         return Padding(
           padding: const EdgeInsets.all(16),

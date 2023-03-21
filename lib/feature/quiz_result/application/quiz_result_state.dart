@@ -5,7 +5,7 @@ import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 
 /// nomalQuizResultListを返すプロバイダー
-final normalQuizResultListStateProvider =
+final normalQuizResultListProvider =
     FutureProvider.autoDispose<List<HitterQuizResult>>((ref) {
   return ref.read(quizResultRepositoryProvider).fetchNormalQuizResultList(
         ref.read(authRepositoryProvider).getCurrentUser()!,
