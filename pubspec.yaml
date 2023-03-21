@@ -27,7 +27,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   # 日付を表示用にフォーマットするために使用
-  # intl: ^0.18.0
+  intl: ^0.18.0
   json_annotation: ^4.7.0
   logger: ^1.1.0
   # 現在時刻をネットワークから取得するために使用
@@ -46,6 +46,8 @@ dependencies:
   uuid: ^3.0.7
 
   # Firebase関連
+  # アップデートする際、ios/Podfileの「pod 'FirebaseFirestore' ~~」のtagのバージョン上げる必要あるかも
+  # アップデートしてエラーが発生したら上記を試してみる
   cloud_firestore: ^4.4.5
   fake_cloud_firestore: ^2.4.1+1
   firebase_analytics: ^10.1.6
