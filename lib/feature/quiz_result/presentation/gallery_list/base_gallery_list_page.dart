@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../common_widget/back_to_top_button.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
+import 'daily_quiz_gallery_list_page.dart';
 import 'normal_quiz_gallery_list_page.dart';
 
 class BaseGalleryListPage extends StatelessWidget {
@@ -28,11 +29,11 @@ class BaseGalleryListPage extends StatelessWidget {
                       Tab(text: '今日の１問'),
                     ],
                   ),
-                  Expanded(
+                  const Expanded(
                     child: TabBarView(
                       children: <Widget>[
-                        const NormalQuizGalleryListPage(),
-                        Container(),
+                        NormalQuizGalleryListPage(),
+                        DailyQuizGalleryListPage(),
                       ],
                     ),
                   ),
