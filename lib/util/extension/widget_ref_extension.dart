@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../feature/error/presentation/error_dialog.dart';
-import '../feature/loading/application/loading_state.dart';
+import '../../feature/error/presentation/error_dialog.dart';
+import '../../feature/loading/application/loading_state.dart';
 
 /// ダイアログ表示用のGlobalKeyを返す
 /// .currentContext!でcontextを取得できる

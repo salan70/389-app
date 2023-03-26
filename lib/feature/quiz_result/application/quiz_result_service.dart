@@ -18,7 +18,7 @@ class QuizResultService {
   final Ref ref;
 
   /// dailyQuizResultを作成する
-  Future<void> createDailyQuizResult(String dailyQuizId) async {
+  Future<void> createDailyQuizResult() async {
     final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
@@ -26,8 +26,11 @@ class QuizResultService {
     notifier.state = await AsyncValue.guard(() async {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
+      /// 別のfeatureのapplication層を参照するの避けたみ
+      // TODO(me): 引数で受け取るようにしたほうが良いか検討する
+      final dailyQuiz = ref.watch(dailyQuizStateProvider).value!;
 
-      await quizResultRepository.createDailyQuiz(user!, dailyQuizId);
+      await quizResultRepository.createDailyQuiz(user!, dailyQuiz);
     });
   }
 
@@ -43,11 +46,11 @@ class QuizResultService {
 
       /// 別のfeatureのapplication層を参照するの避けたみ
       // TODO(me): 引数で受け取るようにしたほうが良いか検討する
-      final dailyQuizId = ref.watch(dailyQuizStateProvider).value!.dailyQuizId;
+      final dailyQuiz = ref.watch(dailyQuizStateProvider).value!;
       final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
       await quizResultRepository.updateDailyQuizResult(
         user!,
-        dailyQuizId,
+        dailyQuiz,
         hitterQuiz,
       );
     });

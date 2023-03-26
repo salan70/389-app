@@ -37,9 +37,9 @@ import 'feature/search_condition/infrastructure/hive_search_condition_repository
 import 'feature/search_condition/util/search_condition_constant.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';
-import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

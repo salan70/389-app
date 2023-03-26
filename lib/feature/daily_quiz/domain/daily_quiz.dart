@@ -8,6 +8,7 @@ part 'daily_quiz.freezed.dart';
 class DailyQuiz with _$DailyQuiz {
   const factory DailyQuiz({
     required String dailyQuizId,
+    required DateTime questionedAt,
     required String playerId,
     required List<String> selectedStatsList,
   }) = _DailyQuiz;

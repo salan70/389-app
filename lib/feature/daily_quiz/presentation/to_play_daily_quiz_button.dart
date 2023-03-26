@@ -50,7 +50,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
                         // users > dailyQuizResultを保存（新規作成）
                         await ref
                             .read(quizResultServiceProvider)
-                            .createDailyQuizResult(data.dailyQuizId);
+                            .createDailyQuizResult();
 
                         await navigator.push(
                           MaterialPageRoute<Widget>(

@@ -38,13 +38,16 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
         throw Exception();
       }
 
+      // TODO(me): fromDocumentメソッドをdomain/daily_quiz.dartに作成する
       final data = document.data()! as Map<String, dynamic>;
+      final questionedAt = (data['questionedAt'] as Timestamp).toDate();
       final playerId = data['playerId'] as String;
       final selectedStatsList =
           formatSelectedStatsList(data['selectedStatsList'] as List<dynamic>);
 
       return DailyQuiz(
         dailyQuizId: document.id,
+        questionedAt: questionedAt,
         playerId: playerId,
         selectedStatsList: selectedStatsList,
       );
