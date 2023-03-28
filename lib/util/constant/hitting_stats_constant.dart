@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 enum StatsType {
   // year,
   team,
@@ -110,7 +112,64 @@ extension ResultRankExt on ResultRank {
         return '不正解';
     }
   }
+
+  Text get labelWidget {
+    switch (this) {
+      case ResultRank.ss:
+        return const Text(
+          'SS',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.s:
+        return const Text(
+          'S',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.a:
+        return const Text(
+          'A',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.b:
+        return const Text(
+          'B',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.c:
+        return const Text(
+          'C',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.incorrect:
+        return const Text(
+          '✕',
+          style: TextStyle(
+            fontSize: labelFontSize,
+            color: Colors.blue,
+          ),
+        );
+    }
+  }
 }
+
+// TODO(me): フォントサイズのconstはそれ用のファイルにまとめたい
+/// ランクラベルのフォントサイズ
+const labelFontSize = 24.0;
 
 const statsTypeList = StatsType.values;
 
