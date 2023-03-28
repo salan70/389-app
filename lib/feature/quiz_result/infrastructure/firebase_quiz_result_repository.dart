@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/domain/hitter_quiz.dart';
 import '../domain/daily_hitter_quiz_result.dart';
