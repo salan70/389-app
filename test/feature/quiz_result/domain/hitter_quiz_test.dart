@@ -12,22 +12,6 @@ void main() {
     unveilCount: 0,
   );
 
-  group('quiz.formattedUpdatedAtText', () {
-    test('2021/01/01', () {
-      // Arrange
-      final hitterQuizResult = baseHitterQuizResult.copyWith(
-        updatedAt: DateTime(2021, 1, 1, 0, 30),
-      );
-
-      // Act
-      final result = hitterQuizResult.formattedUpdatedAtText;
-
-      // Assert
-      const expected = '2021/01/01';
-      expect(expected, result);
-    });
-  });
-
   // 四捨五入するケースのテストができてない懸念あり
   group('quiz.unveilPercentage', () {
     test('0', () {

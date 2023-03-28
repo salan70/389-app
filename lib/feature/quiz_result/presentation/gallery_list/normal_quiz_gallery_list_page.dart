@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -46,7 +47,7 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                   child: Column(
                     children: [
                       Text(quizResult.resultRank.label),
-                      Text('${quizResult.formattedUpdatedAtText}にプレイ'),
+                      Text('${quizResult.updatedAt.toFormattedString()}にプレイ'),
                       Text('${quizResult.unveilPercentage}%表示'),
                     ],
                   ),

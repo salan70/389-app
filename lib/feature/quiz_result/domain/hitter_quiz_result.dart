@@ -1,7 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/json_converter.dart';
@@ -73,14 +72,5 @@ class HitterQuizResult with _$HitterQuizResult {
   /// 表示した割合を整数第1位で四捨五入し文字列で返す
   String get unveilPercentage {
     return (unveilRate * 100).toStringAsFixed(0);
-  }
-
-  // DateTimeのExtensionで実装したため、不要になった
-  // TODO: 影響確認して削除する
-  // 一旦ここにこのロジック書いているが、他で同じような関数を使う可能性あり
-  // その場合は別の場所に移動する
-  /// updatedAtをフォーマットした文字列を返す
-  String get formattedUpdatedAtText {
-    return DateFormat('yyyy/MM/dd').format(updatedAt);
   }
 }
