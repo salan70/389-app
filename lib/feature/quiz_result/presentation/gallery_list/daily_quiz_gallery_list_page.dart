@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../common_widget/async_value_handler.dart';
-import '../../../../util/constant/strings_constant.dart';
 import '../../../quiz/application/hitter_quiz_service.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/daily_hitter_quiz_result.dart';
@@ -16,10 +15,6 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const shareText = '#389quiz\n$storeUrl';
-    // TODO(me): globalKeyを引数として渡すのイケてない感ある
-    final globalKey = GlobalKey();
-
     return TableCalendar<dynamic>(
       firstDay: DateTime.utc(2023, 2),
       // TODO 今日の日付から取得する（ゲーム内の「今月」の最終日をlastDayに設定する）
@@ -38,10 +33,10 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
         },
 
         // 範囲外の日付は空のContainerを返す
-        disabledBuilder: (context, date, _) => Container(),
+        disabledBuilder: (context, _, __) => Container(),
 
         // 範囲内の選択中の月に含まれない日付は空のContainerを返す
-        outsideBuilder: (context, date, _) => Container(),
+        outsideBuilder: (context, _, __) => Container(),
       ),
     );
   }
