@@ -59,10 +59,14 @@ class CalenderCell extends ConsumerWidget {
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
             onTap: () {
-              ref.read(hitterQuizServiceProvider).fromHitterQuizResult(
-                    hitterQuizResult,
-                    QuizType.daily,
-                  );
+              final hitterQuizService = ref.read(hitterQuizServiceProvider);
+
+              hitterQuizService.fromHitterQuizResult(
+                hitterQuizResult,
+                QuizType.daily,
+              );
+              hitterQuizService.updateSelectedDate(date);
+
               Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(
@@ -71,7 +75,9 @@ class CalenderCell extends ConsumerWidget {
               );
             },
             child: Center(
-              child: FittedBox(child: hitterQuizResult.resultRank.labelWidget),
+              child: FittedBox(
+                child: hitterQuizResult.resultRank.smallLabellWidget,
+              ),
             ),
           );
         }

@@ -113,45 +113,45 @@ extension ResultRankExt on ResultRank {
     }
   }
 
-  Text get labelWidget {
+  Text get smallLabellWidget {
     switch (this) {
       case ResultRank.ss:
-        return const Text(
-          'SS',
-          style: TextStyle(
-            fontSize: labelFontSize,
+        return Text(
+          ResultRank.ss.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
             color: Colors.blue,
           ),
         );
       case ResultRank.s:
-        return const Text(
-          'S',
-          style: TextStyle(
-            fontSize: labelFontSize,
+        return Text(
+          ResultRank.s.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
             color: Colors.blue,
           ),
         );
       case ResultRank.a:
-        return const Text(
-          'A',
-          style: TextStyle(
-            fontSize: labelFontSize,
+        return Text(
+          ResultRank.a.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
             color: Colors.blue,
           ),
         );
       case ResultRank.b:
-        return const Text(
-          'B',
-          style: TextStyle(
-            fontSize: labelFontSize,
+        return Text(
+          ResultRank.b.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
             color: Colors.blue,
           ),
         );
       case ResultRank.c:
-        return const Text(
-          'C',
-          style: TextStyle(
-            fontSize: labelFontSize,
+        return Text(
+          ResultRank.c.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
             color: Colors.blue,
           ),
         );
@@ -159,7 +159,60 @@ extension ResultRankExt on ResultRank {
         return const Text(
           '✕',
           style: TextStyle(
-            fontSize: labelFontSize,
+            fontSize: smallLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+    }
+  }
+
+  Text get largeLabelWidget {
+    switch (this) {
+      case ResultRank.ss:
+        return Text(
+          ResultRank.ss.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.s:
+        return Text(
+          ResultRank.s.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.a:
+        return Text(
+          ResultRank.a.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.b:
+        return Text(
+          ResultRank.b.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.c:
+        return Text(
+          ResultRank.c.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: Colors.blue,
+          ),
+        );
+      case ResultRank.incorrect:
+        return const Text(
+          '✕',
+          style: TextStyle(
+            fontSize: largeLabelFontSize,
             color: Colors.blue,
           ),
         );
@@ -168,8 +221,9 @@ extension ResultRankExt on ResultRank {
 }
 
 // TODO(me): フォントサイズのconstはそれ用のファイルにまとめたい
-/// ランクラベルのフォントサイズ
-const labelFontSize = 24.0;
+// ランクラベルのフォントサイズ
+const smallLabelFontSize = 24.0;
+const largeLabelFontSize = 40.0;
 
 const statsTypeList = StatsType.values;
 

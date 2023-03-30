@@ -14,6 +14,8 @@ class QuizWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    /// 結果画面にて再度クイズをプレイすると、hitterQuizStateProviderが更新されるため、
+    /// willUpdateでreadとwatchを分けている
     final hitterQuiz = willRebuild
         ? ref.watch(hitterQuizStateProvider)
         : ref.read(hitterQuizStateProvider);

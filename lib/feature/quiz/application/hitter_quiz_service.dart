@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
+import '../../quiz_result/application/quiz_result_state.dart';
 import '../../quiz_result/domain/hitter_quiz_result.dart';
 import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter.dart';
@@ -174,5 +175,11 @@ class HitterQuizService {
       incorrectCount: hitterQuizResult.incorrectCount,
     );
     ref.read(hitterQuizStateProvider.notifier).state = AsyncData(hitterQuiz);
+  }
+
+  /// selectedDateを更新する
+  void updateSelectedDate(DateTime selectedDate) {
+    final notifier = ref.read(selectedDateProvider.notifier);
+    notifier.state = selectedDate;
   }
 }
