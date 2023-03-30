@@ -17,10 +17,11 @@ extension DateTimeExtension on DateTime {
     return todayInApp;
   }
 
-  /// 月の最終日を取得する
+  /// 当月の最終日を取得する
   DateTime get lastDayOfMonth {
     final nextMonth = DateTime(year, month + 1);
     final lastDayOfMonth = nextMonth.subtract(const Duration(days: 1));
+
     return lastDayOfMonth;
   }
 }
