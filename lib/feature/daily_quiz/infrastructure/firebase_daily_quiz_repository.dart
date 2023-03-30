@@ -1,10 +1,10 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ntp/ntp.dart';
 
 import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
-import '../util/daily_quiz_constant.dart';
 
 class FirebaseDailyQuizRepository implements DailyQuizRepository {
   FirebaseDailyQuizRepository(this.firestore);
@@ -14,7 +14,7 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   @override
   Future<DailyQuiz> fetchDailyQuiz() async {
     final now = await NTP.now();
-    final startTodayInApp = calculateTodayInApp(now);
+    final startTodayInApp = now.calculateDateInApp();
     final endTodayInApp = DateTime(
       startTodayInApp.year,
       startTodayInApp.month,
@@ -66,18 +66,5 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
       }
     }
     return formattedSelectedStatsList;
-  }
-
-  /// アプリ内の「今日の日付」を取得する
-  ///
-  /// UT作成済み
-  @visibleForTesting
-  DateTime calculateTodayInApp(DateTime now) {
-    final nowInApp = now.subtract(
-      const Duration(hours: borderHourForTodayInApp),
-    );
-    final todayInApp = DateTime(nowInApp.year, nowInApp.month, nowInApp.day);
-
-    return todayInApp;
   }
 }
