@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../application/quiz_result_state.dart';
 
 class ResultRankLabelWidget extends ConsumerWidget {

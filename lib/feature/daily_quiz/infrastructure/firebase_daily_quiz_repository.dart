@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:ntp/ntp.dart';
 
+import '../../../util/extension/date_time_extension.dart';
 import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
 

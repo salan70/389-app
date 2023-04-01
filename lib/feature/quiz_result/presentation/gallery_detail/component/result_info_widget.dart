@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../util/extension/date_time_extension.dart';
 import '../../../application/quiz_result_state.dart';
 
 class ResultInfoWidget extends ConsumerWidget {

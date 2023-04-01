@@ -31,12 +31,14 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
               final quizResult = quizResultList[index];
               return InkWell(
                 onTap: () {
-                  ref
-                      .read(quizResultServiceProvider)
-                      .updateHitterQuizFromResult(
-                        quizResult,
-                        QuizType.normal,
-                      );
+                  final quizResultService = ref.read(quizResultServiceProvider);
+
+                  quizResultService.updateQuizStateFromResult(
+                    quizResult,
+                    QuizType.normal,
+                  );
+                  quizResultService.updateQuizResultStateFromIndex(index);
+
                   Navigator.push(
                     context,
                     MaterialPageRoute<Widget>(
