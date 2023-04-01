@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,14 +7,17 @@ import '../../../../quiz/application/hitter_quiz_state.dart';
 import '../../../../quiz/domain/hitter_quiz.dart';
 
 class ShowAnswerButton extends ConsumerWidget {
-  const ShowAnswerButton({super.key});
+  const ShowAnswerButton({super.key, required this.isMain});
+
+  final bool isMain;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueHandler(
       value: ref.watch(hitterQuizStateProvider),
       builder: (HitterQuiz hitterQuiz) {
-        return TextButton(
+        return MyButton(
+          isMain: isMain,
           onPressed: () {
             showDialog<void>(
               context: context,

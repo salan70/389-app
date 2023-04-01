@@ -17,6 +17,7 @@ class DailyQuizGalleryDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     const shareText = '#389quiz\n$appStoreUrl';
+    const buttonWidth = 160.0;
     final globalKey = GlobalKey();
 
     return Scaffold(
@@ -33,11 +34,31 @@ class DailyQuizGalleryDetailPage extends StatelessWidget {
               const SizedBox(height: 8),
               const ResultInfoWidget(),
               const SizedBox(height: 8),
-              const ShowAnswerButton(),
-              const SizedBox(height: 8),
-              ShareButton(globalKey: globalKey, shareText: shareText),
-              const common.BackButton(),
-              const SizedBox(height: 80),
+              const Center(
+                child: SizedBox(
+                  width: buttonWidth,
+                  child: ShowAnswerButton(isMain: true),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Center(
+                child: SizedBox(
+                  width: buttonWidth,
+                  child: ShareButton(
+                    isMain: false,
+                    globalKey: globalKey,
+                    shareText: shareText,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Center(
+                child: SizedBox(
+                  width: buttonWidth,
+                  child: common.BackButton(isMain: false),
+                ),
+              ),
+              const SizedBox(height: 40),
             ],
           ),
         ),

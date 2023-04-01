@@ -8,7 +8,6 @@ import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
 import '../component/custom_confetti_widget.dart';
 import '../component/result_text.dart';
-import 're_prepare_quiz_button.dart';
 import 'replay_button.dart';
 
 class NormalQuizResultPage extends StatelessWidget {
@@ -18,6 +17,7 @@ class NormalQuizResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     const shareText = '#389quiz\n$appStoreUrl';
+    const buttonWidth = 200.0;
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
     // 本当はProviderで参照したかった。。
@@ -36,21 +36,33 @@ class NormalQuizResultPage extends StatelessWidget {
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
                     const ResultText(),
-                    const SizedBox(height: 16),
                     ResultQuizWidget(globalKey: globalKey),
-                    const SizedBox(height: 8),
-                    const ReplayButton(),
-                    const SizedBox(height: 8),
-                    ShareButton(globalKey: globalKey, shareText: shareText),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const [
-                        BackToTopButton(),
-                        RePrepareQuizButton(),
-                      ],
+                    const SizedBox(height: 24),
+                    const Center(
+                      child: SizedBox(
+                        width: buttonWidth,
+                        child: ReplayButton(isMain: true),
+                      ),
                     ),
-                    const SizedBox(height: 80),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: SizedBox(
+                        width: buttonWidth,
+                        child: ShareButton(
+                          isMain: false,
+                          globalKey: globalKey,
+                          shareText: shareText,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Center(
+                      child: SizedBox(
+                        width: buttonWidth,
+                        child: BackToTopButton(isMain: false),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
                   ],
                 ),
                 const Align(

@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,32 +8,35 @@ import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_p
 class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
   const ToPlayNormalQuizFromTopButton({
     super.key,
+    required this.isMain,
   });
+
+  final bool isMain;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
+    return MyButton(
+      isMain: isMain,
       onPressed: () async {
-        // 「Do not use BuildContexts across async gaps.」
-        // というLintの警告を回避するためにnavigatorを切り出し
-        // 上記警告は、contextに対してawaitすると発生すると思われる
-        final navigator = Navigator.of(context);
-
         // 出題する選手を取得
         await ref
             .read(hitterQuizServiceProvider)
             .fetchHitterQuizBySearchCondition();
 
-        await navigator.push(
-          MaterialPageRoute<Widget>(
-            builder: (_) => const PlayNormalQuizPage(),
-          ),
-        );
+        if (context.mounted) {
+          await Navigator.of(context).push(
+            MaterialPageRoute<Widget>(
+              builder: (_) => const PlayNormalQuizPage(),
+            ),
+          );
+        }
       },
       child: FittedBox(
         child: Text(
-          '保存されている条件でプレイ！',
-          style: Theme.of(context).textTheme.headlineSmall,
+          'クイズをプレイ！',
+          style: TextStyle(
+            fontSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
+          ),
         ),
       ),
     );

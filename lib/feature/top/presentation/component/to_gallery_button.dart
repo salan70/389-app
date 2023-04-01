@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../../common_widget/my_button.dart';
 import '../../../quiz_result/presentation/gallery_list/base_gallery_list_page.dart';
 
 class ToGalleryButton extends StatelessWidget {
-  const ToGalleryButton({super.key});
+  const ToGalleryButton({super.key, required this.isMain});
+
+  final bool isMain;
 
   @override
   Widget build(BuildContext context) {
-    return TextButton.icon(
+    return MyButton(
+      isMain: isMain,
       onPressed: () {
         Navigator.push<void>(
           context,
@@ -17,12 +21,11 @@ class ToGalleryButton extends StatelessWidget {
           ),
         );
       },
-      icon: const Icon(
-        Icons.info_outline_rounded,
-      ),
-      label: Text(
-        'ギャラリー',
-        style: Theme.of(context).textTheme.titleLarge,
+      child: Text(
+        'プレイ履歴',
+        style: TextStyle(
+          fontSize: Theme.of(context).textTheme.headlineSmall!.fontSize,
+        ),
       ),
     );
   }

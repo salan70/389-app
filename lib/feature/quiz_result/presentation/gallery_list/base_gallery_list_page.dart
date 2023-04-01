@@ -45,7 +45,10 @@ class BaseGalleryListPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: const [
-                  BackToTopButton(),
+                  SizedBox(
+                    width: 120,
+                    child: BackToTopButton(isMain: true),
+                  ),
                   SizedBox(height: 8),
                   BannerAdWidget(),
                 ],
