@@ -83,3 +83,4 @@ flutter:
 
   assets:
     - .env
+    - assets/in_app/
