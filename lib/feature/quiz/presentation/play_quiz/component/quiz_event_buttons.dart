@@ -10,37 +10,45 @@ class QuizEventButtons extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
+    const buttonWidth = 160.0;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        MyButton(
-          isMain: false,
-          onPressed: () {
-            // 回答入力用のTextFieldのフォーカスを外す
-            FocusManager.instance.primaryFocus?.unfocus();
+        SizedBox(
+          width: buttonWidth,
+          child: MyButton(
+            isMain: false,
+            onPressed: () {
+              // 回答入力用のTextFieldのフォーカスを外す
+              FocusManager.instance.primaryFocus?.unfocus();
 
-            if (hitterQuizService.canOpen()) {
-              showDialog<void>(
-                context: context,
-                builder: (context) {
-                  return const ConfirmOpenAllDialog();
-                },
-              );
-            }
-          },
-          child: const Text('全ての成績を表示'),
+              if (hitterQuizService.canOpen()) {
+                showDialog<void>(
+                  context: context,
+                  builder: (context) {
+                    return const ConfirmOpenAllDialog();
+                  },
+                );
+              }
+            },
+            child: const Text('全ての成績を表示'),
+          ),
         ),
-        TextButton(
-          onPressed: () {
-            // 回答入力用のTextFieldのフォーカスを外す
-            FocusManager.instance.primaryFocus?.unfocus();
+        SizedBox(
+          width: buttonWidth,
+          child: MyButton(
+            isMain: false,
+            onPressed: () {
+              // 回答入力用のTextFieldのフォーカスを外す
+              FocusManager.instance.primaryFocus?.unfocus();
 
-            if (hitterQuizService.canOpen()) {
-              hitterQuizService.openRandom();
-            }
-          },
-          child: const Text('次の成績を表示'),
+              if (hitterQuizService.canOpen()) {
+                hitterQuizService.openRandom();
+              }
+            },
+            child: const Text('次の成績を表示'),
+          ),
         ),
       ],
     );

@@ -14,6 +14,8 @@ class PlayNormalQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    const buttonWidth = 160.0;
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -27,13 +29,24 @@ class PlayNormalQuizPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 const QuizWidget(willRebuild: true),
                 const SizedBox(height: 16),
-                const QuizEventButtons(),
-                const SizedBox(height: 16),
                 InputAnswerTextField(),
                 const SizedBox(height: 16),
-                const NormalQuizSubmitAnswerButton(isMain: true),
-                const RetireButton(),
-                const SizedBox(height: 200),
+                const QuizEventButtons(),
+                const SizedBox(height: 16),
+                const Center(
+                  child: SizedBox(
+                    width: buttonWidth,
+                    child: NormalQuizSubmitAnswerButton(isMain: true),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const Center(
+                  child: SizedBox(
+                    width: buttonWidth,
+                    child: RetireButton(isMain: false),
+                  ),
+                ),
+                const SizedBox(height: 120),
               ],
             ),
           ),

@@ -73,6 +73,7 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
                 );
               }
             },
+      // TODO: ボタン非活性時のスタイルを変更する（MyButtonのほうで定義するほうがいいかも）
       child: const Text('回答する'),
     );
   }

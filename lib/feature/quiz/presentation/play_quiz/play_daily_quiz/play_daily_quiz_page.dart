@@ -15,6 +15,7 @@ class PlayDailyQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    const buttonWidth = 160.0;
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -33,14 +34,24 @@ class PlayDailyQuizPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   const QuizWidget(willRebuild: true),
                   const SizedBox(height: 16),
-                  const QuizEventButtons(),
-                  const SizedBox(height: 16),
                   InputAnswerTextField(),
                   const SizedBox(height: 16),
-                  const DailyQuizSubmitAnswerButton(isMain: true),
+                  const QuizEventButtons(),
                   const SizedBox(height: 16),
-                  const RetireButton(),
-                  const SizedBox(height: 200),
+                  const Center(
+                    child: SizedBox(
+                      width: buttonWidth,
+                      child: DailyQuizSubmitAnswerButton(isMain: true),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  const Center(
+                    child: SizedBox(
+                      width: buttonWidth,
+                      child: RetireButton(isMain: false),
+                    ),
+                  ),
+                  const SizedBox(height: 120),
                 ],
               ),
             ),

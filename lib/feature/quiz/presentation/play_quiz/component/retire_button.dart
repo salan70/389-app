@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,7 +12,9 @@ import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 
 class RetireButton extends ConsumerWidget {
-  const RetireButton({super.key});
+  const RetireButton({super.key, required this.isMain});
+
+  final bool isMain;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,53 +24,49 @@ class RetireButton extends ConsumerWidget {
       orElse: Container.new,
       data: (data) {
         final quizType = data!.quizType;
-        return Center(
-          child: SizedBox(
-            width: 120,
-            child: TextButton(
-              onPressed: () {
-                showDialog<void>(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) {
-                    final retireConfirmText = quizType == QuizType.normal
-                        ? normalQuizRetireConfirmText
-                        : dailyQuizRetireConfirmText;
+        return MyButton(
+          isMain: isMain,
+          onPressed: () {
+            showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                final retireConfirmText = quizType == QuizType.normal
+                    ? normalQuizRetireConfirmText
+                    : dailyQuizRetireConfirmText;
 
-                    final resultPage = quizType == QuizType.normal
-                        ? const NormalQuizResultPage()
-                        : const DailyQuizResultPage();
+                final resultPage = quizType == QuizType.normal
+                    ? const NormalQuizResultPage()
+                    : const DailyQuizResultPage();
 
-                    return ConfirmDialog(
-                      confirmText: retireConfirmText,
-                      onPressedYes: () async {
-                        final quizResultService =
-                            ref.read(quizResultServiceProvider);
+                return ConfirmDialog(
+                  confirmText: retireConfirmText,
+                  onPressedYes: () async {
+                    final quizResultService =
+                        ref.read(quizResultServiceProvider);
 
-                        if (quizType == QuizType.normal) {
-                          await quizResultService.createNormalQuizResult();
-                        } else {
-                          await quizResultService.updateDailyQuizResult();
-                        }
+                    if (quizType == QuizType.normal) {
+                      await quizResultService.createNormalQuizResult();
+                    } else {
+                      await quizResultService.updateDailyQuizResult();
+                    }
 
-                        // submittedHitterProviderを明示的にdisposeする
-                        ref.invalidate(submittedHitterProvider);
+                    // submittedHitterProviderを明示的にdisposeする
+                    ref.invalidate(submittedHitterProvider);
 
-                        if (context.mounted) {
-                          await Navigator.of(context).push(
-                            MaterialPageRoute<Widget>(
-                              builder: (_) => resultPage,
-                            ),
-                          );
-                        }
-                      },
-                    );
+                    if (context.mounted) {
+                      await Navigator.of(context).push(
+                        MaterialPageRoute<Widget>(
+                          builder: (_) => resultPage,
+                        ),
+                      );
+                    }
                   },
                 );
               },
-              child: const Text('諦める'),
-            ),
-          ),
+            );
+          },
+          child: const Text('諦める'),
         );
       },
     );
