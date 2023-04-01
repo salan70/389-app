@@ -1,15 +1,17 @@
 import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 
-class BackToTopButton extends StatelessWidget {
-  const BackToTopButton({super.key, required this.isMain});
+import '../util/constant/button_type_constant.dart';
 
-  final bool isMain;
+class BackToTopButton extends StatelessWidget {
+  const BackToTopButton({super.key, required this.buttonType});
+
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: () {
         Navigator.of(context).popUntil((route) => route.isFirst);
       },

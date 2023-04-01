@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
@@ -41,7 +42,7 @@ class NormalQuizResultPage extends StatelessWidget {
                     const Center(
                       child: SizedBox(
                         width: buttonWidth,
-                        child: ReplayButton(isMain: true),
+                        child: ReplayButton(buttonType: ButtonType.main),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -49,7 +50,7 @@ class NormalQuizResultPage extends StatelessWidget {
                       child: SizedBox(
                         width: buttonWidth,
                         child: ShareButton(
-                          isMain: false,
+                          buttonType: ButtonType.sub,
                           globalKey: globalKey,
                           shareText: shareText,
                         ),
@@ -59,7 +60,7 @@ class NormalQuizResultPage extends StatelessWidget {
                     const Center(
                       child: SizedBox(
                         width: buttonWidth,
-                        child: BackToTopButton(isMain: false),
+                        child: BackToTopButton(buttonType: ButtonType.sub),
                       ),
                     ),
                     const SizedBox(height: 40),

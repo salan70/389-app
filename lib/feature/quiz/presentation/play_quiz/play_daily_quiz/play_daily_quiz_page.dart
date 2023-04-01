@@ -3,6 +3,7 @@ import 'package:baseball_quiz_app/feature/quiz/presentation/play_quiz/play_daily
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/quiz_widget.dart';
 import '../component/quiz_event_buttons.dart';
@@ -41,14 +42,16 @@ class PlayDailyQuizPage extends StatelessWidget {
                   const Center(
                     child: SizedBox(
                       width: buttonWidth,
-                      child: DailyQuizSubmitAnswerButton(isMain: true),
+                      child: DailyQuizSubmitAnswerButton(
+                        buttonType: ButtonType.main,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
                   const Center(
                     child: SizedBox(
                       width: buttonWidth,
-                      child: RetireButton(isMain: false),
+                      child: RetireButton(buttonType: ButtonType.sub),
                     ),
                   ),
                   const SizedBox(height: 120),

@@ -1,51 +1,34 @@
 import 'package:flutter/material.dart';
 
-import '../util/constant/colors_constant.dart';
+import '../util/constant/button_type_constant.dart';
 
 /// アプリ内で使用するボタン
 ///
-/// isMainがtrueの場合はメインボタンとして使用する
+/// メイン、アラート、サブの3種類を定義
 ///
-/// メインボタンは、画面内で最も重要なボタンに使用するため、
+/// - メインボタンは、画面内で最も重要なボタンに使用。
 /// 1画面に1つのみ設置する
 ///
-/// メインでない（サブ）ボタンは、設置数に制限なし
+/// - アラートボタンは、注意が必要な処理を行うボタンに使用。
+/// 設置数の制限なしだが、基本的には1画面に1つのとなりそう
+///
+/// - サブボタンは、メインにもアラートにも該当しないボタンに使用。設置数の制限なし。
 class MyButton extends StatelessWidget {
   const MyButton({
     super.key,
-    required this.isMain,
+    required this.buttonType,
     required this.onPressed,
     required this.child,
   });
 
-  final bool isMain;
+  final ButtonType buttonType;
   final VoidCallback? onPressed;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final mainButtonStyle = TextButton.styleFrom(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      backgroundColor: primaryColor,
-      foregroundColor: backgroundColor,
-    );
-
-    final subButtonStyle = TextButton.styleFrom(
-      side: const BorderSide(
-        width: 2,
-        color: primaryColor,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      backgroundColor: backgroundColor,
-      foregroundColor: primaryColor,
-    );
-
     return TextButton(
-      style: isMain ? mainButtonStyle : subButtonStyle,
+      style: buttonType.buttonStyle,
       onPressed: onPressed,
       child: child,
     );

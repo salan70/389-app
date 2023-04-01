@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
@@ -12,9 +13,9 @@ import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 
 class RetireButton extends ConsumerWidget {
-  const RetireButton({super.key, required this.isMain});
+  const RetireButton({super.key, required this.buttonType});
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +26,7 @@ class RetireButton extends ConsumerWidget {
       data: (data) {
         final quizType = data!.quizType;
         return MyButton(
-          isMain: isMain,
+          buttonType: buttonType,
           onPressed: () {
             showDialog<void>(
               context: context,

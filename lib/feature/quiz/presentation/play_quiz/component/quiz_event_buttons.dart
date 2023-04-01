@@ -2,6 +2,7 @@ import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../application/hitter_quiz_service.dart';
 
 class QuizEventButtons extends ConsumerWidget {
@@ -18,7 +19,7 @@ class QuizEventButtons extends ConsumerWidget {
         SizedBox(
           width: buttonWidth,
           child: MyButton(
-            isMain: false,
+            buttonType: ButtonType.sub,
             onPressed: () {
               // 回答入力用のTextFieldのフォーカスを外す
               FocusManager.instance.primaryFocus?.unfocus();
@@ -38,7 +39,7 @@ class QuizEventButtons extends ConsumerWidget {
         SizedBox(
           width: buttonWidth,
           child: MyButton(
-            isMain: false,
+            buttonType: ButtonType.sub,
             onPressed: () {
               // 回答入力用のTextFieldのフォーカスを外す
               FocusManager.instance.primaryFocus?.unfocus();

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../util/constant/button_type_constant.dart';
 import '../../admob/presentation/banner_ad_widget.dart';
 import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
 import 'component/icon_widget.dart';
@@ -28,7 +29,7 @@ class TopPage extends StatelessWidget {
                   alignment: Alignment.topRight,
                   child: SizedBox(
                     width: 120,
-                    child: ToSettingButton(isMain: false),
+                    child: ToSettingButton(buttonType: ButtonType.sub),
                   ),
                 ),
                 Expanded(
@@ -39,22 +40,25 @@ class TopPage extends StatelessWidget {
                       SizedBox(height: 40),
                       SizedBox(
                         width: buttonWidth,
-                        child: ToPrepareQuizButton(isMain: false),
+                        child: ToPrepareQuizButton(buttonType: ButtonType.sub),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
                         width: buttonWidth,
-                        child: ToPlayNormalQuizFromTopButton(isMain: true),
+                        child: ToPlayNormalQuizFromTopButton(
+                          buttonType: ButtonType.main,
+                        ),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
                         width: buttonWidth,
-                        child: ToPlayDailyQuizButton(isMain: false),
+                        child:
+                            ToPlayDailyQuizButton(buttonType: ButtonType.sub),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
                         width: buttonWidth,
-                        child: ToGalleryButton(isMain: false),
+                        child: ToGalleryButton(buttonType: ButtonType.sub),
                       ),
                     ],
                   ),

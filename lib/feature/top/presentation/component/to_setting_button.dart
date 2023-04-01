@@ -1,20 +1,21 @@
 import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../util/constant/button_type_constant.dart';
 import 'setting_dialog.dart';
 
 class ToSettingButton extends StatelessWidget {
   const ToSettingButton({
     super.key,
-    required this.isMain,
+    required this.buttonType,
   });
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: () {
         showDialog<void>(
           context: context,

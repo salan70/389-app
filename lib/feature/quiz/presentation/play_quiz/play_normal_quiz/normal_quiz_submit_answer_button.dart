@@ -2,6 +2,7 @@ import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../../quiz_result/application/quiz_result_state.dart';
@@ -11,16 +12,16 @@ import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 import '../component/incorrect_dialog.dart';
 
 class NormalQuizSubmitAnswerButton extends ConsumerWidget {
-  const NormalQuizSubmitAnswerButton({super.key, required this.isMain});
+  const NormalQuizSubmitAnswerButton({super.key, required this.buttonType});
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final submittedHitter = ref.watch(submittedHitterProvider);
 
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: submittedHitter == null
           ? null
           : () async {

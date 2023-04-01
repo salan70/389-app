@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
+import '../../../../util/constant/button_type_constant.dart';
 import '../../../browser/presentation/to_privacy_policy_button.dart';
 import '../../../browser/presentation/to_term_button.dart';
 import '../../../inquiry/presentation/inquiry_button.dart';
@@ -64,7 +65,7 @@ class CloseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      isMain: true,
+      buttonType: ButtonType.main,
       onPressed: () async {
         Navigator.pop(context);
       },

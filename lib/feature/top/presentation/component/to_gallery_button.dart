@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widget/my_button.dart';
+import '../../../../util/constant/button_type_constant.dart';
 import '../../../quiz_result/presentation/gallery_list/base_gallery_list_page.dart';
 
 class ToGalleryButton extends StatelessWidget {
-  const ToGalleryButton({super.key, required this.isMain});
+  const ToGalleryButton({super.key, required this.buttonType});
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: () {
         Navigator.push<void>(
           context,

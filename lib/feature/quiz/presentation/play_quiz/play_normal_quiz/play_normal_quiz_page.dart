@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/quiz_widget.dart';
 import '../component/input_answer_text_field.dart';
@@ -36,14 +37,16 @@ class PlayNormalQuizPage extends StatelessWidget {
                 const Center(
                   child: SizedBox(
                     width: buttonWidth,
-                    child: NormalQuizSubmitAnswerButton(isMain: true),
+                    child: NormalQuizSubmitAnswerButton(
+                      buttonType: ButtonType.main,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
                 const Center(
                   child: SizedBox(
                     width: buttonWidth,
-                    child: RetireButton(isMain: false),
+                    child: RetireButton(buttonType: ButtonType.sub),
                   ),
                 ),
                 const SizedBox(height: 120),

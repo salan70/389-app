@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../application/answer_state.dart';
@@ -11,9 +12,9 @@ import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../component/incorrect_dialog.dart';
 
 class DailyQuizSubmitAnswerButton extends ConsumerWidget {
-  const DailyQuizSubmitAnswerButton({super.key, required this.isMain});
+  const DailyQuizSubmitAnswerButton({super.key, required this.buttonType});
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,7 +78,7 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
     }
 
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: submittedHitter == null
           ? null
           : () async {

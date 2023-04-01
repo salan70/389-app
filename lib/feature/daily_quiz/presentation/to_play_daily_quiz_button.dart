@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/confirm_dialog.dart';
+import '../../../util/constant/button_type_constant.dart';
 import '../../quiz/application/hitter_quiz_service.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
@@ -11,9 +12,9 @@ import '../application/daily_quiz_state.dart';
 import '../util/daily_quiz_constant.dart';
 
 class ToPlayDailyQuizButton extends ConsumerWidget {
-  const ToPlayDailyQuizButton({super.key, required this.isMain});
+  const ToPlayDailyQuizButton({super.key, required this.buttonType});
 
-  final bool isMain;
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +24,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
         '\n\n※プレイ中にアプリが終了された場合、不正解となります。';
 
     return MyButton(
-      isMain: isMain,
+      buttonType: buttonType,
       onPressed: () async {
         final dailyQuizService = ref.read(dailyQuizServiceProvider);
         await dailyQuizService.fetchDailyQuiz();

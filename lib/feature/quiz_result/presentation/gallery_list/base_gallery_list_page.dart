@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widget/back_to_top_button.dart';
+import '../../../../util/constant/button_type_constant.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
 import 'daily_quiz_gallery_list_page.dart';
@@ -47,7 +48,7 @@ class BaseGalleryListPage extends StatelessWidget {
                 children: const [
                   SizedBox(
                     width: 120,
-                    child: BackToTopButton(isMain: true),
+                    child: BackToTopButton(buttonType: ButtonType.main),
                   ),
                   SizedBox(height: 16),
                   BannerAdWidget(),

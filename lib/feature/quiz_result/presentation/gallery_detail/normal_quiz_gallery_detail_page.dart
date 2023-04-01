@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../common_widget/back_button.dart' as common;
+import '../../../../util/constant/button_type_constant.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
 import '../../../quiz/presentation/component/result_quiz_widget.dart';
 import '../../../quiz/presentation/component/share_button.dart';
@@ -40,7 +41,7 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
               const Center(
                 child: SizedBox(
                   width: buttonWidth,
-                  child: ShowAnswerButton(isMain: true),
+                  child: ShowAnswerButton(buttonType: ButtonType.main),
                 ),
               ),
               const SizedBox(height: 4),
@@ -48,7 +49,7 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
                 child: SizedBox(
                   width: buttonWidth,
                   child: ShareButton(
-                    isMain: false,
+                    buttonType: ButtonType.sub,
                     globalKey: globalKey,
                     shareText: shareText,
                   ),
@@ -58,7 +59,7 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
               const Center(
                 child: SizedBox(
                   width: buttonWidth,
-                  child: common.BackButton(isMain: false),
+                  child: common.BackButton(buttonType: ButtonType.sub),
                 ),
               ),
               const SizedBox(height: 40),
