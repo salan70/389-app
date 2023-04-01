@@ -15,7 +15,7 @@ class DailyQuizResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#389quiz #今日の1問\n$storeUrl';
+    const shareText = '#389quiz #今日の1問\n$appStoreUrl';
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
     // 本当はProviderで参照したかった。。

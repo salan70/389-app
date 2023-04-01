@@ -1,6 +1,5 @@
+import 'package:baseball_quiz_app/util/error_message.dart';
 import 'package:flutter/material.dart';
-
-import '../util/error_message.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {

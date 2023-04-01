@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../util/constant/strings_constant.dart';
 import '../application/browser_service.dart';
-import '../util/browser_constant.dart';
 
 class ToTermButton extends ConsumerWidget {
   const ToTermButton({super.key});

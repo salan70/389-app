@@ -16,7 +16,7 @@ class DailyQuizGalleryDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#389quiz\n$storeUrl';
+    const shareText = '#389quiz\n$appStoreUrl';
     final globalKey = GlobalKey();
 
     return Scaffold(
