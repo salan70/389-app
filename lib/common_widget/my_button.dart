@@ -19,7 +19,7 @@ class MyButton extends StatelessWidget {
   });
 
   final bool isMain;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Widget child;
 
   @override
