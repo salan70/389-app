@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
@@ -81,7 +82,7 @@ class QuizResultService {
   }
 
   /// HitterQuizResultからHitterQuizを作成し、hitterQuizStateに格納する
-  void updateHitterQuizFromResult(
+  void updateQuizStateFromResult(
     HitterQuizResult hitterQuizResult,
     QuizType quizType,
   ) {
@@ -99,9 +100,12 @@ class QuizResultService {
     ref.read(hitterQuizStateProvider.notifier).state = AsyncData(hitterQuiz);
   }
 
-  /// selectedDateを更新する
-  void updateSelectedDate(DateTime selectedDate) {
-    final notifier = ref.read(selectedDateProvider.notifier);
-    notifier.state = selectedDate;
+  /// 指定した日付からHitterQuizResultを取得しquizResultStateを更新する
+  void updateQuizResultStatefromDate(DateTime data) {
+    final formattedDate = data.toFormattedString();
+    final dailyQuizResult = ref.read(dailyQuizResultProvider).value!;
+
+    ref.read(quizResultStateProvider.notifier).state =
+        dailyQuizResult.resultMap[formattedDate];
   }
 }

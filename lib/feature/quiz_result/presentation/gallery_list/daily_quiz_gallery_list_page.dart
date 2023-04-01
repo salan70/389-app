@@ -61,11 +61,11 @@ class CalenderCell extends ConsumerWidget {
             onTap: () {
               final quizResultService = ref.read(quizResultServiceProvider);
 
-              quizResultService.updateHitterQuizFromResult(
+              quizResultService.updateQuizStateFromResult(
                 hitterQuizResult,
                 QuizType.daily,
               );
-              quizResultService.updateSelectedDate(date);
+              quizResultService.updateQuizResultStatefromDate(date);
 
               Navigator.push(
                 context,

@@ -21,11 +21,12 @@ final dailyQuizResultProvider =
       );
 });
 
+/// クイズ結果を返すプロバイダー
+final quizResultStateProvider = StateProvider<HitterQuizResult?>(
+  (_) => null,
+);
+
 /// クイズ結果関連の関数の処理状態をAsyncValueとして返すプロバイダー
 final quizResultFunctionStateProvider = StateProvider<AsyncValue<void>>(
   (_) => const AsyncValue.data(null),
 );
-
-/// 選択した日付を返すプロバイダー
-/// dailyQuizの詳細画面への遷移で使用
-final selectedDateProvider = StateProvider<DateTime?>((_) => null);
