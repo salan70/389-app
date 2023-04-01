@@ -85,7 +85,8 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
                 ),
                 content: const Text('本日分はプレイ済みです。\n\n※毎日19時に更新されます。'),
                 actions: [
-                  TextButton(
+                  MyButton(
+                    buttonType: ButtonType.main,
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text('OK'),
                   ),

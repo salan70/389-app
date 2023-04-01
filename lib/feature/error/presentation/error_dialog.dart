@@ -1,5 +1,8 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:baseball_quiz_app/util/error_message.dart';
 import 'package:flutter/material.dart';
+
+import '../../../util/constant/button_type_constant.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
@@ -19,7 +22,8 @@ class ErrorDialog extends StatelessWidget {
       ),
       content: Text(error.errorMessage),
       actions: [
-        TextButton(
+        MyButton(
+          buttonType: ButtonType.main,
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('OK'),
         ),

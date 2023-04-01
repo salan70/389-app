@@ -28,7 +28,8 @@ class ShowAnswerButton extends ConsumerWidget {
                   title: const Text('正解は...'),
                   content: Text('${hitterQuiz.name}選手でした！'),
                   actions: [
-                    TextButton(
+                    MyButton(
+                      buttonType: ButtonType.main,
                       onPressed: () => Navigator.of(context).pop(),
                       child: const Text('OK'),
                     ),
