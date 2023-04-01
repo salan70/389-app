@@ -49,7 +49,7 @@ class BaseGalleryListPage extends StatelessWidget {
                     width: 120,
                     child: BackToTopButton(isMain: true),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 16),
                   BannerAdWidget(),
                 ],
               ),

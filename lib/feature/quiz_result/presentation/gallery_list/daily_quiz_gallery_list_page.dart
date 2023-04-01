@@ -15,13 +15,18 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final todayInApp = DateTime.now().calculateDateInApp();
+
+    /// アプリ内日付の月の最終日
+    final lastDayOfInAppThisMonth = todayInApp.lastDayOfMonth;
+
     return TableCalendar<dynamic>(
       firstDay: DateTime.utc(2023, 2),
       // 現在のゲーム内月の最終日をlastDayに設定
-      lastDay: DateTime.now().calculateDateInApp().lastDayOfMonth,
+      lastDay: lastDayOfInAppThisMonth,
       daysOfWeekHeight: 24,
       availableCalendarFormats: const {CalendarFormat.month: '月'},
-      focusedDay: DateTime.now().calculateDateInApp(),
+      focusedDay: todayInApp,
       locale: 'ja_JP',
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, _) {
