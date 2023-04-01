@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common_widget/my_button.dart';
 import '../../../util/constant/strings_constant.dart';
 import '../application/browser_service.dart';
 
@@ -9,12 +10,20 @@ class ToPrivacyPolicyButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton.icon(
+    return MyButton(
+      isMain: false,
       onPressed: () {
         ref.read(browserServiceProvider).launchBrowser(privacyPolicyUrl);
       },
-      icon: const Icon(Icons.person_rounded),
-      label: const Text('プライバシーポリシー'),
+      child: Stack(
+        children: const [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Icon(Icons.person_rounded),
+          ),
+          Center(child: Text('プライバシーポリシー')),
+        ],
+      ),
     );
   }
 }

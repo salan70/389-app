@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common_widget/my_button.dart';
 import '../application/inquiry_service.dart';
 
 class InquiryButton extends ConsumerWidget {
@@ -10,13 +11,21 @@ class InquiryButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final inquiryService = ref.watch(inquiryServiceProvider);
 
-    return TextButton.icon(
+    return MyButton(
+      isMain: false,
       onPressed: () async {
         final body = await inquiryService.createInquiryBody();
         await inquiryService.launchMail(body);
       },
-      icon: const Icon(Icons.mail_outline_rounded),
-      label: const Text('お問い合わせ'),
+      child: Stack(
+        children: const [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Icon(Icons.mail_outline_rounded),
+          ),
+          Center(child: Text('お問い合わせ')),
+        ],
+      ),
     );
   }
 }
