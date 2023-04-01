@@ -1,9 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../util/constant/hitting_stats_constant.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
-import '../../quiz_result/application/quiz_result_state.dart';
-import '../../quiz_result/domain/hitter_quiz_result.dart';
 import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
@@ -156,30 +153,5 @@ class HitterQuizService {
 
     final hitterQuiz = ref.read(hitterQuizStateProvider);
     return hitterQuiz.value!.incorrectCount == maxCanIncorrectCount;
-  }
-
-  /// HitterQuizResultからHitterQuizを作成し、hitterQuizStateに格納する
-  void fromHitterQuizResult(
-    HitterQuizResult hitterQuizResult,
-    QuizType quizType,
-  ) {
-    final hitterQuiz = HitterQuiz(
-      id: hitterQuizResult.id,
-      name: hitterQuizResult.name,
-      quizType: quizType,
-      yearList: hitterQuizResult.yearList,
-      selectedStatsList: hitterQuizResult.selectedStatsList,
-      statsMapList: hitterQuizResult.statsMapList,
-      unveilCount: hitterQuizResult.unveilCount,
-      isCorrect: hitterQuizResult.isCorrect,
-      incorrectCount: hitterQuizResult.incorrectCount,
-    );
-    ref.read(hitterQuizStateProvider.notifier).state = AsyncData(hitterQuiz);
-  }
-
-  /// selectedDateを更新する
-  void updateSelectedDate(DateTime selectedDate) {
-    final notifier = ref.read(selectedDateProvider.notifier);
-    notifier.state = selectedDate;
   }
 }

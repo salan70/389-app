@@ -5,7 +5,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../common_widget/async_value_handler.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/extension/date_time_extension.dart';
-import '../../../quiz/application/hitter_quiz_service.dart';
+import '../../application/quiz_result_service.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/daily_hitter_quiz_result.dart';
 import '../gallery_detail/daily_quiz_gallery_detail_page.dart';
@@ -21,7 +21,7 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
       lastDay: DateTime.now().calculateDateInApp().lastDayOfMonth,
       daysOfWeekHeight: 24,
       availableCalendarFormats: const {CalendarFormat.month: '月'},
-      focusedDay: DateTime.now(),
+      focusedDay: DateTime.now().calculateDateInApp(),
       locale: 'ja_JP',
       calendarBuilders: CalendarBuilders(
         defaultBuilder: (context, date, _) {
@@ -59,13 +59,13 @@ class CalenderCell extends ConsumerWidget {
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
             onTap: () {
-              final hitterQuizService = ref.read(hitterQuizServiceProvider);
+              final quizResultService = ref.read(quizResultServiceProvider);
 
-              hitterQuizService.fromHitterQuizResult(
+              quizResultService.updateHitterQuizFromResult(
                 hitterQuizResult,
                 QuizType.daily,
               );
-              hitterQuizService.updateSelectedDate(date);
+              quizResultService.updateSelectedDate(date);
 
               Navigator.push(
                 context,
