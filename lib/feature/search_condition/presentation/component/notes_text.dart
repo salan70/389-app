@@ -5,7 +5,7 @@ class NotesText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const quizNotes = '※成績等は2022年12月4日に取得したものを使用しています。';
+    const quizNotes = '※成績等は2022年12月4日時点のものです';
 
     return const Text(
       quizNotes,
