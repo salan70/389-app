@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../common_widget/my_button.dart';
+import '../../../../util/constant/button_type_constant.dart';
 import '../../../browser/presentation/to_privacy_policy_button.dart';
 import '../../../browser/presentation/to_term_button.dart';
 import '../../../inquiry/presentation/inquiry_button.dart';
@@ -10,42 +12,64 @@ class SettingDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const lergeButtonWidth = 240.0;
+    const smallButtonWidth = 120.0;
+
     return Dialog(
       child: SingleChildScrollView(
         child: SizedBox(
           height: 320,
           child: Column(
-            children: [
-              const SizedBox(
-                height: 16,
+            children: const [
+              SizedBox(height: 16),
+              Text('その他'),
+              SizedBox(height: 24),
+              Center(
+                child: SizedBox(
+                  width: lergeButtonWidth,
+                  child: InquiryButton(),
+                ),
               ),
-              const Text('その他'),
-              const SizedBox(
-                height: 24,
+              SizedBox(height: 16),
+              Center(
+                child: SizedBox(
+                  width: lergeButtonWidth,
+                  child: ToTermButton(),
+                ),
               ),
-              const InquiryButton(),
-              const SizedBox(
-                height: 16,
+              SizedBox(height: 16),
+              Center(
+                child: SizedBox(
+                  width: lergeButtonWidth,
+                  child: ToPrivacyPolicyButton(),
+                ),
               ),
-              const ToTermButton(),
-              const SizedBox(
-                height: 16,
-              ),
-              const ToPrivacyPolicyButton(),
-              const SizedBox(
-                height: 16,
-              ),
-              TextButton.icon(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.close_rounded),
-                label: const Text('閉じる'),
+              SizedBox(height: 16),
+              Center(
+                child: SizedBox(
+                  width: smallButtonWidth,
+                  child: CloseButton(),
+                ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class CloseButton extends StatelessWidget {
+  const CloseButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MyButton(
+      buttonType: ButtonType.main,
+      onPressed: () async {
+        Navigator.pop(context);
+      },
+      child: const Center(child: Text('閉じる')),
     );
   }
 }

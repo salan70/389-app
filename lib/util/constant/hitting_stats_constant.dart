@@ -1,3 +1,6 @@
+import 'package:baseball_quiz_app/util/constant/colors_constant.dart';
+import 'package:flutter/material.dart';
+
 enum StatsType {
   // year,
   team,
@@ -110,7 +113,118 @@ extension ResultRankExt on ResultRank {
         return '不正解';
     }
   }
+
+  Text get smallLabellWidget {
+    switch (this) {
+      case ResultRank.ss:
+        return Text(
+          ResultRank.ss.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
+            color: ssRankColor,
+          ),
+        );
+      case ResultRank.s:
+        return Text(
+          ResultRank.s.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
+            color: sRankColor,
+          ),
+        );
+      case ResultRank.a:
+        return Text(
+          ResultRank.a.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
+            color: aRankColor,
+          ),
+        );
+      case ResultRank.b:
+        return Text(
+          ResultRank.b.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
+            color: bRankColor,
+          ),
+        );
+      case ResultRank.c:
+        return Text(
+          ResultRank.c.label,
+          style: const TextStyle(
+            fontSize: smallLabelFontSize,
+            color: cRankColor,
+          ),
+        );
+      case ResultRank.incorrect:
+        return const Text(
+          '✗',
+          style: TextStyle(
+            fontSize: smallLabelFontSize,
+            color: primaryColor,
+          ),
+        );
+    }
+  }
+
+  Text get largeLabelWidget {
+    switch (this) {
+      case ResultRank.ss:
+        return Text(
+          ResultRank.ss.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: ssRankColor,
+          ),
+        );
+      case ResultRank.s:
+        return Text(
+          ResultRank.s.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: sRankColor,
+          ),
+        );
+      case ResultRank.a:
+        return Text(
+          ResultRank.a.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: aRankColor,
+          ),
+        );
+      case ResultRank.b:
+        return Text(
+          ResultRank.b.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: bRankColor,
+          ),
+        );
+      case ResultRank.c:
+        return Text(
+          ResultRank.c.label,
+          style: const TextStyle(
+            fontSize: largeLabelFontSize,
+            color: cRankColor,
+          ),
+        );
+      case ResultRank.incorrect:
+        return const Text(
+          '✗',
+          style: TextStyle(
+            fontSize: largeLabelFontSize,
+            color: primaryColor,
+          ),
+        );
+    }
+  }
 }
+
+// TODO(me): フォントサイズのconstはそれ用のファイルにまとめたい
+// ランクラベルのフォントサイズ
+const smallLabelFontSize = 24.0;
+const largeLabelFontSize = 40.0;
 
 const statsTypeList = StatsType.values;
 

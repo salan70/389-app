@@ -1,6 +1,8 @@
+import 'package:baseball_quiz_app/common_widget/back_to_top_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../util/constant/button_type_constant.dart';
 import '../../admob/presentation/banner_ad_widget.dart';
 import 'component/chose_team_widget.dart';
 import 'component/notes_text.dart';
@@ -28,9 +30,23 @@ class PrepareQuizPage extends StatelessWidget {
               SizedBox(height: 16),
               SelectStatsWidget(),
               SizedBox(height: 16),
-              ToPlayNormalQuizFromPrepareButton(),
-              SizedBox(height: 16),
               NotesText(),
+              SizedBox(height: 32),
+              Center(
+                child: SizedBox(
+                  width: 160,
+                  child: ToPlayNormalQuizFromPrepareButton(
+                    buttonType: ButtonType.main,
+                  ),
+                ),
+              ),
+              SizedBox(height: 8),
+              Center(
+                child: SizedBox(
+                  width: 160,
+                  child: BackToTopButton(buttonType: ButtonType.sub),
+                ),
+              ),
               SizedBox(height: 80),
             ],
           ),

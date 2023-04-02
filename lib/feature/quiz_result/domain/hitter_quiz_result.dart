@@ -1,7 +1,6 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/json_converter.dart';
@@ -31,17 +30,17 @@ class HitterQuizResult with _$HitterQuizResult {
 
   // TODO(me): selectedStatsListに年度が含まれた場合、年度をremoveする処理を書く'
 
-  // 表示しうる成績の数
+  /// 表示しうる成績の数
   int get totalStatsCount {
     return statsMapList.length * statsMapList.first.keys.length;
   }
 
-  // 成績を表示した割合
+  /// 成績を表示した割合
   double get unveilRate {
     return unveilCount / totalStatsCount;
   }
 
-  // 間違えた数と表示した割合から評価を行う
+  /// 間違えた数と表示した割合から評価を行う
   ResultRank get resultRank {
     // 不正解の場合
     if (!isCorrect) {
@@ -73,12 +72,5 @@ class HitterQuizResult with _$HitterQuizResult {
   /// 表示した割合を整数第1位で四捨五入し文字列で返す
   String get unveilPercentage {
     return (unveilRate * 100).toStringAsFixed(0);
-  }
-
-  // 一旦ここにこのロジック書いているが、他で同じような関数を使う可能性あり
-  // その場合は別の場所に移動する
-  // updatedAtをフォーマットした文字列を返す
-  String get formattedUpdatedAtText {
-    return DateFormat('yyyy/MM/dd').format(updatedAt);
   }
 }

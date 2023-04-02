@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
+import '../../../../../common_widget/my_button.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../application/answer_state.dart';
 import '../../../application/hitter_quiz_service.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
-import '../component/answer_widget.dart';
 import '../component/incorrect_dialog.dart';
 
-class DailyQuizAnswerWidget extends ConsumerWidget {
-  const DailyQuizAnswerWidget({super.key});
+class DailyQuizSubmitAnswerButton extends ConsumerWidget {
+  const DailyQuizSubmitAnswerButton({super.key, required this.buttonType});
+
+  final ButtonType buttonType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const maxCanIncorrectCount = 2;
 
+    final submittedHitter = ref.watch(submittedHitterProvider);
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
 
     /// クイズ終了（最終回答）時の処理
@@ -73,31 +77,35 @@ class DailyQuizAnswerWidget extends ConsumerWidget {
       }
     }
 
-    return AnswerWidget(
-      onSubmittedAnswer: () async {
-        // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
-        // 確認ダイアログを表示する
-        final isFinalAnswer =
-            hitterQuizService.isFinalAnswer(maxCanIncorrectCount);
+    return MyButton(
+      buttonType: buttonType,
+      onPressed: submittedHitter == null
+          ? null
+          : () async {
+              // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
+              // 確認ダイアログを表示する
+              final isFinalAnswer =
+                  hitterQuizService.isFinalAnswer(maxCanIncorrectCount);
 
-        if (isFinalAnswer) {
-          await showDialog<void>(
-            context: context,
-            barrierDismissible: false,
-            builder: (_) {
-              return ConfirmDialog(
-                confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
-                onPressedYes: () async {
-                  await submitAnswer(isFinalAnswer: true);
-                },
-              );
+              if (isFinalAnswer) {
+                await showDialog<void>(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (_) {
+                    return ConfirmDialog(
+                      confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
+                      onPressedYes: () async {
+                        await submitAnswer(isFinalAnswer: true);
+                      },
+                    );
+                  },
+                );
+                return;
+              }
+
+              await submitAnswer(isFinalAnswer: false);
             },
-          );
-          return;
-        }
-
-        await submitAnswer(isFinalAnswer: false);
-      },
+      child: const Text('回答する'),
     );
   }
 }

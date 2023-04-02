@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DailyQuiz {
   String get dailyQuizId => throw _privateConstructorUsedError;
+  DateTime get questionedAt => throw _privateConstructorUsedError;
   String get playerId => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
 
@@ -31,7 +32,10 @@ abstract class $DailyQuizCopyWith<$Res> {
       _$DailyQuizCopyWithImpl<$Res, DailyQuiz>;
   @useResult
   $Res call(
-      {String dailyQuizId, String playerId, List<String> selectedStatsList});
+      {String dailyQuizId,
+      DateTime questionedAt,
+      String playerId,
+      List<String> selectedStatsList});
 }
 
 /// @nodoc
@@ -48,6 +52,7 @@ class _$DailyQuizCopyWithImpl<$Res, $Val extends DailyQuiz>
   @override
   $Res call({
     Object? dailyQuizId = null,
+    Object? questionedAt = null,
     Object? playerId = null,
     Object? selectedStatsList = null,
   }) {
@@ -56,6 +61,10 @@ class _$DailyQuizCopyWithImpl<$Res, $Val extends DailyQuiz>
           ? _value.dailyQuizId
           : dailyQuizId // ignore: cast_nullable_to_non_nullable
               as String,
+      questionedAt: null == questionedAt
+          ? _value.questionedAt
+          : questionedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       playerId: null == playerId
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
@@ -76,7 +85,10 @@ abstract class _$$_DailyQuizCopyWith<$Res> implements $DailyQuizCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String dailyQuizId, String playerId, List<String> selectedStatsList});
+      {String dailyQuizId,
+      DateTime questionedAt,
+      String playerId,
+      List<String> selectedStatsList});
 }
 
 /// @nodoc
@@ -91,6 +103,7 @@ class __$$_DailyQuizCopyWithImpl<$Res>
   @override
   $Res call({
     Object? dailyQuizId = null,
+    Object? questionedAt = null,
     Object? playerId = null,
     Object? selectedStatsList = null,
   }) {
@@ -99,6 +112,10 @@ class __$$_DailyQuizCopyWithImpl<$Res>
           ? _value.dailyQuizId
           : dailyQuizId // ignore: cast_nullable_to_non_nullable
               as String,
+      questionedAt: null == questionedAt
+          ? _value.questionedAt
+          : questionedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       playerId: null == playerId
           ? _value.playerId
           : playerId // ignore: cast_nullable_to_non_nullable
@@ -116,12 +133,15 @@ class __$$_DailyQuizCopyWithImpl<$Res>
 class _$_DailyQuiz implements _DailyQuiz {
   const _$_DailyQuiz(
       {required this.dailyQuizId,
+      required this.questionedAt,
       required this.playerId,
       required final List<String> selectedStatsList})
       : _selectedStatsList = selectedStatsList;
 
   @override
   final String dailyQuizId;
+  @override
+  final DateTime questionedAt;
   @override
   final String playerId;
   final List<String> _selectedStatsList;
@@ -133,7 +153,7 @@ class _$_DailyQuiz implements _DailyQuiz {
 
   @override
   String toString() {
-    return 'DailyQuiz(dailyQuizId: $dailyQuizId, playerId: $playerId, selectedStatsList: $selectedStatsList)';
+    return 'DailyQuiz(dailyQuizId: $dailyQuizId, questionedAt: $questionedAt, playerId: $playerId, selectedStatsList: $selectedStatsList)';
   }
 
   @override
@@ -143,6 +163,8 @@ class _$_DailyQuiz implements _DailyQuiz {
             other is _$_DailyQuiz &&
             (identical(other.dailyQuizId, dailyQuizId) ||
                 other.dailyQuizId == dailyQuizId) &&
+            (identical(other.questionedAt, questionedAt) ||
+                other.questionedAt == questionedAt) &&
             (identical(other.playerId, playerId) ||
                 other.playerId == playerId) &&
             const DeepCollectionEquality()
@@ -150,8 +172,8 @@ class _$_DailyQuiz implements _DailyQuiz {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dailyQuizId, playerId,
-      const DeepCollectionEquality().hash(_selectedStatsList));
+  int get hashCode => Object.hash(runtimeType, dailyQuizId, questionedAt,
+      playerId, const DeepCollectionEquality().hash(_selectedStatsList));
 
   @JsonKey(ignore: true)
   @override
@@ -163,11 +185,14 @@ class _$_DailyQuiz implements _DailyQuiz {
 abstract class _DailyQuiz implements DailyQuiz {
   const factory _DailyQuiz(
       {required final String dailyQuizId,
+      required final DateTime questionedAt,
       required final String playerId,
       required final List<String> selectedStatsList}) = _$_DailyQuiz;
 
   @override
   String get dailyQuizId;
+  @override
+  DateTime get questionedAt;
   @override
   String get playerId;
   @override

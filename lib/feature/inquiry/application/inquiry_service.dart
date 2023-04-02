@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../util/constant/strings_constant.dart';
 import '../../auth/domain/auth_repository.dart';
-import '../util/inquiry_constant.dart';
 
 final inquiryServiceProvider =
     Provider.autoDispose<InquiryService>(InquiryService.new);

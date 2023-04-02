@@ -1,4 +1,7 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
+
+import '../util/constant/button_type_constant.dart';
 
 class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({
@@ -16,18 +19,15 @@ class ConfirmDialog extends StatelessWidget {
       title: const Text('確認'),
       content: Text(confirmText),
       actions: <Widget>[
-        TextButton(
+        MyButton(
+          buttonType: ButtonType.sub,
           child: const Text('いいえ'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.pop(context),
         ),
-        TextButton(
+        MyButton(
+          buttonType: ButtonType.alert,
           onPressed: onPressedYes,
-          child: Text(
-            'はい',
-            style: TextStyle(color: Theme.of(context).colorScheme.error),
-          ),
+          child: const Text('はい'),
         ),
       ],
     );

@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'feature/auth/application/auth_service.dart';
@@ -36,9 +37,9 @@ import 'feature/search_condition/infrastructure/hive_search_condition_repository
 import 'feature/search_condition/util/search_condition_constant.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';
-import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -144,6 +145,9 @@ Future<void> initialize() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
+
+  // table_calendarを日本語で表示するために必要
+  await initializeDateFormatting();
 }
 
 class MyApp extends ConsumerStatefulWidget {

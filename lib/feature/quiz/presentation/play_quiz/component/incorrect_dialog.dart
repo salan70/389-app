@@ -1,7 +1,9 @@
+import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
@@ -25,13 +27,11 @@ class IncorrectDialog extends ConsumerWidget {
         return AlertDialog(
           title: const Text('残念...'),
           // submittedHitterがnullの場合、このダイアログは表示されない想定
-          content: Text('${submittedHitter!.label}選手ではありません}'),
+          content: Text('${submittedHitter!.label}選手ではありません'),
           actions: <Widget>[
-            TextButton(
-              child: Text(
-                '諦める',
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
+            MyButton(
+              buttonType: ButtonType.alert,
+              child: const Text('諦める'),
               onPressed: () async {
                 await showDialog<void>(
                   context: context,
@@ -70,7 +70,8 @@ class IncorrectDialog extends ConsumerWidget {
                 );
               },
             ),
-            TextButton(
+            MyButton(
+              buttonType: ButtonType.sub,
               child: const Text('もう一度回答する'),
               onPressed: () {
                 Navigator.of(context).pop();

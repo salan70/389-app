@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
+import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
@@ -15,7 +16,8 @@ class DailyQuizResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#389quiz #今日の1問\n$storeUrl';
+    const shareText = '#389quiz #今日の1問\n$appStoreUrl';
+    const buttonWidth = 160.0;
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
     // 本当はProviderで参照したかった。。
@@ -34,13 +36,26 @@ class DailyQuizResultPage extends StatelessWidget {
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
                     const ResultText(),
-                    const SizedBox(height: 16),
                     ResultQuizWidget(globalKey: globalKey),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: SizedBox(
+                        width: buttonWidth,
+                        child: ShareButton(
+                          buttonType: ButtonType.sub,
+                          globalKey: globalKey,
+                          shareText: shareText,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 8),
-                    ShareButton(globalKey: globalKey, shareText: shareText),
-                    const SizedBox(height: 8),
-                    const BackToTopButton(),
-                    const SizedBox(height: 80),
+                    const Center(
+                      child: SizedBox(
+                        width: buttonWidth,
+                        child: BackToTopButton(buttonType: ButtonType.main),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
                   ],
                 ),
               ),
