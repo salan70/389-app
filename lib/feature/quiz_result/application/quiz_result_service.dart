@@ -6,6 +6,7 @@ import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_state.dart';
 import '../../quiz/domain/hitter_quiz.dart';
+import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
@@ -49,14 +50,10 @@ class QuizResultService {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
 
-      /// 別のfeatureのapplication層を参照するの避けたみ
-      // TODO(me): 引数で受け取るようにしたほうが良いか検討する
-      final dailyQuiz = ref.watch(dailyQuizStateProvider).value!;
-      final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
       await quizResultRepository.updateDailyQuizResult(
         user!,
-        dailyQuiz,
-        hitterQuiz,
+        ref.read(dailyQuizStateProvider).value!,
+        ref.read(hitterQuizStateProvider).value!,
       );
     });
   }
@@ -71,12 +68,10 @@ class QuizResultService {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
 
-      /// 別のfeatureのapplication層を参照するの避けたみ
-      // TODO(me): 引数で受け取るようにしたほうが良いか検討する
-      final hitterQuiz = ref.read(hitterQuizStateProvider).value!;
       await quizResultRepository.createNormalQuizResult(
         user!,
-        hitterQuiz,
+        ref.read(hitterQuizStateProvider).value!,
+        ref.read(searchConditionProvider),
       );
     });
   }

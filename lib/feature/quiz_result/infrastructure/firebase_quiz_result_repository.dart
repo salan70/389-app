@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/search_condition/domain/search_condition.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -63,7 +64,11 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
   }
 
   @override
-  Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz) async {
+  Future<void> createNormalQuizResult(
+    User user,
+    HitterQuiz hitterQuiz,
+    SearchCondition searchCondition,
+  ) async {
     await firestore
         .collection('users')
         .doc(user.uid)
@@ -91,6 +96,7 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
       'unveilCount': hitterQuiz.unveilCount,
       'isCorrect': hitterQuiz.isCorrect,
       'incorrectCount': hitterQuiz.incorrectCount,
+      'searchCondition': searchCondition.toJson(),
     });
   }
 

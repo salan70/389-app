@@ -51,3 +51,28 @@ class SearchConditionAdapter extends TypeAdapter<SearchCondition> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_$_SearchCondition _$$_SearchConditionFromJson(Map<String, dynamic> json) =>
+    _$_SearchCondition(
+      teamList:
+          (json['teamList'] as List<dynamic>).map((e) => e as String).toList(),
+      minGames: json['minGames'] as int,
+      minHits: json['minHits'] as int,
+      minHr: json['minHr'] as int,
+      selectedStatsList: (json['selectedStatsList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$$_SearchConditionToJson(_$_SearchCondition instance) =>
+    <String, dynamic>{
+      'teamList': instance.teamList,
+      'minGames': instance.minGames,
+      'minHits': instance.minHits,
+      'minHr': instance.minHr,
+      'selectedStatsList': instance.selectedStatsList,
+    };

@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+SearchCondition _$SearchConditionFromJson(Map<String, dynamic> json) {
+  return _SearchCondition.fromJson(json);
+}
+
 /// @nodoc
 mixin _$SearchCondition {
   @HiveField(0)
@@ -27,6 +31,7 @@ mixin _$SearchCondition {
   @HiveField(5)
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $SearchConditionCopyWith<SearchCondition> get copyWith =>
       throw _privateConstructorUsedError;
@@ -149,7 +154,7 @@ class __$$_SearchConditionCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_SearchCondition implements _SearchCondition {
   const _$_SearchCondition(
       {@HiveField(0) required final List<String> teamList,
@@ -159,6 +164,9 @@ class _$_SearchCondition implements _SearchCondition {
       @HiveField(5) required final List<String> selectedStatsList})
       : _teamList = teamList,
         _selectedStatsList = selectedStatsList;
+
+  factory _$_SearchCondition.fromJson(Map<String, dynamic> json) =>
+      _$$_SearchConditionFromJson(json);
 
   final List<String> _teamList;
   @override
@@ -204,6 +212,7 @@ class _$_SearchCondition implements _SearchCondition {
                 .equals(other._selectedStatsList, _selectedStatsList));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -218,6 +227,13 @@ class _$_SearchCondition implements _SearchCondition {
   @pragma('vm:prefer-inline')
   _$$_SearchConditionCopyWith<_$_SearchCondition> get copyWith =>
       __$$_SearchConditionCopyWithImpl<_$_SearchCondition>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_SearchConditionToJson(
+      this,
+    );
+  }
 }
 
 abstract class _SearchCondition implements SearchCondition {
@@ -228,6 +244,9 @@ abstract class _SearchCondition implements SearchCondition {
           @HiveField(4) required final int minHr,
           @HiveField(5) required final List<String> selectedStatsList}) =
       _$_SearchCondition;
+
+  factory _SearchCondition.fromJson(Map<String, dynamic> json) =
+      _$_SearchCondition.fromJson;
 
   @override
   @HiveField(0)
