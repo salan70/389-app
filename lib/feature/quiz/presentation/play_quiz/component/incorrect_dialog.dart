@@ -27,7 +27,7 @@ class IncorrectDialog extends ConsumerWidget {
         return AlertDialog(
           title: const Text('残念...'),
           // submittedHitterがnullの場合、このダイアログは表示されない想定
-          content: Text('${submittedHitter!.label}選手ではありません}'),
+          content: Text('${submittedHitter!.label}選手ではありません'),
           actions: <Widget>[
             MyButton(
               buttonType: ButtonType.alert,
