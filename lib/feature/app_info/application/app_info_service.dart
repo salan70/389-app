@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:baseball_quiz_app/util/constant/strings_constant.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
+import '../../../util/constant/strings_constant.dart';
 import '../domain/app_info_repository.dart';
 import 'app_info_state.dart';
 

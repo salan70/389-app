@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/common_widget/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/async_value_handler.dart';
+import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../quiz/application/hitter_quiz_state.dart';
 import '../../../../quiz/domain/hitter_quiz.dart';

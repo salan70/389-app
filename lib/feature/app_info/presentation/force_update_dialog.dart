@@ -1,9 +1,9 @@
-import 'package:baseball_quiz_app/common_widget/my_button.dart';
-import 'package:baseball_quiz_app/feature/app_info/application/app_info_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../common_widget/my_button.dart';
 import '../../../util/constant/button_type_constant.dart';
+import '../application/app_info_service.dart';
 
 /// エラーを知らせるダイアログ
 class ForceUpdateDialog extends ConsumerWidget {

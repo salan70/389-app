@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/common_widget/my_button.dart';
-import 'package:baseball_quiz_app/util/error_message.dart';
 import 'package:flutter/material.dart';
 
+import '../../../common_widget/my_button.dart';
 import '../../../util/constant/button_type_constant.dart';
+import '../../../util/error_message.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
