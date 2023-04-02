@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../util/constant/button_type_constant.dart';
+import '../../admob/presentation/banner_ad_widget.dart';
 import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
 import 'component/icon_widget.dart';
 import 'component/to_gallery_button.dart';
@@ -64,7 +65,7 @@ class TopPage extends StatelessWidget {
                 ),
                 const Align(
                   alignment: Alignment.bottomCenter,
-                  // child: BannerAdWidget(),
+                  child: BannerAdWidget(),
                 ),
               ],
             ),

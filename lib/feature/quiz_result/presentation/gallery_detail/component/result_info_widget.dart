@@ -18,13 +18,18 @@ class ResultInfoWidget extends ConsumerWidget {
           Text(
             '${quizResult.updatedAt.toFormattedString()}にプレイ',
           ),
-          Text(
-            '${quizResult.incorrectCount}ミス',
-          ),
-          Text(
-            '${quizResult.unveilPercentage}%'
-            '（${quizResult.unveilCount}/${quizResult.totalStatsCount}）'
-            '表示',
+          Row(
+            children: [
+              Text(
+                '${quizResult.incorrectCount}ミス',
+              ),
+              const SizedBox(width: 16),
+              Text(
+                '${quizResult.unveilPercentage}%'
+                '表示'
+                '（${quizResult.unveilCount}/${quizResult.totalStatsCount}）',
+              ),
+            ],
           ),
         ],
       ),

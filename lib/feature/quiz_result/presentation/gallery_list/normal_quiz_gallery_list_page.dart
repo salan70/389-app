@@ -24,8 +24,9 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
             itemCount: quizResultList.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: 3 / 2,
             ),
             itemBuilder: (context, index) {
               final quizResult = quizResultList[index];
@@ -46,13 +47,26 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                     ),
                   );
                 },
-                child: Card(
-                  color: backgroundColor,
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    border: Border.all(color: primaryColor, width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(quizResult.resultRank.label),
-                      Text('${quizResult.updatedAt.toFormattedString()}にプレイ'),
-                      Text('${quizResult.unveilPercentage}%表示'),
+                      quizResult.resultRank.smallLabellWidget,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(quizResult.updatedAt.toFormattedString()),
+                          FittedBox(
+                            child: Text('${quizResult.unveilPercentage}%表示'
+                                '（${quizResult.unveilCount}/${quizResult.totalStatsCount})'),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
