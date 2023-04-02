@@ -13,6 +13,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'feature/app_info/application/app_info_state.dart';
+import 'feature/app_info/domain/app_info_repository.dart';
+import 'feature/app_info/infrastructure/firebase_app_info_repository.dart';
 import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/domain/user_info_repository.dart';
@@ -92,6 +95,13 @@ Future<void> main() async {
         quizResultRepositoryProvider.overrideWith(
           (ref) {
             return FirebaseQuizResultRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
+        appInfoRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseAppInfoRepository(
               ref.watch(firestoreProvider),
             );
           },
@@ -190,6 +200,9 @@ class _MyApp extends ConsumerState<MyApp> {
     );
     ref.handleAsyncValue<void>(
       quizResultFunctionStateProvider,
+    );
+    ref.handleAsyncValue<void>(
+      checkNeedUpdateStateProvider,
     );
 
     // Userを作成

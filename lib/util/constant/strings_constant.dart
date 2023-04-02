@@ -20,8 +20,11 @@ const subject = '【タイトルをご記載ください】/.389';
 // * --------------------------------- URL --------------------------------- * //
 
 /// AppStoreのURL
-const appStoreUrl =
-    'https://apps.apple.com/us/app/389-%E3%83%97%E3%83%AD%E9%87%8E%E7%90%83%E6%88%90%E7%B8%BE%E3%82%AF%E3%82%A4%E3%82%BA/id1668555651';
+const appStoreUrl = 'https://apps.apple.com/jp/app/1668555651';
+
+/// GooglePlayのURL
+const playStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.toda.baseball_quiz_app';
 
 /// 利用規約のURL
 const termsUrl = 'https://389-terms.web.app/';

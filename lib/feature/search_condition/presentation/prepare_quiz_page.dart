@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/common_widget/back_to_top_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../common_widget/back_to_top_button.dart';
 import '../../../util/constant/button_type_constant.dart';
 import '../../admob/presentation/banner_ad_widget.dart';
 import 'component/chose_team_widget.dart';

@@ -1,13 +1,13 @@
-import 'package:baseball_quiz_app/feature/quiz/presentation/play_quiz/component/input_answer_text_field.dart';
-import 'package:baseball_quiz_app/feature/quiz/presentation/play_quiz/play_daily_quiz/daily_quiz_submit_answer_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/quiz_widget.dart';
+import '../component/input_answer_text_field.dart';
 import '../component/quiz_event_buttons.dart';
 import '../component/retire_button.dart';
+import 'daily_quiz_submit_answer_button.dart';
 import 'life_widget.dart';
 
 class PlayDailyQuizPage extends StatelessWidget {
