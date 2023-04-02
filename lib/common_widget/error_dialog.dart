@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../common_widget/my_button.dart';
-import '../../../util/constant/button_type_constant.dart';
-import '../../../util/error_message.dart';
+import '../util/constant/button_type_constant.dart';
+import '../util/error_message.dart';
+import 'my_button.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
