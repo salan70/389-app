@@ -75,10 +75,12 @@ jobs:
         run: |
           pwd
           ls -la
-          cd build/ios/ipa/
+          cd ./build/ios/ipa/
+          echo "after cd ------"
           pwd 
           ls -la
           cd ../../..
           pwd
-          xcrun altool --upload-app --type ios -f "build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
+          echo "before upload ------"
+          xcrun altool --upload-app --type ios -f "./build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
           pwd
