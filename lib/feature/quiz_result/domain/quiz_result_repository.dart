@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/domain/hitter_quiz.dart';
+import '../../search_condition/domain/search_condition.dart';
 import 'daily_hitter_quiz_result.dart';
 import 'hitter_quiz_result.dart';
 
@@ -27,7 +28,11 @@ abstract class QuizResultRepository {
   );
 
   /// normalQuizの結果を作成する
-  Future<void> createNormalQuizResult(User user, HitterQuiz hitterQuiz);
+  Future<void> createNormalQuizResult(
+    User user,
+    HitterQuiz hitterQuiz,
+    SearchCondition searchCondition,
+  );
 
   /// normalQuizの結果をリストで取得する（作成日の降順）
   Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user);

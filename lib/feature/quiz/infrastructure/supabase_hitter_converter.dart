@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 import '../../../../../util/constant/hitting_stats_constant.dart';
-import '../../domain/hitter_quiz.dart';
-import '../../domain/stats_value.dart';
+import '../domain/hitter_quiz.dart';
+import '../domain/stats_value.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
