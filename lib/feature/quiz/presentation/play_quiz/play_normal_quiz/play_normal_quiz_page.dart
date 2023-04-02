@@ -42,7 +42,7 @@ class PlayNormalQuizPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 8),
                 const Center(
                   child: SizedBox(
                     width: buttonWidth,

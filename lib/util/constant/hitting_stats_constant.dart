@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/constant/colors_constant.dart';
 import 'package:flutter/material.dart';
 
 enum StatsType {
@@ -120,7 +121,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.ss.label,
           style: const TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: ssRankColor,
           ),
         );
       case ResultRank.s:
@@ -128,7 +129,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.s.label,
           style: const TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: sRankColor,
           ),
         );
       case ResultRank.a:
@@ -136,7 +137,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.a.label,
           style: const TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: aRankColor,
           ),
         );
       case ResultRank.b:
@@ -144,7 +145,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.b.label,
           style: const TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: bRankColor,
           ),
         );
       case ResultRank.c:
@@ -152,15 +153,15 @@ extension ResultRankExt on ResultRank {
           ResultRank.c.label,
           style: const TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: cRankColor,
           ),
         );
       case ResultRank.incorrect:
         return const Text(
-          '✕',
+          '✗',
           style: TextStyle(
             fontSize: smallLabelFontSize,
-            color: Colors.blue,
+            color: primaryColor,
           ),
         );
     }
@@ -173,7 +174,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.ss.label,
           style: const TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: ssRankColor,
           ),
         );
       case ResultRank.s:
@@ -181,7 +182,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.s.label,
           style: const TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: sRankColor,
           ),
         );
       case ResultRank.a:
@@ -189,7 +190,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.a.label,
           style: const TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: aRankColor,
           ),
         );
       case ResultRank.b:
@@ -197,7 +198,7 @@ extension ResultRankExt on ResultRank {
           ResultRank.b.label,
           style: const TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: bRankColor,
           ),
         );
       case ResultRank.c:
@@ -205,15 +206,15 @@ extension ResultRankExt on ResultRank {
           ResultRank.c.label,
           style: const TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: cRankColor,
           ),
         );
       case ResultRank.incorrect:
         return const Text(
-          '✕',
+          '✗',
           style: TextStyle(
             fontSize: largeLabelFontSize,
-            color: Colors.blue,
+            color: primaryColor,
           ),
         );
     }
