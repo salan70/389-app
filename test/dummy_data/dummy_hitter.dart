@@ -1,8 +1,8 @@
 
 import 'package:baseball_quiz_app/feature/quiz/domain/hitter_quiz.dart';
 import 'package:baseball_quiz_app/feature/quiz/domain/stats_value.dart';
-import 'package:baseball_quiz_app/feature/quiz/infrastructure/supabase/entity/hitting_stats.dart';
-import 'package:baseball_quiz_app/feature/quiz/infrastructure/supabase/entity/supabase_hitter.dart';
+import 'package:baseball_quiz_app/feature/quiz/infrastructure/entity/hitting_stats.dart';
+import 'package:baseball_quiz_app/feature/quiz/infrastructure/entity/supabase_hitter.dart';
 import 'package:baseball_quiz_app/feature/search_condition/domain/search_condition.dart';
 import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 
