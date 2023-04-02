@@ -1,10 +1,10 @@
-import 'package:baseball_quiz_app/feature/search_condition/domain/search_condition.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/domain/hitter_quiz.dart';
+import '../../search_condition/domain/search_condition.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
