@@ -16,12 +16,14 @@ class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    final deviceHeight = MediaQuery.of(context).size.height;
     const buttonWidth = 240.0;
 
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 40, top: 100, right: 40),
+          padding: EdgeInsets.only(left: 40, top: deviceHeight / 15, right: 40),
+          // padding: const EdgeInsets.only(left: 40, top: 100, right: 40),
           child: Center(
             child: Column(
               children: [
