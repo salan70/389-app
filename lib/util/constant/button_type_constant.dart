@@ -17,6 +17,7 @@ extension ButtonTypeExt on ButtonType {
             borderRadius: BorderRadius.circular(8),
           ),
           backgroundColor: primaryColor,
+          disabledBackgroundColor: primaryColor.withOpacity(0.4),
           foregroundColor: backgroundColor,
         );
 
