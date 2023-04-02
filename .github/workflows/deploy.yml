@@ -59,7 +59,6 @@ jobs:
           echo -n ${{ secrets.PROVISIONING_PROFILE }} | base64 -d > ~/Library/MobileDevice/Provisioning\ Profiles/389.mobileprovision
 
       # 署名をする
-      # 署名をする
       - name: Import Code-Signing Certificates
         uses: Apple-Actions/import-codesign-certs@v1 # 外部パッケージを使っている 
         with:
