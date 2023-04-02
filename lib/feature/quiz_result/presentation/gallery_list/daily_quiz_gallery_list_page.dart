@@ -21,7 +21,7 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
     final lastDayOfInAppThisMonth = todayInApp.lastDayOfMonth;
 
     return TableCalendar<dynamic>(
-      firstDay: DateTime.utc(2023, 2),
+      firstDay: DateTime.utc(2023, 4),
       // 現在のゲーム内月の最終日をlastDayに設定
       lastDay: lastDayOfInAppThisMonth,
       daysOfWeekHeight: 24,
