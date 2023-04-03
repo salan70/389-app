@@ -19,11 +19,11 @@
 
 | 履歴リスト画面（通常） | 履歴リスト画面（デイリー） | 
 | ---- | ---- | 
-| <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="readme/daily_garalley_list.png" width="160px"> | 
+| <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="assets/readme/daily_garalley_list.png" width="160px"> | 
 
 | 履歴詳細画面（通常） | 
 | ---- | 
-| <img src="readme/normal_garalley_detail.png" width="160px"> | 
+| <img src="assets/readme/normal_garalley_detail.png" width="160px"> | 
 
 # 主な機能
 
