@@ -60,7 +60,7 @@ NPBに所属している野手の成績クイズをプレイすることがで�
 
 ## feature
 
-以下記事を参考にしています。  
+以下記事を参考にさせていただきました。  
 https://codewithandrea.com/articles/flutter-project-structure/
 
 featureの配下には、auth, quiz, search_conditionといった機能（関心）毎にディレクトを作成しており、  
@@ -74,7 +74,7 @@ featureの配下には、auth, quiz, search_conditionといった機能（関心
 
 ## util
 
-例外やロガー、定数などを定義しています
+例外やロガー、定数などを定義しています。
 
 # 使用技術
 
