@@ -9,19 +9,19 @@
 
 # スクリーンショット
 
-| TOP画面 | クイズ設定画面 | 
+| TOP | クイズ設定 | 
 | ---- | ---- | 
 | <img src="assets/readme/top.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
 
-| クイズプレイ画面 | クイズ結果画面 | 
+| クイズプレイ | クイズ結果 | 
 | ---- | ---- | 
 | <img src="assets/readme/normal_quiz.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
 
-| 履歴リスト画面（通常） | 履歴リスト画面（デイリー） | 
+| 履歴リスト（通常） | 履歴リスト（デイリー） | 
 | ---- | ---- | 
 | <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="assets/readme/daily_garalley_list.png" width="160px"> | 
 
-| 履歴詳細画面（通常） | 
+| 履歴詳細（通常） | 
 | ---- | 
 | <img src="assets/readme/normal_garalley_detail.png" width="160px"> | 
 
