@@ -11,19 +11,19 @@
 
 | TOP画面 | クイズ設定画面 | 
 | ---- | ---- | 
-| <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/top.png" width="160px"> | <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/search_condition.png" width="160px"> | 
+| <img src="assets/readme/top.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
 
 | クイズプレイ画面 | クイズ結果画面 | 
 | ---- | ---- | 
-| <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/normal_quiz.png" width="160px"> | <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/search_condition.png" width="160px"> | 
+| <img src="assets/readme/normal_quiz.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
 
 | 履歴リスト画面（通常） | 履歴リスト画面（デイリー） | 
 | ---- | ---- | 
-| <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/normal_garalley_list.png" width="160px"> | <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/daily_garalley_list.png" width="160px"> | 
+| <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="readme/daily_garalley_list.png" width="160px"> | 
 
 | 履歴詳細画面（通常） | 
 | ---- | 
-| <img src="/Users/odatetsuo/Projects/baseball_quiz_app/assets/readme/normal_garalley_detail.png" width="160px"> | 
+| <img src="readme/normal_garalley_detail.png" width="160px"> | 
 
 # 主な機能
 
