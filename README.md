@@ -9,21 +9,13 @@
 
 # スクリーンショット
 
-| TOP | クイズ設定 | 
-| ---- | ---- | 
-| <img src="assets/readme/top.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
+| TOP | クイズ設定 | クイズプレイ | クイズ結果 | 
+| ---- | ---- | ---- | ---- | 
+| <img src="assets/readme/top.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | <img src="assets/readme/normal_quiz.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
 
-| クイズプレイ | クイズ結果 | 
-| ---- | ---- | 
-| <img src="assets/readme/normal_quiz.png" width="160px"> | <img src="assets/readme/search_condition.png" width="160px"> | 
-
-| 履歴リスト（通常） | 履歴リスト（デイリー） | 
-| ---- | ---- | 
-| <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="assets/readme/daily_garalley_list.png" width="160px"> | 
-
-| 履歴詳細（通常） | 
-| ---- | 
-| <img src="assets/readme/normal_garalley_detail.png" width="160px"> | 
+| 履歴リスト（通常） | 履歴リスト（デイリー） | 履歴詳細（通常） | 
+| ---- | ---- | ---- | 
+| <img src="assets/readme/normal_garalley_list.png" width="160px"> | <img src="assets/readme/daily_garalley_list.png" width="160px"> | <img src="assets/readme/normal_garalley_detail.png" width="160px"> | 
 
 # 主な機能
 
