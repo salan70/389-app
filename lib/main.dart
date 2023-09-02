@@ -10,32 +10,39 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'application/loading/loading_state.dart';
-import 'application/quiz/daily_quiz/daily_quiz_state.dart';
-import 'application/quiz/hitter_quiz/hitter_quiz_state.dart';
-import 'application/user/user_service.dart';
-import 'application/widget/widget_state.dart';
-import 'domain/entity/search_condition.dart';
-import 'domain/repository/auth_repository.dart';
-import 'domain/repository/daily_quiz_repository.dart';
-import 'domain/repository/hitter_repository.dart';
-import 'domain/repository/search_condition_repository.dart';
-import 'domain/repository/user_info_repository.dart';
-import 'infrastructure/firebase/auth/firebase_auth_repository.dart';
-import 'infrastructure/firebase/daily_quiz/firebase_daily_quiz_repository.dart';
-import 'infrastructure/firebase/firebase_providers.dart';
-import 'infrastructure/firebase/user_info/firebase_user_info_repository.dart';
-import 'infrastructure/hive/hive_search_condition_repository.dart';
-import 'infrastructure/supabase/hitter/supabase_hitter_repository.dart';
-import 'infrastructure/supabase/supabase_providers.dart';
-import 'presentation/component/quiz_loading_widget.dart';
-import 'presentation/page/top/top_page.dart';
-import 'util/constant/color_constant.dart';
-import 'util/constant/search_condition_constant.dart';
+import 'feature/app_info/application/app_info_state.dart';
+import 'feature/app_info/domain/app_info_repository.dart';
+import 'feature/app_info/infrastructure/firebase_app_info_repository.dart';
+import 'feature/auth/application/auth_service.dart';
+import 'feature/auth/domain/auth_repository.dart';
+import 'feature/auth/domain/user_info_repository.dart';
+import 'feature/auth/infrastructure/firebase_auth_provider.dart';
+import 'feature/auth/infrastructure/firebase_auth_repository.dart';
+import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
+import 'feature/daily_quiz/application/daily_quiz_state.dart';
+import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
+import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
+import 'feature/loading/application/loading_state.dart';
+import 'feature/loading/presentation/loading_widget.dart';
+import 'feature/quiz/application/hitter_quiz_state.dart';
+import 'feature/quiz/domain/hitter_repository.dart';
+import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
+import 'feature/quiz/infrastructure/supabase_providers.dart';
+import 'feature/quiz_result/application/quiz_result_state.dart';
+import 'feature/quiz_result/domain/quiz_result_repository.dart';
+import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart';
+import 'feature/search_condition/domain/search_condition.dart';
+import 'feature/search_condition/domain/search_condition_repository.dart';
+import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
+import 'feature/search_condition/util/search_condition_constant.dart';
+import 'feature/top/presentation/top_page.dart';
+import 'util/constant/colors_constant.dart';
+import 'util/extension/widget_ref_extension.dart';
+import 'util/firebase_instance.dart';
 import 'util/logger.dart';
-import 'util/widget_ref_extension.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -81,6 +88,20 @@ Future<void> main() async {
         dailyQuizRepositoryProvider.overrideWith(
           (ref) {
             return FirebaseDailyQuizRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
+        quizResultRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseQuizResultRepository(
+              ref.watch(firestoreProvider),
+            );
+          },
+        ),
+        appInfoRepositoryProvider.overrideWith(
+          (ref) {
+            return FirebaseAppInfoRepository(
               ref.watch(firestoreProvider),
             );
           },
@@ -134,6 +155,9 @@ Future<void> initialize() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_API_KEY']!,
   );
+
+  // table_calendarを日本語で表示するために必要
+  await initializeDateFormatting();
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -165,30 +189,40 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // NotifierProviderの結果をハンドリングする
+    // AsyncValueを返すStateProviderの結果をハンドリングする
+    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも
+    // Providerによっては複数のWidgetで使用するためここで書いている
     ref.handleAsyncValue<void>(
       hitterQuizStateProvider,
     );
     ref.handleAsyncValue<void>(
       dailyQuizStateProvider,
     );
+    ref.handleAsyncValue<void>(
+      quizResultFunctionStateProvider,
+    );
+    ref.handleAsyncValue<void>(
+      checkNeedUpdateStateProvider,
+    );
 
     // Userを作成
-    ref.read(userServiceProvider).login();
+    ref.read(authServiceProvider).login();
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         textTheme: GoogleFonts.rocknRollOneTextTheme().copyWith(
-          bodyText2: GoogleFonts.rocknRollOneTextTheme().bodyText2?.copyWith(
+          bodyMedium: GoogleFonts.rocknRollOneTextTheme().bodyMedium?.copyWith(
                 fontSize: 16,
               ),
-          button: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
+          labelLarge: GoogleFonts.rocknRollOneTextTheme().labelLarge?.copyWith(
                 fontSize: 16,
               ),
-          headline5: GoogleFonts.rocknRollOneTextTheme().button?.copyWith(
-                color: primaryColor,
-              ),
+          headlineSmall:
+              GoogleFonts.rocknRollOneTextTheme().headlineSmall?.copyWith(
+                    color: primaryColor,
+                  ),
         ),
         // ボタン
         primaryColor: highlightColor,
@@ -209,7 +243,7 @@ class _MyApp extends ConsumerState<MyApp> {
             children: [
               child!,
               // ローディングを表示する
-              if (isLoading) const QuizLoadingWidget(),
+              if (isLoading) const LoadingWidget(),
             ],
           );
         },

@@ -1,5 +1,5 @@
-import 'package:baseball_quiz_app/domain/entity/search_condition.dart';
-import 'package:baseball_quiz_app/util/constant/hitting_stats/stats_type.dart';
+import 'package:baseball_quiz_app/feature/search_condition/domain/search_condition.dart';
+import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
 
 /// 1つの球団を選択しているダミーデータ
 final dummySearchCondition1 = SearchCondition(
@@ -10,7 +10,6 @@ final dummySearchCondition1 = SearchCondition(
   minHits: 0,
   minHr: 0,
   selectedStatsList: [
-    StatsType.year.label,
     StatsType.team.label,
     StatsType.avg.label,
     StatsType.hr.label,
@@ -28,7 +27,6 @@ final dummySearchCondition2 = SearchCondition(
   minHits: 0,
   minHr: 0,
   selectedStatsList: [
-    StatsType.year.label,
     StatsType.team.label,
     StatsType.avg.label,
     StatsType.hr.label,
