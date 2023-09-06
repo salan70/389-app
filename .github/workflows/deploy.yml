@@ -24,6 +24,15 @@ jobs:
     steps:
       - name: Checkout # step に名前をつけられる なくてもいい
         uses: actions/checkout@v3
+      
+      # 空の.envを作成
+      # 必要あれば、githubのSECRET情報から値を取得して.envに書き込む
+      # 参考
+      # https://zenn.dev/big_tanukiudon/articles/fc1a2ff562ce3d#2.-github-actions-%E3%81%AEstep%E3%82%BB%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7.env%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B
+      - name: Create dot env file
+        shell: bash
+        run: |
+          touch .env
 
       - name: Run pre-process script
         shell: bash
