@@ -70,7 +70,20 @@ jobs:
         # GITHUB_RUN_NUMBER をビルドナンバーに指定することで被りがないようにしている
         run: flutter build ipa --dart-define=FLAVOR=prod --export-options-plist=ExportOptions.plist --build-number ${GITHUB_RUN_NUMBER}
 
-      # AppStoreConnect にアップロードする --validate-app
-      - name: Upload to AppStoreConnect
-        # run: xcrun altool --upload-app --type ios -f "./build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
-        run: xcrun altool --validate-app --type ios -f "./build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
+      - name: Detect path for ipa file
+        run: |
+          echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
+
+      # AppStoreConnect にアップロードする
+      - name: Upload to App Store Connect
+        id: upload
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PASS: ${{ secrets.APPLE_APP_PASS }}
+        run: xcrun altool --upload-app --type ios -f "$IPA_PATH" -u "$APPLE_ID" -p "$APPLE_APP_PASS"
+
+
+      # # AppStoreConnect にアップロードする --validate-app
+      # - name: Upload to AppStoreConnect
+      #   # run: xcrun altool --upload-app --type ios -f "./build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
+      #   run: xcrun altool --validate-app --type ios -f "./build/ios/ipa/.389.ipa" -u "${{ secrets.APPLE_ID }}" -p "${{ secrets.APPLE_APP_PASS }}"
