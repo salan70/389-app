@@ -72,7 +72,7 @@ jobs:
 
       - name: Detect path for ipa file
         run: |
-          echo "IPA_PATH=$(find build/ios/archive -type f -name '*.ipa')" >> $GITHUB_ENV
+          echo "IPA_PATH=$(find build/ios/archive/ -type f -name '*.ipa')" >> $GITHUB_ENV
 
       - name: Echo IPA_PATH
         run: echo "IPA_PATH=${{ env.IPA_PATH }}"  
