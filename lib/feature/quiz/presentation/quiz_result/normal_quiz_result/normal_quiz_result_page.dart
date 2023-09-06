@@ -31,7 +31,6 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
     Future(() async {
       final shouldRequestAppReview =
           await appReviewService.shouldRequestAppReview();
-      print('test $shouldRequestAppReview');
       if (shouldRequestAppReview) {
         await appReviewService.maybeRequestAppReview();
       }
