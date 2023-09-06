@@ -77,7 +77,8 @@ jobs:
 
       - name: Build ipa
         id: build
-        run: flutter build ipa --export-options-plist=./ios/ExportOptions.plist
+        # GITHUB_RUN_NUMBER をビルドナンバーに指定することで被りがないようにしている
+        run: flutter build ipa --dart-define=FLAVOR=prod --export-options-plist=ExportOptions.plist --build-number ${GITHUB_RUN_NUMBER}
 
       - name: Detect path for ipa file
         run: |
