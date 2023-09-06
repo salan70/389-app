@@ -74,6 +74,9 @@ jobs:
         run: |
           echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
 
+      - name: Echo IPA_PATH
+        run: echo "IPA_PATH=${{ env.IPA_PATH }}"  
+
       # AppStoreConnect にアップロードする
       - name: Upload to App Store Connect
         id: upload
