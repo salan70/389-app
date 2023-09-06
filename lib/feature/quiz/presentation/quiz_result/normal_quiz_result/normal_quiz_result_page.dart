@@ -1,5 +1,7 @@
+import 'package:baseball_quiz_app/feature/app_review/application/app_review_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../util/constant/button_type_constant.dart';
@@ -11,8 +13,30 @@ import '../component/custom_confetti_widget.dart';
 import '../component/result_text.dart';
 import 'replay_button.dart';
 
-class NormalQuizResultPage extends StatelessWidget {
+class NormalQuizResultPage extends ConsumerStatefulWidget {
   const NormalQuizResultPage({super.key});
+
+  @override
+  ConsumerState<NormalQuizResultPage> createState() =>
+      _NormalQuizResultPageState();
+}
+
+class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
+  @override
+  void initState() {
+    super.initState();
+
+    final appReviewService = ref.read(appReviewServiceProvider);
+
+    Future(() async {
+      final shouldRequestAppReview =
+          await appReviewService.shouldRequestAppReview();
+      print('test $shouldRequestAppReview');
+      if (shouldRequestAppReview) {
+        await appReviewService.maybeRequestAppReview();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

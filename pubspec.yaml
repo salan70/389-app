@@ -28,6 +28,7 @@ dependencies:
   hive_flutter: ^1.1.0
   # 日付を表示用にフォーマットするために使用
   intl: ^0.18.0
+  in_app_review: ^2.0.6
   json_annotation: ^4.7.0
   logger: ^1.1.0
   # 現在時刻をネットワークから取得するために使用
