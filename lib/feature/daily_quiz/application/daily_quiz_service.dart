@@ -6,7 +6,7 @@ import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
 import 'daily_quiz_state.dart';
 
-final dailyQuizServiceProvider = Provider.autoDispose<DailyQuizService>(
+final dailyQuizServiceProvider = Provider.autoDispose<DailyQuizService>( 
   DailyQuizService.new,
 );
 

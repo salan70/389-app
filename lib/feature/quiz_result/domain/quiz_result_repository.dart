@@ -42,4 +42,10 @@ abstract class QuizResultRepository {
 
   /// 指定したdailyQuizの結果が存在するかどうかを返す
   Future<bool> existSpecifiedDailyQuizResult(User user, String dailyQuizId);
+
+  /// normalQuizのプレイ回数を返す
+  Future<int> fetchPlayedNormalQuizCount(User user);
+
+  /// normalQuizの正解数を返す
+  Future<int> fetchCorrectedNormalQuizCount(User user);
 }
