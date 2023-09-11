@@ -23,6 +23,7 @@ class TopPage extends ConsumerStatefulWidget {
 class _TopPageState extends ConsumerState<TopPage> {
   @override
   void initState() {
+    print('test: start initState()');
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // バージョンチェック

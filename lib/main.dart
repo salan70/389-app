@@ -114,6 +114,7 @@ Future<void> main() async {
 
 Future<void> initialize() async {
   WidgetsFlutterBinding.ensureInitialized();
+  print('test: initialize!!!!!!!!!!!!!!!!!!!!!!11');
 
   // .envの読み込み
   await dotenv.load();
@@ -158,6 +159,7 @@ Future<void> initialize() async {
 
   // table_calendarを日本語で表示するために必要
   await initializeDateFormatting();
+  print('test: finish initialize!!!!!!!!!!');
 }
 
 class MyApp extends ConsumerStatefulWidget {

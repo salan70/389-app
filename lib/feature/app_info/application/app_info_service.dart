@@ -20,6 +20,7 @@ class AppInfoService {
 
   /// アップデートが必要かどうかを返す
   Future<bool> needUpdate() async {
+    print('test: start needUpdate()');
     final notifier = ref.read(checkNeedUpdateStateProvider.notifier);
     notifier.state = const AsyncValue.loading();
 
@@ -32,6 +33,7 @@ class AppInfoService {
     late Version requiredAppVersion;
     notifier.state = await AsyncValue.guard(() async {
       if (Platform.isAndroid) {
+        print('test: platform is android');
         requiredAppVersion =
             await appInfoRepository.fetchRequiredAppVersionForAndroid();
       } else {

@@ -19,8 +19,10 @@ class FirebaseAppInfoRepository implements AppInfoRepository {
   /// Androidでプレイするのに必要なアプリバージョンを取得する
   @override
   Future<Version> fetchRequiredAppVersionForAndroid() async {
+    print('test: start fetchRequiredAppVersionForAndroid()');
     final doc =
         await firestore.collection('config').doc('configDocument').get();
+    print('test: doc is $doc');
     return Version.parse(doc.data()!['requiredAppVersionForAndroid'] as String);
   }
 }
