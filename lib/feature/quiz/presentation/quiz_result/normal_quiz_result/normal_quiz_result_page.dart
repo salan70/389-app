@@ -40,7 +40,7 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#389quiz\n$appStoreUrl';
+    const shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
     const buttonWidth = 200.0;
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある
