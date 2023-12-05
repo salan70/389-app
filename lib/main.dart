@@ -124,7 +124,7 @@ Future<void> initialize() async {
   // Firebase Analytics
   // アプリ起動時にイベントを送信
   await FirebaseAnalytics.instance.logEvent(
-    name: 'アプリを起動',
+    name: 'launch_app',
   );
 
   // Firebase Crashlytics
