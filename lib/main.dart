@@ -13,6 +13,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import 'feature/app_info/application/app_info_state.dart';
 import 'feature/app_info/domain/app_info_repository.dart';
@@ -159,6 +161,10 @@ Future<void> initialize() async {
 
   // table_calendarを日本語で表示するために必要
   await initializeDateFormatting();
+
+  // ローカルPUSH通知を日時に応じて送信するために必要
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
 }
 
 class MyApp extends ConsumerStatefulWidget {

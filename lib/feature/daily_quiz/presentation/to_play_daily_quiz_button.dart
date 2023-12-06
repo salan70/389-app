@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/confirm_dialog.dart';
 import '../../../common_widget/my_button.dart';
+import '../../push_notification_local/application/local_push_notification_service.dart';
 import '../../quiz/application/hitter_quiz_service.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
@@ -26,6 +27,12 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
       buttonName: 'to_play_daily_quiz_button',
       buttonType: buttonType,
       onPressed: () async {
+        // todo: Delete this code after debug.
+        await ref
+            .read(localPushNotificationServiceProvider)
+            .scheduleStartDailyQuizNotification();
+        return;
+
         final dailyQuizService = ref.read(dailyQuizServiceProvider);
         await dailyQuizService.fetchDailyQuiz();
         // 値を取得してからdailyQuizStateProviderをreadする
