@@ -41,10 +41,7 @@ class _TopPageState extends ConsumerState<TopPage> {
       // ローカルPUSH通知の初期設定を行う。
       await ref
           .read(localPushNotificationServiceProvider)
-          .settingNotification();
-      await ref
-          .read(localPushNotificationServiceProvider)
-          .scheduleStartDailyQuizNotification();
+          .onAppLaunch();
     });
   }
 

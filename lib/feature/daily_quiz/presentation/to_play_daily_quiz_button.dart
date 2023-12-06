@@ -27,12 +27,6 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
       buttonName: 'to_play_daily_quiz_button',
       buttonType: buttonType,
       onPressed: () async {
-        // todo: Delete this code after debug.
-        await ref
-            .read(localPushNotificationServiceProvider)
-            .scheduleStartDailyQuizNotification();
-        return;
-
         final dailyQuizService = ref.read(dailyQuizServiceProvider);
         await dailyQuizService.fetchDailyQuiz();
         // 値を取得してからdailyQuizStateProviderをreadする
@@ -63,6 +57,14 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
                         await ref
                             .read(quizResultServiceProvider)
                             .createDailyQuizResult();
+
+                        // ローカルプッシュ通知のスケジュールを更新し、
+                        // プレイ済みなのにリマインドが通知されるのを防ぐ。
+                        await ref
+                            .read(localPushNotificationServiceProvider)
+                            .scheduleRemindDailyQuizNotification(
+                              isDoneTodaysDailyQuiz: true,
+                            );
 
                         await navigator.push(
                           MaterialPageRoute<Widget>(
