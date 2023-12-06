@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../common_widget/back_button.dart' as common;
-import '../../../../util/constant/button_type_constant.dart';
+import '../../../../common_widget/my_button.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
 import '../../../quiz/presentation/component/result_quiz_widget.dart';
 import '../../../quiz/presentation/component/share_button.dart';

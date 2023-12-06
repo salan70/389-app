@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widget/my_button.dart';
-import '../../../../util/constant/button_type_constant.dart';
 import '../../../search_condition/presentation/prepare_quiz_page.dart';
 
 class ToPrepareQuizButton extends StatelessWidget {
@@ -15,6 +14,7 @@ class ToPrepareQuizButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
+      buttonName: 'to_prepare_quiz_button',
       buttonType: buttonType,
       child: FittedBox(
         child: Text(

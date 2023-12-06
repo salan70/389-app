@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../util/constant/button_type_constant.dart';
 import 'my_button.dart';
 
 class ConfirmDialog extends StatelessWidget {
@@ -20,11 +19,13 @@ class ConfirmDialog extends StatelessWidget {
       content: Text(confirmText),
       actions: <Widget>[
         MyButton(
+          buttonName: 'confirm_no_button',
           buttonType: ButtonType.sub,
           child: const Text('いいえ'),
           onPressed: () => Navigator.pop(context),
         ),
         MyButton(
+          buttonName: 'confirm_yes_button',
           buttonType: ButtonType.alert,
           onPressed: onPressedYes,
           child: const Text('はい'),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../../quiz_result/application/quiz_result_state.dart';
@@ -21,6 +20,7 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
     final submittedHitter = ref.watch(submittedHitterProvider);
 
     return MyButton(
+      buttonName: 'submit_answer_button',
       buttonType: buttonType,
       onPressed: submittedHitter == null
           ? null

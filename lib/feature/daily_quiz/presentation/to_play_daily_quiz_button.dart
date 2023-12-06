@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/confirm_dialog.dart';
 import '../../../common_widget/my_button.dart';
-import '../../../util/constant/button_type_constant.dart';
 import '../../quiz/application/hitter_quiz_service.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
@@ -24,6 +23,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
         '\n\n※プレイ中にアプリが終了された場合、不正解となります。';
 
     return MyButton(
+      buttonName: 'to_play_daily_quiz_button',
       buttonType: buttonType,
       onPressed: () async {
         final dailyQuizService = ref.read(dailyQuizServiceProvider);
@@ -89,6 +89,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
                 content: const Text('本日分はプレイ済みです。\n\n※毎日19時に更新されます。'),
                 actions: [
                   MyButton(
+                    buttonName: 'ok_button_in_already_played_daily_quiz_dialog',
                     buttonType: ButtonType.main,
                     onPressed: () => Navigator.of(context).pop(),
                     child: const Text('OK'),

@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
+import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';

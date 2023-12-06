@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/async_value_handler.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../quiz/application/hitter_quiz_state.dart';
 import '../../../../quiz/domain/hitter_quiz.dart';
 
@@ -18,6 +17,7 @@ class ShowAnswerButton extends ConsumerWidget {
       value: ref.watch(hitterQuizStateProvider),
       builder: (HitterQuiz hitterQuiz) {
         return MyButton(
+          buttonName: 'show_answer_button',
           buttonType: buttonType,
           onPressed: () {
             showDialog<void>(
@@ -29,6 +29,7 @@ class ShowAnswerButton extends ConsumerWidget {
                   content: Text('${hitterQuiz.name}選手でした！'),
                   actions: [
                     MyButton(
+                      buttonName: 'OK',
                       buttonType: ButtonType.main,
                       onPressed: () => Navigator.of(context).pop(),
                       child: const Text('OK'),

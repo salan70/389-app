@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../application/answer_state.dart';
@@ -37,7 +36,6 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
             settings: const RouteSettings(
               name: '/daily_quiz__resultpage',
             ),
-            
           ),
         );
       }
@@ -82,6 +80,7 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
     }
 
     return MyButton(
+      buttonName: 'submit_answer_button',
       buttonType: buttonType,
       onPressed: submittedHitter == null
           ? null
