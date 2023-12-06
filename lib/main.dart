@@ -1,4 +1,5 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -124,7 +125,7 @@ Future<void> initialize() async {
   // Firebase Analytics
   // アプリ起動時にイベントを送信
   await FirebaseAnalytics.instance.logEvent(
-    name: 'アプリを起動',
+    name: 'launch_app',
   );
 
   // Firebase Crashlytics
@@ -236,6 +237,9 @@ class _MyApp extends ConsumerState<MyApp> {
         ),
       ),
       navigatorKey: ref.watch(navigatorKeyProvider),
+      navigatorObservers: [
+        ref.watch(analyticsObserverProvider),
+      ],
       builder: (context, child) => Consumer(
         builder: (context, ref, _) {
           final isLoading = ref.watch(loadingProvider);

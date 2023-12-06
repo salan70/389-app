@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
-import '../../../../util/constant/button_type_constant.dart';
 import '../../application/share_quiz_result_service.dart';
 
 class ShareButton extends ConsumerWidget {
@@ -20,6 +19,7 @@ class ShareButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MyButton(
+      buttonName: 'share_button',
       buttonType: buttonType,
       onPressed: () {
         ref.read(shareQuizResultServiceProvider).shareImageAndText(

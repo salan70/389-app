@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../util/constant/button_type_constant.dart';
 import '../util/error_message.dart';
 import 'my_button.dart';
 
@@ -23,6 +22,7 @@ class ErrorDialog extends StatelessWidget {
       content: Text(error.errorMessage),
       actions: [
         MyButton(
+          buttonName: 'error_dialog_ok_button',
           buttonType: ButtonType.main,
           onPressed: () => Navigator.of(context).pop(),
           child: const Text('OK'),

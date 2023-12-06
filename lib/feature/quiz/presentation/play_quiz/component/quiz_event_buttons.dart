@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../application/hitter_quiz_service.dart';
 
 class QuizEventButtons extends ConsumerWidget {
@@ -20,6 +19,7 @@ class QuizEventButtons extends ConsumerWidget {
         SizedBox(
           width: buttonWidth,
           child: MyButton(
+            buttonName: 'show_all_stat_button',
             buttonType: ButtonType.sub,
             onPressed: () {
               // 回答入力用のTextFieldのフォーカスを外す
@@ -46,6 +46,7 @@ class QuizEventButtons extends ConsumerWidget {
         SizedBox(
           width: buttonWidth,
           child: MyButton(
+            buttonName: 'show_next_stat_button',
             buttonType: ButtonType.sub,
             onPressed: () {
               // 回答入力用のTextFieldのフォーカスを外す

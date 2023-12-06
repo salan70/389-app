@@ -1,32 +1,33 @@
-import 'dart:io';
-
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:roggle/roggle.dart';
 
-const _loggerName = '[APP]';
-
-/// どこから呼び出してOK
-///
-/// ログレベル毎の使い分けは次の通り
-///
-/// verbose: 垂れ流し系、大量に出力される場合
-///
-/// debug: デバッグ時に一時的に使う場合
-///
-/// info: ユーザーイベントなど、通常のログ
-///
-/// warning: 注意喚起を促す
-///
-/// error: エラー発生時
-///
-/// wtf: あり得ないことが起きた時
-final logger = Roggle(
-  printer: SinglePrettyPrinter(
-    loggerName: _loggerName,
-    // error 以上のときはスタックトレースを出力する
-    stackTraceLevel: Level.error,
-    // iOS はカラー非対応
-    colors: !Platform.isIOS,
-    // ログが長くなるので非表示
-    printCaller: false,
-  ),
-);
+final logger = kReleaseMode
+    ? Roggle.crashlytics(
+        printer: CrashlyticsPrinter(
+          // error 以上のログを送信する。
+          errorLevel: Level.error,
+          onError: (event) {
+            FirebaseCrashlytics.instance.recordError(
+              event.exception,
+              event.stack,
+              // エラーレポートを即時送信する。
+              fatal: true,
+            );
+          },
+          onLog: (event) {
+            // ここで記録したログは、firebase コンソールのログタブに表示される。
+            FirebaseCrashlytics.instance.log(event.message);
+          },
+        ),
+      )
+    : Roggle(
+        printer: SinglePrettyPrinter(
+          loggerName: '[APP]',
+          stackTraceLevel: Level.error,
+          stackTraceMethodCount: 10,
+          stackTracePrefix: '>>> ',
+          // ログが長くなるので非表示。
+          printCaller: false,
+        ),
+      );

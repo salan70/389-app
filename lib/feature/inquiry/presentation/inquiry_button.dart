@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/my_button.dart';
-import '../../../util/constant/button_type_constant.dart';
 import '../application/inquiry_service.dart';
 
 class InquiryButton extends ConsumerWidget {
@@ -13,6 +12,7 @@ class InquiryButton extends ConsumerWidget {
     final inquiryService = ref.watch(inquiryServiceProvider);
 
     return MyButton(
+      buttonName: 'to_inquiry_button',
       buttonType: ButtonType.sub,
       onPressed: () async {
         final body = await inquiryService.createInquiryBody();

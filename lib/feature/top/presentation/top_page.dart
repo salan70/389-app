@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../util/constant/button_type_constant.dart';
+import '../../../common_widget/my_button.dart';
 import '../../admob/presentation/banner_ad_widget.dart';
 import '../../app_info/application/app_info_service.dart';
 import '../../app_info/presentation/force_update_dialog.dart';

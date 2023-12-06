@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../util/constant/button_type_constant.dart';
 import 'my_button.dart';
 
 class BackToTopButton extends StatelessWidget {
@@ -11,6 +10,7 @@ class BackToTopButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
+      buttonName: 'back_to_top_button',
       buttonType: buttonType,
       onPressed: () {
         Navigator.of(context).popUntil((route) => route.isFirst);

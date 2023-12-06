@@ -17,4 +17,7 @@ class SearchCondition with _$SearchCondition {
 
   factory SearchCondition.fromJson(Map<String, dynamic> json) =>
       _$SearchConditionFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson();
 }
