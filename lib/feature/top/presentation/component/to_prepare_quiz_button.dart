@@ -29,6 +29,9 @@ class ToPrepareQuizButton extends StatelessWidget {
           context,
           MaterialPageRoute<Widget>(
             builder: (_) => const PrepareQuizPage(),
+            settings: const RouteSettings(
+              name: '/prepare_quiz_page',
+            ),
           ),
         );
       },

@@ -19,6 +19,9 @@ class ToGalleryButton extends StatelessWidget {
           MaterialPageRoute(
             fullscreenDialog: true,
             builder: (context) => const BaseGalleryListPage(),
+            settings: const RouteSettings(
+              name: '/base_gallery_list_page',
+            ),
           ),
         );
       },

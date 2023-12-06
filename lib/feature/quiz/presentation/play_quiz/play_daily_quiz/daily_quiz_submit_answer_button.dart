@@ -34,6 +34,10 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
         await Navigator.of(context).push(
           MaterialPageRoute<Widget>(
             builder: (_) => const DailyQuizResultPage(),
+            settings: const RouteSettings(
+              name: '/daily_quiz__resultpage',
+            ),
+            
           ),
         );
       }

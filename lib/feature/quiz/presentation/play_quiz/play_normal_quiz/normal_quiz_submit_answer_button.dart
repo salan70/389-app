@@ -53,6 +53,9 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
                   await navigator.push(
                     MaterialPageRoute<Widget>(
                       builder: (_) => normalQuizResultPage,
+                      settings: const RouteSettings(
+                        name: '/play_normal_quiz_page',
+                      ),
                     ),
                   );
                 }

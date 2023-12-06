@@ -44,6 +44,9 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                     context,
                     MaterialPageRoute<Widget>(
                       builder: (_) => const NormalQuizGalleryDetailPage(),
+                      settings: const RouteSettings(
+                        name: '/normal_quiz_gallery_detail_page',
+                      ),
                     ),
                   );
                 },

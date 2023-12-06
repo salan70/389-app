@@ -28,6 +28,9 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
           await Navigator.of(context).push(
             MaterialPageRoute<Widget>(
               builder: (_) => const PlayNormalQuizPage(),
+              settings: const RouteSettings(
+                name: '/play_normal_quiz_page',
+              ),
             ),
           );
         }

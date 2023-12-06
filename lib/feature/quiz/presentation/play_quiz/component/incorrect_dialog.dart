@@ -61,6 +61,9 @@ class IncorrectDialog extends ConsumerWidget {
                           await Navigator.of(context).push(
                             MaterialPageRoute<Widget>(
                               builder: (_) => resultPage,
+                              settings:  RouteSettings(
+                                name: '/${quizType!.label}_quiz_result_page',
+                              ),
                             ),
                           );
                         }

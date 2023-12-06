@@ -239,5 +239,14 @@ final List<String> probabilityStats = [
 
 enum QuizType {
   normal,
-  daily,
+  daily;
+
+  String get label {
+    switch (this) {
+      case QuizType.normal:
+        return 'normal';
+      case QuizType.daily:
+        return 'daily';
+    }
+  }
 }
