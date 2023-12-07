@@ -1,5 +1,6 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
+import 'package:baseball_quiz_app/util/constant/hive_box_type.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -13,6 +14,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
+import 'package:timezone/timezone.dart' as tz;
 
 import 'feature/app_info/application/app_info_state.dart';
 import 'feature/app_info/domain/app_info_repository.dart';
@@ -23,11 +26,13 @@ import 'feature/auth/domain/user_info_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
 import 'feature/auth/infrastructure/firebase_auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
-import 'feature/daily_quiz/application/daily_quiz_state.dart';
 import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
 import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
 import 'feature/loading/application/loading_state.dart';
 import 'feature/loading/presentation/loading_widget.dart';
+import 'feature/push_notification/domain/notification_setting.dart';
+import 'feature/push_notification/domain/notification_setting_repository.dart';
+import 'feature/push_notification/infrastructure/hive_notification_setting_repository.dart';
 import 'feature/quiz/application/hitter_quiz_state.dart';
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
@@ -38,7 +43,6 @@ import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart'
 import 'feature/search_condition/domain/search_condition.dart';
 import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
-import 'feature/search_condition/util/search_condition_constant.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
 import 'util/extension/widget_ref_extension.dart';
@@ -53,7 +57,10 @@ Future<void> main() async {
 
   // HiveのBoxをopen
   final searchConditionBox =
-      await Hive.openBox<SearchCondition>(searchConditionBoxKey);
+      await Hive.openBox<SearchCondition>(HiveBoxType.searchCondition.key);
+  final notificationSettingBox = await Hive.openBox<NotificationSetting>(
+    HiveBoxType.notificationSetting.key,
+  );
 
   runApp(
     ProviderScope(
@@ -66,11 +73,10 @@ Future<void> main() async {
           },
         ),
         searchConditionRepositoryProvider.overrideWith(
-          (ref) {
-            return HiveSearchConditionRepository(
-              searchConditionBox,
-            );
-          },
+          (ref) => HiveSearchConditionRepository(searchConditionBox),
+        ),
+        notificationSettingRepositoryProvider.overrideWith(
+          (ref) => HiveNotificationSettingRepository(notificationSettingBox),
         ),
         authRepositoryProvider.overrideWith(
           (ref) {
@@ -150,6 +156,7 @@ Future<void> initialize() async {
   // Hiveの初期化
   await Hive.initFlutter();
   Hive.registerAdapter(SearchConditionAdapter());
+  Hive.registerAdapter(NotificationSettingAdapter());
 
   // Supabaseの初期化
   await Supabase.initialize(
@@ -159,6 +166,10 @@ Future<void> initialize() async {
 
   // table_calendarを日本語で表示するために必要
   await initializeDateFormatting();
+
+  // ローカルPUSH通知を日時に応じて送信するために必要
+  tz.initializeTimeZones();
+  tz.setLocalLocation(tz.getLocation('Asia/Tokyo'));
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -195,9 +206,6 @@ class _MyApp extends ConsumerState<MyApp> {
     // Providerによっては複数のWidgetで使用するためここで書いている
     ref.handleAsyncValue<void>(
       hitterQuizStateProvider,
-    );
-    ref.handleAsyncValue<void>(
-      dailyQuizStateProvider,
     );
     ref.handleAsyncValue<void>(
       quizResultFunctionStateProvider,

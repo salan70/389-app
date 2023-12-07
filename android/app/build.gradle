@@ -71,6 +71,8 @@ android {
     ndkVersion flutter.ndkVersion
 
     compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -96,6 +98,7 @@ android {
         // https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#defaultconfig-%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AAid%E3%81%A8%E3%82%A2%E3%83%97%E3%83%AA%E5%90%8D%E3%82%92%E8%A8%AD%E5%AE%9A
         applicationIdSuffix appIdSuffix
         resValue "string", "app_name", appName
+        multiDexEnabled true
     }
 
     def keystoreProperties = new Properties()
@@ -127,5 +130,8 @@ flutter {
 }
 
 dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.window:window:1.0.0'
+    implementation 'androidx.window:window-java:1.0.0'
 }

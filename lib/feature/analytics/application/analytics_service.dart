@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../util/logger.dart';
 import '../../search_condition/domain/search_condition.dart';
 
-// TODO(me): `material.dart` に依存しているため、他のファイルに移動したい。
+// TODO(me): `material` に依存しているため、他のファイルに移動したい。
 final analyticsObserverProvider =
     Provider.autoDispose<RouteObserver<ModalRoute<dynamic>>>((ref) {
   return FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance);
@@ -48,6 +48,19 @@ class AnalyticsService {
       );
     } on Exception catch (e, s) {
       logger.e('ボタンタップのログを送信時にエラーが発生。', e, s);
+    }
+  }
+
+  Future<void> logTapNotification(int notificationId) async {
+    try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: 'tap_notification',
+        parameters: {
+          'notification_id': notificationId,
+        },
+      );
+    } on Exception catch (e, s) {
+      logger.e('通知タップのログを送信時にエラーが発生。', e, s);
     }
   }
 

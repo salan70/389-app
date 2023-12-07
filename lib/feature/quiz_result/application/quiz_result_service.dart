@@ -4,6 +4,7 @@ import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/extension/date_time_extension.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
+import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/application/hitter_quiz_state.dart';
 import '../../quiz/domain/hitter_quiz.dart';
 import '../../search_condition/application/search_condition_state.dart';
@@ -22,21 +23,16 @@ class QuizResultService {
 
   final Ref ref;
 
-  /// dailyQuizResultを作成する
-  Future<void> createDailyQuizResult() async {
+  /// dailyQuizResult を作成する
+  Future<void> createDailyQuizResult(DailyQuiz dailyQuiz) async {
     final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
-
     notifier.state = await AsyncValue.guard(() async {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
-      final quizResultRepository = ref.read(quizResultRepositoryProvider);
-
-      /// 別のfeatureのapplication層を参照するの避けたみ
-      // TODO(me): 引数で受け取るようにしたほうが良いか検討する
-      final dailyQuiz = ref.watch(dailyQuizStateProvider).value!;
-
-      await quizResultRepository.createDailyQuiz(user!, dailyQuiz);
+      await ref
+          .read(quizResultRepositoryProvider)
+          .createDailyQuiz(user!, dailyQuiz);
     });
   }
 
@@ -45,14 +41,13 @@ class QuizResultService {
     final notifier = ref.read(quizResultFunctionStateProvider.notifier);
 
     notifier.state = const AsyncValue.loading();
-
     notifier.state = await AsyncValue.guard(() async {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
 
       await quizResultRepository.updateDailyQuizResult(
         user!,
-        ref.read(dailyQuizStateProvider).value!,
+        ref.read(dailyQuizProvider).value!,
         ref.read(hitterQuizStateProvider).value!,
       );
     });

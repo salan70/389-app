@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/push_notification/application/local_push_notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,6 +37,11 @@ class _TopPageState extends ConsumerState<TopPage> {
           );
         }
       }
+
+      // ローカルPUSH通知の初期設定を行う。
+      await ref
+          .read(localPushNotificationServiceProvider)
+          .onAppLaunch();
     });
   }
 
