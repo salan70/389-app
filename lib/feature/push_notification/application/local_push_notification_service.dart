@@ -1,5 +1,6 @@
 import 'package:baseball_quiz_app/feature/push_notification/application/notification_setting_state.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -42,6 +43,9 @@ class LocalPushNotificationService {
     // 初期設定
     await _settingNotification();
 
+    // バッジをリセット。
+    await FlutterAppBadger.removeBadge();
+
     // スケジュール関連
     final setting = await ref.read(notificationSettingProvider.future);
     if (setting.allowStartDailyQuizNotification) {
@@ -51,35 +55,17 @@ class LocalPushNotificationService {
       await scheduleRemindDailyQuizNotification();
     }
     if (setting.allowOtherNotification) {
-      // await _schedulePromoteAppNotification();
-      await test(
-        notificationType: NotificationType.promoteApp,
-        seconds: 5,
-      );
+      await _schedulePromoteAppNotification();
     }
-  }
-
-  /// 引数で渡した値秒後に通知を送るようスケジュールする。
-  Future<void> test({
-    required int seconds,
-    required NotificationType notificationType,
-  }) async {
-    await _flutterLocalNotificationsPlugin.zonedSchedule(
-      notificationType.id,
-      _notificationTitle,
-      notificationType.message,
-      tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
-      _defaultNotificationDetail,
-      matchDateTimeComponents: DateTimeComponents.time,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
-    );
   }
 
   @pragma('vm:entry-point')
   static Future<void> notificationTapBackground(
     NotificationResponse details,
   ) async {
+    // バッジをリセット。
+    await FlutterAppBadger.removeBadge();
+
     // 本来は LocalPushNotificationService で行いたい処理だが、
     // この関数は static でないといけないため、ここで直接 log 送信の処理を書いている。
     try {
@@ -298,9 +284,9 @@ enum NotificationType {
       case NotificationType.startDailyQuiz:
         return '今日の1問 が更新されました⚾⚾⚾';
       case NotificationType.remindDailyQUiz:
-        return '今日の1問 は残り30分で更新されます！！';
+        return '今日の1問 は残り30分です❗❗';
       case NotificationType.promoteApp:
-        return '久しぶりに1問どうですか？？';
+        return '久しぶりに1問どうですか？？🥺🥺🥺';
     }
   }
 
