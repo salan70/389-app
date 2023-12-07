@@ -3,7 +3,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-import '../../daily_quiz/application/daily_quiz_service.dart';
+import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';
 import '../domain/notification_setting_repository.dart';
@@ -120,19 +120,14 @@ class LocalPushNotificationService {
   /// 今日分の dailyQuiz の分の通知を送らないようにしている。
   Future<void> scheduleRemindDailyQuizNotification() async {
     const notificationType = NotificationType.remindDailyQUiz;
-
-    // TODO(me): ここの処理、他の Service に依存するのと、処理が冗長なの気になる。
-    final dailyQuizService = ref.read(dailyQuizServiceProvider);
-    await dailyQuizService.fetchDailyQuiz();
-    final canPlay = await dailyQuizService.canPlayDailyQuiz();
+    final isPlayedDailyQuiz = await ref.read(isPlayedDailyQuizProvider.future);
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       notificationType.id,
       _notificationTitle,
       notificationType.message,
       _nextInstanceOfRemindDailyQuiz(
-        // プレイできるかどうかで、 dailyQuiz をプレイ済みかどうかを判別している。
-        isDoneTodaysDailyQuiz: !canPlay,
+        isPlayedTodaysDailyQuiz: isPlayedDailyQuiz,
       ),
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -150,7 +145,7 @@ class LocalPushNotificationService {
 
   /// 次の dailyQuiz の更新日時の30分前を返す。
   tz.TZDateTime _nextInstanceOfRemindDailyQuiz({
-    required bool isDoneTodaysDailyQuiz,
+    required bool isPlayedTodaysDailyQuiz,
   }) {
     final now = tz.TZDateTime.now(tz.local);
     var scheduledDate = tz.TZDateTime(
@@ -164,7 +159,7 @@ class LocalPushNotificationService {
     if (scheduledDate.isBefore(now)) {
       // 今日分の dailyQuiz をプレイ済みの場合は、
       // 今日分の dailyQuiz の分を飛ばすようにしている。
-      final addDayCount = isDoneTodaysDailyQuiz ? 2 : 1;
+      final addDayCount = isPlayedTodaysDailyQuiz ? 2 : 1;
       scheduledDate = scheduledDate.add(Duration(days: addDayCount));
     }
     return scheduledDate;

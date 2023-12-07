@@ -26,7 +26,6 @@ import 'feature/auth/domain/user_info_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
 import 'feature/auth/infrastructure/firebase_auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
-import 'feature/daily_quiz/application/daily_quiz_state.dart';
 import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
 import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
 import 'feature/loading/application/loading_state.dart';
@@ -207,9 +206,6 @@ class _MyApp extends ConsumerState<MyApp> {
     // Providerによっては複数のWidgetで使用するためここで書いている
     ref.handleAsyncValue<void>(
       hitterQuizStateProvider,
-    );
-    ref.handleAsyncValue<void>(
-      dailyQuizStateProvider,
     );
     ref.handleAsyncValue<void>(
       quizResultFunctionStateProvider,

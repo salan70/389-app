@@ -16,10 +16,8 @@ final navigatorKeyProvider = Provider(
 extension WidgetRefEx on WidgetRef {
   /// AsyncValueを良しなにハンドリングする
   void handleAsyncValue<T>(
-    ProviderListenable<AsyncValue<T>> asyncValueProvider, {
-    void Function(BuildContext context, T data)? complete,
-    String? completeMessage,
-  }) =>
+    ProviderListenable<AsyncValue<T>> asyncValueProvider,
+  ) =>
       listen<AsyncValue<T>>(
         asyncValueProvider,
         (_, next) async {
