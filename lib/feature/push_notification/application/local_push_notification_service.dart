@@ -29,16 +29,46 @@ class LocalPushNotificationService {
     // 初期設定
     await _settingNotification();
 
-    // todo: 設定状況に応じて通知を送るようにする。
     // スケジュール関連
-    await _scheduleStartDailyQuizNotification();
-    await scheduleRemindDailyQuizNotification();
-    await _schedulePromoteAppNotification();
+    final setting = await ref.read(notificationSettingProvider.future);
+    if (setting.allowStartDailyQuizNotification) {
+      await _scheduleStartDailyQuizNotification();
+    }
+    if (setting.allowRemindDailyQuizNotification) {
+      await scheduleRemindDailyQuizNotification();
+    }
+    if (setting.allowOtherNotification) {
+      await _schedulePromoteAppNotification();
+    }
+  }
+
+  /// 引数で渡した値秒後に通知を送るようスケジュールする。
+  Future<void> scheduleNotification({
+    required int seconds,
+    required NotificationType notificationType,
+  }) async {
+    await _flutterLocalNotificationsPlugin.zonedSchedule(
+      notificationType.id,
+      _notificationTitle,
+      notificationType.message,
+      tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          '389-other',
+          '389-other',
+          channelDescription: 'Other notification',
+        ),
+        iOS: DarwinNotificationDetails(badgeNumber: 1),
+      ),
+      matchDateTimeComponents: DateTimeComponents.time,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+    );
   }
 
   Future<void> _settingNotification() async {
     const initializationSettings = InitializationSettings(
-      // todo: Set good icon.
+      // TODO(me): Set good icon.
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
     );
