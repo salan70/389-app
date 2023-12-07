@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
 import '../../../util/constant/colors_constant.dart';
+import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../application/notification_setting_state.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {
@@ -30,7 +31,16 @@ class NotificationSettingDialog extends ConsumerWidget {
                       const SizedBox(height: 24),
                       Center(
                         child: SwitchListTile(
-                          title: const Text('今日の1問 更新のお知らせ'),
+                          title: const Text('今日の1問の更新'),
+                          subtitle: Text(
+                            '毎日$borderHourForTodayInApp時に通知します。',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                  color: Colors.black54,
+                                ),
+                          ),
                           value: notificationSetting
                               .allowStartDailyQuizNotification,
                           onChanged: (_) => ref
@@ -42,7 +52,17 @@ class NotificationSettingDialog extends ConsumerWidget {
                       const SizedBox(height: 16),
                       Center(
                         child: SwitchListTile(
-                          title: const Text('今日の1問 残り30分のお知らせ'),
+                          title: const Text('今日の1問のリマインド'),
+                          subtitle: Text(
+                            '今日の1問を未プレイの場合、\n'
+                            '終了30分前に通知します。',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                  color: Colors.black54,
+                                ),
+                          ),
                           value: notificationSetting
                               .allowRemindDailyQuizNotification,
                           onChanged: (_) => ref
@@ -54,7 +74,16 @@ class NotificationSettingDialog extends ConsumerWidget {
                       const SizedBox(height: 16),
                       Center(
                         child: SwitchListTile(
-                          title: const Text('その他のお知らせ'),
+                          title: const Text('その他'),
+                          subtitle: Text(
+                            'その他のお知らせを不定期で\n通知します。',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(
+                                  color: Colors.black54,
+                                ),
+                          ),
                           value: notificationSetting.allowOtherNotification,
                           onChanged: (_) => ref
                               .read(localPushNotificationServiceProvider)
