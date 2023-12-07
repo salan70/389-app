@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../util/logger.dart';
 import '../../search_condition/domain/search_condition.dart';
 
-// TODO(me): `material.dart` に依存しているため、他のファイルに移動したい。
+// TODO(me): `material` に依存しているため、他のファイルに移動したい。
 final analyticsObserverProvider =
     Provider.autoDispose<RouteObserver<ModalRoute<dynamic>>>((ref) {
   return FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance);

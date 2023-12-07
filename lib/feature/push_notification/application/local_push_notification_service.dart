@@ -24,6 +24,17 @@ class LocalPushNotificationService {
 
   static const _notificationTitle = '.389 / プロ野球クイズ';
 
+  static const _defaultNotificationDetail = NotificationDetails(
+    android: AndroidNotificationDetails(
+      '389-notification',
+      '389-notification',
+      channelDescription: '389 notification',
+      importance: Importance.max,
+      priority: Priority.max,
+    ),
+    iOS: DarwinNotificationDetails(badgeNumber: 1),
+  );
+
   /// ローカルプッシュ通知の初期設定、スケジュールを行う。
   ///
   /// アプリ起動時に呼ぶことを想定している。
@@ -58,16 +69,7 @@ class LocalPushNotificationService {
       _notificationTitle,
       notificationType.message,
       tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          '389-other',
-          '389-other',
-          channelDescription: 'Other notification',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(badgeNumber: 1),
-      ),
+      _defaultNotificationDetail,
       matchDateTimeComponents: DateTimeComponents.time,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -115,16 +117,7 @@ class LocalPushNotificationService {
       _notificationTitle,
       notificationType.message,
       _nextInstanceOfStartDailyQuiz(),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          '389-daily-quiz-start',
-          '389-daily-quiz-start',
-          channelDescription: 'Start daily quiz notification',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(badgeNumber: 1),
-      ),
+      _defaultNotificationDetail,
       matchDateTimeComponents: DateTimeComponents.time,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -162,16 +155,7 @@ class LocalPushNotificationService {
       _nextInstanceOfRemindDailyQuiz(
         isPlayedTodaysDailyQuiz: isPlayedDailyQuiz,
       ),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          '389-daily-quiz-remind',
-          '389-daily-quiz-remind',
-          channelDescription: 'Remind daily quiz notification',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(badgeNumber: 1),
-      ),
+      _defaultNotificationDetail,
       matchDateTimeComponents: DateTimeComponents.time,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
@@ -211,16 +195,7 @@ class LocalPushNotificationService {
       _notificationTitle,
       notificationType.message,
       _nextInstanceFor1WeekLater(),
-      const NotificationDetails(
-        android: AndroidNotificationDetails(
-          '389-other',
-          '389-other',
-          channelDescription: 'Other notification',
-          importance: Importance.high,
-          priority: Priority.high,
-        ),
-        iOS: DarwinNotificationDetails(badgeNumber: 1),
-      ),
+      _defaultNotificationDetail,
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
