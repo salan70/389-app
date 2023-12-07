@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/feature/push_notification_local/application/local_push_notification_service.dart';
+import 'package:baseball_quiz_app/feature/push_notification/application/local_push_notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

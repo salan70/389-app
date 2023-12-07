@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/top/presentation/component/to_notification_setting_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,47 +12,52 @@ class SettingDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const lergeButtonWidth = 240.0;
+    const largeButtonWidth = 240.0;
     const smallButtonWidth = 120.0;
 
     return Dialog(
       child: SingleChildScrollView(
-        child: SizedBox(
-          height: 320,
-          child: Column(
-            children: const [
-              SizedBox(height: 16),
-              Text('その他'),
-              SizedBox(height: 24),
-              Center(
-                child: SizedBox(
-                  width: lergeButtonWidth,
-                  child: InquiryButton(),
-                ),
+        child: Column(
+          children: const [
+            SizedBox(height: 16),
+            Text('その他'),
+            SizedBox(height: 24),
+            Center(
+              child: SizedBox(
+                width: largeButtonWidth,
+                child: InquiryButton(),
               ),
-              SizedBox(height: 16),
-              Center(
-                child: SizedBox(
-                  width: lergeButtonWidth,
-                  child: ToTermButton(),
-                ),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                width: largeButtonWidth,
+                child: ToTermButton(),
               ),
-              SizedBox(height: 16),
-              Center(
-                child: SizedBox(
-                  width: lergeButtonWidth,
-                  child: ToPrivacyPolicyButton(),
-                ),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                width: largeButtonWidth,
+                child: ToPrivacyPolicyButton(),
               ),
-              SizedBox(height: 16),
-              Center(
-                child: SizedBox(
-                  width: smallButtonWidth,
-                  child: CloseButton(),
-                ),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                width: largeButtonWidth,
+                child: ToNotificationSettingButton(),
               ),
-            ],
-          ),
+            ),
+            SizedBox(height: 16),
+            Center(
+              child: SizedBox(
+                width: smallButtonWidth,
+                child: CloseButton(),
+              ),
+            ),
+            SizedBox(height: 16),
+          ],
         ),
       ),
     );

@@ -1,9 +1,12 @@
+import 'package:baseball_quiz_app/feature/push_notification/application/notification_setting_state.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../daily_quiz/application/daily_quiz_service.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
+import '../domain/notification_setting.dart';
+import '../domain/notification_setting_repository.dart';
 
 final localPushNotificationServiceProvider =
     Provider(LocalPushNotificationService.new);
@@ -29,14 +32,7 @@ class LocalPushNotificationService {
     // todo: 設定状況に応じて通知を送るようにする。
     // スケジュール関連
     await _scheduleStartDailyQuizNotification();
-
-    // TODO(me): 個々の処理、他の Service に依存するのと、処理が冗長なの気になる。
-    final dailyQuizService = ref.read(dailyQuizServiceProvider);
-    await dailyQuizService.fetchDailyQuiz();
-    final canPlay = await dailyQuizService.canPlayDailyQuiz();
-    // プレイできるかどうかで、 dailyQuiz をプレイ済みかどうかを判別している。
-    await scheduleRemindDailyQuizNotification(isDoneTodaysDailyQuiz: !canPlay);
-
+    await scheduleRemindDailyQuizNotification();
     await _schedulePromoteAppNotification();
   }
 
@@ -89,20 +85,24 @@ class LocalPushNotificationService {
   }
 
   /// dailyQuiz の 更新30分前に通知を送るようスケジュールする。
-  /// 
-  /// [isDoneTodaysDailyQuiz] は、今日分の dailyQuiz をプレイ済みかどうか。
-  /// プレイ済みの場合は、今日分の dailyQuiz の分の通知を送らないようにしている。
-  Future<void> scheduleRemindDailyQuizNotification({
-    required bool isDoneTodaysDailyQuiz,
-  }) async {
+  ///
+  /// 今日分の dailyQuiz をプレイ済みの場合は、
+  /// 今日分の dailyQuiz の分の通知を送らないようにしている。
+  Future<void> scheduleRemindDailyQuizNotification() async {
     const notificationType = NotificationType.remindDailyQUiz;
+
+    // TODO(me): ここの処理、他の Service に依存するのと、処理が冗長なの気になる。
+    final dailyQuizService = ref.read(dailyQuizServiceProvider);
+    await dailyQuizService.fetchDailyQuiz();
+    final canPlay = await dailyQuizService.canPlayDailyQuiz();
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       notificationType.id,
       _notificationTitle,
       notificationType.message,
       _nextInstanceOfRemindDailyQuiz(
-        isDoneTodaysDailyQuiz: isDoneTodaysDailyQuiz,
+        // プレイできるかどうかで、 dailyQuiz をプレイ済みかどうかを判別している。
+        isDoneTodaysDailyQuiz: !canPlay,
       ),
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -180,6 +180,74 @@ class LocalPushNotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 7));
     }
     return scheduledDate;
+  }
+
+  /// [NotificationSetting.allowStartDailyQuizNotification] を保存し、
+  /// 保存した値に応じて、通知のスケジュールを設定もしくはキャンセルする。
+  Future<void> changeAllowStartDailyQuizNotificationSetting() async {
+    // 保存関連の処理。
+    final currentSetting = await ref.read(notificationSettingProvider.future);
+    final nextSetting = currentSetting.copyWith(
+      allowStartDailyQuizNotification:
+          !currentSetting.allowStartDailyQuizNotification,
+    );
+    await ref.read(notificationSettingRepositoryProvider).save(nextSetting);
+
+    // スケジュール変更もしくはキャンセルの処理。
+    if (nextSetting.allowStartDailyQuizNotification) {
+      await _scheduleStartDailyQuizNotification();
+    } else {
+      await _flutterLocalNotificationsPlugin
+          .cancel(NotificationType.startDailyQuiz.id);
+    }
+
+    // [notificationSettingProvider] を再生成。
+    ref.invalidate(notificationSettingProvider);
+  }
+
+  /// [NotificationSetting.allowRemindDailyQuizNotification] を保存し、
+  /// 保存した値に応じて、通知のスケジュールを設定もしくはキャンセルする。
+  Future<void> changeAllowRemindDailyQuizNotificationSetting() async {
+    // 保存関連の処理。
+    final currentSetting = await ref.read(notificationSettingProvider.future);
+    final nextSetting = currentSetting.copyWith(
+      allowRemindDailyQuizNotification:
+          !currentSetting.allowRemindDailyQuizNotification,
+    );
+    await ref.read(notificationSettingRepositoryProvider).save(nextSetting);
+
+    // スケジュール変更もしくはキャンセルの処理。
+    if (nextSetting.allowRemindDailyQuizNotification) {
+      await scheduleRemindDailyQuizNotification();
+    } else {
+      await _flutterLocalNotificationsPlugin
+          .cancel(NotificationType.remindDailyQUiz.id);
+    }
+
+    // [notificationSettingProvider] を再生成。
+    ref.invalidate(notificationSettingProvider);
+  }
+
+  /// [NotificationSetting.allowOtherNotification] を保存し、
+  /// 保存した値に応じて、通知のスケジュールを設定もしくはキャンセルする。
+  Future<void> changeAllowOtherNotificationSetting() async {
+    // 保存関連の処理。
+    final currentSetting = await ref.read(notificationSettingProvider.future);
+    final nextSetting = currentSetting.copyWith(
+      allowOtherNotification: !currentSetting.allowOtherNotification,
+    );
+    await ref.read(notificationSettingRepositoryProvider).save(nextSetting);
+
+    // スケジュール変更もしくはキャンセルの処理。
+    if (nextSetting.allowOtherNotification) {
+      await _schedulePromoteAppNotification();
+    } else {
+      await _flutterLocalNotificationsPlugin
+          .cancel(NotificationType.promoteApp.id);
+    }
+
+    // [notificationSettingProvider] を再生成。
+    ref.invalidate(notificationSettingProvider);
   }
 }
 

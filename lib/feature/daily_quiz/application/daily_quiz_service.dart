@@ -2,11 +2,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../auth/domain/auth_repository.dart';
 import '../../quiz_result/domain/quiz_result_repository.dart';
-import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
 import 'daily_quiz_state.dart';
 
-final dailyQuizServiceProvider = Provider.autoDispose<DailyQuizService>( 
+final dailyQuizServiceProvider = Provider.autoDispose<DailyQuizService>(
   DailyQuizService.new,
 );
 
@@ -21,15 +20,11 @@ class DailyQuizService {
   /// dailyQuizを取得し、dailyQuizStateProviderのstateを更新
   Future<void> fetchDailyQuiz() async {
     final notifier = ref.read(dailyQuizStateProvider.notifier);
-
+    
     notifier.state = const AsyncValue.loading();
-    late DailyQuiz dailyQuiz;
     notifier.state = await AsyncValue.guard(() async {
-      dailyQuiz = await ref.watch(dailyQuizRepositoryProvider).fetchDailyQuiz();
-      return null;
+      return ref.watch(dailyQuizRepositoryProvider).fetchDailyQuiz();
     });
-
-    notifier.state = AsyncData(dailyQuiz);
   }
 
   /// dailyQuizをプレイ可能か返す

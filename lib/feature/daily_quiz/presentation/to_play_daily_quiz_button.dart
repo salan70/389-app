@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/confirm_dialog.dart';
 import '../../../common_widget/my_button.dart';
-import '../../push_notification_local/application/local_push_notification_service.dart';
+import '../../push_notification/application/local_push_notification_service.dart';
 import '../../quiz/application/hitter_quiz_service.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
@@ -62,9 +62,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
                         // プレイ済みなのにリマインドが通知されるのを防ぐ。
                         await ref
                             .read(localPushNotificationServiceProvider)
-                            .scheduleRemindDailyQuizNotification(
-                              isDoneTodaysDailyQuiz: true,
-                            );
+                            .scheduleRemindDailyQuizNotification();
 
                         await navigator.push(
                           MaterialPageRoute<Widget>(
