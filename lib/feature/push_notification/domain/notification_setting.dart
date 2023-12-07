@@ -4,7 +4,6 @@ import 'package:hive/hive.dart';
 part 'notification_setting.freezed.dart';
 part 'notification_setting.g.dart';
 
-// todo: enumで定義する
 @HiveType(typeId: 2)
 @freezed
 class NotificationSetting with _$NotificationSetting {

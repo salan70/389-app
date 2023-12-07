@@ -51,6 +51,19 @@ class AnalyticsService {
     }
   }
 
+  Future<void> logTapNotification(int notificationId) async {
+    try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: 'tap_notification',
+        parameters: {
+          'notification_id': notificationId,
+        },
+      );
+    } on Exception catch (e, s) {
+      logger.e('通知タップのログを送信時にエラーが発生。', e, s);
+    }
+  }
+
   /// `List<String>` を Analytics の log として送信するための文字列に変換する。
   ///
   /// 具体的には、各要素の先頭2文字を取り出し、それらをカンマとスペースで区切って連結する。

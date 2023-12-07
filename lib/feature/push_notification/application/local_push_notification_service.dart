@@ -1,8 +1,10 @@
 import 'package:baseball_quiz_app/feature/push_notification/application/notification_setting_state.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:timezone/timezone.dart' as tz;
 
+import '../../../util/logger.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';
@@ -38,12 +40,16 @@ class LocalPushNotificationService {
       await scheduleRemindDailyQuizNotification();
     }
     if (setting.allowOtherNotification) {
-      await _schedulePromoteAppNotification();
+      // await _schedulePromoteAppNotification();
+      await test(
+        notificationType: NotificationType.promoteApp,
+        seconds: 5,
+      );
     }
   }
 
   /// 引数で渡した値秒後に通知を送るようスケジュールする。
-  Future<void> scheduleNotification({
+  Future<void> test({
     required int seconds,
     required NotificationType notificationType,
   }) async {
@@ -57,6 +63,8 @@ class LocalPushNotificationService {
           '389-other',
           '389-other',
           channelDescription: 'Other notification',
+          importance: Importance.high,
+          priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(badgeNumber: 1),
       ),
@@ -66,13 +74,36 @@ class LocalPushNotificationService {
     );
   }
 
+  @pragma('vm:entry-point')
+  static Future<void> notificationTapBackground(
+    NotificationResponse details,
+  ) async {
+    // 本来は LocalPushNotificationService で行いたい処理だが、
+    // この関数は static でないといけないため、ここで直接 log 送信の処理を書いている。
+    try {
+      await FirebaseAnalytics.instance.logEvent(
+        name: 'tap_notification',
+        parameters: {
+          // 通知の種類を識別するために、通知のIDを送信している。
+          // 万が一 null の場合は -999 を送信する。
+          'notification_id': details.id ?? -999,
+        },
+      );
+    } on Exception catch (e, s) {
+      logger.e('通知タップのログを送信時にエラーが発生。', e, s);
+    }
+  }
+
   Future<void> _settingNotification() async {
     const initializationSettings = InitializationSettings(
       // TODO(me): Set good icon.
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
     );
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    await _flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse: notificationTapBackground,
+    );
   }
 
   /// dailyQuiz の更新日時に毎日通知を送るようスケジュールする。
@@ -89,6 +120,8 @@ class LocalPushNotificationService {
           '389-daily-quiz-start',
           '389-daily-quiz-start',
           channelDescription: 'Start daily quiz notification',
+          importance: Importance.high,
+          priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(badgeNumber: 1),
       ),
@@ -134,6 +167,8 @@ class LocalPushNotificationService {
           '389-daily-quiz-remind',
           '389-daily-quiz-remind',
           channelDescription: 'Remind daily quiz notification',
+          importance: Importance.high,
+          priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(badgeNumber: 1),
       ),
@@ -181,6 +216,8 @@ class LocalPushNotificationService {
           '389-other',
           '389-other',
           channelDescription: 'Other notification',
+          importance: Importance.high,
+          priority: Priority.high,
         ),
         iOS: DarwinNotificationDetails(badgeNumber: 1),
       ),
