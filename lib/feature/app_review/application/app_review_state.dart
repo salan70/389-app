@@ -22,17 +22,26 @@ final reviewHistoryProvider = FutureProvider<ReviewHistory?>((ref) async {
 
 /// レビューを要求するかどうかを返すプロバイダー。
 final shouldRequestReviewProvider = FutureProvider<bool>((ref) async {
+  final hitterQuizState = ref.watch(hitterQuizStateProvider);
+  // ローディングの場合を想定している。
+  if (hitterQuizState.value == null) {
+    return false;
+  }
   // 直近のクイズで不正解している場合 false を返す。
-  if (ref.read(hitterQuizStateProvider).value?.isCorrect ?? false == false) {
+  if (hitterQuizState.value!.isCorrect == false) {
     return false;
   }
 
-  final reviewHistory = await ref.watch(reviewHistoryProvider.future);
-  if (reviewHistory == null) {
+  final reviewHistory = ref.watch(reviewHistoryProvider);
+  if (reviewHistory.value == null) {
     return false;
   }
-  if (reviewHistory.isDisplayedReviewDialog == true) {
-    return false;
+  if (reviewHistory.value!.isDisplayedReviewDialog) {
+    // updatedAt から7日経過していない場合は、レビューを要求しない。
+    final updatedAt = reviewHistory.value!.updatedAt;
+    if (DateTime.now().difference(updatedAt).inDays < minDays) {
+      return false;
+    }
   }
 
   final user = ref.read(authRepositoryProvider).getCurrentUser()!;

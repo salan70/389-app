@@ -7,7 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
-import '../../../../../util/logger.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
@@ -28,16 +27,62 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   void initState() {
     super.initState();
 
-    final appReviewService = ref.read(appReviewServiceProvider);
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        final shouldRequestAppReview =
+            await ref.read(shouldRequestReviewProvider.future);
 
-    Future(() async {
-      final shouldRequestAppReview =
-          await ref.read(shouldRequestReviewProvider.future);
-      if (shouldRequestAppReview) {
-        logger.i('レビュー要求するで');
-        await appReviewService.maybeRequestAppReview();
-      }
-    });
+        if (shouldRequestAppReview) {
+          // レビューを要求する場合
+
+          // レビューダイアログを表示したことを記録する。
+          await ref.read(appReviewServiceProvider).updateReviewHistory();
+
+          if (context.mounted) {
+            await showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text(
+                    'レビューをお願いします！',
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.error),
+                  ),
+                  content: const Text('''.389をお楽しみいただきありがとうございます！
+                \n少しでも.389を気に入っていただけましたら、5秒で終わりますので、是非星5のレビューをお願いします。
+                \nレビューをいただけると、開発者のモチベーションが上がり、はしゃぎます。
+                \nより一層楽しいアプリへの改善に繋がりますので、ご協力をお願いします！
+                '''),
+                  actionsAlignment: MainAxisAlignment.spaceBetween,
+                  actionsPadding:
+                      const EdgeInsets.only(right: 20, bottom: 8, left: 20),
+                  actions: [
+                    MyButton(
+                      buttonName: 'cancel_button_in_request_review_dialog',
+                      buttonType: ButtonType.sub,
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: const Text('今はやめとく'),
+                    ),
+                    MyButton(
+                      buttonName: 'ok_button_in_request_review_dialog',
+                      buttonType: ButtonType.main,
+                      onPressed: () async {
+                        Navigator.of(context).pop();
+                        await ref
+                            .read(appReviewServiceProvider)
+                            .requestAppReview();
+                      },
+                      child: const Text('レビューする！'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+        }
+      },
+    );
   }
 
   @override
