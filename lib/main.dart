@@ -1,5 +1,7 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
+import 'package:baseball_quiz_app/feature/app_review/domain/review_history_repository.dart';
+import 'package:baseball_quiz_app/feature/app_review/infrastructure/firebase_review_history_repository.dart';
 import 'package:baseball_quiz_app/util/constant/hive_box_type.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -91,6 +93,11 @@ Future<void> main() async {
               ref.watch(firestoreProvider),
             );
           },
+        ),
+        reviewHistoryRepositoryProvider.overrideWith(
+          (ref) => FirebaseReviewHistoryRepository(
+            ref.watch(firestoreProvider),
+          ),
         ),
         dailyQuizRepositoryProvider.overrideWith(
           (ref) {
@@ -214,6 +221,7 @@ class _MyApp extends ConsumerState<MyApp> {
       checkNeedUpdateStateProvider,
     );
 
+    // TODO(me): ここで login するのは多分良くないので、なんとかする。
     // Userを作成
     ref.read(authServiceProvider).login();
 

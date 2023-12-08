@@ -1,4 +1,5 @@
 import 'package:baseball_quiz_app/feature/app_review/application/app_review_service.dart';
+import 'package:baseball_quiz_app/feature/app_review/application/app_review_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
+import '../../../../../util/logger.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
@@ -30,8 +32,9 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
 
     Future(() async {
       final shouldRequestAppReview =
-          await appReviewService.shouldRequestAppReview();
+          await ref.read(shouldRequestReviewProvider.future);
       if (shouldRequestAppReview) {
+        logger.i('レビュー要求するで');
         await appReviewService.maybeRequestAppReview();
       }
     });

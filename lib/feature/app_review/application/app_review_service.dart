@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 
@@ -23,7 +21,7 @@ class AppReviewService {
     final notifier = ref.read(checkRequestAppReviewStateProvider.notifier);
     notifier.state = const AsyncValue.loading();
 
-    // 直近のクイズで不正解している場合falseを返す
+    // 直近のクイズで不正解している場合 false を返す
     if (ref.read(hitterQuizStateProvider).value!.isCorrect == false) {
       return false;
     }
@@ -46,10 +44,8 @@ class AppReviewService {
     final inAppReview = InAppReview.instance;
 
     if (await inAppReview.isAvailable()) {
-      // Random().nextDouble()は、0.0から1.0 の範囲でランダムな実数を返す
-      if (Random().nextDouble() < appReviewRequestProbability) {
-        await inAppReview.requestReview();
-      }
+      await inAppReview.requestReview();
     }
+    // todo: ストアでレビューさせるやつのリクエスト
   }
 }

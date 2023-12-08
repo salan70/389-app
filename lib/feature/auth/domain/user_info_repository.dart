@@ -8,6 +8,6 @@ final userInfoRepositoryProvider = Provider<UserInfoRepository>(
 );
 
 abstract class UserInfoRepository {
-  /// ユーザー情報を作成する
+  /// ユーザー情報を作成 / 更新する。
   Future<void> updateUserInfo(User user);
 }

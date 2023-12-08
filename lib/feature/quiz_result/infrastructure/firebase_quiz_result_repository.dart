@@ -162,26 +162,28 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return snapshot.exists;
   }
 
-  @ override
+  @override
   Future<int> fetchPlayedNormalQuizCount(User user) async {
-    final QuerySnapshot snapshot = await firestore
+    final snapshot = await firestore
         .collection('users')
         .doc(user.uid)
         .collection('normalQuizResult')
+        .count()
         .get();
 
-    return snapshot.size;
+    return snapshot.count;
   }
 
   @override
   Future<int> fetchCorrectedNormalQuizCount(User user) async {
-    final QuerySnapshot snapshot = await firestore
+    final snapshot = await firestore
         .collection('users')
         .doc(user.uid)
         .collection('normalQuizResult')
         .where('isCorrect', isEqualTo: true)
+        .count()
         .get();
 
-    return snapshot.size;
+    return snapshot.count;
   }
 }
