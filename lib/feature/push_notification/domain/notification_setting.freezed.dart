@@ -20,7 +20,6 @@ NotificationSetting _$NotificationSettingFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NotificationSetting {
-  /// aaaaaaaaaaaaa
   @HiveField(0)
   bool get allowStartDailyQuizNotification =>
       throw _privateConstructorUsedError;
@@ -139,7 +138,6 @@ class _$_NotificationSetting implements _NotificationSetting {
   factory _$_NotificationSetting.fromJson(Map<String, dynamic> json) =>
       _$$_NotificationSettingFromJson(json);
 
-  /// aaaaaaaaaaaaa
   @override
   @HiveField(0)
   final bool allowStartDailyQuizNotification;
@@ -203,8 +201,6 @@ abstract class _NotificationSetting implements NotificationSetting {
       _$_NotificationSetting.fromJson;
 
   @override
-
-  /// aaaaaaaaaaaaa
   @HiveField(0)
   bool get allowStartDailyQuizNotification;
   @override

@@ -1,7 +1,16 @@
-
 // Appレビューを促すかどうかの判別に使用する
-const minPlayedCount = 5;
-const minCorrectedCount = 2;
 
-/// 条件を満たしている場合に、Appレビューの要求ダイアログを表示させる確率
-const appReviewRequestProbability = 0.3;
+/// プレイ回数の最小値。
+/// 
+/// この回数以上プレイしていることが条件の1つ。
+const minPlayedCount = 20;
+
+/// 正解数の最小値。
+/// 
+/// この回数以上正解していることが条件の1つ。
+const minCorrectedCount = 10;
+
+/// レビューを表示した後、次にレビューを表示するまでの日数。
+/// 
+/// この日数以上経過していることが条件の1つ。
+const minDays = 7;
