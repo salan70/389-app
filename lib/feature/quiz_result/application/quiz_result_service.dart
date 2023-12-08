@@ -108,4 +108,18 @@ class QuizResultService {
     ref.read(quizResultStateProvider.notifier).state =
         dailyQuizResult.resultMap[formattedDate];
   }
+
+  Future<void> deleteNormalQuizResult(String docId) async {
+    final notifier = ref.read(quizResultFunctionStateProvider.notifier);
+
+    notifier.state = const AsyncValue.loading();
+    notifier.state = await AsyncValue.guard(() async {
+      final user = ref.read(authRepositoryProvider).getCurrentUser();
+      await ref.read(quizResultRepositoryProvider).deleteNormalQuizResult(
+            user!,
+            docId,
+          );
+      ref.invalidate(normalQuizResultListProvider);
+    });
+  }
 }

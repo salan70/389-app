@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/quiz_result/presentation/gallery_detail/component/delete_normal_quiz_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -63,6 +64,15 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
+              Center(
+                child: SizedBox(
+                  width: buttonWidth,
+                  child: DeleteNormalQuizResultButton(
+                    onDeleteComplete: Navigator.of(context).pop,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 80),
             ],
           ),
         ),

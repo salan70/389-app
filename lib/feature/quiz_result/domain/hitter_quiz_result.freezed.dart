@@ -14,17 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-HitterQuizResult _$HitterQuizResultFromJson(Map<String, dynamic> json) {
-  return _HitterQuizResult.fromJson(json);
-}
-
 /// @nodoc
 mixin _$HitterQuizResult {
-  @JsonKey(name: 'playerId')
+  String get docId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'playerName')
   String get name => throw _privateConstructorUsedError;
-  @DateTimeConverter()
   DateTime get updatedAt => throw _privateConstructorUsedError;
   List<String> get yearList => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
@@ -34,7 +28,6 @@ mixin _$HitterQuizResult {
   bool get isCorrect => throw _privateConstructorUsedError;
   int get incorrectCount => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HitterQuizResultCopyWith<HitterQuizResult> get copyWith =>
       throw _privateConstructorUsedError;
@@ -47,9 +40,10 @@ abstract class $HitterQuizResultCopyWith<$Res> {
       _$HitterQuizResultCopyWithImpl<$Res, HitterQuizResult>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'playerId') String id,
-      @JsonKey(name: 'playerName') String name,
-      @DateTimeConverter() DateTime updatedAt,
+      {String docId,
+      String id,
+      String name,
+      DateTime updatedAt,
       List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
@@ -71,6 +65,7 @@ class _$HitterQuizResultCopyWithImpl<$Res, $Val extends HitterQuizResult>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? docId = null,
     Object? id = null,
     Object? name = null,
     Object? updatedAt = null,
@@ -82,6 +77,10 @@ class _$HitterQuizResultCopyWithImpl<$Res, $Val extends HitterQuizResult>
     Object? incorrectCount = null,
   }) {
     return _then(_value.copyWith(
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -131,9 +130,10 @@ abstract class _$$_HitterQuizResultCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'playerId') String id,
-      @JsonKey(name: 'playerName') String name,
-      @DateTimeConverter() DateTime updatedAt,
+      {String docId,
+      String id,
+      String name,
+      DateTime updatedAt,
       List<String> yearList,
       List<String> selectedStatsList,
       List<Map<String, StatsValue>> statsMapList,
@@ -153,6 +153,7 @@ class __$$_HitterQuizResultCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? docId = null,
     Object? id = null,
     Object? name = null,
     Object? updatedAt = null,
@@ -164,6 +165,10 @@ class __$$_HitterQuizResultCopyWithImpl<$Res>
     Object? incorrectCount = null,
   }) {
     return _then(_$_HitterQuizResult(
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -205,12 +210,13 @@ class __$$_HitterQuizResultCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_HitterQuizResult extends _HitterQuizResult {
   const _$_HitterQuizResult(
-      {@JsonKey(name: 'playerId') required this.id,
-      @JsonKey(name: 'playerName') required this.name,
-      @DateTimeConverter() required this.updatedAt,
+      {required this.docId,
+      required this.id,
+      required this.name,
+      required this.updatedAt,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
@@ -222,17 +228,13 @@ class _$_HitterQuizResult extends _HitterQuizResult {
         _statsMapList = statsMapList,
         super._();
 
-  factory _$_HitterQuizResult.fromJson(Map<String, dynamic> json) =>
-      _$$_HitterQuizResultFromJson(json);
-
   @override
-  @JsonKey(name: 'playerId')
+  final String docId;
+  @override
   final String id;
   @override
-  @JsonKey(name: 'playerName')
   final String name;
   @override
-  @DateTimeConverter()
   final DateTime updatedAt;
   final List<String> _yearList;
   @override
@@ -264,7 +266,7 @@ class _$_HitterQuizResult extends _HitterQuizResult {
 
   @override
   String toString() {
-    return 'HitterQuizResult(id: $id, name: $name, updatedAt: $updatedAt, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
+    return 'HitterQuizResult(docId: $docId, id: $id, name: $name, updatedAt: $updatedAt, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
   }
 
   @override
@@ -272,6 +274,7 @@ class _$_HitterQuizResult extends _HitterQuizResult {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_HitterQuizResult &&
+            (identical(other.docId, docId) || other.docId == docId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -289,10 +292,10 @@ class _$_HitterQuizResult extends _HitterQuizResult {
                 other.incorrectCount == incorrectCount));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      docId,
       id,
       name,
       updatedAt,
@@ -308,20 +311,14 @@ class _$_HitterQuizResult extends _HitterQuizResult {
   @pragma('vm:prefer-inline')
   _$$_HitterQuizResultCopyWith<_$_HitterQuizResult> get copyWith =>
       __$$_HitterQuizResultCopyWithImpl<_$_HitterQuizResult>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_HitterQuizResultToJson(
-      this,
-    );
-  }
 }
 
 abstract class _HitterQuizResult extends HitterQuizResult {
   const factory _HitterQuizResult(
-      {@JsonKey(name: 'playerId') required final String id,
-      @JsonKey(name: 'playerName') required final String name,
-      @DateTimeConverter() required final DateTime updatedAt,
+      {required final String docId,
+      required final String id,
+      required final String name,
+      required final DateTime updatedAt,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
       required final List<Map<String, StatsValue>> statsMapList,
@@ -330,17 +327,13 @@ abstract class _HitterQuizResult extends HitterQuizResult {
       required final int incorrectCount}) = _$_HitterQuizResult;
   const _HitterQuizResult._() : super._();
 
-  factory _HitterQuizResult.fromJson(Map<String, dynamic> json) =
-      _$_HitterQuizResult.fromJson;
-
   @override
-  @JsonKey(name: 'playerId')
+  String get docId;
+  @override
   String get id;
   @override
-  @JsonKey(name: 'playerName')
   String get name;
   @override
-  @DateTimeConverter()
   DateTime get updatedAt;
   @override
   List<String> get yearList;

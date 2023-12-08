@@ -1,20 +1,17 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
-import '../../../util/json_converter.dart';
 import '../../quiz/domain/stats_value.dart';
 
 part 'hitter_quiz_result.freezed.dart';
-part 'hitter_quiz_result.g.dart';
 
 @freezed
 class HitterQuizResult with _$HitterQuizResult {
   const factory HitterQuizResult({
-    @JsonKey(name: 'playerId') required String id,
-    @JsonKey(name: 'playerName') required String name,
-    @DateTimeConverter() required DateTime updatedAt,
+    required String docId,
+    required String id,
+    required String name,
+    required DateTime updatedAt,
     required List<String> yearList,
     required List<String> selectedStatsList,
     required List<Map<String, StatsValue>> statsMapList,
@@ -24,9 +21,6 @@ class HitterQuizResult with _$HitterQuizResult {
   }) = _HitterQuizResult;
 
   const HitterQuizResult._();
-
-  factory HitterQuizResult.fromJson(Map<String, dynamic> json) =>
-      _$HitterQuizResultFromJson(json);
 
   // TODO(me): selectedStatsListに年度が含まれた場合、年度をremoveする処理を書く'
 

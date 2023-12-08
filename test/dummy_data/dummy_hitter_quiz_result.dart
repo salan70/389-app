@@ -2,6 +2,7 @@ import 'package:baseball_quiz_app/feature/quiz/domain/stats_value.dart';
 import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 
 final dummyHitterQuizResult = HitterQuizResult(
+  docId: 'dummyDocId',
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
   updatedAt: DateTime(2021, 9, 1, 12),
