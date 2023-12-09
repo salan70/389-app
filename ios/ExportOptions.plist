@@ -14,7 +14,7 @@
 		<string>.389</string>
 	</dict>
 	<key>signingCertificate</key>
-	<string>AF723799B72020D4ECD278C2ED4D682C0915E522</string>
+	<string>Apple Distribution</string>
 	<key>signingStyle</key>
 	<string>manual</string>
 	<key>stripSwiftSymbols</key>
