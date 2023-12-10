@@ -1,11 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'notification_setting.dart';
 
-final notificationSettingRepositoryProvider =
-    Provider<NotificationSettingRepository>(
-  (ref) => throw UnimplementedError('Provider was not initialized'),
-);
+part 'notification_setting_repository.g.dart';
+
+@riverpod
+NotificationSettingRepository notificationSettingRepository(
+  NotificationSettingRepositoryRef ref,
+) =>
+    throw UnimplementedError('Provider was not initialized');
 
 abstract class NotificationSettingRepository {
   /// [NotificationSetting] を取得する。

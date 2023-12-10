@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'review_history.dart';
 
@@ -70,11 +70,11 @@ class _$ReviewHistoryCopyWithImpl<$Res, $Val extends ReviewHistory>
 }
 
 /// @nodoc
-abstract class _$$_ReviewHistoryCopyWith<$Res>
+abstract class _$$ReviewHistoryImplCopyWith<$Res>
     implements $ReviewHistoryCopyWith<$Res> {
-  factory _$$_ReviewHistoryCopyWith(
-          _$_ReviewHistory value, $Res Function(_$_ReviewHistory) then) =
-      __$$_ReviewHistoryCopyWithImpl<$Res>;
+  factory _$$ReviewHistoryImplCopyWith(
+          _$ReviewHistoryImpl value, $Res Function(_$ReviewHistoryImpl) then) =
+      __$$ReviewHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -82,11 +82,11 @@ abstract class _$$_ReviewHistoryCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_ReviewHistoryCopyWithImpl<$Res>
-    extends _$ReviewHistoryCopyWithImpl<$Res, _$_ReviewHistory>
-    implements _$$_ReviewHistoryCopyWith<$Res> {
-  __$$_ReviewHistoryCopyWithImpl(
-      _$_ReviewHistory _value, $Res Function(_$_ReviewHistory) _then)
+class __$$ReviewHistoryImplCopyWithImpl<$Res>
+    extends _$ReviewHistoryCopyWithImpl<$Res, _$ReviewHistoryImpl>
+    implements _$$ReviewHistoryImplCopyWith<$Res> {
+  __$$ReviewHistoryImplCopyWithImpl(
+      _$ReviewHistoryImpl _value, $Res Function(_$ReviewHistoryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -95,7 +95,7 @@ class __$$_ReviewHistoryCopyWithImpl<$Res>
     Object? isDisplayedReviewDialog = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$_ReviewHistory(
+    return _then(_$ReviewHistoryImpl(
       isDisplayedReviewDialog: null == isDisplayedReviewDialog
           ? _value.isDisplayedReviewDialog
           : isDisplayedReviewDialog // ignore: cast_nullable_to_non_nullable
@@ -110,14 +110,14 @@ class __$$_ReviewHistoryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ReviewHistory extends _ReviewHistory {
-  const _$_ReviewHistory(
+class _$ReviewHistoryImpl extends _ReviewHistory {
+  const _$ReviewHistoryImpl(
       {required this.isDisplayedReviewDialog,
       @DateTimeConverter() required this.updatedAt})
       : super._();
 
-  factory _$_ReviewHistory.fromJson(Map<String, dynamic> json) =>
-      _$$_ReviewHistoryFromJson(json);
+  factory _$ReviewHistoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReviewHistoryImplFromJson(json);
 
   @override
   final bool isDisplayedReviewDialog;
@@ -134,7 +134,7 @@ class _$_ReviewHistory extends _ReviewHistory {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReviewHistory &&
+            other is _$ReviewHistoryImpl &&
             (identical(
                     other.isDisplayedReviewDialog, isDisplayedReviewDialog) ||
                 other.isDisplayedReviewDialog == isDisplayedReviewDialog) &&
@@ -150,12 +150,12 @@ class _$_ReviewHistory extends _ReviewHistory {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReviewHistoryCopyWith<_$_ReviewHistory> get copyWith =>
-      __$$_ReviewHistoryCopyWithImpl<_$_ReviewHistory>(this, _$identity);
+  _$$ReviewHistoryImplCopyWith<_$ReviewHistoryImpl> get copyWith =>
+      __$$ReviewHistoryImplCopyWithImpl<_$ReviewHistoryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ReviewHistoryToJson(
+    return _$$ReviewHistoryImplToJson(
       this,
     );
   }
@@ -165,11 +165,11 @@ abstract class _ReviewHistory extends ReviewHistory {
   const factory _ReviewHistory(
           {required final bool isDisplayedReviewDialog,
           @DateTimeConverter() required final DateTime updatedAt}) =
-      _$_ReviewHistory;
+      _$ReviewHistoryImpl;
   const _ReviewHistory._() : super._();
 
   factory _ReviewHistory.fromJson(Map<String, dynamic> json) =
-      _$_ReviewHistory.fromJson;
+      _$ReviewHistoryImpl.fromJson;
 
   @override
   bool get isDisplayedReviewDialog;
@@ -178,6 +178,6 @@ abstract class _ReviewHistory extends ReviewHistory {
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_ReviewHistoryCopyWith<_$_ReviewHistory> get copyWith =>
+  _$$ReviewHistoryImplCopyWith<_$ReviewHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -9,8 +10,10 @@ import '../../../util/constant/strings_constant.dart';
 import '../domain/app_info_repository.dart';
 import 'app_info_state.dart';
 
-/// appInfoサービスプロバイダー
-final appInfoServiceProvider = Provider(AppInfoService.new);
+part 'app_info_service.g.dart';
+
+@riverpod
+AppInfoService appInfoService(AppInfoServiceRef ref) => AppInfoService(ref);
 
 /// アプリ情報関連の処理を行うサービスクラス
 class AppInfoService {

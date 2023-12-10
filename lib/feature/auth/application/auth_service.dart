@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
 import '../../app_review/application/app_review_state.dart';
@@ -7,10 +8,12 @@ import '../../app_review/domain/review_history_repository.dart';
 import '../domain/auth_repository.dart';
 import '../domain/user_info_repository.dart';
 
-/// userサービスプロバイダー
-final authServiceProvider = Provider(AuthService.new);
+part 'auth_service.g.dart';
 
-/// Auth関連の処理を行うサービスクラス
+@riverpod
+AuthService authService(AuthServiceRef ref) => AuthService(ref);
+
+/// Auth 関連の処理を行うサービスクラス
 class AuthService {
   const AuthService(this.ref);
 

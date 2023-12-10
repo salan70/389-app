@@ -1,13 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../util/search_condition_constant.dart';
 import 'search_condition_state.dart';
 
-final searchConditionServiceProvider =
-    Provider.autoDispose<SearchConditionService>(
-  SearchConditionService.new,
-);
+part 'search_condition_service.g.dart';
+
+@riverpod
+SearchConditionService searchConditionService(SearchConditionServiceRef ref) =>
+    SearchConditionService(ref);
 
 class SearchConditionService {
   SearchConditionService(

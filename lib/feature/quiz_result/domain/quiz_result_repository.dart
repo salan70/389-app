@@ -1,7 +1,5 @@
-// ignore_for_file: one_member_abstracts
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/domain/hitter_quiz.dart';
@@ -9,9 +7,11 @@ import '../../search_condition/domain/search_condition.dart';
 import 'daily_hitter_quiz_result.dart';
 import 'hitter_quiz_result.dart';
 
-final quizResultRepositoryProvider = Provider<QuizResultRepository>(
-  (ref) => throw UnimplementedError('Provider was not initialized'),
-);
+part 'quiz_result_repository.g.dart';
+
+@riverpod
+QuizResultRepository quizResultRepository(QuizResultRepositoryRef ref) =>
+    throw UnimplementedError('Provider was not initialized');
 
 abstract class QuizResultRepository {
   /// dailyQuizの結果を作成する

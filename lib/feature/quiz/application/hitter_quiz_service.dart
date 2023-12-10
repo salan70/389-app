@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/application/search_condition_state.dart';
@@ -8,10 +9,11 @@ import '../domain/hitter_repository.dart';
 import 'answer_state.dart';
 import 'hitter_quiz_state.dart';
 
-/// HitterQuizサービスプロバイダー
-final hitterQuizServiceProvider = Provider(
-  HitterQuizService.new,
-);
+part 'hitter_quiz_service.g.dart';
+
+@riverpod
+HitterQuizService hitterQuizService(HitterQuizServiceRef ref) =>
+    HitterQuizService(ref);
 
 /// HitterQuizサービス
 ///
@@ -29,9 +31,9 @@ class HitterQuizService {
 
     late HitterQuiz hitterQuiz;
     notifier.state = await AsyncValue.guard(() async {
-      final searchCondition = ref.watch(searchConditionProvider);
+      final searchCondition = ref.read(searchConditionProvider);
       hitterQuiz = await ref
-          .watch(hitterRepositoryProvider)
+          .read(hitterRepositoryProvider)
           .fetchHitterQuizBySearchCondition(searchCondition);
       return null;
     });
@@ -49,7 +51,7 @@ class HitterQuizService {
     late HitterQuiz hitterQuiz;
     notifier.state = await AsyncValue.guard(() async {
       hitterQuiz = await ref
-          .watch(hitterRepositoryProvider)
+          .read(hitterRepositoryProvider)
           .fetchHitterQuizById(dailyQuiz);
       return null;
     });
@@ -97,7 +99,7 @@ class HitterQuizService {
 
   /// 選手名で検索する
   Future<List<Hitter>> searchHitter(String searchWord) async {
-    final allHitterList = await ref.read(allHitterListProvider);
+    final allHitterList = await ref.read(allHitterListProvider.future);
     final hitterListAfterSearch = <Hitter>[];
 
     for (final hitter in allHitterList) {

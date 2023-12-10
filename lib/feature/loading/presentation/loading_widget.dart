@@ -38,7 +38,7 @@ class LoadingDialog extends StatelessWidget {
               height: 24,
             ),
             // Some text
-            Text('Loading...')
+            Text('Loading...'),
           ],
         ),
       ),

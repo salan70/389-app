@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'daily_hitter_quiz_result.dart';
 
@@ -59,22 +59,24 @@ class _$DailyHitterQuizResultCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_DailyHitterQuizResultCopyWith<$Res>
+abstract class _$$DailyHitterQuizResultImplCopyWith<$Res>
     implements $DailyHitterQuizResultCopyWith<$Res> {
-  factory _$$_DailyHitterQuizResultCopyWith(_$_DailyHitterQuizResult value,
-          $Res Function(_$_DailyHitterQuizResult) then) =
-      __$$_DailyHitterQuizResultCopyWithImpl<$Res>;
+  factory _$$DailyHitterQuizResultImplCopyWith(
+          _$DailyHitterQuizResultImpl value,
+          $Res Function(_$DailyHitterQuizResultImpl) then) =
+      __$$DailyHitterQuizResultImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Map<String, HitterQuizResult> resultMap});
 }
 
 /// @nodoc
-class __$$_DailyHitterQuizResultCopyWithImpl<$Res>
-    extends _$DailyHitterQuizResultCopyWithImpl<$Res, _$_DailyHitterQuizResult>
-    implements _$$_DailyHitterQuizResultCopyWith<$Res> {
-  __$$_DailyHitterQuizResultCopyWithImpl(_$_DailyHitterQuizResult _value,
-      $Res Function(_$_DailyHitterQuizResult) _then)
+class __$$DailyHitterQuizResultImplCopyWithImpl<$Res>
+    extends _$DailyHitterQuizResultCopyWithImpl<$Res,
+        _$DailyHitterQuizResultImpl>
+    implements _$$DailyHitterQuizResultImplCopyWith<$Res> {
+  __$$DailyHitterQuizResultImplCopyWithImpl(_$DailyHitterQuizResultImpl _value,
+      $Res Function(_$DailyHitterQuizResultImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -82,7 +84,7 @@ class __$$_DailyHitterQuizResultCopyWithImpl<$Res>
   $Res call({
     Object? resultMap = null,
   }) {
-    return _then(_$_DailyHitterQuizResult(
+    return _then(_$DailyHitterQuizResultImpl(
       resultMap: null == resultMap
           ? _value._resultMap
           : resultMap // ignore: cast_nullable_to_non_nullable
@@ -93,14 +95,15 @@ class __$$_DailyHitterQuizResultCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DailyHitterQuizResult implements _DailyHitterQuizResult {
-  const _$_DailyHitterQuizResult(
+class _$DailyHitterQuizResultImpl implements _DailyHitterQuizResult {
+  const _$DailyHitterQuizResultImpl(
       {required final Map<String, HitterQuizResult> resultMap})
       : _resultMap = resultMap;
 
   final Map<String, HitterQuizResult> _resultMap;
   @override
   Map<String, HitterQuizResult> get resultMap {
+    if (_resultMap is EqualUnmodifiableMapView) return _resultMap;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_resultMap);
   }
@@ -114,7 +117,7 @@ class _$_DailyHitterQuizResult implements _DailyHitterQuizResult {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DailyHitterQuizResult &&
+            other is _$DailyHitterQuizResultImpl &&
             const DeepCollectionEquality()
                 .equals(other._resultMap, _resultMap));
   }
@@ -126,20 +129,20 @@ class _$_DailyHitterQuizResult implements _DailyHitterQuizResult {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DailyHitterQuizResultCopyWith<_$_DailyHitterQuizResult> get copyWith =>
-      __$$_DailyHitterQuizResultCopyWithImpl<_$_DailyHitterQuizResult>(
-          this, _$identity);
+  _$$DailyHitterQuizResultImplCopyWith<_$DailyHitterQuizResultImpl>
+      get copyWith => __$$DailyHitterQuizResultImplCopyWithImpl<
+          _$DailyHitterQuizResultImpl>(this, _$identity);
 }
 
 abstract class _DailyHitterQuizResult implements DailyHitterQuizResult {
   const factory _DailyHitterQuizResult(
           {required final Map<String, HitterQuizResult> resultMap}) =
-      _$_DailyHitterQuizResult;
+      _$DailyHitterQuizResultImpl;
 
   @override
   Map<String, HitterQuizResult> get resultMap;
   @override
   @JsonKey(ignore: true)
-  _$$_DailyHitterQuizResultCopyWith<_$_DailyHitterQuizResult> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$DailyHitterQuizResultImplCopyWith<_$DailyHitterQuizResultImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

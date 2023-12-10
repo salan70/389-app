@@ -3,13 +3,16 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/constant/strings_constant.dart';
 import '../../auth/domain/auth_repository.dart';
 
-final inquiryServiceProvider =
-    Provider.autoDispose<InquiryService>(InquiryService.new);
+part 'inquiry_service.g.dart';
+
+@riverpod
+InquiryService inquiryService(InquiryServiceRef ref) => InquiryService(ref);
 
 /// お問い合わせ関連の処理を行うサービスクラス
 class InquiryService {

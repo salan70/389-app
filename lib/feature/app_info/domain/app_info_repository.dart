@@ -1,9 +1,11 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';
 
-final appInfoRepositoryProvider = Provider<AppInfoRepository>(
-  (ref) => throw UnimplementedError('Provider was not initialized'),
-);
+part 'app_info_repository.g.dart';
+
+@riverpod
+AppInfoRepository appInfoRepository(AppInfoRepositoryRef ref) =>
+    throw UnimplementedError('Provider was not initialized');
 
 abstract class AppInfoRepository {
   /// iOSでプレイするのに必要なアプリバージョンを取得する

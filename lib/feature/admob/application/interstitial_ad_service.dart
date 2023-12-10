@@ -6,15 +6,18 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
 import '../../loading/application/loading_state.dart';
 
-final interstitialAdServiceProvider = Provider(
-  InterstitialAdService.new,
-);
+part 'interstitial_ad_service.g.dart';
 
-/// InterstitialAd関連の処理を行うサービスクラス
+@riverpod
+InterstitialAdService interstitialAdService(InterstitialAdServiceRef ref) =>
+    InterstitialAdService(ref);
+
+/// InterstitialAd 関連の処理を行うサービスクラス
 class InterstitialAdService {
   InterstitialAdService(this.ref);
 

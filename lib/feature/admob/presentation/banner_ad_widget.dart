@@ -10,7 +10,7 @@ class BannerAdWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final futureBannerAd = BannerAdService().createBannerAd();
+    final futureBannerAd = ref.watch(bannerAdServiceProvider).createBannerAd();
 
     return FutureBuilder(
       future: futureBannerAd,

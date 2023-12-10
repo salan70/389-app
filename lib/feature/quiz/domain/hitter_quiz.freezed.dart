@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'hitter_quiz.dart';
 
@@ -115,11 +115,11 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
 }
 
 /// @nodoc
-abstract class _$$_HitterQuizCopyWith<$Res>
+abstract class _$$HitterQuizImplCopyWith<$Res>
     implements $HitterQuizCopyWith<$Res> {
-  factory _$$_HitterQuizCopyWith(
-          _$_HitterQuiz value, $Res Function(_$_HitterQuiz) then) =
-      __$$_HitterQuizCopyWithImpl<$Res>;
+  factory _$$HitterQuizImplCopyWith(
+          _$HitterQuizImpl value, $Res Function(_$HitterQuizImpl) then) =
+      __$$HitterQuizImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -135,11 +135,11 @@ abstract class _$$_HitterQuizCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_HitterQuizCopyWithImpl<$Res>
-    extends _$HitterQuizCopyWithImpl<$Res, _$_HitterQuiz>
-    implements _$$_HitterQuizCopyWith<$Res> {
-  __$$_HitterQuizCopyWithImpl(
-      _$_HitterQuiz _value, $Res Function(_$_HitterQuiz) _then)
+class __$$HitterQuizImplCopyWithImpl<$Res>
+    extends _$HitterQuizCopyWithImpl<$Res, _$HitterQuizImpl>
+    implements _$$HitterQuizImplCopyWith<$Res> {
+  __$$HitterQuizImplCopyWithImpl(
+      _$HitterQuizImpl _value, $Res Function(_$HitterQuizImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,7 +155,7 @@ class __$$_HitterQuizCopyWithImpl<$Res>
     Object? isCorrect = null,
     Object? incorrectCount = null,
   }) {
-    return _then(_$_HitterQuiz(
+    return _then(_$HitterQuizImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -198,8 +198,8 @@ class __$$_HitterQuizCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HitterQuiz implements _HitterQuiz {
-  const _$_HitterQuiz(
+class _$HitterQuizImpl implements _HitterQuiz {
+  const _$HitterQuizImpl(
       {required this.id,
       required this.name,
       required this.quizType,
@@ -222,6 +222,7 @@ class _$_HitterQuiz implements _HitterQuiz {
   final List<String> _yearList;
   @override
   List<String> get yearList {
+    if (_yearList is EqualUnmodifiableListView) return _yearList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_yearList);
   }
@@ -229,6 +230,8 @@ class _$_HitterQuiz implements _HitterQuiz {
   final List<String> _selectedStatsList;
   @override
   List<String> get selectedStatsList {
+    if (_selectedStatsList is EqualUnmodifiableListView)
+      return _selectedStatsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedStatsList);
   }
@@ -236,6 +239,7 @@ class _$_HitterQuiz implements _HitterQuiz {
   final List<Map<String, StatsValue>> _statsMapList;
   @override
   List<Map<String, StatsValue>> get statsMapList {
+    if (_statsMapList is EqualUnmodifiableListView) return _statsMapList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_statsMapList);
   }
@@ -256,7 +260,7 @@ class _$_HitterQuiz implements _HitterQuiz {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HitterQuiz &&
+            other is _$HitterQuizImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.quizType, quizType) ||
@@ -290,8 +294,8 @@ class _$_HitterQuiz implements _HitterQuiz {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterQuizCopyWith<_$_HitterQuiz> get copyWith =>
-      __$$_HitterQuizCopyWithImpl<_$_HitterQuiz>(this, _$identity);
+  _$$HitterQuizImplCopyWith<_$HitterQuizImpl> get copyWith =>
+      __$$HitterQuizImplCopyWithImpl<_$HitterQuizImpl>(this, _$identity);
 }
 
 abstract class _HitterQuiz implements HitterQuiz {
@@ -304,7 +308,7 @@ abstract class _HitterQuiz implements HitterQuiz {
       required final List<Map<String, StatsValue>> statsMapList,
       required final int unveilCount,
       required final bool isCorrect,
-      required final int incorrectCount}) = _$_HitterQuiz;
+      required final int incorrectCount}) = _$HitterQuizImpl;
 
   @override
   String get id;
@@ -326,6 +330,6 @@ abstract class _HitterQuiz implements HitterQuiz {
   int get incorrectCount;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterQuizCopyWith<_$_HitterQuiz> get copyWith =>
+  _$$HitterQuizImplCopyWith<_$HitterQuizImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

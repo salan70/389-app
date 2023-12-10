@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/extension/date_time_extension.dart';
@@ -12,10 +13,11 @@ import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
 
-/// quizResultサービスプロバイダー
-final quizResultServiceProvider = Provider(
-  QuizResultService.new,
-);
+part 'quiz_result_service.g.dart';
+
+@riverpod
+QuizResultService quizResultService(QuizResultServiceRef ref) =>
+    QuizResultService(ref);
 
 /// quizResult関連の処理を行うサービスクラス
 class QuizResultService {

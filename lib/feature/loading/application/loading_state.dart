@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// todo notifierProvider
 /// ローディング表示しているか否かを返すプロバイダー
 final loadingProvider = NotifierProvider<LoadingNotifier, bool>(
   LoadingNotifier.new,

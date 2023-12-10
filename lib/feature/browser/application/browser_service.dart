@@ -1,7 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-final browserServiceProvider = Provider.autoDispose((_) => BrowserService());
+part 'browser_service.g.dart';
+
+@riverpod
+BrowserService browserService(_) => BrowserService();
 
 /// ブラウザ起動を行うサービスクラス
 class BrowserService {

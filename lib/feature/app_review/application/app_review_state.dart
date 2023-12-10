@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../auth/domain/auth_repository.dart';
 import '../../quiz/application/hitter_quiz_state.dart';
@@ -7,7 +8,11 @@ import '../domain/review_history.dart';
 import '../domain/review_history_repository.dart';
 import '../util/app_rview_constant.dart';
 
-/// アプリレビューのリクエストを送るかどうか確認する処理の状態をAsyncValueとして返すプロバイダー
+part 'app_review_state.g.dart';
+
+// todo stateProvider
+/// アプリレビューのリクエストを送るかどうか確認する処理の状態を
+/// AsyncValueとして返すプロバイダー。
 final checkRequestAppReviewStateProvider = StateProvider<AsyncValue<void>>(
   (_) => const AsyncValue.data(null),
 );
@@ -15,13 +20,15 @@ final checkRequestAppReviewStateProvider = StateProvider<AsyncValue<void>>(
 /// [ReviewHistory] を取得する。
 ///
 /// 存在しない場合は null を返す。
-final reviewHistoryProvider = FutureProvider<ReviewHistory?>((ref) async {
+@riverpod
+Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
   final user = ref.read(authRepositoryProvider).getCurrentUser();
   return ref.read(reviewHistoryRepositoryProvider).fetch(user!.uid);
-});
+}
 
 /// レビューを要求するかどうかを返すプロバイダー。
-final shouldRequestReviewProvider = FutureProvider<bool>((ref) async {
+@riverpod
+Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
   final hitterQuizState = ref.watch(hitterQuizStateProvider);
   // ローディングの場合を想定している。
   if (hitterQuizState.value == null) {
@@ -56,4 +63,4 @@ final shouldRequestReviewProvider = FutureProvider<bool>((ref) async {
   final correctedCount =
       await quizResultRepository.fetchCorrectedNormalQuizCount(user);
   return correctedCount >= minCorrectedCount;
-});
+}
