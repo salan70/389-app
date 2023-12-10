@@ -193,6 +193,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.2"
+  change:
+    dependency: transitive
+    description:
+      name: change
+      sha256: b4d4aceb94f5081d40a2c08211bd779e55373265ce2304b7b38b5c4c218a9263
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.0"
   characters:
     dependency: transitive
     description:
@@ -217,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  cider:
+    dependency: "direct dev"
+    description:
+      name: cider
+      sha256: "74d96930575f97d83e0a3a5cd26d27d10c38961b1b41346eebe5baabf0f56940"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   cli_util:
     dependency: transitive
     description:
@@ -329,6 +345,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.4"
+  dbus:
+    dependency: transitive
+    description:
+      name: dbus
+      sha256: "365c771ac3b0e58845f39ec6deebc76e3276aa9922b0cc60840712094d9047ac"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.10"
   device_info_plus:
     dependency: "direct main"
     description:
@@ -518,6 +542,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_app_badger:
+    dependency: "direct main"
+    description:
+      name: flutter_app_badger
+      sha256: "64d4a279bab862ed28850431b9b446b9820aaae0bf363322d51077419f930fa8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.0"
   flutter_dotenv:
     dependency: "direct main"
     description:
@@ -542,6 +574,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_local_notifications:
+    dependency: "direct main"
+    description:
+      name: flutter_local_notifications
+      sha256: bb5cd63ff7c91d6efe452e41d0d0ae6348925c82eafd10ce170ef585ea04776e
+      url: "https://pub.dev"
+    source: hosted
+    version: "16.2.0"
+  flutter_local_notifications_linux:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_linux
+      sha256: "33f741ef47b5f63cc7f78fe75eeeac7e19f171ff3c3df054d84c1e38bedb6a03"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0+1"
+  flutter_local_notifications_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_platform_interface
+      sha256: "7cf643d6d5022f3baed0be777b0662cce5919c0a7b86e700299f22dc4ae660ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.0.0+1"
+  flutter_native_splash:
+    dependency: "direct dev"
+    description:
+      name: flutter_native_splash
+      sha256: "06e82dcc3aae28085a385f8d6e2c6753199041b2001e6fc1dcce997f6e6ff463"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.11"
   flutter_riverpod:
     dependency: "direct main"
     description:
@@ -760,6 +824,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  klizma:
+    dependency: transitive
+    description:
+      name: klizma
+      sha256: "3bb0ed5cc183274e39d48fa42a61484e4dda3dc52970aa902379c7403cd7f0f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.1"
   lints:
     dependency: transitive
     description:
@@ -784,6 +856,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: acf35edccc0463a9d7384e437c015a3535772e09714cf60e07eeef3a15870dcd
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.1.1"
+  marker:
+    dependency: transitive
+    description:
+      name: marker
+      sha256: "970eb97ea43752bd443b91d992068575f37bcc7f952c01334779673b7db23114"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.1"
   matcher:
     dependency: transitive
     description:
@@ -1032,6 +1120,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  rfc_6901:
+    dependency: transitive
+    description:
+      name: rfc_6901
+      sha256: "8d97680dada633146cf75ab9382f2ce2b7e4bd63ceecd867416cf43b5832b988"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   riverpod:
     dependency: transitive
     description:
@@ -1229,6 +1325,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.0"
+  timezone:
+    dependency: "direct main"
+    description:
+      name: timezone
+      sha256: "1cfd8ddc2d1cfd836bc93e67b9be88c3adaeca6f40a00ca999104c30693cdca0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.2"
   timing:
     dependency: transitive
     description:
@@ -1357,6 +1461,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  version_manipulation:
+    dependency: transitive
+    description:
+      name: version_manipulation
+      sha256: "9ef166939794d5bd80309cc6dbfe33c9f81674ba1c73ac117a866fd2dc746846"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.2"
   visibility_detector:
     dependency: transitive
     description:
@@ -1414,5 +1526,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.6 <3.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.0.0"

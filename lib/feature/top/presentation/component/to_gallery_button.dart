@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widget/my_button.dart';
-import '../../../../util/constant/button_type_constant.dart';
 import '../../../quiz_result/presentation/gallery_list/base_gallery_list_page.dart';
 
 class ToGalleryButton extends StatelessWidget {
@@ -12,6 +11,7 @@ class ToGalleryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
+      buttonName: 'to_gallery_button',
       buttonType: buttonType,
       onPressed: () {
         Navigator.push<void>(
@@ -19,6 +19,9 @@ class ToGalleryButton extends StatelessWidget {
           MaterialPageRoute(
             fullscreenDialog: true,
             builder: (context) => const BaseGalleryListPage(),
+            settings: const RouteSettings(
+              name: '/base_gallery_list_page',
+            ),
           ),
         );
       },

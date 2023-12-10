@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../common_widget/my_button.dart';
-import '../../../../util/constant/button_type_constant.dart';
 import 'setting_dialog.dart';
 
 class ToSettingButton extends StatelessWidget {
@@ -15,6 +14,7 @@ class ToSettingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
+      buttonName: 'to_setting_button',
       buttonType: buttonType,
       onPressed: () {
         showDialog<void>(

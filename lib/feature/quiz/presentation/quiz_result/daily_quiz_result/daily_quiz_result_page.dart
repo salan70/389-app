@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
+import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/result_quiz_widget.dart';
@@ -16,7 +16,7 @@ class DailyQuizResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#389quiz #今日の1問\n$appStoreUrl';
+    const shareText = '#プロ野球クイズ #389quiz #今日の1問\n$appStoreUrl';
     const buttonWidth = 160.0;
 
     // TODO(me): globalKeyを引数として渡すのイケてない感ある

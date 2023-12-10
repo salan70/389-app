@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../../../util/constant/button_type_constant.dart';
+import '../../../../../common_widget/my_button.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../component/quiz_widget.dart';
 import '../component/input_answer_text_field.dart';

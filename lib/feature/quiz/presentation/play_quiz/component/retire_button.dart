@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
@@ -26,6 +25,7 @@ class RetireButton extends ConsumerWidget {
       data: (data) {
         final quizType = data!.quizType;
         return MyButton(
+          buttonName: 'retire_button',
           buttonType: buttonType,
           onPressed: () {
             showDialog<void>(
@@ -59,6 +59,9 @@ class RetireButton extends ConsumerWidget {
                       await Navigator.of(context).push(
                         MaterialPageRoute<Widget>(
                           builder: (_) => resultPage,
+                          settings: RouteSettings(
+                            name: '/${quizType!.label}_quiz_result_page',
+                          ),
                         ),
                       );
                     }

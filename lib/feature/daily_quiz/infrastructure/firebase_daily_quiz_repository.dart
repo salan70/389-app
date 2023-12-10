@@ -12,7 +12,7 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
   final FirebaseFirestore firestore;
 
   @override
-  Future<DailyQuiz> fetchDailyQuiz() async {
+  Future<DailyQuiz?> fetchDailyQuiz() async {
     final now = await NTP.now();
     final startTodayInApp = now.calculateDateInApp();
     final endTodayInApp = DateTime(
@@ -34,10 +34,6 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
         .get();
 
     final dailyQuizList = snapshot.docs.map((DocumentSnapshot document) {
-      if (document.data() == null) {
-        throw Exception();
-      }
-
       // TODO(me): fromDocumentメソッドをdomain/daily_quiz.dartに作成する
       final data = document.data()! as Map<String, dynamic>;
       final questionedAt = (data['questionedAt'] as Timestamp).toDate();
@@ -52,6 +48,10 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
         selectedStatsList: selectedStatsList,
       );
     }).toList();
+
+    if (dailyQuizList.isEmpty) {
+      return null;
+    }
 
     return dailyQuizList[0];
   }

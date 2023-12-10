@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/button_type_constant.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
@@ -30,6 +29,7 @@ class IncorrectDialog extends ConsumerWidget {
           content: Text('${submittedHitter!.label}選手ではありません'),
           actions: <Widget>[
             MyButton(
+              buttonName: 'retire_button',
               buttonType: ButtonType.alert,
               child: const Text('諦める'),
               onPressed: () async {
@@ -61,6 +61,9 @@ class IncorrectDialog extends ConsumerWidget {
                           await Navigator.of(context).push(
                             MaterialPageRoute<Widget>(
                               builder: (_) => resultPage,
+                              settings: RouteSettings(
+                                name: '/${quizType!.label}_quiz_result_page',
+                              ),
                             ),
                           );
                         }
@@ -71,6 +74,7 @@ class IncorrectDialog extends ConsumerWidget {
               },
             ),
             MyButton(
+              buttonName: 'try_again_button',
               buttonType: ButtonType.sub,
               child: const Text('もう一度回答する'),
               onPressed: () {

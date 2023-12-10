@@ -34,18 +34,21 @@ abstract class QuizResultRepository {
     SearchCondition searchCondition,
   );
 
-  /// normalQuizの結果をリストで取得する（作成日の降順）
+  /// normalQuiz の結果をリストで取得する（作成日の降順）。
   Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user);
 
-  /// dailyQuizの結果をリストで取得する（出題日の降順）
+  /// dailyQuiz の結果をリストで取得する（出題日の降順）。
   Future<DailyHitterQuizResult> fetchDailyHitterQuizResult(User user);
 
-  /// 指定したdailyQuizの結果が存在するかどうかを返す
+  /// 指定した dailyQuiz の結果が存在するかどうかを返す。
   Future<bool> existSpecifiedDailyQuizResult(User user, String dailyQuizId);
 
-  /// normalQuizのプレイ回数を返す
+  /// normalQuiz のプレイ回数を返す。
   Future<int> fetchPlayedNormalQuizCount(User user);
 
-  /// normalQuizの正解数を返す
+  /// normalQuiz の正解数を返す。
   Future<int> fetchCorrectedNormalQuizCount(User user);
+
+  /// normalQuiz を削除する。
+  Future<void> deleteNormalQuizResult(User user, String docId);
 }

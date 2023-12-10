@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../util/constant/hive_box_type.dart';
 import '../domain/search_condition.dart';
 import '../domain/search_condition_repository.dart';
 import '../util/search_condition_constant.dart';
@@ -11,10 +12,12 @@ class HiveSearchConditionRepository implements SearchConditionRepository {
 
   final Box<SearchCondition> box;
 
+  final _boxKey = HiveBoxType.searchCondition.key;
+
   @override
   SearchCondition fetchSearchCondition() {
     final searchCondition = box.get(
-      searchConditionBoxKey,
+      _boxKey,
       defaultValue: defaultSearchCondition,
     )!;
 
@@ -28,6 +31,6 @@ class HiveSearchConditionRepository implements SearchConditionRepository {
 
   @override
   void saveSearchCondition(SearchCondition searchCondition) {
-    box.put(searchConditionBoxKey, searchCondition);
+    box.put(_boxKey, searchCondition);
   }
 }

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/domain/hitter_quiz.dart';
+import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
@@ -111,8 +112,7 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
 
     final hitterQuizResultList = <HitterQuizResult>[];
     for (final document in snapshot.docs) {
-      final hitterQuizResult =
-          HitterQuizResult.fromJson(document.data()! as Map<String, dynamic>);
+      final hitterQuizResult = _toHitterQuizResult(document);
       hitterQuizResultList.add(hitterQuizResult);
     }
 
@@ -140,11 +140,41 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
       if (data.containsKey('questionedAt')) {
         final formattedQuestionedAt =
             (data['questionedAt'] as Timestamp).toDate().toFormattedString();
-        final hitterQuizResult = HitterQuizResult.fromJson(data);
+        final hitterQuizResult = _toHitterQuizResult(document);
         resultMap[formattedQuestionedAt] = hitterQuizResult;
       }
     }
     return DailyHitterQuizResult(resultMap: resultMap);
+  }
+
+  /// ドキュメントから [HitterQuizResult] を生成する
+  HitterQuizResult _toHitterQuizResult(
+    QueryDocumentSnapshot<Object?> document,
+  ) {
+    final data = document.data()! as Map<String, dynamic>;
+
+    return HitterQuizResult(
+      docId: document.id,
+      id: data['playerId'] as String,
+      name: data['playerName'] as String,
+      updatedAt: (data['updatedAt'] as Timestamp).toDate(),
+      yearList:
+          (data['yearList'] as List<dynamic>).map((e) => e as String).toList(),
+      selectedStatsList: (data['selectedStatsList'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      statsMapList: (data['statsMapList'] as List<dynamic>)
+          .map(
+            (e) => (e as Map<String, dynamic>).map(
+              (k, e) =>
+                  MapEntry(k, StatsValue.fromJson(e as Map<String, dynamic>)),
+            ),
+          )
+          .toList(),
+      unveilCount: data['unveilCount'] as int,
+      isCorrect: data['isCorrect'] as bool,
+      incorrectCount: data['incorrectCount'] as int,
+    );
   }
 
   @override
@@ -162,26 +192,38 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return snapshot.exists;
   }
 
-  @ override
+  @override
   Future<int> fetchPlayedNormalQuizCount(User user) async {
-    final QuerySnapshot snapshot = await firestore
+    final snapshot = await firestore
         .collection('users')
         .doc(user.uid)
         .collection('normalQuizResult')
+        .count()
         .get();
 
-    return snapshot.size;
+    return snapshot.count;
   }
 
   @override
   Future<int> fetchCorrectedNormalQuizCount(User user) async {
-    final QuerySnapshot snapshot = await firestore
+    final snapshot = await firestore
         .collection('users')
         .doc(user.uid)
         .collection('normalQuizResult')
         .where('isCorrect', isEqualTo: true)
+        .count()
         .get();
 
-    return snapshot.size;
+    return snapshot.count;
+  }
+
+  @override
+  Future<void> deleteNormalQuizResult(User user, String docId) async {
+    return firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .doc(docId)
+        .delete();
   }
 }

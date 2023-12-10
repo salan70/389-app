@@ -1,12 +1,10 @@
-import 'dart:math';
-
+import 'package:baseball_quiz_app/feature/app_info/application/app_info_service.dart';
+import 'package:baseball_quiz_app/feature/app_review/domain/review_history_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 
+import '../../../util/logger.dart';
 import '../../auth/domain/auth_repository.dart';
-import '../../quiz/application/hitter_quiz_state.dart';
-import '../../quiz_result/domain/quiz_result_repository.dart';
-import '../util/app_rview_constant.dart';
 import 'app_review_state.dart';
 
 final appReviewServiceProvider = Provider.autoDispose<AppReviewService>(
@@ -19,37 +17,29 @@ class AppReviewService {
 
   final Ref ref;
 
-  Future<bool> shouldRequestAppReview() async {
-    final notifier = ref.read(checkRequestAppReviewStateProvider.notifier);
-    notifier.state = const AsyncValue.loading();
-
-    // 直近のクイズで不正解している場合falseを返す
-    if (ref.read(hitterQuizStateProvider).value!.isCorrect == false) {
-      return false;
-    }
-
-    final user = ref.read(authRepositoryProvider).getCurrentUser()!;
-    final quizResultRepository = ref.read(quizResultRepositoryProvider);
-
-    late int playedCount;
-    late int correctedCount;
-    notifier.state = await AsyncValue.guard(() async {
-      playedCount = await quizResultRepository.fetchPlayedNormalQuizCount(user);
-      correctedCount =
-          await quizResultRepository.fetchCorrectedNormalQuizCount(user);
-    });
-
-    return playedCount >= minPlayedCount && correctedCount >= minCorrectedCount;
-  }
-
-  Future<void> maybeRequestAppReview() async {
+  /// アプリのレビューを依頼する。
+  ///
+  /// レビュー用のダイアログを表示できない場合、ストアを開く。
+  Future<void> requestAppReview() async {
     final inAppReview = InAppReview.instance;
 
-    if (await inAppReview.isAvailable()) {
-      // Random().nextDouble()は、0.0から1.0 の範囲でランダムな実数を返す
-      if (Random().nextDouble() < appReviewRequestProbability) {
+    try {
+      if (await inAppReview.isAvailable()) {
         await inAppReview.requestReview();
+      } else {
+        await ref.read(appInfoServiceProvider).launchStore();
       }
+    } on Exception catch (e, s) {
+      // TODO(me): エラーが発生したことをスナックバーなどでユーザーに伝える。（presentationで）
+      logger.e('レビューリクエストに失敗しました。', e, s);
     }
+  }
+
+  Future<void> updateReviewHistory() async {
+    final userId = ref.read(authRepositoryProvider).getCurrentUser()!.uid;
+    await ref.read(reviewHistoryRepositoryProvider).update(userId);
+
+    // 更新が反映されるよう、 invalidate する。
+    ref.invalidate(reviewHistoryProvider);
   }
 }
