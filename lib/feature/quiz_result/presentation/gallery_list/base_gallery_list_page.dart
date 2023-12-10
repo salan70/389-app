@@ -41,11 +41,11 @@ class BaseGalleryListPage extends StatelessWidget {
                 ],
               ),
             ),
-            Align(
+            const Align(
               alignment: Alignment.bottomCenter,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
+                children: [
                   SizedBox(
                     width: 120,
                     child: BackToTopButton(buttonType: ButtonType.main),

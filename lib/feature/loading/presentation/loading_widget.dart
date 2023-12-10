@@ -26,12 +26,12 @@ class LoadingDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return const Dialog(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40),
+        padding: EdgeInsets.symmetric(vertical: 40),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             // The loading indicator
             CircularProgressIndicator(),
             SizedBox(

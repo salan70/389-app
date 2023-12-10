@@ -15,10 +15,10 @@ class SettingDialog extends ConsumerWidget {
     const largeButtonWidth = 240.0;
     const smallButtonWidth = 120.0;
 
-    return Dialog(
+    return const Dialog(
       child: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             SizedBox(height: 16),
             Text('その他'),
             SizedBox(height: 24),

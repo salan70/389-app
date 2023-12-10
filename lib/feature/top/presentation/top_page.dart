@@ -39,9 +39,7 @@ class _TopPageState extends ConsumerState<TopPage> {
       }
 
       // ローカルPUSH通知の初期設定を行う。
-      await ref
-          .read(localPushNotificationServiceProvider)
-          .onAppLaunch();
+      await ref.read(localPushNotificationServiceProvider).onAppLaunch();
     });
   }
 
@@ -55,10 +53,10 @@ class _TopPageState extends ConsumerState<TopPage> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.only(left: 40, top: deviceHeight / 15, right: 40),
-          child: Center(
+          child: const Center(
             child: Column(
               children: [
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
                     width: 120,
@@ -67,7 +65,7 @@ class _TopPageState extends ConsumerState<TopPage> {
                 ),
                 Expanded(
                   child: Column(
-                    children: const [
+                    children: [
                       SizedBox(height: 48),
                       IconWidget(),
                       SizedBox(height: 40),
@@ -96,7 +94,7 @@ class _TopPageState extends ConsumerState<TopPage> {
                     ],
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.bottomCenter,
                   child: BannerAdWidget(),
                 ),

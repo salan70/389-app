@@ -16,8 +16,8 @@ class ToTermButton extends ConsumerWidget {
       onPressed: () {
         ref.read(browserServiceProvider).launchBrowser(termsUrl);
       },
-      child: Stack(
-        children: const [
+      child: const Stack(
+        children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Icon(Icons.description_rounded),
