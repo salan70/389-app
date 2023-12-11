@@ -168,11 +168,4 @@ jobs:
 
       - name: Upload dsym artifacts to Firebase Crashlytics
         run: |
-          find . -name "*.dSYM*"
-          dSymZipPath=$(find . -name "*.dSYM.zip" | head -1)
-          echo "dSymZipPath: $dSymZipPath"
-          dSymPath="$(dirname "${dSymZipPath}")"
-          googleServicesPath="$FCI_BUILD_DIR/build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app/GoogleService-Info.plist"
-          crashlyticsScriptPath="$FCI_BUILD_DIR/ios/Pods/FirebaseCrashlytics/upload-symbols"
-          echo "Publishing debug symbols from $dSymPath to Firebase Crashlytics"
-          $crashlyticsScriptPath -gsp $googleServicesPath -p ios $dSymPath
+          ios/Pods/FirebaseCrashlytics/upload-symbols -gsp ios/GoogleService-Info.plist -p ios build/ios/archive/Runner.xcarchive/dSYMs
