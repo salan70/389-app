@@ -1,6 +1,5 @@
 // ignore_for_file: one_member_abstracts
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'daily_quiz.dart';

@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../daily_quiz/domain/daily_quiz.dart';
-import '../../search_condition/application/search_condition_state.dart';
+import '../../search_condition/application/search_condition_notifier.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
 import '../domain/hitter_repository.dart';
@@ -31,7 +31,7 @@ class HitterQuizService {
 
     late HitterQuiz hitterQuiz;
     notifier.state = await AsyncValue.guard(() async {
-      final searchCondition = ref.read(searchConditionProvider);
+      final searchCondition = ref.read(searchConditionNotifierProvider);
       hitterQuiz = await ref
           .read(hitterRepositoryProvider)
           .fetchHitterQuizBySearchCondition(searchCondition);

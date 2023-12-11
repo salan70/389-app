@@ -4,17 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/constant/strings_constant.dart';
-import '../../application/search_condition_service.dart';
-import '../../application/search_condition_state.dart';
+import '../../application/search_condition_notifier.dart';
 
 class SelectStatsWidget extends ConsumerWidget {
   const SelectStatsWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(searchConditionProvider);
-    final selectedStatsList = searchCondition.selectedStatsList;
-    final searchConditionService = ref.watch(searchConditionServiceProvider);
+    final selectedStatsList =
+        ref.watch(searchConditionNotifierProvider).selectedStatsList;
+
+    final notifier = ref.watch(searchConditionNotifierProvider.notifier);
 
     return SmartSelect.multiple(
       title: '出題する成績',
@@ -34,12 +34,11 @@ class SelectStatsWidget extends ConsumerWidget {
       choiceType: S2ChoiceType.chips,
       onChange: (selectedObject) {
         final selectedList = selectedObject.value as List<String>;
-        searchConditionService.saveSelectedStatsList(selectedList);
+        notifier.updateSelectedStatsList(selectedList);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid =
-            searchConditionService.isValidSelectedStatsList(chosen.length);
+        final isValid = notifier.isValidSelectedStatsList(chosen.length);
         return isValid ? '' : errorForSelectStatsValidation;
       },
       // modal表示前画面の、選択している成績のUI
@@ -76,9 +75,6 @@ class ChoiceCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchConditionService = ref.watch(searchConditionServiceProvider);
-    final tappedStats = choice.value! as String;
-
     return Container(
       padding: const EdgeInsets.only(left: 12, top: 8, right: 12, bottom: 8),
       margin: const EdgeInsets.only(top: 4, bottom: 4),
@@ -92,17 +88,19 @@ class ChoiceCard extends ConsumerWidget {
         onTap: () {
           final isSelected = choice.selected;
 
-          final canChangeState = searchConditionService.canChangeStatsState(
-            selectedLength: state.selection!.length,
-            isSelected: isSelected,
-          );
+          final canChangeState = ref
+              .read(searchConditionNotifierProvider.notifier)
+              .canChangeStatsState(
+                selectedLength: state.selection!.length,
+                isSelected: isSelected,
+              );
 
           if (canChangeState) {
             choice.select?.call(!isSelected);
           }
         },
         child: Text(
-          tappedStats,
+          choice.value! as String,
           textAlign: TextAlign.center,
           overflow: TextOverflow.ellipsis,
         ),

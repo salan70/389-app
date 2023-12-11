@@ -5,7 +5,7 @@ import '../../../../common_widget/my_button.dart';
 import '../../../analytics/application/analytics_service.dart';
 import '../../../quiz/application/hitter_quiz_service.dart';
 import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
-import '../../application/search_condition_state.dart';
+import '../../application/search_condition_notifier.dart';
 import '../../domain/search_condition_repository.dart';
 
 class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget {
@@ -23,7 +23,9 @@ class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget {
       buttonType: buttonType,
       onPressed: () async {
         // searchConditionをローカルDBへ保存
-        final searchCondition = ref.read(searchConditionProvider);
+        final searchCondition = ref.read(searchConditionNotifierProvider);
+
+        // todo: application層に移動する。
         ref
             .read(searchConditionRepositoryProvider)
             .saveSearchCondition(searchCondition);

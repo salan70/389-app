@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/search_condition/application/search_condition_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -8,7 +9,6 @@ import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../quiz/application/hitter_quiz_state.dart';
 import '../../quiz/domain/hitter_quiz.dart';
-import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
@@ -68,7 +68,7 @@ class QuizResultService {
       await quizResultRepository.createNormalQuizResult(
         user!,
         ref.read(hitterQuizStateProvider).value!,
-        ref.read(searchConditionProvider),
+        ref.read(searchConditionNotifierProvider),
       );
     });
   }
