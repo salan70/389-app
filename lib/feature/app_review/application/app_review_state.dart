@@ -1,4 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
@@ -10,13 +9,6 @@ import '../domain/review_history_repository.dart';
 import '../util/app_rview_constant.dart';
 
 part 'app_review_state.g.dart';
-
-// todo stateProvider
-/// アプリレビューのリクエストを送るかどうか確認する処理の状態を
-/// AsyncValueとして返すプロバイダー。
-final checkRequestAppReviewStateProvider = StateProvider<AsyncValue<void>>(
-  (_) => const AsyncValue.data(null),
-);
 
 /// [ReviewHistory] を取得する。
 ///
@@ -31,8 +23,8 @@ Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
 @riverpod
 Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
   // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
-  final hitterQuiz = await
-      ref.watch(hitterQuizNotifierProvider(QuizType.normal).future);
+  final hitterQuiz =
+      await ref.watch(hitterQuizNotifierProvider(QuizType.normal).future);
 
   // 直近のクイズで不正解している場合 false を返す。
   if (hitterQuiz.isCorrect == false) {
