@@ -30,7 +30,7 @@ class RetireButton extends ConsumerWidget {
           builder: (_) {
             final resultPage = quizType == QuizType.normal
                 ? const NormalQuizResultPage()
-                : const DailyQuizResultPage();
+                : DailyQuizResultPage();
 
             return ConfirmDialog(
               confirmText: quizType.retireConfirmText,

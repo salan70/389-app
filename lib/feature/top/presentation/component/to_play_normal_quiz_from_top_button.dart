@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/mixin/presentation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,7 +7,8 @@ import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../quiz/application/hitter_quiz_notifier.dart';
 import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
-class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
+class ToPlayNormalQuizFromTopButton extends ConsumerWidget
+    with PresentationMixin {
   const ToPlayNormalQuizFromTopButton({
     super.key,
     required this.buttonType,
@@ -20,19 +22,26 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
       buttonName: 'to_play_normal_quiz_from_top_button',
       buttonType: buttonType,
       onPressed: () async {
-        // 出題する選手を生成する。
-        ref.invalidate(hitterQuizNotifierProvider(QuizType.normal));
-
-        if (context.mounted) {
-          await Navigator.of(context).push(
-            MaterialPageRoute<Widget>(
-              builder: (_) => const PlayNormalQuizPage(),
-              settings: const RouteSettings(
-                name: '/play_normal_quiz_page',
-              ),
-            ),
-          );
-        }
+        await executeWithOverlayLoading(
+          ref,
+          action: () async {
+            ref.invalidate(hitterQuizNotifierProvider(QuizType.normal));
+            // ラグを回避するため、作成が完了するまで待つ。
+            await ref.read(hitterQuizNotifierProvider(QuizType.normal).future);
+          },
+          onLoadingComplete: () {
+            if (context.mounted) {
+              Navigator.of(context).push(
+                MaterialPageRoute<Widget>(
+                  builder: (_) => const PlayNormalQuizPage(),
+                  settings: const RouteSettings(
+                    name: '/play_normal_quiz_page',
+                  ),
+                ),
+              );
+            }
+          },
+        );
       },
       child: FittedBox(
         child: Text(

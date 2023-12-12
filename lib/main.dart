@@ -30,12 +30,11 @@ import 'feature/auth/infrastructure/firebase_auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
 import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
 import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
-import 'feature/loading/application/loading_state.dart';
+import 'feature/loading/application/loading_notifier.dart';
 import 'feature/loading/presentation/loading_widget.dart';
 import 'feature/push_notification/domain/notification_setting.dart';
 import 'feature/push_notification/domain/notification_setting_repository.dart';
 import 'feature/push_notification/infrastructure/hive_notification_setting_repository.dart';
-import 'feature/quiz/application/hitter_quiz_notifier.dart';
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_providers.dart';
@@ -47,7 +46,6 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
-import 'util/constant/hitting_stats_constant.dart';
 import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';
@@ -214,12 +212,6 @@ class _MyApp extends ConsumerState<MyApp> {
     // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも。
     // Providerによっては複数のWidgetで使用するためここで書いている。
     ref.handleAsyncValue<void>(
-      hitterQuizNotifierProvider(QuizType.normal),
-    );
-    ref.handleAsyncValue<void>(
-      hitterQuizNotifierProvider(QuizType.daily),
-    );
-    ref.handleAsyncValue<void>(
       quizResultFunctionStateProvider,
     );
     ref.handleAsyncValue<void>(
@@ -267,7 +259,7 @@ class _MyApp extends ConsumerState<MyApp> {
             children: [
               child!,
               // ローディングを表示する
-              if (ref.watch(loadingProvider)) const LoadingWidget(),
+              if (ref.watch(loadingNotifierProvider)) const LoadingWidget(),
             ],
           );
         },

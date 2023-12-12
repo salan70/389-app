@@ -22,9 +22,13 @@ class TopPage extends ConsumerStatefulWidget {
 }
 
 class _TopPageState extends ConsumerState<TopPage> {
+  late final deviceHeight = MediaQuery.of(context).size.height;
+  static const _buttonWidth = 240.0;
+
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       // バージョンチェック
       final needUpdate = await ref.read(appInfoServiceProvider).needUpdate();
@@ -46,8 +50,6 @@ class _TopPageState extends ConsumerState<TopPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    final deviceHeight = MediaQuery.of(context).size.height;
-    const buttonWidth = 240.0;
 
     return Scaffold(
       body: SafeArea(
@@ -70,25 +72,25 @@ class _TopPageState extends ConsumerState<TopPage> {
                       IconWidget(),
                       SizedBox(height: 40),
                       SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: ToPrepareQuizButton(buttonType: ButtonType.sub),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: ToPlayNormalQuizFromTopButton(
                           buttonType: ButtonType.main,
                         ),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child:
                             ToPlayDailyQuizButton(buttonType: ButtonType.sub),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: ToGalleryButton(buttonType: ButtonType.sub),
                       ),
                     ],

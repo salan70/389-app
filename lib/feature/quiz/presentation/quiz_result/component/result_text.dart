@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../util/constant/hitting_stats_constant.dart';
-import '../../../application/hitter_quiz_notifier.dart';
+import '../../../domain/hitter_quiz.dart';
 
 class ResultText extends ConsumerWidget {
-  const ResultText.normal({super.key}) : quizType = QuizType.normal;
+  const ResultText.normal({super.key, required this.hitterQuiz})
+      : quizType = QuizType.normal;
 
-  const ResultText.daily({super.key}) : quizType = QuizType.daily;
+  const ResultText.daily({super.key, required this.hitterQuiz})
+      : quizType = QuizType.daily;
 
   final QuizType quizType;
+  final HitterQuiz hitterQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // todo: .value つかうの多分良くない
-    final hitterQuiz = ref.watch(hitterQuizNotifierProvider(quizType)).value!;
-
     return Center(
       child: SizedBox(
         height: 64,

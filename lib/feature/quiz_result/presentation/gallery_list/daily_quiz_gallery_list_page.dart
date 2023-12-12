@@ -71,7 +71,7 @@ class CalenderCell extends ConsumerWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(
-                  builder: (_) => const DailyQuizGalleryDetailPage(),
+                  builder: (_) => DailyQuizGalleryDetailPage(),
                   settings: const RouteSettings(
                     name: '/daily_quiz_gallery_detail_page',
                   ),

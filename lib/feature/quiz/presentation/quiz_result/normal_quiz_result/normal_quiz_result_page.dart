@@ -6,8 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../common_widget/my_button.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
 import '../component/custom_confetti_widget.dart';
@@ -27,7 +29,7 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
 
   // Widget の画像を作成するために使用する。
-  final globalKey = GlobalKey();
+  final _globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -93,6 +95,8 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    final asyncHitterQuiz =
+        ref.watch(hitterQuizNotifierProvider(QuizType.normal));
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -100,47 +104,56 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: Stack(
-              children: [
-                ListView(
+            child: asyncHitterQuiz.maybeWhen(
+              orElse: Container.new,
+              loading: () => const Center(child: CircularProgressIndicator()),
+              data: (hitterQuiz) {
+                return Stack(
                   children: [
-                    const BannerAdWidget(),
-                    const SizedBox(height: 16),
-                    const ResultText.normal(),
-                    ResultQuizWidget(globalKey: globalKey),
-                    const SizedBox(height: 24),
-                    const Center(
-                      child: SizedBox(
-                        width: _buttonWidth,
-                        child: ReplayButton(buttonType: ButtonType.main),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Center(
-                      child: SizedBox(
-                        width: _buttonWidth,
-                        child: ShareButton(
-                          buttonType: ButtonType.sub,
-                          globalKey: globalKey,
-                          shareText: _shareText,
+                    ListView(
+                      children: [
+                        const BannerAdWidget(),
+                        const SizedBox(height: 16),
+                        ResultText.normal(hitterQuiz: hitterQuiz),
+                        ResultQuizWidget(
+                          globalKey: _globalKey,
+                          hitterQuiz: hitterQuiz,
                         ),
-                      ),
+                        const SizedBox(height: 24),
+                        const Center(
+                          child: SizedBox(
+                            width: _buttonWidth,
+                            child: ReplayButton(buttonType: ButtonType.main),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Center(
+                          child: SizedBox(
+                            width: _buttonWidth,
+                            child: ShareButton(
+                              buttonType: ButtonType.sub,
+                              globalKey: _globalKey,
+                              shareText: _shareText,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Center(
+                          child: SizedBox(
+                            width: _buttonWidth,
+                            child: BackToTopButton(buttonType: ButtonType.sub),
+                          ),
+                        ),
+                        const SizedBox(height: 40),
+                      ],
                     ),
-                    const SizedBox(height: 8),
-                    const Center(
-                      child: SizedBox(
-                        width: _buttonWidth,
-                        child: BackToTopButton(buttonType: ButtonType.sub),
-                      ),
+                    const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: CustomConfettiWidget(),
                     ),
-                    const SizedBox(height: 40),
                   ],
-                ),
-                const Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomConfettiWidget(),
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
