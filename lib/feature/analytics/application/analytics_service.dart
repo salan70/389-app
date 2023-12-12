@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
-import '../../search_condition/domain/search_condition.dart';
+import '../../search_condition/application/search_condition_notifier.dart';
 
 part 'analytics_service.g.dart';
 
@@ -25,7 +25,9 @@ class AnalyticsService {
 
   final Ref ref;
 
-  Future<void> logSearchCondition(SearchCondition searchCondition) async {
+  Future<void> logSearchCondition() async {
+    final searchCondition = ref.read(searchConditionNotifierProvider);
+
     try {
       await FirebaseAnalytics.instance.logEvent(
         name: 'search_condition',

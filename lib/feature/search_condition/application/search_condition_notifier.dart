@@ -90,4 +90,8 @@ class SearchConditionNotifier extends _$SearchConditionNotifier {
     }
     return selectedLength < mustSelectStatsNum;
   }
+
+  /// [SearchCondition] を repository に保存する。
+  void save() =>
+      ref.read(searchConditionRepositoryProvider).saveSearchCondition(state);
 }
