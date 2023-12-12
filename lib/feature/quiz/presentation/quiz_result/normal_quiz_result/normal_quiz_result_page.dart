@@ -147,9 +147,10 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
                         const SizedBox(height: 40),
                       ],
                     ),
-                    const Align(
+                    Align(
                       alignment: Alignment.bottomCenter,
-                      child: CustomConfettiWidget(),
+                      child:
+                          CustomConfettiWidget(isCorrect: hitterQuiz.isCorrect),
                     ),
                   ],
                 );

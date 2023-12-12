@@ -70,9 +70,11 @@ class DailyQuizResultPage extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.bottomCenter,
-                    child: CustomConfettiWidget(),
+                    child: CustomConfettiWidget(
+                      isCorrect: hitterQuiz.isCorrect,
+                    ),
                   ),
                 ],
               );
