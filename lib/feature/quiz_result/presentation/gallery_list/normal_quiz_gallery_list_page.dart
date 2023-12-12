@@ -5,7 +5,6 @@ import '../../../../common_widget/async_value_handler.dart';
 import '../../../../util/constant/colors_constant.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/extension/date_time_extension.dart';
-import '../../application/quiz_result_service.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/hitter_quiz_result.dart';
 import '../gallery_detail/normal_quiz_gallery_detail_page.dart';
@@ -36,14 +35,12 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                   final quizResult = quizResultList[index];
                   return InkWell(
                     onTap: () {
-                      ref
-                          .read(quizResultServiceProvider)
-                          .updateQuizResultStateFromIndex(index);
-
                       Navigator.push(
                         context,
                         MaterialPageRoute<Widget>(
-                          builder: (_) => NormalQuizGalleryDetailPage(),
+                          builder: (_) => NormalQuizGalleryDetailPage(
+                            quizResult: quizResult,
+                          ),
                           settings: const RouteSettings(
                             name: '/normal_quiz_gallery_detail_page',
                           ),

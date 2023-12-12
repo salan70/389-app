@@ -5,7 +5,6 @@ import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
-import '../../../../quiz_result/application/quiz_result_state.dart';
 import '../../../application/hitter_quiz_notifier.dart';
 import '../../../domain/hitter.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
@@ -51,17 +50,14 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
 
                 // `createNormalQuizResult()` でエラーが発生しなかった場合のみ、
                 // 画面遷移する。
-                final functionState = ref.read(quizResultFunctionStateProvider);
-                if (!functionState.hasError) {
-                  await navigator.push(
-                    MaterialPageRoute<Widget>(
-                      builder: (_) => const NormalQuizResultPage(),
-                      settings: const RouteSettings(
-                        name: '/play_normal_quiz_page',
-                      ),
+                await navigator.push(
+                  MaterialPageRoute<Widget>(
+                    builder: (_) => const NormalQuizResultPage(),
+                    settings: const RouteSettings(
+                      name: '/play_normal_quiz_page',
                     ),
-                  );
-                }
+                  ),
+                );
                 return;
               }
               // 不正解の場合。

@@ -37,7 +37,6 @@ import 'feature/push_notification/infrastructure/hive_notification_setting_repos
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_providers.dart';
-import 'feature/quiz_result/application/quiz_result_state.dart';
 import 'feature/quiz_result/domain/quiz_result_repository.dart';
 import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart';
 import 'feature/search_condition/domain/search_condition.dart';
@@ -206,14 +205,6 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // AsyncValueを返すStateProviderの結果をハンドリングする。
-    //
-    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも。
-    // Providerによっては複数のWidgetで使用するためここで書いている。
-    ref.handleAsyncValue<void>(
-      quizResultFunctionStateProvider,
-    );
-
     // TODO(me): ここで login するのは多分良くないのでなんとかする。
     // Userを作成
     ref.read(authServiceProvider).login();
