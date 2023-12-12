@@ -14,9 +14,10 @@ import 'daily_quiz_submit_answer_button.dart';
 import 'life_widget.dart';
 
 class PlayDailyQuizPage extends ConsumerWidget {
-  const PlayDailyQuizPage({super.key});
+  PlayDailyQuizPage({super.key});
 
   static const _buttonWidth = 160.0;
+  final _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,7 +46,9 @@ class PlayDailyQuizPage extends ConsumerWidget {
                       const SizedBox(height: 16),
                       QuizWidget(hitterQuiz: hitterQuiz),
                       const SizedBox(height: 16),
-                      InputAnswerTextField.daily(),
+                      InputAnswerTextField.daily(
+                        textEditingController: _textEditingController,
+                      ),
                       const SizedBox(height: 16),
                       const QuizEventButtons.daily(),
                       const SizedBox(height: 16),

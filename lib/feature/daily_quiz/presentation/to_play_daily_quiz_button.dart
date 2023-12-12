@@ -123,7 +123,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget {
 
                   await navigator.push(
                     MaterialPageRoute<Widget>(
-                      builder: (_) => const PlayDailyQuizPage(),
+                      builder: (_) => PlayDailyQuizPage(),
                       settings: const RouteSettings(
                         name: '/play_daily_quiz_page',
                       ),

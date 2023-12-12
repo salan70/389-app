@@ -8,18 +8,22 @@ import '../../../application/hitter_quiz_service.dart';
 import '../../../domain/hitter.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
-  InputAnswerTextField.normal({super.key}) : quizType = QuizType.normal;
+  InputAnswerTextField.normal({super.key, required this.textEditingController})
+      : quizType = QuizType.normal;
 
-  InputAnswerTextField.daily({super.key}) : quizType = QuizType.daily;
+  InputAnswerTextField.daily({super.key, required this.textEditingController})
+      : quizType = QuizType.daily;
 
   final QuizType quizType;
 
-  final textEditingController = TextEditingController();
-  final scrollController = ScrollController();
+  /// 回答入力用に使用する [TextEditingController].
+  ///
+  /// リビルドしても入力した文字列が保持されるように、親の Widget で管理する。
+  final TextEditingController textEditingController;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
     final hitterQuizNotifier =
         ref.watch(hitterQuizNotifierProvider(quizType).notifier);
 
@@ -29,12 +33,14 @@ class InputAnswerTextField extends ConsumerWidget {
       minStringLength: 0,
       itemsInView: 5,
       scrollbarDecoration: ScrollbarDecoration(
-        controller: scrollController,
+        controller: _scrollController,
         theme: const ScrollbarThemeData(),
       ),
       future: () {
         hitterQuizNotifier.updateEnteredHitter(null);
-        return hitterQuizService.searchHitter(textEditingController.text);
+        return ref
+            .read(hitterQuizServiceProvider)
+            .searchHitter(textEditingController.text);
       },
       getSelectedValue: (Hitter value) {
         // 回答入力用のTextFieldのフォーカスを外す

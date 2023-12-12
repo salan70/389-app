@@ -13,9 +13,10 @@ import '../component/retire_button.dart';
 import 'normal_quiz_submit_answer_button.dart';
 
 class PlayNormalQuizPage extends ConsumerWidget {
-  const PlayNormalQuizPage({super.key});
+  PlayNormalQuizPage({super.key});
 
   static const _buttonWidth = 160.0;
+  final _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +42,9 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     const SizedBox(height: 16),
                     QuizWidget(hitterQuiz: hitterQuiz),
                     const SizedBox(height: 16),
-                    InputAnswerTextField.normal(),
+                    InputAnswerTextField.normal(
+                      textEditingController: _textEditingController,
+                    ),
                     const SizedBox(height: 16),
                     const QuizEventButtons.normal(),
                     const SizedBox(height: 16),

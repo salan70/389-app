@@ -31,7 +31,7 @@ class ReplayButton extends ConsumerWidget with PresentationMixin {
           onLoadingComplete: () {
             Navigator.of(context).push(
               MaterialPageRoute<Widget>(
-                builder: (_) => const PlayNormalQuizPage(),
+                builder: (_) => PlayNormalQuizPage(),
                 settings: const RouteSettings(
                   name: '/play_normal_quiz_page',
                 ),
