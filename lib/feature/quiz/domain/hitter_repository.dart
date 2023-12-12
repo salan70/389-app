@@ -13,11 +13,15 @@ HitterRepository hitterRepository(HitterRepositoryRef ref) =>
 
 abstract class HitterRepository {
   /// 検索条件に合う野手を1人取得し、[HitterQuiz] として返す。
+  /// 
+  /// 検索条件に合う野手がいない場合、 null を返す。
   Future<HitterQuiz> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
   );
 
   /// IDで野手を1人取得し、[HitterQuiz] として返す。
+  /// 
+  /// 条件に合う野手がいない場合、 null を返す。
   Future<HitterQuiz> fetchHitterQuizById(DailyQuiz dailyQuiz);
 
   /// 登録されている全ての野手を取得する。

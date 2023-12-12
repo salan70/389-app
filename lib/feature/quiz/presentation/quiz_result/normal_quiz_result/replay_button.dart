@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/my_button.dart';
-import '../../../application/hitter_quiz_service.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 import '../../play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
 class ReplayButton extends ConsumerWidget {
@@ -19,9 +20,7 @@ class ReplayButton extends ConsumerWidget {
       buttonName: 'replay_button',
       buttonType: buttonType,
       onPressed: () async {
-        await ref
-            .read(hitterQuizServiceProvider)
-            .fetchHitterQuizBySearchCondition();
+        ref.invalidate(hitterQuizNotifierProvider(QuizType.normal));
 
         if (context.mounted) {
           await Navigator.of(context).push(

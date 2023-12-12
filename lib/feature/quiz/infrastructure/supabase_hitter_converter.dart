@@ -45,6 +45,7 @@ class SupabaseHitterConverter {
     final hitterQuiz = HitterQuiz(
       id: supabaseHitter.id,
       name: supabaseHitter.name,
+      enteredHitter: null,
       quizType: quizType,
       yearList: yearList,
       selectedStatsList: selectedStatsList,

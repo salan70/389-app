@@ -42,7 +42,7 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
               const Center(
                 child: SizedBox(
                   width: buttonWidth,
-                  child: ShowAnswerButton(buttonType: ButtonType.main),
+                  child: ShowAnswerButton.normal(buttonType: ButtonType.main),
                 ),
               ),
               const SizedBox(height: 4),

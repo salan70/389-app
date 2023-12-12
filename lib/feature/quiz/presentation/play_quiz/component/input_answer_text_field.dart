@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../application/answer_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 import '../../../application/hitter_quiz_service.dart';
 import '../../../domain/hitter.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
-  InputAnswerTextField({super.key});
+  InputAnswerTextField.normal({super.key}) : quizType = QuizType.normal;
+
+  InputAnswerTextField.daily({super.key}) : quizType = QuizType.daily;
+
+  final QuizType quizType;
 
   final textEditingController = TextEditingController();
   final scrollController = ScrollController();
@@ -15,7 +20,8 @@ class InputAnswerTextField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final hitterQuizService = ref.watch(hitterQuizServiceProvider);
-    final submittedHitterNotifier = ref.watch(submittedHitterProvider.notifier);
+    final hitterQuizNotifier =
+        ref.watch(hitterQuizNotifierProvider(quizType).notifier);
 
     return TextFieldSearch(
       label: '選手名',
@@ -27,13 +33,13 @@ class InputAnswerTextField extends ConsumerWidget {
         theme: const ScrollbarThemeData(),
       ),
       future: () {
-        submittedHitterNotifier.state = null;
+        hitterQuizNotifier.updateEnteredHitter(null);
         return hitterQuizService.searchHitter(textEditingController.text);
       },
       getSelectedValue: (Hitter value) {
         // 回答入力用のTextFieldのフォーカスを外す
         FocusManager.instance.primaryFocus?.unfocus();
-        submittedHitterNotifier.state = value;
+        hitterQuizNotifier.updateEnteredHitter(value);
       },
     );
   }

@@ -147,6 +147,7 @@ const dummySearchCondition = SearchCondition(
 const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
+  enteredHitter: null,
   quizType: QuizType.normal,
   yearList: ['2021', '2022', 'NPB：2年'],
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],

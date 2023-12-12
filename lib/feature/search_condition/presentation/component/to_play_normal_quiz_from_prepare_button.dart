@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../analytics/application/analytics_service.dart';
-import '../../../quiz/application/hitter_quiz_service.dart';
+import '../../../quiz/application/hitter_quiz_notifier.dart';
 import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 import '../../application/search_condition_notifier.dart';
 import '../../domain/search_condition_repository.dart';
@@ -32,8 +33,7 @@ class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget {
 
         // 出題する選手を取得
         await ref
-            .read(hitterQuizServiceProvider)
-            .fetchHitterQuizBySearchCondition();
+            .read(hitterQuizNotifierProvider(QuizType.normal).future);
 
         // Analytics に search_condition を送信する。
         await ref.read(analyticsServiceProvider).logSearchCondition(

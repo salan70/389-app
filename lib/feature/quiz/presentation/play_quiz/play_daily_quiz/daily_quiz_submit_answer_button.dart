@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
-import '../../../application/answer_state.dart';
-import '../../../application/hitter_quiz_service.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../component/incorrect_dialog.dart';
 
@@ -19,14 +19,15 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const maxCanIncorrectCount = 2;
 
-    final submittedHitter = ref.watch(submittedHitterProvider);
-    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
+    final asyncHitterQuiz = ref.watch(
+      hitterQuizNotifierProvider(QuizType.daily),
+    );
+    final notifier =
+        ref.watch(hitterQuizNotifierProvider(QuizType.daily).notifier);
 
     /// クイズ終了（最終回答）時の処理
     /// dailyQuizResultを更新し、結果ページに遷移する
     Future<void> finishQuiz() async {
-      // submittedHitterProviderを明示的にdisposeする
-      ref.invalidate(submittedHitterProvider);
       await ref.read(quizResultServiceProvider).updateDailyQuizResult();
 
       if (context.mounted) {
@@ -41,22 +42,25 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
       }
     }
 
-    Future<void> submitAnswer({required bool isFinalAnswer}) async {
+    Future<void> submitAnswer({
+      required bool isFinalAnswer,
+      required String hitterName,
+    }) async {
       // interstitial広告を作成
       final interstitialAdService = ref.read(interstitialAdServiceProvider);
       await interstitialAdService.createAd();
       await interstitialAdService.waitResult();
 
-      final isCorrect = hitterQuizService.isCorrectHitterQuiz();
+      final isCorrect = notifier.isCorrectHitterQuiz();
 
       // 正解の場合
       if (isCorrect) {
-        hitterQuizService.markCorrect();
+        notifier.markCorrect();
         await finishQuiz();
         return;
       }
       // 不正解の場合
-      hitterQuizService.addIncorrectCount();
+      notifier.addIncorrectCount();
 
       // interstitial広告を確率で表示
       await interstitialAdService.randomShowAd();
@@ -73,42 +77,53 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
           context: context,
           barrierDismissible: false,
           builder: (_) {
-            return const IncorrectDialog();
+            return IncorrectDialog.daily(hitterName: hitterName);
           },
         );
       }
     }
 
-    return MyButton(
-      buttonName: 'submit_answer_button',
-      buttonType: buttonType,
-      onPressed: submittedHitter == null
-          ? null
-          : () async {
-              // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
-              // 確認ダイアログを表示する
-              final isFinalAnswer =
-                  hitterQuizService.isFinalAnswer(maxCanIncorrectCount);
+    return asyncHitterQuiz.maybeWhen(
+      orElse: Container.new,
+      data: (hitterQuiz) {
+        return MyButton(
+          buttonName: 'submit_answer_button',
+          buttonType: buttonType,
+          onPressed: hitterQuiz.enteredHitter == null
+              ? null
+              : () async {
+                  // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
+                  // 確認ダイアログを表示する
+                  final isFinalAnswer =
+                      notifier.isFinalAnswer(maxCanIncorrectCount);
 
-              if (isFinalAnswer) {
-                await showDialog<void>(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (_) {
-                    return ConfirmDialog(
-                      confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
-                      onPressedYes: () async {
-                        await submitAnswer(isFinalAnswer: true);
+                  if (isFinalAnswer) {
+                    await showDialog<void>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (_) {
+                        return ConfirmDialog(
+                          confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
+                          onPressedYes: () async {
+                            await submitAnswer(
+                              isFinalAnswer: true,
+                              hitterName: hitterQuiz.enteredHitter!.label,
+                            );
+                          },
+                        );
                       },
                     );
-                  },
-                );
-                return;
-              }
+                    return;
+                  }
 
-              await submitAnswer(isFinalAnswer: false);
-            },
-      child: const Text('回答する'),
+                  await submitAnswer(
+                    isFinalAnswer: false,
+                    hitterName: hitterQuiz.enteredHitter!.label,
+                  );
+                },
+          child: const Text('回答する'),
+        );
+      },
     );
   }
 }

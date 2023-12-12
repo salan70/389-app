@@ -38,7 +38,7 @@ class DailyQuizGalleryDetailPage extends StatelessWidget {
               const Center(
                 child: SizedBox(
                   width: buttonWidth,
-                  child: ShowAnswerButton(buttonType: ButtonType.main),
+                  child: ShowAnswerButton.daily(buttonType: ButtonType.main),
                 ),
               ),
               const SizedBox(height: 4),

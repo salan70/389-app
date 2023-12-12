@@ -35,9 +35,9 @@ class PlayDailyQuizPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   const QuizWidget(willRebuild: true),
                   const SizedBox(height: 16),
-                  InputAnswerTextField(),
+                  InputAnswerTextField.daily(),
                   const SizedBox(height: 16),
-                  const QuizEventButtons(),
+                  const QuizEventButtons.daily(),
                   const SizedBox(height: 16),
                   const Center(
                     child: SizedBox(
@@ -51,7 +51,7 @@ class PlayDailyQuizPage extends StatelessWidget {
                   const Center(
                     child: SizedBox(
                       width: buttonWidth,
-                      child: RetireButton(buttonType: ButtonType.sub),
+                      child: RetireButton.daily(buttonType: ButtonType.sub),
                     ),
                   ),
                   const SizedBox(height: 120),

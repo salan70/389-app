@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../application/hitter_quiz_state.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../application/hitter_quiz_notifier.dart';
 
 /// Quizの画面を表示するWidget
 /// willUpdateがtrueの場合、このhitterQuizStateProviderをwatch（監視）される
@@ -16,14 +17,14 @@ class QuizWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     /// 結果画面にて再度クイズをプレイすると、hitterQuizStateProviderが更新されるため、
     /// willUpdateでreadとwatchを分けている
-    final hitterQuiz = willRebuild
-        ? ref.watch(hitterQuizStateProvider)
-        : ref.read(hitterQuizStateProvider);
+    final asyncHitterQuiz = willRebuild
+        ? ref.watch(hitterQuizNotifierProvider(QuizType.normal))
+        : ref.read(hitterQuizNotifierProvider(QuizType.normal));
 
-    return hitterQuiz.maybeWhen(
+    return asyncHitterQuiz.maybeWhen(
       orElse: Container.new,
-      data: (data) {
-        final selectedStatsList = data!.selectedStatsList;
+      data: (hitterQuiz) {
+        final selectedStatsList = hitterQuiz.selectedStatsList;
         return Column(
           children: [
             Row(
@@ -45,11 +46,11 @@ class QuizWidget extends ConsumerWidget {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: data.statsMapList.length,
+              itemCount: hitterQuiz.statsMapList.length,
               itemBuilder: (_, index) {
-                final year = data.yearList[index];
-                final statsMap = data.statsMapList[index];
-                final unveilCount = data.unveilCount;
+                final year = hitterQuiz.yearList[index];
+                final statsMap = hitterQuiz.statsMapList[index];
+                final unveilCount = hitterQuiz.unveilCount;
 
                 return Row(
                   children: [

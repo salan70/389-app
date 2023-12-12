@@ -36,14 +36,9 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                   final quizResult = quizResultList[index];
                   return InkWell(
                     onTap: () {
-                      final quizResultService =
-                          ref.read(quizResultServiceProvider);
-
-                      quizResultService.updateQuizStateFromResult(
-                        quizResult,
-                        QuizType.normal,
-                      );
-                      quizResultService.updateQuizResultStateFromIndex(index);
+                      ref
+                          .read(quizResultServiceProvider)
+                          .updateQuizResultStateFromIndex(index);
 
                       Navigator.push(
                         context,

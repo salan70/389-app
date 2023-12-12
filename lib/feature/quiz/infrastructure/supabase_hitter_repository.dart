@@ -13,7 +13,6 @@ import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 import 'supabase_hitter_converter.dart';
 
-// TODO(me): エラーハンドリング要検討
 class SupabaseHitterRepository implements HitterRepository {
   SupabaseHitterRepository(this.supabase);
 

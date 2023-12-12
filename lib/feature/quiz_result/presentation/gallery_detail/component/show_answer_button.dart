@@ -3,18 +3,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/async_value_handler.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../quiz/application/hitter_quiz_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../quiz/application/hitter_quiz_notifier.dart';
 import '../../../../quiz/domain/hitter_quiz.dart';
 
 class ShowAnswerButton extends ConsumerWidget {
-  const ShowAnswerButton({super.key, required this.buttonType});
+  const ShowAnswerButton.normal({super.key, required this.buttonType})
+      : quizType = QuizType.normal;
+
+  const ShowAnswerButton.daily({super.key, required this.buttonType})
+      : quizType = QuizType.daily;
 
   final ButtonType buttonType;
+  final QuizType quizType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueHandler(
-      value: ref.watch(hitterQuizStateProvider),
+      value: ref.watch(hitterQuizNotifierProvider(quizType)),
       builder: (HitterQuiz hitterQuiz) {
         return MyButton(
           buttonName: 'show_answer_button',

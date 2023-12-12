@@ -7,9 +7,7 @@ import '../../../util/extension/date_time_extension.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
-import '../../quiz/application/hitter_quiz_state.dart';
-import '../../quiz/domain/hitter_quiz.dart';
-import '../domain/hitter_quiz_result.dart';
+import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../domain/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
 
@@ -47,10 +45,13 @@ class QuizResultService {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
 
+      final hitterQuiz = await ref
+          .read(hitterQuizNotifierProvider(QuizType.daily).future);
+
       await quizResultRepository.updateDailyQuizResult(
         user!,
         ref.read(dailyQuizProvider).value!,
-        ref.read(hitterQuizStateProvider).value!,
+        hitterQuiz,
       );
     });
   }
@@ -65,31 +66,15 @@ class QuizResultService {
       final user = ref.read(authRepositoryProvider).getCurrentUser();
       final quizResultRepository = ref.read(quizResultRepositoryProvider);
 
+      final hitterQuiz = await ref
+          .read(hitterQuizNotifierProvider(QuizType.normal).future);
+
       await quizResultRepository.createNormalQuizResult(
         user!,
-        ref.read(hitterQuizStateProvider).value!,
+        hitterQuiz,
         ref.read(searchConditionNotifierProvider),
       );
     });
-  }
-
-  /// HitterQuizResultからHitterQuizを作成し、hitterQuizStateに格納する
-  void updateQuizStateFromResult(
-    HitterQuizResult hitterQuizResult,
-    QuizType quizType,
-  ) {
-    final hitterQuiz = HitterQuiz(
-      id: hitterQuizResult.id,
-      name: hitterQuizResult.name,
-      quizType: quizType,
-      yearList: hitterQuizResult.yearList,
-      selectedStatsList: hitterQuizResult.selectedStatsList,
-      statsMapList: hitterQuizResult.statsMapList,
-      unveilCount: hitterQuizResult.unveilCount,
-      isCorrect: hitterQuizResult.isCorrect,
-      incorrectCount: hitterQuizResult.incorrectCount,
-    );
-    ref.read(hitterQuizStateProvider.notifier).state = AsyncData(hitterQuiz);
   }
 
   /// 指定したindexからHitterQuizResultを取得しquizResultStateを更新する
@@ -103,7 +88,7 @@ class QuizResultService {
 
   /// 指定した日付からHitterQuizResultを取得しquizResultStateを更新する
   /// dailyQuizの結果表示で使用する
-  void updateQuizResultStatefromDate(DateTime data) {
+  void updateQuizResultStateFromDate(DateTime data) {
     final formattedDate = data.toFormattedString();
     final dailyQuizResult = ref.read(dailyQuizResultProvider).value!;
 

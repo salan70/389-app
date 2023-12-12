@@ -1,47 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/hitter_quiz_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 
 class ResultText extends ConsumerWidget {
-  const ResultText({super.key});
+  const ResultText.normal({super.key}) : quizType = QuizType.normal;
+
+  const ResultText.daily({super.key}) : quizType = QuizType.daily;
+
+  final QuizType quizType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isCorrect = ref.read(hitterQuizStateProvider).value!.isCorrect;
+    // todo: .value つかうの多分良くない
+    final hitterQuiz = ref.watch(hitterQuizNotifierProvider(quizType)).value!;
 
     return Center(
       child: SizedBox(
         height: 64,
-        child: isCorrect ? const CorrectText() : const InCorrectText(),
+        child: hitterQuiz.isCorrect
+            ? const Text('正解！')
+            : Column(
+                children: [
+                  const Text('残念...'),
+                  Text('正解は、${hitterQuiz.name}選手でした。'),
+                ],
+              ),
       ),
-    );
-  }
-}
-
-class CorrectText extends StatelessWidget {
-  const CorrectText({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('正解！');
-  }
-}
-
-/// hitterQuizStateProviderをref.readしている
-/// 上記プロバイダーを更新しても、このWidgetは再描画されないことに注意
-class InCorrectText extends ConsumerWidget {
-  const InCorrectText({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final answer = ref.read(hitterQuizStateProvider).value!.name;
-
-    return Column(
-      children: [
-        const Text('残念...'),
-        Text('正解は、$answer選手でした。'),
-      ],
     );
   }
 }

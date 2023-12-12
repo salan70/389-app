@@ -12,10 +12,11 @@ import 'normal_quiz_submit_answer_button.dart';
 class PlayNormalQuizPage extends StatelessWidget {
   const PlayNormalQuizPage({super.key});
 
+  static const _buttonWidth = 160.0;
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const buttonWidth = 160.0;
 
     return Scaffold(
       body: SafeArea(
@@ -30,13 +31,13 @@ class PlayNormalQuizPage extends StatelessWidget {
                 const SizedBox(height: 16),
                 const QuizWidget(willRebuild: true),
                 const SizedBox(height: 16),
-                InputAnswerTextField(),
+                InputAnswerTextField.normal(),
                 const SizedBox(height: 16),
-                const QuizEventButtons(),
+                const QuizEventButtons.normal(),
                 const SizedBox(height: 16),
                 const Center(
                   child: SizedBox(
-                    width: buttonWidth,
+                    width: _buttonWidth,
                     child: NormalQuizSubmitAnswerButton(
                       buttonType: ButtonType.main,
                     ),
@@ -45,8 +46,8 @@ class PlayNormalQuizPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Center(
                   child: SizedBox(
-                    width: buttonWidth,
-                    child: RetireButton(buttonType: ButtonType.sub),
+                    width: _buttonWidth,
+                    child: RetireButton.normal(buttonType: ButtonType.sub),
                   ),
                 ),
                 const SizedBox(height: 120),

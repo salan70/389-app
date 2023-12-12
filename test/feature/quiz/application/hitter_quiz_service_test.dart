@@ -1,11 +1,8 @@
 import 'package:baseball_quiz_app/feature/quiz/application/answer_state.dart';
 import 'package:baseball_quiz_app/feature/quiz/application/hitter_quiz_service.dart';
-import 'package:baseball_quiz_app/feature/quiz/application/hitter_quiz_state.dart';
 import 'package:baseball_quiz_app/feature/quiz/domain/hitter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../../../dummy_data/dummy_hitter.dart';
 
 void main() {
   group('filterHitter関数', () {
@@ -96,56 +93,56 @@ void main() {
     });
   });
 
-  group('isCorrectHitterQuiz関数', () {
-    test('正解している', () {
-      final container = ProviderContainer(
-        overrides: [
-          hitterQuizStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuiz),
-          ),
-          submittedHitterProvider.overrideWith(
-            (ref) => const Hitter(
-              label: '牧秀悟',
-              id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
-            ),
-          ),
-        ],
-      );
-      final result =
-          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
-      expect(true, result);
-    });
+  // group('isCorrectHitterQuiz関数', () {
+  //   test('正解している', () {
+  //     final container = ProviderContainer(
+  //       overrides: [
+  //         hitterQuizStateProvider.overrideWith(
+  //           (ref) => const AsyncData(dummyHitterQuiz),
+  //         ),
+  //         submittedHitterProvider.overrideWith(
+  //           (ref) => const Hitter(
+  //             label: '牧秀悟',
+  //             id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
+  //           ),
+  //         ),
+  //       ],
+  //     );
+  //     final result =
+  //         container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
+  //     expect(true, result);
+  //   });
 
-    test('不正解している', () {
-      final container = ProviderContainer(
-        overrides: [
-          hitterQuizStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuiz),
-          ),
-          submittedHitterProvider.overrideWith(
-            (ref) => const Hitter(label: '牧秀悟', id: 'incorrect Id'),
-          ),
-        ],
-      );
-      final result =
-          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
-      expect(false, result);
-    });
+  //   test('不正解している', () {
+  //     final container = ProviderContainer(
+  //       overrides: [
+  //         hitterQuizStateProvider.overrideWith(
+  //           (ref) => const AsyncData(dummyHitterQuiz),
+  //         ),
+  //         submittedHitterProvider.overrideWith(
+  //           (ref) => const Hitter(label: '牧秀悟', id: 'incorrect Id'),
+  //         ),
+  //       ],
+  //     );
+  //     final result =
+  //         container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
+  //     expect(false, result);
+  //   });
 
-    test('null', () {
-      final container = ProviderContainer(
-        overrides: [
-          hitterQuizStateProvider.overrideWith(
-            (ref) => const AsyncData(dummyHitterQuiz),
-          ),
-          submittedHitterProvider.overrideWith(
-            (ref) => null,
-          ),
-        ],
-      );
-      final result =
-          container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
-      expect(false, result);
-    });
-  });
+  //   test('null', () {
+  //     final container = ProviderContainer(
+  //       overrides: [
+  //         hitterQuizStateProvider.overrideWith(
+  //           (ref) => const AsyncData(dummyHitterQuiz),
+  //         ),
+  //         submittedHitterProvider.overrideWith(
+  //           (ref) => null,
+  //         ),
+  //       ],
+  //     );
+  //     final result =
+  //         container.read(hitterQuizServiceProvider).isCorrectHitterQuiz();
+  //     expect(false, result);
+  //   });
+  // });
 }

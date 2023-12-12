@@ -64,13 +64,9 @@ class CalenderCell extends ConsumerWidget {
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
             onTap: () {
-              final quizResultService = ref.read(quizResultServiceProvider);
-
-              quizResultService.updateQuizStateFromResult(
-                hitterQuizResult,
-                QuizType.daily,
-              );
-              quizResultService.updateQuizResultStatefromDate(date);
+              ref
+                  .read(quizResultServiceProvider)
+                  .updateQuizResultStateFromDate(date);
 
               Navigator.push(
                 context,

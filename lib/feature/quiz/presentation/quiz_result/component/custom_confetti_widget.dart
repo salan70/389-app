@@ -4,7 +4,8 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/hitter_quiz_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 
 class CustomConfettiWidget extends ConsumerStatefulWidget {
   const CustomConfettiWidget({
@@ -23,8 +24,12 @@ class _CustomConfettiWidgetState extends ConsumerState<CustomConfettiWidget> {
   void initState() {
     super.initState();
 
-    // 正解している場合のみ紙吹雪を出す
-    final isCorrect = ref.read(hitterQuizStateProvider).value!.isCorrect;
+    // todo: dailyにも対応させる
+    // 正解している場合のみ紙吹雪を出す。
+    final isCorrect = ref
+        .read(hitterQuizNotifierProvider(QuizType.normal))
+        .value!
+        .isCorrect;
     if (isCorrect) {
       controller.play();
     }

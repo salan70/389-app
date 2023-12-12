@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common_widget/error_dialog.dart';
 import '../../feature/loading/application/loading_state.dart';
+import '../logger.dart';
 
 /// ダイアログ表示用のGlobalKeyを返す
 /// .currentContext!でcontextを取得できる
@@ -32,6 +33,7 @@ extension WidgetRefEx on WidgetRef {
               loadingNotifier.hide();
             },
             error: (e, _) async {
+              logger.e('[$asyncValueProvider]でエラーが発生しました。', e);
               loadingNotifier.hide();
 
               // エラーダイアログを表示

@@ -35,7 +35,7 @@ class DailyQuizResultPage extends StatelessWidget {
                   children: [
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
-                    const ResultText(),
+                    const ResultText.daily(),
                     ResultQuizWidget(globalKey: globalKey),
                     const SizedBox(height: 24),
                     Center(

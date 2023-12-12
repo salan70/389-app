@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
-import '../../../quiz/application/hitter_quiz_service.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../quiz/application/hitter_quiz_notifier.dart';
 import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
 class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
@@ -19,10 +20,8 @@ class ToPlayNormalQuizFromTopButton extends ConsumerWidget {
       buttonName: 'to_play_normal_quiz_from_top_button',
       buttonType: buttonType,
       onPressed: () async {
-        // 出題する選手を取得
-        await ref
-            .read(hitterQuizServiceProvider)
-            .fetchHitterQuizBySearchCondition();
+        // 出題する選手を生成する。
+        ref.invalidate(hitterQuizNotifierProvider(QuizType.normal));
 
         if (context.mounted) {
           await Navigator.of(context).push(

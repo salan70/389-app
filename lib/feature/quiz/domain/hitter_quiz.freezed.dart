@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HitterQuiz {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+
+  /// ユーザーが回答として入力した Hitter
+  Hitter? get enteredHitter => throw _privateConstructorUsedError;
   QuizType? get quizType => throw _privateConstructorUsedError;
   List<String> get yearList => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
@@ -41,6 +44,7 @@ abstract class $HitterQuizCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
+      Hitter? enteredHitter,
       QuizType? quizType,
       List<String> yearList,
       List<String> selectedStatsList,
@@ -48,6 +52,8 @@ abstract class $HitterQuizCopyWith<$Res> {
       int unveilCount,
       bool isCorrect,
       int incorrectCount});
+
+  $HitterCopyWith<$Res>? get enteredHitter;
 }
 
 /// @nodoc
@@ -65,6 +71,7 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? enteredHitter = freezed,
     Object? quizType = freezed,
     Object? yearList = null,
     Object? selectedStatsList = null,
@@ -82,6 +89,10 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredHitter: freezed == enteredHitter
+          ? _value.enteredHitter
+          : enteredHitter // ignore: cast_nullable_to_non_nullable
+              as Hitter?,
       quizType: freezed == quizType
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
@@ -112,6 +123,18 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
               as int,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HitterCopyWith<$Res>? get enteredHitter {
+    if (_value.enteredHitter == null) {
+      return null;
+    }
+
+    return $HitterCopyWith<$Res>(_value.enteredHitter!, (value) {
+      return _then(_value.copyWith(enteredHitter: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -125,6 +148,7 @@ abstract class _$$HitterQuizImplCopyWith<$Res>
   $Res call(
       {String id,
       String name,
+      Hitter? enteredHitter,
       QuizType? quizType,
       List<String> yearList,
       List<String> selectedStatsList,
@@ -132,6 +156,9 @@ abstract class _$$HitterQuizImplCopyWith<$Res>
       int unveilCount,
       bool isCorrect,
       int incorrectCount});
+
+  @override
+  $HitterCopyWith<$Res>? get enteredHitter;
 }
 
 /// @nodoc
@@ -147,6 +174,7 @@ class __$$HitterQuizImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? enteredHitter = freezed,
     Object? quizType = freezed,
     Object? yearList = null,
     Object? selectedStatsList = null,
@@ -164,6 +192,10 @@ class __$$HitterQuizImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredHitter: freezed == enteredHitter
+          ? _value.enteredHitter
+          : enteredHitter // ignore: cast_nullable_to_non_nullable
+              as Hitter?,
       quizType: freezed == quizType
           ? _value.quizType
           : quizType // ignore: cast_nullable_to_non_nullable
@@ -198,10 +230,11 @@ class __$$HitterQuizImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HitterQuizImpl implements _HitterQuiz {
+class _$HitterQuizImpl extends _HitterQuiz {
   const _$HitterQuizImpl(
       {required this.id,
       required this.name,
+      required this.enteredHitter,
       required this.quizType,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
@@ -211,12 +244,17 @@ class _$HitterQuizImpl implements _HitterQuiz {
       required this.incorrectCount})
       : _yearList = yearList,
         _selectedStatsList = selectedStatsList,
-        _statsMapList = statsMapList;
+        _statsMapList = statsMapList,
+        super._();
 
   @override
   final String id;
   @override
   final String name;
+
+  /// ユーザーが回答として入力した Hitter
+  @override
+  final Hitter? enteredHitter;
   @override
   final QuizType? quizType;
   final List<String> _yearList;
@@ -253,7 +291,7 @@ class _$HitterQuizImpl implements _HitterQuiz {
 
   @override
   String toString() {
-    return 'HitterQuiz(id: $id, name: $name, quizType: $quizType, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
+    return 'HitterQuiz(id: $id, name: $name, enteredHitter: $enteredHitter, quizType: $quizType, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
   }
 
   @override
@@ -263,6 +301,8 @@ class _$HitterQuizImpl implements _HitterQuiz {
             other is _$HitterQuizImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.enteredHitter, enteredHitter) ||
+                other.enteredHitter == enteredHitter) &&
             (identical(other.quizType, quizType) ||
                 other.quizType == quizType) &&
             const DeepCollectionEquality().equals(other._yearList, _yearList) &&
@@ -283,6 +323,7 @@ class _$HitterQuizImpl implements _HitterQuiz {
       runtimeType,
       id,
       name,
+      enteredHitter,
       quizType,
       const DeepCollectionEquality().hash(_yearList),
       const DeepCollectionEquality().hash(_selectedStatsList),
@@ -298,10 +339,11 @@ class _$HitterQuizImpl implements _HitterQuiz {
       __$$HitterQuizImplCopyWithImpl<_$HitterQuizImpl>(this, _$identity);
 }
 
-abstract class _HitterQuiz implements HitterQuiz {
+abstract class _HitterQuiz extends HitterQuiz {
   const factory _HitterQuiz(
       {required final String id,
       required final String name,
+      required final Hitter? enteredHitter,
       required final QuizType? quizType,
       required final List<String> yearList,
       required final List<String> selectedStatsList,
@@ -309,11 +351,16 @@ abstract class _HitterQuiz implements HitterQuiz {
       required final int unveilCount,
       required final bool isCorrect,
       required final int incorrectCount}) = _$HitterQuizImpl;
+  const _HitterQuiz._() : super._();
 
   @override
   String get id;
   @override
   String get name;
+  @override
+
+  /// ユーザーが回答として入力した Hitter
+  Hitter? get enteredHitter;
   @override
   QuizType? get quizType;
   @override

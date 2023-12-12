@@ -1,8 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../util/constant/hitting_stats_constant.dart';
 import '../../auth/domain/auth_repository.dart';
-import '../../quiz/application/hitter_quiz_state.dart';
+import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz_result/domain/quiz_result_repository.dart';
 import '../domain/review_history.dart';
 import '../domain/review_history_repository.dart';
@@ -29,13 +30,12 @@ Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
 /// レビューを要求するかどうかを返すプロバイダー。
 @riverpod
 Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
-  final hitterQuizState = ref.watch(hitterQuizStateProvider);
-  // ローディングの場合を想定している。
-  if (hitterQuizState.value == null) {
-    return false;
-  }
+  // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
+  final hitterQuiz = await
+      ref.watch(hitterQuizNotifierProvider(QuizType.normal).future);
+
   // 直近のクイズで不正解している場合 false を返す。
-  if (hitterQuizState.value!.isCorrect == false) {
+  if (hitterQuiz.isCorrect == false) {
     return false;
   }
 

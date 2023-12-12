@@ -23,6 +23,12 @@ class NormalQuizResultPage extends ConsumerStatefulWidget {
 }
 
 class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
+  static const _buttonWidth = 200.0;
+  static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
+
+  // Widget の画像を作成するために使用する。
+  final globalKey = GlobalKey();
+
   @override
   void initState() {
     super.initState();
@@ -32,9 +38,8 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
         final shouldRequestAppReview =
             await ref.read(shouldRequestReviewProvider.future);
 
+        // レビューを要求するかどうか。
         if (shouldRequestAppReview) {
-          // レビューを要求する場合
-
           // レビューダイアログを表示したことを記録する。
           await ref.read(appReviewServiceProvider).updateReviewHistory();
 
@@ -88,12 +93,6 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
-    const buttonWidth = 200.0;
-
-    // TODO(me): globalKeyを引数として渡すのイケてない感ある
-    // 本当はProviderで参照したかった。。
-    final globalKey = GlobalKey();
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -107,30 +106,30 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
                   children: [
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
-                    const ResultText(),
+                    const ResultText.normal(),
                     ResultQuizWidget(globalKey: globalKey),
                     const SizedBox(height: 24),
                     const Center(
                       child: SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: ReplayButton(buttonType: ButtonType.main),
                       ),
                     ),
                     const SizedBox(height: 8),
                     Center(
                       child: SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: ShareButton(
                           buttonType: ButtonType.sub,
                           globalKey: globalKey,
-                          shareText: shareText,
+                          shareText: _shareText,
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
                     const Center(
                       child: SizedBox(
-                        width: buttonWidth,
+                        width: _buttonWidth,
                         child: BackToTopButton(buttonType: ButtonType.sub),
                       ),
                     ),

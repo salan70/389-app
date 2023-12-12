@@ -35,7 +35,7 @@ import 'feature/loading/presentation/loading_widget.dart';
 import 'feature/push_notification/domain/notification_setting.dart';
 import 'feature/push_notification/domain/notification_setting_repository.dart';
 import 'feature/push_notification/infrastructure/hive_notification_setting_repository.dart';
-import 'feature/quiz/application/hitter_quiz_state.dart';
+import 'feature/quiz/application/hitter_quiz_notifier.dart';
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_providers.dart';
@@ -47,6 +47,7 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/constant/hitting_stats_constant.dart';
 import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';
@@ -208,11 +209,15 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // AsyncValueを返すStateProviderの結果をハンドリングする
-    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも
-    // Providerによっては複数のWidgetで使用するためここで書いている
+    // AsyncValueを返すStateProviderの結果をハンドリングする。
+    //
+    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも。
+    // Providerによっては複数のWidgetで使用するためここで書いている。
     ref.handleAsyncValue<void>(
-      hitterQuizStateProvider,
+      hitterQuizNotifierProvider(QuizType.normal),
+    );
+    ref.handleAsyncValue<void>(
+      hitterQuizNotifierProvider(QuizType.daily),
     );
     ref.handleAsyncValue<void>(
       quizResultFunctionStateProvider,
@@ -221,7 +226,7 @@ class _MyApp extends ConsumerState<MyApp> {
       checkNeedUpdateStateProvider,
     );
 
-    // TODO(me): ここで login するのは多分良くないので、なんとかする。
+    // TODO(me): ここで login するのは多分良くないのでなんとかする。
     // Userを作成
     ref.read(authServiceProvider).login();
 
@@ -258,12 +263,11 @@ class _MyApp extends ConsumerState<MyApp> {
       ],
       builder: (context, child) => Consumer(
         builder: (context, ref, _) {
-          final isLoading = ref.watch(loadingProvider);
           return Stack(
             children: [
               child!,
               // ローディングを表示する
-              if (isLoading) const LoadingWidget(),
+              if (ref.watch(loadingProvider)) const LoadingWidget(),
             ],
           );
         },

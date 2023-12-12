@@ -27,7 +27,7 @@ final reviewHistoryProvider =
 
 typedef ReviewHistoryRef = AutoDisposeFutureProviderRef<ReviewHistory?>;
 String _$shouldRequestReviewHash() =>
-    r'7b500545e95bb3938b62131c32783dc63acd9e6b';
+    r'd60dc47165b4c7d0a4de37010f948d3112a1a0ea';
 
 /// レビューを要求するかどうかを返すプロバイダー。
 ///

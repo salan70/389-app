@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../application/hitter_quiz_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 
 class LifeWidget extends ConsumerWidget {
   const LifeWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final fullscreenWidth = MediaQuery.of(context).size.width;
-    final hitterQuiz = ref.watch(hitterQuizStateProvider);
+    final fullScreenWidth = MediaQuery.of(context).size.width;
+    final asyncHitterQuiz =
+        ref.watch(hitterQuizNotifierProvider(QuizType.daily));
 
     return Align(
       child: SizedBox(
-        width: fullscreenWidth / 2,
-        child: hitterQuiz.maybeWhen(
+        width: fullScreenWidth / 2,
+        child: asyncHitterQuiz.maybeWhen(
           orElse: Container.new,
-          data: (data) {
+          data: (hitterQuiz) {
             Icon favoriteIcon(int borderCount) {
-              if (data!.incorrectCount < borderCount) {
+              if (hitterQuiz.incorrectCount < borderCount) {
                 return const Icon(Icons.favorite_rounded);
               }
               return const Icon(Icons.favorite_border_rounded);
