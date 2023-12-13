@@ -1,0 +1,26 @@
+{
+    // 使用するFlutter SDKのパスを指定。
+	"dart.flutterSdkPath": ".fvm/flutter_sdk",
+    // 検索対象から除外するファイル
+    "search.exclude": {
+        "**/.fvm": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
+        "**/*.gr.dart": true,
+        "**/*.mocks.dart": true,
+    },
+    // ファイル監視対象から除外するファイル
+    "files.watcherExclude": {
+        "**/.fvm": true
+    },
+    // ファイルエクスプローラーの表示から除外するファイル
+    "files.exclude": {
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
+        "**/*.mocks.dart": true,
+    },
+    "cSpell.words": [
+        "supabase",
+        "firestore",
+    ],
+}
