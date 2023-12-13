@@ -1,4 +1,3 @@
-import 'package:baseball_quiz_app/feature/top/presentation/component/to_notification_setting_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,6 +5,7 @@ import '../../../../common_widget/my_button.dart';
 import '../../../browser/presentation/to_privacy_policy_button.dart';
 import '../../../browser/presentation/to_term_button.dart';
 import '../../../inquiry/presentation/inquiry_button.dart';
+import 'to_notification_setting_button.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({super.key});

@@ -1,10 +1,10 @@
-import 'package:baseball_quiz_app/feature/push_notification/application/local_push_notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
 import '../../../util/constant/colors_constant.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
+import '../application/local_push_notification_service.dart';
 import '../application/notification_setting_state.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {

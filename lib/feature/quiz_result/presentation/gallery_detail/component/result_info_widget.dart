@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../util/extension/date_time_extension.dart';
+import '../../../domain/hitter_quiz_result.dart';
 
 class ResultInfoWidget extends ConsumerWidget {
   const ResultInfoWidget({super.key, required this.quizResult});

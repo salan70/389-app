@@ -1,5 +1,6 @@
-import 'package:baseball_quiz_app/feature/app_review/domain/review_history.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import 'review_history.dart';
 
 part 'review_history_repository.g.dart';
 

@@ -1,4 +1,3 @@
-import 'package:baseball_quiz_app/feature/search_condition/application/search_condition_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -6,6 +5,7 @@ import '../../../util/constant/hitting_stats_constant.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';
+import '../../search_condition/application/search_condition_notifier.dart';
 import '../domain/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
 

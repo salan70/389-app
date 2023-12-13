@@ -1,6 +1,7 @@
-import 'package:baseball_quiz_app/feature/push_notification/domain/notification_setting.dart';
-import 'package:baseball_quiz_app/feature/push_notification/domain/notification_setting_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../domain/notification_setting.dart';
+import '../domain/notification_setting_repository.dart';
 
 part 'notification_setting_state.g.dart';
 

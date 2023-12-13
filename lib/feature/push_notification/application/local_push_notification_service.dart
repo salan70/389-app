@@ -1,4 +1,3 @@
-import 'package:baseball_quiz_app/feature/push_notification/application/notification_setting_state.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,6 +10,7 @@ import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';
 import '../domain/notification_setting_repository.dart';
+import 'notification_setting_state.dart';
 
 part 'local_push_notification_service.g.dart';
 

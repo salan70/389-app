@@ -1,8 +1,4 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
-import 'package:baseball_quiz_app/feature/app_review/domain/review_history_repository.dart';
-import 'package:baseball_quiz_app/feature/app_review/infrastructure/firebase_review_history_repository.dart';
-import 'package:baseball_quiz_app/util/constant/hive_box_type.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -19,8 +15,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+import 'feature/analytics/application/analytics_service.dart';
 import 'feature/app_info/domain/app_info_repository.dart';
 import 'feature/app_info/infrastructure/firebase_app_info_repository.dart';
+import 'feature/app_review/domain/review_history_repository.dart';
+import 'feature/app_review/infrastructure/firebase_review_history_repository.dart';
 import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/domain/user_info_repository.dart';
@@ -44,6 +43,7 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/constant/hive_box_type.dart';
 import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';

@@ -1,6 +1,6 @@
-import 'package:baseball_quiz_app/feature/app_review/domain/review_history.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../domain/review_history.dart';
 import '../domain/review_history_repository.dart';
 
 class FirebaseReviewHistoryRepository implements ReviewHistoryRepository {

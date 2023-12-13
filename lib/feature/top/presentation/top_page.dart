@@ -1,4 +1,3 @@
-import 'package:baseball_quiz_app/feature/push_notification/application/local_push_notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +7,7 @@ import '../../admob/presentation/banner_ad_widget.dart';
 import '../../app_info/application/need_update_state.dart';
 import '../../app_info/presentation/force_update_dialog.dart';
 import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
+import '../../push_notification/application/local_push_notification_service.dart';
 import 'component/icon_widget.dart';
 import 'component/to_gallery_button.dart';
 import 'component/to_play_normal_quiz_from_top_button.dart';

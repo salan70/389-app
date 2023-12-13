@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/feature/search_condition/application/search_condition_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../application/search_condition_notifier.dart';
 import '../../util/search_condition_constant.dart';
 
 class StatsValueFilterWidget extends ConsumerWidget {

@@ -1,9 +1,9 @@
-import 'package:baseball_quiz_app/feature/quiz_result/application/quiz_result_service.dart';
-import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/my_button.dart';
+import '../../../application/quiz_result_service.dart';
+import '../../../domain/hitter_quiz_result.dart';
 
 class DeleteNormalQuizResultButton extends ConsumerWidget {
   const DeleteNormalQuizResultButton({

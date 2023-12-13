@@ -1,6 +1,6 @@
-import 'package:baseball_quiz_app/util/constant/hive_box_type.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../../util/constant/hive_box_type.dart';
 import '../domain/notification_setting.dart';
 import '../domain/notification_setting_repository.dart';
 

@@ -1,5 +1,3 @@
-import 'package:baseball_quiz_app/feature/quiz/application/hitter_quiz_notifier.dart';
-import 'package:baseball_quiz_app/util/mixin/presentation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,8 +6,10 @@ import '../../../common_widget/error_dialog.dart';
 import '../../../common_widget/my_button.dart';
 import '../../../util/constant/hitting_stats_constant.dart';
 import '../../../util/logger.dart';
+import '../../../util/mixin/presentation_mixin.dart';
 import '../../loading/application/loading_notifier.dart';
 import '../../push_notification/application/local_push_notification_service.dart';
+import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
 import '../../quiz_result/application/quiz_result_service.dart';
 import '../application/daily_quiz_state.dart';

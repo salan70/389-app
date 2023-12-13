@@ -1,9 +1,9 @@
-import 'package:baseball_quiz_app/util/mixin/presentation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/my_button.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../util/mixin/presentation_mixin.dart';
 import '../../../quiz/application/hitter_quiz_notifier.dart';
 import '../../../quiz/presentation/play_quiz/play_normal_quiz/play_normal_quiz_page.dart';
 
