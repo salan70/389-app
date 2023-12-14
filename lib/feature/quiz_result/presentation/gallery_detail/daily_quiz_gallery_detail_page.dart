@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../common_widget/back_button.dart' as common;
 import '../../../../common_widget/my_button.dart';
+import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
+import '../../../quiz/domain/hitter_quiz.dart';
 import '../../../quiz/presentation/component/result_quiz_widget.dart';
 import '../../../quiz/presentation/component/share_button.dart';
+import '../../domain/hitter_quiz_result.dart';
 import 'component/result_info_widget.dart';
 import 'component/result_rank_label_widget.dart';
 import 'component/show_answer_button.dart';
 
 class DailyQuizGalleryDetailPage extends StatelessWidget {
-  const DailyQuizGalleryDetailPage({super.key});
+  DailyQuizGalleryDetailPage({super.key, required this.hitterQuizResult});
+
+  final HitterQuizResult hitterQuizResult;
+
+  static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
+  static const _buttonWidth = 160.0;
+  final _globalKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-    const shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
-    const buttonWidth = 160.0;
-    final globalKey = GlobalKey();
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -29,33 +32,42 @@ class DailyQuizGalleryDetailPage extends StatelessWidget {
             children: [
               const BannerAdWidget(),
               const SizedBox(height: 16),
-              const ResultRankLabelWidget(),
+              ResultRankLabelWidget(quizResult: hitterQuizResult),
               const SizedBox(height: 16),
-              ResultQuizWidget(globalKey: globalKey),
+              ResultQuizWidget(
+                globalKey: _globalKey,
+                hitterQuiz: HitterQuiz.fromHitterResult(
+                  hitterQuizResult,
+                  QuizType.daily,
+                ),
+              ),
               const SizedBox(height: 8),
-              const ResultInfoWidget(),
+              ResultInfoWidget(quizResult: hitterQuizResult),
               const SizedBox(height: 8),
-              const Center(
+              Center(
                 child: SizedBox(
-                  width: buttonWidth,
-                  child: ShowAnswerButton(buttonType: ButtonType.main),
+                  width: _buttonWidth,
+                  child: ShowAnswerButton(
+                    buttonType: ButtonType.main,
+                    quizResult: hitterQuizResult,
+                  ),
                 ),
               ),
               const SizedBox(height: 4),
               Center(
                 child: SizedBox(
-                  width: buttonWidth,
+                  width: _buttonWidth,
                   child: ShareButton(
                     buttonType: ButtonType.sub,
-                    globalKey: globalKey,
-                    shareText: shareText,
+                    globalKey: _globalKey,
+                    shareText: _shareText,
                   ),
                 ),
               ),
               const SizedBox(height: 4),
               const Center(
                 child: SizedBox(
-                  width: buttonWidth,
+                  width: _buttonWidth,
                   child: common.BackButton(buttonType: ButtonType.sub),
                 ),
               ),

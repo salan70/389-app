@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'daily_quiz.dart';
 
@@ -78,10 +78,11 @@ class _$DailyQuizCopyWithImpl<$Res, $Val extends DailyQuiz>
 }
 
 /// @nodoc
-abstract class _$$_DailyQuizCopyWith<$Res> implements $DailyQuizCopyWith<$Res> {
-  factory _$$_DailyQuizCopyWith(
-          _$_DailyQuiz value, $Res Function(_$_DailyQuiz) then) =
-      __$$_DailyQuizCopyWithImpl<$Res>;
+abstract class _$$DailyQuizImplCopyWith<$Res>
+    implements $DailyQuizCopyWith<$Res> {
+  factory _$$DailyQuizImplCopyWith(
+          _$DailyQuizImpl value, $Res Function(_$DailyQuizImpl) then) =
+      __$$DailyQuizImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,11 +93,11 @@ abstract class _$$_DailyQuizCopyWith<$Res> implements $DailyQuizCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DailyQuizCopyWithImpl<$Res>
-    extends _$DailyQuizCopyWithImpl<$Res, _$_DailyQuiz>
-    implements _$$_DailyQuizCopyWith<$Res> {
-  __$$_DailyQuizCopyWithImpl(
-      _$_DailyQuiz _value, $Res Function(_$_DailyQuiz) _then)
+class __$$DailyQuizImplCopyWithImpl<$Res>
+    extends _$DailyQuizCopyWithImpl<$Res, _$DailyQuizImpl>
+    implements _$$DailyQuizImplCopyWith<$Res> {
+  __$$DailyQuizImplCopyWithImpl(
+      _$DailyQuizImpl _value, $Res Function(_$DailyQuizImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -107,7 +108,7 @@ class __$$_DailyQuizCopyWithImpl<$Res>
     Object? playerId = null,
     Object? selectedStatsList = null,
   }) {
-    return _then(_$_DailyQuiz(
+    return _then(_$DailyQuizImpl(
       dailyQuizId: null == dailyQuizId
           ? _value.dailyQuizId
           : dailyQuizId // ignore: cast_nullable_to_non_nullable
@@ -130,8 +131,8 @@ class __$$_DailyQuizCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DailyQuiz implements _DailyQuiz {
-  const _$_DailyQuiz(
+class _$DailyQuizImpl implements _DailyQuiz {
+  const _$DailyQuizImpl(
       {required this.dailyQuizId,
       required this.questionedAt,
       required this.playerId,
@@ -147,6 +148,8 @@ class _$_DailyQuiz implements _DailyQuiz {
   final List<String> _selectedStatsList;
   @override
   List<String> get selectedStatsList {
+    if (_selectedStatsList is EqualUnmodifiableListView)
+      return _selectedStatsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedStatsList);
   }
@@ -160,7 +163,7 @@ class _$_DailyQuiz implements _DailyQuiz {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_DailyQuiz &&
+            other is _$DailyQuizImpl &&
             (identical(other.dailyQuizId, dailyQuizId) ||
                 other.dailyQuizId == dailyQuizId) &&
             (identical(other.questionedAt, questionedAt) ||
@@ -178,8 +181,8 @@ class _$_DailyQuiz implements _DailyQuiz {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DailyQuizCopyWith<_$_DailyQuiz> get copyWith =>
-      __$$_DailyQuizCopyWithImpl<_$_DailyQuiz>(this, _$identity);
+  _$$DailyQuizImplCopyWith<_$DailyQuizImpl> get copyWith =>
+      __$$DailyQuizImplCopyWithImpl<_$DailyQuizImpl>(this, _$identity);
 }
 
 abstract class _DailyQuiz implements DailyQuiz {
@@ -187,7 +190,7 @@ abstract class _DailyQuiz implements DailyQuiz {
       {required final String dailyQuizId,
       required final DateTime questionedAt,
       required final String playerId,
-      required final List<String> selectedStatsList}) = _$_DailyQuiz;
+      required final List<String> selectedStatsList}) = _$DailyQuizImpl;
 
   @override
   String get dailyQuizId;
@@ -199,6 +202,6 @@ abstract class _DailyQuiz implements DailyQuiz {
   List<String> get selectedStatsList;
   @override
   @JsonKey(ignore: true)
-  _$$_DailyQuizCopyWith<_$_DailyQuiz> get copyWith =>
+  _$$DailyQuizImplCopyWith<_$DailyQuizImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

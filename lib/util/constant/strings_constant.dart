@@ -4,11 +4,6 @@ import '../../feature/search_condition/util/search_condition_constant.dart';
 
 // * --------------------------------- アプリで表示するテキスト --------------------------------- * //
 
-/// デイリークイズを諦める際の確認テキスト
-const dailyQuizRetireConfirmText = '本当に諦めますか？\n\n※「今日の1問」は1度しか\nプレイできません。';
-
-/// 通常のクイズを諦める際の確認テキスト
-const normalQuizRetireConfirmText = '本当に諦めますか？';
 
 const errorForChoseTeamValidation = '球団を$minChoseTeamNumつ以上選択してください';
 

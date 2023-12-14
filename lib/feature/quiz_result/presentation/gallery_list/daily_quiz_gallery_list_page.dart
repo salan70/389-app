@@ -5,7 +5,6 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../common_widget/async_value_handler.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/extension/date_time_extension.dart';
-import '../../application/quiz_result_service.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/daily_hitter_quiz_result.dart';
 import '../gallery_detail/daily_quiz_gallery_detail_page.dart';
@@ -64,18 +63,12 @@ class CalenderCell extends ConsumerWidget {
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
             onTap: () {
-              final quizResultService = ref.read(quizResultServiceProvider);
-
-              quizResultService.updateQuizStateFromResult(
-                hitterQuizResult,
-                QuizType.daily,
-              );
-              quizResultService.updateQuizResultStatefromDate(date);
-
               Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(
-                  builder: (_) => const DailyQuizGalleryDetailPage(),
+                  builder: (_) => DailyQuizGalleryDetailPage(
+                    hitterQuizResult: hitterQuizResult,
+                  ),
                   settings: const RouteSettings(
                     name: '/daily_quiz_gallery_detail_page',
                   ),

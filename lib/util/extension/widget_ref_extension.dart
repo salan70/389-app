@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../common_widget/error_dialog.dart';
-import '../../feature/loading/application/loading_state.dart';
+import '../../feature/loading/application/loading_notifier.dart';
+import '../logger.dart';
 
 /// ダイアログ表示用のGlobalKeyを返す
 /// .currentContext!でcontextを取得できる
@@ -21,7 +22,7 @@ extension WidgetRefEx on WidgetRef {
       listen<AsyncValue<T>>(
         asyncValueProvider,
         (_, next) async {
-          final loadingNotifier = read(loadingProvider.notifier);
+          final loadingNotifier = read(loadingNotifierProvider.notifier);
           if (next.isLoading) {
             loadingNotifier.show();
             return;
@@ -32,12 +33,13 @@ extension WidgetRefEx on WidgetRef {
               loadingNotifier.hide();
             },
             error: (e, _) async {
+              logger.e('[$asyncValueProvider]でエラーが発生しました。', e);
               loadingNotifier.hide();
 
               // エラーダイアログを表示
               await showDialog<void>(
                 context: read(navigatorKeyProvider).currentContext!,
-                builder: (context) => ErrorDialog(error: e),
+                builder: (context) => const ErrorDialog(),
               );
             },
             loading: loadingNotifier.show,

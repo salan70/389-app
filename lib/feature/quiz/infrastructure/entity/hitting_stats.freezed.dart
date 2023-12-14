@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'hitting_stats.dart';
 
@@ -57,22 +57,22 @@ class _$HittingStatsCopyWithImpl<$Res, $Val extends HittingStats>
 }
 
 /// @nodoc
-abstract class _$$_HittingStatsCopyWith<$Res>
+abstract class _$$HittingStatsImplCopyWith<$Res>
     implements $HittingStatsCopyWith<$Res> {
-  factory _$$_HittingStatsCopyWith(
-          _$_HittingStats value, $Res Function(_$_HittingStats) then) =
-      __$$_HittingStatsCopyWithImpl<$Res>;
+  factory _$$HittingStatsImplCopyWith(
+          _$HittingStatsImpl value, $Res Function(_$HittingStatsImpl) then) =
+      __$$HittingStatsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Map<String, dynamic> stats});
 }
 
 /// @nodoc
-class __$$_HittingStatsCopyWithImpl<$Res>
-    extends _$HittingStatsCopyWithImpl<$Res, _$_HittingStats>
-    implements _$$_HittingStatsCopyWith<$Res> {
-  __$$_HittingStatsCopyWithImpl(
-      _$_HittingStats _value, $Res Function(_$_HittingStats) _then)
+class __$$HittingStatsImplCopyWithImpl<$Res>
+    extends _$HittingStatsCopyWithImpl<$Res, _$HittingStatsImpl>
+    implements _$$HittingStatsImplCopyWith<$Res> {
+  __$$HittingStatsImplCopyWithImpl(
+      _$HittingStatsImpl _value, $Res Function(_$HittingStatsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -80,7 +80,7 @@ class __$$_HittingStatsCopyWithImpl<$Res>
   $Res call({
     Object? stats = null,
   }) {
-    return _then(_$_HittingStats(
+    return _then(_$HittingStatsImpl(
       stats: null == stats
           ? _value._stats
           : stats // ignore: cast_nullable_to_non_nullable
@@ -91,13 +91,14 @@ class __$$_HittingStatsCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HittingStats implements _HittingStats {
-  const _$_HittingStats({required final Map<String, dynamic> stats})
+class _$HittingStatsImpl implements _HittingStats {
+  const _$HittingStatsImpl({required final Map<String, dynamic> stats})
       : _stats = stats;
 
   final Map<String, dynamic> _stats;
   @override
   Map<String, dynamic> get stats {
+    if (_stats is EqualUnmodifiableMapView) return _stats;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_stats);
   }
@@ -111,7 +112,7 @@ class _$_HittingStats implements _HittingStats {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_HittingStats &&
+            other is _$HittingStatsImpl &&
             const DeepCollectionEquality().equals(other._stats, _stats));
   }
 
@@ -122,18 +123,18 @@ class _$_HittingStats implements _HittingStats {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HittingStatsCopyWith<_$_HittingStats> get copyWith =>
-      __$$_HittingStatsCopyWithImpl<_$_HittingStats>(this, _$identity);
+  _$$HittingStatsImplCopyWith<_$HittingStatsImpl> get copyWith =>
+      __$$HittingStatsImplCopyWithImpl<_$HittingStatsImpl>(this, _$identity);
 }
 
 abstract class _HittingStats implements HittingStats {
   const factory _HittingStats({required final Map<String, dynamic> stats}) =
-      _$_HittingStats;
+      _$HittingStatsImpl;
 
   @override
   Map<String, dynamic> get stats;
   @override
   @JsonKey(ignore: true)
-  _$$_HittingStatsCopyWith<_$_HittingStats> get copyWith =>
+  _$$HittingStatsImplCopyWith<_$HittingStatsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

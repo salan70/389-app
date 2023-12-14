@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'search_condition.dart';
 
@@ -96,11 +96,11 @@ class _$SearchConditionCopyWithImpl<$Res, $Val extends SearchCondition>
 }
 
 /// @nodoc
-abstract class _$$_SearchConditionCopyWith<$Res>
+abstract class _$$SearchConditionImplCopyWith<$Res>
     implements $SearchConditionCopyWith<$Res> {
-  factory _$$_SearchConditionCopyWith(
-          _$_SearchCondition value, $Res Function(_$_SearchCondition) then) =
-      __$$_SearchConditionCopyWithImpl<$Res>;
+  factory _$$SearchConditionImplCopyWith(_$SearchConditionImpl value,
+          $Res Function(_$SearchConditionImpl) then) =
+      __$$SearchConditionImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -112,11 +112,11 @@ abstract class _$$_SearchConditionCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SearchConditionCopyWithImpl<$Res>
-    extends _$SearchConditionCopyWithImpl<$Res, _$_SearchCondition>
-    implements _$$_SearchConditionCopyWith<$Res> {
-  __$$_SearchConditionCopyWithImpl(
-      _$_SearchCondition _value, $Res Function(_$_SearchCondition) _then)
+class __$$SearchConditionImplCopyWithImpl<$Res>
+    extends _$SearchConditionCopyWithImpl<$Res, _$SearchConditionImpl>
+    implements _$$SearchConditionImplCopyWith<$Res> {
+  __$$SearchConditionImplCopyWithImpl(
+      _$SearchConditionImpl _value, $Res Function(_$SearchConditionImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -128,7 +128,7 @@ class __$$_SearchConditionCopyWithImpl<$Res>
     Object? minHr = null,
     Object? selectedStatsList = null,
   }) {
-    return _then(_$_SearchCondition(
+    return _then(_$SearchConditionImpl(
       teamList: null == teamList
           ? _value._teamList
           : teamList // ignore: cast_nullable_to_non_nullable
@@ -155,8 +155,8 @@ class __$$_SearchConditionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SearchCondition implements _SearchCondition {
-  const _$_SearchCondition(
+class _$SearchConditionImpl implements _SearchCondition {
+  const _$SearchConditionImpl(
       {@HiveField(0) required final List<String> teamList,
       @HiveField(1) required this.minGames,
       @HiveField(3) required this.minHits,
@@ -165,13 +165,14 @@ class _$_SearchCondition implements _SearchCondition {
       : _teamList = teamList,
         _selectedStatsList = selectedStatsList;
 
-  factory _$_SearchCondition.fromJson(Map<String, dynamic> json) =>
-      _$$_SearchConditionFromJson(json);
+  factory _$SearchConditionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SearchConditionImplFromJson(json);
 
   final List<String> _teamList;
   @override
   @HiveField(0)
   List<String> get teamList {
+    if (_teamList is EqualUnmodifiableListView) return _teamList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_teamList);
   }
@@ -189,6 +190,8 @@ class _$_SearchCondition implements _SearchCondition {
   @override
   @HiveField(5)
   List<String> get selectedStatsList {
+    if (_selectedStatsList is EqualUnmodifiableListView)
+      return _selectedStatsList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_selectedStatsList);
   }
@@ -202,7 +205,7 @@ class _$_SearchCondition implements _SearchCondition {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SearchCondition &&
+            other is _$SearchConditionImpl &&
             const DeepCollectionEquality().equals(other._teamList, _teamList) &&
             (identical(other.minGames, minGames) ||
                 other.minGames == minGames) &&
@@ -225,12 +228,13 @@ class _$_SearchCondition implements _SearchCondition {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SearchConditionCopyWith<_$_SearchCondition> get copyWith =>
-      __$$_SearchConditionCopyWithImpl<_$_SearchCondition>(this, _$identity);
+  _$$SearchConditionImplCopyWith<_$SearchConditionImpl> get copyWith =>
+      __$$SearchConditionImplCopyWithImpl<_$SearchConditionImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SearchConditionToJson(
+    return _$$SearchConditionImplToJson(
       this,
     );
   }
@@ -243,10 +247,10 @@ abstract class _SearchCondition implements SearchCondition {
           @HiveField(3) required final int minHits,
           @HiveField(4) required final int minHr,
           @HiveField(5) required final List<String> selectedStatsList}) =
-      _$_SearchCondition;
+      _$SearchConditionImpl;
 
   factory _SearchCondition.fromJson(Map<String, dynamic> json) =
-      _$_SearchCondition.fromJson;
+      _$SearchConditionImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -265,6 +269,6 @@ abstract class _SearchCondition implements SearchCondition {
   List<String> get selectedStatsList;
   @override
   @JsonKey(ignore: true)
-  _$$_SearchConditionCopyWith<_$_SearchCondition> get copyWith =>
+  _$$SearchConditionImplCopyWith<_$SearchConditionImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

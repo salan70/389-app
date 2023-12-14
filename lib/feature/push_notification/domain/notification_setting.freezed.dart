@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notification_setting.dart';
 
@@ -82,11 +82,11 @@ class _$NotificationSettingCopyWithImpl<$Res, $Val extends NotificationSetting>
 }
 
 /// @nodoc
-abstract class _$$_NotificationSettingCopyWith<$Res>
+abstract class _$$NotificationSettingImplCopyWith<$Res>
     implements $NotificationSettingCopyWith<$Res> {
-  factory _$$_NotificationSettingCopyWith(_$_NotificationSetting value,
-          $Res Function(_$_NotificationSetting) then) =
-      __$$_NotificationSettingCopyWithImpl<$Res>;
+  factory _$$NotificationSettingImplCopyWith(_$NotificationSettingImpl value,
+          $Res Function(_$NotificationSettingImpl) then) =
+      __$$NotificationSettingImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -96,11 +96,11 @@ abstract class _$$_NotificationSettingCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_NotificationSettingCopyWithImpl<$Res>
-    extends _$NotificationSettingCopyWithImpl<$Res, _$_NotificationSetting>
-    implements _$$_NotificationSettingCopyWith<$Res> {
-  __$$_NotificationSettingCopyWithImpl(_$_NotificationSetting _value,
-      $Res Function(_$_NotificationSetting) _then)
+class __$$NotificationSettingImplCopyWithImpl<$Res>
+    extends _$NotificationSettingCopyWithImpl<$Res, _$NotificationSettingImpl>
+    implements _$$NotificationSettingImplCopyWith<$Res> {
+  __$$NotificationSettingImplCopyWithImpl(_$NotificationSettingImpl _value,
+      $Res Function(_$NotificationSettingImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -110,7 +110,7 @@ class __$$_NotificationSettingCopyWithImpl<$Res>
     Object? allowRemindDailyQuizNotification = null,
     Object? allowOtherNotification = null,
   }) {
-    return _then(_$_NotificationSetting(
+    return _then(_$NotificationSettingImpl(
       allowStartDailyQuizNotification: null == allowStartDailyQuizNotification
           ? _value.allowStartDailyQuizNotification
           : allowStartDailyQuizNotification // ignore: cast_nullable_to_non_nullable
@@ -129,14 +129,14 @@ class __$$_NotificationSettingCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_NotificationSetting implements _NotificationSetting {
-  const _$_NotificationSetting(
+class _$NotificationSettingImpl implements _NotificationSetting {
+  const _$NotificationSettingImpl(
       {@HiveField(0) required this.allowStartDailyQuizNotification,
       @HiveField(1) required this.allowRemindDailyQuizNotification,
       @HiveField(2) required this.allowOtherNotification});
 
-  factory _$_NotificationSetting.fromJson(Map<String, dynamic> json) =>
-      _$$_NotificationSettingFromJson(json);
+  factory _$NotificationSettingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NotificationSettingImplFromJson(json);
 
   @override
   @HiveField(0)
@@ -157,7 +157,7 @@ class _$_NotificationSetting implements _NotificationSetting {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_NotificationSetting &&
+            other is _$NotificationSettingImpl &&
             (identical(other.allowStartDailyQuizNotification,
                     allowStartDailyQuizNotification) ||
                 other.allowStartDailyQuizNotification ==
@@ -178,13 +178,13 @@ class _$_NotificationSetting implements _NotificationSetting {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_NotificationSettingCopyWith<_$_NotificationSetting> get copyWith =>
-      __$$_NotificationSettingCopyWithImpl<_$_NotificationSetting>(
+  _$$NotificationSettingImplCopyWith<_$NotificationSettingImpl> get copyWith =>
+      __$$NotificationSettingImplCopyWithImpl<_$NotificationSettingImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_NotificationSettingToJson(
+    return _$$NotificationSettingImplToJson(
       this,
     );
   }
@@ -195,10 +195,10 @@ abstract class _NotificationSetting implements NotificationSetting {
           {@HiveField(0) required final bool allowStartDailyQuizNotification,
           @HiveField(1) required final bool allowRemindDailyQuizNotification,
           @HiveField(2) required final bool allowOtherNotification}) =
-      _$_NotificationSetting;
+      _$NotificationSettingImpl;
 
   factory _NotificationSetting.fromJson(Map<String, dynamic> json) =
-      _$_NotificationSetting.fromJson;
+      _$NotificationSettingImpl.fromJson;
 
   @override
   @HiveField(0)
@@ -211,6 +211,6 @@ abstract class _NotificationSetting implements NotificationSetting {
   bool get allowOtherNotification;
   @override
   @JsonKey(ignore: true)
-  _$$_NotificationSettingCopyWith<_$_NotificationSetting> get copyWith =>
+  _$$NotificationSettingImplCopyWith<_$NotificationSettingImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

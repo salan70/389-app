@@ -6,15 +6,18 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
-import '../../loading/application/loading_state.dart';
+import '../../loading/application/loading_notifier.dart';
 
-final interstitialAdServiceProvider = Provider(
-  InterstitialAdService.new,
-);
+part 'interstitial_ad_service.g.dart';
 
-/// InterstitialAd関連の処理を行うサービスクラス
+@riverpod
+InterstitialAdService interstitialAdService(InterstitialAdServiceRef ref) =>
+    InterstitialAdService(ref);
+
+/// InterstitialAd 関連の処理を行うサービスクラス
 class InterstitialAdService {
   InterstitialAdService(this.ref);
 
@@ -83,7 +86,7 @@ class InterstitialAdService {
   /// 結果表示までじらすための処理
   /// interstitial広告が表示されるために時間を稼ぐという意図もある
   Future<void> waitResult() async {
-    final loadingNotifier = ref.read(loadingProvider.notifier);
+    final loadingNotifier = ref.read(loadingNotifierProvider.notifier);
     loadingNotifier.show();
     await Future<void>.delayed(const Duration(seconds: 3));
     loadingNotifier.hide();

@@ -1,8 +1,8 @@
-import 'package:baseball_quiz_app/feature/push_notification/application/notification_setting_state.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
 
 import '../../../util/logger.dart';
@@ -10,9 +10,15 @@ import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';
 import '../domain/notification_setting_repository.dart';
+import 'notification_setting_state.dart';
 
-final localPushNotificationServiceProvider =
-    Provider(LocalPushNotificationService.new);
+part 'local_push_notification_service.g.dart';
+
+@riverpod
+LocalPushNotificationService localPushNotificationService(
+  LocalPushNotificationServiceRef ref,
+) =>
+    LocalPushNotificationService(ref);
 
 /// Analytics 関連の処理を行うサービスクラス。
 class LocalPushNotificationService {

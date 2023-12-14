@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../application/search_condition_state.dart';
+import '../../application/search_condition_notifier.dart';
 import '../../util/search_condition_constant.dart';
 
 class StatsValueFilterWidget extends ConsumerWidget {
@@ -9,8 +9,8 @@ class StatsValueFilterWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(searchConditionProvider);
-    final notifier = ref.watch(searchConditionProvider.notifier);
+    final searchCondition = ref.watch(searchConditionNotifierProvider);
+    final notifier = ref.watch(searchConditionNotifierProvider.notifier);
 
     final size = MediaQuery.of(context).size;
 
@@ -24,10 +24,8 @@ class StatsValueFilterWidget extends ConsumerWidget {
             children: [
               const Text('最低通算試合数'),
               DropdownButton<int>(
-                items: statsFilterDropdownMenu(minGamesOptionList),
-                onChanged: (int? value) {
-                  notifier.state = searchCondition.copyWith(minGames: value!);
-                },
+                items: _statsFilterDropdownMenu(minGamesOptionList),
+                onChanged: (int? value) => notifier.updateMinGames(value!),
                 value: searchCondition.minGames,
               ),
             ],
@@ -38,10 +36,8 @@ class StatsValueFilterWidget extends ConsumerWidget {
             children: [
               const Text('最低通算ヒット数'),
               DropdownButton<int>(
-                items: statsFilterDropdownMenu(minHitsOptionList),
-                onChanged: (int? value) {
-                  notifier.state = searchCondition.copyWith(minHits: value!);
-                },
+                items: _statsFilterDropdownMenu(minHitsOptionList),
+                onChanged: (int? value) => notifier.updateMinHits(value!),
                 value: searchCondition.minHits,
               ),
             ],
@@ -52,10 +48,8 @@ class StatsValueFilterWidget extends ConsumerWidget {
             children: [
               const Text('最低通算ホームラン数'),
               DropdownButton<int>(
-                items: statsFilterDropdownMenu(minHrOptionList),
-                onChanged: (int? value) {
-                  notifier.state = searchCondition.copyWith(minHr: value!);
-                },
+                items: _statsFilterDropdownMenu(minHrOptionList),
+                onChanged: (int? value) => notifier.updateMinHr(value!),
                 value: searchCondition.minHr,
               ),
             ],
@@ -65,7 +59,7 @@ class StatsValueFilterWidget extends ConsumerWidget {
     );
   }
 
-  List<DropdownMenuItem<int>> statsFilterDropdownMenu(List<int> intItemList) {
+  List<DropdownMenuItem<int>> _statsFilterDropdownMenu(List<int> intItemList) {
     return intItemList
         .map(
           (e) => DropdownMenuItem(

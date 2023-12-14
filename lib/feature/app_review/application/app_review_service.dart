@@ -1,15 +1,18 @@
-import 'package:baseball_quiz_app/feature/app_info/application/app_info_service.dart';
-import 'package:baseball_quiz_app/feature/app_review/domain/review_history_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
+import '../../app_info/application/app_info_service.dart';
 import '../../auth/domain/auth_repository.dart';
+import '../domain/review_history_repository.dart';
 import 'app_review_state.dart';
 
-final appReviewServiceProvider = Provider.autoDispose<AppReviewService>(
-  AppReviewService.new,
-);
+part 'app_review_service.g.dart';
+
+@riverpod
+AppReviewService appReviewService(AppReviewServiceRef ref) =>
+    AppReviewService(ref);
 
 /// アプリのレビュー関連の処理を行うサービスクラス
 class AppReviewService {

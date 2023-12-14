@@ -1,18 +1,23 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
-import '../../search_condition/domain/search_condition.dart';
+import '../../search_condition/application/search_condition_notifier.dart';
+
+part 'analytics_service.g.dart';
 
 // TODO(me): `material` に依存しているため、他のファイルに移動したい。
-final analyticsObserverProvider =
-    Provider.autoDispose<RouteObserver<ModalRoute<dynamic>>>((ref) {
-  return FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance);
-});
+@riverpod
+RouteObserver<ModalRoute<dynamic>> analyticsObserver(
+  AnalyticsObserverRef ref,
+) =>
+    FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance);
 
-/// [AnalyticsService] プロバイダー
-final analyticsServiceProvider = Provider(AnalyticsService.new);
+@riverpod
+AnalyticsService analyticsService(AnalyticsServiceRef ref) =>
+    AnalyticsService(ref);
 
 /// Analytics 関連の処理を行うサービスクラス。
 class AnalyticsService {
@@ -20,7 +25,9 @@ class AnalyticsService {
 
   final Ref ref;
 
-  Future<void> logSearchCondition(SearchCondition searchCondition) async {
+  Future<void> logSearchCondition() async {
+    final searchCondition = ref.read(searchConditionNotifierProvider);
+
     try {
       await FirebaseAnalytics.instance.logEvent(
         name: 'search_condition',

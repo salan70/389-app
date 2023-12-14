@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'supabase_hitter.dart';
 
@@ -80,22 +80,22 @@ class _$SupabaseHitterCopyWithImpl<$Res, $Val extends SupabaseHitter>
 }
 
 /// @nodoc
-abstract class _$$_SupabaseHitterCopyWith<$Res>
+abstract class _$$SupabaseHitterImplCopyWith<$Res>
     implements $SupabaseHitterCopyWith<$Res> {
-  factory _$$_SupabaseHitterCopyWith(
-          _$_SupabaseHitter value, $Res Function(_$_SupabaseHitter) then) =
-      __$$_SupabaseHitterCopyWithImpl<$Res>;
+  factory _$$SupabaseHitterImplCopyWith(_$SupabaseHitterImpl value,
+          $Res Function(_$SupabaseHitterImpl) then) =
+      __$$SupabaseHitterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String name, String team, bool hasData});
 }
 
 /// @nodoc
-class __$$_SupabaseHitterCopyWithImpl<$Res>
-    extends _$SupabaseHitterCopyWithImpl<$Res, _$_SupabaseHitter>
-    implements _$$_SupabaseHitterCopyWith<$Res> {
-  __$$_SupabaseHitterCopyWithImpl(
-      _$_SupabaseHitter _value, $Res Function(_$_SupabaseHitter) _then)
+class __$$SupabaseHitterImplCopyWithImpl<$Res>
+    extends _$SupabaseHitterCopyWithImpl<$Res, _$SupabaseHitterImpl>
+    implements _$$SupabaseHitterImplCopyWith<$Res> {
+  __$$SupabaseHitterImplCopyWithImpl(
+      _$SupabaseHitterImpl _value, $Res Function(_$SupabaseHitterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -106,7 +106,7 @@ class __$$_SupabaseHitterCopyWithImpl<$Res>
     Object? team = null,
     Object? hasData = null,
   }) {
-    return _then(_$_SupabaseHitter(
+    return _then(_$SupabaseHitterImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -129,17 +129,17 @@ class __$$_SupabaseHitterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SupabaseHitter
+class _$SupabaseHitterImpl
     with DiagnosticableTreeMixin
     implements _SupabaseHitter {
-  const _$_SupabaseHitter(
+  const _$SupabaseHitterImpl(
       {required this.id,
       required this.name,
       required this.team,
       required this.hasData});
 
-  factory _$_SupabaseHitter.fromJson(Map<String, dynamic> json) =>
-      _$$_SupabaseHitterFromJson(json);
+  factory _$SupabaseHitterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SupabaseHitterImplFromJson(json);
 
   @override
   final String id;
@@ -170,7 +170,7 @@ class _$_SupabaseHitter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SupabaseHitter &&
+            other is _$SupabaseHitterImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.team, team) || other.team == team) &&
@@ -184,12 +184,13 @@ class _$_SupabaseHitter
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SupabaseHitterCopyWith<_$_SupabaseHitter> get copyWith =>
-      __$$_SupabaseHitterCopyWithImpl<_$_SupabaseHitter>(this, _$identity);
+  _$$SupabaseHitterImplCopyWith<_$SupabaseHitterImpl> get copyWith =>
+      __$$SupabaseHitterImplCopyWithImpl<_$SupabaseHitterImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SupabaseHitterToJson(
+    return _$$SupabaseHitterImplToJson(
       this,
     );
   }
@@ -200,10 +201,10 @@ abstract class _SupabaseHitter implements SupabaseHitter {
       {required final String id,
       required final String name,
       required final String team,
-      required final bool hasData}) = _$_SupabaseHitter;
+      required final bool hasData}) = _$SupabaseHitterImpl;
 
   factory _SupabaseHitter.fromJson(Map<String, dynamic> json) =
-      _$_SupabaseHitter.fromJson;
+      _$SupabaseHitterImpl.fromJson;
 
   @override
   String get id;
@@ -215,6 +216,6 @@ abstract class _SupabaseHitter implements SupabaseHitter {
   bool get hasData;
   @override
   @JsonKey(ignore: true)
-  _$$_SupabaseHitterCopyWith<_$_SupabaseHitter> get copyWith =>
+  _$$SupabaseHitterImplCopyWith<_$SupabaseHitterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

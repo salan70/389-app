@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../domain/hitter_quiz.dart';
 import 'quiz_widget.dart';
 
 class ResultQuizWidget extends StatelessWidget {
   const ResultQuizWidget({
     super.key,
     required this.globalKey,
+    required this.hitterQuiz,
   });
 
   final GlobalKey globalKey;
+  final HitterQuiz hitterQuiz;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +19,7 @@ class ResultQuizWidget extends StatelessWidget {
       key: globalKey,
       child: ColoredBox(
         color: Theme.of(context).colorScheme.background,
-        child: const QuizWidget(
-          willRebuild: false,
-        ),
+        child: QuizWidget(hitterQuiz: hitterQuiz),
       ),
     );
   }

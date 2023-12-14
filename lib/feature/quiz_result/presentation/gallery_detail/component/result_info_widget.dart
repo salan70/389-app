@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../util/extension/date_time_extension.dart';
-import '../../../application/quiz_result_state.dart';
+import '../../../domain/hitter_quiz_result.dart';
 
 class ResultInfoWidget extends ConsumerWidget {
-  const ResultInfoWidget({super.key});
+  const ResultInfoWidget({super.key, required this.quizResult});
+
+  final HitterQuizResult quizResult;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final quizResult = ref.watch(quizResultStateProvider)!;
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Column(

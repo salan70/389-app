@@ -1,34 +1,33 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../util/constant/hitting_stats_constant.dart';
 import '../../auth/domain/auth_repository.dart';
-import '../../quiz/application/hitter_quiz_state.dart';
+import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz_result/domain/quiz_result_repository.dart';
 import '../domain/review_history.dart';
 import '../domain/review_history_repository.dart';
 import '../util/app_rview_constant.dart';
 
-/// アプリレビューのリクエストを送るかどうか確認する処理の状態をAsyncValueとして返すプロバイダー
-final checkRequestAppReviewStateProvider = StateProvider<AsyncValue<void>>(
-  (_) => const AsyncValue.data(null),
-);
+part 'app_review_state.g.dart';
 
 /// [ReviewHistory] を取得する。
 ///
 /// 存在しない場合は null を返す。
-final reviewHistoryProvider = FutureProvider<ReviewHistory?>((ref) async {
+@riverpod
+Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
   final user = ref.read(authRepositoryProvider).getCurrentUser();
   return ref.read(reviewHistoryRepositoryProvider).fetch(user!.uid);
-});
+}
 
 /// レビューを要求するかどうかを返すプロバイダー。
-final shouldRequestReviewProvider = FutureProvider<bool>((ref) async {
-  final hitterQuizState = ref.watch(hitterQuizStateProvider);
-  // ローディングの場合を想定している。
-  if (hitterQuizState.value == null) {
-    return false;
-  }
+@riverpod
+Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
+  // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
+  final hitterQuiz =
+      await ref.watch(hitterQuizNotifierProvider(QuizType.normal).future);
+
   // 直近のクイズで不正解している場合 false を返す。
-  if (hitterQuizState.value!.isCorrect == false) {
+  if (hitterQuiz.isCorrect == false) {
     return false;
   }
 
@@ -56,4 +55,4 @@ final shouldRequestReviewProvider = FutureProvider<bool>((ref) async {
   final correctedCount =
       await quizResultRepository.fetchCorrectedNormalQuizCount(user);
   return correctedCount >= minCorrectedCount;
-});
+}

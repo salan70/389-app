@@ -18,8 +18,8 @@ class InquiryButton extends ConsumerWidget {
         final body = await inquiryService.createInquiryBody();
         await inquiryService.launchMail(body);
       },
-      child: Stack(
-        children: const [
+      child: const Stack(
+        children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Icon(Icons.mail_outline_rounded),

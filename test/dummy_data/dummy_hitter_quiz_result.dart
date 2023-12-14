@@ -13,31 +13,31 @@ final dummyHitterQuizResult = HitterQuizResult(
       '球団': const StatsValue(unveilOrder: 12, data: 'DeNA'),
       '本塁打': const StatsValue(unveilOrder: 11, data: '22'),
       '打率': const StatsValue(unveilOrder: 10, data: '.314'),
-      'OPS': const StatsValue(unveilOrder: 9, data: '.890')
+      'OPS': const StatsValue(unveilOrder: 9, data: '.890'),
     },
     {
       '球団': const StatsValue(unveilOrder: 12, data: 'DeNA'),
       '本塁打': const StatsValue(unveilOrder: 11, data: '22'),
       '打率': const StatsValue(unveilOrder: 10, data: '.314'),
-      'OPS': const StatsValue(unveilOrder: 9, data: '.890')
+      'OPS': const StatsValue(unveilOrder: 9, data: '.890'),
     },
     {
       '球団': const StatsValue(unveilOrder: 12, data: 'DeNA'),
       '本塁打': const StatsValue(unveilOrder: 11, data: '22'),
       '打率': const StatsValue(unveilOrder: 10, data: '.314'),
-      'OPS': const StatsValue(unveilOrder: 9, data: '.890')
+      'OPS': const StatsValue(unveilOrder: 9, data: '.890'),
     },
     {
       '球団': const StatsValue(unveilOrder: 8, data: 'DeNA'),
       '本塁打': const StatsValue(unveilOrder: 7, data: '24'),
       '打率': const StatsValue(unveilOrder: 6, data: '.291'),
-      'OPS': const StatsValue(unveilOrder: 5, data: '.861')
+      'OPS': const StatsValue(unveilOrder: 5, data: '.861'),
     },
     {
       '球団': const StatsValue(unveilOrder: 4, data: 'NPB：2年'),
       '本塁打': const StatsValue(unveilOrder: 0, data: '46'),
       '打率': const StatsValue(unveilOrder: 1, data: '.302'),
-      'OPS': const StatsValue(unveilOrder: 2, data: '.876')
+      'OPS': const StatsValue(unveilOrder: 2, data: '.876'),
     }
   ],
   isCorrect: false,
