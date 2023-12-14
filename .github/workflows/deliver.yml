@@ -45,6 +45,8 @@ jobs:
           echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> .env
           echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> .env
           echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> .env
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -135,6 +137,8 @@ jobs:
           echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> .env
           echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> .env
           echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> .env
 
 
       - name: Install Flutter
