@@ -6,7 +6,7 @@ import '../../admob/presentation/banner_ad_widget.dart';
 import '../../app_info/application/need_update_state.dart';
 import '../../app_info/presentation/force_update_dialog.dart';
 import '../../auth/application/auth_service.dart';
-import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
+import '../../daily_quiz/presentation/to_play_todays_daily_quiz_button.dart';
 import '../../push_notification/application/local_push_notification_service.dart';
 import 'component/icon_widget.dart';
 import 'component/to_gallery_button.dart';
@@ -87,8 +87,9 @@ class _TopPageState extends ConsumerState<TopPage> {
                       SizedBox(height: 16),
                       SizedBox(
                         width: _buttonWidth,
-                        child:
-                            ToPlayDailyQuizButton(buttonType: ButtonType.sub),
+                        child: ToPlayTodaysDailyQuizButton(
+                          buttonType: ButtonType.sub,
+                        ),
                       ),
                       SizedBox(height: 16),
                       SizedBox(

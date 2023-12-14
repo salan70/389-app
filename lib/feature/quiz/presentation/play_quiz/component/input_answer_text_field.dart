@@ -9,12 +9,17 @@ import '../../../domain/hitter.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
   InputAnswerTextField.normal({super.key, required this.textEditingController})
-      : quizType = QuizType.normal;
+      : quizType = QuizType.normal,
+        questionedAt = null;
 
-  InputAnswerTextField.daily({super.key, required this.textEditingController})
-      : quizType = QuizType.daily;
+  InputAnswerTextField.daily({
+    super.key,
+    required this.textEditingController,
+    required this.questionedAt,
+  }) : quizType = QuizType.daily;
 
   final QuizType quizType;
+  final DateTime? questionedAt;
 
   /// 回答入力用に使用する [TextEditingController].
   ///
@@ -24,8 +29,9 @@ class InputAnswerTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizNotifier =
-        ref.watch(hitterQuizNotifierProvider(quizType).notifier);
+    final hitterQuizNotifier = ref.watch(
+      hitterQuizNotifierProvider(quizType, questionedAt: questionedAt).notifier,
+    );
 
     return TextFieldSearch(
       label: '選手名',

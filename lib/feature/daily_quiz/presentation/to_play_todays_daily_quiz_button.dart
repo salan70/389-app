@@ -1,5 +1,7 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ntp/ntp.dart';
 
 import '../../../common_widget/confirm_dialog.dart';
 import '../../../common_widget/error_dialog.dart';
@@ -11,12 +13,12 @@ import '../../loading/application/loading_notifier.dart';
 import '../../push_notification/application/local_push_notification_service.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
-import '../../quiz_result/application/quiz_result_service.dart';
 import '../application/daily_quiz_state.dart';
 import '../util/daily_quiz_constant.dart';
 
-class ToPlayDailyQuizButton extends ConsumerWidget with PresentationMixin {
-  const ToPlayDailyQuizButton({super.key, required this.buttonType});
+class ToPlayTodaysDailyQuizButton extends ConsumerWidget
+    with PresentationMixin {
+  const ToPlayTodaysDailyQuizButton({super.key, required this.buttonType});
 
   final ButtonType buttonType;
 
@@ -31,7 +33,7 @@ class ToPlayDailyQuizButton extends ConsumerWidget with PresentationMixin {
           ..show();
         try {
           final isPlayedDailyQuiz =
-              await ref.read(isPlayedDailyQuizProvider.future);
+              await ref.read(isPlayedTodaysDailyQuizProvider.future);
 
           // * プレイ済みの場合
           if (isPlayedDailyQuiz) {
@@ -50,7 +52,9 @@ class ToPlayDailyQuizButton extends ConsumerWidget with PresentationMixin {
           // * 未プレイの場合
           // 念のため、 invalidate する。
           ref.invalidate(dailyQuizProvider);
-          final dailyQuiz = await ref.read(dailyQuizProvider.future);
+          final now = await NTP.now();
+          final nowInApp = now.calculateDateInApp();
+          final dailyQuiz = await ref.read(dailyQuizProvider(nowInApp).future);
 
           // * 今日の1問が null （未登録などで取得できなかった）の場合。
           if (dailyQuiz == null) {
@@ -175,11 +179,15 @@ class _ConfirmPlayDailyQuizDialog extends ConsumerWidget
         await executeWithOverlayLoading(
           ref,
           action: () async {
+            final now = await NTP.now();
+            final nowInApp = now.calculateDateInApp();
             // クイズを作成する。
-            await ref.read(hitterQuizNotifierProvider(QuizType.daily).future);
-
-            // users > dailyQuizResultを保存（新規作成）
-            await ref.read(quizResultServiceProvider).createDailyQuizResult();
+            await ref.read(
+              hitterQuizNotifierProvider(
+                QuizType.daily,
+                questionedAt: nowInApp,
+              ).future,
+            );
 
             // ローカルプッシュ通知のスケジュールを更新し、
             // プレイ済みなのにリマインドが通知されるのを防ぐ。
@@ -187,10 +195,17 @@ class _ConfirmPlayDailyQuizDialog extends ConsumerWidget
                 .read(localPushNotificationServiceProvider)
                 .scheduleRemindDailyQuizNotification();
           },
-          onLoadingComplete: () {
-            Navigator.of(context).push(
+          onLoadingComplete: () async {
+            final now = await NTP.now();
+            final nowInApp = now.calculateDateInApp();
+            if (!context.mounted) {
+              return;
+            }
+            await Navigator.of(context).push(
               MaterialPageRoute<Widget>(
-                builder: (_) => PlayDailyQuizPage(),
+                builder: (_) => PlayDailyQuizPage(
+                  questionedAt: nowInApp,
+                ),
                 settings: const RouteSettings(
                   name: '/play_daily_quiz_page',
                 ),

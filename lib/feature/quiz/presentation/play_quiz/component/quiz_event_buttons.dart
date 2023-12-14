@@ -7,17 +7,23 @@ import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../application/hitter_quiz_notifier.dart';
 
 class QuizEventButtons extends ConsumerWidget {
-  const QuizEventButtons.normal({super.key}) : quizType = QuizType.normal;
+  const QuizEventButtons.normal({super.key})
+      : quizType = QuizType.normal,
+        questionedAt = null;
 
-  const QuizEventButtons.daily({super.key}) : quizType = QuizType.daily;
+  const QuizEventButtons.daily({super.key, required this.questionedAt})
+      : quizType = QuizType.daily;
 
   final QuizType quizType;
+  final DateTime? questionedAt;
 
   static const _buttonWidth = 160.0;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(hitterQuizNotifierProvider(quizType).notifier);
+    final notifier = ref.watch(
+      hitterQuizNotifierProvider(quizType, questionedAt: questionedAt).notifier,
+    );
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -9,10 +9,17 @@ import '../domain/hitter_repository.dart';
 
 part 'hitter_quiz_notifier.g.dart';
 
+/// [HitterQuiz] を保持する。
+///
+/// [quizType] に [QuizType.daily] を指定する場合、
+/// [questionedAt] に DailyQuiz の出題日を指定すること。
 @riverpod
 class HitterQuizNotifier extends _$HitterQuizNotifier {
   @override
-  FutureOr<HitterQuiz> build(QuizType quizType) async {
+  FutureOr<HitterQuiz> build(
+    QuizType quizType, {
+    required DateTime? questionedAt,
+  }) async {
     switch (quizType) {
       case QuizType.normal:
         final searchCondition = ref.watch(searchConditionNotifierProvider);
@@ -21,7 +28,11 @@ class HitterQuizNotifier extends _$HitterQuizNotifier {
             .fetchHitterQuizBySearchCondition(searchCondition);
 
       case QuizType.daily:
-        final dailyQuiz = await ref.watch(dailyQuizProvider.future);
+        if (questionedAt == null) {
+          throw ArgumentError.notNull('questionedAt');
+        }
+        final dailyQuiz =
+            await ref.watch(dailyQuizProvider(questionedAt).future);
         // TODO(me): null チェックしたほうがいいかも。
         return ref
             .read(hitterRepositoryProvider)

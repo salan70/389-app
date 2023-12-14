@@ -138,7 +138,8 @@ class LocalPushNotificationService {
   /// 今日分の dailyQuiz の分の通知を送らないようにしている。
   Future<void> scheduleRemindDailyQuizNotification() async {
     const notificationType = NotificationType.remindDailyQUiz;
-    final isPlayedDailyQuiz = await ref.read(isPlayedDailyQuizProvider.future);
+    final isPlayedDailyQuiz =
+        await ref.read(isPlayedTodaysDailyQuizProvider.future);
 
     await _flutterLocalNotificationsPlugin.zonedSchedule(
       notificationType.id,

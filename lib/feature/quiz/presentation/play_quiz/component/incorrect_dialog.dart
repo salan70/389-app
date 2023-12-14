@@ -10,13 +10,22 @@ import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';
 
 class IncorrectDialog extends ConsumerWidget {
   const IncorrectDialog.normal({super.key, required this.hitterName})
-      : quizType = QuizType.normal;
+      : quizType = QuizType.normal,
+        questionedAt = null;
 
-  const IncorrectDialog.daily({super.key, required this.hitterName})
-      : quizType = QuizType.daily;
+  const IncorrectDialog.daily({
+    super.key,
+    required this.hitterName,
+    required this.questionedAt,
+  }) : quizType = QuizType.daily;
 
   final String hitterName;
   final QuizType quizType;
+
+  /// 対象となる DailyQuiz の出題日。
+  ///
+  /// [QuizType.daily] の場合、必須。
+  final DateTime? questionedAt;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +44,9 @@ class IncorrectDialog extends ConsumerWidget {
               builder: (_) {
                 final resultPage = quizType == QuizType.normal
                     ? const NormalQuizResultPage()
-                    : DailyQuizResultPage();
+                    : DailyQuizResultPage(
+                        questionedAt: questionedAt!,
+                    );
 
                 return ConfirmDialog(
                   confirmText: quizType.retireConfirmText,
@@ -46,7 +57,11 @@ class IncorrectDialog extends ConsumerWidget {
                     if (quizType == QuizType.normal) {
                       await quizResultService.createNormalQuizResult();
                     } else {
-                      await quizResultService.updateDailyQuizResult();
+                      if (questionedAt == null) {
+                        throw ArgumentError.notNull('questionedAt');
+                      }
+                      await quizResultService
+                          .updateDailyQuizResult(questionedAt!);
                     }
 
                     if (context.mounted) {

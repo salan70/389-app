@@ -16,28 +16,38 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
     super.key,
     required this.buttonType,
     required this.hitterQuiz,
+    required this.questionedAt,
   });
 
   final ButtonType buttonType;
   final HitterQuiz hitterQuiz;
+  final DateTime questionedAt;
 
   static const _maxCanIncorrectCount = 2;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifier =
-        ref.watch(hitterQuizNotifierProvider(QuizType.daily).notifier);
+    final notifier = ref.watch(
+      hitterQuizNotifierProvider(
+        QuizType.daily,
+        questionedAt: questionedAt,
+      ).notifier,
+    );
 
     /// クイズ終了（最終回答）時の処理。
-    /// 
+    ///
     /// dailyQuizResult を更新し、結果ページに遷移する。
     Future<void> finishQuiz() async {
-      await ref.read(quizResultServiceProvider).updateDailyQuizResult();
+      await ref
+          .read(quizResultServiceProvider)
+          .updateDailyQuizResult(questionedAt);
 
       if (context.mounted) {
         await Navigator.of(context).push(
           MaterialPageRoute<Widget>(
-            builder: (_) => DailyQuizResultPage(),
+            builder: (_) => DailyQuizResultPage(
+              questionedAt: questionedAt,
+            ),
             settings: const RouteSettings(
               name: '/daily_quiz__resultpage',
             ),
@@ -81,7 +91,10 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
           context: context,
           barrierDismissible: false,
           builder: (_) {
-            return IncorrectDialog.daily(hitterName: hitterName);
+            return IncorrectDialog.daily(
+              hitterName: hitterName,
+              questionedAt: questionedAt,
+            );
           },
         );
       }

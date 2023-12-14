@@ -13,7 +13,9 @@ import '../component/custom_confetti_widget.dart';
 import '../component/result_text.dart';
 
 class DailyQuizResultPage extends ConsumerWidget {
-  DailyQuizResultPage({super.key});
+  DailyQuizResultPage({super.key, required this.questionedAt});
+
+  final DateTime questionedAt;
 
   static const _shareText = '#プロ野球クイズ #389quiz #今日の1問\n$appStoreUrl';
   static const _buttonWidth = 160.0;
@@ -21,8 +23,12 @@ class DailyQuizResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncHitterQuiz =
-        ref.watch(hitterQuizNotifierProvider(QuizType.daily));
+    final asyncHitterQuiz = ref.watch(
+      hitterQuizNotifierProvider(
+        QuizType.daily,
+        questionedAt: questionedAt,
+      ),
+    );
 
     return WillPopScope(
       onWillPop: () async => false,

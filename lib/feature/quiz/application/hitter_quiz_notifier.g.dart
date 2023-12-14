@@ -7,7 +7,7 @@ part of 'hitter_quiz_notifier.dart';
 // **************************************************************************
 
 String _$hitterQuizNotifierHash() =>
-    r'd2f15c5acf41c8967e1a767a3cd43d4f1f82e59a';
+    r'bd688cf52642ab7ca628bc77993a042bfd7ca674';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -33,27 +33,51 @@ class _SystemHash {
 abstract class _$HitterQuizNotifier
     extends BuildlessAutoDisposeAsyncNotifier<HitterQuiz> {
   late final QuizType quizType;
+  late final DateTime? questionedAt;
 
   FutureOr<HitterQuiz> build(
-    QuizType quizType,
-  );
+    QuizType quizType, {
+    required DateTime? questionedAt,
+  });
 }
 
-/// See also [HitterQuizNotifier].
+/// [HitterQuiz] を保持する。
+///
+/// [quizType] に [QuizType.daily] を指定する場合、
+/// [questionedAt] に DailyQuiz の出題日を指定すること。
+///
+/// Copied from [HitterQuizNotifier].
 @ProviderFor(HitterQuizNotifier)
 const hitterQuizNotifierProvider = HitterQuizNotifierFamily();
 
-/// See also [HitterQuizNotifier].
+/// [HitterQuiz] を保持する。
+///
+/// [quizType] に [QuizType.daily] を指定する場合、
+/// [questionedAt] に DailyQuiz の出題日を指定すること。
+///
+/// Copied from [HitterQuizNotifier].
 class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
-  /// See also [HitterQuizNotifier].
+  /// [HitterQuiz] を保持する。
+  ///
+  /// [quizType] に [QuizType.daily] を指定する場合、
+  /// [questionedAt] に DailyQuiz の出題日を指定すること。
+  ///
+  /// Copied from [HitterQuizNotifier].
   const HitterQuizNotifierFamily();
 
-  /// See also [HitterQuizNotifier].
+  /// [HitterQuiz] を保持する。
+  ///
+  /// [quizType] に [QuizType.daily] を指定する場合、
+  /// [questionedAt] に DailyQuiz の出題日を指定すること。
+  ///
+  /// Copied from [HitterQuizNotifier].
   HitterQuizNotifierProvider call(
-    QuizType quizType,
-  ) {
+    QuizType quizType, {
+    required DateTime? questionedAt,
+  }) {
     return HitterQuizNotifierProvider(
       quizType,
+      questionedAt: questionedAt,
     );
   }
 
@@ -63,6 +87,7 @@ class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
   ) {
     return call(
       provider.quizType,
+      questionedAt: provider.questionedAt,
     );
   }
 
@@ -81,14 +106,27 @@ class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
   String? get name => r'hitterQuizNotifierProvider';
 }
 
-/// See also [HitterQuizNotifier].
+/// [HitterQuiz] を保持する。
+///
+/// [quizType] に [QuizType.daily] を指定する場合、
+/// [questionedAt] に DailyQuiz の出題日を指定すること。
+///
+/// Copied from [HitterQuizNotifier].
 class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
     HitterQuizNotifier, HitterQuiz> {
-  /// See also [HitterQuizNotifier].
+  /// [HitterQuiz] を保持する。
+  ///
+  /// [quizType] に [QuizType.daily] を指定する場合、
+  /// [questionedAt] に DailyQuiz の出題日を指定すること。
+  ///
+  /// Copied from [HitterQuizNotifier].
   HitterQuizNotifierProvider(
-    QuizType quizType,
-  ) : this._internal(
-          () => HitterQuizNotifier()..quizType = quizType,
+    QuizType quizType, {
+    required DateTime? questionedAt,
+  }) : this._internal(
+          () => HitterQuizNotifier()
+            ..quizType = quizType
+            ..questionedAt = questionedAt,
           from: hitterQuizNotifierProvider,
           name: r'hitterQuizNotifierProvider',
           debugGetCreateSourceHash:
@@ -99,6 +137,7 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
           allTransitiveDependencies:
               HitterQuizNotifierFamily._allTransitiveDependencies,
           quizType: quizType,
+          questionedAt: questionedAt,
         );
 
   HitterQuizNotifierProvider._internal(
@@ -109,9 +148,11 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
     required super.debugGetCreateSourceHash,
     required super.from,
     required this.quizType,
+    required this.questionedAt,
   }) : super.internal();
 
   final QuizType quizType;
+  final DateTime? questionedAt;
 
   @override
   FutureOr<HitterQuiz> runNotifierBuild(
@@ -119,6 +160,7 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   ) {
     return notifier.build(
       quizType,
+      questionedAt: questionedAt,
     );
   }
 
@@ -127,13 +169,16 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
     return ProviderOverride(
       origin: this,
       override: HitterQuizNotifierProvider._internal(
-        () => create()..quizType = quizType,
+        () => create()
+          ..quizType = quizType
+          ..questionedAt = questionedAt,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
         quizType: quizType,
+        questionedAt: questionedAt,
       ),
     );
   }
@@ -146,13 +191,16 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
 
   @override
   bool operator ==(Object other) {
-    return other is HitterQuizNotifierProvider && other.quizType == quizType;
+    return other is HitterQuizNotifierProvider &&
+        other.quizType == quizType &&
+        other.questionedAt == questionedAt;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, quizType.hashCode);
+    hash = _SystemHash.combine(hash, questionedAt.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -161,6 +209,9 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
 mixin HitterQuizNotifierRef on AutoDisposeAsyncNotifierProviderRef<HitterQuiz> {
   /// The parameter `quizType` of this provider.
   QuizType get quizType;
+
+  /// The parameter `questionedAt` of this provider.
+  DateTime? get questionedAt;
 }
 
 class _HitterQuizNotifierProviderElement
@@ -170,6 +221,9 @@ class _HitterQuizNotifierProviderElement
 
   @override
   QuizType get quizType => (origin as HitterQuizNotifierProvider).quizType;
+  @override
+  DateTime? get questionedAt =>
+      (origin as HitterQuizNotifierProvider).questionedAt;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

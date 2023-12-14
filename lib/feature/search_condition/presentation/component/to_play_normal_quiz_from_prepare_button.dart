@@ -31,7 +31,10 @@ class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget
             ref.read(searchConditionNotifierProvider.notifier).save();
 
             // 出題する選手を取得する。
-            await ref.read(hitterQuizNotifierProvider(QuizType.normal).future);
+            await ref.read(
+              hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
+                  .future,
+            );
 
             // Analytics に search_condition を送信する。
             await ref.read(analyticsServiceProvider).logSearchCondition();
