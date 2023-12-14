@@ -15,7 +15,7 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
     /// アプリ内日付の月の最終日
     final lastDayOfInAppThisMonth = todayInApp.lastDayOfMonth;
 
-    return Column(
+    return ListView(
       children: [
         TableCalendar<dynamic>(
           firstDay: DateTime.utc(2023, 4),
@@ -40,12 +40,16 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 16),
-        Text(
-          '過去の日付（-）をタップして動画広告を見ると、\n'
-          'その日の「今日の1問」をプレイできます！\n'
-          '※ 未プレイの場合に限ります。',
-          style: Theme.of(context).textTheme.bodyMedium,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Text(
+            '過去の日付（-）をタップして動画広告を見ると、\n'
+            'その日の「今日の1問」をプレイできます！\n'
+            '※ 未プレイの場合に限ります。',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
         ),
+        const SizedBox(height: 160),
       ],
     );
   }
