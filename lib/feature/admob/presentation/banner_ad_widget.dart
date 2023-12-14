@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../util/logger.dart';
-import '../application/banner_ad_id_state.dart';
+import '../application/ad_id_state.dart';
 
 class BannerAdWidget extends ConsumerWidget {
   const BannerAdWidget({super.key});

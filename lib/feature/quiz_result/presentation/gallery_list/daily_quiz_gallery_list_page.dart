@@ -1,12 +1,12 @@
-import 'package:baseball_quiz_app/util/mixin/presentation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../common_widget/async_value_handler.dart';
-import '../../../../common_widget/confirm_dialog.dart';
+import '../../../../common_widget/my_button.dart';
 import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/extension/date_time_extension.dart';
+import '../../../admob/application/rewarded_ad_notifier.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/daily_hitter_quiz_result.dart';
 import '../gallery_detail/daily_quiz_gallery_detail_page.dart';
@@ -116,8 +116,7 @@ class CalenderCell extends ConsumerWidget {
   }
 }
 
-class _ConfirmPlayPastDailyQuizDialog extends ConsumerWidget
-    with PresentationMixin {
+class _ConfirmPlayPastDailyQuizDialog extends ConsumerStatefulWidget {
   const _ConfirmPlayPastDailyQuizDialog({
     required this.date,
   });
@@ -125,22 +124,75 @@ class _ConfirmPlayPastDailyQuizDialog extends ConsumerWidget
   final DateTime date;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formattedDate = date.toFormattedString();
+  ConsumerState<_ConfirmPlayPastDailyQuizDialog> createState() =>
+      __ConfirmPlayPastDailyQuizDialog();
+}
 
-    return ConfirmDialog(
-      confirmText: '動画広告を見て、$formattedDateの「今日の1問」をプレイしますか？\n'
+class __ConfirmPlayPastDailyQuizDialog
+    extends ConsumerState<_ConfirmPlayPastDailyQuizDialog> {
+  static const double _buttonHeight = 24;
+  static const double _buttonWidth = 64;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        // todo エラーハンドリング
+        await ref.read(rewardedAdNotifierProvider.notifier).loadAd();
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final rewardedAdState = ref.watch(rewardedAdNotifierProvider);
+    final formattedDate = widget.date.toFormattedString();
+
+    return AlertDialog(
+      title: const Text('確認'),
+      content: Text('動画広告を見て、$formattedDateの「今日の1問」をプレイしますか？\n'
           'はいをタップすると、動画広告が再生されます。\n\n'
           '※1度プレイした日付の「今日の1問」は、2度とプレイできません。\n\n'
-          '※プレイ中にアプリが終了された場合、不正解となります。',
-      onPressedYes: () async {
-        await executeWithOverlayLoading(
-          ref,
-          action: () async {
-            // todo: リワード広告出す
+          '※プレイ中にアプリが終了された場合、不正解となります。'),
+      actionsPadding: const EdgeInsets.only(right: 24, bottom: 16),
+      actions: <Widget>[
+        MyButton(
+          buttonName: 'confirm_no_button',
+          buttonType: ButtonType.sub,
+          child: const SizedBox(
+            height: _buttonHeight,
+            width: _buttonWidth,
+            child: Center(child: Text('いいえ')),
+          ),
+          onPressed: () => Navigator.pop(context),
+        ),
+        const SizedBox(width: 4),
+        MyButton(
+          buttonName: 'confirm_yes_button',
+          buttonType: ButtonType.alert,
+          onPressed: () {
+            ref.read(rewardedAdNotifierProvider.notifier).showAd(() {
+              // todo dailyQuiz の作成と画面遷移
+            });
           },
-        );
-      },
+          child: SizedBox(
+            height: _buttonHeight,
+            width: _buttonWidth,
+            child: Center(
+              child: rewardedAdState.isLoaded
+                  ? const Text('はい')
+                  : const SizedBox(
+                      // 正方形で表示させるため、 _buttonHeight を width に設定。
+                      width: _buttonHeight,
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
