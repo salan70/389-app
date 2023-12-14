@@ -69,66 +69,72 @@ Future<void> main() async {
     overlays: SystemUiOverlay.values,
   );
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        hitterRepositoryProvider.overrideWith(
-          (ref) {
-            return SupabaseHitterRepository(
-              ref.watch(supabaseProvider),
-            );
-          },
-        ),
-        searchConditionRepositoryProvider.overrideWith(
-          (ref) => HiveSearchConditionRepository(searchConditionBox),
-        ),
-        notificationSettingRepositoryProvider.overrideWith(
-          (ref) => HiveNotificationSettingRepository(notificationSettingBox),
-        ),
-        authRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseAuthRepository(
-              ref.watch(firebaseAuthProvider),
-            );
-          },
-        ),
-        userInfoRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseUserInfoRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        reviewHistoryRepositoryProvider.overrideWith(
-          (ref) => FirebaseReviewHistoryRepository(
-            ref.watch(firestoreProvider),
+  // 画面の向きを縦で固定する。
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(
+      ProviderScope(
+        overrides: [
+          hitterRepositoryProvider.overrideWith(
+            (ref) {
+              return SupabaseHitterRepository(
+                ref.watch(supabaseProvider),
+              );
+            },
           ),
-        ),
-        dailyQuizRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseDailyQuizRepository(
+          searchConditionRepositoryProvider.overrideWith(
+            (ref) => HiveSearchConditionRepository(searchConditionBox),
+          ),
+          notificationSettingRepositoryProvider.overrideWith(
+            (ref) => HiveNotificationSettingRepository(notificationSettingBox),
+          ),
+          authRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseAuthRepository(
+                ref.watch(firebaseAuthProvider),
+              );
+            },
+          ),
+          userInfoRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseUserInfoRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          reviewHistoryRepositoryProvider.overrideWith(
+            (ref) => FirebaseReviewHistoryRepository(
               ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        quizResultRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseQuizResultRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        appInfoRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseAppInfoRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+            ),
+          ),
+          dailyQuizRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseDailyQuizRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          quizResultRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseQuizResultRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          appInfoRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseAppInfoRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 Future<void> initialize() async {
