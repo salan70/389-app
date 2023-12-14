@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/back_to_top_button.dart';
@@ -22,8 +21,6 @@ class DailyQuizResultPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-
     final asyncHitterQuiz =
         ref.watch(hitterQuizNotifierProvider(QuizType.daily));
 

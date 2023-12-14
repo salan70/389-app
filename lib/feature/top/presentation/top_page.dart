@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../common_widget/my_button.dart';
 import '../../admob/presentation/banner_ad_widget.dart';
 import '../../app_info/application/need_update_state.dart';
 import '../../app_info/presentation/force_update_dialog.dart';
+import '../../auth/application/auth_service.dart';
 import '../../daily_quiz/presentation/to_play_daily_quiz_button.dart';
 import '../../push_notification/application/local_push_notification_service.dart';
 import 'component/icon_widget.dart';
@@ -30,6 +30,9 @@ class _TopPageState extends ConsumerState<TopPage> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // ログインする。
+      await ref.read(authServiceProvider).login();
+
       // バージョンチェック
       final needUpdate = await ref.read(needUpdateProvider.future);
       if (needUpdate) {
@@ -49,8 +52,6 @@ class _TopPageState extends ConsumerState<TopPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-
     return Scaffold(
       body: SafeArea(
         child: Padding(

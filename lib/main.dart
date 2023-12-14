@@ -5,6 +5,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,7 +21,6 @@ import 'feature/app_info/domain/app_info_repository.dart';
 import 'feature/app_info/infrastructure/firebase_app_info_repository.dart';
 import 'feature/app_review/domain/review_history_repository.dart';
 import 'feature/app_review/infrastructure/firebase_review_history_repository.dart';
-import 'feature/auth/application/auth_service.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/domain/user_info_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
@@ -59,6 +59,14 @@ Future<void> main() async {
       await Hive.openBox<SearchCondition>(HiveBoxType.searchCondition.key);
   final notificationSettingBox = await Hive.openBox<NotificationSetting>(
     HiveBoxType.notificationSetting.key,
+  );
+
+  // iOS 端末にてステータスバーを表示させるための設定。
+  //
+  // 参考: https://halzoblog.com/error-bug-diary/20220922-2/
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
   );
 
   runApp(
@@ -205,10 +213,6 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(me): ここで login するのは多分良くないのでなんとかする。
-    // Userを作成
-    ref.read(authServiceProvider).login();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
