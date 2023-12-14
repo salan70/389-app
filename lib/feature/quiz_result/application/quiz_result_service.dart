@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/logger.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';

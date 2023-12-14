@@ -1,6 +1,5 @@
 import 'package:baseball_quiz_app/feature/admob/application/ad_id_state.dart';
 import 'package:baseball_quiz_app/feature/admob/domain/rewarded_ad_state.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -36,21 +35,21 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
 
   /// 広告を表示する。
   ///
-  /// [onAdCompleted] に広告の視聴が完了した際の処理を渡す。
-  void showAd(VoidCallback onAdCompleted) {
+  /// 広告の視聴が完了したら、 state.isWatchCompleted が true になる。
+  void showAd() {
     state.rewardedAd
       ?..fullScreenContentCallback = FullScreenContentCallback(
-        // 広告が表示された場合
+        // 広告が表示された場合。
         onAdShowedFullScreenContent: (ad) {
           logger.i('fullScreen content が表示されました。');
         },
-        // 広告が閉じられた場合
+        // 広告が閉じられた場合。
         onAdDismissedFullScreenContent: (ad) {
           logger.i('fullScreen content が閉じられました。');
           ad.dispose();
           loadAd();
         },
-        // 広告でエラーが発生した場合
+        // 広告でエラーが発生した場合。
         onAdFailedToShowFullScreenContent: (ad, error) {
           logger.e('fullScreen content でエラーが発生しました。', error);
           ad.dispose();
@@ -61,8 +60,13 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       ..show(
         onUserEarnedReward: (ad, reward) {
           logger.i('リワード広告の視聴が完了しました。');
-          onAdCompleted();
+          state = state.copyWith(isWatchCompleted: true);
         },
       );
+  }
+
+  /// state.isStartedQuiz を true にする。
+  void updateIsStartedQuiz() async {
+    state = state.copyWith(isStartedQuiz: true);
   }
 }

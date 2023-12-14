@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../util/extension/date_time_extension.dart';
+import '../../../util/logger.dart';
 import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
 
@@ -12,11 +12,15 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
 
   @override
   Future<DailyQuiz?> fetchByQuestionedAt(DateTime questionedAt) async {
-    final startDateInApp = questionedAt.calculateDateInApp();
-    final endDateInApp = DateTime(
-      startDateInApp.year,
-      startDateInApp.month,
-      startDateInApp.day,
+    final startDate = DateTime(
+      questionedAt.year,
+      questionedAt.month,
+      questionedAt.day,
+    );
+    final endDate = DateTime(
+      startDate.year,
+      startDate.month,
+      startDate.day,
       23,
       59,
       59,
@@ -26,8 +30,8 @@ class FirebaseDailyQuizRepository implements DailyQuizRepository {
     final QuerySnapshot snapshot = await firestore
         .collection('dailyQuiz')
         .orderBy('questionedAt')
-        .startAt([Timestamp.fromDate(startDateInApp)])
-        .endAt([Timestamp.fromDate(endDateInApp)])
+        .startAt([Timestamp.fromDate(startDate)])
+        .endAt([Timestamp.fromDate(endDate)])
         .limit(1)
         .get();
 

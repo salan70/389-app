@@ -337,6 +337,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.7"
+  custom_lint_builder:
+    dependency: transitive
+    description:
+      name: custom_lint_builder
+      sha256: dfcfa987d2bd9d0ba751ef4bdef0f6c1aa0062f2a67fe716fd5f3f8b709d6418
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.7"
   custom_lint_core:
     dependency: transitive
     description:
@@ -728,6 +736,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  hotreloader:
+    dependency: transitive
+    description:
+      name: hotreloader
+      sha256: "94ee21a60ea2836500799f3af035dc3212b1562027f1e0031c14e087f0231449"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   html:
     dependency: transitive
     description:
@@ -1152,6 +1168,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.9"
+  riverpod_lint:
+    dependency: "direct main"
+    description:
+      name: riverpod_lint
+      sha256: "944929ef82c9bfeaa455ccab97920abcf847a0ffed5c9f6babc520a95db25176"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.7"
   roggle:
     dependency: "direct main"
     description:
@@ -1565,6 +1589,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.2"
+  vm_service:
+    dependency: transitive
+    description:
+      name: vm_service
+      sha256: b3d56ff4341b8f182b96aceb2fa20e3dcb336b9f867bc0eafc0de10f1048e957
+      url: "https://pub.dev"
+    source: hosted
+    version: "13.0.0"
   watcher:
     dependency: transitive
     description:

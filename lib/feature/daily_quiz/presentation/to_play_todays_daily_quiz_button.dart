@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ntp/ntp.dart';
@@ -12,7 +13,6 @@ import '../../loading/application/loading_notifier.dart';
 import '../../push_notification/application/local_push_notification_service.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz/presentation/play_quiz/play_daily_quiz/play_daily_quiz_page.dart';
-import '../../quiz_result/application/quiz_result_service.dart';
 import '../application/daily_quiz_state.dart';
 import '../util/daily_quiz_constant.dart';
 
@@ -53,7 +53,8 @@ class ToPlayTodaysDailyQuizButton extends ConsumerWidget
           // 念のため、 invalidate する。
           ref.invalidate(dailyQuizProvider);
           final now = await NTP.now();
-          final dailyQuiz = await ref.read(dailyQuizProvider(now).future);
+          final nowInApp = now.calculateDateInApp();
+          final dailyQuiz = await ref.read(dailyQuizProvider(nowInApp).future);
 
           // * 今日の1問が null （未登録などで取得できなかった）の場合。
           if (dailyQuiz == null) {
@@ -179,19 +180,14 @@ class _ConfirmPlayDailyQuizDialog extends ConsumerWidget
           ref,
           action: () async {
             final now = await NTP.now();
+            final nowInApp = now.calculateDateInApp();
             // クイズを作成する。
             await ref.read(
               hitterQuizNotifierProvider(
                 QuizType.daily,
-                questionedAt: now,
+                questionedAt: nowInApp,
               ).future,
             );
-
-            // users > dailyQuizResultを保存（新規作成）
-
-            await ref
-                .read(quizResultServiceProvider)
-                .createDailyQuizResult(now);
 
             // ローカルプッシュ通知のスケジュールを更新し、
             // プレイ済みなのにリマインドが通知されるのを防ぐ。
@@ -201,13 +197,14 @@ class _ConfirmPlayDailyQuizDialog extends ConsumerWidget
           },
           onLoadingComplete: () async {
             final now = await NTP.now();
+            final nowInApp = now.calculateDateInApp();
             if (!context.mounted) {
               return;
             }
             await Navigator.of(context).push(
               MaterialPageRoute<Widget>(
                 builder: (_) => PlayDailyQuizPage(
-                  questionedAt: now,
+                  questionedAt: nowInApp,
                 ),
                 settings: const RouteSettings(
                   name: '/play_daily_quiz_page',

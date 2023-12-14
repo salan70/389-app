@@ -18,6 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RewardAdState {
   RewardedAd? get rewardedAd => throw _privateConstructorUsedError;
   bool get isLoaded => throw _privateConstructorUsedError;
+  bool get isWatchCompleted => throw _privateConstructorUsedError;
+  bool get isStartedQuiz => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RewardAdStateCopyWith<RewardAdState> get copyWith =>
@@ -30,7 +32,11 @@ abstract class $RewardAdStateCopyWith<$Res> {
           RewardAdState value, $Res Function(RewardAdState) then) =
       _$RewardAdStateCopyWithImpl<$Res, RewardAdState>;
   @useResult
-  $Res call({RewardedAd? rewardedAd, bool isLoaded});
+  $Res call(
+      {RewardedAd? rewardedAd,
+      bool isLoaded,
+      bool isWatchCompleted,
+      bool isStartedQuiz});
 }
 
 /// @nodoc
@@ -48,6 +54,8 @@ class _$RewardAdStateCopyWithImpl<$Res, $Val extends RewardAdState>
   $Res call({
     Object? rewardedAd = freezed,
     Object? isLoaded = null,
+    Object? isWatchCompleted = null,
+    Object? isStartedQuiz = null,
   }) {
     return _then(_value.copyWith(
       rewardedAd: freezed == rewardedAd
@@ -57,6 +65,14 @@ class _$RewardAdStateCopyWithImpl<$Res, $Val extends RewardAdState>
       isLoaded: null == isLoaded
           ? _value.isLoaded
           : isLoaded // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isWatchCompleted: null == isWatchCompleted
+          ? _value.isWatchCompleted
+          : isWatchCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStartedQuiz: null == isStartedQuiz
+          ? _value.isStartedQuiz
+          : isStartedQuiz // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
   }
@@ -70,7 +86,11 @@ abstract class _$$RewardAdStateImplCopyWith<$Res>
       __$$RewardAdStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RewardedAd? rewardedAd, bool isLoaded});
+  $Res call(
+      {RewardedAd? rewardedAd,
+      bool isLoaded,
+      bool isWatchCompleted,
+      bool isStartedQuiz});
 }
 
 /// @nodoc
@@ -86,6 +106,8 @@ class __$$RewardAdStateImplCopyWithImpl<$Res>
   $Res call({
     Object? rewardedAd = freezed,
     Object? isLoaded = null,
+    Object? isWatchCompleted = null,
+    Object? isStartedQuiz = null,
   }) {
     return _then(_$RewardAdStateImpl(
       rewardedAd: freezed == rewardedAd
@@ -96,6 +118,14 @@ class __$$RewardAdStateImplCopyWithImpl<$Res>
           ? _value.isLoaded
           : isLoaded // ignore: cast_nullable_to_non_nullable
               as bool,
+      isWatchCompleted: null == isWatchCompleted
+          ? _value.isWatchCompleted
+          : isWatchCompleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStartedQuiz: null == isStartedQuiz
+          ? _value.isStartedQuiz
+          : isStartedQuiz // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -103,17 +133,27 @@ class __$$RewardAdStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RewardAdStateImpl implements _RewardAdState {
-  const _$RewardAdStateImpl({this.rewardedAd, this.isLoaded = false});
+  const _$RewardAdStateImpl(
+      {this.rewardedAd,
+      this.isLoaded = false,
+      this.isWatchCompleted = false,
+      this.isStartedQuiz = false});
 
   @override
   final RewardedAd? rewardedAd;
   @override
   @JsonKey()
   final bool isLoaded;
+  @override
+  @JsonKey()
+  final bool isWatchCompleted;
+  @override
+  @JsonKey()
+  final bool isStartedQuiz;
 
   @override
   String toString() {
-    return 'RewardAdState(rewardedAd: $rewardedAd, isLoaded: $isLoaded)';
+    return 'RewardAdState(rewardedAd: $rewardedAd, isLoaded: $isLoaded, isWatchCompleted: $isWatchCompleted, isStartedQuiz: $isStartedQuiz)';
   }
 
   @override
@@ -124,11 +164,16 @@ class _$RewardAdStateImpl implements _RewardAdState {
             (identical(other.rewardedAd, rewardedAd) ||
                 other.rewardedAd == rewardedAd) &&
             (identical(other.isLoaded, isLoaded) ||
-                other.isLoaded == isLoaded));
+                other.isLoaded == isLoaded) &&
+            (identical(other.isWatchCompleted, isWatchCompleted) ||
+                other.isWatchCompleted == isWatchCompleted) &&
+            (identical(other.isStartedQuiz, isStartedQuiz) ||
+                other.isStartedQuiz == isStartedQuiz));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, rewardedAd, isLoaded);
+  int get hashCode => Object.hash(
+      runtimeType, rewardedAd, isLoaded, isWatchCompleted, isStartedQuiz);
 
   @JsonKey(ignore: true)
   @override
@@ -140,12 +185,18 @@ class _$RewardAdStateImpl implements _RewardAdState {
 abstract class _RewardAdState implements RewardAdState {
   const factory _RewardAdState(
       {final RewardedAd? rewardedAd,
-      final bool isLoaded}) = _$RewardAdStateImpl;
+      final bool isLoaded,
+      final bool isWatchCompleted,
+      final bool isStartedQuiz}) = _$RewardAdStateImpl;
 
   @override
   RewardedAd? get rewardedAd;
   @override
   bool get isLoaded;
+  @override
+  bool get isWatchCompleted;
+  @override
+  bool get isStartedQuiz;
   @override
   @JsonKey(ignore: true)
   _$$RewardAdStateImplCopyWith<_$RewardAdStateImpl> get copyWith =>

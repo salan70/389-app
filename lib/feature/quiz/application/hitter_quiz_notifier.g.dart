@@ -7,7 +7,7 @@ part of 'hitter_quiz_notifier.dart';
 // **************************************************************************
 
 String _$hitterQuizNotifierHash() =>
-    r'f706c41f29d786a7b7217f8a38743e02b96bd907';
+    r'bd688cf52642ab7ca628bc77993a042bfd7ca674';
 
 /// Copied from Dart SDK
 class _SystemHash {

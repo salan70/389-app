@@ -8,5 +8,7 @@ class RewardAdState with _$RewardAdState {
   const factory RewardAdState({
     RewardedAd? rewardedAd,
     @Default(false) bool isLoaded,
+    @Default(false) bool isWatchCompleted,
+    @Default(false) bool isStartedQuiz,
   }) = _RewardAdState;
 }

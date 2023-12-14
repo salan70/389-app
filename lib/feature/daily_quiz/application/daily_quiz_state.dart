@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,7 +22,8 @@ Future<bool> isPlayedTodaysDailyQuiz(
   IsPlayedTodaysDailyQuizRef ref,
 ) async {
   final now = await NTP.now();
-  final dailyQuiz = await ref.watch(dailyQuizProvider(now).future);
+  final nowInApp = now.calculateDateInApp();
+  final dailyQuiz = await ref.watch(dailyQuizProvider(nowInApp).future);
   if (dailyQuiz == null) {
     return false;
   }
