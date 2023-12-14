@@ -32,19 +32,15 @@ class DailyQuizGalleryListPage extends ConsumerWidget {
           focusedDay: todayInApp,
           locale: 'ja_JP',
           calendarBuilders: CalendarBuilders(
-            defaultBuilder: (context, date, _) {
-              return CalenderCell(date: date);
-            },
+            defaultBuilder: (context, date, _) => CalenderCell(date: date),
 
-            todayBuilder: (context, date, _) {
-              return CalenderCell(date: date);
-            },
+            todayBuilder: (context, date, _) => CalenderCell(date: date),
 
-            // 範囲外の日付は空のContainerを返す
-            disabledBuilder: (context, _, __) => Container(),
+            // 範囲外の日付は空のContainerを返す。
+            disabledBuilder: (context, _, __) => const SizedBox.shrink(),
 
-            // 範囲内の選択中の月に含まれない日付は空のContainerを返す
-            outsideBuilder: (context, _, __) => Container(),
+            // 範囲内の選択中の月に含まれない日付は空のContainerを返す。
+            outsideBuilder: (context, _, __) => const SizedBox.shrink(),
           ),
         ),
         const SizedBox(height: 16),

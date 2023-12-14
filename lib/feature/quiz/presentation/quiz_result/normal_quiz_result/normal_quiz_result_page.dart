@@ -93,8 +93,8 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncHitterQuiz =
-        ref.watch(hitterQuizNotifierProvider(QuizType.normal));
+    final asyncHitterQuiz = ref
+        .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
 
     return WillPopScope(
       onWillPop: () async => false,

@@ -23,8 +23,9 @@ Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
 @riverpod
 Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
   // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
-  final hitterQuiz =
-      await ref.watch(hitterQuizNotifierProvider(QuizType.normal).future);
+  final hitterQuiz = await ref.watch(
+    hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).future,
+  );
 
   // 直近のクイズで不正解している場合 false を返す。
   if (hitterQuiz.isCorrect == false) {

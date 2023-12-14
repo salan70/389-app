@@ -37,7 +37,8 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
               await interstitialAdService.waitResult();
 
               final hitterQuizNotifier = ref.read(
-                hitterQuizNotifierProvider(QuizType.normal).notifier,
+                hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
+                    .notifier,
               );
               final isCorrect = hitterQuizNotifier.isCorrectHitterQuiz();
 

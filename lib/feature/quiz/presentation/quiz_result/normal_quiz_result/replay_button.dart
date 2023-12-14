@@ -24,9 +24,17 @@ class ReplayButton extends ConsumerWidget with PresentationMixin {
         await executeWithOverlayLoading(
           ref,
           action: () async {
-            ref.invalidate(hitterQuizNotifierProvider(QuizType.normal));
+            ref.invalidate(
+              hitterQuizNotifierProvider(
+                QuizType.normal,
+                questionedAt: null,
+              ),
+            );
             // ラグを回避するため、作成が完了するまで待つ。
-            await ref.read(hitterQuizNotifierProvider(QuizType.normal).future);
+            await ref.read(
+              hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
+                  .future,
+            );
           },
           onLoadingComplete: () {
             Navigator.of(context).push(

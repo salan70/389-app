@@ -19,8 +19,8 @@ class PlayNormalQuizPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncHitterQuiz =
-        ref.watch(hitterQuizNotifierProvider(QuizType.normal));
+    final asyncHitterQuiz = ref
+        .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
 
     return Scaffold(
       body: SafeArea(

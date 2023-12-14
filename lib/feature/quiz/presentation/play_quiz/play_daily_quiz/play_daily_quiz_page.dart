@@ -13,15 +13,19 @@ import 'daily_quiz_submit_answer_button.dart';
 import 'life_widget.dart';
 
 class PlayDailyQuizPage extends ConsumerWidget {
-  PlayDailyQuizPage({super.key});
+  PlayDailyQuizPage({super.key, required this.questionedAt});
+
+  /// 対象となる DailyQuiz の出題日。
+  final DateTime questionedAt;
 
   static const _buttonWidth = 160.0;
   final _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final asyncHitterQuiz =
-        ref.watch(hitterQuizNotifierProvider(QuizType.daily));
+    final asyncHitterQuiz = ref.watch(
+      hitterQuizNotifierProvider(QuizType.daily, questionedAt: questionedAt),
+    );
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -46,9 +50,12 @@ class PlayDailyQuizPage extends ConsumerWidget {
                       const SizedBox(height: 16),
                       InputAnswerTextField.daily(
                         textEditingController: _textEditingController,
+                        questionedAt: questionedAt,
                       ),
                       const SizedBox(height: 16),
-                      const QuizEventButtons.daily(),
+                      QuizEventButtons.daily(
+                        questionedAt: questionedAt,
+                      ),
                       const SizedBox(height: 16),
                       Center(
                         child: SizedBox(
@@ -56,14 +63,18 @@ class PlayDailyQuizPage extends ConsumerWidget {
                           child: DailyQuizSubmitAnswerButton(
                             buttonType: ButtonType.main,
                             hitterQuiz: hitterQuiz,
+                            questionedAt: questionedAt,
                           ),
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Center(
+                      Center(
                         child: SizedBox(
                           width: _buttonWidth,
-                          child: RetireButton.daily(buttonType: ButtonType.sub),
+                          child: RetireButton.daily(
+                            buttonType: ButtonType.sub,
+                            questionedAt: questionedAt,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 120),

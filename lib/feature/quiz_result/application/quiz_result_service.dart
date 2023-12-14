@@ -22,9 +22,9 @@ class QuizResultService {
   final Ref ref;
 
   /// dailyQuizResult を作成する。
-  Future<void> createDailyQuizResult() async {
+  Future<void> createDailyQuizResult(DateTime questionedAt) async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final dailyQuiz = await ref.read(dailyQuizProvider.future);
+    final dailyQuiz = await ref.read(dailyQuizProvider(questionedAt).future);
 
     await ref
         .read(quizResultRepositoryProvider)
@@ -32,11 +32,13 @@ class QuizResultService {
   }
 
   /// dailyQuizResult を更新する。
-  Future<void> updateDailyQuizResult() async {
+  Future<void> updateDailyQuizResult(DateTime questionedAt) async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final dailyQuiz = await ref.read(dailyQuizProvider.future);
-    final hitterQuiz =
-        await ref.read(hitterQuizNotifierProvider(QuizType.daily).future);
+    final dailyQuiz = await ref.read(dailyQuizProvider(questionedAt).future);
+    final hitterQuiz = await ref.read(
+      hitterQuizNotifierProvider(QuizType.daily, questionedAt: questionedAt)
+          .future,
+    );
 
     await ref.read(quizResultRepositoryProvider).updateDailyQuizResult(
           user!,
@@ -48,8 +50,9 @@ class QuizResultService {
   /// normalQuizResult を作成する。
   Future<void> createNormalQuizResult() async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
-    final hitterQuiz =
-        await ref.read(hitterQuizNotifierProvider(QuizType.normal).future);
+    final hitterQuiz = await ref.read(
+      hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).future,
+    );
     final searchCondition = ref.read(searchConditionNotifierProvider);
 
     await ref.read(quizResultRepositoryProvider).createNormalQuizResult(
