@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../util/extension/date_time_extension.dart';
-import 'daily_quiz_callender_cell.dart';
+import 'daily_quiz_calender_cell.dart';
 
 class DailyQuizGalleryListPage extends ConsumerWidget {
   const DailyQuizGalleryListPage({super.key});
