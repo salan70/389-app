@@ -8,7 +8,7 @@ part of 'need_update_state.dart';
 
 String _$needUpdateHash() => r'599b4d4ecaf26dbc953853b3fa85a5b8bec1ada7';
 
-/// アップデートが必要かどうかを返す。
+/// アプリのアップデートが必要かどうかを返す。
 ///
 /// Copied from [needUpdate].
 @ProviderFor(needUpdate)
