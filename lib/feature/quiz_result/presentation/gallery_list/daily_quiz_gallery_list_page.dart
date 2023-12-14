@@ -1,3 +1,4 @@
+import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
 import 'package:baseball_quiz_app/util/mixin/presentation_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +74,7 @@ class CalenderCell extends ConsumerStatefulWidget {
 class _CalenderCellState extends ConsumerState<CalenderCell>
     with PresentationMixin {
   /// このセルの日付の今日の1問を、広告を見てプレイするかどうか。
-  /// 
+  ///
   /// それぞれの日付のセルが作成されるため、該当するセルだけで
   /// プレイするかどうかを管理する必要がある。
   var _willPlay = false;
@@ -111,8 +112,14 @@ class _CalenderCellState extends ConsumerState<CalenderCell>
           final hitterQuizResult =
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              await ref
+                  .read(analyticsServiceProvider)
+                  .logTapButton('to_daily_quiz_gallery_detail_page');
+              if (!context.mounted) {
+                return;
+              }
+              await Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(
                   builder: (_) => DailyQuizGalleryDetailPage(
@@ -156,11 +163,17 @@ class _CalenderCellState extends ConsumerState<CalenderCell>
                     ).future,
                   );
                 },
-                onLoadingComplete: () {
+                onLoadingComplete: () async {
+                  await ref
+                      .read(analyticsServiceProvider)
+                      .logTapButton('show_confirm_play_past_daily_quiz_dialog');
                   setState(() {
                     _willPlay = true;
                   });
-                  showDialog<void>(
+                  if (!context.mounted) {
+                    return;
+                  }
+                  await showDialog<void>(
                     context: context,
                     barrierDismissible: false,
                     builder: (_) {
@@ -230,13 +243,26 @@ class __ConfirmPlayPastDailyQuizDialog
             width: _buttonWidth,
             child: Center(child: Text('いいえ')),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () async {
+            await ref
+                .read(analyticsServiceProvider)
+                .logTapButton('cancelled_play_past_daily_quiz');
+            if (!context.mounted) {
+              return;
+            }
+            Navigator.pop(context);
+          },
         ),
         const SizedBox(width: 4),
         MyButton(
           buttonName: 'confirm_yes_button',
           buttonType: ButtonType.alert,
-          onPressed: ref.read(rewardedAdNotifierProvider.notifier).showAd,
+          onPressed: () async {
+            await ref
+                .read(analyticsServiceProvider)
+                .logTapButton('approved_play_past_daily_quiz');
+            ref.read(rewardedAdNotifierProvider.notifier).showAd();
+          },
           child: SizedBox(
             height: _buttonHeight,
             width: _buttonWidth,

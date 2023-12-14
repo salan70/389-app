@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
-import '../../../util/logger.dart';
 import '../domain/daily_quiz.dart';
 import '../domain/daily_quiz_repository.dart';
 

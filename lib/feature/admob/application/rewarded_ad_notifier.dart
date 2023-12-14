@@ -66,7 +66,7 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
   }
 
   /// state.isStartedQuiz を true にする。
-  void updateIsStartedQuiz() async {
+  void updateIsStartedQuiz() {
     state = state.copyWith(isStartedQuiz: true);
   }
 }

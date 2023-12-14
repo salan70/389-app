@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/constant/hitting_stats_constant.dart';
-import '../../../util/logger.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../search_condition/application/search_condition_notifier.dart';
 import '../domain/hitter.dart';
