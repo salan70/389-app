@@ -3,38 +3,47 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../util/logger.dart';
-import '../application/banner_ad_service.dart';
+import '../application/banner_ad_id_state.dart';
 
 class BannerAdWidget extends ConsumerWidget {
   const BannerAdWidget({super.key});
 
+  static const _buttonHeight = 64.0;
+  static const _buttonWidth = double.infinity;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final futureBannerAd = ref.watch(bannerAdServiceProvider).createBannerAd();
+    final asyncBannerAdId = ref.watch(bannerAdIdProvider);
 
-    return FutureBuilder(
-      future: futureBannerAd,
-      builder: (BuildContext context, AsyncSnapshot<BannerAd> snapshot) {
-        if (snapshot.error != null) {
-          logger.e('bannerAd error: ${snapshot.error}');
-          return Container();
-        }
-
-        if (!snapshot.hasData) {
-          return Container();
-        }
-
-        final bannerAd = snapshot.data!;
-        bannerAd.load();
-        final adWidget = AdWidget(ad: bannerAd);
-
-        return Container(
-          alignment: Alignment.center,
-          width: bannerAd.size.width.toDouble(),
-          height: bannerAd.size.height.toDouble(),
-          child: adWidget,
+    return asyncBannerAdId.when(
+      data: (bannerAdId) {
+        return SizedBox(
+          height: _buttonHeight,
+          width: _buttonWidth,
+          child: AdWidget(
+            ad: BannerAd(
+              size: AdSize.banner,
+              adUnitId: bannerAdId,
+              request: const AdRequest(),
+              listener: BannerAdListener(
+                onAdFailedToLoad: (Ad ad, LoadAdError error) {
+                  ad.dispose();
+                  logger.e('BannerAdの読み込みに失敗しました。 error: $error');
+                },
+              ),
+            )..load(),
+          ),
         );
       },
+      error: (e, s) {
+        logger.e('バナー広告でエラーが発生', e, s);
+        return const SizedBox.shrink();
+      },
+      loading: () => const SizedBox(
+        height: _buttonHeight,
+        width: _buttonWidth,
+        child: Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }

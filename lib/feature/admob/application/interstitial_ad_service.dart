@@ -92,10 +92,12 @@ class InterstitialAdService {
     loadingNotifier.hide();
   }
 
-  /// 広告を表示するかどうかを返す
-  /// 50%の確率で広告を表示する
+  /// 広告を表示するかどうかを返す。
+  ///
+  /// 70%の確率で広告を表示する。
   @visibleForTesting
   bool isShownAds() {
-    return Random().nextBool();
+    final randomInt = Random().nextInt(100);
+    return randomInt < 70;
   }
 }
