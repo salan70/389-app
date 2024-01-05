@@ -22,6 +22,7 @@ Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
 /// レビューを要求するかどうかを返すプロバイダー。
 @riverpod
 Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
+  // todo: ノーマルクイズの正解状況の判別は、ここの責務じゃない気がする
   // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
   final hitterQuiz = await ref.watch(
     hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).future,
@@ -32,16 +33,13 @@ Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
     return false;
   }
 
-  final reviewHistory = ref.watch(reviewHistoryProvider);
-  if (reviewHistory.value == null) {
+  final reviewHistory = await ref.watch(reviewHistoryProvider.future);
+  if (reviewHistory == null) {
     return false;
   }
-  if (reviewHistory.value!.isDisplayedReviewDialog) {
-    // updatedAt から7日経過していない場合は、レビューを要求しない。
-    final updatedAt = reviewHistory.value!.updatedAt;
-    if (DateTime.now().difference(updatedAt).inDays < minDays) {
-      return false;
-    }
+  // 最後にレビューダイアログを表示してから、一定日数経過していない場合 false を返す。
+  if (reviewHistory.isReviewDialogPastMinDayCount == false) {
+    return false;
   }
 
   final user = ref.read(authRepositoryProvider).getCurrentUser()!;
