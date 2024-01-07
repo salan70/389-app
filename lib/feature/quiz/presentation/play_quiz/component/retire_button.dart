@@ -38,10 +38,10 @@ class RetireButton extends ConsumerWidget {
           barrierDismissible: false,
           builder: (_) {
             final resultPage = quizType == QuizType.normal
-                ? const NormalQuizResultPage()
+                ? NormalQuizResultPage()
                 : DailyQuizResultPage(
                     questionedAt: questionedAt!,
-                );
+                  );
 
             return ConfirmDialog(
               confirmText: quizType.retireConfirmText,

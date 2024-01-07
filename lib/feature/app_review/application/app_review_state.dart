@@ -1,8 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../util/constant/hitting_stats_constant.dart';
 import '../../auth/domain/auth_repository.dart';
-import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../quiz_result/domain/quiz_result_repository.dart';
 import '../domain/review_history.dart';
 import '../domain/review_history_repository.dart';
@@ -22,30 +20,17 @@ Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
 /// レビューを要求するかどうかを返すプロバイダー。
 @riverpod
 Future<bool> shouldRequestReview(ShouldRequestReviewRef ref) async {
-  // ノーマルクイズの回答時に判別する想定のため、 HitterQuizType.normal を指定している。
-  final hitterQuiz = await ref.watch(
-    hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).future,
-  );
-
-  // 直近のクイズで不正解している場合 false を返す。
-  if (hitterQuiz.isCorrect == false) {
+  final reviewHistory = await ref.watch(reviewHistoryProvider.future);
+  if (reviewHistory == null) {
+    return false;
+  }
+  // 最後にレビューダイアログを表示してから、一定日数経過していない場合 false を返す。
+  if (reviewHistory.isReviewDialogPastMinDayCount == false) {
     return false;
   }
 
-  final reviewHistory = ref.watch(reviewHistoryProvider);
-  if (reviewHistory.value == null) {
-    return false;
-  }
-  if (reviewHistory.value!.isDisplayedReviewDialog) {
-    // updatedAt から7日経過していない場合は、レビューを要求しない。
-    final updatedAt = reviewHistory.value!.updatedAt;
-    if (DateTime.now().difference(updatedAt).inDays < minDays) {
-      return false;
-    }
-  }
-
-  final user = ref.read(authRepositoryProvider).getCurrentUser()!;
-  final quizResultRepository = ref.read(quizResultRepositoryProvider);
+  final user = ref.watch(authRepositoryProvider).getCurrentUser()!;
+  final quizResultRepository = ref.watch(quizResultRepositoryProvider);
 
   final playedCount =
       await quizResultRepository.fetchPlayedNormalQuizCount(user);

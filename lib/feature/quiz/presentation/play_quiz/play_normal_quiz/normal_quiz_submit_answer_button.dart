@@ -53,7 +53,7 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
                 // 画面遷移する。
                 await navigator.push(
                   MaterialPageRoute<Widget>(
-                    builder: (_) => const NormalQuizResultPage(),
+                    builder: (_) => NormalQuizResultPage(),
                     settings: const RouteSettings(
                       name: '/play_normal_quiz_page',
                     ),

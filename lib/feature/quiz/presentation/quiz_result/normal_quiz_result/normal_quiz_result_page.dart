@@ -9,21 +9,16 @@ import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../../../app_review/application/app_review_service.dart';
 import '../../../../app_review/application/app_review_state.dart';
 import '../../../application/hitter_quiz_notifier.dart';
+import '../../../domain/hitter_quiz.dart';
 import '../../component/result_quiz_widget.dart';
 import '../../component/share_button.dart';
 import '../component/custom_confetti_widget.dart';
 import '../component/result_text.dart';
 import 'replay_button.dart';
 
-class NormalQuizResultPage extends ConsumerStatefulWidget {
-  const NormalQuizResultPage({super.key});
+class NormalQuizResultPage extends ConsumerWidget {
+  NormalQuizResultPage({super.key});
 
-  @override
-  ConsumerState<NormalQuizResultPage> createState() =>
-      _NormalQuizResultPageState();
-}
-
-class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   static const _buttonWidth = 200.0;
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
 
@@ -31,70 +26,43 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
   final _globalKey = GlobalKey();
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final normalHitterQuizNotifierProvider =
+        hitterQuizNotifierProvider(QuizType.normal, questionedAt: null);
 
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) async {
+    ref.listen(
+      normalHitterQuizNotifierProvider,
+      (_, next) async {
+        final nextHitterQuiz = next! as AsyncData<HitterQuiz>;
+        // 直近のクイズが不正解だった場合、何もしない。
+        if (nextHitterQuiz.value.isCorrect == false) {
+          return;
+        }
+
         final shouldRequestAppReview =
             await ref.read(shouldRequestReviewProvider.future);
+        // レビューを要求する条件を満たしていない場合、何もしない。
+        if (shouldRequestAppReview == false) {
+          return;
+        }
 
-        // レビューを要求するかどうか。
-        if (shouldRequestAppReview) {
-          // レビューダイアログを表示したことを記録する。
-          await ref.read(appReviewServiceProvider).updateReviewHistory();
+        // レビューダイアログを表示したことを記録する。
+        await ref.read(appReviewServiceProvider).updateReviewHistory();
 
-          if (context.mounted) {
-            await showDialog<void>(
-              context: context,
-              barrierDismissible: false,
-              builder: (_) {
-                return AlertDialog(
-                  title: Text(
-                    'レビューをお願いします！',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
-                  ),
-                  content: const Text('''.389をお楽しみいただきありがとうございます！
-                \n少しでも.389を気に入っていただけましたら、5秒で終わりますので、是非星5のレビューをお願いします。
-                \nレビューをいただけると、開発者のモチベーションが上がり、はしゃぎます。
-                \nより一層楽しいアプリへの改善に繋がりますので、ご協力をお願いします！
-                '''),
-                  actionsAlignment: MainAxisAlignment.spaceBetween,
-                  actionsPadding:
-                      const EdgeInsets.only(right: 20, bottom: 8, left: 20),
-                  actions: [
-                    MyButton(
-                      buttonName: 'cancel_button_in_request_review_dialog',
-                      buttonType: ButtonType.sub,
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('今はやめとく'),
-                    ),
-                    MyButton(
-                      buttonName: 'ok_button_in_request_review_dialog',
-                      buttonType: ButtonType.main,
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-                        await ref
-                            .read(appReviewServiceProvider)
-                            .requestAppReview();
-                      },
-                      child: const Text('レビューする！'),
-                    ),
-                  ],
-                );
-              },
-            );
-          }
+        // レビューダイアログを表示する。
+        if (context.mounted) {
+          await showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (_) {
+              return const _RequestReviewDialog();
+            },
+          );
         }
       },
     );
-  }
 
-  @override
-  Widget build(BuildContext context) {
-    final asyncHitterQuiz = ref
-        .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
+    final asyncHitterQuiz = ref.watch(normalHitterQuizNotifierProvider);
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -157,6 +125,44 @@ class _NormalQuizResultPageState extends ConsumerState<NormalQuizResultPage> {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _RequestReviewDialog extends ConsumerWidget {
+  const _RequestReviewDialog();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return AlertDialog(
+      title: Text(
+        'レビューをお願いします！',
+        style: TextStyle(color: Theme.of(context).colorScheme.error),
+      ),
+      content: const Text('''.389をお楽しみいただきありがとうございます！
+    \n少しでも.389を気に入っていただけましたら、5秒で終わりますので、是非星5のレビューをお願いします。
+    \nレビューをいただけると、開発者のモチベーションが上がり、はしゃぎます。
+    \nより一層楽しいアプリへの改善に繋がりますので、ご協力をお願いします！
+    '''),
+      actionsAlignment: MainAxisAlignment.spaceBetween,
+      actionsPadding: const EdgeInsets.only(right: 20, bottom: 8, left: 20),
+      actions: [
+        MyButton(
+          buttonName: 'cancel_button_in_request_review_dialog',
+          buttonType: ButtonType.sub,
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('今はやめとく'),
+        ),
+        MyButton(
+          buttonName: 'ok_button_in_request_review_dialog',
+          buttonType: ButtonType.main,
+          onPressed: () async {
+            Navigator.of(context).pop();
+            await ref.read(appReviewServiceProvider).requestAppReview();
+          },
+          child: const Text('レビューする！'),
+        ),
+      ],
     );
   }
 }
