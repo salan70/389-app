@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => throw UnimplementedError('Provider was not initialized'),
-);
+part 'auth_repository.g.dart';
+
+@riverpod
+AuthRepository authRepository(AuthRepositoryRef ref) =>
+    throw UnimplementedError('Provider was not initialized');
 
 abstract class AuthRepository {
   /// 現在サインインしているユーザーを取得する
@@ -11,5 +13,4 @@ abstract class AuthRepository {
 
   /// サインイン（匿名ユーザーを作成）
   Future<void> signInAnonymously();
-  
 }

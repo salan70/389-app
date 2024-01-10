@@ -1,4 +1,3 @@
-
 import 'package:baseball_quiz_app/feature/quiz/domain/hitter_quiz.dart';
 import 'package:baseball_quiz_app/feature/quiz/domain/stats_value.dart';
 import 'package:baseball_quiz_app/feature/quiz/infrastructure/entity/hitting_stats.dart';
@@ -40,7 +39,7 @@ const dummyHittingStats = HittingStats(
     '出塁率': 0.356,
     '長打率': 0.534,
     'OPS': 0.89,
-    'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d'
+    'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   },
 );
 
@@ -72,7 +71,7 @@ final dummyHittingStatsList = [
       '出塁率': 0.356,
       '長打率': 0.534,
       'OPS': 0.89,
-      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d'
+      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
     },
   ),
   const HittingStats(
@@ -102,7 +101,7 @@ final dummyHittingStatsList = [
       '出塁率': 0.354,
       '長打率': 0.507,
       'OPS': 0.861,
-      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d'
+      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
     },
   ),
   const HittingStats(
@@ -132,9 +131,9 @@ final dummyHittingStatsList = [
       '出塁率': 0.355,
       '長打率': 0.52,
       'OPS': 0.876,
-      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d'
+      'playerId': '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
     },
-  )
+  ),
 ];
 
 const dummySearchCondition = SearchCondition(
@@ -148,6 +147,7 @@ const dummySearchCondition = SearchCondition(
 const dummyHitterQuiz = HitterQuiz(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
+  enteredHitter: null,
   quizType: QuizType.normal,
   yearList: ['2021', '2022', 'NPB：2年'],
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
@@ -156,19 +156,19 @@ const dummyHitterQuiz = HitterQuiz(
       '球団': StatsValue(unveilOrder: 12, data: 'DeNA'),
       '本塁打': StatsValue(unveilOrder: 11, data: '22'),
       '打率': StatsValue(unveilOrder: 10, data: '.314'),
-      'OPS': StatsValue(unveilOrder: 9, data: '.890')
+      'OPS': StatsValue(unveilOrder: 9, data: '.890'),
     },
     {
       '球団': StatsValue(unveilOrder: 8, data: 'DeNA'),
       '本塁打': StatsValue(unveilOrder: 7, data: '24'),
       '打率': StatsValue(unveilOrder: 6, data: '.291'),
-      'OPS': StatsValue(unveilOrder: 5, data: '.861')
+      'OPS': StatsValue(unveilOrder: 5, data: '.861'),
     },
     {
       '球団': StatsValue(unveilOrder: 4, data: 'NPB：2年'),
       '本塁打': StatsValue(unveilOrder: 0, data: '46'),
       '打率': StatsValue(unveilOrder: 1, data: '.302'),
-      'OPS': StatsValue(unveilOrder: 2, data: '.876')
+      'OPS': StatsValue(unveilOrder: 2, data: '.876'),
     }
   ],
   isCorrect: false,

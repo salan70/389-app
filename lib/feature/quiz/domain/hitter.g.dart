@@ -6,12 +6,13 @@ part of 'hitter.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Hitter _$$_HitterFromJson(Map<String, dynamic> json) => _$_Hitter(
+_$HitterImpl _$$HitterImplFromJson(Map<String, dynamic> json) => _$HitterImpl(
       label: json['name'] as String,
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$$_HitterToJson(_$_Hitter instance) => <String, dynamic>{
+Map<String, dynamic> _$$HitterImplToJson(_$HitterImpl instance) =>
+    <String, dynamic>{
       'name': instance.label,
       'id': instance.id,
     };

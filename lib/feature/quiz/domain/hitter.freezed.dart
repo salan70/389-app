@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'hitter.dart';
 
@@ -67,19 +67,21 @@ class _$HitterCopyWithImpl<$Res, $Val extends Hitter>
 }
 
 /// @nodoc
-abstract class _$$_HitterCopyWith<$Res> implements $HitterCopyWith<$Res> {
-  factory _$$_HitterCopyWith(_$_Hitter value, $Res Function(_$_Hitter) then) =
-      __$$_HitterCopyWithImpl<$Res>;
+abstract class _$$HitterImplCopyWith<$Res> implements $HitterCopyWith<$Res> {
+  factory _$$HitterImplCopyWith(
+          _$HitterImpl value, $Res Function(_$HitterImpl) then) =
+      __$$HitterImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({@JsonKey(name: 'name') String label, String id});
 }
 
 /// @nodoc
-class __$$_HitterCopyWithImpl<$Res>
-    extends _$HitterCopyWithImpl<$Res, _$_Hitter>
-    implements _$$_HitterCopyWith<$Res> {
-  __$$_HitterCopyWithImpl(_$_Hitter _value, $Res Function(_$_Hitter) _then)
+class __$$HitterImplCopyWithImpl<$Res>
+    extends _$HitterCopyWithImpl<$Res, _$HitterImpl>
+    implements _$$HitterImplCopyWith<$Res> {
+  __$$HitterImplCopyWithImpl(
+      _$HitterImpl _value, $Res Function(_$HitterImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +90,7 @@ class __$$_HitterCopyWithImpl<$Res>
     Object? label = null,
     Object? id = null,
   }) {
-    return _then(_$_Hitter(
+    return _then(_$HitterImpl(
       label: null == label
           ? _value.label
           : label // ignore: cast_nullable_to_non_nullable
@@ -103,12 +105,12 @@ class __$$_HitterCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Hitter implements _Hitter {
-  const _$_Hitter(
+class _$HitterImpl implements _Hitter {
+  const _$HitterImpl(
       {@JsonKey(name: 'name') required this.label, required this.id});
 
-  factory _$_Hitter.fromJson(Map<String, dynamic> json) =>
-      _$$_HitterFromJson(json);
+  factory _$HitterImpl.fromJson(Map<String, dynamic> json) =>
+      _$$HitterImplFromJson(json);
 
   @override
   @JsonKey(name: 'name')
@@ -125,7 +127,7 @@ class _$_Hitter implements _Hitter {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Hitter &&
+            other is _$HitterImpl &&
             (identical(other.label, label) || other.label == label) &&
             (identical(other.id, id) || other.id == id));
   }
@@ -137,12 +139,12 @@ class _$_Hitter implements _Hitter {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_HitterCopyWith<_$_Hitter> get copyWith =>
-      __$$_HitterCopyWithImpl<_$_Hitter>(this, _$identity);
+  _$$HitterImplCopyWith<_$HitterImpl> get copyWith =>
+      __$$HitterImplCopyWithImpl<_$HitterImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_HitterToJson(
+    return _$$HitterImplToJson(
       this,
     );
   }
@@ -151,9 +153,9 @@ class _$_Hitter implements _Hitter {
 abstract class _Hitter implements Hitter {
   const factory _Hitter(
       {@JsonKey(name: 'name') required final String label,
-      required final String id}) = _$_Hitter;
+      required final String id}) = _$HitterImpl;
 
-  factory _Hitter.fromJson(Map<String, dynamic> json) = _$_Hitter.fromJson;
+  factory _Hitter.fromJson(Map<String, dynamic> json) = _$HitterImpl.fromJson;
 
   @override
   @JsonKey(name: 'name')
@@ -162,6 +164,6 @@ abstract class _Hitter implements Hitter {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_HitterCopyWith<_$_Hitter> get copyWith =>
+  _$$HitterImplCopyWith<_$HitterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

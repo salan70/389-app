@@ -12,8 +12,21 @@ class ReviewHistory with _$ReviewHistory {
     @DateTimeConverter() required DateTime updatedAt,
   }) = _ReviewHistory;
 
-  const ReviewHistory._();
-
   factory ReviewHistory.fromJson(Map<String, dynamic> json) =>
       _$ReviewHistoryFromJson(json);
+  const ReviewHistory._();
+
+  /// レビューダイアログを表示後、次のレビューダイアログを表示するまでの最低日数。
+  static const _minDayCount = 7;
+
+  /// 最後にレビューダイアログを表示してから [_minDayCount] 日経過しているかどうか。
+  bool get isReviewDialogPastMinDayCount {
+    // レビューダイアログを表示したことがない場合は、true を返す。
+    if (!isDisplayedReviewDialog) {
+      return true;
+    }
+
+    final diff = DateTime.now().difference(updatedAt).inDays;
+    return diff >= _minDayCount;
+  }
 }

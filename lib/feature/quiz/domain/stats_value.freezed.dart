@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'stats_value.dart';
 
@@ -68,22 +68,22 @@ class _$StatsValueCopyWithImpl<$Res, $Val extends StatsValue>
 }
 
 /// @nodoc
-abstract class _$$_StatsValueCopyWith<$Res>
+abstract class _$$StatsValueImplCopyWith<$Res>
     implements $StatsValueCopyWith<$Res> {
-  factory _$$_StatsValueCopyWith(
-          _$_StatsValue value, $Res Function(_$_StatsValue) then) =
-      __$$_StatsValueCopyWithImpl<$Res>;
+  factory _$$StatsValueImplCopyWith(
+          _$StatsValueImpl value, $Res Function(_$StatsValueImpl) then) =
+      __$$StatsValueImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int unveilOrder, String data});
 }
 
 /// @nodoc
-class __$$_StatsValueCopyWithImpl<$Res>
-    extends _$StatsValueCopyWithImpl<$Res, _$_StatsValue>
-    implements _$$_StatsValueCopyWith<$Res> {
-  __$$_StatsValueCopyWithImpl(
-      _$_StatsValue _value, $Res Function(_$_StatsValue) _then)
+class __$$StatsValueImplCopyWithImpl<$Res>
+    extends _$StatsValueCopyWithImpl<$Res, _$StatsValueImpl>
+    implements _$$StatsValueImplCopyWith<$Res> {
+  __$$StatsValueImplCopyWithImpl(
+      _$StatsValueImpl _value, $Res Function(_$StatsValueImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_StatsValueCopyWithImpl<$Res>
     Object? unveilOrder = null,
     Object? data = null,
   }) {
-    return _then(_$_StatsValue(
+    return _then(_$StatsValueImpl(
       unveilOrder: null == unveilOrder
           ? _value.unveilOrder
           : unveilOrder // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_StatsValueCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_StatsValue implements _StatsValue {
-  const _$_StatsValue({required this.unveilOrder, required this.data});
+class _$StatsValueImpl implements _StatsValue {
+  const _$StatsValueImpl({required this.unveilOrder, required this.data});
 
-  factory _$_StatsValue.fromJson(Map<String, dynamic> json) =>
-      _$$_StatsValueFromJson(json);
+  factory _$StatsValueImpl.fromJson(Map<String, dynamic> json) =>
+      _$$StatsValueImplFromJson(json);
 
   @override
   final int unveilOrder;
@@ -127,7 +127,7 @@ class _$_StatsValue implements _StatsValue {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_StatsValue &&
+            other is _$StatsValueImpl &&
             (identical(other.unveilOrder, unveilOrder) ||
                 other.unveilOrder == unveilOrder) &&
             (identical(other.data, data) || other.data == data));
@@ -140,12 +140,12 @@ class _$_StatsValue implements _StatsValue {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_StatsValueCopyWith<_$_StatsValue> get copyWith =>
-      __$$_StatsValueCopyWithImpl<_$_StatsValue>(this, _$identity);
+  _$$StatsValueImplCopyWith<_$StatsValueImpl> get copyWith =>
+      __$$StatsValueImplCopyWithImpl<_$StatsValueImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_StatsValueToJson(
+    return _$$StatsValueImplToJson(
       this,
     );
   }
@@ -154,10 +154,10 @@ class _$_StatsValue implements _StatsValue {
 abstract class _StatsValue implements StatsValue {
   const factory _StatsValue(
       {required final int unveilOrder,
-      required final String data}) = _$_StatsValue;
+      required final String data}) = _$StatsValueImpl;
 
   factory _StatsValue.fromJson(Map<String, dynamic> json) =
-      _$_StatsValue.fromJson;
+      _$StatsValueImpl.fromJson;
 
   @override
   int get unveilOrder;
@@ -165,6 +165,6 @@ abstract class _StatsValue implements StatsValue {
   String get data;
   @override
   @JsonKey(ignore: true)
-  _$$_StatsValueCopyWith<_$_StatsValue> get copyWith =>
+  _$$StatsValueImplCopyWith<_$StatsValueImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

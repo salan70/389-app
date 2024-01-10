@@ -60,7 +60,7 @@ void main() {
         {'date': DateTime(2022, 12), 'expectedLastDay': DateTime(2022, 12, 31)},
         {
           'date': DateTime(2024, 2),
-          'expectedLastDay': DateTime(2024, 2, 29)
+          'expectedLastDay': DateTime(2024, 2, 29),
         }, // Leap year
       ];
 

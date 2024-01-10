@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/constant/strings_constant.dart';
-import '../../application/search_condition_service.dart';
-import '../../application/search_condition_state.dart';
+import '../../application/search_condition_notifier.dart';
 import '../../util/search_condition_constant.dart';
 
 class ChoseTeamWidget extends ConsumerWidget {
@@ -12,8 +11,9 @@ class ChoseTeamWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final teamList = ref.watch(searchConditionProvider).teamList;
-    final searchConditionService = ref.watch(searchConditionServiceProvider);
+    final teamList = ref.watch(searchConditionNotifierProvider).teamList;
+
+    final notifier = ref.watch(searchConditionNotifierProvider.notifier);
 
     return SmartSelect.multiple(
       title: '球団',
@@ -42,13 +42,10 @@ class ChoseTeamWidget extends ConsumerWidget {
       groupHeaderStyle: S2GroupHeaderStyle(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
-      onChange: (selectedList) {
-        searchConditionService.saveTeamList(selectedList.value);
-      },
+      onChange: (selectedList) => notifier.updateTeamList(selectedList.value),
       // 返すテキストが空（''）の場合のみ、modalを閉じれる
       modalValidation: (chosen) {
-        final isValid =
-            searchConditionService.isValidChoseTeamList(chosen.length);
+        final isValid = notifier.isValidTeamList(chosen.length);
         return isValid ? '' : errorForChoseTeamValidation;
       },
       tileBuilder: (context, state) {
@@ -62,8 +59,8 @@ class ChoseTeamWidget extends ConsumerWidget {
               return Text(teamList[index]);
             },
             chipOnDelete: (index) {
-              if (searchConditionService.canRemoveTeam()) {
-                searchConditionService.removeTeam(index);
+              if (notifier.canRemoveTeam()) {
+                notifier.removeTeam(index);
               }
             },
           ),

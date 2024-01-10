@@ -6,12 +6,16 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../../util/logger.dart';
 
-final shareQuizResultServiceProvider =
-    Provider.autoDispose<ShareQuizResultService>(ShareQuizResultService.new);
+part 'share_quiz_result_service.g.dart';
+
+@riverpod
+ShareQuizResultService shareQuizResultService(ShareQuizResultServiceRef ref) =>
+    ShareQuizResultService(ref);
 
 /// お問い合わせ関連の処理を行うサービスクラス
 class ShareQuizResultService {

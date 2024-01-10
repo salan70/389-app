@@ -33,7 +33,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           # TODO:  ハードコーディング避けたい。
-          flutter-version: '3.7.5'
+          flutter-version: '3.13.6'
           channel: 'stable'
           cache: true
 

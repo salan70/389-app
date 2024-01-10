@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../feature/analytics/application/analytics_service.dart';
 import '../util/constant/colors_constant.dart';
 
 /// アプリ内で使用するボタン
@@ -25,7 +25,7 @@ class MyButton extends ConsumerWidget {
   });
 
   /// Analytics に送信する用のボタンの名称。
-  /// 
+  ///
   /// スネークケースのアルファベットで記述する。
   final String buttonName;
   final ButtonType buttonType;

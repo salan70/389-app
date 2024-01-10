@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../../util/constant/hitting_stats_constant.dart';
-import '../../../../../util/logger.dart';
 import '../../../../util/exception/supabase_exception.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
@@ -14,7 +13,6 @@ import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 import 'supabase_hitter_converter.dart';
 
-// TODO(me): エラーハンドリング要検討
 class SupabaseHitterRepository implements HitterRepository {
   SupabaseHitterRepository(this.supabase);
 
@@ -51,66 +49,49 @@ class SupabaseHitterRepository implements HitterRepository {
   Future<SupabaseHitter> _searchHitterBySearchCondition(
     SearchCondition searchCondition,
   ) async {
-    try {
-      final responses = await supabase.client
-              .from('hitter_table')
-              .select<dynamic>(
-                'id, name, team, hasData, hitting_stats_table!inner(*)',
-              )
-              .eq('hasData', true)
-              .filter('team', 'in', searchCondition.teamList)
-              .gte('hitting_stats_table.試合', searchCondition.minGames)
-              .gte('hitting_stats_table.安打', searchCondition.minHits)
-              .gte('hitting_stats_table.本塁打', searchCondition.minHr)
-          as List<dynamic>;
+    final responses = await supabase.client
+        .from('hitter_table')
+        .select<dynamic>(
+          'id, name, team, hasData, hitting_stats_table!inner(*)',
+        )
+        .eq('hasData', true)
+        .filter('team', 'in', searchCondition.teamList)
+        .gte('hitting_stats_table.試合', searchCondition.minGames)
+        .gte('hitting_stats_table.安打', searchCondition.minHits)
+        .gte('hitting_stats_table.本塁打', searchCondition.minHr) as List<dynamic>;
 
-      // 検索条件に合致する選手がいない場合、例外を返す
-      if (responses.isEmpty) {
-        throw SupabaseException.notFound();
-      }
-
-      // ランダムで1人選出
-      final chosenResponse =
-          responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
-      final supabaseHitter = SupabaseHitter.fromJson(chosenResponse);
-
-      return supabaseHitter;
-    } on SupabaseException catch (e) {
-      logger.e(e);
-      rethrow;
-    } on Exception catch (e) {
-      logger.e(e);
-      throw SupabaseException.unknown();
+    // 検索条件に合致する選手がいない場合、例外を返す
+    if (responses.isEmpty) {
+      throw SupabaseException.notFound();
     }
+
+    // ランダムで1人選出
+    final chosenResponse =
+        responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
+    final supabaseHitter = SupabaseHitter.fromJson(chosenResponse);
+
+    return supabaseHitter;
   }
 
   /// IDで選手を検索する
   Future<SupabaseHitter> _searchHitterById(String id) async {
-    try {
-      final responses = await supabase.client
-          .from('hitter_table')
-          .select<dynamic>(
-            'id, name, team, hasData',
-          )
-          .eq('hasData', true)
-          .eq('id', id) as List<dynamic>;
+    final responses = await supabase.client
+        .from('hitter_table')
+        .select<dynamic>(
+          'id, name, team, hasData',
+        )
+        .eq('hasData', true)
+        .eq('id', id) as List<dynamic>;
 
-      // 検索条件に合致する選手がいない場合、例外を返す
-      if (responses.isEmpty) {
-        throw SupabaseException.notFound();
-      }
-
-      final supabaseHitter =
-          SupabaseHitter.fromJson(responses[0] as Map<String, dynamic>);
-
-      return supabaseHitter;
-    } on SupabaseException catch (e) {
-      logger.e(e);
-      rethrow;
-    } on Exception catch (e) {
-      logger.e(e);
-      throw SupabaseException.unknown();
+    // 検索条件に合致する選手がいない場合、例外を返す
+    if (responses.isEmpty) {
+      throw SupabaseException.notFound();
     }
+
+    final supabaseHitter =
+        SupabaseHitter.fromJson(responses[0] as Map<String, dynamic>);
+
+    return supabaseHitter;
   }
 
   /// SupabaseHitterとSearchConditionからHitterQuizを作成する
@@ -136,44 +117,34 @@ class SupabaseHitterRepository implements HitterRepository {
   /// playerIdから打撃成績のListを取得する
   Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
-    try {
-      final responses = await supabase.client
-          .from('hitting_stats_table')
-          .select<dynamic>()
-          .eq('playerId', playerId) as List<dynamic>;
+    final responses = await supabase.client
+        .from('hitting_stats_table')
+        .select<dynamic>()
+        .eq('playerId', playerId) as List<dynamic>;
 
-      for (final response in responses) {
-        final stats = HittingStats.fromJson(response as Map<String, dynamic>);
-        statsList.add(stats);
-      }
-
-      return statsList;
-    } on Exception catch (e) {
-      logger.e(e);
-      throw SupabaseException.unknown();
+    for (final response in responses) {
+      final stats = HittingStats.fromJson(response as Map<String, dynamic>);
+      statsList.add(stats);
     }
+
+    return statsList;
   }
 
   /// 解答を入力するテキストフィールドの検索用
   /// 全選手の名前とIDを取得する
   @override
   Future<List<Hitter>> fetchAllHitter() async {
-    try {
-      final responses = await supabase.client
-          .from('hitter_table')
-          .select<dynamic>() as List<dynamic>;
+    final responses = await supabase.client
+        .from('hitter_table')
+        .select<dynamic>() as List<dynamic>;
 
-      final allHitterList = <Hitter>[];
-      for (final response in responses) {
-        final hitterMap = Hitter.fromJson(
-          response as Map<String, dynamic>,
-        );
-        allHitterList.add(hitterMap);
-      }
-      return allHitterList;
-    } on Exception catch (e) {
-      logger.e(e);
-      throw SupabaseException.unknown();
+    final allHitterList = <Hitter>[];
+    for (final response in responses) {
+      final hitterMap = Hitter.fromJson(
+        response as Map<String, dynamic>,
+      );
+      allHitterList.add(hitterMap);
     }
+    return allHitterList;
   }
 }

@@ -1,14 +1,11 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
-import 'package:baseball_quiz_app/feature/analytics/application/analytics_service.dart';
-import 'package:baseball_quiz_app/feature/app_review/domain/review_history_repository.dart';
-import 'package:baseball_quiz_app/feature/app_review/infrastructure/firebase_review_history_repository.dart';
-import 'package:baseball_quiz_app/util/constant/hive_box_type.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,10 +16,11 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-import 'feature/app_info/application/app_info_state.dart';
+import 'feature/analytics/application/analytics_service.dart';
 import 'feature/app_info/domain/app_info_repository.dart';
 import 'feature/app_info/infrastructure/firebase_app_info_repository.dart';
-import 'feature/auth/application/auth_service.dart';
+import 'feature/app_review/domain/review_history_repository.dart';
+import 'feature/app_review/infrastructure/firebase_review_history_repository.dart';
 import 'feature/auth/domain/auth_repository.dart';
 import 'feature/auth/domain/user_info_repository.dart';
 import 'feature/auth/infrastructure/firebase_auth_provider.dart';
@@ -30,16 +28,14 @@ import 'feature/auth/infrastructure/firebase_auth_repository.dart';
 import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
 import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
 import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
-import 'feature/loading/application/loading_state.dart';
+import 'feature/loading/application/loading_notifier.dart';
 import 'feature/loading/presentation/loading_widget.dart';
 import 'feature/push_notification/domain/notification_setting.dart';
 import 'feature/push_notification/domain/notification_setting_repository.dart';
 import 'feature/push_notification/infrastructure/hive_notification_setting_repository.dart';
-import 'feature/quiz/application/hitter_quiz_state.dart';
 import 'feature/quiz/domain/hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_hitter_repository.dart';
 import 'feature/quiz/infrastructure/supabase_providers.dart';
-import 'feature/quiz_result/application/quiz_result_state.dart';
 import 'feature/quiz_result/domain/quiz_result_repository.dart';
 import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart';
 import 'feature/search_condition/domain/search_condition.dart';
@@ -47,6 +43,7 @@ import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
 import 'feature/top/presentation/top_page.dart';
 import 'util/constant/colors_constant.dart';
+import 'util/constant/hive_box_type.dart';
 import 'util/extension/widget_ref_extension.dart';
 import 'util/firebase_instance.dart';
 import 'util/logger.dart';
@@ -64,66 +61,80 @@ Future<void> main() async {
     HiveBoxType.notificationSetting.key,
   );
 
-  runApp(
-    ProviderScope(
-      overrides: [
-        hitterRepositoryProvider.overrideWith(
-          (ref) {
-            return SupabaseHitterRepository(
-              ref.watch(supabaseProvider),
-            );
-          },
-        ),
-        searchConditionRepositoryProvider.overrideWith(
-          (ref) => HiveSearchConditionRepository(searchConditionBox),
-        ),
-        notificationSettingRepositoryProvider.overrideWith(
-          (ref) => HiveNotificationSettingRepository(notificationSettingBox),
-        ),
-        authRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseAuthRepository(
-              ref.watch(firebaseAuthProvider),
-            );
-          },
-        ),
-        userInfoRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseUserInfoRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        reviewHistoryRepositoryProvider.overrideWith(
-          (ref) => FirebaseReviewHistoryRepository(
-            ref.watch(firestoreProvider),
-          ),
-        ),
-        dailyQuizRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseDailyQuizRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        quizResultRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseQuizResultRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-        appInfoRepositoryProvider.overrideWith(
-          (ref) {
-            return FirebaseAppInfoRepository(
-              ref.watch(firestoreProvider),
-            );
-          },
-        ),
-      ],
-      child: const MyApp(),
-    ),
+  // iOS 端末にてステータスバーを表示させるための設定。
+  //
+  // 参考: https://halzoblog.com/error-bug-diary/20220922-2/
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
   );
+
+  // 画面の向きを縦で固定する。
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) {
+    runApp(
+      ProviderScope(
+        overrides: [
+          hitterRepositoryProvider.overrideWith(
+            (ref) {
+              return SupabaseHitterRepository(
+                ref.watch(supabaseProvider),
+              );
+            },
+          ),
+          searchConditionRepositoryProvider.overrideWith(
+            (ref) => HiveSearchConditionRepository(searchConditionBox),
+          ),
+          notificationSettingRepositoryProvider.overrideWith(
+            (ref) => HiveNotificationSettingRepository(notificationSettingBox),
+          ),
+          authRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseAuthRepository(
+                ref.watch(firebaseAuthProvider),
+              );
+            },
+          ),
+          userInfoRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseUserInfoRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          reviewHistoryRepositoryProvider.overrideWith(
+            (ref) => FirebaseReviewHistoryRepository(
+              ref.watch(firestoreProvider),
+            ),
+          ),
+          dailyQuizRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseDailyQuizRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          quizResultRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseQuizResultRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+          appInfoRepositoryProvider.overrideWith(
+            (ref) {
+              return FirebaseAppInfoRepository(
+                ref.watch(firestoreProvider),
+              );
+            },
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    );
+  });
 }
 
 Future<void> initialize() async {
@@ -208,23 +219,6 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // AsyncValueを返すStateProviderの結果をハンドリングする
-    // 実際にそれぞれのProviderを使用するWidgetに書いたほうが良いかも
-    // Providerによっては複数のWidgetで使用するためここで書いている
-    ref.handleAsyncValue<void>(
-      hitterQuizStateProvider,
-    );
-    ref.handleAsyncValue<void>(
-      quizResultFunctionStateProvider,
-    );
-    ref.handleAsyncValue<void>(
-      checkNeedUpdateStateProvider,
-    );
-
-    // TODO(me): ここで login するのは多分良くないので、なんとかする。
-    // Userを作成
-    ref.read(authServiceProvider).login();
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -258,12 +252,11 @@ class _MyApp extends ConsumerState<MyApp> {
       ],
       builder: (context, child) => Consumer(
         builder: (context, ref, _) {
-          final isLoading = ref.watch(loadingProvider);
           return Stack(
             children: [
               child!,
               // ローディングを表示する
-              if (isLoading) const LoadingWidget(),
+              if (ref.watch(loadingNotifierProvider)) const LoadingWidget(),
             ],
           );
         },

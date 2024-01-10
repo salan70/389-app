@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../../common_widget/back_to_top_button.dart';
 import '../../../common_widget/my_button.dart';
@@ -15,7 +14,6 @@ class PrepareQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       body: SafeArea(
         child: Padding(

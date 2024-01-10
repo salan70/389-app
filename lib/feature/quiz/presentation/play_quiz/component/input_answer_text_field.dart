@@ -2,20 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-import '../../../application/answer_state.dart';
+import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../application/hitter_quiz_notifier.dart';
 import '../../../application/hitter_quiz_service.dart';
 import '../../../domain/hitter.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
-  InputAnswerTextField({super.key});
+  InputAnswerTextField.normal({super.key, required this.textEditingController})
+      : quizType = QuizType.normal,
+        questionedAt = null;
 
-  final textEditingController = TextEditingController();
-  final scrollController = ScrollController();
+  InputAnswerTextField.daily({
+    super.key,
+    required this.textEditingController,
+    required this.questionedAt,
+  }) : quizType = QuizType.daily;
+
+  final QuizType quizType;
+  final DateTime? questionedAt;
+
+  /// 回答入力用に使用する [TextEditingController].
+  ///
+  /// リビルドしても入力した文字列が保持されるように、親の Widget で管理する。
+  final TextEditingController textEditingController;
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizService = ref.watch(hitterQuizServiceProvider);
-    final submittedHitterNotifier = ref.watch(submittedHitterProvider.notifier);
+    final hitterQuizNotifier = ref.watch(
+      hitterQuizNotifierProvider(quizType, questionedAt: questionedAt).notifier,
+    );
 
     return TextFieldSearch(
       label: '選手名',
@@ -23,17 +39,19 @@ class InputAnswerTextField extends ConsumerWidget {
       minStringLength: 0,
       itemsInView: 5,
       scrollbarDecoration: ScrollbarDecoration(
-        controller: scrollController,
+        controller: _scrollController,
         theme: const ScrollbarThemeData(),
       ),
       future: () {
-        submittedHitterNotifier.state = null;
-        return hitterQuizService.searchHitter(textEditingController.text);
+        hitterQuizNotifier.updateEnteredHitter(null);
+        return ref
+            .read(hitterQuizServiceProvider)
+            .searchHitter(textEditingController.text);
       },
       getSelectedValue: (Hitter value) {
         // 回答入力用のTextFieldのフォーカスを外す
         FocusManager.instance.primaryFocus?.unfocus();
-        submittedHitterNotifier.state = value;
+        hitterQuizNotifier.updateEnteredHitter(value);
       },
     );
   }

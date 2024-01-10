@@ -50,9 +50,9 @@ class NotificationSettingAdapter extends TypeAdapter<NotificationSetting> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_NotificationSetting _$$_NotificationSettingFromJson(
+_$NotificationSettingImpl _$$NotificationSettingImplFromJson(
         Map<String, dynamic> json) =>
-    _$_NotificationSetting(
+    _$NotificationSettingImpl(
       allowStartDailyQuizNotification:
           json['allowStartDailyQuizNotification'] as bool,
       allowRemindDailyQuizNotification:
@@ -60,8 +60,8 @@ _$_NotificationSetting _$$_NotificationSettingFromJson(
       allowOtherNotification: json['allowOtherNotification'] as bool,
     );
 
-Map<String, dynamic> _$$_NotificationSettingToJson(
-        _$_NotificationSetting instance) =>
+Map<String, dynamic> _$$NotificationSettingImplToJson(
+        _$NotificationSettingImpl instance) =>
     <String, dynamic>{
       'allowStartDailyQuizNotification':
           instance.allowStartDailyQuizNotification,

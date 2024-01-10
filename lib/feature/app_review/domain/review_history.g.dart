@@ -6,14 +6,14 @@ part of 'review_history.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ReviewHistory _$$_ReviewHistoryFromJson(Map<String, dynamic> json) =>
-    _$_ReviewHistory(
+_$ReviewHistoryImpl _$$ReviewHistoryImplFromJson(Map<String, dynamic> json) =>
+    _$ReviewHistoryImpl(
       isDisplayedReviewDialog: json['isDisplayedReviewDialog'] as bool,
       updatedAt:
           const DateTimeConverter().fromJson(json['updatedAt'] as Object),
     );
 
-Map<String, dynamic> _$$_ReviewHistoryToJson(_$_ReviewHistory instance) =>
+Map<String, dynamic> _$$ReviewHistoryImplToJson(_$ReviewHistoryImpl instance) =>
     <String, dynamic>{
       'isDisplayedReviewDialog': instance.isDisplayedReviewDialog,
       'updatedAt': const DateTimeConverter().toJson(instance.updatedAt),

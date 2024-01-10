@@ -1,32 +1,28 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../auth/domain/auth_repository.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
 import '../domain/quiz_result_repository.dart';
 
-/// nomalQuizの結果をリストで返すプロバイダー
-final normalQuizResultListProvider =
-    FutureProvider.autoDispose<List<HitterQuizResult>>((ref) {
+part 'quiz_result_state.g.dart';
+
+/// normalQuiz の結果をリストで返すプロバイダー。
+@riverpod
+Future<List<HitterQuizResult>> normalQuizResultList(
+  NormalQuizResultListRef ref,
+) async {
+  final user = ref.read(authRepositoryProvider).getCurrentUser();
   return ref.read(quizResultRepositoryProvider).fetchNormalQuizResultList(
-        ref.read(authRepositoryProvider).getCurrentUser()!,
+        user!,
       );
-});
+}
 
-/// dailyQuizの結果を返すプロバイダー
-final dailyQuizResultProvider =
-    FutureProvider.autoDispose<DailyHitterQuizResult>((ref) {
+/// dailyQuiz の結果を返すプロバイダー。
+@riverpod
+Future<DailyHitterQuizResult> dailyQuizResult(DailyQuizResultRef ref) async {
+  final user = ref.read(authRepositoryProvider).getCurrentUser();
   return ref.read(quizResultRepositoryProvider).fetchDailyHitterQuizResult(
-        ref.read(authRepositoryProvider).getCurrentUser()!,
+        user!,
       );
-});
-
-/// クイズ結果を返すプロバイダー
-final quizResultStateProvider = StateProvider<HitterQuizResult?>(
-  (_) => null,
-);
-
-/// クイズ結果関連の関数の処理状態をAsyncValueとして返すプロバイダー
-final quizResultFunctionStateProvider = StateProvider<AsyncValue<void>>(
-  (_) => const AsyncValue.data(null),
-);
+}
