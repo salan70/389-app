@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../util/enum/hitting_stats_type.dart';
 import '../domain/hitter_quiz.dart';
 import '../domain/stats_value.dart';

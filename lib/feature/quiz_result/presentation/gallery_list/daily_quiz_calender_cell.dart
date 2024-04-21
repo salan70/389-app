@@ -1,10 +1,10 @@
-import 'package:baseball_quiz_app/util/enum/hitting_stats_type.dart';
 import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/async_value_handler.dart';
 import '../../../../common_widget/my_button.dart';
+import '../../../../util/enum/quiz_type.dart';
 import '../../../../util/logger.dart';
 import '../../../../util/mixin/presentation_mixin.dart';
 import '../../../admob/application/rewarded_ad_notifier.dart';

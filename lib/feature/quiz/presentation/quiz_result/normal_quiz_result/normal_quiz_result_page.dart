@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../common_widget/back_to_top_button.dart';
 import '../../../../../common_widget/my_button.dart';
 import '../../../../../util/constant/strings_constant.dart';
-import '../../../../../util/enum/hitting_stats_type.dart';
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../../admob/presentation/banner_ad_widget.dart';
 import '../../../../app_review/application/app_review_service.dart';
 import '../../../../app_review/application/app_review_state.dart';

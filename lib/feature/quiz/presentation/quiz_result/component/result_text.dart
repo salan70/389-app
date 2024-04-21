@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../util/enum/hitting_stats_type.dart';
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../domain/hitter_quiz.dart';
 
 class ResultText extends ConsumerWidget {

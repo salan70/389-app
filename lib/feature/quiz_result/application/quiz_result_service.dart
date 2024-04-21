@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../util/enum/hitting_stats_type.dart';
+import '../../../util/enum/quiz_type.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';

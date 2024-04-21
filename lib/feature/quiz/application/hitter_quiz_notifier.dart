@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../util/enum/hitting_stats_type.dart';
+import '../../../../../util/enum/quiz_type.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../search_condition/application/search_condition_notifier.dart';
 import '../domain/hitter.dart';

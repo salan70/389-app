@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../../util/exception/supabase_exception.dart';
-import '../../../util/enum/hitting_stats_type.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/hitter.dart';

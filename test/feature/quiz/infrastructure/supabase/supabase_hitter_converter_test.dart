@@ -1,5 +1,6 @@
 import 'package:baseball_quiz_app/feature/quiz/infrastructure/supabase_hitter_converter.dart';
 import 'package:baseball_quiz_app/util/enum/hitting_stats_type.dart';
+import 'package:baseball_quiz_app/util/enum/quiz_type.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 

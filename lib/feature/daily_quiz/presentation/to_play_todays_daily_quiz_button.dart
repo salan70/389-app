@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ntp/ntp.dart';
 
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../common_widget/confirm_dialog.dart';
 import '../../../common_widget/error_dialog.dart';
 import '../../../common_widget/my_button.dart';
-import '../../../util/enum/hitting_stats_type.dart';
 import '../../../util/logger.dart';
 import '../../../util/mixin/presentation_mixin.dart';
 import '../../loading/application/loading_notifier.dart';
