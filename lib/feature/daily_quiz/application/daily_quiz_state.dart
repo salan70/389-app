@@ -1,7 +1,7 @@
-import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../util/extension/date_time_extension.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../../quiz_result/domain/quiz_result_repository.dart';
 import '../domain/daily_quiz.dart';

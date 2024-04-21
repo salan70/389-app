@@ -1,9 +1,9 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../../util/enum/quiz_type.dart';
+import '../../quiz_result/domain/hitter_quiz_result.dart';
 import 'hitter.dart';
 import 'stats_value.dart';
 

@@ -1,9 +1,9 @@
-import 'package:baseball_quiz_app/feature/admob/application/ad_id_state.dart';
-import 'package:baseball_quiz_app/feature/admob/domain/rewarded_ad_state.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/logger.dart';
+import '../domain/rewarded_ad_state.dart';
+import 'ad_id_state.dart';
 
 part 'rewarded_ad_notifier.g.dart';
 

@@ -68,6 +68,7 @@ linter:
     - prefer_final_locals
     - prefer_foreach
     - prefer_int_literals
+    - prefer_relative_imports
     - prefer_single_quotes
     - require_trailing_commas
     - secure_pubspec_urls
