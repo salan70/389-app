@@ -230,5 +230,3 @@ final List<String> probabilityStats = [
   StatsType.slg.label,
   StatsType.ops.label,
 ];
-
-
