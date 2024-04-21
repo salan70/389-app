@@ -88,7 +88,7 @@ class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
             },
             child: Center(
               child: FittedBox(
-                child: hitterQuizResult.resultRank.smallLabellWidget,
+                child: hitterQuizResult.resultRank.smallLabelWidget,
               ),
             ),
           );
