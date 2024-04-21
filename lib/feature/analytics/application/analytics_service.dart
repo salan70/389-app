@@ -74,7 +74,6 @@ class AnalyticsService {
   /// `List<String>` を Analytics の log として送信するための文字列に変換する。
   ///
   /// 具体的には、各要素の先頭2文字を取り出し、それらをカンマとスペースで区切って連結する。
-  String _formatListForParameter(List<String> stringList) {
-    return stringList.map((s) => s.substring(0, 2)).join(', ');
-  }
+  String _formatListForParameter(List<String> stringList) =>
+      stringList.map((s) => s.substring(0, 2)).join(', ');
 }

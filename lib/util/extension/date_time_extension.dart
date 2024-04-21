@@ -3,9 +3,7 @@ import 'package:intl/intl.dart';
 import '../../feature/daily_quiz/util/daily_quiz_constant.dart';
 
 extension DateTimeExtension on DateTime {
-  String toFormattedString() {
-    return DateFormat('yyyy/MM/dd').format(this);
-  }
+  String toFormattedString() => DateFormat('yyyy/MM/dd').format(this);
 
   /// アプリ内の「今日の日付」を取得する
   DateTime calculateDateInApp() {

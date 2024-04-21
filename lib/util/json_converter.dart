@@ -5,12 +5,8 @@ class DateTimeConverter implements JsonConverter<DateTime, Object> {
   const DateTimeConverter();
 
   @override
-  DateTime fromJson(Object fieldValue) {
-    return (fieldValue as Timestamp).toDate();
-  }
+  DateTime fromJson(Object fieldValue) => (fieldValue as Timestamp).toDate();
 
   @override
-  String toJson(DateTime dateTime) {
-    return dateTime.toLocal().toString();
-  }
+  String toJson(DateTime dateTime) => dateTime.toLocal().toString();
 }

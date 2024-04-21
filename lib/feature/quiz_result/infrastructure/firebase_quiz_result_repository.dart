@@ -218,12 +218,11 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
   }
 
   @override
-  Future<void> deleteNormalQuizResult(User user, String docId) async {
-    return firestore
-        .collection('users')
-        .doc(user.uid)
-        .collection('normalQuizResult')
-        .doc(docId)
-        .delete();
-  }
+  Future<void> deleteNormalQuizResult(User user, String docId) async =>
+      firestore
+          .collection('users')
+          .doc(user.uid)
+          .collection('normalQuizResult')
+          .doc(docId)
+          .delete();
 }

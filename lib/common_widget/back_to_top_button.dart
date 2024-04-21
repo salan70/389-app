@@ -12,9 +12,7 @@ class BackToTopButton extends StatelessWidget {
     return MyButton(
       buttonName: 'back_to_top_button',
       buttonType: buttonType,
-      onPressed: () {
-        Navigator.of(context).popUntil((route) => route.isFirst);
-      },
+      onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
       child: const Text('TOPへ戻る'),
     );
   }
