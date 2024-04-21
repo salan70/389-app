@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
+import 'package:baseball_quiz_app/util/enum/hitting_stats_type.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../dummy_data/dummy_hitter_quiz_result.dart';

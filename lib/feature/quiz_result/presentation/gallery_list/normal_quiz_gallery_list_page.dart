@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../common_widget/async_value_handler.dart';
 import '../../../../util/constant/colors_constant.dart';
-import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../util/enum/hitting_stats_type.dart';
 import '../../../../util/extension/date_time_extension.dart';
 import '../../application/quiz_result_state.dart';
 import '../../domain/hitter_quiz_result.dart';

@@ -1,4 +1,4 @@
-import 'package:baseball_quiz_app/util/constant/hitting_stats_constant.dart';
+import 'package:baseball_quiz_app/util/enum/hitting_stats_type.dart';
 import 'package:baseball_quiz_app/util/extension/date_time_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -3,7 +3,7 @@
 import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/enum/hitting_stats_type.dart';
 import 'hitter.dart';
 import 'stats_value.dart';
 

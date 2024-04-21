@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../../util/enum/hitting_stats_type.dart';
 import '../../../application/hitter_quiz_notifier.dart';
 
 class QuizEventButtons extends ConsumerWidget {

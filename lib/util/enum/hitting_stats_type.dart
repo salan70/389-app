@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors_constant.dart';
+import '../constant/colors_constant.dart';
 
 enum StatsType {
   // year,

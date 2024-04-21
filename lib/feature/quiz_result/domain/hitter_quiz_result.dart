@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/enum/hitting_stats_type.dart';
 import '../../quiz/domain/stats_value.dart';
 
 part 'hitter_quiz_result.freezed.dart';

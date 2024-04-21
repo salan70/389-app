@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../../util/enum/hitting_stats_type.dart';
 import '../../../../admob/application/interstitial_ad_service.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../../application/hitter_quiz_notifier.dart';

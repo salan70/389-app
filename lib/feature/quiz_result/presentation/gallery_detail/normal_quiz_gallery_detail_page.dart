@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../util/constant/strings_constant.dart';
 import '../../../../common_widget/back_button.dart' as common;
 import '../../../../common_widget/my_button.dart';
-import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../util/enum/hitting_stats_type.dart';
 import '../../../admob/presentation/banner_ad_widget.dart';
 import '../../../quiz/domain/hitter_quiz.dart';
 import '../../../quiz/presentation/component/result_quiz_widget.dart';

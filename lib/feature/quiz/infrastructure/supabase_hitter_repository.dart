@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/enum/hitting_stats_type.dart';
 import '../../../../util/exception/supabase_exception.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
