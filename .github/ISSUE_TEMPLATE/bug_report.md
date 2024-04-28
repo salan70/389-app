@@ -7,7 +7,7 @@ assignees: salan70
 
 ---
 
-## 発生したバグの説明 
+## 発生したバグの説明
 
 ## バグ発生までの操作手順
 
@@ -23,6 +23,7 @@ assignees: salan70
 - XX (Emulator) / Android XX
 
 ## ログ
+
 ```
 hoge
 ```
