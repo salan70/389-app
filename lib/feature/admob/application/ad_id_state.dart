@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,22 +7,22 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'ad_id_state.g.dart';
 
 @riverpod
-Future<String> bannerAdId (BannerAdIdRef ref) async{
-      final packageInfo = await PackageInfo.fromPlatform();
-    final appName = packageInfo.appName;
+Future<String> bannerAdId(BannerAdIdRef ref) async {
+  final packageInfo = await PackageInfo.fromPlatform();
+  final appName = packageInfo.appName;
 
-    // prod 環境の場合
-    if (appName == '.389') {
-      return Platform.isAndroid
-          ? dotenv.env['BANNER_ID_ANDROID']!
-          : dotenv.env['BANNER_ID_IOS']!;
-    }
-
-    // prod 環境以外の場合
+  // prod 環境の場合
+  if (appName == '.389') {
     return Platform.isAndroid
-        ? dotenv.env['TEST_BANNER_ID_ANDROID']!
-        : dotenv.env['TEST_BANNER_ID_IOS']!;
+        ? dotenv.env['BANNER_ID_ANDROID']!
+        : dotenv.env['BANNER_ID_IOS']!;
   }
+
+  // prod 環境以外の場合
+  return Platform.isAndroid
+      ? dotenv.env['TEST_BANNER_ID_ANDROID']!
+      : dotenv.env['TEST_BANNER_ID_IOS']!;
+}
 
 @riverpod
 Future<String> rewardAdId(RewardAdIdRef ref) async {
