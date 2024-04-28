@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../common_widget/confirm_dialog.dart';
 import '../../../../../common_widget/my_button.dart';
-import '../../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../../util/enum/quiz_type.dart';
 import '../../../../quiz_result/application/quiz_result_service.dart';
 import '../../quiz_result/daily_quiz_result/daily_quiz_result_page.dart';
 import '../../quiz_result/normal_quiz_result/normal_quiz_result_page.dart';

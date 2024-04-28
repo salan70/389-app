@@ -1,9 +1,9 @@
 // ignore_for_file: invalid_annotation_target
 
-import 'package:baseball_quiz_app/feature/quiz_result/domain/hitter_quiz_result.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../util/constant/hitting_stats_constant.dart';
+import '../../../../../util/enum/quiz_type.dart';
+import '../../quiz_result/domain/hitter_quiz_result.dart';
 import 'hitter.dart';
 import 'stats_value.dart';
 
@@ -14,6 +14,7 @@ class HitterQuiz with _$HitterQuiz {
   const factory HitterQuiz({
     required String id,
     required String name,
+
     /// ユーザーが回答として入力した Hitter
     required Hitter? enteredHitter,
     required QuizType? quizType,

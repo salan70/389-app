@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../util/constant/hive_box_type.dart';
+import '../../../util/enum/hive_box_type.dart';
 import '../domain/notification_setting.dart';
 import '../domain/notification_setting_repository.dart';
 
@@ -15,15 +15,12 @@ class HiveNotificationSettingRepository
   final _boxKey = HiveBoxType.notificationSetting.key;
 
   @override
-  Future<NotificationSetting> fetch() async {
-    return box.get(
-      _boxKey,
-      defaultValue: NotificationSetting.initial(),
-    )!;
-  }
+  Future<NotificationSetting> fetch() async => box.get(
+        _boxKey,
+        defaultValue: NotificationSetting.initial(),
+      )!;
 
   @override
-  Future<void> save(NotificationSetting notificationSetting) {
-    return box.put(_boxKey, notificationSetting);
-  }
+  Future<void> save(NotificationSetting notificationSetting) =>
+      box.put(_boxKey, notificationSetting);
 }

@@ -2,8 +2,8 @@ import 'package:awesome_select/awesome_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../util/constant/hitting_stats_constant.dart';
 import '../../../../util/constant/strings_constant.dart';
+import '../../../../util/enum/hitting_stats_type.dart';
 import '../../application/search_condition_notifier.dart';
 
 class SelectStatsWidget extends ConsumerWidget {

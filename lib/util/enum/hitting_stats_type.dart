@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'colors_constant.dart';
+import '../constant/colors_constant.dart';
 
 enum StatsType {
-  // year,
   team,
   games,
   pa,
@@ -27,14 +26,10 @@ enum StatsType {
   avg,
   obp,
   slg,
-  ops,
-}
+  ops;
 
-extension StatsTypeExt on StatsType {
   String get label {
     switch (this) {
-      // case StatsType.year:
-      //   return '年度';
       case StatsType.team:
         return '球団';
       case StatsType.games:
@@ -93,11 +88,10 @@ enum ResultRank {
   a,
   b,
   c,
-  // 不正解
-  incorrect,
-}
 
-extension ResultRankExt on ResultRank {
+  /// 不正解
+  incorrect;
+
   String get label {
     switch (this) {
       case ResultRank.ss:
@@ -115,7 +109,7 @@ extension ResultRankExt on ResultRank {
     }
   }
 
-  Text get smallLabellWidget {
+  Text get smallLabelWidget {
     switch (this) {
       case ResultRank.ss:
         return Text(
@@ -236,26 +230,3 @@ final List<String> probabilityStats = [
   StatsType.slg.label,
   StatsType.ops.label,
 ];
-
-enum QuizType {
-  normal,
-  daily;
-
-  String get label {
-    switch (this) {
-      case QuizType.normal:
-        return 'normal';
-      case QuizType.daily:
-        return 'daily';
-    }
-  }
-
-  String get retireConfirmText {
-    switch (this) {
-      case QuizType.normal:
-        return '本当に諦めますか？';
-      case QuizType.daily:
-        return '本当に諦めますか？\n\n※「今日の1問」は1度しか\nプレイできません。';
-    }
-  }
-}

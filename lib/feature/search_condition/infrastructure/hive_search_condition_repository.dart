@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../util/constant/hive_box_type.dart';
+import '../../../util/enum/hive_box_type.dart';
 import '../domain/search_condition.dart';
 import '../domain/search_condition_repository.dart';
 import '../util/search_condition_constant.dart';

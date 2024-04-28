@@ -49,10 +49,8 @@ class MyButton extends ConsumerWidget {
 enum ButtonType {
   main,
   alert,
-  sub,
-}
+  sub;
 
-extension ButtonTypeExt on ButtonType {
   ButtonStyle get buttonStyle {
     switch (this) {
       case ButtonType.main:

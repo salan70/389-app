@@ -1,4 +1,4 @@
-import '../../../util/constant/hitting_stats_constant.dart';
+import '../../../util/enum/hitting_stats_type.dart';
 import '../domain/search_condition.dart';
 
 final defaultSearchCondition = SearchCondition(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../util/constant/hitting_stats_constant.dart';
 import '../../../domain/hitter_quiz_result.dart';
 
 class ResultRankLabelWidget extends ConsumerWidget {
