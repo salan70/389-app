@@ -1,27 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'quiz_result_repository.dart';
+part of 'app_info_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$quizResultRepositoryHash() =>
-    r'cc83526bac68bca2079e62efe9c8120513b2a399';
+String _$appInfoRepositoryHash() => r'c8004263dfc4bcf9d4906df5079f2f99f2695029';
 
-/// See also [quizResultRepository].
-@ProviderFor(quizResultRepository)
-final quizResultRepositoryProvider =
-    AutoDisposeProvider<QuizResultRepository>.internal(
-  quizResultRepository,
-  name: r'quizResultRepositoryProvider',
+/// See also [appInfoRepository].
+@ProviderFor(appInfoRepository)
+final appInfoRepositoryProvider =
+    AutoDisposeProvider<AppInfoRepository>.internal(
+  appInfoRepository,
+  name: r'appInfoRepositoryProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$quizResultRepositoryHash,
+      : _$appInfoRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef QuizResultRepositoryRef = AutoDisposeProviderRef<QuizResultRepository>;
+typedef AppInfoRepositoryRef = AutoDisposeProviderRef<AppInfoRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

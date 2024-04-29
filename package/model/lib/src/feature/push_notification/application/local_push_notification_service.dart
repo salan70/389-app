@@ -9,7 +9,7 @@ import 'package:timezone/timezone.dart' as tz;
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';
-import '../domain/notification_setting_repository.dart';
+import '../infrastructure/notification_setting_repository.dart';
 import 'notification_setting_state.dart';
 
 part 'local_push_notification_service.g.dart';

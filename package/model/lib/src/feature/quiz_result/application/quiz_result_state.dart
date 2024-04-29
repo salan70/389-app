@@ -1,11 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../auth/domain/auth_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
-import '../domain/quiz_result_repository.dart';
+import '../infrastructure/quiz_result_repository.dart';
 
 part 'quiz_result_state.g.dart';
+
+// TODO(me): ref.watch に修正する。
 
 /// normalQuiz の結果をリストで返すプロバイダー。
 @riverpod

@@ -2,10 +2,10 @@ import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/extension/date_time_extension.dart';
-import '../../auth/domain/auth_repository.dart';
-import '../../quiz_result/domain/quiz_result_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
+import '../../quiz_result/infrastructure/quiz_result_repository.dart';
 import '../domain/daily_quiz.dart';
-import '../domain/daily_quiz_repository.dart';
+import '../infrastructure/daily_quiz_repository.dart';
 
 part 'daily_quiz_state.g.dart';
 

@@ -1,20 +1,26 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/enum/hive_box_type.dart';
 import '../domain/search_condition.dart';
-import '../domain/search_condition_repository.dart';
 import '../util/search_condition_constant.dart';
 
-class HiveSearchConditionRepository implements SearchConditionRepository {
-  HiveSearchConditionRepository(
-    this.box,
-  );
+part 'search_condition_repository.g.dart';
+
+/// [SearchConditionRepository] の Provider.
+@riverpod
+SearchConditionRepository searchConditionRepository(
+  SearchConditionRepositoryRef ref,
+) =>
+    throw UnimplementedError();
+
+class SearchConditionRepository {
+  SearchConditionRepository(this.box);
 
   final Box<SearchCondition> box;
 
   final _boxKey = HiveBoxType.searchCondition.key;
 
-  @override
   SearchCondition fetchSearchCondition() {
     final searchCondition = box.get(
       _boxKey,
@@ -29,7 +35,6 @@ class HiveSearchConditionRepository implements SearchConditionRepository {
     );
   }
 
-  @override
   void saveSearchCondition(SearchCondition searchCondition) {
     box.put(_boxKey, searchCondition);
   }

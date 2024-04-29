@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
@@ -8,13 +10,20 @@ import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
-import '../domain/quiz_result_repository.dart';
 
-class FirebaseQuizResultRepository implements QuizResultRepository {
-  FirebaseQuizResultRepository(this.firestore);
+part 'quiz_result_repository.g.dart';
+
+@riverpod
+QuizResultRepository quizResultRepository(QuizResultRepositoryRef ref) {
+  final firestore = ref.watch(firestoreProvider);
+  return QuizResultRepository(firestore);
+}
+
+class QuizResultRepository {
+  QuizResultRepository(this.firestore);
 
   final FirebaseFirestore firestore;
-  @override
+
   Future<void> createDailyQuiz(User user, DailyQuiz dailyQuiz) async {
     await firestore
         .collection('users')
@@ -27,7 +36,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     });
   }
 
-  @override
   Future<void> updateDailyQuizResult(
     User user,
     DailyQuiz dailyQuiz,
@@ -64,7 +72,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     });
   }
 
-  @override
   Future<void> createNormalQuizResult(
     User user,
     HitterQuiz hitterQuiz,
@@ -101,7 +108,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     });
   }
 
-  @override
   Future<List<HitterQuizResult>> fetchNormalQuizResultList(User user) async {
     final QuerySnapshot snapshot = await firestore
         .collection('users')
@@ -119,7 +125,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return hitterQuizResultList;
   }
 
-  @override
   Future<DailyHitterQuizResult> fetchDailyHitterQuizResult(
     User user,
   ) async {
@@ -177,7 +182,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     );
   }
 
-  @override
   Future<bool> existSpecifiedDailyQuizResult(
     User user,
     String dailyQuizId,
@@ -192,7 +196,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return snapshot.exists;
   }
 
-  @override
   Future<int> fetchPlayedNormalQuizCount(User user) async {
     final snapshot = await firestore
         .collection('users')
@@ -205,7 +208,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return snapshot.count!;
   }
 
-  @override
   Future<int> fetchCorrectedNormalQuizCount(User user) async {
     final snapshot = await firestore
         .collection('users')
@@ -219,7 +221,6 @@ class FirebaseQuizResultRepository implements QuizResultRepository {
     return snapshot.count!;
   }
 
-  @override
   Future<void> deleteNormalQuizResult(User user, String docId) async =>
       firestore
           .collection('users')

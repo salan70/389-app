@@ -1,14 +1,20 @@
 import 'package:common/common.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../domain/auth_repository.dart';
+part 'auth_repository.g.dart';
 
-class FirebaseAuthRepository implements AuthRepository {
-  FirebaseAuthRepository(this.firebaseAuth);
+@riverpod
+AuthRepository authRepository(AuthRepositoryRef ref) {
+  final firebaseAuth = ref.watch(firebaseAuthProvider);
+  return AuthRepository(firebaseAuth);
+}
+
+class AuthRepository {
+  AuthRepository(this.firebaseAuth);
 
   final FirebaseAuth firebaseAuth;
 
-  @override
   User? getCurrentUser() {
     try {
       return firebaseAuth.currentUser;
@@ -17,7 +23,6 @@ class FirebaseAuthRepository implements AuthRepository {
     }
   }
 
-  @override
   Future<void> signInAnonymously() async {
     try {
       await firebaseAuth.signInAnonymously();

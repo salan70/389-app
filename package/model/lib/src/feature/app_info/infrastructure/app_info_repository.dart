@@ -1,23 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';
 
-import '../domain/app_info_repository.dart';
+part 'app_info_repository.g.dart';
 
-class FirebaseAppInfoRepository implements AppInfoRepository {
-  FirebaseAppInfoRepository(this.firestore);
+@riverpod
+AppInfoRepository appInfoRepository(AppInfoRepositoryRef ref) {
+  final firestore = ref.watch(firestoreProvider);
+  return AppInfoRepository(firestore);
+}
+
+class AppInfoRepository {
+  AppInfoRepository(this.firestore);
 
   final FirebaseFirestore firestore;
 
-  /// iOSでプレイするのに必要なアプリバージョンを取得する
-  @override
+  /// iOS でプレイするのに必要なアプリバージョンを取得する。
   Future<Version> fetchRequiredAppVersionForIos() async {
     final doc =
         await firestore.collection('config').doc('configDocument').get();
     return Version.parse(doc.data()!['requiredAppVersionForIos'] as String);
   }
 
-  /// Androidでプレイするのに必要なアプリバージョンを取得する
-  @override
+  /// Android でプレイするのに必要なアプリバージョンを取得する。
   Future<Version> fetchRequiredAppVersionForAndroid() async {
     final doc =
         await firestore.collection('config').doc('configDocument').get();

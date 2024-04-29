@@ -1,9 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../domain/search_condition.dart';
-import '../domain/search_condition_repository.dart';
-import '../util/search_condition_constant.dart';
 
 part 'search_condition_notifier.g.dart';
 

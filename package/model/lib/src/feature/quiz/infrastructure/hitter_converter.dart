@@ -2,14 +2,14 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
-import '../../../util/enum/quiz_type.dart';
 import '../../../util/enum/hitting_stats_type.dart';
+import '../../../util/enum/quiz_type.dart';
 import '../domain/hitter_quiz.dart';
 import '../domain/stats_value.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
-class SupabaseHitterConverter {
+class HitterConverter {
   /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
   HitterQuiz toHitterQuiz(
     QuizType quizType,

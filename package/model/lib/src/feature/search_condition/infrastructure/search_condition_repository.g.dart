@@ -7,9 +7,11 @@ part of 'search_condition_repository.dart';
 // **************************************************************************
 
 String _$searchConditionRepositoryHash() =>
-    r'5fa542a0fea303bd95dff3c6d910397a4e752466';
+    r'ce2c59968621fb71ed5de97e6ae7c291b34ffd4f';
 
-/// See also [searchConditionRepository].
+/// [SearchConditionRepository] の Provider.
+///
+/// Copied from [searchConditionRepository].
 @ProviderFor(searchConditionRepository)
 final searchConditionRepositoryProvider =
     AutoDisposeProvider<SearchConditionRepository>.internal(

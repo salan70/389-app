@@ -1,16 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/review_history.dart';
-import '../domain/review_history_repository.dart';
 
-class FirebaseReviewHistoryRepository implements ReviewHistoryRepository {
-  FirebaseReviewHistoryRepository(this._firestore);
+part 'review_history_repository.g.dart';
+
+@riverpod
+ReviewHistoryRepository reviewHistoryRepository(
+  ReviewHistoryRepositoryRef ref,
+) {
+  final firestore = ref.watch(firestoreProvider);
+  return ReviewHistoryRepository(firestore);
+}
+
+class ReviewHistoryRepository {
+  ReviewHistoryRepository(this._firestore);
 
   final FirebaseFirestore _firestore;
 
   static const String _collectionName = 'userReviewHistories';
 
-  @override
   Future<ReviewHistory?> fetch(String userId) async {
     final DocumentSnapshot snapshot =
         await _firestore.collection(_collectionName).doc(userId).get();
@@ -22,7 +32,6 @@ class FirebaseReviewHistoryRepository implements ReviewHistoryRepository {
     return ReviewHistory.fromJson(snapshot.data()! as Map<String, dynamic>);
   }
 
-  @override
   Future<void> create(String userId) async {
     await _firestore
         .collection(_collectionName)
@@ -34,7 +43,6 @@ class FirebaseReviewHistoryRepository implements ReviewHistoryRepository {
     });
   }
 
-  @override
   Future<void> update(String userId) async {
     await _firestore
         .collection(_collectionName)

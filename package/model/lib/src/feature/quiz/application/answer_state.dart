@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/hitter.dart';
-import '../domain/hitter_repository.dart';
+import '../infrastructure/hitter_repository.dart';
 
 part 'answer_state.g.dart';
 

@@ -7,7 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../util/constant/strings_constant.dart';
-import '../../auth/domain/auth_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
 
 part 'inquiry_service.g.dart';
 

@@ -1,14 +1,13 @@
-import 'package:model/src/feature/quiz/infrastructure/supabase_hitter_converter.dart';
-import 'package:model/src/util/enum/hitting_stats_type.dart';
-import 'package:model/src/util/enum/quiz_type.dart';
-
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:model/src/feature/quiz/infrastructure/hitter_converter.dart';
+import 'package:model/src/util/enum/hitting_stats_type.dart';
+import 'package:model/src/util/enum/quiz_type.dart';
 
 import '../../../../dummy_data/dummy_hitter.dart';
 
 void main() async {
-  final converter = SupabaseHitterConverter();
+  final converter = HitterConverter();
 
   group('toHitterQuiz関数', () {
     test('正常系', () {

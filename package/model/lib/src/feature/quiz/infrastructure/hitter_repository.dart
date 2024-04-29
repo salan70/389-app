@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:common/common.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../util/enum/quiz_type.dart';
@@ -8,17 +9,23 @@ import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
-import '../domain/hitter_repository.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
-import 'supabase_hitter_converter.dart';
+import 'hitter_converter.dart';
 
-class SupabaseHitterRepository implements HitterRepository {
-  SupabaseHitterRepository(this.supabase);
+part 'hitter_repository.g.dart';
+
+@riverpod
+HitterRepository hitterRepository(HitterRepositoryRef ref) {
+  final supabase = ref.watch(supabaseProvider);
+  return HitterRepository(supabase);
+}
+
+class HitterRepository {
+  HitterRepository(this.supabase);
 
   final Supabase supabase;
 
-  @override
   Future<HitterQuiz> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
   ) async {
@@ -33,7 +40,6 @@ class SupabaseHitterRepository implements HitterRepository {
     );
   }
 
-  @override
   Future<HitterQuiz> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
     // 検索条件に合う選手を1人取得
     final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
@@ -104,7 +110,7 @@ class SupabaseHitterRepository implements HitterRepository {
     final statsList = await _fetchHittingStats(supabaseHitter.id);
 
     // HitterQuiz型に変換
-    final hitterQuiz = SupabaseHitterConverter().toHitterQuiz(
+    final hitterQuiz = HitterConverter().toHitterQuiz(
       quizType,
       supabaseHitter,
       statsList,
@@ -132,7 +138,7 @@ class SupabaseHitterRepository implements HitterRepository {
 
   /// 解答を入力するテキストフィールドの検索用
   /// 全選手の名前とIDを取得する
-  @override
+
   Future<List<Hitter>> fetchAllHitter() async {
     final responses = await supabase.client
         .from('hitter_table')

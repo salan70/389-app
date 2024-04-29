@@ -5,7 +5,7 @@ import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../search_condition/application/search_condition_notifier.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
-import '../domain/hitter_repository.dart';
+import '../infrastructure/hitter_repository.dart';
 
 part 'hitter_quiz_notifier.g.dart';
 

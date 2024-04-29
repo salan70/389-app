@@ -52,58 +52,11 @@ Future<void> main() async {
     runApp(
       ProviderScope(
         overrides: [
-          hitterRepositoryProvider.overrideWith(
-            (ref) {
-              return SupabaseHitterRepository(
-                ref.watch(supabaseProvider),
-              );
-            },
-          ),
           searchConditionRepositoryProvider.overrideWith(
-            (ref) => HiveSearchConditionRepository(searchConditionBox),
+            (ref) => SearchConditionRepository(searchConditionBox),
           ),
           notificationSettingRepositoryProvider.overrideWith(
-            (ref) => HiveNotificationSettingRepository(notificationSettingBox),
-          ),
-          authRepositoryProvider.overrideWith(
-            (ref) {
-              return FirebaseAuthRepository(
-                ref.watch(firebaseAuthProvider),
-              );
-            },
-          ),
-          userInfoRepositoryProvider.overrideWith(
-            (ref) {
-              return FirebaseUserInfoRepository(
-                ref.watch(firestoreProvider),
-              );
-            },
-          ),
-          reviewHistoryRepositoryProvider.overrideWith(
-            (ref) => FirebaseReviewHistoryRepository(
-              ref.watch(firestoreProvider),
-            ),
-          ),
-          dailyQuizRepositoryProvider.overrideWith(
-            (ref) {
-              return FirebaseDailyQuizRepository(
-                ref.watch(firestoreProvider),
-              );
-            },
-          ),
-          quizResultRepositoryProvider.overrideWith(
-            (ref) {
-              return FirebaseQuizResultRepository(
-                ref.watch(firestoreProvider),
-              );
-            },
-          ),
-          appInfoRepositoryProvider.overrideWith(
-            (ref) {
-              return FirebaseAppInfoRepository(
-                ref.watch(firestoreProvider),
-              );
-            },
+            (ref) => NotificationSettingRepository(notificationSettingBox),
           ),
         ],
         child: const MyApp(),

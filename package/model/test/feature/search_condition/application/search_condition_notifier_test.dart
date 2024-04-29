@@ -1,10 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:model/src/feature/search_condition/application/search_condition_notifier.dart';
-import 'package:model/src/feature/search_condition/domain/search_condition.dart';
-import 'package:model/src/feature/search_condition/domain/search_condition_repository.dart';
-import 'package:model/src/feature/search_condition/util/search_condition_constant.dart';
-import 'package:model/src/util/enum/hitting_stats_type.dart';
+import 'package:hive/hive.dart';
+import 'package:model/model.dart';
 
 import '../../../dummy_data/dummy_search_condition.dart';
 
@@ -18,6 +15,10 @@ class DummySearchConditionRepository implements SearchConditionRepository {
 
   @override
   void saveSearchCondition(SearchCondition searchCondition) {}
+
+  @override
+  // TODO: implement box
+  Box<SearchCondition> get box => throw UnimplementedError();
 }
 
 void main() {

@@ -1,15 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:flutter/foundation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/daily_quiz.dart';
-import '../domain/daily_quiz_repository.dart';
 
-class FirebaseDailyQuizRepository implements DailyQuizRepository {
-  FirebaseDailyQuizRepository(this.firestore);
+part 'daily_quiz_repository.g.dart';
+
+@riverpod
+DailyQuizRepository dailyQuizRepository(DailyQuizRepositoryRef ref) {
+  final firestore = ref.watch(firestoreProvider);
+  return DailyQuizRepository(firestore);
+}
+
+class DailyQuizRepository {
+  DailyQuizRepository(this.firestore);
 
   final FirebaseFirestore firestore;
 
-  @override
   Future<DailyQuiz?> fetchByQuestionedAt(DateTime questionedAt) async {
     final startDate = DateTime(
       questionedAt.year,

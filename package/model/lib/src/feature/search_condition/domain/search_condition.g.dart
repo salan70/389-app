@@ -61,9 +61,9 @@ _$SearchConditionImpl _$$SearchConditionImplFromJson(
     _$SearchConditionImpl(
       teamList:
           (json['teamList'] as List<dynamic>).map((e) => e as String).toList(),
-      minGames: json['minGames'] as int,
-      minHits: json['minHits'] as int,
-      minHr: json['minHr'] as int,
+      minGames: (json['minGames'] as num).toInt(),
+      minHits: (json['minHits'] as num).toInt(),
+      minHr: (json['minHr'] as num).toInt(),
       selectedStatsList: (json['selectedStatsList'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),

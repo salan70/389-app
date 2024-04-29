@@ -4,9 +4,11 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:version/version.dart';
 
-import '../domain/app_info_repository.dart';
+import '../infrastructure/app_info_repository.dart';
 
 part 'need_update_state.g.dart';
+
+// TODO(me): ref.watch に修正する。
 
 /// アプリのアップデートが必要かどうかを返す。
 @riverpod

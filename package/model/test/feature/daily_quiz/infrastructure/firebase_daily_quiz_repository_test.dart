@@ -1,15 +1,14 @@
-import 'package:model/src/feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
-
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:model/src/feature/daily_quiz/infrastructure/daily_quiz_repository.dart';
 
 void main() async {
-  late FirebaseDailyQuizRepository repository;
+  late DailyQuizRepository repository;
 
   setUp(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
 
-    repository = FirebaseDailyQuizRepository(
+    repository = DailyQuizRepository(
       FakeFirebaseFirestore(),
     );
   });

@@ -1,14 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:common/common.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../domain/user_info_repository.dart';
+part 'user_info_repository.g.dart';
 
-class FirebaseUserInfoRepository implements UserInfoRepository {
-  FirebaseUserInfoRepository(this.firestore);
+@riverpod
+UserInfoRepository userInfoRepository(UserInfoRepositoryRef ref) {
+  final firestore = ref.watch(firestoreProvider);
+  return UserInfoRepository(firestore);
+}
+
+class UserInfoRepository {
+  UserInfoRepository(this.firestore);
 
   final FirebaseFirestore firestore;
 
-  @override
   Future<void> updateUserInfo(User user) async {
     await firestore.collection('users').doc(user.uid).set(<String, dynamic>{
       'createdAt': user.metadata.creationTime,

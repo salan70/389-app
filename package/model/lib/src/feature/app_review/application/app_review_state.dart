@@ -1,9 +1,9 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../auth/domain/auth_repository.dart';
-import '../../quiz_result/domain/quiz_result_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
+import '../../quiz_result/infrastructure/quiz_result_repository.dart';
 import '../domain/review_history.dart';
-import '../domain/review_history_repository.dart';
+import '../infrastructure/review_history_repository.dart';
 import '../util/app_rview_constant.dart';
 
 part 'app_review_state.g.dart';

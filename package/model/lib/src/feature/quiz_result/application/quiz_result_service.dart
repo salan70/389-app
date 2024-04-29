@@ -2,11 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/enum/quiz_type.dart';
-import '../../auth/domain/auth_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';
 import '../../search_condition/application/search_condition_notifier.dart';
-import '../domain/quiz_result_repository.dart';
+import '../infrastructure/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
 
 part 'quiz_result_service.g.dart';

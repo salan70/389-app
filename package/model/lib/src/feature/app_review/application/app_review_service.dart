@@ -4,8 +4,8 @@ import 'package:in_app_review/in_app_review.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../app_info/application/app_info_service.dart';
-import '../../auth/domain/auth_repository.dart';
-import '../domain/review_history_repository.dart';
+import '../../auth/infrastructure/auth_repository.dart';
+import '../infrastructure/review_history_repository.dart';
 import 'app_review_state.dart';
 
 part 'app_review_service.g.dart';

@@ -8,7 +8,7 @@ part of 'stats_value.dart';
 
 _$StatsValueImpl _$$StatsValueImplFromJson(Map<String, dynamic> json) =>
     _$StatsValueImpl(
-      unveilOrder: json['unveilOrder'] as int,
+      unveilOrder: (json['unveilOrder'] as num).toInt(),
       data: json['data'] as String,
     );
 
