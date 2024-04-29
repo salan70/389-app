@@ -1,4 +1,5 @@
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:common/common.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -19,6 +20,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 import 'presentation/component/common/loading_widget.dart';
 import 'presentation/page/top_page.dart';
+import 'presentation/util/colors_constant.dart';
 import 'presentation/util/widget_ref_extension.dart';
 
 Future<void> main() async {

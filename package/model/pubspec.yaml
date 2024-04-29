@@ -6,6 +6,10 @@ environment:
   sdk: ">=2.17.5 <3.0.0"
 
 dependencies:
+  # Other packages in the project
+  common:
+    path: ../common
+
   collection: ^1.16.0
   cupertino_icons: ^1.0.2
   device_info_plus: ^8.0.0

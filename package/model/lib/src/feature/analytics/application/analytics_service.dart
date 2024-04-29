@@ -1,9 +1,9 @@
+import 'package:common/common.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../util/logger.dart';
 import '../../search_condition/application/search_condition_notifier.dart';
 
 part 'analytics_service.g.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:model/model.dart';
 
 import '../../page/daily_quiz_gallery_list_page.dart';
 import '../../page/normal_quiz_gallery_list_page.dart';
+import '../../util/colors_constant.dart';
 import '../ad/banner_ad_widget.dart';
 import '../common/button/back_to_top_button.dart';
 import '../common/button/my_button.dart';

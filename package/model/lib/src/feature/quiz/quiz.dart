@@ -10,4 +10,3 @@ export 'infrastructure/entity/hitting_stats.dart';
 export 'infrastructure/entity/supabase_hitter.dart';
 export 'infrastructure/supabase_hitter_converter.dart';
 export 'infrastructure/supabase_hitter_repository.dart';
-export 'infrastructure/supabase_providers.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../../util/colors_constant.dart';
 import '../common/button/my_button.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/common/async_value_handler.dart';
+import '../util/colors_constant.dart';
+import '../util/result_rank_extension.dart';
 import 'normal_quiz_gallery_detail_page.dart';
 
 class NormalQuizGalleryListPage extends ConsumerWidget {

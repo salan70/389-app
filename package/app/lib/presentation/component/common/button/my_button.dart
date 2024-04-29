@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../../../util/colors_constant.dart';
+
 /// アプリ内で使用するボタン
 ///
 /// メイン、アラート、サブの3種類を定義

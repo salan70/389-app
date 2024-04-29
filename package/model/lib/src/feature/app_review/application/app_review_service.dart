@@ -1,8 +1,8 @@
+import 'package:common/common.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_review/in_app_review.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../util/logger.dart';
 import '../../app_info/application/app_info_service.dart';
 import '../../auth/domain/auth_repository.dart';
 import '../domain/review_history_repository.dart';

@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -5,6 +6,7 @@ import 'package:model/model.dart';
 import '../../page/daily_quiz_gallery_detail_page.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
+import '../../util/result_rank_extension.dart';
 import '../common/async_value_handler.dart';
 import '../common/button/my_button.dart';
 

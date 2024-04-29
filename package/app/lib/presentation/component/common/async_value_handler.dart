@@ -1,6 +1,6 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 /// RiverpodのAsyncValueを良しなに処理するWidget
 class AsyncValueHandler<T extends Object> extends StatelessWidget {

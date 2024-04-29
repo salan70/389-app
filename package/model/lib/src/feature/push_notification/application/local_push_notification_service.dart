@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -5,7 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-import '../../../util/logger.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../daily_quiz/util/daily_quiz_constant.dart';
 import '../domain/notification_setting.dart';

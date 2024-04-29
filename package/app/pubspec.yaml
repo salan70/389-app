@@ -12,6 +12,8 @@ dependencies:
   # Other packages in the project
   model:
     path: ../model
+  common:
+    path: ../common
 
   # 選択フォームの作成に使用
   app_tracking_transparency: ^2.0.3
