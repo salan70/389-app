@@ -17,4 +17,8 @@
         "supabase",
         "firestore",
     ],
+    // launch.json がネストしたプロジェクトに到達するために指定
+    // 参考: https://zenn.dev/heyhey1028/scraps/87fad0c103401a
+    "dart.projectSearchDepth": 4,
+    "dart.runPubGetOnPubspecChanges": "never",
 }
