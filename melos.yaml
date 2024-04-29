@@ -1,0 +1,5 @@
+name: baseball_quiz_app
+packages:
+  - "packages/**"
+repository: "https://github.com/kktaro/melos_sample"
+sdkPath: .fvm/flutter_sdk
