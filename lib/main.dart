@@ -29,7 +29,6 @@ import 'feature/auth/infrastructure/firebase_user_info_repository.dart';
 import 'feature/daily_quiz/domain/daily_quiz_repository.dart';
 import 'feature/daily_quiz/infrastructure/firebase_daily_quiz_repository.dart';
 import 'feature/loading/application/loading_notifier.dart';
-import 'feature/loading/presentation/loading_widget.dart';
 import 'feature/push_notification/domain/notification_setting.dart';
 import 'feature/push_notification/domain/notification_setting_repository.dart';
 import 'feature/push_notification/infrastructure/hive_notification_setting_repository.dart';
@@ -41,7 +40,8 @@ import 'feature/quiz_result/infrastructure/firebase_quiz_result_repository.dart'
 import 'feature/search_condition/domain/search_condition.dart';
 import 'feature/search_condition/domain/search_condition_repository.dart';
 import 'feature/search_condition/infrastructure/hive_search_condition_repository.dart';
-import 'feature/top/presentation/top_page.dart';
+import 'presentation/common_widget/loading_widget.dart';
+import 'presentation/page/top/top_page.dart';
 import 'util/constant/colors_constant.dart';
 import 'util/enum/hive_box_type.dart';
 import 'util/extension/widget_ref_extension.dart';

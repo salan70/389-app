@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../common_widget/error_dialog.dart';
 import '../../feature/loading/application/loading_notifier.dart';
+import '../../presentation/common_widget/error_dialog.dart';
 import '../logger.dart';
 
 /// ダイアログ表示用のGlobalKeyを返す
