@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../../feature/quiz/domain/hitter_quiz.dart';
+import 'package:model/model.dart';
 
 class QuizWidget extends StatelessWidget {
   const QuizWidget({super.key, required this.hitterQuiz});

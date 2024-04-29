@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
-import '../../../util/constant/strings_constant.dart';
-import '../../feature/quiz/domain/hitter_quiz.dart';
-import '../../feature/quiz_result/domain/hitter_quiz_result.dart';
-import '../../util/enum/quiz_type.dart';
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/back_button.dart' as common;
 import '../component/common/button/my_button.dart';

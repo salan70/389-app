@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import '../../../feature/admob/application/ad_id_state.dart';
-import '../../../util/logger.dart';
-
-
+import 'package:model/model.dart';
 
 class BannerAdWidget extends ConsumerWidget {
   const BannerAdWidget({super.key});

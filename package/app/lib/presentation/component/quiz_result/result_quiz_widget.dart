@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
-import '../../../feature/quiz/domain/hitter_quiz.dart';
 import '../quiz_play/quiz_widget.dart';
 
 class ResultQuizWidget extends StatelessWidget {

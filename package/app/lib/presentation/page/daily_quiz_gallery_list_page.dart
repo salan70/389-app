@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../util/extension/date_time_extension.dart';
 import '../component/gallery/daily_quiz_calender_cell.dart';
 
 class DailyQuizGalleryListPage extends ConsumerWidget {

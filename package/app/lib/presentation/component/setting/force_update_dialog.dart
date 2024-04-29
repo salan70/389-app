@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../feature/app_info/application/app_info_service.dart';
 import '../common/button/my_button.dart';
 
 /// エラーを知らせるダイアログ

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
+import 'package:model/model.dart';
 
 class ResultRankLabelWidget extends ConsumerWidget {
   const ResultRankLabelWidget({super.key, required this.quizResult});

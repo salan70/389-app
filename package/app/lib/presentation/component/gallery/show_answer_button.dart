@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
 import '../common/button/my_button.dart';
 
 class ShowAnswerButton extends ConsumerWidget {

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../feature/quiz_result/application/quiz_result_state.dart';
-import '../../feature/quiz_result/domain/hitter_quiz_result.dart';
-import '../../util/constant/colors_constant.dart';
-import '../../util/extension/date_time_extension.dart';
 import '../component/common/async_value_handler.dart';
 import 'normal_quiz_gallery_detail_page.dart';
 

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../feature/analytics/application/analytics_service.dart';
-import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../../../../feature/search_condition/application/search_condition_notifier.dart';
-import '../../../../util/enum/quiz_type.dart';
 import '../../page/play_normal_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
 import '../common/button/my_button.dart';

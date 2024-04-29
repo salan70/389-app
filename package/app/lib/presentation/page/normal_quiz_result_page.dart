@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../util/constant/strings_constant.dart';
-import '../../../../util/enum/quiz_type.dart';
-import '../../../feature/app_review/application/app_review_service.dart';
-import '../../../feature/app_review/application/app_review_state.dart';
-import '../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../../../feature/quiz/domain/hitter_quiz.dart';
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/back_to_top_button.dart';
 import '../component/common/button/my_button.dart';

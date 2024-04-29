@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../feature/loading/application/loading_notifier.dart';
-import '../../util/logger.dart';
 import '../component/common/dialog/error_dialog.dart';
 import 'widget_ref_extension.dart';
 

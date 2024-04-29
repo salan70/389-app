@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../../util/enum/quiz_type.dart';
-import '../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../page/daily_quiz_result_page.dart';
 import '../../page/normal_quiz_result_page.dart';
 import '../common/button/my_button.dart';

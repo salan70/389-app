@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../feature/admob/application/rewarded_ad_notifier.dart';
-import '../../../feature/admob/domain/rewarded_ad_state.dart';
-import '../../../feature/analytics/application/analytics_service.dart';
-import '../../../feature/daily_quiz/application/daily_quiz_state.dart';
-import '../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../../../feature/quiz_result/application/quiz_result_state.dart';
-import '../../../feature/quiz_result/domain/daily_hitter_quiz_result.dart';
-import '../../../util/enum/quiz_type.dart';
-import '../../../util/extension/date_time_extension.dart';
-import '../../../util/logger.dart';
 import '../../page/daily_quiz_gallery_detail_page.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../util/presentation_mixin.dart';

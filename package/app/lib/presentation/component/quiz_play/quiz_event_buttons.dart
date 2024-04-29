@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../../util/enum/quiz_type.dart';
-import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
 import '../common/button/my_button.dart';
 import '../common/dialog/confirm_dialog.dart';
 

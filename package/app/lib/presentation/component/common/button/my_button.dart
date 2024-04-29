@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../feature/analytics/application/analytics_service.dart';
-import '../../../../util/constant/colors_constant.dart';
-
-
+import 'package:model/model.dart';
 
 /// アプリ内で使用するボタン
 ///

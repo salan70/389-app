@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../util/constant/strings_constant.dart';
-import '../../../../util/enum/quiz_type.dart';
-import '../../../feature/quiz/application/hitter_quiz_notifier.dart';
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/back_to_top_button.dart';
 import '../component/common/button/my_button.dart';
@@ -34,6 +32,7 @@ class DailyQuizResultPage extends ConsumerWidget {
       onWillPop: () async => false,
       child: Scaffold(
         body: SafeArea(
+          // ignore: avoid_dynamic_calls
           child: asyncHitterQuiz.maybeWhen(
             orElse: Container.new,
             loading: () => const Center(child: CircularProgressIndicator()),

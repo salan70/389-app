@@ -13,12 +13,6 @@
     "files.watcherExclude": {
         "**/.fvm": true
     },
-    // ファイルエクスプローラーの表示から除外するファイル
-    "files.exclude": {
-        "**/*.freezed.dart": true,
-        "**/*.g.dart": true,
-        "**/*.mocks.dart": true,
-    },
     "cSpell.words": [
         "supabase",
         "firestore",

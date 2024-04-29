@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../../util/extension/date_time_extension.dart';
-import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
 
 class ResultInfoWidget extends ConsumerWidget {
   const ResultInfoWidget({super.key, required this.quizResult});

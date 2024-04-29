@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../../../util/enum/quiz_type.dart';
-import '../../../../feature/quiz/domain/hitter_quiz.dart';
+import 'package:model/model.dart';
 
 class ResultText extends ConsumerWidget {
   const ResultText.normal({super.key, required this.hitterQuiz})

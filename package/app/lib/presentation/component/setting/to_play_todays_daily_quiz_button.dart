@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
 
-import '../../../../../../util/enum/quiz_type.dart';
-import '../../../../feature/daily_quiz/application/daily_quiz_state.dart';
-import '../../../../feature/daily_quiz/util/daily_quiz_constant.dart';
-import '../../../../feature/loading/application/loading_notifier.dart';
-import '../../../../feature/push_notification/application/local_push_notification_service.dart';
-import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../../../../util/extension/date_time_extension.dart';
-import '../../../../util/logger.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
 import '../common/button/my_button.dart';

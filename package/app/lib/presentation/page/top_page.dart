@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../feature/app_info/application/need_update_state.dart';
-import '../../feature/auth/application/auth_service.dart';
-import '../../feature/push_notification/application/local_push_notification_service.dart';
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/my_button.dart';
 import '../component/setting/force_update_dialog.dart';
@@ -13,7 +11,6 @@ import '../component/setting/to_play_normal_quiz_from_top_button.dart';
 import '../component/setting/to_play_todays_daily_quiz_button.dart';
 import '../component/setting/to_prepare_quiz_button.dart';
 import '../component/setting/to_setting_button.dart';
-
 
 class TopPage extends ConsumerStatefulWidget {
   const TopPage({super.key});

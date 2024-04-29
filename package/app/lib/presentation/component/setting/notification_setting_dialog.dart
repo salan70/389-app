@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-
-import '../../../feature/daily_quiz/util/daily_quiz_constant.dart';
-import '../../../feature/push_notification/application/local_push_notification_service.dart';
-import '../../../feature/push_notification/application/notification_setting_state.dart';
-import '../../../util/constant/colors_constant.dart';
 import '../common/button/my_button.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {

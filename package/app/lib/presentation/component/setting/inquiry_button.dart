@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 
-import '../../../../feature/inquiry/application/inquiry_service.dart';
 import '../common/button/my_button.dart';
 
 class InquiryButton extends ConsumerWidget {

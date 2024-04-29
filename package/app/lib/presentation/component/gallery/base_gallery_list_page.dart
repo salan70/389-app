@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:model/model.dart';
 
-import '../../../util/constant/colors_constant.dart';
 import '../../page/daily_quiz_gallery_list_page.dart';
 import '../../page/normal_quiz_gallery_list_page.dart';
 import '../ad/banner_ad_widget.dart';

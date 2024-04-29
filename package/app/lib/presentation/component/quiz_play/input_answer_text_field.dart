@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:model/model.dart';
 import 'package:textfield_search/textfield_search.dart';
-
-import '../../../../../util/enum/quiz_type.dart';
-import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../../../../feature/quiz/application/hitter_quiz_service.dart';
-import '../../../../feature/quiz/domain/hitter.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
   InputAnswerTextField.normal({super.key, required this.textEditingController})
