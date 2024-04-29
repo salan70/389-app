@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../util/enum/quiz_type.dart';
 import '../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../component/common/banner_ad_widget.dart';
-import '../component/common/my_button.dart';
+import '../component/ad/banner_ad_widget.dart';
+import '../component/common/button/my_button.dart';
 import '../component/quiz_play/input_answer_text_field.dart';
 import '../component/quiz_play/normal_quiz_submit_answer_button.dart';
 import '../component/quiz_play/quiz_event_buttons.dart';

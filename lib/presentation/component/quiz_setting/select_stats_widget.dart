@@ -57,15 +57,14 @@ class SelectStatsWidget extends ConsumerWidget {
       },
       // modal内の成績のUI
       choiceBuilder: (_, state, choice) {
-        return ChoiceCard(state: state, choice: choice);
+        return _ChoiceCard(state: state, choice: choice);
       },
     );
   }
 }
 
-class ChoiceCard extends ConsumerWidget {
-  const ChoiceCard({
-    super.key,
+class _ChoiceCard extends ConsumerWidget {
+  const _ChoiceCard({
     required this.state,
     required this.choice,
   });

@@ -7,7 +7,7 @@ import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
 import '../../../../feature/quiz/domain/hitter.dart';
 import '../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../page/normal_quiz_result_page.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 import 'incorrect_dialog.dart';
 
 class NormalQuizSubmitAnswerButton extends ConsumerWidget {

@@ -12,9 +12,9 @@ import '../../../../util/extension/date_time_extension.dart';
 import '../../../../util/logger.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
-import '../common/confirm_dialog.dart';
-import '../common/error_dialog.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
+import '../common/dialog/confirm_dialog.dart';
+import '../common/dialog/error_dialog.dart';
 
 class ToPlayTodaysDailyQuizButton extends ConsumerWidget
     with PresentationMixin {

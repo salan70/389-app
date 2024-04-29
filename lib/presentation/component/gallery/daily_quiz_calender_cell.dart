@@ -15,7 +15,7 @@ import '../../page/daily_quiz_gallery_detail_page.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
 import '../common/async_value_handler.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class DailyQuizCalenderCell extends ConsumerStatefulWidget {
   const DailyQuizCalenderCell({super.key, required this.date});

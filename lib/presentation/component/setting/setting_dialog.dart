@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 import 'inquiry_button.dart';
 import 'to_notification_setting_button.dart';
 import 'to_privacy_policy_button.dart';

@@ -5,7 +5,7 @@ import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
 import '../../../../util/enum/quiz_type.dart';
 import '../../page/play_normal_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class ToPlayNormalQuizFromTopButton extends ConsumerWidget
     with PresentationMixin {

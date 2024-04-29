@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../component/common/back_to_top_button.dart';
-import '../component/common/banner_ad_widget.dart';
-import '../component/common/my_button.dart';
+import '../component/ad/banner_ad_widget.dart';
+import '../component/common/button/back_to_top_button.dart';
+import '../component/common/button/my_button.dart';
 import '../component/quiz_setting/chose_team_widget.dart';
 import '../component/quiz_setting/notes_text.dart';
 import '../component/quiz_setting/select_stats_widget.dart';
 import '../component/quiz_setting/stats_value_filter_widget.dart';
 import '../component/quiz_setting/to_play_normal_quiz_from_prepare_button.dart';
-
-
 
 class PrepareQuizPage extends StatelessWidget {
   const PrepareQuizPage({super.key});

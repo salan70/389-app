@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 import 'setting_dialog.dart';
 
 class ToSettingButton extends StatelessWidget {

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../util/constant/colors_constant.dart';
 import '../../page/daily_quiz_gallery_list_page.dart';
 import '../../page/normal_quiz_gallery_list_page.dart';
-import '../common/back_to_top_button.dart';
-import '../common/banner_ad_widget.dart';
-import '../common/my_button.dart';
-
+import '../ad/banner_ad_widget.dart';
+import '../common/button/back_to_top_button.dart';
+import '../common/button/my_button.dart';
 
 class BaseGalleryListPage extends StatelessWidget {
   const BaseGalleryListPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../page/prepare_quiz_page.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class ToPrepareQuizButton extends StatelessWidget {
   const ToPrepareQuizButton({

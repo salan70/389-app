@@ -6,7 +6,7 @@ import '../../../feature/daily_quiz/util/daily_quiz_constant.dart';
 import '../../../feature/push_notification/application/local_push_notification_service.dart';
 import '../../../feature/push_notification/application/notification_setting_state.dart';
 import '../../../util/constant/colors_constant.dart';
-import 'my_button.dart';
+import '../common/button/my_button.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {
   const NotificationSettingDialog({super.key});

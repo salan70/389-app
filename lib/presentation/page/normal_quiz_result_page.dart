@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../../../util/constant/strings_constant.dart';
 import '../../../../util/enum/quiz_type.dart';
 import '../../../feature/app_review/application/app_review_service.dart';
 import '../../../feature/app_review/application/app_review_state.dart';
 import '../../../feature/quiz/application/hitter_quiz_notifier.dart';
 import '../../../feature/quiz/domain/hitter_quiz.dart';
-import '../component/common/back_to_top_button.dart';
-import '../component/common/banner_ad_widget.dart';
-import '../component/common/my_button.dart';
+import '../component/ad/banner_ad_widget.dart';
+import '../component/common/button/back_to_top_button.dart';
+import '../component/common/button/my_button.dart';
 import '../component/quiz_result/custom_confetti_widget.dart';
 import '../component/quiz_result/replay_button.dart';
 import '../component/quiz_result/result_quiz_widget.dart';

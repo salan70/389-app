@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../common/my_button.dart';
-import '../common/notification_setting_dialog.dart';
+import '../common/button/my_button.dart';
+import 'notification_setting_dialog.dart';
 
 
 class ToNotificationSettingButton extends StatelessWidget {

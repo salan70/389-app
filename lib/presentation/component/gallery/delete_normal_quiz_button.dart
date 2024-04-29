@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../../feature/quiz_result/domain/hitter_quiz_result.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class DeleteNormalQuizResultButton extends ConsumerWidget {
   const DeleteNormalQuizResultButton({

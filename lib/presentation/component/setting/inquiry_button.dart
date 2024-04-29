@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../feature/inquiry/application/inquiry_service.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class InquiryButton extends ConsumerWidget {
   const InquiryButton({super.key});

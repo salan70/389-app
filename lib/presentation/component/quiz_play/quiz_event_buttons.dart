@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../util/enum/quiz_type.dart';
 import '../../../../feature/quiz/application/hitter_quiz_notifier.dart';
-import '../common/confirm_dialog.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
+import '../common/dialog/confirm_dialog.dart';
 
 class QuizEventButtons extends ConsumerWidget {
   const QuizEventButtons.normal({super.key})

@@ -7,7 +7,7 @@ import '../../../../feature/search_condition/application/search_condition_notifi
 import '../../../../util/enum/quiz_type.dart';
 import '../../page/play_normal_quiz_page.dart';
 import '../../util/presentation_mixin.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class ToPlayNormalQuizFromPrepareButton extends ConsumerWidget
     with PresentationMixin {

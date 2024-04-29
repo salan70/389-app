@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../feature/loading/application/loading_notifier.dart';
 import '../../util/logger.dart';
-import '../component/common/error_dialog.dart';
+import '../component/common/dialog/error_dialog.dart';
 
 /// ダイアログ表示用のGlobalKeyを返す
 /// .currentContext!でcontextを取得できる

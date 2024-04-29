@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'my_button.dart';
+import '../button/my_button.dart';
 
 class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../feature/app_info/application/app_info_service.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 /// エラーを知らせるダイアログ
 class ForceUpdateDialog extends ConsumerWidget {

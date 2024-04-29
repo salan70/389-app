@@ -5,8 +5,8 @@ import '../../../../../util/enum/quiz_type.dart';
 import '../../../../feature/quiz_result/application/quiz_result_service.dart';
 import '../../page/daily_quiz_result_page.dart';
 import '../../page/normal_quiz_result_page.dart';
-import '../common/confirm_dialog.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
+import '../common/dialog/confirm_dialog.dart';
 
 class IncorrectDialog extends ConsumerWidget {
   const IncorrectDialog.normal({super.key, required this.hitterName})

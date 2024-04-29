@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../feature/browser/application/browser_service.dart';
 import '../../../../util/constant/strings_constant.dart';
-import '../common/my_button.dart';
+import '../common/button/my_button.dart';
 
 class ToPrivacyPolicyButton extends ConsumerWidget {
   const ToPrivacyPolicyButton({super.key});
