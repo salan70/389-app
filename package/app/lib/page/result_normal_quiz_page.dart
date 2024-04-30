@@ -13,8 +13,8 @@ import '../feature/quiz_result/result_text.dart';
 import '../feature/quiz_result/share_button.dart';
 
 @RoutePage()
-class NormalQuizResultPage extends ConsumerWidget {
-  NormalQuizResultPage({super.key});
+class ResultNormalQuizPage extends ConsumerWidget {
+  ResultNormalQuizPage({super.key});
 
   static const _buttonWidth = 200.0;
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';

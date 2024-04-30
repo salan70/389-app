@@ -11,8 +11,8 @@ import '../feature/quiz_setting/stats_value_filter_widget.dart';
 import '../feature/quiz_setting/to_play_normal_quiz_from_prepare_button.dart';
 
 @RoutePage()
-class PrepareQuizPage extends StatelessWidget {
-  const PrepareQuizPage({super.key});
+class QuizSettingPage extends StatelessWidget {
+  const QuizSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -15,54 +15,36 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    DailyQuizGalleryDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<DailyQuizGalleryDetailRouteArgs>();
+    GalleryDetailDailyQuizRoute.name: (routeData) {
+      final args = routeData.argsAs<GalleryDetailDailyQuizRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: DailyQuizGalleryDetailPage(
+        child: GalleryDetailDailyQuizPage(
           key: args.key,
           hitterQuizResult: args.hitterQuizResult,
         ),
       );
     },
-    DailyQuizGalleryListRoute.name: (routeData) {
+    GalleryDetailNormalQuizRoute.name: (routeData) {
+      final args = routeData.argsAs<GalleryDetailNormalQuizRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DailyQuizGalleryListPage(),
-      );
-    },
-    DailyQuizResultRoute.name: (routeData) {
-      final args = routeData.argsAs<DailyQuizResultRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: DailyQuizResultPage(
-          key: args.key,
-          questionedAt: args.questionedAt,
-        ),
-      );
-    },
-    NormalQuizGalleryDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<NormalQuizGalleryDetailRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: NormalQuizGalleryDetailPage(
+        child: GalleryDetailNormalQuizPage(
           key: args.key,
           quizResult: args.quizResult,
         ),
       );
     },
-    NormalQuizGalleryListRoute.name: (routeData) {
+    GalleryListDailyQuizRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const NormalQuizGalleryListPage(),
+        child: const GalleryListDailyQuizPage(),
       );
     },
-    NormalQuizResultRoute.name: (routeData) {
-      final args = routeData.argsAs<NormalQuizResultRouteArgs>(
-          orElse: () => const NormalQuizResultRouteArgs());
+    GalleryListNormalQuizRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NormalQuizResultPage(key: args.key),
+        child: const GalleryListNormalQuizPage(),
       );
     },
     PlayDailyQuizRoute.name: (routeData) {
@@ -83,10 +65,28 @@ abstract class _$AppRouter extends RootStackRouter {
         child: PlayNormalQuizPage(key: args.key),
       );
     },
-    PrepareQuizRoute.name: (routeData) {
+    QuizSettingRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const PrepareQuizPage(),
+        child: const QuizSettingPage(),
+      );
+    },
+    ResultDailyQuizRoute.name: (routeData) {
+      final args = routeData.argsAs<ResultDailyQuizRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResultDailyQuizPage(
+          key: args.key,
+          questionedAt: args.questionedAt,
+        ),
+      );
+    },
+    ResultNormalQuizRoute.name: (routeData) {
+      final args = routeData.argsAs<ResultNormalQuizRouteArgs>(
+          orElse: () => const ResultNormalQuizRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: ResultNormalQuizPage(key: args.key),
       );
     },
     TopRoute.name: (routeData) {
@@ -99,30 +99,30 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [DailyQuizGalleryDetailPage]
-class DailyQuizGalleryDetailRoute
-    extends PageRouteInfo<DailyQuizGalleryDetailRouteArgs> {
-  DailyQuizGalleryDetailRoute({
+/// [GalleryDetailDailyQuizPage]
+class GalleryDetailDailyQuizRoute
+    extends PageRouteInfo<GalleryDetailDailyQuizRouteArgs> {
+  GalleryDetailDailyQuizRoute({
     Key? key,
     required HitterQuizResult hitterQuizResult,
     List<PageRouteInfo>? children,
   }) : super(
-          DailyQuizGalleryDetailRoute.name,
-          args: DailyQuizGalleryDetailRouteArgs(
+          GalleryDetailDailyQuizRoute.name,
+          args: GalleryDetailDailyQuizRouteArgs(
             key: key,
             hitterQuizResult: hitterQuizResult,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'DailyQuizGalleryDetailRoute';
+  static const String name = 'GalleryDetailDailyQuizRoute';
 
-  static const PageInfo<DailyQuizGalleryDetailRouteArgs> page =
-      PageInfo<DailyQuizGalleryDetailRouteArgs>(name);
+  static const PageInfo<GalleryDetailDailyQuizRouteArgs> page =
+      PageInfo<GalleryDetailDailyQuizRouteArgs>(name);
 }
 
-class DailyQuizGalleryDetailRouteArgs {
-  const DailyQuizGalleryDetailRouteArgs({
+class GalleryDetailDailyQuizRouteArgs {
+  const GalleryDetailDailyQuizRouteArgs({
     this.key,
     required this.hitterQuizResult,
   });
@@ -133,87 +133,35 @@ class DailyQuizGalleryDetailRouteArgs {
 
   @override
   String toString() {
-    return 'DailyQuizGalleryDetailRouteArgs{key: $key, hitterQuizResult: $hitterQuizResult}';
+    return 'GalleryDetailDailyQuizRouteArgs{key: $key, hitterQuizResult: $hitterQuizResult}';
   }
 }
 
 /// generated route for
-/// [DailyQuizGalleryListPage]
-class DailyQuizGalleryListRoute extends PageRouteInfo<void> {
-  const DailyQuizGalleryListRoute({List<PageRouteInfo>? children})
-      : super(
-          DailyQuizGalleryListRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DailyQuizGalleryListRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [DailyQuizResultPage]
-class DailyQuizResultRoute extends PageRouteInfo<DailyQuizResultRouteArgs> {
-  DailyQuizResultRoute({
-    Key? key,
-    required DateTime questionedAt,
-    List<PageRouteInfo>? children,
-  }) : super(
-          DailyQuizResultRoute.name,
-          args: DailyQuizResultRouteArgs(
-            key: key,
-            questionedAt: questionedAt,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'DailyQuizResultRoute';
-
-  static const PageInfo<DailyQuizResultRouteArgs> page =
-      PageInfo<DailyQuizResultRouteArgs>(name);
-}
-
-class DailyQuizResultRouteArgs {
-  const DailyQuizResultRouteArgs({
-    this.key,
-    required this.questionedAt,
-  });
-
-  final Key? key;
-
-  final DateTime questionedAt;
-
-  @override
-  String toString() {
-    return 'DailyQuizResultRouteArgs{key: $key, questionedAt: $questionedAt}';
-  }
-}
-
-/// generated route for
-/// [NormalQuizGalleryDetailPage]
-class NormalQuizGalleryDetailRoute
-    extends PageRouteInfo<NormalQuizGalleryDetailRouteArgs> {
-  NormalQuizGalleryDetailRoute({
+/// [GalleryDetailNormalQuizPage]
+class GalleryDetailNormalQuizRoute
+    extends PageRouteInfo<GalleryDetailNormalQuizRouteArgs> {
+  GalleryDetailNormalQuizRoute({
     Key? key,
     required HitterQuizResult quizResult,
     List<PageRouteInfo>? children,
   }) : super(
-          NormalQuizGalleryDetailRoute.name,
-          args: NormalQuizGalleryDetailRouteArgs(
+          GalleryDetailNormalQuizRoute.name,
+          args: GalleryDetailNormalQuizRouteArgs(
             key: key,
             quizResult: quizResult,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'NormalQuizGalleryDetailRoute';
+  static const String name = 'GalleryDetailNormalQuizRoute';
 
-  static const PageInfo<NormalQuizGalleryDetailRouteArgs> page =
-      PageInfo<NormalQuizGalleryDetailRouteArgs>(name);
+  static const PageInfo<GalleryDetailNormalQuizRouteArgs> page =
+      PageInfo<GalleryDetailNormalQuizRouteArgs>(name);
 }
 
-class NormalQuizGalleryDetailRouteArgs {
-  const NormalQuizGalleryDetailRouteArgs({
+class GalleryDetailNormalQuizRouteArgs {
+  const GalleryDetailNormalQuizRouteArgs({
     this.key,
     required this.quizResult,
   });
@@ -224,51 +172,36 @@ class NormalQuizGalleryDetailRouteArgs {
 
   @override
   String toString() {
-    return 'NormalQuizGalleryDetailRouteArgs{key: $key, quizResult: $quizResult}';
+    return 'GalleryDetailNormalQuizRouteArgs{key: $key, quizResult: $quizResult}';
   }
 }
 
 /// generated route for
-/// [NormalQuizGalleryListPage]
-class NormalQuizGalleryListRoute extends PageRouteInfo<void> {
-  const NormalQuizGalleryListRoute({List<PageRouteInfo>? children})
+/// [GalleryListDailyQuizPage]
+class GalleryListDailyQuizRoute extends PageRouteInfo<void> {
+  const GalleryListDailyQuizRoute({List<PageRouteInfo>? children})
       : super(
-          NormalQuizGalleryListRoute.name,
+          GalleryListDailyQuizRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'NormalQuizGalleryListRoute';
+  static const String name = 'GalleryListDailyQuizRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [NormalQuizResultPage]
-class NormalQuizResultRoute extends PageRouteInfo<NormalQuizResultRouteArgs> {
-  NormalQuizResultRoute({
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          NormalQuizResultRoute.name,
-          args: NormalQuizResultRouteArgs(key: key),
+/// [GalleryListNormalQuizPage]
+class GalleryListNormalQuizRoute extends PageRouteInfo<void> {
+  const GalleryListNormalQuizRoute({List<PageRouteInfo>? children})
+      : super(
+          GalleryListNormalQuizRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'NormalQuizResultRoute';
+  static const String name = 'GalleryListNormalQuizRoute';
 
-  static const PageInfo<NormalQuizResultRouteArgs> page =
-      PageInfo<NormalQuizResultRouteArgs>(name);
-}
-
-class NormalQuizResultRouteArgs {
-  const NormalQuizResultRouteArgs({this.key});
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'NormalQuizResultRouteArgs{key: $key}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -339,17 +272,84 @@ class PlayNormalQuizRouteArgs {
 }
 
 /// generated route for
-/// [PrepareQuizPage]
-class PrepareQuizRoute extends PageRouteInfo<void> {
-  const PrepareQuizRoute({List<PageRouteInfo>? children})
+/// [QuizSettingPage]
+class QuizSettingRoute extends PageRouteInfo<void> {
+  const QuizSettingRoute({List<PageRouteInfo>? children})
       : super(
-          PrepareQuizRoute.name,
+          QuizSettingRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'PrepareQuizRoute';
+  static const String name = 'QuizSettingRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ResultDailyQuizPage]
+class ResultDailyQuizRoute extends PageRouteInfo<ResultDailyQuizRouteArgs> {
+  ResultDailyQuizRoute({
+    Key? key,
+    required DateTime questionedAt,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResultDailyQuizRoute.name,
+          args: ResultDailyQuizRouteArgs(
+            key: key,
+            questionedAt: questionedAt,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ResultDailyQuizRoute';
+
+  static const PageInfo<ResultDailyQuizRouteArgs> page =
+      PageInfo<ResultDailyQuizRouteArgs>(name);
+}
+
+class ResultDailyQuizRouteArgs {
+  const ResultDailyQuizRouteArgs({
+    this.key,
+    required this.questionedAt,
+  });
+
+  final Key? key;
+
+  final DateTime questionedAt;
+
+  @override
+  String toString() {
+    return 'ResultDailyQuizRouteArgs{key: $key, questionedAt: $questionedAt}';
+  }
+}
+
+/// generated route for
+/// [ResultNormalQuizPage]
+class ResultNormalQuizRoute extends PageRouteInfo<ResultNormalQuizRouteArgs> {
+  ResultNormalQuizRoute({
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ResultNormalQuizRoute.name,
+          args: ResultNormalQuizRouteArgs(key: key),
+          initialChildren: children,
+        );
+
+  static const String name = 'ResultNormalQuizRoute';
+
+  static const PageInfo<ResultNormalQuizRouteArgs> page =
+      PageInfo<ResultNormalQuizRouteArgs>(name);
+}
+
+class ResultNormalQuizRouteArgs {
+  const ResultNormalQuizRouteArgs({this.key});
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'ResultNormalQuizRouteArgs{key: $key}';
+  }
 }
 
 /// generated route for

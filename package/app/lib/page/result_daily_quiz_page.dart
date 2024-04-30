@@ -12,8 +12,8 @@ import '../feature/quiz_result/result_text.dart';
 import '../feature/quiz_result/share_button.dart';
 
 @RoutePage()
-class DailyQuizResultPage extends ConsumerWidget {
-  DailyQuizResultPage({super.key, required this.questionedAt});
+class ResultDailyQuizPage extends ConsumerWidget {
+  ResultDailyQuizPage({super.key, required this.questionedAt});
 
   final DateTime questionedAt;
 

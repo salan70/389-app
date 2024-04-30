@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../core/common_widget/button/back_to_top_button.dart';
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/colors_constant.dart';
-import '../../../page/daily_quiz_gallery_list_page.dart';
-import '../../../page/normal_quiz_gallery_list_page.dart';
+import '../../page/gallery_list_daily_quiz_page.dart';
+import '../../page/gallery_list_normal_quiz_page.dart';
 import '../ad/banner_ad_widget.dart';
 
 class BaseGalleryListPage extends StatelessWidget {
@@ -33,8 +33,8 @@ class BaseGalleryListPage extends StatelessWidget {
                   const Expanded(
                     child: TabBarView(
                       children: <Widget>[
-                        NormalQuizGalleryListPage(),
-                        DailyQuizGalleryListPage(),
+                        GalleryListNormalQuizPage(),
+                        GalleryListDailyQuizPage(),
                       ],
                     ),
                   ),

@@ -51,7 +51,7 @@ class IncorrectDialog extends ConsumerWidget {
                     if (quizType == QuizType.normal) {
                       await quizResultService.createNormalQuizResult();
                       if (context.mounted) {
-                        await context.pushRoute(NormalQuizResultRoute());
+                        await context.pushRoute(ResultNormalQuizRoute());
                       }
                       return;
                     }
@@ -65,7 +65,7 @@ class IncorrectDialog extends ConsumerWidget {
 
                     if (context.mounted) {
                       await context.pushRoute(
-                        DailyQuizResultRoute(questionedAt: questionedAt!),
+                        ResultDailyQuizRoute(questionedAt: questionedAt!),
                       );
                     }
                   },

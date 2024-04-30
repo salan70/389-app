@@ -5,7 +5,6 @@ import 'package:model/model.dart';
 import '../core/common_widget/button/back_button.dart' as common;
 import '../core/common_widget/button/my_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
-import '../feature/gallery/delete_normal_quiz_button.dart';
 import '../feature/gallery/result_info_widget.dart';
 import '../feature/gallery/result_rank_label_widget.dart';
 import '../feature/gallery/show_answer_button.dart';
@@ -13,10 +12,10 @@ import '../feature/quiz_result/result_quiz_widget.dart';
 import '../feature/quiz_result/share_button.dart';
 
 @RoutePage()
-class NormalQuizGalleryDetailPage extends StatelessWidget {
-  NormalQuizGalleryDetailPage({super.key, required this.quizResult});
+class GalleryDetailDailyQuizPage extends StatelessWidget {
+  GalleryDetailDailyQuizPage({super.key, required this.hitterQuizResult});
 
-  final HitterQuizResult quizResult;
+  final HitterQuizResult hitterQuizResult;
 
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
   static const _buttonWidth = 160.0;
@@ -32,24 +31,24 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
             children: [
               const BannerAdWidget(),
               const SizedBox(height: 16),
-              ResultRankLabelWidget(quizResult: quizResult),
+              ResultRankLabelWidget(quizResult: hitterQuizResult),
               const SizedBox(height: 16),
               ResultQuizWidget(
                 globalKey: _globalKey,
                 hitterQuiz: HitterQuiz.fromHitterResult(
-                  quizResult,
-                  QuizType.normal,
+                  hitterQuizResult,
+                  QuizType.daily,
                 ),
               ),
               const SizedBox(height: 8),
-              ResultInfoWidget(quizResult: quizResult),
+              ResultInfoWidget(quizResult: hitterQuizResult),
               const SizedBox(height: 8),
               Center(
                 child: SizedBox(
                   width: _buttonWidth,
                   child: ShowAnswerButton(
                     buttonType: ButtonType.main,
-                    quizResult: quizResult,
+                    quizResult: hitterQuizResult,
                   ),
                 ),
               ),
@@ -72,16 +71,6 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              Center(
-                child: SizedBox(
-                  width: _buttonWidth,
-                  child: DeleteNormalQuizResultButton(
-                    quizResult: quizResult,
-                    onDeleteComplete: context.popRoute,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 80),
             ],
           ),
         ),

@@ -6,11 +6,11 @@ import 'package:model/model.dart';
 import '../core/common_widget/async_value_handler.dart';
 import '../core/util/colors_constant.dart';
 import '../core/util/result_rank_extension.dart';
-import 'normal_quiz_gallery_detail_page.dart';
+import 'gallery_detail_normal_quiz_page.dart';
 
 @RoutePage()
-class NormalQuizGalleryListPage extends ConsumerWidget {
-  const NormalQuizGalleryListPage({super.key});
+class GalleryListNormalQuizPage extends ConsumerWidget {
+  const GalleryListNormalQuizPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,7 +47,7 @@ class NormalQuizGalleryListPage extends ConsumerWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute<Widget>(
-                                builder: (_) => NormalQuizGalleryDetailPage(
+                                builder: (_) => GalleryDetailNormalQuizPage(
                                   quizResult: quizResult,
                                 ),
                                 settings: const RouteSettings(

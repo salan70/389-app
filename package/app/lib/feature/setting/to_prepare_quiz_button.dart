@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
-import '../../../page/prepare_quiz_page.dart';
+import '../../page/quiz_setting_page.dart';
 
 class ToPrepareQuizButton extends StatelessWidget {
   const ToPrepareQuizButton({
@@ -28,7 +28,7 @@ class ToPrepareQuizButton extends StatelessWidget {
         await Navigator.push(
           context,
           MaterialPageRoute<Widget>(
-            builder: (_) => const PrepareQuizPage(),
+            builder: (_) => const QuizSettingPage(),
             settings: const RouteSettings(
               name: '/prepare_quiz_page',
             ),

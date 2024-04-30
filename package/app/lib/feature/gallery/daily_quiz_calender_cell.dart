@@ -8,8 +8,8 @@ import '../../../core/common_widget/async_value_handler.dart';
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/presentation_mixin.dart';
 import '../../../core/util/result_rank_extension.dart';
-import '../../../page/daily_quiz_gallery_detail_page.dart';
 import '../../core/router/app_router.dart';
+import '../../page/gallery_detail_daily_quiz_page.dart';
 
 class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
   const DailyQuizCalenderCell({super.key, required this.date});
@@ -38,7 +38,7 @@ class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
               await Navigator.push(
                 context,
                 MaterialPageRoute<Widget>(
-                  builder: (_) => DailyQuizGalleryDetailPage(
+                  builder: (_) => GalleryDetailDailyQuizPage(
                     hitterQuizResult: hitterQuizResult,
                   ),
                   settings: const RouteSettings(

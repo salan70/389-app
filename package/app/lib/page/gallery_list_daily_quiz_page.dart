@@ -7,8 +7,8 @@ import 'package:table_calendar/table_calendar.dart';
 import '../feature/gallery/daily_quiz_calender_cell.dart';
 
 @RoutePage()
-class DailyQuizGalleryListPage extends ConsumerWidget {
-  const DailyQuizGalleryListPage({super.key});
+class GalleryListDailyQuizPage extends ConsumerWidget {
+  const GalleryListDailyQuizPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

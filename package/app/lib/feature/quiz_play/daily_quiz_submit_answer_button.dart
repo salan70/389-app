@@ -41,7 +41,7 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
 
       if (context.mounted) {
         await context
-            .pushRoute(DailyQuizResultRoute(questionedAt: questionedAt));
+            .pushRoute(ResultDailyQuizRoute(questionedAt: questionedAt));
       }
     }
 

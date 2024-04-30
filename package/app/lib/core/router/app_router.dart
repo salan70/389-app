@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../page/daily_quiz_gallery_detail_page.dart';
-import '../../page/daily_quiz_gallery_list_page.dart';
-import '../../page/daily_quiz_result_page.dart';
-import '../../page/normal_quiz_gallery_detail_page.dart';
-import '../../page/normal_quiz_gallery_list_page.dart';
-import '../../page/normal_quiz_result_page.dart';
+import '../../page/gallery_detail_daily_quiz_page.dart';
+import '../../page/gallery_detail_normal_quiz_page.dart';
+import '../../page/gallery_list_daily_quiz_page.dart';
+import '../../page/gallery_list_normal_quiz_page.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../page/play_normal_quiz_page.dart';
-import '../../page/prepare_quiz_page.dart';
+import '../../page/quiz_setting_page.dart';
+import '../../page/result_daily_quiz_page.dart';
+import '../../page/result_normal_quiz_page.dart';
 import '../../page/top_page.dart';
 
 part 'app_router.g.dart';
@@ -25,13 +25,13 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(page: TopRoute.page, initial: true),
-        AutoRoute(page: PrepareQuizRoute.page),
-        AutoRoute(page: NormalQuizGalleryListRoute.page),
-        AutoRoute(page: NormalQuizResultRoute.page),
-        AutoRoute(page: DailyQuizGalleryListRoute.page),
-        AutoRoute(page: DailyQuizResultRoute.page),
-        AutoRoute(page: NormalQuizGalleryDetailRoute.page),
-        AutoRoute(page: DailyQuizGalleryDetailRoute.page),
+        AutoRoute(page: QuizSettingRoute.page),
+        AutoRoute(page: GalleryListNormalQuizRoute.page),
+        AutoRoute(page: GalleryListDailyQuizRoute.page),
+        AutoRoute(page: GalleryDetailNormalQuizRoute.page),
+        AutoRoute(page: GalleryDetailDailyQuizRoute.page),
+        AutoRoute(page: ResultNormalQuizRoute.page),
+        AutoRoute(page: ResultDailyQuizRoute.page),
         AutoRoute(page: PlayNormalQuizRoute.page),
         AutoRoute(page: PlayDailyQuizRoute.page),
       ];

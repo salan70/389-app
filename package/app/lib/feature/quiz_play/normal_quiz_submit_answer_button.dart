@@ -47,7 +47,7 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
                 // `createNormalQuizResult()` でエラーが発生しなかった場合のみ、
                 // 画面遷移する。
                 if (context.mounted) {
-                  await context.pushRoute(NormalQuizResultRoute());
+                  await context.pushRoute(ResultNormalQuizRoute());
                 }
                 return;
               }
