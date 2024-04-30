@@ -32,10 +32,12 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
     );
   }
 
+  // TODO(me): 広告の視聴が完了した際の処理を、引数で渡せない？
+
   /// 広告を表示する。
   ///
   /// 広告の視聴が完了したら、 state.isWatchCompleted が true になる。
-  void showAd() {
+  void showAd({required Function onUserEarnedReward}) {
     state.rewardedAd
       ?..fullScreenContentCallback = FullScreenContentCallback(
         // 広告が表示された場合。
@@ -59,13 +61,10 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       ..show(
         onUserEarnedReward: (ad, reward) {
           logger.i('リワード広告の視聴が完了しました。');
-          state = state.copyWith(isWatchCompleted: true);
+          // state = state.copyWith(isWatchCompleted: true);
+          onUserEarnedReward();
+          logger.i('リワード広告の特典を受け取りました');
         },
       );
-  }
-
-  /// state.isStartedQuiz を true にする。
-  void updateIsStartedQuiz() {
-    state = state.copyWith(isStartedQuiz: true);
   }
 }

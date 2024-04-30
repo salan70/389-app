@@ -10,50 +10,17 @@ import '../../../core/util/result_rank_extension.dart';
 import '../../../page/daily_quiz_gallery_detail_page.dart';
 import '../../../page/play_daily_quiz_page.dart';
 
-class DailyQuizCalenderCell extends ConsumerStatefulWidget {
+class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
   const DailyQuizCalenderCell({super.key, required this.date});
 
   final DateTime date;
 
   @override
-  ConsumerState<DailyQuizCalenderCell> createState() => _CalenderCellState();
-}
-
-class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
-    with PresentationMixin {
-  /// このセルの日付の今日の1問を、広告を見てプレイするかどうか。
-  ///
-  /// それぞれの日付のセルが作成されるため、該当するセルだけで
-  /// プレイするかどうかを管理する必要がある。
-  var _willPlay = false;
-
-  @override
-  Widget build(BuildContext context) {
-    ref.listen(
-      rewardedAdNotifierProvider,
-      (_, next) {
-        if (!_willPlay) {
-          return;
-        }
-        final nextState = next! as RewardAdState;
-        // 広告の視聴が完了しており、 かつ、 クイズがプレイ開始されていない場合。
-        // 該当日の今日の1問をプレイする。
-        if (nextState.isWatchCompleted && !nextState.isStartedQuiz) {
-          ref.read(rewardedAdNotifierProvider.notifier).updateIsStartedQuiz();
-          Navigator.of(context).push(
-            MaterialPageRoute<Widget>(
-              builder: (_) => PlayDailyQuizPage(questionedAt: widget.date),
-              settings: const RouteSettings(name: '/play_daily_quiz_page'),
-            ),
-          );
-        }
-      },
-    );
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return AsyncValueHandler(
       value: ref.watch(dailyQuizResultProvider),
       builder: (DailyHitterQuizResult dailyHitterQuizResult) {
-        final formattedDate = widget.date.toFormattedString();
+        final formattedDate = date.toFormattedString();
 
         // プレイ済みの日付。
         if (dailyHitterQuizResult.resultMap.containsKey(formattedDate)) {
@@ -87,16 +54,16 @@ class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
           );
         }
         // 未プレイ かつ 過去の日付。
-        else if (widget.date.isBefore(DateTime.now().calculateDateInApp())) {
+        if (date.isBefore(DateTime.now().calculateDateInApp())) {
           return InkWell(
             onTap: () async {
               await executeWithOverlayLoading(
                 ref,
                 action: () async {
                   // 念のため、 invalidate する。
-                  ref.invalidate(dailyQuizProvider(widget.date));
+                  ref.invalidate(dailyQuizProvider(date));
                   final dailyQuiz =
-                      await ref.read(dailyQuizProvider(widget.date).future);
+                      await ref.read(dailyQuizProvider(date).future);
 
                   // * null （未登録などで取得できなかった）の場合。
                   if (dailyQuiz == null) {
@@ -107,7 +74,7 @@ class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
                   await ref.read(
                     hitterQuizNotifierProvider(
                       QuizType.daily,
-                      questionedAt: widget.date,
+                      questionedAt: date,
                     ).future,
                   );
                 },
@@ -115,9 +82,6 @@ class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
                   await ref
                       .read(analyticsServiceProvider)
                       .logTapButton('show_confirm_play_past_daily_quiz_dialog');
-                  setState(() {
-                    _willPlay = true;
-                  });
                   if (!context.mounted) {
                     return;
                   }
@@ -126,7 +90,7 @@ class _CalenderCellState extends ConsumerState<DailyQuizCalenderCell>
                     barrierDismissible: false,
                     builder: (_) {
                       return _ConfirmPlayPastDailyQuizDialog(
-                        date: widget.date,
+                        date: date,
                       );
                     },
                   );
@@ -209,7 +173,19 @@ class __ConfirmPlayPastDailyQuizDialog
             await ref
                 .read(analyticsServiceProvider)
                 .logTapButton('approved_play_past_daily_quiz');
-            ref.read(rewardedAdNotifierProvider.notifier).showAd();
+
+            ref.read(rewardedAdNotifierProvider.notifier).showAd(
+              onUserEarnedReward: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<Widget>(
+                    builder: (_) =>
+                        PlayDailyQuizPage(questionedAt: widget.date),
+                    settings:
+                        const RouteSettings(name: '/play_daily_quiz_page'),
+                  ),
+                );
+              },
+            );
           },
           child: SizedBox(
             height: _buttonHeight,
