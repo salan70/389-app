@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
-import '../core/common_widget/button/back_button.dart' as common;
 import '../core/common_widget/button/my_button.dart';
+import '../core/common_widget/navigation_button/back_button.dart' as common;
 import '../feature/ad/banner_ad_widget.dart';
 import '../feature/gallery/result_info_widget.dart';
 import '../feature/gallery/result_rank_label_widget.dart';

@@ -4,14 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../core/common_widget/button/my_button.dart';
+import '../core/common_widget/navigation_button/to_gallery_button.dart';
+import '../core/common_widget/navigation_button/to_play_normal_quiz_from_top_button.dart';
+import '../core/common_widget/navigation_button/to_play_todays_daily_quiz_button.dart';
+import '../core/common_widget/navigation_button/to_prepare_quiz_button.dart';
+import '../core/common_widget/navigation_button/to_setting_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
 import '../feature/setting/force_update_dialog.dart';
 import '../feature/setting/icon_widget.dart';
-import '../feature/setting/to_gallery_button.dart';
-import '../feature/setting/to_play_normal_quiz_from_top_button.dart';
-import '../feature/setting/to_play_todays_daily_quiz_button.dart';
-import '../feature/setting/to_prepare_quiz_button.dart';
-import '../feature/setting/to_setting_button.dart';
 
 @RoutePage()
 class TopPage extends ConsumerStatefulWidget {

@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/common_widget/button/back_to_top_button.dart';
-import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/util/colors_constant.dart';
-import '../../page/gallery_list_daily_quiz_page.dart';
-import '../../page/gallery_list_normal_quiz_page.dart';
-import '../ad/banner_ad_widget.dart';
+import '../../core/common_widget/button/my_button.dart';
+import '../../core/util/colors_constant.dart';
+import '../core/common_widget/navigation_button/back_to_top_button.dart';
+import '../feature/ad/banner_ad_widget.dart';
+import '../feature/gallery/daily_quiz_gallery_list.dart';
+import '../feature/gallery/normal_quiz_gallery_list.dart';
 
-class BaseGalleryListPage extends StatelessWidget {
-  const BaseGalleryListPage({super.key});
+@RoutePage()
+class GalleryListPage extends StatelessWidget {
+  const GalleryListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +35,8 @@ class BaseGalleryListPage extends StatelessWidget {
                   const Expanded(
                     child: TabBarView(
                       children: <Widget>[
-                        GalleryListNormalQuizPage(),
-                        GalleryListDailyQuizPage(),
+                        NormalQuizGalleryList(),
+                        DailyQuizGalleryList(),
                       ],
                     ),
                   ),

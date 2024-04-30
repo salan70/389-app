@@ -1,16 +1,14 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../core/common_widget/async_value_handler.dart';
-import '../core/util/colors_constant.dart';
-import '../core/util/result_rank_extension.dart';
-import 'gallery_detail_normal_quiz_page.dart';
+import '../../core/common_widget/async_value_handler.dart';
+import '../../core/util/colors_constant.dart';
+import '../../core/util/result_rank_extension.dart';
+import '../../page/gallery_detail_normal_quiz_page.dart';
 
-@RoutePage()
-class GalleryListNormalQuizPage extends ConsumerWidget {
-  const GalleryListNormalQuizPage({super.key});
+class NormalQuizGalleryList extends ConsumerWidget {
+  const NormalQuizGalleryList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

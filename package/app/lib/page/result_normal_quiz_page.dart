@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../core/common_widget/button/back_to_top_button.dart';
 import '../core/common_widget/button/my_button.dart';
+import '../core/common_widget/navigation_button/back_to_top_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
 import '../feature/quiz_result/custom_confetti_widget.dart';
 import '../feature/quiz_result/replay_button.dart';

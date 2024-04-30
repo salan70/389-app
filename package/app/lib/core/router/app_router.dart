@@ -5,8 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../page/gallery_detail_daily_quiz_page.dart';
 import '../../page/gallery_detail_normal_quiz_page.dart';
-import '../../page/gallery_list_daily_quiz_page.dart';
-import '../../page/gallery_list_normal_quiz_page.dart';
+import '../../page/gallery_list_page.dart';
 import '../../page/play_daily_quiz_page.dart';
 import '../../page/play_normal_quiz_page.dart';
 import '../../page/quiz_setting_page.dart';
@@ -26,8 +25,7 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(page: TopRoute.page, initial: true),
         AutoRoute(page: QuizSettingRoute.page),
-        AutoRoute(page: GalleryListNormalQuizRoute.page),
-        AutoRoute(page: GalleryListDailyQuizRoute.page),
+        AutoRoute(page: GalleryListRoute.page),
         AutoRoute(page: GalleryDetailNormalQuizRoute.page),
         AutoRoute(page: GalleryDetailDailyQuizRoute.page),
         AutoRoute(page: ResultNormalQuizRoute.page),

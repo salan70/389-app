@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -115,7 +116,7 @@ class _CloseButton extends StatelessWidget {
     return MyButton(
       buttonName: 'close_button_in_notification_setting_dialog',
       buttonType: ButtonType.main,
-      onPressed: () => Navigator.pop(context),
+      onPressed: context.popRoute,
       child: const Center(child: Text('閉じる')),
     );
   }

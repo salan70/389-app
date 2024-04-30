@@ -9,7 +9,6 @@ import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/presentation_mixin.dart';
 import '../../../core/util/result_rank_extension.dart';
 import '../../core/router/app_router.dart';
-import '../../page/gallery_detail_daily_quiz_page.dart';
 
 class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
   const DailyQuizCalenderCell({super.key, required this.date});
@@ -32,20 +31,14 @@ class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
               await ref
                   .read(analyticsServiceProvider)
                   .logTapButton('to_daily_quiz_gallery_detail_page');
-              if (!context.mounted) {
-                return;
-              }
-              await Navigator.push(
-                context,
-                MaterialPageRoute<Widget>(
-                  builder: (_) => GalleryDetailDailyQuizPage(
+
+              if (context.mounted) {
+                await context.pushRoute(
+                  GalleryDetailDailyQuizRoute(
                     hitterQuizResult: hitterQuizResult,
                   ),
-                  settings: const RouteSettings(
-                    name: '/daily_quiz_gallery_detail_page',
-                  ),
-                ),
-              );
+                );
+              }
             },
             child: Center(
               child: FittedBox(
@@ -160,10 +153,10 @@ class __ConfirmPlayPastDailyQuizDialog
             await ref
                 .read(analyticsServiceProvider)
                 .logTapButton('cancelled_play_past_daily_quiz');
+
             if (!context.mounted) {
-              return;
+              await context.popRoute();
             }
-            Navigator.pop(context);
           },
         ),
         const SizedBox(width: 4),

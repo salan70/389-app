@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../../../core/common_widget/button/my_button.dart';
+import '../../../../core/common_widget/button/my_button.dart';
 
 class ToTermButton extends ConsumerWidget {
   const ToTermButton({super.key});

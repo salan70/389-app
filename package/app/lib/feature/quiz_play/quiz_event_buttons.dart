@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -44,7 +45,7 @@ class QuizEventButtons extends ConsumerWidget {
                       confirmText: '本当に全ての成績を表示しますか？',
                       onPressedYes: () {
                         notifier.openAll();
-                        Navigator.pop(context);
+                        context.popRoute();
                       },
                     );
                   },

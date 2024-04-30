@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/common_widget/button/my_button.dart';
-import 'setting_dialog.dart';
+import '../../../../core/common_widget/button/my_button.dart';
+import '../../../feature/setting/setting_dialog.dart';
 
 class ToSettingButton extends StatelessWidget {
   const ToSettingButton({

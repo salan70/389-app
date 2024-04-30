@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../button/my_button.dart';
@@ -22,7 +23,7 @@ class ConfirmDialog extends StatelessWidget {
           buttonName: 'confirm_no_button',
           buttonType: ButtonType.sub,
           child: const Text('いいえ'),
-          onPressed: () => Navigator.pop(context),
+          onPressed: context.popRoute,
         ),
         MyButton(
           buttonName: 'confirm_yes_button',

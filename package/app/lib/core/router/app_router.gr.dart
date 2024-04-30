@@ -35,16 +35,10 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    GalleryListDailyQuizRoute.name: (routeData) {
+    GalleryListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const GalleryListDailyQuizPage(),
-      );
-    },
-    GalleryListNormalQuizRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const GalleryListNormalQuizPage(),
+        child: const GalleryListPage(),
       );
     },
     PlayDailyQuizRoute.name: (routeData) {
@@ -177,29 +171,15 @@ class GalleryDetailNormalQuizRouteArgs {
 }
 
 /// generated route for
-/// [GalleryListDailyQuizPage]
-class GalleryListDailyQuizRoute extends PageRouteInfo<void> {
-  const GalleryListDailyQuizRoute({List<PageRouteInfo>? children})
+/// [GalleryListPage]
+class GalleryListRoute extends PageRouteInfo<void> {
+  const GalleryListRoute({List<PageRouteInfo>? children})
       : super(
-          GalleryListDailyQuizRoute.name,
+          GalleryListRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'GalleryListDailyQuizRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [GalleryListNormalQuizPage]
-class GalleryListNormalQuizRoute extends PageRouteInfo<void> {
-  const GalleryListNormalQuizRoute({List<PageRouteInfo>? children})
-      : super(
-          GalleryListNormalQuizRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'GalleryListNormalQuizRoute';
+  static const String name = 'GalleryListRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

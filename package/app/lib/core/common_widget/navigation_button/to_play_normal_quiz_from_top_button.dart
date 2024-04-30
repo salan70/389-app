@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/util/presentation_mixin.dart';
-import '../../core/router/app_router.dart';
+import '../../../../core/common_widget/button/my_button.dart';
+import '../../../../core/util/presentation_mixin.dart';
+import '../../router/app_router.dart';
 
 class ToPlayNormalQuizFromTopButton extends ConsumerWidget
     with PresentationMixin {

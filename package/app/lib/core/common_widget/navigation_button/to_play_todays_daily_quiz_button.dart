@@ -5,11 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
 
-import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../../core/common_widget/dialog/error_dialog.dart';
-import '../../../core/util/presentation_mixin.dart';
-import '../../core/router/app_router.dart';
+import '../../../../core/common_widget/button/my_button.dart';
+import '../../../../core/common_widget/dialog/confirm_dialog.dart';
+import '../../../../core/common_widget/dialog/error_dialog.dart';
+import '../../../../core/util/presentation_mixin.dart';
+import '../../router/app_router.dart';
 
 class ToPlayTodaysDailyQuizButton extends ConsumerWidget
     with PresentationMixin {

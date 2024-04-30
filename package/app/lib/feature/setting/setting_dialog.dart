@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
+import '../../core/common_widget/navigation_button/to_notification_setting_button.dart';
+import '../../core/common_widget/navigation_button/to_privacy_policy_button.dart';
+import '../../core/common_widget/navigation_button/to_term_button.dart';
 import 'inquiry_button.dart';
-import 'to_notification_setting_button.dart';
-import 'to_privacy_policy_button.dart';
-import 'to_term_button.dart';
 
 class SettingDialog extends ConsumerWidget {
   const SettingDialog({super.key});
@@ -72,9 +73,7 @@ class CloseButton extends StatelessWidget {
     return MyButton(
       buttonName: 'close_button',
       buttonType: ButtonType.main,
-      onPressed: () async {
-        Navigator.pop(context);
-      },
+      onPressed: context.popRoute,
       child: const Center(child: Text('閉じる')),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../core/common_widget/button/back_to_top_button.dart';
 import '../core/common_widget/button/my_button.dart';
+import '../core/common_widget/navigation_button/back_to_top_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
 import '../feature/quiz_setting/chose_team_widget.dart';
 import '../feature/quiz_setting/notes_text.dart';

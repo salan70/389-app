@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/common_widget/button/my_button.dart';
-import '../gallery/base_gallery_list_page.dart';
+import '../../../../core/common_widget/button/my_button.dart';
+import '../../router/app_router.dart';
 
 class ToGalleryButton extends StatelessWidget {
   const ToGalleryButton({super.key, required this.buttonType});
@@ -13,18 +14,7 @@ class ToGalleryButton extends StatelessWidget {
     return MyButton(
       buttonName: 'to_gallery_button',
       buttonType: buttonType,
-      onPressed: () {
-        Navigator.push<void>(
-          context,
-          MaterialPageRoute(
-            fullscreenDialog: true,
-            builder: (context) => const BaseGalleryListPage(),
-            settings: const RouteSettings(
-              name: '/base_gallery_list_page',
-            ),
-          ),
-        );
-      },
+      onPressed: () => context.pushRoute(GalleryListRoute()),
       child: Text(
         'プレイ履歴',
         style: TextStyle(
