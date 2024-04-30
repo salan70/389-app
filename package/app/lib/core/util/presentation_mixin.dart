@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../common_widget/dialog/error_dialog.dart';
-import 'widget_ref_extension.dart';
+import '../router/scaffold_messenger_key.dart';
 
 /// Presentation 層で使用する Mixin.
 mixin PresentationMixin {
@@ -30,7 +30,7 @@ mixin PresentationMixin {
 
       // エラーダイアログを表示
       await showDialog<void>(
-        context: ref.read(navigatorKeyProvider).currentContext!,
+        context: ref.read(scaffoldMessengerKeyProvider).currentContext!,
         builder: (context) => const ErrorDialog(),
       );
     }

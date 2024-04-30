@@ -62,12 +62,6 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "flutter_lints",
-      "rootUri": "file:///Users/odatetsuo/.pub-cache/hosted/pub.dev/flutter_lints-2.0.3",
-      "packageUri": "lib/",
-      "languageVersion": "2.19"
-    },
-    {
       "name": "glob",
       "rootUri": "file:///Users/odatetsuo/.pub-cache/hosted/pub.dev/glob-2.1.2",
       "packageUri": "lib/",
@@ -100,12 +94,6 @@
     {
       "name": "json_annotation",
       "rootUri": "file:///Users/odatetsuo/.pub-cache/hosted/pub.dev/json_annotation-4.9.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-      "name": "lints",
-      "rootUri": "file:///Users/odatetsuo/.pub-cache/hosted/pub.dev/lints-2.1.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -254,7 +242,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2024-04-30T08:24:39.362408Z",
+  "generated": "2024-04-30T10:00:53.329096Z",
   "generator": "pub",
   "generatorVersion": "3.2.3"
 }

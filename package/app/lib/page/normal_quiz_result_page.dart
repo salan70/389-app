@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -11,6 +12,7 @@ import '../feature/quiz_result/result_quiz_widget.dart';
 import '../feature/quiz_result/result_text.dart';
 import '../feature/quiz_result/share_button.dart';
 
+@RoutePage()
 class NormalQuizResultPage extends ConsumerWidget {
   NormalQuizResultPage({super.key});
 
@@ -59,8 +61,8 @@ class NormalQuizResultPage extends ConsumerWidget {
 
     final asyncHitterQuiz = ref.watch(normalHitterQuizNotifierProvider);
 
-    return WillPopScope(
-      onWillPop: () async => false,
+    return PopScope(
+      canPop: false,
       child: Scaffold(
         body: SafeArea(
           child: Padding(

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -7,6 +8,7 @@ import '../core/util/colors_constant.dart';
 import '../core/util/result_rank_extension.dart';
 import 'normal_quiz_gallery_detail_page.dart';
 
+@RoutePage()
 class NormalQuizGalleryListPage extends ConsumerWidget {
   const NormalQuizGalleryListPage({super.key});
 

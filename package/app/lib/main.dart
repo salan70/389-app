@@ -19,9 +19,9 @@ import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 import 'core/common_widget/loading_widget.dart';
+import 'core/router/app_router.dart';
+import 'core/router/scaffold_messenger_key.dart';
 import 'core/util/colors_constant.dart';
-import 'core/util/widget_ref_extension.dart';
-import 'page/top_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -148,7 +148,7 @@ class _MyApp extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -175,22 +175,25 @@ class _MyApp extends ConsumerState<MyApp> {
           background: backgroundColor,
         ),
       ),
-      navigatorKey: ref.watch(navigatorKeyProvider),
-      navigatorObservers: [
-        ref.watch(analyticsObserverProvider),
-      ],
-      builder: (context, child) => Consumer(
-        builder: (context, ref, _) {
-          return Stack(
-            children: [
-              child!,
-              // ローディングを表示する
-              if (ref.watch(loadingNotifierProvider)) const LoadingWidget(),
+      routerConfig: ref.watch(appRouterProvider).config(
+            navigatorObservers: () => [
+              ref.watch(analyticsObserverProvider),
             ],
-          );
-        },
+          ),
+      builder: (context, child) => ScaffoldMessenger(
+        key: ref.watch(scaffoldMessengerKeyProvider),
+        child: Consumer(
+          builder: (context, ref, _) {
+            return Stack(
+              children: [
+                child!,
+                // ローディングを表示する
+                if (ref.watch(loadingNotifierProvider)) const LoadingWidget(),
+              ],
+            );
+          },
+        ),
       ),
-      home: const TopPage(),
     );
   }
 }

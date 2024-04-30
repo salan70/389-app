@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
@@ -11,6 +12,7 @@ import '../feature/gallery/show_answer_button.dart';
 import '../feature/quiz_result/result_quiz_widget.dart';
 import '../feature/quiz_result/share_button.dart';
 
+@RoutePage()
 class NormalQuizGalleryDetailPage extends StatelessWidget {
   NormalQuizGalleryDetailPage({super.key, required this.quizResult});
 

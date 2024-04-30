@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -12,6 +13,7 @@ import '../feature/setting/to_play_todays_daily_quiz_button.dart';
 import '../feature/setting/to_prepare_quiz_button.dart';
 import '../feature/setting/to_setting_button.dart';
 
+@RoutePage()
 class TopPage extends ConsumerStatefulWidget {
   const TopPage({super.key});
 

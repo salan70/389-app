@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -5,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../feature/gallery/daily_quiz_calender_cell.dart';
 
+@RoutePage()
 class DailyQuizGalleryListPage extends ConsumerWidget {
   const DailyQuizGalleryListPage({super.key});
 

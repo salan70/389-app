@@ -4,12 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../common_widget/dialog/error_dialog.dart';
-
-/// ダイアログ表示用のGlobalKeyを返す
-/// .currentContext!でcontextを取得できる
-final navigatorKeyProvider = Provider(
-  (_) => GlobalKey<NavigatorState>(),
-);
+import '../router/scaffold_messenger_key.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
 /// 参考
@@ -38,7 +33,7 @@ extension WidgetRefEx on WidgetRef {
 
               // エラーダイアログを表示
               await showDialog<void>(
-                context: read(navigatorKeyProvider).currentContext!,
+                context: read(scaffoldMessengerKeyProvider).currentContext!,
                 builder: (context) => const ErrorDialog(),
               );
             },

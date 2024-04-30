@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Other packages in the project
+  # Other packages in the project.
   model:
     path: ../model
   common:
@@ -24,6 +24,9 @@ dependencies:
   google_fonts: ^6.1.0
   table_calendar: ^3.0.9
   textfield_search: ^0.10.0
+
+  # Routing.
+  auto_route: ^7.8.3
 
   # Environment variables.
   flutter_dotenv: ^5.0.2
@@ -82,6 +85,7 @@ dev_dependencies:
   flutter_native_splash: ^2.1.0
 
   # Code generation.
+  auto_route_generator: ^7.3.1
   build_runner: ^2.4.7
   freezed: ^2.4.5
   hive_generator: ^2.0.1
