@@ -3,7 +3,6 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/rewarded_ad_state.dart';
-import 'ad_id_state.dart';
 
 part 'rewarded_ad_notifier.g.dart';
 
@@ -16,7 +15,7 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
   /// 広告を作成する。
   Future<void> loadAd() async {
     await RewardedAd.load(
-      adUnitId: await ref.read(rewardAdIdProvider.future),
+      adUnitId: ref.read(flavorProvider).rewardId,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (Ad ad) {

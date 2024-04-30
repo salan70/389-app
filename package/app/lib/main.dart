@@ -52,6 +52,7 @@ Future<void> main() async {
     runApp(
       ProviderScope(
         overrides: [
+          flavorProvider.overrideWithValue(Flavor.fromEnvironment),
           searchConditionRepositoryProvider.overrideWith(
             (ref) => SearchConditionRepository(searchConditionBox),
           ),

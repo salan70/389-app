@@ -1,12 +1,9 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:common/common.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../loading/application/loading_notifier.dart';
@@ -27,7 +24,7 @@ class InterstitialAdService {
   /// 広告を作成する
   Future<void> createAd() async {
     await InterstitialAd.load(
-      adUnitId: await _selectInterstitialId(),
+      adUnitId: ref.read(flavorProvider).interstitialId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (InterstitialAd ad) {
@@ -36,23 +33,6 @@ class InterstitialAdService {
         onAdFailedToLoad: logger.e,
       ),
     );
-  }
-
-  Future<String> _selectInterstitialId() async {
-    final packageInfo = await PackageInfo.fromPlatform();
-    final appName = packageInfo.appName;
-
-    // prod環境の場合
-    if (appName == '.389') {
-      return Platform.isAndroid
-          ? dotenv.env['INTERSTITIAL_ID_ANDROID']!
-          : dotenv.env['INTERSTITIAL_ID_IOS']!;
-    }
-
-    // prod環境以外の場合
-    return Platform.isAndroid
-        ? dotenv.env['TEST_INTERSTITIAL_ID_ANDROID']!
-        : dotenv.env['TEST_INTERSTITIAL_ID_IOS']!;
   }
 
   /// 広告を表示する
