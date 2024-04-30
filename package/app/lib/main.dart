@@ -18,10 +18,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
-import 'presentation/component/common/loading_widget.dart';
-import 'presentation/page/top_page.dart';
-import 'presentation/util/colors_constant.dart';
-import 'presentation/util/widget_ref_extension.dart';
+import 'core/common_widget/loading_widget.dart';
+import 'core/util/colors_constant.dart';
+import 'core/util/widget_ref_extension.dart';
+import 'page/top_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
