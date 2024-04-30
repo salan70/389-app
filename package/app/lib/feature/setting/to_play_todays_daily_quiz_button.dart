@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,7 @@ import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
 import '../../../core/common_widget/dialog/error_dialog.dart';
 import '../../../core/util/presentation_mixin.dart';
-import '../../../page/play_daily_quiz_page.dart';
+import '../../core/router/app_router.dart';
 
 class ToPlayTodaysDailyQuizButton extends ConsumerWidget
     with PresentationMixin {
@@ -120,7 +121,7 @@ class _AlertAlreadyPlayedDailyQuizDialog extends StatelessWidget {
         MyButton(
           buttonName: 'ok_button_in_already_played_daily_quiz_dialog',
           buttonType: ButtonType.main,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: context.popRoute,
           child: const Text('OK'),
         ),
       ],
@@ -147,7 +148,7 @@ class _AlertNotFoundDailyQuizDialog extends StatelessWidget {
           buttonName: 'ok_button_in_'
               'not_found_daily_quiz_dialog',
           buttonType: ButtonType.main,
-          onPressed: Navigator.of(context).pop,
+          onPressed: context.popRoute,
           child: const Text('OK'),
         ),
       ],
@@ -192,19 +193,14 @@ class _ConfirmPlayDailyQuizDialog extends ConsumerWidget
           onLoadingComplete: () async {
             final now = await NTP.now();
             final nowInApp = now.calculateDateInApp();
-            if (!context.mounted) {
-              return;
-            }
-            await Navigator.of(context).push(
-              MaterialPageRoute<Widget>(
-                builder: (_) => PlayDailyQuizPage(
+
+            if (context.mounted) {
+              await context.pushRoute(
+                PlayDailyQuizRoute(
                   questionedAt: nowInApp,
                 ),
-                settings: const RouteSettings(
-                  name: '/play_daily_quiz_page',
-                ),
-              ),
-            );
+              );
+            }
           },
         );
       },

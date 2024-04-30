@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
-import '../../../page/normal_quiz_result_page.dart';
+import '../../core/router/app_router.dart';
 import 'incorrect_dialog.dart';
 
 class NormalQuizSubmitAnswerButton extends ConsumerWidget {
@@ -24,8 +25,6 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
       onPressed: enteredHitter == null
           ? null
           : () async {
-              final navigator = Navigator.of(context);
-
               // interstitial 広告を作成する。
               final interstitialAdService =
                   ref.read(interstitialAdServiceProvider);
@@ -38,7 +37,7 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
               );
               final isCorrect = hitterQuizNotifier.isCorrectHitterQuiz();
 
-              // 正解の場合。
+              // * 正解の場合。
               if (isCorrect) {
                 hitterQuizNotifier.markCorrect();
                 await ref
@@ -47,17 +46,13 @@ class NormalQuizSubmitAnswerButton extends ConsumerWidget {
 
                 // `createNormalQuizResult()` でエラーが発生しなかった場合のみ、
                 // 画面遷移する。
-                await navigator.push(
-                  MaterialPageRoute<Widget>(
-                    builder: (_) => NormalQuizResultPage(),
-                    settings: const RouteSettings(
-                      name: '/play_normal_quiz_page',
-                    ),
-                  ),
-                );
+                if (context.mounted) {
+                  await context.pushRoute(NormalQuizResultRoute());
+                }
                 return;
               }
-              // 不正解の場合。
+
+              // * 不正解の場合。
               hitterQuizNotifier.addIncorrectCount();
 
               // 広告を確率で表示する。

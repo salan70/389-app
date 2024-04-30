@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
@@ -36,7 +37,7 @@ class DeleteNormalQuizResultButton extends ConsumerWidget {
                   buttonName:
                       'cancel_button_in_delete_normal_quiz_result_dialog',
                   buttonType: ButtonType.sub,
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: context.popRoute,
                   child: const Text('キャンセル'),
                 ),
                 MyButton(
@@ -44,7 +45,7 @@ class DeleteNormalQuizResultButton extends ConsumerWidget {
                       'delete_button_in_delete_normal_quiz_result_dialog',
                   buttonType: ButtonType.alert,
                   onPressed: () async {
-                    Navigator.of(context).pop();
+                    await context.popRoute();
                     await ref
                         .read(quizResultServiceProvider)
                         .deleteNormalQuizResult(quizResult.docId);

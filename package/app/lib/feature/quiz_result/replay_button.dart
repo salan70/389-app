@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/presentation_mixin.dart';
-import '../../../page/play_normal_quiz_page.dart';
+import '../../core/router/app_router.dart';
 
 class ReplayButton extends ConsumerWidget with PresentationMixin {
   const ReplayButton({
@@ -35,16 +36,7 @@ class ReplayButton extends ConsumerWidget with PresentationMixin {
                   .future,
             );
           },
-          onLoadingComplete: () {
-            Navigator.of(context).push(
-              MaterialPageRoute<Widget>(
-                builder: (_) => PlayNormalQuizPage(),
-                settings: const RouteSettings(
-                  name: '/play_normal_quiz_page',
-                ),
-              ),
-            );
-          },
+          onLoadingComplete: () => context.pushRoute(PlayNormalQuizRoute()),
         );
       },
       child: const Text('同じ条件でもう一度！'),

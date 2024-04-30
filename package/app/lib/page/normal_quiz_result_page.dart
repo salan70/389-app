@@ -147,14 +147,14 @@ class _RequestReviewDialog extends ConsumerWidget {
         MyButton(
           buttonName: 'cancel_button_in_request_review_dialog',
           buttonType: ButtonType.sub,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: context.popRoute,
           child: const Text('今はやめとく'),
         ),
         MyButton(
           buttonName: 'ok_button_in_request_review_dialog',
           buttonType: ButtonType.main,
           onPressed: () async {
-            Navigator.of(context).pop();
+            await context.popRoute();
             await ref.read(appReviewServiceProvider).requestAppReview();
           },
           child: const Text('レビューする！'),

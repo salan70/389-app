@@ -77,7 +77,7 @@ class NormalQuizGalleryDetailPage extends StatelessWidget {
                   width: _buttonWidth,
                   child: DeleteNormalQuizResultButton(
                     quizResult: quizResult,
-                    onDeleteComplete: Navigator.of(context).pop,
+                    onDeleteComplete: context.popRoute,
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,7 @@ import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/presentation_mixin.dart';
 import '../../../core/util/result_rank_extension.dart';
 import '../../../page/daily_quiz_gallery_detail_page.dart';
-import '../../../page/play_daily_quiz_page.dart';
+import '../../core/router/app_router.dart';
 
 class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
   const DailyQuizCalenderCell({super.key, required this.date});
@@ -175,17 +176,9 @@ class __ConfirmPlayPastDailyQuizDialog
                 .logTapButton('approved_play_past_daily_quiz');
 
             ref.read(rewardedAdNotifierProvider.notifier).showAd(
-              onUserEarnedReward: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute<Widget>(
-                    builder: (_) =>
-                        PlayDailyQuizPage(questionedAt: widget.date),
-                    settings:
-                        const RouteSettings(name: '/play_daily_quiz_page'),
-                  ),
+                  onUserEarnedReward: () => context
+                      .pushRoute(PlayDailyQuizRoute(questionedAt: widget.date)),
                 );
-              },
-            );
           },
           child: SizedBox(
             height: _buttonHeight,

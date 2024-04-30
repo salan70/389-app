@@ -1,11 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../../page/daily_quiz_result_page.dart';
-import '../../../page/normal_quiz_result_page.dart';
+import '../../core/router/app_router.dart';
 
 class IncorrectDialog extends ConsumerWidget {
   const IncorrectDialog.normal({super.key, required this.hitterName})
@@ -41,36 +41,31 @@ class IncorrectDialog extends ConsumerWidget {
               context: context,
               barrierDismissible: false,
               builder: (_) {
-                final resultPage = quizType == QuizType.normal
-                    ? NormalQuizResultPage()
-                    : DailyQuizResultPage(
-                        questionedAt: questionedAt!,
-                      );
-
                 return ConfirmDialog(
                   confirmText: quizType.retireConfirmText,
                   onPressedYes: () async {
                     final quizResultService =
                         ref.read(quizResultServiceProvider);
 
+                    // * 通常クイズの場合
                     if (quizType == QuizType.normal) {
                       await quizResultService.createNormalQuizResult();
-                    } else {
-                      if (questionedAt == null) {
-                        throw ArgumentError.notNull('questionedAt');
+                      if (context.mounted) {
+                        await context.pushRoute(NormalQuizResultRoute());
                       }
-                      await quizResultService
-                          .updateDailyQuizResult(questionedAt!);
+                      return;
                     }
 
+                    // * デイリークイズの場合
+                    if (questionedAt == null) {
+                      throw ArgumentError.notNull('questionedAt');
+                    }
+                    await quizResultService
+                        .updateDailyQuizResult(questionedAt!);
+
                     if (context.mounted) {
-                      await Navigator.of(context).push(
-                        MaterialPageRoute<Widget>(
-                          builder: (_) => resultPage,
-                          settings: RouteSettings(
-                            name: '/${quizType.label}_quiz_result_page',
-                          ),
-                        ),
+                      await context.pushRoute(
+                        DailyQuizResultRoute(questionedAt: questionedAt!),
                       );
                     }
                   },
@@ -82,7 +77,7 @@ class IncorrectDialog extends ConsumerWidget {
         MyButton(
           buttonName: 'try_again_button',
           buttonType: ButtonType.sub,
-          onPressed: Navigator.of(context).pop,
+          onPressed: context.popRoute,
           child: const Text('もう一度回答する'),
         ),
       ],

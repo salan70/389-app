@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../../page/daily_quiz_result_page.dart';
+import '../../core/router/app_router.dart';
 import 'incorrect_dialog.dart';
 
 class DailyQuizSubmitAnswerButton extends ConsumerWidget {
@@ -39,16 +40,8 @@ class DailyQuizSubmitAnswerButton extends ConsumerWidget {
           .updateDailyQuizResult(questionedAt);
 
       if (context.mounted) {
-        await Navigator.of(context).push(
-          MaterialPageRoute<Widget>(
-            builder: (_) => DailyQuizResultPage(
-              questionedAt: questionedAt,
-            ),
-            settings: const RouteSettings(
-              name: '/daily_quiz__resultpage',
-            ),
-          ),
-        );
+        await context
+            .pushRoute(DailyQuizResultRoute(questionedAt: questionedAt));
       }
     }
 

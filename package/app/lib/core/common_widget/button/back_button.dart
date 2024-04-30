@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'my_button.dart';
@@ -12,7 +13,7 @@ class BackButton extends StatelessWidget {
     return MyButton(
       buttonName: 'back_button',
       buttonType: buttonType,
-      onPressed: Navigator.of(context).pop,
+      onPressed: context.popRoute,
       child: const Text('戻る'),
     );
   }

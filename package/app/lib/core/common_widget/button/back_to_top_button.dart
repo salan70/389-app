@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'my_button.dart';
@@ -12,7 +13,7 @@ class BackToTopButton extends StatelessWidget {
     return MyButton(
       buttonName: 'back_to_top_button',
       buttonType: buttonType,
-      onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+      onPressed: context.router.popUntilRoot,
       child: const Text('TOPへ戻る'),
     );
   }
