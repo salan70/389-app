@@ -1,11 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../core/common_widget/async_value_handler.dart';
+import '../../core/router/app_router.dart';
 import '../../core/util/colors_constant.dart';
 import '../../core/util/result_rank_extension.dart';
-import '../../page/gallery_detail_normal_quiz_page.dart';
 
 class NormalQuizGalleryList extends ConsumerWidget {
   const NormalQuizGalleryList({super.key});
@@ -41,19 +42,11 @@ class NormalQuizGalleryList extends ConsumerWidget {
                       itemBuilder: (context, index) {
                         final quizResult = quizResultList[index];
                         return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute<Widget>(
-                                builder: (_) => GalleryDetailNormalQuizPage(
-                                  quizResult: quizResult,
-                                ),
-                                settings: const RouteSettings(
-                                  name: '/normal_quiz_gallery_detail_page',
-                                ),
-                              ),
-                            );
-                          },
+                          onTap: () => context.pushRoute(
+                            GalleryDetailNormalQuizRoute(
+                              quizResult: quizResult,
+                            ),
+                          ),
                           child: DecoratedBox(
                             decoration: BoxDecoration(
                               color: backgroundColor,

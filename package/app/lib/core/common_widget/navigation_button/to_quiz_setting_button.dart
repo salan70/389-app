@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/common_widget/button/my_button.dart';
-import '../../../page/quiz_setting_page.dart';
+import '../../router/app_router.dart';
 
-class ToPrepareQuizButton extends StatelessWidget {
-  const ToPrepareQuizButton({
+class ToQuizSettingButton extends StatelessWidget {
+  const ToQuizSettingButton({
     super.key,
     required this.buttonType,
   });
@@ -14,7 +15,7 @@ class ToPrepareQuizButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      buttonName: 'to_prepare_quiz_button',
+      buttonName: 'to_quiz_setting_button',
       buttonType: buttonType,
       child: FittedBox(
         child: Text(
@@ -24,17 +25,7 @@ class ToPrepareQuizButton extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () async {
-        await Navigator.push(
-          context,
-          MaterialPageRoute<Widget>(
-            builder: (_) => const QuizSettingPage(),
-            settings: const RouteSettings(
-              name: '/prepare_quiz_page',
-            ),
-          ),
-        );
-      },
+      onPressed: () => context.pushRoute(QuizSettingRoute()),
     );
   }
 }

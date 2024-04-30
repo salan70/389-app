@@ -7,7 +7,7 @@ import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/to_gallery_button.dart';
 import '../core/common_widget/navigation_button/to_play_normal_quiz_from_top_button.dart';
 import '../core/common_widget/navigation_button/to_play_todays_daily_quiz_button.dart';
-import '../core/common_widget/navigation_button/to_prepare_quiz_button.dart';
+import '../core/common_widget/navigation_button/to_quiz_setting_button.dart';
 import '../core/common_widget/navigation_button/to_setting_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
 import '../feature/setting/force_update_dialog.dart';
@@ -75,7 +75,7 @@ class _TopPageState extends ConsumerState<TopPage> {
                       SizedBox(height: 40),
                       SizedBox(
                         width: _buttonWidth,
-                        child: ToPrepareQuizButton(buttonType: ButtonType.sub),
+                        child: ToQuizSettingButton(buttonType: ButtonType.sub),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
