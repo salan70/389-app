@@ -1,23 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 
 class DeleteNormalQuizResultButton extends ConsumerWidget {
   const DeleteNormalQuizResultButton({
     super.key,
-    required this.quizResult,
-    required this.onDeleteComplete,
+    required this.onAcceptDelete,
   });
 
-  final HitterQuizResult quizResult;
-
-  /// 削除が完了した時に呼ばれる処理。
+  /// 削除するか確認後、削除を確定させた際に行われる処理。
   ///
-  /// 画面の pop を想定している。
-  final VoidCallback onDeleteComplete;
+  /// 削除するか確認するダイアログを閉じる処理の後に実行される。
+  final VoidCallback onAcceptDelete;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -46,10 +42,7 @@ class DeleteNormalQuizResultButton extends ConsumerWidget {
                   buttonType: ButtonType.alert,
                   onPressed: () async {
                     await context.popRoute();
-                    await ref
-                        .read(quizResultServiceProvider)
-                        .deleteNormalQuizResult(quizResult.docId);
-                    onDeleteComplete();
+                    onAcceptDelete();
                   },
                   child: const Text('消す'),
                 ),

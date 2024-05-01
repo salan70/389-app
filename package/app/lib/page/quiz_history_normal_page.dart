@@ -10,7 +10,7 @@ import '../component/history/result_rank_label_widget.dart';
 import '../component/history/show_answer_button.dart';
 import '../component/quiz_result/result_quiz_widget.dart';
 import '../component/quiz_result/share_button.dart';
-import '../controller/quiz_history_daily_page_controller.dart';
+import '../controller/quiz_history_normal_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/back_button.dart' as common;
 
@@ -61,9 +61,8 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShareButton(
                     buttonType: ButtonType.sub,
-                    // TODO(me): 仮に他 Page の Controller を使っているので、修正する。
                     onPressed: () => ref
-                        .read(quizHistoryDailyPageControllerProvider)
+                        .read(quizHistoryNormalPageControllerProvider)
                         .shareQuiz(_globalKey, _shareText),
                   ),
                 ),
@@ -80,8 +79,9 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                 child: SizedBox(
                   width: _buttonWidth,
                   child: DeleteNormalQuizResultButton(
-                    quizResult: quizResult,
-                    onDeleteComplete: context.popRoute,
+                    onAcceptDelete: () => ref
+                        .read(quizHistoryNormalPageControllerProvider)
+                        .deleteQuizHistory(quizResult),
                   ),
                 ),
               ),
