@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/common_widget/button/my_button.dart';
-import '../../../feature/setting/setting_dialog.dart';
+import '../../../core/common_widget/button/my_button.dart';
+import 'setting_dialog.dart';
 
-class ToSettingButton extends StatelessWidget {
-  const ToSettingButton({
+class OpenSettingButton extends StatelessWidget {
+  const OpenSettingButton({
     super.key,
     required this.buttonType,
   });
@@ -14,7 +14,7 @@ class ToSettingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MyButton(
-      buttonName: 'to_setting_button',
+      buttonName: 'open_setting_button',
       buttonType: buttonType,
       onPressed: () {
         showDialog<void>(

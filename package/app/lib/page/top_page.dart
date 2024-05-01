@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../controller/top_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/to_gallery_button.dart';
-import '../core/common_widget/navigation_button/to_play_normal_quiz_from_top_button.dart';
-import '../core/common_widget/navigation_button/to_play_todays_daily_quiz_button.dart';
 import '../core/common_widget/navigation_button/to_quiz_setting_button.dart';
-import '../core/common_widget/navigation_button/to_setting_button.dart';
 import '../feature/ad/banner_ad_widget.dart';
+import '../feature/play_daily_quiz/start_todays_daily_quiz_button.dart';
+import '../feature/play_normal_quiz/start_normal_quiz_from_top_button.dart';
 import '../feature/setting/force_update_dialog.dart';
 import '../feature/setting/icon_widget.dart';
+import '../feature/setting/open_setting_button.dart';
 
 @RoutePage()
 class TopPage extends ConsumerStatefulWidget {
@@ -52,19 +53,21 @@ class _TopPageState extends ConsumerState<TopPage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = ref.watch(topPageControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
           padding:
               EdgeInsets.only(left: 40, top: _deviceHeight / 15, right: 40),
-          child: const Center(
+          child: Center(
             child: Column(
               children: [
                 Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
                     width: 120,
-                    child: ToSettingButton(buttonType: ButtonType.sub),
+                    child: OpenSettingButton(buttonType: ButtonType.sub),
                   ),
                 ),
                 Expanded(
@@ -80,15 +83,17 @@ class _TopPageState extends ConsumerState<TopPage> {
                       SizedBox(height: 16),
                       SizedBox(
                         width: _buttonWidth,
-                        child: ToPlayNormalQuizFromTopButton(
+                        child: StartNormalQuizFromTopButton(
                           buttonType: ButtonType.main,
+                          onPressed: controller.startNormalQuiz,
                         ),
                       ),
                       SizedBox(height: 16),
                       SizedBox(
                         width: _buttonWidth,
-                        child: ToPlayTodaysDailyQuizButton(
+                        child: StartTodaysDailyQuizButton(
                           buttonType: ButtonType.sub,
+                          onPressed: controller.startTodaysDailyQuiz,
                         ),
                       ),
                       SizedBox(height: 16),
