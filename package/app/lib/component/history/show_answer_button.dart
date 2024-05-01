@@ -21,10 +21,13 @@ class ShowAnswerButton extends ConsumerWidget {
       buttonName: 'show_answer_button',
       buttonType: buttonType,
       onPressed: () {
+        // TODO(me): controller に移譲する。
         showDialog<void>(
           context: context,
           barrierDismissible: false,
           builder: (_) {
+            // TODO(me): シンプルなダイアログは1つのファイルかディレクトリにまとめたい。
+            // enum や factory constructor 使うのもあり。
             return AlertDialog(
               title: const Text('正解は...'),
               content: Text('${quizResult.name}選手でした！'),

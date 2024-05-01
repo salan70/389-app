@@ -8,8 +8,8 @@ import '../component/play_daily_quiz/start_todays_daily_quiz_button.dart';
 import '../core/common_widget/dialog/error_dialog.dart';
 import '../core/router/app_router.dart';
 import '../core/router/scaffold_messenger_key.dart';
-import '../core/util/context_extension.dart';
 import '../core/util/controller_mixin.dart';
+import '../core/util/extension/context_extension.dart';
 
 part 'top_page_controller.g.dart';
 

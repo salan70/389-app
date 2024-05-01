@@ -1,9 +1,6 @@
 import 'dart:io';
-import 'dart:ui' as ui;
 
 import 'package:common/common.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,21 +21,18 @@ class ShareQuizResultService {
 
   final Ref ref;
 
-  /// ディレクトへのパスを取得し、シェアする
+  /// 画像の [ByteData] （[bytes]）と [text] をシェアする。
   Future<void> shareImageAndText(
     String text,
-    GlobalKey globalKey,
+    ByteData bytes,
     String shareText,
   ) async {
-    // shareする際のテキスト
     try {
-      final bytes = await _exportToImage(globalKey);
-
-      // byte data→Uint8List
+      // byte data → Uint8List
       final widgetImageBytes =
           bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes);
 
-      // App directoryファイルに保存
+      // App directory ファイルに保存
       final applicationDocumentsFile =
           await _getApplicationDocumentsFile(text, widgetImageBytes);
 
@@ -46,27 +40,9 @@ class ShareQuizResultService {
 
       await Share.shareXFiles([XFile(path)], text: shareText);
       await applicationDocumentsFile.delete();
-    } on Exception catch (error) {
-      logger.e(error);
+    } on Exception catch (e, s) {
+      logger.e(e, s);
     }
-  }
-
-  /// Widgetを画像化する
-  /// 参考：
-  /// https://zenn.dev/gold_panzee54/articles/210516-flutter-widget-to-image-share#1.-widget%E3%82%92%E7%94%BB%E5%83%8F%E5%8C%96%E3%81%99%E3%82%8B
-  Future<ByteData> _exportToImage(GlobalKey globalKey) async {
-    final boundary =
-        globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary?;
-
-    final image = await boundary?.toImage(
-      pixelRatio: 3,
-    );
-
-    final byteData = await image?.toByteData(
-      format: ui.ImageByteFormat.png,
-    );
-
-    return byteData!;
   }
 
   /// 作成した画像をアプリ内のディレクトリへ保存しパスを取得する

@@ -6,7 +6,7 @@ import 'package:model/model.dart';
 import '../../core/common_widget/async_value_handler.dart';
 import '../../core/router/app_router.dart';
 import '../../core/util/colors_constant.dart';
-import '../../core/util/result_rank_extension.dart';
+import '../../core/util/extension/result_rank_extension.dart';
 
 class NormalQuizGalleryList extends ConsumerWidget {
   const NormalQuizGalleryList({super.key});
@@ -43,9 +43,7 @@ class NormalQuizGalleryList extends ConsumerWidget {
                         final quizResult = quizResultList[index];
                         return InkWell(
                           onTap: () => context.pushRoute(
-                            GalleryDetailNormalQuizRoute(
-                              quizResult: quizResult,
-                            ),
+                            QuizHistoryNormalRoute(quizResult: quizResult),
                           ),
                           child: DecoratedBox(
                             decoration: BoxDecoration(

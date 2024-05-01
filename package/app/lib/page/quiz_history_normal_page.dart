@@ -1,20 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
 import '../component/gallery/delete_normal_quiz_button.dart';
-import '../component/gallery/result_info_widget.dart';
-import '../component/gallery/result_rank_label_widget.dart';
-import '../component/gallery/show_answer_button.dart';
+import '../component/history/result_info_widget.dart';
+import '../component/history/result_rank_label_widget.dart';
+import '../component/history/show_answer_button.dart';
 import '../component/quiz_result/result_quiz_widget.dart';
 import '../component/quiz_result/share_button.dart';
+import '../controller/quiz_history_daily_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/back_button.dart' as common;
 
 @RoutePage()
-class GalleryDetailNormalQuizPage extends StatelessWidget {
-  GalleryDetailNormalQuizPage({super.key, required this.quizResult});
+class QuizHistoryNormalPage extends ConsumerWidget {
+  QuizHistoryNormalPage({super.key, required this.quizResult});
 
   final HitterQuizResult quizResult;
 
@@ -23,7 +25,7 @@ class GalleryDetailNormalQuizPage extends StatelessWidget {
   final _globalKey = GlobalKey();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -59,8 +61,10 @@ class GalleryDetailNormalQuizPage extends StatelessWidget {
                   width: _buttonWidth,
                   child: ShareButton(
                     buttonType: ButtonType.sub,
-                    globalKey: _globalKey,
-                    shareText: _shareText,
+                    // TODO(me): 仮に他 Page の Controller を使っているので、修正する。
+                    onPressed: () => ref
+                        .read(quizHistoryDailyPageControllerProvider)
+                        .shareQuiz(_globalKey, _shareText),
                   ),
                 ),
               ),

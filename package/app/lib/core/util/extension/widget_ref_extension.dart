@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../common_widget/dialog/error_dialog.dart';
-import '../router/scaffold_messenger_key.dart';
+import '../../common_widget/dialog/error_dialog.dart';
+import '../../router/scaffold_messenger_key.dart';
 
 /// ref.listen() を共通化して使い回せるようにするためのextension
 /// 参考

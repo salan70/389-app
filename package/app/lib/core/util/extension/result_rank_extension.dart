@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
-import 'colors_constant.dart';
+import '../colors_constant.dart';
 
 extension ResultRankExtension on ResultRank {
   Text get smallLabelWidget {

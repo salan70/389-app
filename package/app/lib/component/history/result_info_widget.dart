@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-
-class ResultInfoWidget extends ConsumerWidget {
+class ResultInfoWidget extends StatelessWidget {
   const ResultInfoWidget({super.key, required this.quizResult});
 
   final HitterQuizResult quizResult;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
       child: Column(
