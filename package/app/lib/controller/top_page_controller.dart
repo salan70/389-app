@@ -1,5 +1,4 @@
 import 'package:common/common.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
@@ -8,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../core/common_widget/dialog/error_dialog.dart';
 import '../core/router/app_router.dart';
 import '../core/router/scaffold_messenger_key.dart';
+import '../core/util/context_extension.dart';
 import '../core/util/controller_mixin.dart';
 import '../feature/play_daily_quiz/start_todays_daily_quiz_button.dart';
 
@@ -57,7 +57,7 @@ class TopPageController with ControllerMixin {
       // * プレイ済みの場合
       if (isPlayedDailyQuiz) {
         loadingNotifier.hide();
-        await _showAlertAlreadyPlayedDialog();
+        _showAlertAlreadyPlayedDialog();
         return;
       }
 
@@ -68,13 +68,13 @@ class TopPageController with ControllerMixin {
       if (dailyQuiz == null) {
         logger.e('今日の1問が null でした。登録漏れの可能性があります。');
         loadingNotifier.hide();
-        await _showAlertNotFoundDialog();
+        _showAlertNotFoundDialog();
         return;
       }
 
       // ** 今日の1問がプレイできる場合。
       loadingNotifier.hide();
-      await _showConfirmPlayDialog();
+      _showConfirmPlayDialog();
     }
 
     // * エラーが発生した場合。
@@ -85,7 +85,7 @@ class TopPageController with ControllerMixin {
         s,
       );
       loadingNotifier.hide();
-      await _showErrorDialog();
+      _showErrorDialog();
     }
   }
 
@@ -132,40 +132,32 @@ class TopPageController with ControllerMixin {
     return await _ref.read(dailyQuizProvider(nowInApp).future);
   }
 
-  Future<void> _showAlertAlreadyPlayedDialog() async {
-    await showDialog<void>(
-      context: _ref.read(scaffoldMessengerKeyProvider).currentContext!,
-      barrierDismissible: false,
-      builder: (_) => const AlertAlreadyPlayedDailyQuizDialog(),
-    );
-  }
-
-  Future<void> _showAlertNotFoundDialog() async {
-    await showDialog<void>(
-      context: _ref.read(scaffoldMessengerKeyProvider).currentContext!,
-      builder: (context) => const AlertNotFoundDailyQuizDialog(),
-    );
-  }
-
-  Future<void> _showConfirmPlayDialog() async {
-    await showDialog<void>(
-      context: _ref.read(scaffoldMessengerKeyProvider).currentContext!,
-      barrierDismissible: false,
-      builder: (_) => ConfirmPlayDailyQuizDialog(
-        onPressedYes: _onAcceptPlayDailyQuiz,
-      ),
-    );
-  }
-
-  Future<void> _showErrorDialog() async {
-    await showDialog<void>(
-      context: _ref.read(scaffoldMessengerKeyProvider).currentContext!,
-      builder: (context) => const ErrorDialog(),
-    );
-  }
-
   Future<DateTime> _nowInApp() async {
     final now = await NTP.now();
     return now.calculateDateInApp();
   }
+
+  // * ダイアログ表示関連
+
+  void _showAlertAlreadyPlayedDialog() => _ref
+      .read(scaffoldMessengerKeyProvider)
+      .currentContext!
+      .showDialogWithChild(const AlertAlreadyPlayedDailyQuizDialog());
+
+  void _showAlertNotFoundDialog() => _ref
+      .read(scaffoldMessengerKeyProvider)
+      .currentContext!
+      .showDialogWithChild(const AlertNotFoundDailyQuizDialog());
+
+  void _showConfirmPlayDialog() => _ref
+      .read(scaffoldMessengerKeyProvider)
+      .currentContext!
+      .showDialogWithChild(
+        ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
+      );
+
+  void _showErrorDialog() => _ref
+      .read(scaffoldMessengerKeyProvider)
+      .currentContext!
+      .showDialogWithChild(const ErrorDialog());
 }
