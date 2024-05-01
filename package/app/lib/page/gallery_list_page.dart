@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 import '../../core/common_widget/button/my_button.dart';
 import '../../core/util/colors_constant.dart';
+import '../component/ad/banner_ad_widget.dart';
+import '../component/gallery/daily_quiz_gallery_list.dart';
+import '../component/gallery/normal_quiz_gallery_list.dart';
 import '../core/common_widget/navigation_button/back_to_top_button.dart';
-import '../feature/ad/banner_ad_widget.dart';
-import '../feature/gallery/daily_quiz_gallery_list.dart';
-import '../feature/gallery/normal_quiz_gallery_list.dart';
 
 @RoutePage()
 class GalleryListPage extends StatelessWidget {

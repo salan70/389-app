@@ -4,12 +4,12 @@ import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../component/play_daily_quiz/start_todays_daily_quiz_button.dart';
 import '../core/common_widget/dialog/error_dialog.dart';
 import '../core/router/app_router.dart';
 import '../core/router/scaffold_messenger_key.dart';
 import '../core/util/context_extension.dart';
 import '../core/util/controller_mixin.dart';
-import '../feature/play_daily_quiz/start_todays_daily_quiz_button.dart';
 
 part 'top_page_controller.g.dart';
 

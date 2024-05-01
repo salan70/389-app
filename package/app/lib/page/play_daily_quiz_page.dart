@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../component/ad/banner_ad_widget.dart';
+import '../component/quiz_play/daily_quiz_submit_answer_button.dart';
+import '../component/quiz_play/input_answer_text_field.dart';
+import '../component/quiz_play/life_widget.dart';
+import '../component/quiz_play/quiz_event_buttons.dart';
+import '../component/quiz_play/quiz_widget.dart';
+import '../component/quiz_play/retire_button.dart';
 import '../core/common_widget/button/my_button.dart';
-import '../feature/ad/banner_ad_widget.dart';
-import '../feature/quiz_play/daily_quiz_submit_answer_button.dart';
-import '../feature/quiz_play/input_answer_text_field.dart';
-import '../feature/quiz_play/life_widget.dart';
-import '../feature/quiz_play/quiz_event_buttons.dart';
-import '../feature/quiz_play/quiz_widget.dart';
-import '../feature/quiz_play/retire_button.dart';
 
 @RoutePage()
 class PlayDailyQuizPage extends ConsumerStatefulWidget {
