@@ -7,13 +7,13 @@ part of 'quiz_setting_page_controller.dart';
 // **************************************************************************
 
 String _$quizSettingPageControllerHash() =>
-    r'f59f3c2bb07ee5522a87dd39e4761d6c8db7da9f';
+    r'b3783671e73bec7c590add6eaba3267d8537552c';
 
-/// See also [quizSettingPageController].
-@ProviderFor(quizSettingPageController)
-final quizSettingPageControllerProvider =
-    AutoDisposeProvider<QuizSettingPageController>.internal(
-  quizSettingPageController,
+/// See also [QuizSettingPageController].
+@ProviderFor(QuizSettingPageController)
+final quizSettingPageControllerProvider = AutoDisposeNotifierProvider<
+    QuizSettingPageController, QuizSettingPageState>.internal(
+  QuizSettingPageController.new,
   name: r'quizSettingPageControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -22,7 +22,6 @@ final quizSettingPageControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef QuizSettingPageControllerRef
-    = AutoDisposeProviderRef<QuizSettingPageController>;
+typedef _$QuizSettingPageController = AutoDisposeNotifier<QuizSettingPageState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

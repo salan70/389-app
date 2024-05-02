@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-class StatsValueFilterWidget extends ConsumerWidget {
-  const StatsValueFilterWidget({super.key});
+class StatsValueFilterWidget extends StatelessWidget {
+  const StatsValueFilterWidget({
+    super.key,
+    required this.searchCondition,
+    required this.updateMinGames,
+    required this.updateMinHits,
+    required this.updateMinHr,
+  });
+
+  final SearchCondition searchCondition;
+
+  /// 検索条件である「最低出場数」更新時の処理。
+  final void Function(int?) updateMinGames;
+
+  /// 検索条件である「最低ヒット数」更新時の処理。
+  final void Function(int?) updateMinHits;
+
+  /// 検索条件である「最低ホームラン数」更新時の処理。
+  final void Function(int?) updateMinHr;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final searchCondition = ref.watch(searchConditionNotifierProvider);
-    final notifier = ref.watch(searchConditionNotifierProvider.notifier);
-
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Padding(
@@ -23,7 +36,7 @@ class StatsValueFilterWidget extends ConsumerWidget {
               const Text('最低通算試合数'),
               DropdownButton<int>(
                 items: _statsFilterDropdownMenu(minGamesOptionList),
-                onChanged: (int? value) => notifier.updateMinGames(value!),
+                onChanged: updateMinGames,
                 value: searchCondition.minGames,
               ),
             ],
@@ -35,7 +48,7 @@ class StatsValueFilterWidget extends ConsumerWidget {
               const Text('最低通算ヒット数'),
               DropdownButton<int>(
                 items: _statsFilterDropdownMenu(minHitsOptionList),
-                onChanged: (int? value) => notifier.updateMinHits(value!),
+                onChanged: updateMinHits,
                 value: searchCondition.minHits,
               ),
             ],
@@ -47,7 +60,7 @@ class StatsValueFilterWidget extends ConsumerWidget {
               const Text('最低通算ホームラン数'),
               DropdownButton<int>(
                 items: _statsFilterDropdownMenu(minHrOptionList),
-                onChanged: (int? value) => notifier.updateMinHr(value!),
+                onChanged: updateMinHr,
                 value: searchCondition.minHr,
               ),
             ],
