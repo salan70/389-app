@@ -1,29 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rewarded_ad_notifier.dart';
+part of 'search_condition_state.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$rewardedAdNotifierHash() =>
-    r'e4005bb4a27a183761fe259a4503c9d05e6d66fc';
+String _$searchConditionHash() => r'157c2deb99eca5aa6b2d385518a6eda5db2d37c7';
 
-/// [RewardedAd] を保持する [Notifier].
+/// ノーマルクイズの検索条件を返すプロバイダー。
 ///
-/// Copied from [RewardedAdNotifier].
-@ProviderFor(RewardedAdNotifier)
-final rewardedAdNotifierProvider =
-    AutoDisposeNotifierProvider<RewardedAdNotifier, RewardAdState>.internal(
-  RewardedAdNotifier.new,
-  name: r'rewardedAdNotifierProvider',
+/// Copied from [searchCondition].
+@ProviderFor(searchCondition)
+final searchConditionProvider = AutoDisposeProvider<SearchCondition>.internal(
+  searchCondition,
+  name: r'searchConditionProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$rewardedAdNotifierHash,
+      : _$searchConditionHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$RewardedAdNotifier = AutoDisposeNotifier<RewardAdState>;
+typedef SearchConditionRef = AutoDisposeProviderRef<SearchCondition>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

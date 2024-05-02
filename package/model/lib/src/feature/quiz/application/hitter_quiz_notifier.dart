@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/enum/quiz_type.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
-import '../../search_condition/application/search_condition_notifier.dart';
+import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz.dart';
 import '../infrastructure/hitter_repository.dart';
@@ -22,7 +22,7 @@ class HitterQuizNotifier extends _$HitterQuizNotifier {
   }) async {
     switch (quizType) {
       case QuizType.normal:
-        final searchCondition = ref.watch(searchConditionNotifierProvider);
+        final searchCondition = ref.watch(searchConditionProvider);
         return ref
             .watch(hitterRepositoryProvider)
             .fetchHitterQuizBySearchCondition(searchCondition);

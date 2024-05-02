@@ -37,7 +37,7 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
   /// 広告を表示する。
   ///
   /// 広告の視聴が完了したら、 state.isWatchCompleted が true になる。
-  void showAd({required Function onUserEarnedReward}) {
+  void showAd({required void Function() onUserEarnedReward}) {
     state.rewardedAd
       ?..fullScreenContentCallback = FullScreenContentCallback(
         // 広告が表示された場合。

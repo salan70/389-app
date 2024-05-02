@@ -20,8 +20,7 @@ class QuizSettingPageController extends _$QuizSettingPageController
     with ControllerMixin {
   @override
   QuizSettingPageState build() {
-    final searchCondition =
-        ref.watch(searchConditionRepositoryProvider).fetchSearchCondition();
+    final searchCondition = ref.watch(searchConditionProvider);
 
     return QuizSettingPageState(searchCondition: searchCondition);
   }
@@ -153,5 +152,8 @@ class QuizSettingPageController extends _$QuizSettingPageController
     ref
         .read(searchConditionRepositoryProvider)
         .saveSearchCondition(state.searchCondition);
+
+    // TODO(me): ここの invalidate によって、望ましくない UI のリビルドが発生しないか確認する。
+    ref.invalidate(searchConditionProvider);
   }
 }

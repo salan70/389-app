@@ -5,7 +5,7 @@ import '../../../util/enum/quiz_type.dart';
 import '../../auth/infrastructure/auth_repository.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../quiz/application/hitter_quiz_notifier.dart';
-import '../../search_condition/application/search_condition_notifier.dart';
+import '../../search_condition/application/search_condition_state.dart';
 import '../infrastructure/quiz_result_repository.dart';
 import 'quiz_result_state.dart';
 
@@ -53,7 +53,7 @@ class QuizResultService {
     final hitterQuiz = await ref.read(
       hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).future,
     );
-    final searchCondition = ref.read(searchConditionNotifierProvider);
+    final searchCondition = ref.read(searchConditionProvider);
 
     await ref.read(quizResultRepositoryProvider).createNormalQuizResult(
           user!,

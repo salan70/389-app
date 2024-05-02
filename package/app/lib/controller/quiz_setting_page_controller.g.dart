@@ -7,7 +7,7 @@ part of 'quiz_setting_page_controller.dart';
 // **************************************************************************
 
 String _$quizSettingPageControllerHash() =>
-    r'b3783671e73bec7c590add6eaba3267d8537552c';
+    r'305b93384ba7f30cf01b343628636b1563f963a9';
 
 /// See also [QuizSettingPageController].
 @ProviderFor(QuizSettingPageController)
