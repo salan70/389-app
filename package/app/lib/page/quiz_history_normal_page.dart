@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/gallery/delete_normal_quiz_button.dart';
+import '../component/history/delete_normal_quiz_button.dart';
 import '../component/history/result_info_widget.dart';
 import '../component/history/result_rank_label_widget.dart';
 import '../component/history/show_answer_button.dart';

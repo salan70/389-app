@@ -28,10 +28,10 @@ class DailyQuizCalenderCell extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dailyQuizStatus =
-        DailyQuizCellType.getQuizStatus(dailyHitterQuizResult, date);
+        _DailyQuizCellType.getQuizStatus(dailyHitterQuizResult, date);
 
     switch (dailyQuizStatus) {
-      case DailyQuizCellType.played:
+      case _DailyQuizCellType.played:
         final formattedDate = date.toFormattedString();
         final hitterQuizResult =
             dailyHitterQuizResult.resultMap[formattedDate]!;
@@ -45,19 +45,19 @@ class DailyQuizCalenderCell extends ConsumerWidget {
           ),
         );
 
-      case DailyQuizCellType.notPlayed:
+      case _DailyQuizCellType.notPlayed:
         return InkWell(
           onTap: onTapNotPlayedDailyQuiz,
           child: const Center(child: Text('-')),
         );
 
-      case DailyQuizCellType.future:
+      case _DailyQuizCellType.future:
         return const SizedBox.shrink();
     }
   }
 }
 
-enum DailyQuizCellType {
+enum _DailyQuizCellType {
   /// プレイ済み。
   played,
 
@@ -67,24 +67,24 @@ enum DailyQuizCellType {
   /// 未来の日付。
   future;
 
-  /// 状況に応じた [DailyQuizCellType] を返す。
-  static DailyQuizCellType getQuizStatus(
+  /// 状況に応じた [_DailyQuizCellType] を返す。
+  static _DailyQuizCellType getQuizStatus(
     DailyHitterQuizResult dailyHitterQuizResult,
     DateTime date,
   ) {
     // * プレイ済みの日付。
     final formattedDate = date.toFormattedString();
     if (dailyHitterQuizResult.resultMap.containsKey(formattedDate)) {
-      return DailyQuizCellType.played;
+      return _DailyQuizCellType.played;
     }
 
     // * 未プレイ かつ 過去の日付。
     final nowInApp = DateTime.now().calculateDateInApp();
     if (date.isBefore(nowInApp)) {
-      return DailyQuizCellType.notPlayed;
+      return _DailyQuizCellType.notPlayed;
     }
 
     // * 未来の日付。
-    return DailyQuizCellType.future;
+    return _DailyQuizCellType.future;
   }
 }
