@@ -10,6 +10,7 @@ import '../component/quiz_play/life_widget.dart';
 import '../component/quiz_play/quiz_event_buttons.dart';
 import '../component/quiz_play/quiz_widget.dart';
 import '../component/quiz_play/retire_button.dart';
+import '../controller/play_daily_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 
 @RoutePage()
@@ -48,6 +49,8 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
       ),
     );
 
+    final controller = ref.watch(playDailyQuizPageControllerProvider);
+
     return PopScope(
       canPop: false,
       child: Scaffold(
@@ -69,13 +72,21 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       const SizedBox(height: 16),
                       QuizWidget(hitterQuiz: hitterQuiz),
                       const SizedBox(height: 16),
-                      InputAnswerTextField.daily(
+                      InputAnswerTextField(
                         textEditingController: widget._textEditingController,
-                        questionedAt: widget.questionedAt,
+                        onSearchHitter: () async => controller.onSearchHitter(
+                          widget.questionedAt,
+                          widget._textEditingController.text,
+                        ),
+                        onSelectedHitter: (value) => controller
+                            .onSelectedHitter(widget.questionedAt, value),
                       ),
                       const SizedBox(height: 16),
-                      QuizEventButtons.daily(
-                        questionedAt: widget.questionedAt,
+                      QuizEventButtons(
+                        onOpenAll: () =>
+                            controller.onShowAllStat(widget.questionedAt),
+                        onOpenSingle: () =>
+                            controller.onShowSingleStat(widget.questionedAt),
                       ),
                       const SizedBox(height: 16),
                       Center(
@@ -83,8 +94,12 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                           width: widget._buttonWidth,
                           child: DailyQuizSubmitAnswerButton(
                             buttonType: ButtonType.main,
-                            hitterQuiz: hitterQuiz,
-                            questionedAt: widget.questionedAt,
+                            hitter: hitterQuiz.enteredHitter,
+                            onTapSubmitAnswer: () async =>
+                                controller.onTapSubmitAnswer(
+                              hitterQuiz.enteredHitter?.label,
+                              widget.questionedAt,
+                            ),
                           ),
                         ),
                       ),
@@ -95,6 +110,8 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                           child: RetireButton.daily(
                             buttonType: ButtonType.sub,
                             questionedAt: widget.questionedAt,
+                            onRetireDailyQuiz: () async =>
+                                controller.onRetire(widget.questionedAt),
                           ),
                         ),
                       ),

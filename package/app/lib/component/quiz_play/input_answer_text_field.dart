@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 import 'package:textfield_search/textfield_search.dart';
 
-class InputAnswerTextField extends ConsumerWidget {
-  InputAnswerTextField.normal({
+class InputAnswerTextField extends StatelessWidget {
+  InputAnswerTextField({
     super.key,
     required this.textEditingController,
-  })  : quizType = QuizType.normal,
-        questionedAt = null;
-
-  InputAnswerTextField.daily({
-    super.key,
-    required this.textEditingController,
-    required this.questionedAt,
-  }) : quizType = QuizType.daily;
-
-  final QuizType quizType;
-  final DateTime? questionedAt;
+    required this.onSearchHitter,
+    required this.onSelectedHitter,
+  });
 
   /// 回答入力用に使用する [TextEditingController].
   ///
   /// リビルドしても入力した文字列が保持されるように、親の Widget で管理する。
   final TextEditingController textEditingController;
+
+  /// 選手検索時の処理。
+  ///
+  /// 戻り値で [List<Hitter>] を指定すること。
+  final Future<List<Hitter>> Function() onSearchHitter;
+
+  /// 検索結果のリストの中から、選手を選択した際の処理。
+  final void Function(Hitter value) onSelectedHitter;
+
   final _scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final hitterQuizNotifier = ref.watch(
-      hitterQuizNotifierProvider(quizType, questionedAt: questionedAt).notifier,
-    );
-
+  Widget build(BuildContext context) {
     return TextFieldSearch(
       label: '選手名',
       controller: textEditingController,
@@ -40,17 +36,8 @@ class InputAnswerTextField extends ConsumerWidget {
         controller: _scrollController,
         theme: const ScrollbarThemeData(),
       ),
-      future: () {
-        hitterQuizNotifier.updateEnteredHitter(null);
-        return ref
-            .read(hitterQuizServiceProvider)
-            .searchHitter(textEditingController.text);
-      },
-      getSelectedValue: (Hitter value) {
-        // 回答入力用のTextFieldのフォーカスを外す
-        FocusManager.instance.primaryFocus?.unfocus();
-        hitterQuizNotifier.updateEnteredHitter(value);
-      },
+      future: onSearchHitter,
+      getSelectedValue: onSelectedHitter,
     );
   }
 }

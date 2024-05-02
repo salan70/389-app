@@ -40,11 +40,22 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     const SizedBox(height: 16),
                     QuizWidget(hitterQuiz: hitterQuiz),
                     const SizedBox(height: 16),
-                    InputAnswerTextField.normal(
+                    InputAnswerTextField(
                       textEditingController: _textEditingController,
+                      onSearchHitter: () {
+                        // todo
+                      },
+                      onSelectedHitter: (Hitter value) {},
                     ),
                     const SizedBox(height: 16),
-                    const QuizEventButtons.normal(),
+                    QuizEventButtons(
+                      onOpenAll: () {
+                        //todo
+                      },
+                      onOpenSingle: () {
+                        //todo
+                      },
+                    ),
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(

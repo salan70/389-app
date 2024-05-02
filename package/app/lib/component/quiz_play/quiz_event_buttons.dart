@@ -1,30 +1,24 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/common_widget/dialog/confirm_dialog.dart';
 
-class QuizEventButtons extends ConsumerWidget {
-  const QuizEventButtons.normal({super.key})
-      : quizType = QuizType.normal,
-        questionedAt = null;
+class QuizEventButtons extends StatelessWidget {
+  const QuizEventButtons({
+    super.key,
+    required this.onOpenAll,
+    required this.onOpenSingle,
+  });
 
-  const QuizEventButtons.daily({super.key, required this.questionedAt})
-      : quizType = QuizType.daily;
+  /// 全ての成績を表示するボタンが押された際の処理。
+  final VoidCallback onOpenAll;
 
-  final QuizType quizType;
-  final DateTime? questionedAt;
+  /// 成績を1つ表示するボタンが押された際の処理。
+  final VoidCallback onOpenSingle;
 
   static const _buttonWidth = 160.0;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final notifier = ref.watch(
-      hitterQuizNotifierProvider(quizType, questionedAt: questionedAt).notifier,
-    );
-
+  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -33,25 +27,7 @@ class QuizEventButtons extends ConsumerWidget {
           child: MyButton(
             buttonName: 'show_all_stat_button',
             buttonType: ButtonType.sub,
-            onPressed: () {
-              // 回答入力用の TextField のフォーカスを外す。
-              FocusManager.instance.primaryFocus?.unfocus();
-
-              if (notifier.canOpen()) {
-                showDialog<void>(
-                  context: context,
-                  builder: (context) {
-                    return ConfirmDialog(
-                      confirmText: '本当に全ての成績を表示しますか？',
-                      onPressedYes: () {
-                        notifier.openAll();
-                        context.popRoute();
-                      },
-                    );
-                  },
-                );
-              }
-            },
+            onPressed: onOpenAll,
             child: const Text('全ての成績を表示'),
           ),
         ),
@@ -60,14 +36,7 @@ class QuizEventButtons extends ConsumerWidget {
           child: MyButton(
             buttonName: 'show_next_stat_button',
             buttonType: ButtonType.sub,
-            onPressed: () {
-              // 回答入力用の TextField のフォーカスを外す。
-              FocusManager.instance.primaryFocus?.unfocus();
-
-              if (notifier.canOpen()) {
-                notifier.openRandom();
-              }
-            },
+            onPressed: onOpenSingle,
             child: const Text('次の成績を表示'),
           ),
         ),

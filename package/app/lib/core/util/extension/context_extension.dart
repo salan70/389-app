@@ -62,9 +62,13 @@ extension ContextExtension on BuildContext {
 
   // TODO(me): dialog 表示されないので、修正する。
   /// [child] をダイアログとして表示する。
-  void showDialogWithChild(Widget child) {
+  void showDialogWithChild({
+    required Widget child,
+    bool barrierDismissible = true,
+  }) {
     showDialog<void>(
       context: this,
+      barrierDismissible: barrierDismissible,
       builder: (context) => child,
     );
   }

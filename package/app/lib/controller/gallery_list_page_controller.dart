@@ -64,7 +64,7 @@ class GalleryListPageController with ControllerMixin {
 
         if (currentContext.mounted) {
           currentContext.showDialogWithChild(
-            ConfirmPlayPastDailyQuizDialog(
+            child: ConfirmPlayPastDailyQuizDialog(
               date: date,
               onPressed: () async => _onAcceptPlayPastDailyQuiz(date),
             ),

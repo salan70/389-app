@@ -12,12 +12,14 @@ class RetireButton extends ConsumerWidget {
     super.key,
     required this.buttonType,
   })  : quizType = QuizType.normal,
-        questionedAt = null;
+        questionedAt = null,
+        onRetireDailyQuiz = null;
 
   const RetireButton.daily({
     super.key,
     required this.buttonType,
     required this.questionedAt,
+    required this.onRetireDailyQuiz,
   }) : quizType = QuizType.daily;
 
   final ButtonType buttonType;
@@ -27,6 +29,8 @@ class RetireButton extends ConsumerWidget {
   ///
   /// [QuizType.daily] の場合、必須。
   final DateTime? questionedAt;
+
+  final VoidCallback? onRetireDailyQuiz;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -52,16 +56,7 @@ class RetireButton extends ConsumerWidget {
               }
 
               // * デイリークイズの場合
-              if (questionedAt == null) {
-                throw ArgumentError.notNull('questionedAt');
-              }
-              await quizResultService.updateDailyQuizResult(questionedAt!);
-
-              if (context.mounted) {
-                await context.pushRoute(
-                  ResultDailyQuizRoute(questionedAt: questionedAt!),
-                );
-              }
+              onRetireDailyQuiz?.call();
             },
           ),
         );

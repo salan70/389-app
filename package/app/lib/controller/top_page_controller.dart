@@ -122,6 +122,8 @@ class TopPageController with ControllerMixin {
     await _ref
         .read(appRouterProvider)
         .push(PlayDailyQuizRoute(questionedAt: nowInApp));
+
+    // TODO(me): ここで PlayDailyQuizPage の initState でやってる処理できないか試す。
   }
 
   Future<DailyQuiz?> _fetchTodaysDailyQuiz() async {
@@ -142,22 +144,22 @@ class TopPageController with ControllerMixin {
   void _showAlertAlreadyPlayedDialog() => _ref
       .read(scaffoldMessengerKeyProvider)
       .currentContext!
-      .showDialogWithChild(const AlertAlreadyPlayedDailyQuizDialog());
+      .showDialogWithChild(child: const AlertAlreadyPlayedDailyQuizDialog());
 
   void _showAlertNotFoundDialog() => _ref
       .read(scaffoldMessengerKeyProvider)
       .currentContext!
-      .showDialogWithChild(const AlertNotFoundDailyQuizDialog());
+      .showDialogWithChild(child: const AlertNotFoundDailyQuizDialog());
 
   void _showConfirmPlayDialog() => _ref
       .read(scaffoldMessengerKeyProvider)
       .currentContext!
       .showDialogWithChild(
-        ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
+        child: ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
       );
 
   void _showErrorDialog() => _ref
       .read(scaffoldMessengerKeyProvider)
       .currentContext!
-      .showDialogWithChild(const ErrorDialog());
+      .showDialogWithChild(child: const ErrorDialog());
 }
