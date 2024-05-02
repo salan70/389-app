@@ -1,9 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
+import '../../controller/common/navigator_key_controller.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class ShowAnswerButton extends ConsumerWidget {
   const ShowAnswerButton({
@@ -21,24 +22,22 @@ class ShowAnswerButton extends ConsumerWidget {
       buttonName: 'show_answer_button',
       buttonType: buttonType,
       onPressed: () {
-        showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) {
-            return AlertDialog(
-              title: const Text('正解は...'),
-              content: Text('${quizResult.name}選手でした！'),
-              actions: [
-                MyButton(
-                  buttonName: 'OK',
-                  buttonType: ButtonType.main,
-                  onPressed: context.popRoute,
-                  child: const Text('OK'),
-                ),
-              ],
+        // TODO(me): controller で書く。
+        ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+              barrierDismissible: false,
+              child: AlertDialog(
+                title: const Text('正解は...'),
+                content: Text('${quizResult.name}選手でした！'),
+                actions: [
+                  MyButton(
+                    buttonName: 'OK',
+                    buttonType: ButtonType.main,
+                    onPressed: context.pop,
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
             );
-          },
-        );
       },
       child: const Text('正解を確認'),
     );

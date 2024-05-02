@@ -1,43 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/common_widget/dialog/confirm_dialog.dart';
 
-class RetireButton extends ConsumerWidget {
-  const RetireButton.normal({
+class RetireButton extends StatelessWidget {
+  const RetireButton({
     super.key,
     required this.buttonType,
-    required this.onRetire,
-  }) : quizType = QuizType.normal;
-
-  const RetireButton.daily({
-    super.key,
-    required this.buttonType,
-    required this.onRetire,
-  }) : quizType = QuizType.daily;
+    required this.onTapRetire,
+  });
 
   final ButtonType buttonType;
-  final QuizType quizType;
 
-  final VoidCallback onRetire;
+  final VoidCallback onTapRetire;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MyButton(
       buttonName: 'retire_button',
       buttonType: buttonType,
-      onPressed: () {
-        showDialog<void>(
-          context: context,
-          barrierDismissible: false,
-          builder: (_) => ConfirmDialog(
-            confirmText: quizType.retireConfirmText,
-            onPressedYes: onRetire,
-          ),
-        );
-      },
+      onPressed: onTapRetire,
       child: const Text('諦める'),
     );
   }

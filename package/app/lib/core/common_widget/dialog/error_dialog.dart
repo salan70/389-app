@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../util/extension/context_extension.dart';
 import '../button/my_button.dart';
 
 /// エラーを知らせるダイアログ
@@ -20,7 +20,7 @@ class ErrorDialog extends StatelessWidget {
         MyButton(
           buttonName: 'error_dialog_ok_button',
           buttonType: ButtonType.main,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const Text('OK'),
         ),
       ],

@@ -1,9 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../core/common_widget/button/my_button.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class ConfirmPlayPastDailyQuizDialog extends ConsumerStatefulWidget {
   const ConfirmPlayPastDailyQuizDialog({
@@ -51,7 +51,7 @@ class _ConfirmPlayPastDailyQuizDialog
         MyButton(
           buttonName: 'confirm_no_button',
           buttonType: ButtonType.sub,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const SizedBox(
             height: _buttonHeight,
             width: _buttonWidth,

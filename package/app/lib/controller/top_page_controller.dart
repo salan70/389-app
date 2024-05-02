@@ -1,15 +1,17 @@
 import 'package:common/common.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../component/play_quiz_daily/start_todays_daily_quiz_button.dart';
+import '../component/setting/notification_setting_dialog.dart';
+import '../component/setting/setting_dialog.dart';
 import '../core/common_widget/dialog/error_dialog.dart';
 import '../core/router/app_router.dart';
-import '../core/router/scaffold_messenger_key.dart';
 import '../core/util/controller_mixin.dart';
-import '../core/util/extension/context_extension.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'top_page_controller.g.dart';
 
@@ -21,6 +23,15 @@ class TopPageController with ControllerMixin {
   TopPageController(this._ref);
 
   final Ref _ref;
+
+  /// 設定画面（ダイアログ）を開く。
+  void onTapOpenSetting() {
+    _showDialog(
+      child: SettingDialog(
+        onTapNotificationSetting: _onTapNotificationSetting,
+      ),
+    );
+  }
 
   Future<void> startNormalQuiz() async {
     await executeWithOverlayLoading(
@@ -141,25 +152,28 @@ class TopPageController with ControllerMixin {
 
   // * ダイアログ表示関連
 
-  void _showAlertAlreadyPlayedDialog() => _ref
-      .read(scaffoldMessengerKeyProvider)
-      .currentContext!
-      .showDialogWithChild(child: const AlertAlreadyPlayedDailyQuizDialog());
+  Future<void> _onTapNotificationSetting() async =>
+      _showDialog(child: const NotificationSettingDialog());
 
-  void _showAlertNotFoundDialog() => _ref
-      .read(scaffoldMessengerKeyProvider)
-      .currentContext!
-      .showDialogWithChild(child: const AlertNotFoundDailyQuizDialog());
+  void _showDialog({
+    required Widget child,
+    bool barrierDismissible = true,
+  }) {
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: child,
+          barrierDismissible: barrierDismissible,
+        );
+  }
 
-  void _showConfirmPlayDialog() => _ref
-      .read(scaffoldMessengerKeyProvider)
-      .currentContext!
-      .showDialogWithChild(
+  void _showAlertAlreadyPlayedDialog() =>
+      _showDialog(child: const AlertAlreadyPlayedDailyQuizDialog());
+
+  void _showAlertNotFoundDialog() =>
+      _showDialog(child: const AlertNotFoundDailyQuizDialog());
+
+  void _showConfirmPlayDialog() => _showDialog(
         child: ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
       );
 
-  void _showErrorDialog() => _ref
-      .read(scaffoldMessengerKeyProvider)
-      .currentContext!
-      .showDialogWithChild(child: const ErrorDialog());
+  void _showErrorDialog() => _showDialog(child: const ErrorDialog());
 }

@@ -20,7 +20,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 import 'core/common_widget/loading_widget.dart';
 import 'core/router/app_router.dart';
-import 'core/router/scaffold_messenger_key.dart';
+import 'core/router/navigator_key.dart';
 import 'core/util/colors_constant.dart';
 
 Future<void> main() async {
@@ -176,24 +176,22 @@ class _MyApp extends ConsumerState<MyApp> {
           background: backgroundColor,
         ),
       ),
-      routerConfig: ref.watch(appRouterProvider).config(
-            navigatorObservers: () => [
-              ref.watch(analyticsObserverProvider),
-            ],
-          ),
-      builder: (context, child) => ScaffoldMessenger(
-        key: ref.watch(scaffoldMessengerKeyProvider),
-        child: Consumer(
-          builder: (context, ref, _) {
-            return Stack(
+      routerConfig: ref.watch(appRouterProvider).config(),
+      builder: (context, child) => Navigator(
+        key: ref.watch(navigatorKeyProvider),
+        observers: [ref.watch(analyticsObserverProvider)],
+        onPopPage: (route, dynamic _) => false,
+        pages: [
+          MaterialPage<Widget>(
+            child: Stack(
               children: [
                 child!,
                 // ローディングを表示する
                 if (ref.watch(loadingNotifierProvider)) const LoadingWidget(),
               ],
-            );
-          },
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

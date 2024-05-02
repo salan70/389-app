@@ -1,11 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../../core/util/presentation_mixin.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class StartTodaysDailyQuizButton extends ConsumerWidget {
   const StartTodaysDailyQuizButton({
@@ -52,7 +51,7 @@ class AlertAlreadyPlayedDailyQuizDialog extends StatelessWidget {
         MyButton(
           buttonName: 'ok_button_in_already_played_daily_quiz_dialog',
           buttonType: ButtonType.main,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const Text('OK'),
         ),
       ],
@@ -79,7 +78,7 @@ class AlertNotFoundDailyQuizDialog extends StatelessWidget {
           buttonName: 'ok_button_in_'
               'not_found_daily_quiz_dialog',
           buttonType: ButtonType.main,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const Text('OK'),
         ),
       ],
@@ -88,7 +87,7 @@ class AlertNotFoundDailyQuizDialog extends StatelessWidget {
 }
 
 /// 今日の1問がプレイできる場合、プレイするか確認するダイアログ。
-class ConfirmPlayDailyQuizDialog extends ConsumerWidget with PresentationMixin {
+class ConfirmPlayDailyQuizDialog extends ConsumerWidget {
   const ConfirmPlayDailyQuizDialog({super.key, required this.onPressedYes});
 
   final VoidCallback onPressedYes;

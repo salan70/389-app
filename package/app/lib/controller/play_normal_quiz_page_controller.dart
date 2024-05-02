@@ -6,8 +6,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../component/play_quiz_common/incorrect_dialog.dart';
 import '../core/common_widget/dialog/confirm_dialog.dart';
 import '../core/router/app_router.dart';
-import '../core/router/scaffold_messenger_key.dart';
+import '../core/router/navigator_key.dart';
 import '../core/util/extension/context_extension.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'play_normal_quiz_page_controller.g.dart';
 
@@ -96,28 +97,48 @@ class PlayNormalQuizPageController {
     }
   }
 
-  Future<void> onRetire() async {
+  /// 諦めるボタンをタップした際の処理。
+  Future<void> onTapRetire() async {
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: ConfirmDialog(
+            confirmText: QuizType.normal.retireConfirmText,
+            onPressedYes: _onAcceptRetire,
+          ),
+          barrierDismissible: false,
+        );
+  }
+
+  /// 諦めることの確認ダイアログで、承認した際の処理。
+  Future<void> _onAcceptRetire() async {
     await _ref.read(quizResultServiceProvider).createNormalQuizResult();
+
+    // ダイアログを閉じる。
+    final context = _ref.read(navigatorKeyProvider).currentContext!;
+    if (context.mounted) {
+      context.pop();
+    }
+
+    /// 画面遷移する。
     await _ref.read(appRouterProvider).push(ResultNormalQuizRoute());
   }
 
   void _showIncorrectDialog(String hitterName) {
-    _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
-          child: IncorrectDialog.normal(
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: IncorrectDialog(
             hitterName: hitterName,
-            onAcceptRetire: onRetire,
+            onTapRetire: onTapRetire,
           ),
           barrierDismissible: false,
         );
   }
 
   void _showConfirmOpenAllDialog(HitterQuizNotifier notifier) {
-    _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
             onPressedYes: () {
               notifier.openAll();
-              _ref.read(appRouterProvider).pop();
+              _ref.read(navigatorKeyProvider).currentContext!.pop();
             },
           ),
         );

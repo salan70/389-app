@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../../controller/common/navigator_key_controller.dart';
 import '../common_widget/dialog/error_dialog.dart';
-import '../router/scaffold_messenger_key.dart';
 
 /// Controller で使用する Mixin.
 mixin ControllerMixin {
@@ -28,11 +28,10 @@ mixin ControllerMixin {
       logger.e('error: $e, stackTrace: $s');
       ref.read(loadingNotifierProvider.notifier).hide();
 
-      // エラーダイアログを表示
-      await showDialog<void>(
-        context: ref.read(scaffoldMessengerKeyProvider).currentContext!,
-        builder: (context) => const ErrorDialog(),
-      );
+      // エラーダイアログを表示する。
+      ref
+          .read(navigatorKeyControllerProvider)
+          .showDialogWithChild(child: const ErrorDialog());
     }
   }
 }

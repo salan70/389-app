@@ -70,9 +70,9 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     Center(
                       child: SizedBox(
                         width: _buttonWidth,
-                        child: RetireButton.normal(
+                        child: RetireButton(
                           buttonType: ButtonType.sub,
-                          onRetire: controller.onRetire,
+                          onTapRetire: controller.onTapRetire,
                         ),
                       ),
                     ),

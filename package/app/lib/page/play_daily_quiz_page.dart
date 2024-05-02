@@ -107,10 +107,10 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       Center(
                         child: SizedBox(
                           width: widget._buttonWidth,
-                          child: RetireButton.daily(
+                          child: RetireButton(
                             buttonType: ButtonType.sub,
-                            onRetire: () async =>
-                                controller.onRetire(widget.questionedAt),
+                            onTapRetire: () async =>
+                                controller.onTapRetire(widget.questionedAt),
                           ),
                         ),
                       ),

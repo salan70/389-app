@@ -5,10 +5,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../component/quiz_result_normal/request_review_dialog.dart';
 import '../core/router/app_router.dart';
-import '../core/router/scaffold_messenger_key.dart';
 import '../core/util/controller_mixin.dart';
-import '../core/util/extension/context_extension.dart';
 import '../core/util/extension/global_key_extension.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'result_normal_quiz_page_controller.g.dart';
 
@@ -42,14 +41,10 @@ class ResultNormalQuizPageController with ControllerMixin {
     await _ref.read(appReviewServiceProvider).updateReviewHistory();
 
     // レビューダイアログを表示する。
-    final currentContext =
-        _ref.read(scaffoldMessengerKeyProvider).currentContext!;
-    if (currentContext.mounted) {
-      currentContext.showDialogWithChild(
-        child: RequestReviewDialog(onAcceptReview: _onAcceptReview),
-        barrierDismissible: false,
-      );
-    }
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: RequestReviewDialog(onAcceptReview: _onAcceptReview),
+          barrierDismissible: false,
+        );
   }
 
   /// クイズ結果をシェアする。

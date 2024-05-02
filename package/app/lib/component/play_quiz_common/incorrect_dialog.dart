@@ -1,29 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
-import '../../../core/common_widget/dialog/confirm_dialog.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class IncorrectDialog extends StatelessWidget {
-  const IncorrectDialog.normal({
+  const IncorrectDialog({
     super.key,
     required this.hitterName,
-    required this.onAcceptRetire,
-  }) : quizType = QuizType.normal;
-
-  const IncorrectDialog.daily({
-    super.key,
-    required this.hitterName,
-    required this.onAcceptRetire,
-  }) : quizType = QuizType.daily;
-
-  final QuizType quizType;
+    required this.onTapRetire,
+  });
 
   final String hitterName;
 
-  /// 諦めることを承認した際の処理。
-  final VoidCallback onAcceptRetire;
+  /// 諦めるボタンを押した際の処理。
+  final VoidCallback onTapRetire;
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +24,13 @@ class IncorrectDialog extends StatelessWidget {
         MyButton(
           buttonName: 'retire_button',
           buttonType: ButtonType.alert,
+          onPressed: onTapRetire,
           child: const Text('諦める'),
-          onPressed: () async {
-            await showDialog<void>(
-              context: context,
-              barrierDismissible: false,
-              builder: (_) => ConfirmDialog(
-                confirmText: quizType.retireConfirmText,
-                onPressedYes: onAcceptRetire,
-              ),
-            );
-          },
         ),
         MyButton(
           buttonName: 'try_again_button',
           buttonType: ButtonType.sub,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const Text('もう一度回答する'),
         ),
       ],

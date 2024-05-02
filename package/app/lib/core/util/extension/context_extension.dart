@@ -38,38 +38,6 @@ extension ContextExtension on BuildContext {
     }
   }
 
-  void showSnackBar(
-    String text, {
-    Color? backgroundColor,
-    Duration duration = const Duration(milliseconds: 1500),
-    VoidCallback? onTap,
-    String closeLabel = '閉じる',
-  }) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        backgroundColor: backgroundColor ?? colorScheme.primary,
-        content: Text(text),
-        duration: duration,
-        action: SnackBarAction(
-          label: closeLabel,
-          onPressed: () {
-            onTap?.call();
-          },
-        ),
-      ),
-    );
-  }
-
-  // TODO(me): dialog 表示されないので、修正する。
-  /// [child] をダイアログとして表示する。
-  void showDialogWithChild({
-    required Widget child,
-    bool barrierDismissible = true,
-  }) {
-    showDialog<void>(
-      context: this,
-      barrierDismissible: barrierDismissible,
-      builder: (context) => child,
-    );
-  }
+  /// ダイアログを閉じる際に使うことを想定している。
+  void pop() => Navigator.of(this).pop();
 }

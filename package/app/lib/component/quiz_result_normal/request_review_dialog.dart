@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/common_widget/button/my_button.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class RequestReviewDialog extends StatelessWidget {
   const RequestReviewDialog({super.key, required this.onAcceptReview});
@@ -27,7 +27,7 @@ class RequestReviewDialog extends StatelessWidget {
         MyButton(
           buttonName: 'cancel_button_in_request_review_dialog',
           buttonType: ButtonType.sub,
-          onPressed: context.popRoute,
+          onPressed: context.pop,
           child: const Text('今はやめとく'),
         ),
         MyButton(

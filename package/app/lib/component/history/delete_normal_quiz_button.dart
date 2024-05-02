@@ -1,8 +1,9 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
+import '../../controller/common/navigator_key_controller.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class DeleteNormalQuizResultButton extends ConsumerWidget {
   const DeleteNormalQuizResultButton({
@@ -21,35 +22,33 @@ class DeleteNormalQuizResultButton extends ConsumerWidget {
       buttonName: 'delete_normal_quiz_result_button',
       buttonType: ButtonType.alert,
       onPressed: () {
-        showDialog<void>(
-          context: context,
-          builder: (_) {
-            return AlertDialog(
-              title: const Text('確認'),
-              content: const Text('本当にこの履歴を消しますか？\n一度消した履歴は元に戻せません。'),
-              actionsAlignment: MainAxisAlignment.spaceAround,
-              actions: [
-                MyButton(
-                  buttonName:
-                      'cancel_button_in_delete_normal_quiz_result_dialog',
-                  buttonType: ButtonType.sub,
-                  onPressed: context.popRoute,
-                  child: const Text('キャンセル'),
-                ),
-                MyButton(
-                  buttonName:
-                      'delete_button_in_delete_normal_quiz_result_dialog',
-                  buttonType: ButtonType.alert,
-                  onPressed: () async {
-                    await context.popRoute();
-                    onAcceptDelete();
-                  },
-                  child: const Text('消す'),
-                ),
-              ],
+        // TODO(me): controller で書く。
+        ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+              child: AlertDialog(
+                title: const Text('確認'),
+                content: const Text('本当にこの履歴を消しますか？\n一度消した履歴は元に戻せません。'),
+                actionsAlignment: MainAxisAlignment.spaceAround,
+                actions: [
+                  MyButton(
+                    buttonName:
+                        'cancel_button_in_delete_normal_quiz_result_dialog',
+                    buttonType: ButtonType.sub,
+                    onPressed: context.pop,
+                    child: const Text('キャンセル'),
+                  ),
+                  MyButton(
+                    buttonName:
+                        'delete_button_in_delete_normal_quiz_result_dialog',
+                    buttonType: ButtonType.alert,
+                    onPressed: () async {
+                      context.pop();
+                      onAcceptDelete();
+                    },
+                    child: const Text('消す'),
+                  ),
+                ],
+              ),
             );
-          },
-        );
       },
       child: const Text('この履歴を消す'),
     );

@@ -9,6 +9,7 @@ import '../component/play_quiz_normal/start_normal_quiz_from_top_button.dart';
 import '../component/setting/force_update_dialog.dart';
 import '../component/setting/icon_widget.dart';
 import '../component/setting/open_setting_button.dart';
+import '../controller/common/navigator_key_controller.dart';
 import '../controller/top_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/to_gallery_button.dart';
@@ -37,13 +38,10 @@ class _TopPageState extends ConsumerState<TopPage> {
       // バージョンチェック
       final needUpdate = await ref.read(needUpdateProvider.future);
       if (needUpdate) {
-        if (context.mounted) {
-          await showDialog<void>(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => const ForceUpdateDialog(),
-          );
-        }
+        ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+              child: const ForceUpdateDialog(),
+              barrierDismissible: false,
+            );
       }
 
       // ローカルPUSH通知の初期設定を行う。
@@ -63,11 +61,14 @@ class _TopPageState extends ConsumerState<TopPage> {
           child: Center(
             child: Column(
               children: [
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
                     width: 120,
-                    child: OpenSettingButton(buttonType: ButtonType.sub),
+                    child: OpenSettingButton(
+                      buttonType: ButtonType.sub,
+                      onTap: controller.onTapOpenSetting,
+                    ),
                   ),
                 ),
                 Expanded(

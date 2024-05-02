@@ -1,10 +1,10 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/util/colors_constant.dart';
+import '../../core/util/extension/context_extension.dart';
 
 class NotificationSettingDialog extends ConsumerWidget {
   const NotificationSettingDialog({super.key});
@@ -116,7 +116,7 @@ class _CloseButton extends StatelessWidget {
     return MyButton(
       buttonName: 'close_button_in_notification_setting_dialog',
       buttonType: ButtonType.main,
-      onPressed: context.popRoute,
+      onPressed: context.pop,
       child: const Center(child: Text('閉じる')),
     );
   }

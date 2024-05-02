@@ -6,8 +6,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../component/play_quiz_common/incorrect_dialog.dart';
 import '../core/common_widget/dialog/confirm_dialog.dart';
 import '../core/router/app_router.dart';
-import '../core/router/scaffold_messenger_key.dart';
+import '../core/router/navigator_key.dart';
 import '../core/util/extension/context_extension.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'play_daily_quiz_page_controller.g.dart';
 
@@ -55,7 +56,7 @@ class PlayDailyQuizPageController {
   ///
   /// このダイアログで回答することを承認した場合、二度と [questionedAt] の今日の1問に回答できない。
   void _showConfirmLastSubmitDialog(String hitterName, DateTime questionedAt) {
-    _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
             onPressedYes: () async => _submitAnswer(hitterName, questionedAt),
@@ -116,12 +117,23 @@ class PlayDailyQuizPageController {
     notifier.updateEnteredHitter(value);
   }
 
+  /// 諦めるボタンをタップした際の処理。
+  Future<void> onTapRetire(DateTime questionedAt) async {
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: ConfirmDialog(
+            confirmText: QuizType.daily.retireConfirmText,
+            onPressedYes: () => _onAcceptRetire(questionedAt),
+          ),
+          barrierDismissible: false,
+        );
+  }
+
   /// 今日の1問をリタイアする際の処理。
-  Future<void> onRetire(DateTime questionedAt) async =>
+  Future<void> _onAcceptRetire(DateTime questionedAt) async =>
       _finishQuiz(questionedAt);
 
   void _showConfirmOpenAllDialog(HitterQuizNotifier notifier) {
-    _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
             onPressedYes: () {
@@ -174,10 +186,10 @@ class PlayDailyQuizPageController {
   }
 
   void _showIncorrectDialog(String hitterName, DateTime questionedAt) {
-    _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
-          child: IncorrectDialog.daily(
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          child: IncorrectDialog(
             hitterName: hitterName,
-            onAcceptRetire: () => onRetire(questionedAt),
+            onTapRetire: () => onTapRetire(questionedAt),
           ),
           barrierDismissible: false,
         );
@@ -191,6 +203,13 @@ class PlayDailyQuizPageController {
         .read(quizResultServiceProvider)
         .updateDailyQuizResult(questionedAt);
 
+    // ダイアログを閉じる。
+    final context = _ref.read(navigatorKeyProvider).currentContext!;
+    if (context.mounted) {
+      context.pop();
+    }
+
+    /// 画面遷移する。
     await _ref
         .read(appRouterProvider)
         .push(ResultDailyQuizRoute(questionedAt: questionedAt));

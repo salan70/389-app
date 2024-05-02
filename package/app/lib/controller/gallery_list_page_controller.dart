@@ -5,9 +5,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../component/gallery/confirm_play_past_daily_quiz_dialog.dart';
 import '../core/router/app_router.dart';
-import '../core/router/scaffold_messenger_key.dart';
 import '../core/util/controller_mixin.dart';
-import '../core/util/extension/context_extension.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'gallery_list_page_controller.g.dart';
 
@@ -59,17 +58,12 @@ class GalleryListPageController with ControllerMixin {
             .read(analyticsServiceProvider)
             .logTapButton('show_confirm_play_past_daily_quiz_dialog');
 
-        final currentContext =
-            _ref.read(scaffoldMessengerKeyProvider).currentContext!;
-
-        if (currentContext.mounted) {
-          currentContext.showDialogWithChild(
-            child: ConfirmPlayPastDailyQuizDialog(
-              date: date,
-              onPressed: () async => _onAcceptPlayPastDailyQuiz(date),
-            ),
-          );
-        }
+        _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+              child: ConfirmPlayPastDailyQuizDialog(
+                date: date,
+                onPressed: () async => _onAcceptPlayPastDailyQuiz(date),
+              ),
+            );
       },
     );
   }

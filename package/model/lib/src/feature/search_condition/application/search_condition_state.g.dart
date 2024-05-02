@@ -8,7 +8,7 @@ part of 'search_condition_state.dart';
 
 String _$searchConditionHash() => r'157c2deb99eca5aa6b2d385518a6eda5db2d37c7';
 
-/// ノーマルクイズの検索条件を返すプロバイダー。
+/// ノーマルクイズの検索条件を保持するプロバイダー。
 ///
 /// Copied from [searchCondition].
 @ProviderFor(searchCondition)
