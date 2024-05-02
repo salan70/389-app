@@ -116,6 +116,10 @@ class PlayDailyQuizPageController {
     notifier.updateEnteredHitter(value);
   }
 
+  /// 今日の1問をリタイアする際の処理。
+  Future<void> onRetire(DateTime questionedAt) async =>
+      _finishQuiz(questionedAt);
+
   void _showConfirmOpenAllDialog(HitterQuizNotifier notifier) {
     _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
           child: ConfirmDialog(
@@ -173,7 +177,7 @@ class PlayDailyQuizPageController {
     _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
           child: IncorrectDialog.daily(
             hitterName: hitterName,
-            questionedAt: questionedAt,
+            onAcceptRetire: () => onRetire(questionedAt),
           ),
           barrierDismissible: false,
         );
@@ -191,8 +195,4 @@ class PlayDailyQuizPageController {
         .read(appRouterProvider)
         .push(ResultDailyQuizRoute(questionedAt: questionedAt));
   }
-
-  /// 今日の1問をリタイアする際の処理。
-  Future<void> onRetire(DateTime questionedAt) async =>
-      _finishQuiz(questionedAt);
 }

@@ -1,33 +1,32 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../core/router/app_router.dart';
 
-class IncorrectDialog extends ConsumerWidget {
-  const IncorrectDialog.normal({super.key, required this.hitterName})
-      : quizType = QuizType.normal,
-        questionedAt = null;
+class IncorrectDialog extends StatelessWidget {
+  const IncorrectDialog.normal({
+    super.key,
+    required this.hitterName,
+    required this.onAcceptRetire,
+  }) : quizType = QuizType.normal;
 
   const IncorrectDialog.daily({
     super.key,
     required this.hitterName,
-    required this.questionedAt,
+    required this.onAcceptRetire,
   }) : quizType = QuizType.daily;
 
-  final String hitterName;
   final QuizType quizType;
 
-  /// 対象となる DailyQuiz の出題日。
-  ///
-  /// [QuizType.daily] の場合、必須。
-  final DateTime? questionedAt;
+  final String hitterName;
+
+  /// 諦めることを承認した際の処理。
+  final VoidCallback onAcceptRetire;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('残念...'),
       content: Text('$hitterName選手ではありません'),
@@ -40,37 +39,10 @@ class IncorrectDialog extends ConsumerWidget {
             await showDialog<void>(
               context: context,
               barrierDismissible: false,
-              builder: (_) {
-                return ConfirmDialog(
-                  confirmText: quizType.retireConfirmText,
-                  onPressedYes: () async {
-                    final quizResultService =
-                        ref.read(quizResultServiceProvider);
-
-                    // * 通常クイズの場合
-                    if (quizType == QuizType.normal) {
-                      await quizResultService.createNormalQuizResult();
-                      if (context.mounted) {
-                        await context.pushRoute(ResultNormalQuizRoute());
-                      }
-                      return;
-                    }
-
-                    // * デイリークイズの場合
-                    if (questionedAt == null) {
-                      throw ArgumentError.notNull('questionedAt');
-                    }
-                    await quizResultService
-                        .updateDailyQuizResult(questionedAt!);
-
-                    if (context.mounted) {
-                      await context.pushRoute(
-                        ResultDailyQuizRoute(questionedAt: questionedAt!),
-                      );
-                    }
-                  },
-                );
-              },
+              builder: (_) => ConfirmDialog(
+                confirmText: quizType.retireConfirmText,
+                onPressedYes: onAcceptRetire,
+              ),
             );
           },
         ),

@@ -4,11 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/play_quiz_common/submit_answer_button.dart';
 import '../component/play_quiz_common/input_answer_text_field.dart';
 import '../component/play_quiz_common/quiz_event_buttons.dart';
 import '../component/play_quiz_common/quiz_widget.dart';
 import '../component/play_quiz_common/retire_button.dart';
+import '../component/play_quiz_common/submit_answer_button.dart';
 import '../controller/play_normal_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 

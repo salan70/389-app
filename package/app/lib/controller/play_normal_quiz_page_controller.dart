@@ -103,7 +103,10 @@ class PlayNormalQuizPageController {
 
   void _showIncorrectDialog(String hitterName) {
     _ref.read(scaffoldMessengerKeyProvider).currentContext!.showDialogWithChild(
-          child: IncorrectDialog.normal(hitterName: hitterName),
+          child: IncorrectDialog.normal(
+            hitterName: hitterName,
+            onAcceptRetire: onRetire,
+          ),
           barrierDismissible: false,
         );
   }
