@@ -1,3 +1,4 @@
+// ignore_for_file: lines_longer_than_80_chars
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:flutter_test/flutter_test.dart';
 // import 'package:hive/hive.dart';
@@ -17,7 +18,7 @@
 //   void saveSearchCondition(SearchCondition searchCondition) {}
 
 //   @override
-//   // TODO: implement box
+  // TODO(me): implement box
 //   Box<SearchCondition> get box => throw UnimplementedError();
 // }
 
