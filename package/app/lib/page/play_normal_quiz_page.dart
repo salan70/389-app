@@ -9,6 +9,7 @@ import '../component/quiz_play/normal_quiz_submit_answer_button.dart';
 import '../component/quiz_play/quiz_event_buttons.dart';
 import '../component/quiz_play/quiz_widget.dart';
 import '../component/quiz_play/retire_button.dart';
+import '../controller/play_normal_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 
 @RoutePage()
@@ -22,6 +23,8 @@ class PlayNormalQuizPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncHitterQuiz = ref
         .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
+
+    final controller = ref.watch(playNormalQuizPageControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -42,19 +45,14 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     const SizedBox(height: 16),
                     InputAnswerTextField(
                       textEditingController: _textEditingController,
-                      onSearchHitter: () {
-                        // todo
-                      },
+                      onSearchHitter: () => controller
+                          .onSearchHitter(_textEditingController.text),
                       onSelectedHitter: (Hitter value) {},
                     ),
                     const SizedBox(height: 16),
                     QuizEventButtons(
-                      onOpenAll: () {
-                        //todo
-                      },
-                      onOpenSingle: () {
-                        //todo
-                      },
+                      onOpenAll: controller.onShowAllStat,
+                      onOpenSingle: controller.onShowSingleStat,
                     ),
                     const SizedBox(height: 16),
                     Center(
@@ -63,14 +61,19 @@ class PlayNormalQuizPage extends ConsumerWidget {
                         child: NormalQuizSubmitAnswerButton(
                           buttonType: ButtonType.main,
                           enteredHitter: hitterQuiz.enteredHitter,
+                          onSubmitAnswer: () => controller
+                              .onSubmitAnswer(hitterQuiz.enteredHitter?.label),
                         ),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Center(
+                    Center(
                       child: SizedBox(
                         width: _buttonWidth,
-                        child: RetireButton.normal(buttonType: ButtonType.sub),
+                        child: RetireButton.normal(
+                          buttonType: ButtonType.sub,
+                          onRetire: controller.onRetire,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 120),

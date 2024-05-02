@@ -1,36 +1,27 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 import '../../../core/common_widget/dialog/confirm_dialog.dart';
-import '../../core/router/app_router.dart';
 
 class RetireButton extends ConsumerWidget {
   const RetireButton.normal({
     super.key,
     required this.buttonType,
-  })  : quizType = QuizType.normal,
-        questionedAt = null,
-        onRetireDailyQuiz = null;
+    required this.onRetire,
+  }) : quizType = QuizType.normal;
 
   const RetireButton.daily({
     super.key,
     required this.buttonType,
-    required this.questionedAt,
-    required this.onRetireDailyQuiz,
+    required this.onRetire,
   }) : quizType = QuizType.daily;
 
   final ButtonType buttonType;
   final QuizType quizType;
 
-  /// 対象となる DailyQuiz の出題日。
-  ///
-  /// [QuizType.daily] の場合、必須。
-  final DateTime? questionedAt;
-
-  final VoidCallback? onRetireDailyQuiz;
+  final VoidCallback onRetire;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,21 +34,7 @@ class RetireButton extends ConsumerWidget {
           barrierDismissible: false,
           builder: (_) => ConfirmDialog(
             confirmText: quizType.retireConfirmText,
-            onPressedYes: () async {
-              final quizResultService = ref.read(quizResultServiceProvider);
-
-              // * 通常クイズの場合
-              if (quizType == QuizType.normal) {
-                await quizResultService.createNormalQuizResult();
-                if (context.mounted) {
-                  await context.pushRoute(ResultNormalQuizRoute());
-                }
-                return;
-              }
-
-              // * デイリークイズの場合
-              onRetireDailyQuiz?.call();
-            },
+            onPressedYes: onRetire,
           ),
         );
       },
