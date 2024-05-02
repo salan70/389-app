@@ -37,14 +37,14 @@ class DailyQuizGalleryList extends ConsumerWidget {
                     defaultBuilder: (context, date, _) {
                       final formattedDate = date.toFormattedString();
                       final hitterQuizResult =
-                          dailyQuizResult.resultMap[formattedDate]!;
+                          dailyQuizResult.resultMap[formattedDate];
 
                       return DailyQuizCalenderCell(
                         date: date,
                         dailyHitterQuizResult: dailyQuizResult,
                         onTapPlayedDailyQuiz: () => ref
                             .read(galleryListPageControllerProvider)
-                            .onTapPlayedDailyQuiz(hitterQuizResult),
+                            .onTapPlayedDailyQuiz(hitterQuizResult!),
                         onTapNotPlayedDailyQuiz: () => ref
                             .read(galleryListPageControllerProvider)
                             .onTapNotPlayedDailyQuiz(date),
@@ -54,14 +54,14 @@ class DailyQuizGalleryList extends ConsumerWidget {
                     todayBuilder: (context, date, _) {
                       final formattedDate = date.toFormattedString();
                       final hitterQuizResult =
-                          dailyQuizResult.resultMap[formattedDate]!;
+                          dailyQuizResult.resultMap[formattedDate];
 
                       return DailyQuizCalenderCell(
                         date: date,
                         dailyHitterQuizResult: dailyQuizResult,
                         onTapPlayedDailyQuiz: () => ref
                             .read(galleryListPageControllerProvider)
-                            .onTapPlayedDailyQuiz(hitterQuizResult),
+                            .onTapPlayedDailyQuiz(hitterQuizResult!),
                         onTapNotPlayedDailyQuiz: () => ref
                             .read(galleryListPageControllerProvider)
                             .onTapNotPlayedDailyQuiz(date),
