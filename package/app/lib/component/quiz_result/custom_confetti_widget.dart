@@ -2,9 +2,8 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomConfettiWidget extends ConsumerStatefulWidget {
+class CustomConfettiWidget extends StatefulWidget {
   const CustomConfettiWidget({
     super.key,
     required this.isCorrect,
@@ -13,25 +12,25 @@ class CustomConfettiWidget extends ConsumerStatefulWidget {
   final bool isCorrect;
 
   @override
-  ConsumerState<CustomConfettiWidget> createState() =>
-      _CustomConfettiWidgetState();
+  State<CustomConfettiWidget> createState() => _CustomConfettiWidgetState();
 }
 
-class _CustomConfettiWidgetState extends ConsumerState<CustomConfettiWidget> {
-  final controller = ConfettiController(duration: const Duration(seconds: 2));
+class _CustomConfettiWidgetState extends State<CustomConfettiWidget> {
+  final confettiController =
+      ConfettiController(duration: const Duration(seconds: 2));
 
   @override
   void initState() {
     super.initState();
     if (widget.isCorrect) {
-      controller.play();
+      confettiController.play();
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return ConfettiWidget(
-      confettiController: controller,
+      confettiController: confettiController,
       emissionFrequency: 0.2,
       blastDirection: 3 * pi / 2,
       particleDrag: 0.005,

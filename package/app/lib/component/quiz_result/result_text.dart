@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-class ResultText extends ConsumerWidget {
+class ResultText extends StatelessWidget {
   const ResultText({super.key, required this.hitterQuiz});
 
   final HitterQuiz hitterQuiz;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
         height: 64,

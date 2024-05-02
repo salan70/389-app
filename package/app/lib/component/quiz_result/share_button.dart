@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 
-class ShareButton extends ConsumerWidget {
+class ShareButton extends StatelessWidget {
   const ShareButton({
     super.key,
     required this.buttonType,
@@ -14,7 +13,7 @@ class ShareButton extends ConsumerWidget {
   final VoidCallback onPressed;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MyButton(
       buttonName: 'share_button',
       buttonType: buttonType,

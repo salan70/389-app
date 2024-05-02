@@ -8,7 +8,7 @@ import '../component/quiz_result/custom_confetti_widget.dart';
 import '../component/quiz_result/result_quiz_widget.dart';
 import '../component/quiz_result/result_text.dart';
 import '../component/quiz_result/share_button.dart';
-import '../controller/quiz_history_daily_page_controller.dart';
+import '../controller/result_daily_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/back_to_top_button.dart';
 
@@ -61,7 +61,7 @@ class ResultDailyQuizPage extends ConsumerWidget {
                               buttonType: ButtonType.sub,
                               // TODO(me): 仮に他 Page の Controller を使っているので、修正する。
                               onPressed: () => ref
-                                  .read(quizHistoryDailyPageControllerProvider)
+                                  .read(resultDailyQuizPageControllerProvider)
                                   .shareQuiz(_globalKey, _shareText),
                             ),
                           ),
