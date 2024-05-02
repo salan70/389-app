@@ -34,7 +34,7 @@ class QuizEventButtons extends ConsumerWidget {
             buttonName: 'show_all_stat_button',
             buttonType: ButtonType.sub,
             onPressed: () {
-              // 回答入力用のTextFieldのフォーカスを外す
+              // 回答入力用の TextField のフォーカスを外す。
               FocusManager.instance.primaryFocus?.unfocus();
 
               if (notifier.canOpen()) {
@@ -61,7 +61,7 @@ class QuizEventButtons extends ConsumerWidget {
             buttonName: 'show_next_stat_button',
             buttonType: ButtonType.sub,
             onPressed: () {
-              // 回答入力用のTextFieldのフォーカスを外す
+              // 回答入力用の TextField のフォーカスを外す。
               FocusManager.instance.primaryFocus?.unfocus();
 
               if (notifier.canOpen()) {

@@ -42,11 +42,7 @@ class QuizWidget extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(4),
                     alignment: Alignment.center,
-                    child: FittedBox(
-                      child: Text(
-                        year,
-                      ),
-                    ),
+                    child: FittedBox(child: Text(year)),
                   ),
                 ),
                 for (final selectedStats in selectedStatsList)
@@ -57,9 +53,7 @@ class QuizWidget extends StatelessWidget {
                       child: (statsMap[selectedStats]!.unveilOrder <
                               unveilCount)
                           ? FittedBox(
-                              child: Text(
-                                statsMap[selectedStats]!.data,
-                              ),
+                              child: Text(statsMap[selectedStats]!.data),
                             )
                           : Container(
                               width: double.infinity,

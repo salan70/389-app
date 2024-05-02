@@ -4,8 +4,10 @@ import 'package:model/model.dart';
 import 'package:textfield_search/textfield_search.dart';
 
 class InputAnswerTextField extends ConsumerWidget {
-  InputAnswerTextField.normal({super.key, required this.textEditingController})
-      : quizType = QuizType.normal,
+  InputAnswerTextField.normal({
+    super.key,
+    required this.textEditingController,
+  })  : quizType = QuizType.normal,
         questionedAt = null;
 
   InputAnswerTextField.daily({

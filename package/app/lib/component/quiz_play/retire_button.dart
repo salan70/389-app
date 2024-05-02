@@ -8,8 +8,10 @@ import '../../../core/common_widget/dialog/confirm_dialog.dart';
 import '../../core/router/app_router.dart';
 
 class RetireButton extends ConsumerWidget {
-  const RetireButton.normal({super.key, required this.buttonType})
-      : quizType = QuizType.normal,
+  const RetireButton.normal({
+    super.key,
+    required this.buttonType,
+  })  : quizType = QuizType.normal,
         questionedAt = null;
 
   const RetireButton.daily({

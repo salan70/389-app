@@ -27,6 +27,7 @@ class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
           final hitterQuizResult =
               dailyHitterQuizResult.resultMap[formattedDate]!;
           return InkWell(
+            // todo: controller
             onTap: () async {
               await ref
                   .read(analyticsServiceProvider)
@@ -48,6 +49,7 @@ class DailyQuizCalenderCell extends ConsumerWidget with PresentationMixin {
         // 未プレイ かつ 過去の日付。
         if (date.isBefore(DateTime.now().calculateDateInApp())) {
           return InkWell(
+            // todo: controller
             onTap: () async {
               await executeWithOverlayLoading(
                 ref,
@@ -148,6 +150,7 @@ class __ConfirmPlayPastDailyQuizDialog
             child: Center(child: Text('いいえ')),
           ),
           onPressed: () async {
+            // todo: controller
             await ref
                 .read(analyticsServiceProvider)
                 .logTapButton('cancelled_play_past_daily_quiz');
@@ -162,6 +165,7 @@ class __ConfirmPlayPastDailyQuizDialog
           buttonName: 'confirm_yes_button',
           buttonType: ButtonType.alert,
           onPressed: () async {
+            // todo: controller
             await ref
                 .read(analyticsServiceProvider)
                 .logTapButton('approved_play_past_daily_quiz');
