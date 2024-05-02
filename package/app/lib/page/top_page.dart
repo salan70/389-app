@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/play_daily_quiz/start_todays_daily_quiz_button.dart';
-import '../component/play_normal_quiz/start_normal_quiz_from_top_button.dart';
+import '../component/play_quiz_daily/start_todays_daily_quiz_button.dart';
+import '../component/play_quiz_normal/start_normal_quiz_from_top_button.dart';
 import '../component/setting/force_update_dialog.dart';
 import '../component/setting/icon_widget.dart';
 import '../component/setting/open_setting_button.dart';

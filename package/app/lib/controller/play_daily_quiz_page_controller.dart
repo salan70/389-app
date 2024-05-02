@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../component/quiz_play/incorrect_dialog.dart';
+import '../component/play_quiz_common/incorrect_dialog.dart';
 import '../core/common_widget/dialog/confirm_dialog.dart';
 import '../core/router/app_router.dart';
 import '../core/router/scaffold_messenger_key.dart';

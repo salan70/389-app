@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 
-import '../quiz_play/quiz_widget.dart';
+import '../play_quiz_common/quiz_widget.dart';
 
 class ResultQuizWidget extends StatelessWidget {
   const ResultQuizWidget({

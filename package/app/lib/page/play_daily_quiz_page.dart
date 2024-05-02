@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/quiz_play/daily_quiz_submit_answer_button.dart';
-import '../component/quiz_play/input_answer_text_field.dart';
-import '../component/quiz_play/life_widget.dart';
-import '../component/quiz_play/quiz_event_buttons.dart';
-import '../component/quiz_play/quiz_widget.dart';
-import '../component/quiz_play/retire_button.dart';
+import '../component/play_quiz_daily/life_widget.dart';
+import '../component/play_quiz_common/submit_answer_button.dart';
+import '../component/play_quiz_common/input_answer_text_field.dart';
+import '../component/play_quiz_common/quiz_event_buttons.dart';
+import '../component/play_quiz_common/quiz_widget.dart';
+import '../component/play_quiz_common/retire_button.dart';
 import '../controller/play_daily_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 
@@ -92,7 +92,7 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       Center(
                         child: SizedBox(
                           width: widget._buttonWidth,
-                          child: DailyQuizSubmitAnswerButton(
+                          child: SubmitAnswerButton(
                             buttonType: ButtonType.main,
                             hitter: hitterQuiz.enteredHitter,
                             onTapSubmitAnswer: () async =>

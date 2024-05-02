@@ -3,8 +3,8 @@ import 'package:model/model.dart';
 
 import '../../../core/common_widget/button/my_button.dart';
 
-class DailyQuizSubmitAnswerButton extends StatelessWidget {
-  const DailyQuizSubmitAnswerButton({
+class SubmitAnswerButton extends StatelessWidget {
+  const SubmitAnswerButton({
     super.key,
     required this.buttonType,
     required this.hitter,
@@ -24,7 +24,7 @@ class DailyQuizSubmitAnswerButton extends StatelessWidget {
     return MyButton(
       buttonName: 'submit_answer_button',
       buttonType: buttonType,
-      onPressed: hitter == null ? null : () async => onTapSubmitAnswer,
+      onPressed: hitter == null ? null : onTapSubmitAnswer,
       child: const Text('回答する'),
     );
   }
