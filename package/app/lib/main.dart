@@ -152,6 +152,7 @@ class _MyApp extends ConsumerState<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        useMaterial3: false,
         textTheme: GoogleFonts.rocknRollOneTextTheme().copyWith(
           bodyMedium: GoogleFonts.rocknRollOneTextTheme().bodyMedium?.copyWith(
                 fontSize: 16,
