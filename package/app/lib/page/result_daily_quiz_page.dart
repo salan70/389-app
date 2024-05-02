@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/quiz_result/custom_confetti_widget.dart';
-import '../component/quiz_result/result_quiz_widget.dart';
-import '../component/quiz_result/result_text.dart';
-import '../component/quiz_result/share_button.dart';
+import '../component/quiz_result_common/custom_confetti_widget.dart';
+import '../component/quiz_result_common/result_quiz_widget.dart';
+import '../component/quiz_result_common/result_text.dart';
+import '../component/quiz_result_common/share_button.dart';
 import '../controller/result_daily_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/back_to_top_button.dart';

@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
-import '../component/quiz_result/custom_confetti_widget.dart';
-import '../component/quiz_result/replay_button.dart';
-import '../component/quiz_result/result_quiz_widget.dart';
-import '../component/quiz_result/result_text.dart';
-import '../component/quiz_result/share_button.dart';
-import '../controller/quiz_history_daily_page_controller.dart';
+import '../component/quiz_result_common/custom_confetti_widget.dart';
+import '../component/quiz_result_common/result_quiz_widget.dart';
+import '../component/quiz_result_common/result_text.dart';
+import '../component/quiz_result_common/share_button.dart';
+import '../component/quiz_result_normal/replay_button.dart';
+import '../controller/result_normal_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 import '../core/common_widget/navigation_button/back_to_top_button.dart';
 
@@ -25,42 +25,19 @@ class ResultNormalQuizPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final normalHitterQuizNotifierProvider =
+    final controller = ref.watch(resultNormalQuizPageControllerProvider);
+
+    final hitterQuizProvider =
         hitterQuizNotifierProvider(QuizType.normal, questionedAt: null);
 
+    // TODO(me): ここ listen する必要があるか確認する。（ initState でいいのでは？ ）
     ref.listen(
-      normalHitterQuizNotifierProvider,
+      hitterQuizProvider,
       (_, next) async {
         final nextHitterQuiz = next! as AsyncData<HitterQuiz>;
-        // 直近のクイズが不正解だった場合、何もしない。
-        if (nextHitterQuiz.value.isCorrect == false) {
-          return;
-        }
-
-        final shouldRequestAppReview =
-            await ref.read(shouldRequestReviewProvider.future);
-        // レビューを要求する条件を満たしていない場合、何もしない。
-        if (shouldRequestAppReview == false) {
-          return;
-        }
-
-        // レビューダイアログを表示したことを記録する。
-        await ref.read(appReviewServiceProvider).updateReviewHistory();
-
-        // レビューダイアログを表示する。
-        if (context.mounted) {
-          await showDialog<void>(
-            context: context,
-            barrierDismissible: false,
-            builder: (_) {
-              return const _RequestReviewDialog();
-            },
-          );
-        }
+        await controller.onOpenPage(nextHitterQuiz);
       },
     );
-
-    final asyncHitterQuiz = ref.watch(normalHitterQuizNotifierProvider);
 
     return PopScope(
       canPop: false,
@@ -68,101 +45,69 @@ class ResultNormalQuizPage extends ConsumerWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: asyncHitterQuiz.maybeWhen(
-              orElse: Container.new,
-              loading: () => const Center(child: CircularProgressIndicator()),
-              data: (hitterQuiz) {
-                return Stack(
-                  children: [
-                    ListView(
+            child: ref.watch(hitterQuizProvider).maybeWhen(
+                  orElse: Container.new,
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  data: (hitterQuiz) {
+                    return Stack(
                       children: [
-                        const BannerAdWidget(),
-                        const SizedBox(height: 16),
-                        ResultText(hitterQuiz: hitterQuiz),
-                        ResultQuizWidget(
-                          globalKey: _globalKey,
-                          hitterQuiz: hitterQuiz,
-                        ),
-                        const SizedBox(height: 24),
-                        const Center(
-                          child: SizedBox(
-                            width: _buttonWidth,
-                            child: ReplayButton(buttonType: ButtonType.main),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Center(
-                          child: SizedBox(
-                            width: _buttonWidth,
-                            child: ShareButton(
-                              buttonType: ButtonType.sub,
-                              // TODO(me): 仮に他 Page の Controller を使っているので、修正する。
-                              onPressed: () => ref
-                                  .read(quizHistoryDailyPageControllerProvider)
-                                  .shareQuiz(_globalKey, _shareText),
+                        ListView(
+                          children: [
+                            const BannerAdWidget(),
+                            const SizedBox(height: 16),
+                            ResultText(hitterQuiz: hitterQuiz),
+                            ResultQuizWidget(
+                              globalKey: _globalKey,
+                              hitterQuiz: hitterQuiz,
                             ),
+                            const SizedBox(height: 24),
+                            Center(
+                              child: SizedBox(
+                                width: _buttonWidth,
+                                child: ReplayButton(
+                                  buttonType: ButtonType.main,
+                                  onPressed: controller.onTapReplay,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Center(
+                              child: SizedBox(
+                                width: _buttonWidth,
+                                child: ShareButton(
+                                  buttonType: ButtonType.sub,
+                                  onPressed: () => controller.shareQuiz(
+                                    _globalKey,
+                                    _shareText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Center(
+                              child: SizedBox(
+                                width: _buttonWidth,
+                                child:
+                                    BackToTopButton(buttonType: ButtonType.sub),
+                              ),
+                            ),
+                            const SizedBox(height: 40),
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: CustomConfettiWidget(
+                            isCorrect: hitterQuiz.isCorrect,
                           ),
                         ),
-                        const SizedBox(height: 8),
-                        const Center(
-                          child: SizedBox(
-                            width: _buttonWidth,
-                            child: BackToTopButton(buttonType: ButtonType.sub),
-                          ),
-                        ),
-                        const SizedBox(height: 40),
                       ],
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child:
-                          CustomConfettiWidget(isCorrect: hitterQuiz.isCorrect),
-                    ),
-                  ],
-                );
-              },
-            ),
+                    );
+                  },
+                ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _RequestReviewDialog extends ConsumerWidget {
-  const _RequestReviewDialog();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return AlertDialog(
-      title: Text(
-        'レビューをお願いします！',
-        style: TextStyle(color: Theme.of(context).colorScheme.error),
-      ),
-      content: const Text('''.389をお楽しみいただきありがとうございます！
-    \n少しでも.389を気に入っていただけましたら、5秒で終わりますので、是非星5のレビューをお願いします。
-    \nレビューをいただけると、開発者のモチベーションが上がり、はしゃぎます。
-    \nより一層楽しいアプリへの改善に繋がりますので、ご協力をお願いします！
-    '''),
-      actionsAlignment: MainAxisAlignment.spaceBetween,
-      actionsPadding: const EdgeInsets.only(right: 20, bottom: 8, left: 20),
-      actions: [
-        MyButton(
-          buttonName: 'cancel_button_in_request_review_dialog',
-          buttonType: ButtonType.sub,
-          onPressed: context.popRoute,
-          child: const Text('今はやめとく'),
-        ),
-        MyButton(
-          buttonName: 'ok_button_in_request_review_dialog',
-          buttonType: ButtonType.main,
-          onPressed: () async {
-            await context.popRoute();
-            await ref.read(appReviewServiceProvider).requestAppReview();
-          },
-          child: const Text('レビューする！'),
-        ),
-      ],
     );
   }
 }
