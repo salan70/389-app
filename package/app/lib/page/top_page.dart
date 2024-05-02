@@ -63,7 +63,7 @@ class _TopPageState extends ConsumerState<TopPage> {
           child: Center(
             child: Column(
               children: [
-                Align(
+                const Align(
                   alignment: Alignment.topRight,
                   child: SizedBox(
                     width: 120,
@@ -73,14 +73,14 @@ class _TopPageState extends ConsumerState<TopPage> {
                 Expanded(
                   child: Column(
                     children: [
-                      SizedBox(height: 48),
-                      IconWidget(),
-                      SizedBox(height: 40),
-                      SizedBox(
+                      const SizedBox(height: 48),
+                      const IconWidget(),
+                      const SizedBox(height: 40),
+                      const SizedBox(
                         width: _buttonWidth,
                         child: ToQuizSettingButton(buttonType: ButtonType.sub),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         width: _buttonWidth,
                         child: StartNormalQuizFromTopButton(
@@ -88,7 +88,7 @@ class _TopPageState extends ConsumerState<TopPage> {
                           onPressed: controller.startNormalQuiz,
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       SizedBox(
                         width: _buttonWidth,
                         child: StartTodaysDailyQuizButton(
@@ -96,15 +96,15 @@ class _TopPageState extends ConsumerState<TopPage> {
                           onPressed: controller.startTodaysDailyQuiz,
                         ),
                       ),
-                      SizedBox(height: 16),
-                      SizedBox(
+                      const SizedBox(height: 16),
+                      const SizedBox(
                         width: _buttonWidth,
                         child: ToGalleryButton(buttonType: ButtonType.sub),
                       ),
                     ],
                   ),
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.bottomCenter,
                   child: BannerAdWidget(),
                 ),

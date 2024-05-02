@@ -14,7 +14,7 @@ class ToGalleryButton extends StatelessWidget {
     return MyButton(
       buttonName: 'to_gallery_button',
       buttonType: buttonType,
-      onPressed: () => context.pushRoute(GalleryListRoute()),
+      onPressed: () => context.pushRoute(const GalleryListRoute()),
       child: Text(
         'プレイ履歴',
         style: TextStyle(

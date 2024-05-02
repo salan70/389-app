@@ -25,7 +25,7 @@ class ToQuizSettingButton extends StatelessWidget {
           ),
         ),
       ),
-      onPressed: () => context.pushRoute(QuizSettingRoute()),
+      onPressed: () => context.pushRoute(const QuizSettingRoute()),
     );
   }
 }
