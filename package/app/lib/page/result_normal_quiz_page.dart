@@ -78,7 +78,7 @@ class ResultNormalQuizPage extends ConsumerWidget {
                       children: [
                         const BannerAdWidget(),
                         const SizedBox(height: 16),
-                        ResultText.normal(hitterQuiz: hitterQuiz),
+                        ResultText(hitterQuiz: hitterQuiz),
                         ResultQuizWidget(
                           globalKey: _globalKey,
                           hitterQuiz: hitterQuiz,

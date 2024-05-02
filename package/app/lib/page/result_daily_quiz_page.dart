@@ -48,7 +48,7 @@ class ResultDailyQuizPage extends ConsumerWidget {
                       children: [
                         const BannerAdWidget(),
                         const SizedBox(height: 16),
-                        ResultText.daily(hitterQuiz: hitterQuiz),
+                        ResultText(hitterQuiz: hitterQuiz),
                         ResultQuizWidget(
                           globalKey: _globalKey,
                           hitterQuiz: hitterQuiz,
