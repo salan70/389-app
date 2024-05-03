@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 part 'browser_service.g.dart';
 
 @riverpod
-BrowserService browserService(_) => BrowserService();
+BrowserService browserService(BrowserServiceRef ref) => BrowserService();
 
 /// ブラウザ起動を行うサービスクラス
 class BrowserService {
