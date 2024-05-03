@@ -80,7 +80,7 @@ class ResultNormalQuizPageController with ControllerMixin {
   }
 
   Future<void> _onAcceptReview() async {
-    await _ref.read(appRouterProvider).pop();
+    await _ref.read(appRouterProvider).maybePop();
     await _ref.read(appReviewServiceProvider).requestAppReview();
   }
 }

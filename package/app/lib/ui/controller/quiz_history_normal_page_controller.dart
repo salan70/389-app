@@ -35,6 +35,6 @@ class QuizHistoryNormalPageController {
     await _ref
         .read(quizResultServiceProvider)
         .deleteNormalQuizResult(quizResult.docId);
-    await _ref.read(appRouterProvider).pop();
+    await _ref.read(appRouterProvider).maybePop();
   }
 }

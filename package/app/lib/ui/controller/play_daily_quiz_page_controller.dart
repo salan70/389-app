@@ -138,7 +138,7 @@ class PlayDailyQuizPageController {
             confirmText: '本当に全ての成績を表示しますか？',
             onPressedYes: () {
               notifier.openAll();
-              _ref.read(appRouterProvider).pop();
+              _ref.read(appRouterProvider).maybePop();
             },
           ),
         );

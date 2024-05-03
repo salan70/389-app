@@ -26,7 +26,7 @@ dependencies:
   textfield_search: ^0.10.0
 
   # Routing.
-  auto_route: ^7.8.3
+  auto_route: ^7.9.0
 
   # Environment variables.
   flutter_dotenv: ^5.0.2

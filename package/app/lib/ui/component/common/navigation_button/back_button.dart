@@ -13,7 +13,7 @@ class BackButton extends StatelessWidget {
     return MyButton(
       buttonName: 'back_button',
       buttonType: buttonType,
-      onPressed: context.popRoute,
+      onPressed: context.maybePop,
       child: const Text('戻る'),
     );
   }
