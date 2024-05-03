@@ -24,7 +24,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists: lib
+      dirExists: test
 
   analyze:
     run: fvm flutter analyze .
