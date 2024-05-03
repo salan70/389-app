@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/util/extension/context_extension.dart';
 import '../common/button/my_button.dart';
@@ -8,7 +7,7 @@ import '../common/navigation_button/to_privacy_policy_button.dart';
 import '../common/navigation_button/to_term_button.dart';
 import 'inquiry_button.dart';
 
-class SettingDialog extends ConsumerWidget {
+class SettingDialog extends StatelessWidget {
   const SettingDialog({
     super.key,
     required this.onTapNotificationSetting,
@@ -17,7 +16,7 @@ class SettingDialog extends ConsumerWidget {
   final VoidCallback onTapNotificationSetting;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     const largeButtonWidth = 240.0;
     const smallButtonWidth = 120.0;
 
@@ -61,7 +60,7 @@ class SettingDialog extends ConsumerWidget {
             const Center(
               child: SizedBox(
                 width: smallButtonWidth,
-                child: CloseButton(),
+                child: _CloseButton(),
               ),
             ),
             const SizedBox(height: 16),
@@ -72,8 +71,8 @@ class SettingDialog extends ConsumerWidget {
   }
 }
 
-class CloseButton extends StatelessWidget {
-  const CloseButton({super.key});
+class _CloseButton extends StatelessWidget {
+  const _CloseButton();
 
   @override
   Widget build(BuildContext context) {
