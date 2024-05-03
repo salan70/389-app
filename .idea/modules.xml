@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/package/app/melos_baseball_quiz_app.iml" filepath="$PROJECT_DIR$/package/app/melos_baseball_quiz_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/package/common/melos_common.iml" filepath="$PROJECT_DIR$/package/common/melos_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/package/model/melos_model.iml" filepath="$PROJECT_DIR$/package/model/melos_model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_baseball_quiz_app.iml" filepath="$PROJECT_DIR$/melos_baseball_quiz_app.iml" />
+    </modules>
+  </component>
+</project>
