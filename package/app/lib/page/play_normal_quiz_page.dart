@@ -13,14 +13,25 @@ import '../controller/play_normal_quiz_page_controller.dart';
 import '../core/common_widget/button/my_button.dart';
 
 @RoutePage()
-class PlayNormalQuizPage extends ConsumerWidget {
+class PlayNormalQuizPage extends ConsumerStatefulWidget {
   PlayNormalQuizPage({super.key});
 
-  static const _buttonWidth = 160.0;
   final _textEditingController = TextEditingController();
+  final _buttonWidth = 160.0;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PlayNormalQuizPage> createState() => _PlayNormalQuizPageState();
+}
+
+class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
+  @override
+  void dispose() {
+    widget._textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final asyncHitterQuiz = ref
         .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
 
@@ -44,9 +55,9 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     QuizWidget(hitterQuiz: hitterQuiz),
                     const SizedBox(height: 16),
                     InputAnswerTextField(
-                      textEditingController: _textEditingController,
+                      textEditingController: widget._textEditingController,
                       onSearchHitter: () => controller
-                          .onSearchHitter(_textEditingController.text),
+                          .onSearchHitter(widget._textEditingController.text),
                       onSelectedHitter: (Hitter value) {},
                     ),
                     const SizedBox(height: 16),
@@ -57,7 +68,7 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(
-                        width: _buttonWidth,
+                        width: widget._buttonWidth,
                         child: SubmitAnswerButton(
                           buttonType: ButtonType.main,
                           hitter: hitterQuiz.enteredHitter,
@@ -69,7 +80,7 @@ class PlayNormalQuizPage extends ConsumerWidget {
                     const SizedBox(height: 8),
                     Center(
                       child: SizedBox(
-                        width: _buttonWidth,
+                        width: widget._buttonWidth,
                         child: RetireButton(
                           buttonType: ButtonType.sub,
                           onTapRetire: controller.onTapRetire,

@@ -41,6 +41,12 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
   }
 
   @override
+  void dispose() {
+    widget._textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final asyncHitterQuiz = ref.watch(
       hitterQuizNotifierProvider(
