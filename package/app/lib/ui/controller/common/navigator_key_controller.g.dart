@@ -7,7 +7,7 @@ part of 'navigator_key_controller.dart';
 // **************************************************************************
 
 String _$navigatorKeyControllerHash() =>
-    r'c25d94b645dc4956f906b2db9b4a3642089beac0';
+    r'16ade5458d2ca0483e3c4fb0195fd9325b7ae881';
 
 /// See also [navigatorKeyController].
 @ProviderFor(navigatorKeyController)

@@ -1,5 +1,48 @@
 name: baseball_quiz_app
 packages:
-  - "packages/**"
-repository: "https://github.com/kktaro/melos_sample"
+  - "package/**"
+repository: "https://github.com/salan70/baseball_quiz_app"
 sdkPath: .fvm/flutter_sdk
+
+command:
+  clean:
+    hooks:
+      post: |
+        melos exec --flutter -- "fvm flutter clean"
+        melos exec --flutter --file-exists="ios/Podfile.lock" -- "cd ios && rm Podfile.lock"
+
+scripts:
+  clean:
+    run: fvm flutter clean
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: lib
+
+  test:
+    run: fvm flutter test
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: lib
+
+  analyze:
+    run: fvm flutter analyze .
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: lib
+
+  format:
+    run: fvm dart format .
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists: lib
+
+  gen:
+    run: fvm dart run build_runner build --delete-conflicting-outputs
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: "build_runner"
