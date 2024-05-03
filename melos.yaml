@@ -13,35 +13,35 @@ command:
 
 scripts:
   clean:
-    run: fvm flutter clean
+    run: flutter clean
     exec:
       concurrency: 1
     packageFilters:
       dirExists: lib
 
   test:
-    run: fvm flutter test
+    run: flutter test
     exec:
       concurrency: 1
     packageFilters:
       dirExists: test
 
   analyze:
-    run: fvm flutter analyze .
+    run: flutter analyze .
     exec:
       concurrency: 1
     packageFilters:
       dirExists: lib
 
   format:
-    run: fvm dart format .
+    run: dart format .
     exec:
       concurrency: 1
     packageFilters:
       dirExists: lib
 
   gen:
-    run: fvm dart run build_runner build --delete-conflicting-outputs
+    run: dart run build_runner build --delete-conflicting-outputs
     exec:
       concurrency: 1
     packageFilters:
