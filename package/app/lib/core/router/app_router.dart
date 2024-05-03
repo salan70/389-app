@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../page/gallery_list_page.dart';
-import '../../page/play_daily_quiz_page.dart';
-import '../../page/play_normal_quiz_page.dart';
-import '../../page/quiz_history_daily_page.dart';
-import '../../page/quiz_history_normal_page.dart';
-import '../../page/quiz_setting_page.dart';
-import '../../page/result_daily_quiz_page.dart';
-import '../../page/result_normal_quiz_page.dart';
-import '../../page/top_page.dart';
+import '../../ui/page/gallery_list_page.dart';
+import '../../ui/page/play_daily_quiz_page.dart';
+import '../../ui/page/play_normal_quiz_page.dart';
+import '../../ui/page/quiz_history_daily_page.dart';
+import '../../ui/page/quiz_history_normal_page.dart';
+import '../../ui/page/quiz_setting_page.dart';
+import '../../ui/page/result_daily_quiz_page.dart';
+import '../../ui/page/result_normal_quiz_page.dart';
+import '../../ui/page/top_page.dart';
 
 part 'app_router.g.dart';
 part 'app_router.gr.dart';

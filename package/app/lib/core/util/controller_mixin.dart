@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
-import '../../controller/common/navigator_key_controller.dart';
-import '../common_widget/dialog/error_dialog.dart';
+import '../../ui/component/common/dialog/error_dialog.dart';
+import '../../ui/controller/common/navigator_key_controller.dart';
 
 /// Controller で使用する Mixin.
 mixin ControllerMixin {
