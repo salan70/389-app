@@ -71,8 +71,10 @@ dev_dependencies:
   riverpod_generator: ^2.3.9
 
   # Static analysis.
-  flutter_lints: ^2.0.0
   dependency_validator:
+  custom_lint: ^0.5.0
+  flutter_lints: ^2.0.0
+  riverpod_lint: ^2.3.7
 
   # Testing.
   fake_cloud_firestore: ^2.4.1+1
