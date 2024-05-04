@@ -26,6 +26,7 @@ class QuizHistoryNormalPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(quizHistoryNormalPageControllerProvider);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -51,7 +52,7 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShowAnswerButton(
                     buttonType: ButtonType.main,
-                    quizResult: quizResult,
+                    onTap: () => controller.onTapShowAnswer(quizResult.name),
                   ),
                 ),
               ),
@@ -61,9 +62,8 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShareButton(
                     buttonType: ButtonType.sub,
-                    onPressed: () => ref
-                        .read(quizHistoryNormalPageControllerProvider)
-                        .shareQuiz(_globalKey, _shareText),
+                    onPressed: () =>
+                        controller.shareQuiz(_globalKey, _shareText),
                   ),
                 ),
               ),
@@ -79,9 +79,9 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                 child: SizedBox(
                   width: _buttonWidth,
                   child: DeleteNormalQuizResultButton(
-                    onAcceptDelete: () => ref
+                    onTap: () => ref
                         .read(quizHistoryNormalPageControllerProvider)
-                        .deleteQuizHistory(quizResult),
+                        .onTapDeleteHistory(quizResult),
                   ),
                 ),
               ),

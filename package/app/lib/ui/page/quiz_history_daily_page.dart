@@ -25,6 +25,8 @@ class QuizHistoryDailyPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final controller = ref.watch(quizHistoryDailyPageControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -50,7 +52,8 @@ class QuizHistoryDailyPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShowAnswerButton(
                     buttonType: ButtonType.main,
-                    quizResult: hitterQuizResult,
+                    onTap: () =>
+                        controller.onTapShowAnswer(hitterQuizResult.name),
                   ),
                 ),
               ),
@@ -60,9 +63,8 @@ class QuizHistoryDailyPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShareButton(
                     buttonType: ButtonType.sub,
-                    onPressed: () => ref
-                        .read(quizHistoryDailyPageControllerProvider)
-                        .shareQuiz(_globalKey, _shareText),
+                    onPressed: () =>
+                        controller.shareQuiz(_globalKey, _shareText),
                   ),
                 ),
               ),

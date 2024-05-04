@@ -29,8 +29,8 @@ class IncorrectDialog extends StatelessWidget {
               buttonName: 'retire_button',
               buttonType: ButtonType.alert,
               onPressed: () {
-                context.pop();
                 onTapRetire();
+                context.pop();
               },
               child: const Text('諦める'),
             );

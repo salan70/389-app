@@ -180,10 +180,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
-            onPressedYes: () {
-              _openAll();
-              ref.read(appRouterProvider).maybePop();
-            },
+            onPressedYes: _openAll,
           ),
         );
   }

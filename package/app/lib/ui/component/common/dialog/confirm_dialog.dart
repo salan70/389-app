@@ -28,7 +28,10 @@ class ConfirmDialog extends StatelessWidget {
         MyButton(
           buttonName: 'confirm_yes_button',
           buttonType: ButtonType.alert,
-          onPressed: onPressedYes,
+          onPressed: () {
+            onPressedYes();
+            context.pop();
+          },
           child: const Text('はい'),
         ),
       ],
