@@ -152,7 +152,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: QuizType.daily.retireConfirmText,
-            onPressedYes: _onAcceptRetire,
+            onAccept: _onAcceptRetire,
           ),
           barrierDismissible: false,
         );
@@ -167,7 +167,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: 'これが最後のチャンスです。\n本当にその回答でよろしいですか？',
-            onPressedYes: () async => _submitAnswer(hitterName),
+            onAccept: () async => _submitAnswer(hitterName),
           ),
           barrierDismissible: false,
         );
@@ -180,7 +180,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
-            onPressedYes: _openAll,
+            onAccept: _openAll,
           ),
         );
   }

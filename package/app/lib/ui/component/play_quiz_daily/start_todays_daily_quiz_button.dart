@@ -101,7 +101,7 @@ class ConfirmPlayDailyQuizDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ConfirmDialog(
       confirmText: _playDailyQuizConfirmText,
-      onPressedYes: onPressedYes,
+      onAccept: onPressedYes,
     );
   }
 }

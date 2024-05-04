@@ -27,9 +27,7 @@ class TopPageController with ControllerMixin {
   /// 設定画面（ダイアログ）を開く。
   void onTapOpenSetting() {
     _showDialog(
-      child: SettingDialog(
-        onTapNotificationSetting: _onTapNotificationSetting,
-      ),
+      child: SettingDialog(onTapNotificationSetting: _onTapNotificationSetting),
     );
   }
 
@@ -39,8 +37,7 @@ class TopPageController with ControllerMixin {
   /// 今日の1問を開始する。
   ///
   /// プレイ状況などによっては、今日の1問がプレイできない場合がある。
-  Future<void> startTodaysDailyQuiz() async {
-    // TODO(me): ローディングダイアログを非表示にする処理、 finally でやりたい。
+  Future<void> onTapPlayTodaysDailyQuiz() async {
     // TODO(me): ローディング, エラーに関する処理もう少しきれいに書きたい。
     final loadingNotifier = _ref.read(loadingNotifierProvider.notifier)..show();
     try {
@@ -72,11 +69,7 @@ class TopPageController with ControllerMixin {
 
     // * エラーが発生した場合。
     on Exception catch (e, s) {
-      logger.e(
-        '[to_play_daily_quiz_button]タップ時にエラーが発生しました。',
-        e,
-        s,
-      );
+      logger.e('[to_play_daily_quiz_button]タップ時にエラーが発生しました。', e, s);
       loadingNotifier.hide();
       _showErrorDialog();
     }
@@ -96,18 +89,20 @@ class TopPageController with ControllerMixin {
 
   Future<void> _toPlayDailyQuizPage() async {
     final nowInApp = await _nowInApp();
+
+    // dailyQuizResult ドキュメントを保存（新規作成）する。
+    await _ref.read(quizResultServiceProvider).createDailyQuizResult(nowInApp);
+
     await _ref
         .read(appRouterProvider)
         .push(PlayDailyQuizRoute(questionedAt: nowInApp));
-
-    // TODO(me): ここで PlayDailyQuizPage の initState でやってる処理できないか試す。
   }
 
   Future<DailyQuiz?> _fetchTodaysDailyQuiz() async {
     // 念のため invalidate する。
     _ref.invalidate(dailyQuizProvider);
+    
     final nowInApp = await _nowInApp();
-
     return await _ref.read(dailyQuizProvider(nowInApp).future);
   }
 
@@ -116,7 +111,7 @@ class TopPageController with ControllerMixin {
     return now.calculateDateInApp();
   }
 
-  // * ダイアログ表示関連
+  // * ダイアログ表示関連（ private ）
 
   Future<void> _onTapNotificationSetting() async =>
       _showDialog(child: const NotificationSettingDialog());

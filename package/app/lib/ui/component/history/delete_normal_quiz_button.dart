@@ -38,7 +38,7 @@ class ConfirmDeleteHistoryDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConfirmDialog(
       confirmText: '本当にこの履歴を消しますか？\n一度消した履歴は元に戻せません。',
-      onPressedYes: onAcceptDelete,
+      onAccept: onAcceptDelete,
     );
   }
 }

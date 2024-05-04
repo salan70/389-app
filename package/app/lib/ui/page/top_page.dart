@@ -94,7 +94,7 @@ class _TopPageState extends ConsumerState<TopPage> {
                         width: _buttonWidth,
                         child: StartTodaysDailyQuizButton(
                           buttonType: ButtonType.sub,
-                          onPressed: controller.startTodaysDailyQuiz,
+                          onPressed: controller.onTapPlayTodaysDailyQuiz,
                         ),
                       ),
                       const SizedBox(height: 16),

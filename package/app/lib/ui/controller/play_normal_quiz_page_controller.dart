@@ -164,7 +164,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: QuizType.normal.retireConfirmText,
-            onPressedYes: _onAcceptRetire,
+            onAccept: _onAcceptRetire,
           ),
           barrierDismissible: false,
         );
@@ -206,7 +206,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
-            onPressedYes: () {
+            onAccept: () {
               _openAll();
               ref.read(navigatorKeyProvider).currentContext!.pop();
             },

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/my_button.dart';
@@ -14,7 +13,7 @@ import '../component/play_quiz_daily/life_widget.dart';
 import '../controller/play_daily_quiz_page_controller.dart';
 
 @RoutePage()
-class PlayDailyQuizPage extends ConsumerStatefulWidget {
+class PlayDailyQuizPage extends ConsumerWidget {
   PlayDailyQuizPage({super.key, required this.questionedAt});
 
   /// 対象となる DailyQuiz の出題日。
@@ -24,38 +23,11 @@ class PlayDailyQuizPage extends ConsumerStatefulWidget {
   final _buttonWidth = 160.0;
 
   @override
-  ConsumerState<PlayDailyQuizPage> createState() => _PlayDailyQuizPageState();
-}
-
-class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
-  @override
-  void initState() {
-    super.initState();
-
-    Future(() async {
-      // TODO(me): controller に移動する。
-      // dailyQuizResult を保存（新規作成）する。
-      await ref
-          .read(quizResultServiceProvider)
-          .createDailyQuizResult(widget.questionedAt);
-    });
-  }
-
-  @override
-  void dispose() {
-    widget._textEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final asyncPageState = ref.watch(
-      playDailyQuizPageControllerProvider(widget.questionedAt),
-    );
-
-    final controller = ref.watch(
-      playDailyQuizPageControllerProvider(widget.questionedAt).notifier,
-    );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final asyncPageState =
+        ref.watch(playDailyQuizPageControllerProvider(questionedAt));
+    final controller =
+        ref.watch(playDailyQuizPageControllerProvider(questionedAt).notifier);
 
     return PopScope(
       canPop: false,
@@ -80,9 +52,9 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       QuizWidget(hitterQuiz: hitterQuiz),
                       const SizedBox(height: 16),
                       InputAnswerTextField(
-                        textEditingController: widget._textEditingController,
+                        textEditingController: _textEditingController,
                         onSearchHitter: () async => controller
-                            .onSearchHitter(widget._textEditingController.text),
+                            .onSearchHitter(_textEditingController.text),
                         onSelectedHitter: controller.onSelectedHitter,
                       ),
                       const SizedBox(height: 16),
@@ -93,7 +65,7 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       const SizedBox(height: 16),
                       Center(
                         child: SizedBox(
-                          width: widget._buttonWidth,
+                          width: _buttonWidth,
                           child: SubmitAnswerButton(
                             buttonType: ButtonType.main,
                             hitter: hitterQuiz.enteredHitter,
@@ -107,7 +79,7 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       const SizedBox(height: 16),
                       Center(
                         child: SizedBox(
-                          width: widget._buttonWidth,
+                          width: _buttonWidth,
                           child: RetireButton(
                             buttonType: ButtonType.sub,
                             onTapRetire: controller.onTapRetire,
