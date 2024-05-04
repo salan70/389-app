@@ -33,7 +33,8 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
     super.initState();
 
     Future(() async {
-      // dailyQuizResultを保存（新規作成）する。
+      // TODO(me): controller に移動する。
+      // dailyQuizResult を保存（新規作成）する。
       await ref
           .read(quizResultServiceProvider)
           .createDailyQuizResult(widget.questionedAt);
@@ -48,14 +49,13 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncHitterQuiz = ref.watch(
-      hitterQuizNotifierProvider(
-        QuizType.daily,
-        questionedAt: widget.questionedAt,
-      ),
+    final asyncPageState = ref.watch(
+      playDailyQuizPageControllerProvider(widget.questionedAt),
     );
 
-    final controller = ref.watch(playDailyQuizPageControllerProvider);
+    final controller = ref.watch(
+      playDailyQuizPageControllerProvider(widget.questionedAt).notifier,
+    );
 
     return PopScope(
       canPop: false,
@@ -66,10 +66,11 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               behavior: HitTestBehavior.opaque,
-              child: asyncHitterQuiz.maybeWhen(
+              child: asyncPageState.maybeWhen(
                 orElse: Container.new,
                 loading: () => const Center(child: CircularProgressIndicator()),
-                data: (hitterQuiz) {
+                data: (pageState) {
+                  final hitterQuiz = pageState.hitterQuiz;
                   return ListView(
                     children: [
                       const BannerAdWidget(),
@@ -80,19 +81,14 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                       const SizedBox(height: 16),
                       InputAnswerTextField(
                         textEditingController: widget._textEditingController,
-                        onSearchHitter: () async => controller.onSearchHitter(
-                          widget.questionedAt,
-                          widget._textEditingController.text,
-                        ),
-                        onSelectedHitter: (value) => controller
-                            .onSelectedHitter(widget.questionedAt, value),
+                        onSearchHitter: () async => controller
+                            .onSearchHitter(widget._textEditingController.text),
+                        onSelectedHitter: controller.onSelectedHitter,
                       ),
                       const SizedBox(height: 16),
                       QuizEventButtons(
-                        onOpenAll: () =>
-                            controller.onShowAllStat(widget.questionedAt),
-                        onOpenSingle: () =>
-                            controller.onShowSingleStat(widget.questionedAt),
+                        onOpenAll: controller.onTapShowAllStat,
+                        onOpenSingle: controller.onTapShowSingleStat,
                       ),
                       const SizedBox(height: 16),
                       Center(
@@ -104,7 +100,6 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                             onTapSubmitAnswer: () async =>
                                 controller.onTapSubmitAnswer(
                               hitterQuiz.enteredHitter?.label,
-                              widget.questionedAt,
                             ),
                           ),
                         ),
@@ -115,8 +110,7 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                           width: widget._buttonWidth,
                           child: RetireButton(
                             buttonType: ButtonType.sub,
-                            onTapRetire: () async =>
-                                controller.onTapRetire(widget.questionedAt),
+                            onTapRetire: controller.onTapRetire,
                           ),
                         ),
                       ),
