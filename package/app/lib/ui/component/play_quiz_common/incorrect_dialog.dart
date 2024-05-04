@@ -21,11 +21,20 @@ class IncorrectDialog extends StatelessWidget {
       title: const Text('残念...'),
       content: Text('$hitterName選手ではありません'),
       actions: <Widget>[
-        MyButton(
-          buttonName: 'retire_button',
-          buttonType: ButtonType.alert,
-          onPressed: onTapRetire,
-          child: const Text('諦める'),
+        // 下記エラーを回避するため、 Builder でラップしている。
+        // `A TextEditingController was used after being disposed.`
+        Builder(
+          builder: (context) {
+            return MyButton(
+              buttonName: 'retire_button',
+              buttonType: ButtonType.alert,
+              onPressed: () {
+                context.pop();
+                onTapRetire();
+              },
+              child: const Text('諦める'),
+            );
+          },
         ),
         MyButton(
           buttonName: 'try_again_button',

@@ -8,3 +8,4 @@ export 'domain/stats_value.dart';
 export 'infrastructure/entity/hitting_stats.dart';
 export 'infrastructure/entity/supabase_hitter.dart';
 export 'infrastructure/hitter_converter.dart';
+export 'infrastructure/hitter_repository.dart';

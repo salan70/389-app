@@ -7,13 +7,13 @@ part of 'play_normal_quiz_page_controller.dart';
 // **************************************************************************
 
 String _$playNormalQuizPageControllerHash() =>
-    r'0e2610e0293a239f16f70d3e93c59bf0443cdd06';
+    r'2e351ceef49f23872fe12c7a0ef3ce947c4fa52a';
 
-/// See also [playNormalQuizPageController].
-@ProviderFor(playNormalQuizPageController)
-final playNormalQuizPageControllerProvider =
-    AutoDisposeProvider<PlayNormalQuizPageController>.internal(
-  playNormalQuizPageController,
+/// See also [PlayNormalQuizPageController].
+@ProviderFor(PlayNormalQuizPageController)
+final playNormalQuizPageControllerProvider = AutoDisposeAsyncNotifierProvider<
+    PlayNormalQuizPageController, PlayNormalQuizPageState>.internal(
+  PlayNormalQuizPageController.new,
   name: r'playNormalQuizPageControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
@@ -22,7 +22,7 @@ final playNormalQuizPageControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef PlayNormalQuizPageControllerRef
-    = AutoDisposeProviderRef<PlayNormalQuizPageController>;
+typedef _$PlayNormalQuizPageController
+    = AutoDisposeAsyncNotifier<PlayNormalQuizPageState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

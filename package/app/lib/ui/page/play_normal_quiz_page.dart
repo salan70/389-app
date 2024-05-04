@@ -32,10 +32,8 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
 
   @override
   Widget build(BuildContext context) {
-    final asyncHitterQuiz = ref
-        .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
-
-    final controller = ref.watch(playNormalQuizPageControllerProvider);
+    final controller = ref.watch(playNormalQuizPageControllerProvider.notifier);
+    final asyncPageState = ref.watch(playNormalQuizPageControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -44,10 +42,11 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
           child: GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             behavior: HitTestBehavior.opaque,
-            child: asyncHitterQuiz.maybeWhen(
+            child: asyncPageState.maybeWhen(
               orElse: Container.new,
               loading: () => const Center(child: CircularProgressIndicator()),
-              data: (hitterQuiz) {
+              data: (pageState) {
+                final hitterQuiz = pageState.hitterQuiz;
                 return ListView(
                   children: [
                     const BannerAdWidget(),
@@ -58,12 +57,12 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                       textEditingController: widget._textEditingController,
                       onSearchHitter: () => controller
                           .onSearchHitter(widget._textEditingController.text),
-                      onSelectedHitter: (Hitter value) {},
+                      onSelectedHitter: controller.onSelectedHitter,
                     ),
                     const SizedBox(height: 16),
                     QuizEventButtons(
-                      onOpenAll: controller.onShowAllStat,
-                      onOpenSingle: controller.onShowSingleStat,
+                      onOpenAll: controller.onTapShowAllStat,
+                      onOpenSingle: controller.onTapShowSingleStat,
                     ),
                     const SizedBox(height: 16),
                     Center(

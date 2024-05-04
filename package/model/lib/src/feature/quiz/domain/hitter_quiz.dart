@@ -42,4 +42,13 @@ class HitterQuiz with _$HitterQuiz {
       incorrectCount: result.incorrectCount,
     );
   }
+
+  /// 入力中の野手（ [enteredHitter] ）が正解かどうか。
+  bool get isCorrectHitterQuiz => enteredHitter?.id == id;
+
+  /// すべての成績数。
+  int get totalStatsCount => statsMapList.length * selectedStatsList.length;
+
+  /// すべての成績が公開されているかどうか。
+  bool get isAllStatsUnveiled => unveilCount >= totalStatsCount;
 }

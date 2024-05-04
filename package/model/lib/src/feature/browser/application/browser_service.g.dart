@@ -6,7 +6,7 @@ part of 'browser_service.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$browserServiceHash() => r'17c663a394e18f5233fbcbe9bea0c519f36c1870';
+String _$browserServiceHash() => r'4f86b65be62fa4edbe587d398849eeb4af6156d5';
 
 /// See also [browserService].
 @ProviderFor(browserService)

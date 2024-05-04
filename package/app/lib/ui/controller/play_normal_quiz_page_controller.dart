@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,18 +10,85 @@ import '../component/common/dialog/confirm_dialog.dart';
 import '../component/play_quiz_common/incorrect_dialog.dart';
 import 'common/navigator_key_controller.dart';
 
+part 'play_normal_quiz_page_controller.freezed.dart';
 part 'play_normal_quiz_page_controller.g.dart';
 
+@freezed
+class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
+  const factory PlayNormalQuizPageState({
+    required HitterQuiz hitterQuiz,
+  }) = _PlayNormalQuizPageState;
+}
+
 @riverpod
-PlayNormalQuizPageController playNormalQuizPageController(
-  PlayNormalQuizPageControllerRef ref,
-) =>
-    PlayNormalQuizPageController(ref);
+class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
+  @override
+  Future<PlayNormalQuizPageState> build() async {
+    final searchCondition = ref.watch(searchConditionProvider);
+    final hitterQuiz = await ref
+        .watch(hitterRepositoryProvider)
+        .fetchHitterQuizBySearchCondition(searchCondition);
 
-class PlayNormalQuizPageController {
-  PlayNormalQuizPageController(this._ref);
+    return PlayNormalQuizPageState(hitterQuiz: hitterQuiz);
+  }
 
-  final Ref _ref;
+  // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
+  /// ランダムに1つ成績を公開する
+  void _openRandom() {
+    final value = state.value!;
+    state = AsyncData(
+      value.copyWith(
+        hitterQuiz: value.hitterQuiz.copyWith(
+          unveilCount: value.hitterQuiz.unveilCount + 1,
+        ),
+      ),
+    );
+  }
+
+  /// 全ての閉じている成績を公開する。
+  void _openAll() {
+    final value = state.value!;
+    state = AsyncData(
+      value.copyWith(
+        hitterQuiz: value.hitterQuiz.copyWith(
+          unveilCount: value.hitterQuiz.totalStatsCount,
+        ),
+      ),
+    );
+  }
+
+  /// isCorrect を true にする。
+  void _markCorrect() {
+    state = AsyncData(
+      state.value!.copyWith(
+        hitterQuiz: state.value!.hitterQuiz.copyWith(isCorrect: true),
+      ),
+    );
+  }
+
+  /// 不正解数を1増やす。
+  void _addIncorrectCount() {
+    final value = state.value!;
+    state = AsyncData(
+      value.copyWith(
+        hitterQuiz: value.hitterQuiz.copyWith(
+          incorrectCount: value.hitterQuiz.incorrectCount + 1,
+        ),
+      ),
+    );
+  }
+
+  /// enteredHitter を更新する。
+  void _updateEnteredHitter(Hitter? enteredHitter) {
+    state = AsyncData(
+      state.value!.copyWith(
+        hitterQuiz:
+            state.value!.hitterQuiz.copyWith(enteredHitter: enteredHitter),
+      ),
+    );
+  }
+
+  // * ---------------------- UI からのイベント ---------------------- * //
 
   /// 回答を送信する際の処理。
   ///
@@ -34,72 +101,60 @@ class PlayNormalQuizPageController {
     // interstitial 広告を作成する。
     await _createInterstitialAd();
 
-    final hitterQuizNotifier = _ref.read(
-      hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).notifier,
-    );
-    final isCorrect = hitterQuizNotifier.isCorrectHitterQuiz();
-
+    final isCorrect = state.value!.hitterQuiz.isCorrectHitterQuiz;
     // * 正解の場合。
     if (isCorrect) {
-      hitterQuizNotifier.markCorrect();
-      await _ref.read(quizResultServiceProvider).createNormalQuizResult();
-
-      // `createNormalQuizResult()` でエラーが発生しなかった場合のみ、
-      // 画面遷移する。
-      await _ref.read(appRouterProvider).push(ResultNormalQuizRoute());
+      _markCorrect();
+      await ref.read(quizResultServiceProvider).createNormalQuizResult();
+      await ref.read(appRouterProvider).push(ResultNormalQuizRoute());
 
       return;
     }
 
     // * 不正解の場合。
-    hitterQuizNotifier.addIncorrectCount();
+    _addIncorrectCount();
 
     // 広告を確率で表示する。
-    await _ref.read(interstitialAdServiceProvider).randomShowAd();
+    await ref.read(interstitialAdServiceProvider).randomShowAd();
 
     _showIncorrectDialog(hitterName);
   }
 
-  Future<List<Hitter>> onSearchHitter(
-    String inputText,
-  ) async {
-    final notifier = _ref.read(
-      hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).notifier,
-    );
-    notifier.updateEnteredHitter(null);
-
-    return _ref.read(hitterQuizServiceProvider).searchHitter(inputText);
+  Future<List<Hitter>> onSearchHitter(String inputText) async {
+    _updateEnteredHitter(null);
+    return ref.read(hitterQuizServiceProvider).searchHitter(inputText);
   }
 
-  Future<void> onShowAllStat() async {
+  void onSelectedHitter(Hitter? hitter) {
+    FocusManager.instance.primaryFocus?.unfocus();
+    _updateEnteredHitter(hitter);
+  }
+
+  Future<void> onTapShowAllStat() async {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final notifier = _ref.read(
-      hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).notifier,
-    );
-
-    if (notifier.canOpen()) {
-      _showConfirmOpenAllDialog(notifier);
+    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    // 非公開の成績が残っている場合、確認ダイアログを表示する。
+    if (isAllStatsUnveiled == false) {
+      _showConfirmOpenAllDialog();
     }
   }
 
-  Future<void> onShowSingleStat() async {
+  Future<void> onTapShowSingleStat() async {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final notifier = _ref.read(
-      hitterQuizNotifierProvider(QuizType.normal, questionedAt: null).notifier,
-    );
-
-    if (notifier.canOpen()) {
-      notifier.openRandom();
+    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    // 非公開の成績が残っている場合、ランダムで成績1つ公開する。
+    if (isAllStatsUnveiled == false) {
+      _openRandom();
     }
   }
 
   /// 諦めるボタンをタップした際の処理。
   Future<void> onTapRetire() async {
-    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+    ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: QuizType.normal.retireConfirmText,
             onPressedYes: _onAcceptRetire,
@@ -108,22 +163,24 @@ class PlayNormalQuizPageController {
         );
   }
 
+  // * ---------------------- private ---------------------- * //
+
   /// 諦めることの確認ダイアログで、承認した際の処理。
   Future<void> _onAcceptRetire() async {
-    await _ref.read(quizResultServiceProvider).createNormalQuizResult();
+    await ref.read(quizResultServiceProvider).createNormalQuizResult();
 
     // ダイアログを閉じる。
-    final context = _ref.read(navigatorKeyProvider).currentContext!;
+    final context = ref.read(navigatorKeyProvider).currentContext!;
     if (context.mounted) {
       context.pop();
     }
 
     /// 画面遷移する。
-    await _ref.read(appRouterProvider).push(ResultNormalQuizRoute());
+    await ref.read(appRouterProvider).push(ResultNormalQuizRoute());
   }
 
   void _showIncorrectDialog(String hitterName) {
-    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+    ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: IncorrectDialog(
             hitterName: hitterName,
             onTapRetire: onTapRetire,
@@ -132,20 +189,20 @@ class PlayNormalQuizPageController {
         );
   }
 
-  void _showConfirmOpenAllDialog(HitterQuizNotifier notifier) {
-    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+  void _showConfirmOpenAllDialog() {
+    ref.read(navigatorKeyControllerProvider).showDialogWithChild(
           child: ConfirmDialog(
             confirmText: '本当に全ての成績を表示しますか？',
             onPressedYes: () {
-              notifier.openAll();
-              _ref.read(navigatorKeyProvider).currentContext!.pop();
+              _openAll();
+              ref.read(navigatorKeyProvider).currentContext!.pop();
             },
           ),
         );
   }
 
   Future<void> _createInterstitialAd() async {
-    final interstitialAdService = _ref.read(interstitialAdServiceProvider);
+    final interstitialAdService = ref.read(interstitialAdServiceProvider);
 
     await interstitialAdService.createAd();
     await interstitialAdService.waitResult();

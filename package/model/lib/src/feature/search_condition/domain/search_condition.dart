@@ -14,6 +14,7 @@ class SearchCondition with _$SearchCondition {
     @HiveField(4) required int minHr,
     @HiveField(5) required List<String> selectedStatsList,
   }) = _SearchCondition;
+  const SearchCondition._();
 
   factory SearchCondition.fromJson(Map<String, dynamic> json) =>
       _$SearchConditionFromJson(json);
