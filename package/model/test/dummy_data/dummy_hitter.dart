@@ -1,4 +1,4 @@
-import 'package:model/src/feature/quiz/domain/hitter_quiz.dart';
+import 'package:model/src/feature/quiz/domain/hitter_quiz_state.dart';
 import 'package:model/src/feature/quiz/domain/stats_value.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/hitting_stats.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/supabase_hitter.dart';
@@ -144,7 +144,7 @@ const dummySearchCondition = SearchCondition(
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
 );
 
-const dummyHitterQuiz = HitterQuiz(
+const dummyHitterQuiz = HitterQuizState(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
   name: '牧秀悟',
   enteredHitter: null,

@@ -4,19 +4,19 @@ import '../../../util/enum/quiz_type.dart';
 import '../../daily_quiz/application/daily_quiz_state.dart';
 import '../../search_condition/application/search_condition_state.dart';
 import '../domain/hitter.dart';
-import '../domain/hitter_quiz.dart';
+import '../domain/hitter_quiz_state.dart';
 import '../infrastructure/hitter_repository.dart';
 
 part 'hitter_quiz_notifier.g.dart';
 
-/// [HitterQuiz] を保持する。
+/// [HitterQuizState] を保持する。
 ///
 /// [quizType] に [QuizType.daily] を指定する場合、
 /// [questionedAt] に DailyQuiz の出題日を指定すること。
 @riverpod
 class HitterQuizNotifier extends _$HitterQuizNotifier {
   @override
-  FutureOr<HitterQuiz> build(
+  FutureOr<HitterQuizState> build(
     QuizType quizType, {
     required DateTime? questionedAt,
   }) async {

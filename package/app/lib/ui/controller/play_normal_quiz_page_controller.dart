@@ -16,7 +16,7 @@ part 'play_normal_quiz_page_controller.g.dart';
 @freezed
 class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
   const factory PlayNormalQuizPageState({
-    required HitterQuiz hitterQuiz,
+    required HitterQuizState hitterQuiz,
   }) = _PlayNormalQuizPageState;
 }
 

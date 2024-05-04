@@ -8,7 +8,7 @@ import '../../../util/enum/quiz_type.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/hitter.dart';
-import '../domain/hitter_quiz.dart';
+import '../domain/hitter_quiz_state.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 import 'hitter_converter.dart';
@@ -26,7 +26,7 @@ class HitterRepository {
 
   final Supabase supabase;
 
-  Future<HitterQuiz> fetchHitterQuizBySearchCondition(
+  Future<HitterQuizState> fetchHitterQuizBySearchCondition(
     SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得
@@ -40,7 +40,7 @@ class HitterRepository {
     );
   }
 
-  Future<HitterQuiz> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
+  Future<HitterQuizState> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
     // 検索条件に合う選手を1人取得
     final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
 
@@ -101,7 +101,7 @@ class HitterRepository {
   }
 
   /// SupabaseHitterとSearchConditionからHitterQuizを作成する
-  Future<HitterQuiz> _createHitterQuiz(
+  Future<HitterQuizState> _createHitterQuiz(
     QuizType quizType,
     SupabaseHitter supabaseHitter,
     List<String> selectedStatsList,

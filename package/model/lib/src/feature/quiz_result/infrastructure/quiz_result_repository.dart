@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
-import '../../quiz/domain/hitter_quiz.dart';
+import '../../quiz/domain/hitter_quiz_state.dart';
 import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/daily_hitter_quiz_result.dart';
@@ -39,7 +39,7 @@ class QuizResultRepository {
   Future<void> updateDailyQuizResult(
     User user,
     DailyQuiz dailyQuiz,
-    HitterQuiz hitterQuiz,
+    HitterQuizState hitterQuiz,
   ) async {
     await firestore
         .collection('users')
@@ -74,7 +74,7 @@ class QuizResultRepository {
 
   Future<void> createNormalQuizResult(
     User user,
-    HitterQuiz hitterQuiz,
+    HitterQuizState hitterQuiz,
     SearchCondition searchCondition,
   ) async {
     await firestore

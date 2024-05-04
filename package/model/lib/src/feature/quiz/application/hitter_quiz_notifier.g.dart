@@ -7,7 +7,7 @@ part of 'hitter_quiz_notifier.dart';
 // **************************************************************************
 
 String _$hitterQuizNotifierHash() =>
-    r'fc09eaf20ca7da91a9d216356684976281f30d83';
+    r'0fd4218a44ed4f9357bdbc1648bfb5c7dd75f61f';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -31,17 +31,17 @@ class _SystemHash {
 }
 
 abstract class _$HitterQuizNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<HitterQuiz> {
+    extends BuildlessAutoDisposeAsyncNotifier<HitterQuizState> {
   late final QuizType quizType;
   late final DateTime? questionedAt;
 
-  FutureOr<HitterQuiz> build(
+  FutureOr<HitterQuizState> build(
     QuizType quizType, {
     required DateTime? questionedAt,
   });
 }
 
-/// [HitterQuiz] を保持する。
+/// [HitterQuizState] を保持する。
 ///
 /// [quizType] に [QuizType.daily] を指定する場合、
 /// [questionedAt] に DailyQuiz の出題日を指定すること。
@@ -50,14 +50,14 @@ abstract class _$HitterQuizNotifier
 @ProviderFor(HitterQuizNotifier)
 const hitterQuizNotifierProvider = HitterQuizNotifierFamily();
 
-/// [HitterQuiz] を保持する。
+/// [HitterQuizState] を保持する。
 ///
 /// [quizType] に [QuizType.daily] を指定する場合、
 /// [questionedAt] に DailyQuiz の出題日を指定すること。
 ///
 /// Copied from [HitterQuizNotifier].
-class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
-  /// [HitterQuiz] を保持する。
+class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuizState>> {
+  /// [HitterQuizState] を保持する。
   ///
   /// [quizType] に [QuizType.daily] を指定する場合、
   /// [questionedAt] に DailyQuiz の出題日を指定すること。
@@ -65,7 +65,7 @@ class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
   /// Copied from [HitterQuizNotifier].
   const HitterQuizNotifierFamily();
 
-  /// [HitterQuiz] を保持する。
+  /// [HitterQuizState] を保持する。
   ///
   /// [quizType] に [QuizType.daily] を指定する場合、
   /// [questionedAt] に DailyQuiz の出題日を指定すること。
@@ -106,15 +106,15 @@ class HitterQuizNotifierFamily extends Family<AsyncValue<HitterQuiz>> {
   String? get name => r'hitterQuizNotifierProvider';
 }
 
-/// [HitterQuiz] を保持する。
+/// [HitterQuizState] を保持する。
 ///
 /// [quizType] に [QuizType.daily] を指定する場合、
 /// [questionedAt] に DailyQuiz の出題日を指定すること。
 ///
 /// Copied from [HitterQuizNotifier].
 class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    HitterQuizNotifier, HitterQuiz> {
-  /// [HitterQuiz] を保持する。
+    HitterQuizNotifier, HitterQuizState> {
+  /// [HitterQuizState] を保持する。
   ///
   /// [quizType] に [QuizType.daily] を指定する場合、
   /// [questionedAt] に DailyQuiz の出題日を指定すること。
@@ -155,7 +155,7 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   final DateTime? questionedAt;
 
   @override
-  FutureOr<HitterQuiz> runNotifierBuild(
+  FutureOr<HitterQuizState> runNotifierBuild(
     covariant HitterQuizNotifier notifier,
   ) {
     return notifier.build(
@@ -184,7 +184,7 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<HitterQuizNotifier, HitterQuiz>
+  AutoDisposeAsyncNotifierProviderElement<HitterQuizNotifier, HitterQuizState>
       createElement() {
     return _HitterQuizNotifierProviderElement(this);
   }
@@ -206,7 +206,8 @@ class HitterQuizNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 }
 
-mixin HitterQuizNotifierRef on AutoDisposeAsyncNotifierProviderRef<HitterQuiz> {
+mixin HitterQuizNotifierRef
+    on AutoDisposeAsyncNotifierProviderRef<HitterQuizState> {
   /// The parameter `quizType` of this provider.
   QuizType get quizType;
 
@@ -216,7 +217,7 @@ mixin HitterQuizNotifierRef on AutoDisposeAsyncNotifierProviderRef<HitterQuiz> {
 
 class _HitterQuizNotifierProviderElement
     extends AutoDisposeAsyncNotifierProviderElement<HitterQuizNotifier,
-        HitterQuiz> with HitterQuizNotifierRef {
+        HitterQuizState> with HitterQuizNotifierRef {
   _HitterQuizNotifierProviderElement(super.provider);
 
   @override

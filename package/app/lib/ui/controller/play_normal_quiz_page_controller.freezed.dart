@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlayNormalQuizPageState {
-  HitterQuiz get hitterQuiz => throw _privateConstructorUsedError;
+  HitterQuizState get hitterQuiz => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayNormalQuizPageStateCopyWith<PlayNormalQuizPageState> get copyWith =>
@@ -29,9 +29,9 @@ abstract class $PlayNormalQuizPageStateCopyWith<$Res> {
           $Res Function(PlayNormalQuizPageState) then) =
       _$PlayNormalQuizPageStateCopyWithImpl<$Res, PlayNormalQuizPageState>;
   @useResult
-  $Res call({HitterQuiz hitterQuiz});
+  $Res call({HitterQuizState hitterQuiz});
 
-  $HitterQuizCopyWith<$Res> get hitterQuiz;
+  $HitterQuizStateCopyWith<$Res> get hitterQuiz;
 }
 
 /// @nodoc
@@ -54,14 +54,14 @@ class _$PlayNormalQuizPageStateCopyWithImpl<$Res,
       hitterQuiz: null == hitterQuiz
           ? _value.hitterQuiz
           : hitterQuiz // ignore: cast_nullable_to_non_nullable
-              as HitterQuiz,
+              as HitterQuizState,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $HitterQuizCopyWith<$Res> get hitterQuiz {
-    return $HitterQuizCopyWith<$Res>(_value.hitterQuiz, (value) {
+  $HitterQuizStateCopyWith<$Res> get hitterQuiz {
+    return $HitterQuizStateCopyWith<$Res>(_value.hitterQuiz, (value) {
       return _then(_value.copyWith(hitterQuiz: value) as $Val);
     });
   }
@@ -76,10 +76,10 @@ abstract class _$$PlayNormalQuizPageStateImplCopyWith<$Res>
       __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HitterQuiz hitterQuiz});
+  $Res call({HitterQuizState hitterQuiz});
 
   @override
-  $HitterQuizCopyWith<$Res> get hitterQuiz;
+  $HitterQuizStateCopyWith<$Res> get hitterQuiz;
 }
 
 /// @nodoc
@@ -101,7 +101,7 @@ class __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>
       hitterQuiz: null == hitterQuiz
           ? _value.hitterQuiz
           : hitterQuiz // ignore: cast_nullable_to_non_nullable
-              as HitterQuiz,
+              as HitterQuizState,
     ));
   }
 }
@@ -112,7 +112,7 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
   const _$PlayNormalQuizPageStateImpl({required this.hitterQuiz});
 
   @override
-  final HitterQuiz hitterQuiz;
+  final HitterQuizState hitterQuiz;
 
   @override
   String toString() {
@@ -141,10 +141,11 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
 
 abstract class _PlayNormalQuizPageState implements PlayNormalQuizPageState {
   const factory _PlayNormalQuizPageState(
-      {required final HitterQuiz hitterQuiz}) = _$PlayNormalQuizPageStateImpl;
+          {required final HitterQuizState hitterQuiz}) =
+      _$PlayNormalQuizPageStateImpl;
 
   @override
-  HitterQuiz get hitterQuiz;
+  HitterQuizState get hitterQuiz;
   @override
   @JsonKey(ignore: true)
   _$$PlayNormalQuizPageStateImplCopyWith<_$PlayNormalQuizPageStateImpl>

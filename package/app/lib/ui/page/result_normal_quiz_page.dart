@@ -34,7 +34,7 @@ class ResultNormalQuizPage extends ConsumerWidget {
     ref.listen(
       hitterQuizProvider,
       (_, next) async {
-        final nextHitterQuiz = next! as AsyncData<HitterQuiz>;
+        final nextHitterQuiz = next! as AsyncData<HitterQuizState>;
         await controller.onOpenPage(nextHitterQuiz);
       },
     );

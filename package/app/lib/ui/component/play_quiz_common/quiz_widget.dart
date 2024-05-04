@@ -4,7 +4,7 @@ import 'package:model/model.dart';
 class QuizWidget extends StatelessWidget {
   const QuizWidget({super.key, required this.hitterQuiz});
 
-  final HitterQuiz hitterQuiz;
+  final HitterQuizState hitterQuiz;
 
   @override
   Widget build(BuildContext context) {
