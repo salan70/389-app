@@ -13,8 +13,8 @@ part 'app_review_state.g.dart';
 /// 存在しない場合は null を返す。
 @riverpod
 Future<ReviewHistory?> reviewHistory(ReviewHistoryRef ref) async {
-  final user = ref.read(authRepositoryProvider).getCurrentUser();
-  return ref.read(reviewHistoryRepositoryProvider).fetch(user!.uid);
+  final user = ref.watch(authRepositoryProvider).getCurrentUser();
+  return ref.watch(reviewHistoryRepositoryProvider).fetch(user!.uid);
 }
 
 /// レビューを要求するかどうかを返すプロバイダー。

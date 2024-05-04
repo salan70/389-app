@@ -28,9 +28,9 @@ Future<bool> isPlayedTodaysDailyQuiz(
     return false;
   }
 
-  final user = ref.read(authRepositoryProvider).getCurrentUser();
+  final user = ref.watch(authRepositoryProvider).getCurrentUser();
 
-  return ref.read(quizResultRepositoryProvider).existSpecifiedDailyQuizResult(
+  return ref.watch(quizResultRepositoryProvider).existSpecifiedDailyQuizResult(
         user!,
         dailyQuiz.dailyQuizId,
       );
