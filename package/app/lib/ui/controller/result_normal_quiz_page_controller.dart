@@ -58,26 +58,8 @@ class ResultNormalQuizPageController with ControllerMixin {
         );
   }
 
-  Future<void> onTapReplay() async {
-    await executeWithOverlayLoading(
-      _ref,
-      action: () async {
-        _ref.invalidate(
-          hitterQuizNotifierProvider(
-            QuizType.normal,
-            questionedAt: null,
-          ),
-        );
-        // ラグを回避するため、作成が完了するまで待つ。
-        await _ref.read(
-          hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
-              .future,
-        );
-      },
-      onLoadingComplete: () =>
-          _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
-    );
-  }
+  Future<void> onTapReplay() async =>
+      _ref.read(appRouterProvider).push(PlayNormalQuizRoute());
 
   Future<void> _onAcceptReview() async {
     await _ref.read(appRouterProvider).maybePop();

@@ -33,26 +33,8 @@ class TopPageController with ControllerMixin {
     );
   }
 
-  Future<void> startNormalQuiz() async {
-    await executeWithOverlayLoading(
-      _ref,
-      action: () async {
-        _ref.invalidate(
-          hitterQuizNotifierProvider(
-            QuizType.normal,
-            questionedAt: null,
-          ),
-        );
-        // ラグを回避するため、作成が完了するまで待つ。
-        await _ref.read(
-          hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
-              .future,
-        );
-      },
-      onLoadingComplete: () =>
-          _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
-    );
-  }
+  Future<void> startNormalQuiz() async =>
+      _ref.read(appRouterProvider).push(PlayNormalQuizRoute());
 
   /// 今日の1問を開始する。
   ///
@@ -103,28 +85,12 @@ class TopPageController with ControllerMixin {
   Future<void> _onAcceptPlayDailyQuiz() async {
     await executeWithOverlayLoading(
       _ref,
-      action: () async {
-        await _createTodaysDailyQuiz();
-
-        // ローカルプッシュ通知のスケジュールを更新し、
-        // プレイ済みなのにリマインドが通知されるのを防ぐ。
-        await _ref
-            .read(localPushNotificationServiceProvider)
-            .scheduleRemindDailyQuizNotification();
-      },
+      // ローカルプッシュ通知のスケジュールを更新し、
+      // プレイ済みなのにリマインドが通知されるのを防ぐ。
+      action: () async => _ref
+          .read(localPushNotificationServiceProvider)
+          .scheduleRemindDailyQuizNotification(),
       onLoadingComplete: _toPlayDailyQuizPage,
-    );
-  }
-
-  Future<void> _createTodaysDailyQuiz() async {
-    final nowInApp = await _nowInApp();
-
-    // クイズを作成する。
-    await _ref.read(
-      hitterQuizNotifierProvider(
-        QuizType.daily,
-        questionedAt: nowInApp,
-      ).future,
     );
   }
 
