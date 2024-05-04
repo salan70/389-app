@@ -101,13 +101,17 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     // interstitial 広告を作成する。
     await _createInterstitialAd();
 
-    final isCorrect = state.value!.hitterQuiz.isCorrectHitterQuiz;
+    final isCorrect = state.value!.hitterQuiz.isCorrectEnteredHitter;
     // * 正解の場合。
     if (isCorrect) {
       _markCorrect();
       await ref.read(quizResultServiceProvider).createNormalQuizResult();
-      await ref.read(appRouterProvider).push(ResultNormalQuizRoute());
 
+      ref.invalidateSelf();
+
+      await ref.read(appRouterProvider).push(
+            ResultNormalQuizRoute(hitterQuizState: state.value!.hitterQuiz),
+          );
       return;
     }
 
@@ -175,8 +179,12 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
       context.pop();
     }
 
+    ref.invalidateSelf();
+
     /// 画面遷移する。
-    await ref.read(appRouterProvider).push(ResultNormalQuizRoute());
+    await ref
+        .read(appRouterProvider)
+        .push(ResultNormalQuizRoute(hitterQuizState: state.value!.hitterQuiz));
   }
 
   void _showIncorrectDialog(String hitterName) {

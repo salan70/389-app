@@ -76,11 +76,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ResultNormalQuizRoute.name: (routeData) {
-      final args = routeData.argsAs<ResultNormalQuizRouteArgs>(
-          orElse: () => const ResultNormalQuizRouteArgs());
+      final args = routeData.argsAs<ResultNormalQuizRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: ResultNormalQuizPage(key: args.key),
+        child: ResultNormalQuizPage(
+          key: args.key,
+          hitterQuizState: args.hitterQuizState,
+        ),
       );
     },
     TopRoute.name: (routeData) {
@@ -306,10 +308,14 @@ class ResultDailyQuizRouteArgs {
 class ResultNormalQuizRoute extends PageRouteInfo<ResultNormalQuizRouteArgs> {
   ResultNormalQuizRoute({
     Key? key,
+    required HitterQuizState hitterQuizState,
     List<PageRouteInfo>? children,
   }) : super(
           ResultNormalQuizRoute.name,
-          args: ResultNormalQuizRouteArgs(key: key),
+          args: ResultNormalQuizRouteArgs(
+            key: key,
+            hitterQuizState: hitterQuizState,
+          ),
           initialChildren: children,
         );
 
@@ -320,13 +326,18 @@ class ResultNormalQuizRoute extends PageRouteInfo<ResultNormalQuizRouteArgs> {
 }
 
 class ResultNormalQuizRouteArgs {
-  const ResultNormalQuizRouteArgs({this.key});
+  const ResultNormalQuizRouteArgs({
+    this.key,
+    required this.hitterQuizState,
+  });
 
   final Key? key;
 
+  final HitterQuizState hitterQuizState;
+
   @override
   String toString() {
-    return 'ResultNormalQuizRouteArgs{key: $key}';
+    return 'ResultNormalQuizRouteArgs{key: $key, hitterQuizState: $hitterQuizState}';
   }
 }
 

@@ -27,7 +27,7 @@ class HitterQuizState with _$HitterQuizState {
     required List<String> yearList,
 
     /// クイズの対象となる成績の種類リスト。
-    /// 
+    ///
     /// 例: ['打率', '本塁打', '打点', '盗塁']
     required List<String> selectedStatsList,
 
@@ -64,7 +64,7 @@ class HitterQuizState with _$HitterQuizState {
   }
 
   /// 入力中の野手（ [enteredHitter] ）が正解かどうか。
-  bool get isCorrectHitterQuiz => enteredHitter?.id == id;
+  bool get isCorrectEnteredHitter => enteredHitter?.id == id;
 
   /// すべての成績数。
   int get totalStatsCount => statsMapList.length * selectedStatsList.length;
