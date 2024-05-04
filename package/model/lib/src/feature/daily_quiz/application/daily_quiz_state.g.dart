@@ -179,7 +179,7 @@ class _DailyQuizProviderElement
 }
 
 String _$isPlayedTodaysDailyQuizHash() =>
-    r'2ec4f794ba1ef1968e7dcf64922305a44671a962';
+    r'36560fb228cd46a2dc913b1b30afff57ba6d9a9a';
 
 /// dailyQuiz をプレイ済みかどうかを返す。
 ///

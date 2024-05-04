@@ -31,8 +31,15 @@ class TopPageController with ControllerMixin {
     );
   }
 
-  Future<void> startNormalQuiz() async =>
-      _ref.read(appRouterProvider).push(PlayNormalQuizRoute());
+  Future<void> startNormalQuiz() async {
+    await executeWithOverlayLoading(
+      _ref,
+      // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
+      action: () async => _ref.read(hitterQuizStateProvider.future),
+      onLoadingComplete: () async =>
+          _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
+    );
+  }
 
   /// 今日の1問を開始する。
   ///
@@ -71,7 +78,7 @@ class TopPageController with ControllerMixin {
     on Exception catch (e, s) {
       logger.e('[to_play_daily_quiz_button]タップ時にエラーが発生しました。', e, s);
       loadingNotifier.hide();
-      _showErrorDialog();
+      _showDialog(child: ErrorDialog(error: e));
     }
   }
 
@@ -101,7 +108,7 @@ class TopPageController with ControllerMixin {
   Future<DailyQuiz?> _fetchTodaysDailyQuiz() async {
     // 念のため invalidate する。
     _ref.invalidate(dailyQuizProvider);
-    
+
     final nowInApp = await _nowInApp();
     return await _ref.read(dailyQuizProvider(nowInApp).future);
   }
@@ -135,6 +142,4 @@ class TopPageController with ControllerMixin {
   void _showConfirmPlayDialog() => _showDialog(
         child: ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
       );
-
-  void _showErrorDialog() => _showDialog(child: const ErrorDialog());
 }

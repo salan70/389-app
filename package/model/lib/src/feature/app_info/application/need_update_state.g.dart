@@ -6,7 +6,7 @@ part of 'need_update_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$needUpdateHash() => r'599b4d4ecaf26dbc953853b3fa85a5b8bec1ada7';
+String _$needUpdateHash() => r'dbf81902fa3dfc9b903f244632c1a8a90e36c856';
 
 /// アプリのアップデートが必要かどうかを返す。
 ///

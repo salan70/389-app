@@ -24,12 +24,8 @@ class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
 class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
   @override
   Future<PlayNormalQuizPageState> build() async {
-    final searchCondition = ref.watch(searchConditionProvider);
-    final hitterQuiz = await ref
-        .watch(hitterRepositoryProvider)
-        .fetchHitterQuizBySearchCondition(searchCondition);
-
-    return PlayNormalQuizPageState(hitterQuiz: hitterQuiz);
+    final hitterQuizState = await ref.watch(hitterQuizStateProvider.future);
+    return PlayNormalQuizPageState(hitterQuiz: hitterQuizState);
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //

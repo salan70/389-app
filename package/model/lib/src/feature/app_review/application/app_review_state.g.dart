@@ -6,7 +6,7 @@ part of 'app_review_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$reviewHistoryHash() => r'f469590f69abec63ef22c019d9717b30bc6e7e70';
+String _$reviewHistoryHash() => r'9891f75df527a0ca25191854d1043682b5e1f84b';
 
 /// [ReviewHistory] を取得する。
 ///

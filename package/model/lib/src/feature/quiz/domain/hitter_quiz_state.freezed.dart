@@ -24,13 +24,29 @@ mixin _$HitterQuizState {
 
   /// ユーザーが回答として入力した [Hitter].
   Hitter? get enteredHitter => throw _privateConstructorUsedError;
+
+  /// クイズの種別。
   QuizType? get quizType => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる年度のリスト。
   List<String> get yearList => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる成績の値のリスト。
   List<Map<String, StatsValue>> get statsMapList =>
       throw _privateConstructorUsedError;
+
+  /// 公開された成績の数。
   int get unveilCount => throw _privateConstructorUsedError;
+
+  /// 正解したかどうか。
   bool get isCorrect => throw _privateConstructorUsedError;
+
+  /// 不正解した回数。
   int get incorrectCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -261,9 +277,15 @@ class _$HitterQuizStateImpl extends _HitterQuizState {
   /// ユーザーが回答として入力した [Hitter].
   @override
   final Hitter? enteredHitter;
+
+  /// クイズの種別。
   @override
   final QuizType? quizType;
+
+  /// クイズの対象となる年度のリスト。
   final List<String> _yearList;
+
+  /// クイズの対象となる年度のリスト。
   @override
   List<String> get yearList {
     if (_yearList is EqualUnmodifiableListView) return _yearList;
@@ -271,7 +293,14 @@ class _$HitterQuizStateImpl extends _HitterQuizState {
     return EqualUnmodifiableListView(_yearList);
   }
 
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   final List<String> _selectedStatsList;
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   @override
   List<String> get selectedStatsList {
     if (_selectedStatsList is EqualUnmodifiableListView)
@@ -280,7 +309,10 @@ class _$HitterQuizStateImpl extends _HitterQuizState {
     return EqualUnmodifiableListView(_selectedStatsList);
   }
 
+  /// クイズの対象となる成績の値のリスト。
   final List<Map<String, StatsValue>> _statsMapList;
+
+  /// クイズの対象となる成績の値のリスト。
   @override
   List<Map<String, StatsValue>> get statsMapList {
     if (_statsMapList is EqualUnmodifiableListView) return _statsMapList;
@@ -288,10 +320,15 @@ class _$HitterQuizStateImpl extends _HitterQuizState {
     return EqualUnmodifiableListView(_statsMapList);
   }
 
+  /// 公開された成績の数。
   @override
   final int unveilCount;
+
+  /// 正解したかどうか。
   @override
   final bool isCorrect;
+
+  /// 不正解した回数。
   @override
   final int incorrectCount;
 
@@ -373,18 +410,34 @@ abstract class _HitterQuizState extends HitterQuizState {
   /// ユーザーが回答として入力した [Hitter].
   Hitter? get enteredHitter;
   @override
+
+  /// クイズの種別。
   QuizType? get quizType;
   @override
+
+  /// クイズの対象となる年度のリスト。
   List<String> get yearList;
   @override
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   List<String> get selectedStatsList;
   @override
+
+  /// クイズの対象となる成績の値のリスト。
   List<Map<String, StatsValue>> get statsMapList;
   @override
+
+  /// 公開された成績の数。
   int get unveilCount;
   @override
+
+  /// 正解したかどうか。
   bool get isCorrect;
   @override
+
+  /// 不正解した回数。
   int get incorrectCount;
   @override
   @JsonKey(ignore: true)

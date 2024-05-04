@@ -58,8 +58,15 @@ class ResultNormalQuizPageController with ControllerMixin {
         );
   }
 
-  Future<void> onTapReplay() async =>
-      _ref.read(appRouterProvider).push(PlayNormalQuizRoute());
+  Future<void> onTapReplay() async {
+    await executeWithOverlayLoading(
+      _ref,
+      // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
+      action: () async => _ref.read(hitterQuizStateProvider.future),
+      onLoadingComplete: () async =>
+          _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
+    );
+  }
 
   Future<void> _onAcceptReview() async {
     await _ref.read(appRouterProvider).maybePop();
