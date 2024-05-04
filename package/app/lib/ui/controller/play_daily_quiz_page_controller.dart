@@ -237,9 +237,10 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
   ///
   /// dailyQuizResult を更新し、結果ページに遷移する。
   Future<void> _finishQuiz() async {
+    final hitterQuizState = state.value!.hitterQuiz;
     await ref
         .read(quizResultServiceProvider)
-        .updateDailyQuizResult(questionedAt);
+        .updateDailyQuizResult(questionedAt, hitterQuizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
@@ -252,7 +253,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     /// 画面遷移する。
     await ref
         .read(appRouterProvider)
-        .push(ResultDailyQuizRoute(hitterQuizState: state.value!.hitterQuiz));
+        .push(ResultDailyQuizRoute(hitterQuizState: hitterQuizState));
   }
 
   bool get _isFinalAnswer =>

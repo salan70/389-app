@@ -105,12 +105,15 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     // * 正解の場合。
     if (isCorrect) {
       _markCorrect();
-      await ref.read(quizResultServiceProvider).createNormalQuizResult();
+      final hitterQuizState = state.value!.hitterQuiz;
+      await ref
+          .read(quizResultServiceProvider)
+          .createNormalQuizResult(hitterQuizState);
 
       ref.invalidateSelf();
 
       await ref.read(appRouterProvider).push(
-            ResultNormalQuizRoute(hitterQuizState: state.value!.hitterQuiz),
+            ResultNormalQuizRoute(hitterQuizState: hitterQuizState),
           );
       return;
     }
@@ -171,7 +174,9 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   /// 諦めることの確認ダイアログで、承認した際の処理。
   Future<void> _onAcceptRetire() async {
-    await ref.read(quizResultServiceProvider).createNormalQuizResult();
+    await ref
+        .read(quizResultServiceProvider)
+        .createNormalQuizResult(state.value!.hitterQuiz);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
