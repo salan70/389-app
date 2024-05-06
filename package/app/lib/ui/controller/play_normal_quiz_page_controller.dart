@@ -106,6 +106,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
           .read(quizResultServiceProvider)
           .createNormalQuizResult(hitterQuizState);
 
+      ref.invalidate(hitterQuizStateProvider);
       ref.invalidateSelf();
 
       await ref.read(appRouterProvider).push(
@@ -180,6 +181,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
       context.pop();
     }
 
+    ref.invalidate(hitterQuizStateProvider);
     ref.invalidateSelf();
 
     /// 画面遷移する。
