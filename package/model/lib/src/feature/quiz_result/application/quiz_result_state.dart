@@ -7,8 +7,6 @@ import '../infrastructure/quiz_result_repository.dart';
 
 part 'quiz_result_state.g.dart';
 
-// TODO(me): ref.watch に修正する。
-
 /// normalQuiz の結果をリストで返すプロバイダー。
 @riverpod
 Future<List<HitterQuizResult>> normalQuizResultList(
