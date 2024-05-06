@@ -27,29 +27,16 @@ class TopPageController with ControllerMixin {
   /// 設定画面（ダイアログ）を開く。
   void onTapOpenSetting() {
     _showDialog(
-      child: SettingDialog(
-        onTapNotificationSetting: _onTapNotificationSetting,
-      ),
+      child: SettingDialog(onTapNotificationSetting: _onTapNotificationSetting),
     );
   }
 
   Future<void> startNormalQuiz() async {
     await executeWithOverlayLoading(
       _ref,
-      action: () async {
-        _ref.invalidate(
-          hitterQuizNotifierProvider(
-            QuizType.normal,
-            questionedAt: null,
-          ),
-        );
-        // ラグを回避するため、作成が完了するまで待つ。
-        await _ref.read(
-          hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
-              .future,
-        );
-      },
-      onLoadingComplete: () =>
+      // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
+      action: () async => _ref.read(hitterQuizStateProvider.future),
+      onLoadingComplete: () async =>
           _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
     );
   }
@@ -57,8 +44,7 @@ class TopPageController with ControllerMixin {
   /// 今日の1問を開始する。
   ///
   /// プレイ状況などによっては、今日の1問がプレイできない場合がある。
-  Future<void> startTodaysDailyQuiz() async {
-    // TODO(me): ローディングダイアログを非表示にする処理、 finally でやりたい。
+  Future<void> onTapPlayTodaysDailyQuiz() async {
     // TODO(me): ローディング, エラーに関する処理もう少しきれいに書きたい。
     final loadingNotifier = _ref.read(loadingNotifierProvider.notifier)..show();
     try {
@@ -90,58 +76,40 @@ class TopPageController with ControllerMixin {
 
     // * エラーが発生した場合。
     on Exception catch (e, s) {
-      logger.e(
-        '[to_play_daily_quiz_button]タップ時にエラーが発生しました。',
-        e,
-        s,
-      );
+      logger.e('[to_play_daily_quiz_button]タップ時にエラーが発生しました。', e, s);
       loadingNotifier.hide();
-      _showErrorDialog();
+      _showDialog(child: ErrorDialog(error: e));
     }
   }
 
   Future<void> _onAcceptPlayDailyQuiz() async {
     await executeWithOverlayLoading(
       _ref,
-      action: () async {
-        await _createTodaysDailyQuiz();
-
-        // ローカルプッシュ通知のスケジュールを更新し、
-        // プレイ済みなのにリマインドが通知されるのを防ぐ。
-        await _ref
-            .read(localPushNotificationServiceProvider)
-            .scheduleRemindDailyQuizNotification();
-      },
+      // ローカルプッシュ通知のスケジュールを更新し、
+      // プレイ済みなのにリマインドが通知されるのを防ぐ。
+      action: () async => _ref
+          .read(localPushNotificationServiceProvider)
+          .scheduleRemindDailyQuizNotification(),
       onLoadingComplete: _toPlayDailyQuizPage,
-    );
-  }
-
-  Future<void> _createTodaysDailyQuiz() async {
-    final nowInApp = await _nowInApp();
-
-    // クイズを作成する。
-    await _ref.read(
-      hitterQuizNotifierProvider(
-        QuizType.daily,
-        questionedAt: nowInApp,
-      ).future,
     );
   }
 
   Future<void> _toPlayDailyQuizPage() async {
     final nowInApp = await _nowInApp();
+
+    // dailyQuizResult ドキュメントを保存（新規作成）する。
+    await _ref.read(quizResultServiceProvider).createDailyQuizResult(nowInApp);
+
     await _ref
         .read(appRouterProvider)
         .push(PlayDailyQuizRoute(questionedAt: nowInApp));
-
-    // TODO(me): ここで PlayDailyQuizPage の initState でやってる処理できないか試す。
   }
 
   Future<DailyQuiz?> _fetchTodaysDailyQuiz() async {
     // 念のため invalidate する。
     _ref.invalidate(dailyQuizProvider);
-    final nowInApp = await _nowInApp();
 
+    final nowInApp = await _nowInApp();
     return await _ref.read(dailyQuizProvider(nowInApp).future);
   }
 
@@ -150,7 +118,7 @@ class TopPageController with ControllerMixin {
     return now.calculateDateInApp();
   }
 
-  // * ダイアログ表示関連
+  // * ダイアログ表示関連（ private ）
 
   Future<void> _onTapNotificationSetting() async =>
       _showDialog(child: const NotificationSettingDialog());
@@ -174,6 +142,4 @@ class TopPageController with ControllerMixin {
   void _showConfirmPlayDialog() => _showDialog(
         child: ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
       );
-
-  void _showErrorDialog() => _showDialog(child: const ErrorDialog());
 }

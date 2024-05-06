@@ -7,11 +7,13 @@ class ConfirmDialog extends StatelessWidget {
   const ConfirmDialog({
     super.key,
     required this.confirmText,
-    required this.onPressedYes,
+    required this.onAccept,
+    this.acceptWidget = const Text('はい'),
   });
 
   final String confirmText;
-  final VoidCallback onPressedYes;
+  final VoidCallback onAccept;
+  final Widget acceptWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,11 @@ class ConfirmDialog extends StatelessWidget {
         MyButton(
           buttonName: 'confirm_yes_button',
           buttonType: ButtonType.alert,
-          onPressed: onPressedYes,
-          child: const Text('はい'),
+          onPressed: () {
+            onAccept();
+            context.pop();
+          },
+          child: acceptWidget,
         ),
       ],
     );

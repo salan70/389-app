@@ -4,6 +4,8 @@ import 'package:model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../core/util/extension/global_key_extension.dart';
+import '../component/history/show_answer_button.dart';
+import 'common/navigator_key_controller.dart';
 
 part 'quiz_history_daily_page_controller.g.dart';
 
@@ -26,6 +28,14 @@ class QuizHistoryDailyPageController {
           'result_quiz_widget',
           bytes,
           shareText,
+        );
+  }
+
+  /// 正解を表示する。
+  void onTapShowAnswer(String hitterName) {
+    _ref.read(navigatorKeyControllerProvider).showDialogWithChild(
+          barrierDismissible: false,
+          child: AlertAnswerDialog(hitterName: hitterName),
         );
   }
 }

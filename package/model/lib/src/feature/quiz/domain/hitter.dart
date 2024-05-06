@@ -1,4 +1,5 @@
 // ignore_for_file: invalid_annotation_target
+// 参考: https://github.com/rrousselGit/freezed/issues/488
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 

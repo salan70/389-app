@@ -45,13 +45,6 @@ class GalleryListPageController with ControllerMixin {
           logger.e('$formattedDate分の今日の1問が null でした。登録漏れの可能性があります。');
           throw Exception('daily quiz is null.');
         }
-
-        await _ref.read(
-          hitterQuizNotifierProvider(
-            QuizType.daily,
-            questionedAt: date,
-          ).future,
-        );
       },
       onLoadingComplete: () async {
         await _ref

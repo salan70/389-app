@@ -77,11 +77,8 @@ class QuizSettingPageController extends _$QuizSettingPageController
         // searchCondition を repository へ保存する。
         _saveSearchCondition();
 
-        // 出題する選手を取得する。
-        await ref.read(
-          hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
-              .future,
-        );
+        // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
+        await ref.read(hitterQuizStateProvider.future);
 
         // Analytics に search_condition を送信する。
         await ref.read(analyticsServiceProvider).logSearchCondition();

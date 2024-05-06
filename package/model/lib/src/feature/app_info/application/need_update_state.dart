@@ -8,12 +8,10 @@ import '../infrastructure/app_info_repository.dart';
 
 part 'need_update_state.g.dart';
 
-// TODO(me): ref.watch に修正する。
-
 /// アプリのアップデートが必要かどうかを返す。
 @riverpod
 Future<bool> needUpdate(NeedUpdateRef ref) async {
-  final appInfoRepository = ref.read(appInfoRepositoryProvider);
+  final appInfoRepository = ref.watch(appInfoRepositoryProvider);
 
   // アプリのバージョンを取得する。
   final packageInfo = await PackageInfo.fromPlatform();

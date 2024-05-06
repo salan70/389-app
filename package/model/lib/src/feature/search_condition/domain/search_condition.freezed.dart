@@ -155,7 +155,7 @@ class __$$SearchConditionImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SearchConditionImpl implements _SearchCondition {
+class _$SearchConditionImpl extends _SearchCondition {
   const _$SearchConditionImpl(
       {@HiveField(0) required final List<String> teamList,
       @HiveField(1) required this.minGames,
@@ -163,7 +163,8 @@ class _$SearchConditionImpl implements _SearchCondition {
       @HiveField(4) required this.minHr,
       @HiveField(5) required final List<String> selectedStatsList})
       : _teamList = teamList,
-        _selectedStatsList = selectedStatsList;
+        _selectedStatsList = selectedStatsList,
+        super._();
 
   factory _$SearchConditionImpl.fromJson(Map<String, dynamic> json) =>
       _$$SearchConditionImplFromJson(json);
@@ -240,7 +241,7 @@ class _$SearchConditionImpl implements _SearchCondition {
   }
 }
 
-abstract class _SearchCondition implements SearchCondition {
+abstract class _SearchCondition extends SearchCondition {
   const factory _SearchCondition(
           {@HiveField(0) required final List<String> teamList,
           @HiveField(1) required final int minGames,
@@ -248,6 +249,7 @@ abstract class _SearchCondition implements SearchCondition {
           @HiveField(4) required final int minHr,
           @HiveField(5) required final List<String> selectedStatsList}) =
       _$SearchConditionImpl;
+  const _SearchCondition._() : super._();
 
   factory _SearchCondition.fromJson(Map<String, dynamic> json) =
       _$SearchConditionImpl.fromJson;

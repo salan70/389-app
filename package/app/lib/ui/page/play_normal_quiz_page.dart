@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
 import '../component/common/button/my_button.dart';
@@ -14,28 +13,26 @@ import '../controller/play_normal_quiz_page_controller.dart';
 
 @RoutePage()
 class PlayNormalQuizPage extends ConsumerStatefulWidget {
-  PlayNormalQuizPage({super.key});
-
-  final _textEditingController = TextEditingController();
-  final _buttonWidth = 160.0;
+  const PlayNormalQuizPage({super.key});
 
   @override
   ConsumerState<PlayNormalQuizPage> createState() => _PlayNormalQuizPageState();
 }
 
 class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
+  final _textEditingController = TextEditingController();
+  final _buttonWidth = 160.0;
+
   @override
   void dispose() {
-    widget._textEditingController.dispose();
+    _textEditingController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final asyncHitterQuiz = ref
-        .watch(hitterQuizNotifierProvider(QuizType.normal, questionedAt: null));
-
-    final controller = ref.watch(playNormalQuizPageControllerProvider);
+    final controller = ref.watch(playNormalQuizPageControllerProvider.notifier);
+    final asyncPageState = ref.watch(playNormalQuizPageControllerProvider);
 
     return Scaffold(
       body: SafeArea(
@@ -44,10 +41,11 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
           child: GestureDetector(
             onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
             behavior: HitTestBehavior.opaque,
-            child: asyncHitterQuiz.maybeWhen(
+            child: asyncPageState.maybeWhen(
               orElse: Container.new,
               loading: () => const Center(child: CircularProgressIndicator()),
-              data: (hitterQuiz) {
+              data: (pageState) {
+                final hitterQuiz = pageState.hitterQuiz;
                 return ListView(
                   children: [
                     const BannerAdWidget(),
@@ -55,20 +53,20 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                     QuizWidget(hitterQuiz: hitterQuiz),
                     const SizedBox(height: 16),
                     InputAnswerTextField(
-                      textEditingController: widget._textEditingController,
+                      textEditingController: _textEditingController,
                       onSearchHitter: () => controller
-                          .onSearchHitter(widget._textEditingController.text),
-                      onSelectedHitter: (Hitter value) {},
+                          .onSearchHitter(_textEditingController.text),
+                      onSelectedHitter: controller.onSelectedHitter,
                     ),
                     const SizedBox(height: 16),
                     QuizEventButtons(
-                      onOpenAll: controller.onShowAllStat,
-                      onOpenSingle: controller.onShowSingleStat,
+                      onOpenAll: controller.onTapShowAllStat,
+                      onOpenSingle: controller.onTapShowSingleStat,
                     ),
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(
-                        width: widget._buttonWidth,
+                        width: _buttonWidth,
                         child: SubmitAnswerButton(
                           buttonType: ButtonType.main,
                           hitter: hitterQuiz.enteredHitter,
@@ -80,7 +78,7 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                     const SizedBox(height: 8),
                     Center(
                       child: SizedBox(
-                        width: widget._buttonWidth,
+                        width: _buttonWidth,
                         child: RetireButton(
                           buttonType: ButtonType.sub,
                           onTapRetire: controller.onTapRetire,

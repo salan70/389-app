@@ -7,7 +7,7 @@ part of 'quiz_result_state.dart';
 // **************************************************************************
 
 String _$normalQuizResultListHash() =>
-    r'd0d7cc5e1630da70c1ae3c5b79b1d2959fa3d6ca';
+    r'e04452c0f9007177982ce133f933a1198142e4cd';
 
 /// normalQuiz の結果をリストで返すプロバイダー。
 ///
@@ -26,7 +26,7 @@ final normalQuizResultListProvider =
 
 typedef NormalQuizResultListRef
     = AutoDisposeFutureProviderRef<List<HitterQuizResult>>;
-String _$dailyQuizResultHash() => r'0fccc68c71ec11030ac0d7fb4268778ed03dbedd';
+String _$dailyQuizResultHash() => r'7fab6ef95826b30b4be1f36e5008e199b51d2a1c';
 
 /// dailyQuiz の結果を返すプロバイダー。
 ///

@@ -7,15 +7,13 @@ import '../infrastructure/quiz_result_repository.dart';
 
 part 'quiz_result_state.g.dart';
 
-// TODO(me): ref.watch に修正する。
-
 /// normalQuiz の結果をリストで返すプロバイダー。
 @riverpod
 Future<List<HitterQuizResult>> normalQuizResultList(
   NormalQuizResultListRef ref,
 ) async {
-  final user = ref.read(authRepositoryProvider).getCurrentUser();
-  return ref.read(quizResultRepositoryProvider).fetchNormalQuizResultList(
+  final user = ref.watch(authRepositoryProvider).getCurrentUser();
+  return ref.watch(quizResultRepositoryProvider).fetchNormalQuizResultList(
         user!,
       );
 }
@@ -23,8 +21,8 @@ Future<List<HitterQuizResult>> normalQuizResultList(
 /// dailyQuiz の結果を返すプロバイダー。
 @riverpod
 Future<DailyHitterQuizResult> dailyQuizResult(DailyQuizResultRef ref) async {
-  final user = ref.read(authRepositoryProvider).getCurrentUser();
-  return ref.read(quizResultRepositoryProvider).fetchDailyHitterQuizResult(
+  final user = ref.watch(authRepositoryProvider).getCurrentUser();
+  return ref.watch(quizResultRepositoryProvider).fetchDailyHitterQuizResult(
         user!,
       );
 }

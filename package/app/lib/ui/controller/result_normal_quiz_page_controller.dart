@@ -22,9 +22,9 @@ class ResultNormalQuizPageController with ControllerMixin {
 
   final Ref _ref;
 
-  Future<void> onOpenPage(AsyncData<HitterQuiz> nextHitterQuiz) async {
+  Future<void> onOpenPage(HitterQuizState nextHitterState) async {
     // 直近のクイズが不正解だった場合、何もしない。
-    if (nextHitterQuiz.value.isCorrect == false) {
+    if (nextHitterState.isCorrect == false) {
       return;
     }
 
@@ -61,20 +61,9 @@ class ResultNormalQuizPageController with ControllerMixin {
   Future<void> onTapReplay() async {
     await executeWithOverlayLoading(
       _ref,
-      action: () async {
-        _ref.invalidate(
-          hitterQuizNotifierProvider(
-            QuizType.normal,
-            questionedAt: null,
-          ),
-        );
-        // ラグを回避するため、作成が完了するまで待つ。
-        await _ref.read(
-          hitterQuizNotifierProvider(QuizType.normal, questionedAt: null)
-              .future,
-        );
-      },
-      onLoadingComplete: () =>
+      // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
+      action: () async => _ref.read(hitterQuizStateProvider.future),
+      onLoadingComplete: () async =>
           _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
     );
   }

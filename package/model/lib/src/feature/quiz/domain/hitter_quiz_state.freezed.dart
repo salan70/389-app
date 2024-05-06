@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'hitter_quiz.dart';
+part of 'hitter_quiz_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,31 +15,50 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$HitterQuiz {
+mixin _$HitterQuizState {
+  /// 回答となる [Hitter] の id.
   String get id => throw _privateConstructorUsedError;
+
+  /// 回答となる [Hitter] の名前。
   String get name => throw _privateConstructorUsedError;
 
-  /// ユーザーが回答として入力した Hitter
+  /// ユーザーが回答として入力した [Hitter].
   Hitter? get enteredHitter => throw _privateConstructorUsedError;
+
+  /// クイズの種別。
   QuizType? get quizType => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる年度のリスト。
   List<String> get yearList => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
+
+  /// クイズの対象となる成績の値のリスト。
   List<Map<String, StatsValue>> get statsMapList =>
       throw _privateConstructorUsedError;
+
+  /// 公開された成績の数。
   int get unveilCount => throw _privateConstructorUsedError;
+
+  /// 正解したかどうか。
   bool get isCorrect => throw _privateConstructorUsedError;
+
+  /// 不正解した回数。
   int get incorrectCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $HitterQuizCopyWith<HitterQuiz> get copyWith =>
+  $HitterQuizStateCopyWith<HitterQuizState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HitterQuizCopyWith<$Res> {
-  factory $HitterQuizCopyWith(
-          HitterQuiz value, $Res Function(HitterQuiz) then) =
-      _$HitterQuizCopyWithImpl<$Res, HitterQuiz>;
+abstract class $HitterQuizStateCopyWith<$Res> {
+  factory $HitterQuizStateCopyWith(
+          HitterQuizState value, $Res Function(HitterQuizState) then) =
+      _$HitterQuizStateCopyWithImpl<$Res, HitterQuizState>;
   @useResult
   $Res call(
       {String id,
@@ -57,9 +76,9 @@ abstract class $HitterQuizCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
-    implements $HitterQuizCopyWith<$Res> {
-  _$HitterQuizCopyWithImpl(this._value, this._then);
+class _$HitterQuizStateCopyWithImpl<$Res, $Val extends HitterQuizState>
+    implements $HitterQuizStateCopyWith<$Res> {
+  _$HitterQuizStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -138,11 +157,11 @@ class _$HitterQuizCopyWithImpl<$Res, $Val extends HitterQuiz>
 }
 
 /// @nodoc
-abstract class _$$HitterQuizImplCopyWith<$Res>
-    implements $HitterQuizCopyWith<$Res> {
-  factory _$$HitterQuizImplCopyWith(
-          _$HitterQuizImpl value, $Res Function(_$HitterQuizImpl) then) =
-      __$$HitterQuizImplCopyWithImpl<$Res>;
+abstract class _$$HitterQuizStateImplCopyWith<$Res>
+    implements $HitterQuizStateCopyWith<$Res> {
+  factory _$$HitterQuizStateImplCopyWith(_$HitterQuizStateImpl value,
+          $Res Function(_$HitterQuizStateImpl) then) =
+      __$$HitterQuizStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -162,11 +181,11 @@ abstract class _$$HitterQuizImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$HitterQuizImplCopyWithImpl<$Res>
-    extends _$HitterQuizCopyWithImpl<$Res, _$HitterQuizImpl>
-    implements _$$HitterQuizImplCopyWith<$Res> {
-  __$$HitterQuizImplCopyWithImpl(
-      _$HitterQuizImpl _value, $Res Function(_$HitterQuizImpl) _then)
+class __$$HitterQuizStateImplCopyWithImpl<$Res>
+    extends _$HitterQuizStateCopyWithImpl<$Res, _$HitterQuizStateImpl>
+    implements _$$HitterQuizStateImplCopyWith<$Res> {
+  __$$HitterQuizStateImplCopyWithImpl(
+      _$HitterQuizStateImpl _value, $Res Function(_$HitterQuizStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -183,7 +202,7 @@ class __$$HitterQuizImplCopyWithImpl<$Res>
     Object? isCorrect = null,
     Object? incorrectCount = null,
   }) {
-    return _then(_$HitterQuizImpl(
+    return _then(_$HitterQuizStateImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -230,8 +249,8 @@ class __$$HitterQuizImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HitterQuizImpl extends _HitterQuiz {
-  const _$HitterQuizImpl(
+class _$HitterQuizStateImpl extends _HitterQuizState {
+  const _$HitterQuizStateImpl(
       {required this.id,
       required this.name,
       required this.enteredHitter,
@@ -247,17 +266,26 @@ class _$HitterQuizImpl extends _HitterQuiz {
         _statsMapList = statsMapList,
         super._();
 
+  /// 回答となる [Hitter] の id.
   @override
   final String id;
+
+  /// 回答となる [Hitter] の名前。
   @override
   final String name;
 
-  /// ユーザーが回答として入力した Hitter
+  /// ユーザーが回答として入力した [Hitter].
   @override
   final Hitter? enteredHitter;
+
+  /// クイズの種別。
   @override
   final QuizType? quizType;
+
+  /// クイズの対象となる年度のリスト。
   final List<String> _yearList;
+
+  /// クイズの対象となる年度のリスト。
   @override
   List<String> get yearList {
     if (_yearList is EqualUnmodifiableListView) return _yearList;
@@ -265,7 +293,14 @@ class _$HitterQuizImpl extends _HitterQuiz {
     return EqualUnmodifiableListView(_yearList);
   }
 
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   final List<String> _selectedStatsList;
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   @override
   List<String> get selectedStatsList {
     if (_selectedStatsList is EqualUnmodifiableListView)
@@ -274,7 +309,10 @@ class _$HitterQuizImpl extends _HitterQuiz {
     return EqualUnmodifiableListView(_selectedStatsList);
   }
 
+  /// クイズの対象となる成績の値のリスト。
   final List<Map<String, StatsValue>> _statsMapList;
+
+  /// クイズの対象となる成績の値のリスト。
   @override
   List<Map<String, StatsValue>> get statsMapList {
     if (_statsMapList is EqualUnmodifiableListView) return _statsMapList;
@@ -282,23 +320,28 @@ class _$HitterQuizImpl extends _HitterQuiz {
     return EqualUnmodifiableListView(_statsMapList);
   }
 
+  /// 公開された成績の数。
   @override
   final int unveilCount;
+
+  /// 正解したかどうか。
   @override
   final bool isCorrect;
+
+  /// 不正解した回数。
   @override
   final int incorrectCount;
 
   @override
   String toString() {
-    return 'HitterQuiz(id: $id, name: $name, enteredHitter: $enteredHitter, quizType: $quizType, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
+    return 'HitterQuizState(id: $id, name: $name, enteredHitter: $enteredHitter, quizType: $quizType, yearList: $yearList, selectedStatsList: $selectedStatsList, statsMapList: $statsMapList, unveilCount: $unveilCount, isCorrect: $isCorrect, incorrectCount: $incorrectCount)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$HitterQuizImpl &&
+            other is _$HitterQuizStateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.enteredHitter, enteredHitter) ||
@@ -335,12 +378,13 @@ class _$HitterQuizImpl extends _HitterQuiz {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$HitterQuizImplCopyWith<_$HitterQuizImpl> get copyWith =>
-      __$$HitterQuizImplCopyWithImpl<_$HitterQuizImpl>(this, _$identity);
+  _$$HitterQuizStateImplCopyWith<_$HitterQuizStateImpl> get copyWith =>
+      __$$HitterQuizStateImplCopyWithImpl<_$HitterQuizStateImpl>(
+          this, _$identity);
 }
 
-abstract class _HitterQuiz extends HitterQuiz {
-  const factory _HitterQuiz(
+abstract class _HitterQuizState extends HitterQuizState {
+  const factory _HitterQuizState(
       {required final String id,
       required final String name,
       required final Hitter? enteredHitter,
@@ -350,33 +394,53 @@ abstract class _HitterQuiz extends HitterQuiz {
       required final List<Map<String, StatsValue>> statsMapList,
       required final int unveilCount,
       required final bool isCorrect,
-      required final int incorrectCount}) = _$HitterQuizImpl;
-  const _HitterQuiz._() : super._();
+      required final int incorrectCount}) = _$HitterQuizStateImpl;
+  const _HitterQuizState._() : super._();
 
   @override
+
+  /// 回答となる [Hitter] の id.
   String get id;
   @override
+
+  /// 回答となる [Hitter] の名前。
   String get name;
   @override
 
-  /// ユーザーが回答として入力した Hitter
+  /// ユーザーが回答として入力した [Hitter].
   Hitter? get enteredHitter;
   @override
+
+  /// クイズの種別。
   QuizType? get quizType;
   @override
+
+  /// クイズの対象となる年度のリスト。
   List<String> get yearList;
   @override
+
+  /// クイズの対象となる成績の種類リスト。
+  ///
+  /// 例: ['打率', '本塁打', '打点', '盗塁']
   List<String> get selectedStatsList;
   @override
+
+  /// クイズの対象となる成績の値のリスト。
   List<Map<String, StatsValue>> get statsMapList;
   @override
+
+  /// 公開された成績の数。
   int get unveilCount;
   @override
+
+  /// 正解したかどうか。
   bool get isCorrect;
   @override
+
+  /// 不正解した回数。
   int get incorrectCount;
   @override
   @JsonKey(ignore: true)
-  _$$HitterQuizImplCopyWith<_$HitterQuizImpl> get copyWith =>
+  _$$HitterQuizStateImplCopyWith<_$HitterQuizStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

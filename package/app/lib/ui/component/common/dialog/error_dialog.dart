@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/util/extension/context_extension.dart';
@@ -5,7 +6,9 @@ import '../button/my_button.dart';
 
 /// エラーを知らせるダイアログ
 class ErrorDialog extends StatelessWidget {
-  const ErrorDialog({super.key});
+  const ErrorDialog({super.key, required this.error});
+
+  final Object error;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +17,7 @@ class ErrorDialog extends StatelessWidget {
         'エラー',
         style: TextStyle(color: Theme.of(context).colorScheme.error),
       ),
-      content: const Text('エラーが発生しました。\n'
-          '時間をおいて再度お試しください。'),
+      content: Text(error.errorMessage),
       actions: [
         MyButton(
           buttonName: 'error_dialog_ok_button',

@@ -31,7 +31,7 @@ mixin ControllerMixin {
       // エラーダイアログを表示する。
       ref
           .read(navigatorKeyControllerProvider)
-          .showDialogWithChild(child: const ErrorDialog());
+          .showDialogWithChild(child: ErrorDialog(error: e));
     }
   }
 }

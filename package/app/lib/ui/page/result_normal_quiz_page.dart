@@ -14,30 +14,39 @@ import '../component/quiz_result_normal/replay_button.dart';
 import '../controller/result_normal_quiz_page_controller.dart';
 
 @RoutePage()
-class ResultNormalQuizPage extends ConsumerWidget {
-  ResultNormalQuizPage({super.key});
+class ResultNormalQuizPage extends ConsumerStatefulWidget {
+  const ResultNormalQuizPage({super.key, required this.hitterQuizState});
 
+  final HitterQuizState hitterQuizState;
+
+  @override
+  ConsumerState<ResultNormalQuizPage> createState() =>
+      _ResultNormalQuizPageState();
+}
+
+class _ResultNormalQuizPageState extends ConsumerState<ResultNormalQuizPage> {
   static const _buttonWidth = 200.0;
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
 
   // Widget の画像を作成するために使用する。
   final _globalKey = GlobalKey();
 
+  // TODO(me): initState からの呼び出しで問題ないか動作確認する。
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(resultNormalQuizPageControllerProvider);
-
-    final hitterQuizProvider =
-        hitterQuizNotifierProvider(QuizType.normal, questionedAt: null);
-
-    // TODO(me): ここ listen する必要があるか確認する。（ initState でいいのでは？ ）
-    ref.listen(
-      hitterQuizProvider,
-      (_, next) async {
-        final nextHitterQuiz = next! as AsyncData<HitterQuiz>;
-        await controller.onOpenPage(nextHitterQuiz);
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) async {
+        await ref
+            .read(resultNormalQuizPageControllerProvider)
+            .onOpenPage(widget.hitterQuizState);
       },
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = ref.watch(resultNormalQuizPageControllerProvider);
 
     return PopScope(
       canPop: false,
@@ -45,66 +54,56 @@ class ResultNormalQuizPage extends ConsumerWidget {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(left: 8, right: 8),
-            child: ref.watch(hitterQuizProvider).maybeWhen(
-                  orElse: Container.new,
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  data: (hitterQuiz) {
-                    return Stack(
-                      children: [
-                        ListView(
-                          children: [
-                            const BannerAdWidget(),
-                            const SizedBox(height: 16),
-                            ResultText(hitterQuiz: hitterQuiz),
-                            ResultQuizWidget(
-                              globalKey: _globalKey,
-                              hitterQuiz: hitterQuiz,
-                            ),
-                            const SizedBox(height: 24),
-                            Center(
-                              child: SizedBox(
-                                width: _buttonWidth,
-                                child: ReplayButton(
-                                  buttonType: ButtonType.main,
-                                  onPressed: controller.onTapReplay,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Center(
-                              child: SizedBox(
-                                width: _buttonWidth,
-                                child: ShareButton(
-                                  buttonType: ButtonType.sub,
-                                  onPressed: () => controller.shareQuiz(
-                                    _globalKey,
-                                    _shareText,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            const Center(
-                              child: SizedBox(
-                                width: _buttonWidth,
-                                child:
-                                    BackToTopButton(buttonType: ButtonType.sub),
-                              ),
-                            ),
-                            const SizedBox(height: 40),
-                          ],
+            child: Stack(
+              children: [
+                ListView(
+                  children: [
+                    const BannerAdWidget(),
+                    const SizedBox(height: 16),
+                    ResultText(hitterQuiz: widget.hitterQuizState),
+                    ResultQuizWidget(
+                      globalKey: _globalKey,
+                      hitterQuiz: widget.hitterQuizState,
+                    ),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: SizedBox(
+                        width: _buttonWidth,
+                        child: ReplayButton(
+                          buttonType: ButtonType.main,
+                          onPressed: controller.onTapReplay,
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: CustomConfettiWidget(
-                            isCorrect: hitterQuiz.isCorrect,
-                          ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Center(
+                      child: SizedBox(
+                        width: _buttonWidth,
+                        child: ShareButton(
+                          buttonType: ButtonType.sub,
+                          onPressed: () =>
+                              controller.shareQuiz(_globalKey, _shareText),
                         ),
-                      ],
-                    );
-                  },
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Center(
+                      child: SizedBox(
+                        width: _buttonWidth,
+                        child: BackToTopButton(buttonType: ButtonType.sub),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CustomConfettiWidget(
+                    isCorrect: widget.hitterQuizState.isCorrect,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
