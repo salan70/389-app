@@ -13,21 +13,33 @@ import '../component/play_quiz_daily/life_widget.dart';
 import '../controller/play_daily_quiz_page_controller.dart';
 
 @RoutePage()
-class PlayDailyQuizPage extends ConsumerWidget {
-  PlayDailyQuizPage({super.key, required this.questionedAt});
+class PlayDailyQuizPage extends ConsumerStatefulWidget {
+  const PlayDailyQuizPage({super.key, required this.questionedAt});
 
   /// 対象となる DailyQuiz の出題日。
   final DateTime questionedAt;
 
+  @override
+  ConsumerState<PlayDailyQuizPage> createState() => _PlayDailyQuizPageState();
+}
+
+class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
   final _textEditingController = TextEditingController();
   final _buttonWidth = 160.0;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final asyncPageState =
-        ref.watch(playDailyQuizPageControllerProvider(questionedAt));
-    final controller =
-        ref.watch(playDailyQuizPageControllerProvider(questionedAt).notifier);
+        ref.watch(playDailyQuizPageControllerProvider(widget.questionedAt));
+    final controller = ref.watch(
+      playDailyQuizPageControllerProvider(widget.questionedAt).notifier,
+    );
 
     return PopScope(
       canPop: false,

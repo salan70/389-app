@@ -13,19 +13,19 @@ import '../controller/play_normal_quiz_page_controller.dart';
 
 @RoutePage()
 class PlayNormalQuizPage extends ConsumerStatefulWidget {
-  PlayNormalQuizPage({super.key});
-
-  final _textEditingController = TextEditingController();
-  final _buttonWidth = 160.0;
+  const PlayNormalQuizPage({super.key});
 
   @override
   ConsumerState<PlayNormalQuizPage> createState() => _PlayNormalQuizPageState();
 }
 
 class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
+  final _textEditingController = TextEditingController();
+  final _buttonWidth = 160.0;
+
   @override
   void dispose() {
-    widget._textEditingController.dispose();
+    _textEditingController.dispose();
     super.dispose();
   }
 
@@ -53,9 +53,9 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                     QuizWidget(hitterQuiz: hitterQuiz),
                     const SizedBox(height: 16),
                     InputAnswerTextField(
-                      textEditingController: widget._textEditingController,
+                      textEditingController: _textEditingController,
                       onSearchHitter: () => controller
-                          .onSearchHitter(widget._textEditingController.text),
+                          .onSearchHitter(_textEditingController.text),
                       onSelectedHitter: controller.onSelectedHitter,
                     ),
                     const SizedBox(height: 16),
@@ -66,7 +66,7 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                     const SizedBox(height: 16),
                     Center(
                       child: SizedBox(
-                        width: widget._buttonWidth,
+                        width: _buttonWidth,
                         child: SubmitAnswerButton(
                           buttonType: ButtonType.main,
                           hitter: hitterQuiz.enteredHitter,
@@ -78,7 +78,7 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                     const SizedBox(height: 8),
                     Center(
                       child: SizedBox(
-                        width: widget._buttonWidth,
+                        width: _buttonWidth,
                         child: RetireButton(
                           buttonType: ButtonType.sub,
                           onTapRetire: controller.onTapRetire,
