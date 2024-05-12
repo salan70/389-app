@@ -35,9 +35,9 @@ class TopPageController with ControllerMixin {
     await executeWithOverlayLoading(
       _ref,
       // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
-      action: () async => _ref.read(hitterQuizStateProvider.future),
+      action: () async => _ref.read(normalQuizStateProvider.future),
       onLoadingComplete: () async =>
-          _ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
+          _ref.read(appRouterProvider).push(const PlayNormalQuizRoute()),
     );
   }
 

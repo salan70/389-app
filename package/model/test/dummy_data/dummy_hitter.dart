@@ -3,7 +3,6 @@ import 'package:model/src/feature/quiz/domain/stats_value.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/hitting_stats.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/supabase_hitter.dart';
 import 'package:model/src/feature/search_condition/domain/search_condition.dart';
-import 'package:model/src/util/enum/quiz_type.dart';
 
 const dummyHitter = SupabaseHitter(
   id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
@@ -144,11 +143,9 @@ const dummySearchCondition = SearchCondition(
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
 );
 
-const dummyHitterQuiz = HitterQuizState(
-  id: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
-  name: '牧秀悟',
-  enteredHitter: null,
-  quizType: QuizType.normal,
+const dummyHitterQuiz = HitterQuiz(
+  hitterId: '9d377b08-3b1d-4ff2-892f-597c404e4b7d',
+  hitterName: '牧秀悟',
   yearList: ['2021', '2022', 'NPB：2年'],
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
   statsMapList: [
@@ -171,7 +168,6 @@ const dummyHitterQuiz = HitterQuizState(
       'OPS': StatsValue(unveilOrder: 2, data: '.876'),
     }
   ],
-  isCorrect: false,
   unveilCount: 0,
   incorrectCount: 0,
 );
