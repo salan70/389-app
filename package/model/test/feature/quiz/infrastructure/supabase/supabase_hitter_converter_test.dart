@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:model/src/feature/quiz/infrastructure/hitter_converter.dart';
 import 'package:model/src/util/enum/hitting_stats_type.dart';
-import 'package:model/src/util/enum/quiz_type.dart';
 
 import '../../../../dummy_data/dummy_hitter.dart';
 
@@ -11,18 +10,23 @@ void main() async {
 
   group('toHitterQuiz関数', () {
     test('正常系', () {
-      final result = converter.toHitterQuiz(
-        QuizType.normal,
-        dummyHitter,
-        dummyHittingStatsList,
-        dummySearchCondition.selectedStatsList,
+      final hitterQuiz = converter
+          .toInputNormalQuizState(
+            dummyHitter,
+            dummyHittingStatsList,
+            dummySearchCondition.selectedStatsList,
+          )
+          .hitterQuiz;
+
+      expect(dummyHitterQuiz.hitterId, hitterQuiz.hitterId);
+      expect(dummyHitterQuiz.hitterName, hitterQuiz.hitterName);
+      expect(dummyHitterQuiz.yearList, hitterQuiz.yearList);
+      expect(dummyHitterQuiz.selectedStatsList, hitterQuiz.selectedStatsList);
+      expect(
+        dummyHitterQuiz.statsMapList.length,
+        hitterQuiz.statsMapList.length,
       );
-      expect(dummyHitterQuiz.id, result.id);
-      expect(dummyHitterQuiz.name, result.name);
-      expect(dummyHitterQuiz.yearList, result.yearList);
-      expect(dummyHitterQuiz.selectedStatsList, result.selectedStatsList);
-      expect(dummyHitterQuiz.statsMapList.length, result.statsMapList.length);
-      expect(dummyHitterQuiz.unveilCount, result.unveilCount);
+      expect(dummyHitterQuiz.unveilCount, hitterQuiz.unveilCount);
     });
   });
 

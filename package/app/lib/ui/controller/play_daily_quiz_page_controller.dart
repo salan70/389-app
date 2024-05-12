@@ -16,7 +16,7 @@ part 'play_daily_quiz_page_controller.g.dart';
 @freezed
 class PlayDailyQuizPageState with _$PlayDailyQuizPageState {
   const factory PlayDailyQuizPageState({
-    required HitterQuizState hitterQuiz,
+    required InputQuizState quizState,
   }) = _PlayDailyQuizPageState;
 }
 
@@ -26,72 +26,75 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
   Future<PlayDailyQuizPageState> build(DateTime questionedAt) async {
     final dailyQuiz = await ref.watch(dailyQuizProvider(questionedAt).future);
     if (dailyQuiz == null) {
+      // TODO(me): Exception をスローするべき？
       throw ArgumentError.notNull('dailyQuiz');
     }
 
-    final hitterQuiz = await ref
+    final hitterQuizState = await ref
         .watch(hitterRepositoryProvider)
-        .fetchHitterQuizById(dailyQuiz);
+        .fetchInputDailyQuizState(dailyQuiz);
 
-    return PlayDailyQuizPageState(hitterQuiz: hitterQuiz);
+    return PlayDailyQuizPageState(quizState: hitterQuizState);
   }
 
   static const _maxCanIncorrectCount = 2;
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
-  /// ランダムに1つ成績を公開する
+  /// ランダムに1つ成績を公開する。
   void _openRandom() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          unveilCount: value.hitterQuiz.unveilCount + 1,
-        ),
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.quizState;
+
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        unveilCount: currentQuizState.hitterQuiz.unveilCount + 1,
       ),
     );
+    final newValue = currentValue.copyWith(quizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// 全ての閉じている成績を公開する。
   void _openAll() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          unveilCount: value.hitterQuiz.totalStatsCount,
-        ),
-      ),
-    );
-  }
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.quizState;
 
-  /// isCorrect を true にする。
-  void _markCorrect() {
-    state = AsyncData(
-      state.value!.copyWith(
-        hitterQuiz: state.value!.hitterQuiz.copyWith(isCorrect: true),
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        unveilCount: currentQuizState.hitterQuiz.totalStatsCount,
       ),
     );
+    final newValue = currentValue.copyWith(quizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// 不正解数を1増やす。
   void _addIncorrectCount() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          incorrectCount: value.hitterQuiz.incorrectCount + 1,
-        ),
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.quizState;
+
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        incorrectCount: currentQuizState.hitterQuiz.incorrectCount + 1,
       ),
     );
+    final newValue = currentValue.copyWith(quizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// enteredHitter を更新する。
   void _updateEnteredHitter(Hitter? enteredHitter) {
-    state = AsyncData(
-      state.value!.copyWith(
-        hitterQuiz:
-            state.value!.hitterQuiz.copyWith(enteredHitter: enteredHitter),
-      ),
-    );
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.quizState;
+
+    final newHitterQuizState =
+        currentQuizState.copyWith(enteredHitter: enteredHitter);
+    final newValue = currentValue.copyWith(quizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   // * ---------------------- UI からのイベント ---------------------- * //
@@ -118,7 +121,8 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    final isAllStatsUnveiled =
+        state.value!.quizState.hitterQuiz.isAllStatsUnveiled;
     // 非公開の成績が残っている場合、確認ダイアログを表示する。
     if (isAllStatsUnveiled == false) {
       _showConfirmOpenAllDialog();
@@ -129,7 +133,8 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    final isAllStatsUnveiled =
+        state.value!.quizState.hitterQuiz.isAllStatsUnveiled;
     // 非公開の成績が残っている場合、確認ダイアログを表示する。
     if (isAllStatsUnveiled == false) {
       _openRandom();
@@ -190,9 +195,8 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     await _createInterstitialAd();
 
     // * 正解の場合
-    final isCorrect = state.value!.hitterQuiz.isCorrectEnteredHitter;
+    final isCorrect = state.value!.quizState.isCorrectEnteredHitter;
     if (isCorrect) {
-      _markCorrect();
       await _finishQuiz();
       return;
     }
@@ -234,10 +238,10 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
   ///
   /// dailyQuizResult を更新し、結果ページに遷移する。
   Future<void> _finishQuiz() async {
-    final hitterQuizState = state.value!.hitterQuiz;
+    final resultQuizState = state.value!.quizState.toResultQuizState();
     await ref
         .read(quizResultServiceProvider)
-        .updateDailyQuizResult(questionedAt, hitterQuizState);
+        .updateDailyQuizResult(questionedAt, resultQuizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
@@ -250,9 +254,9 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     /// 画面遷移する。
     await ref
         .read(appRouterProvider)
-        .push(ResultDailyQuizRoute(hitterQuizState: hitterQuizState));
+        .push(ResultDailyQuizRoute(resultQuizState: resultQuizState));
   }
 
   bool get _isFinalAnswer =>
-      state.value!.hitterQuiz.incorrectCount == _maxCanIncorrectCount;
+      state.value!.quizState.hitterQuiz.incorrectCount == _maxCanIncorrectCount;
 }

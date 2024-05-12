@@ -11,7 +11,7 @@ class ResultQuizWidget extends StatelessWidget {
   });
 
   final GlobalKey globalKey;
-  final HitterQuizState hitterQuiz;
+  final HitterQuiz hitterQuiz;
 
   @override
   Widget build(BuildContext context) {

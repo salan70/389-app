@@ -39,10 +39,7 @@ class QuizHistoryDailyPage extends ConsumerWidget {
               const SizedBox(height: 16),
               ResultQuizWidget(
                 globalKey: _globalKey,
-                hitterQuiz: HitterQuizState.fromHitterResult(
-                  hitterQuizResult,
-                  QuizType.daily,
-                ),
+                hitterQuiz: HitterQuiz.fromHitterResult(hitterQuizResult),
               ),
               const SizedBox(height: 8),
               ResultInfoWidget(quizResult: hitterQuizResult),

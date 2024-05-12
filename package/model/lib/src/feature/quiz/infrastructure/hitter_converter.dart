@@ -3,31 +3,61 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 import '../../../util/enum/hitting_stats_type.dart';
-import '../../../util/enum/quiz_type.dart';
+import '../domain/hitter_quiz.dart';
 import '../domain/hitter_quiz_state.dart';
 import '../domain/stats_value.dart';
 import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
 class HitterConverter {
-  /// SupabaseHitter型, HittingStats型（List）からHitterQuiz型へ変換する
-  HitterQuizState toHitterQuiz(
-    QuizType quizType,
+  /// [InputQuizState.normal] へ変換する。
+  InputQuizState toInputNormalQuizState(
     SupabaseHitter supabaseHitter,
+    List<HittingStats> rowStatsList,
+    List<String> selectedStatsList,
+  ) {
+    final hitterQuiz = _createHitterQuiz(
+      supabaseHitter,
+      rowStatsList,
+      selectedStatsList,
+    );
+
+    return InputQuizState.normal(
+      hitterQuiz: hitterQuiz,
+      enteredHitter: null,
+    );
+  }
+
+  /// [InputQuizState.daily] へ変換する。
+  InputQuizState toInputDailyQuizState(
+    SupabaseHitter supabaseHitter,
+    List<HittingStats> rowStatsList,
+    List<String> selectedStatsList,
+  ) {
+    final hitterQuiz = _createHitterQuiz(
+      supabaseHitter,
+      rowStatsList,
+      selectedStatsList,
+    );
+
+    return InputQuizState.daily(
+      hitterQuiz: hitterQuiz,
+      enteredHitter: null,
+    );
+  }
+
+  List<Map<String, StatsValue>> _createStatsListForUi(
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
   ) {
     final statsListForUi = <Map<String, StatsValue>>[];
     final statsCountList =
-        createStatsCountList(rowStatsList, selectedStatsList);
-    final yearList = <String>[];
+        _createStatsCountList(rowStatsList, selectedStatsList);
 
     for (final rawStats in rowStatsList) {
       final statsMap = toStatsMap(rawStats.stats, selectedStatsList);
       final statsForUi = <String, StatsValue>{};
 
-      // TODO(me): 関数として抽出
-      // 選択された成績に該当するデータを格納する
       for (final selectedStats in selectedStatsList) {
         final removeIndex = Random().nextInt(statsCountList.length);
         final unveilOrder = statsCountList.removeAt(removeIndex);
@@ -38,31 +68,39 @@ class HitterConverter {
         statsForUi[selectedStats] = statsValue;
       }
       statsListForUi.add(statsForUi);
-
-      final year = rawStats.stats['年度'] as String;
-      yearList.add(year);
     }
 
-    final hitterQuiz = HitterQuizState(
-      id: supabaseHitter.id,
-      name: supabaseHitter.name,
-      enteredHitter: null,
-      quizType: quizType,
+    return statsListForUi;
+  }
+
+  List<String> _extractYearList(List<HittingStats> rowStatsList) {
+    return rowStatsList
+        .map((rawStats) => rawStats.stats['年度'] as String)
+        .toList();
+  }
+
+  HitterQuiz _createHitterQuiz(
+    SupabaseHitter supabaseHitter,
+    List<HittingStats> rowStatsList,
+    List<String> selectedStatsList,
+  ) {
+    final statsListForUi =
+        _createStatsListForUi(rowStatsList, selectedStatsList);
+    final yearList = _extractYearList(rowStatsList);
+
+    return HitterQuiz(
+      hitterId: supabaseHitter.id,
+      hitterName: supabaseHitter.name,
       yearList: yearList,
       selectedStatsList: selectedStatsList,
       statsMapList: statsListForUi,
       unveilCount: 0,
-      isCorrect: false,
       incorrectCount: 0,
     );
-
-    return hitterQuiz;
   }
 
-  // TODO(me): UT作成
   /// 0~成績数のリストを作成する
-  @visibleForTesting
-  List<int> createStatsCountList(
+  List<int> _createStatsCountList(
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
   ) {

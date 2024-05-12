@@ -15,9 +15,9 @@ import '../controller/result_normal_quiz_page_controller.dart';
 
 @RoutePage()
 class ResultNormalQuizPage extends ConsumerStatefulWidget {
-  const ResultNormalQuizPage({super.key, required this.hitterQuizState});
+  const ResultNormalQuizPage({super.key, required this.resultQuizState});
 
-  final HitterQuizState hitterQuizState;
+  final ResultQuizState resultQuizState;
 
   @override
   ConsumerState<ResultNormalQuizPage> createState() =>
@@ -39,7 +39,7 @@ class _ResultNormalQuizPageState extends ConsumerState<ResultNormalQuizPage> {
       (_) async {
         await ref
             .read(resultNormalQuizPageControllerProvider)
-            .onOpenPage(widget.hitterQuizState);
+            .onOpenPage(widget.resultQuizState);
       },
     );
   }
@@ -60,10 +60,10 @@ class _ResultNormalQuizPageState extends ConsumerState<ResultNormalQuizPage> {
                   children: [
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
-                    ResultText(hitterQuiz: widget.hitterQuizState),
+                    ResultText(resultQuizState: widget.resultQuizState),
                     ResultQuizWidget(
                       globalKey: _globalKey,
-                      hitterQuiz: widget.hitterQuizState,
+                      hitterQuiz: widget.resultQuizState.hitterQuiz,
                     ),
                     const SizedBox(height: 24),
                     Center(
@@ -99,7 +99,7 @@ class _ResultNormalQuizPageState extends ConsumerState<ResultNormalQuizPage> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: CustomConfettiWidget(
-                    isCorrect: widget.hitterQuizState.isCorrect,
+                    isCorrect: widget.resultQuizState.isCorrect,
                   ),
                 ),
               ],

@@ -45,7 +45,7 @@ class SelectStatsWidget extends StatelessWidget {
       modalType: S2ModalType.bottomSheet,
       choiceType: S2ChoiceType.chips,
       onChange: (selectedObject) {
-        final selectedList = selectedObject.value as List<String>;
+        final selectedList = selectedObject.value;
         onChange(selectedList);
       },
       // 返すテキストが空（''）の場合のみ、modalを閉じれる

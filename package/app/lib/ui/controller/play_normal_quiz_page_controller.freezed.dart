@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlayNormalQuizPageState {
-  HitterQuizState get hitterQuiz => throw _privateConstructorUsedError;
+  InputQuizState get normalQuizState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayNormalQuizPageStateCopyWith<PlayNormalQuizPageState> get copyWith =>
@@ -29,9 +29,7 @@ abstract class $PlayNormalQuizPageStateCopyWith<$Res> {
           $Res Function(PlayNormalQuizPageState) then) =
       _$PlayNormalQuizPageStateCopyWithImpl<$Res, PlayNormalQuizPageState>;
   @useResult
-  $Res call({HitterQuizState hitterQuiz});
-
-  $HitterQuizStateCopyWith<$Res> get hitterQuiz;
+  $Res call({InputQuizState normalQuizState});
 }
 
 /// @nodoc
@@ -48,22 +46,14 @@ class _$PlayNormalQuizPageStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hitterQuiz = null,
+    Object? normalQuizState = null,
   }) {
     return _then(_value.copyWith(
-      hitterQuiz: null == hitterQuiz
-          ? _value.hitterQuiz
-          : hitterQuiz // ignore: cast_nullable_to_non_nullable
-              as HitterQuizState,
+      normalQuizState: null == normalQuizState
+          ? _value.normalQuizState
+          : normalQuizState // ignore: cast_nullable_to_non_nullable
+              as InputQuizState,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HitterQuizStateCopyWith<$Res> get hitterQuiz {
-    return $HitterQuizStateCopyWith<$Res>(_value.hitterQuiz, (value) {
-      return _then(_value.copyWith(hitterQuiz: value) as $Val);
-    });
   }
 }
 
@@ -76,10 +66,7 @@ abstract class _$$PlayNormalQuizPageStateImplCopyWith<$Res>
       __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HitterQuizState hitterQuiz});
-
-  @override
-  $HitterQuizStateCopyWith<$Res> get hitterQuiz;
+  $Res call({InputQuizState normalQuizState});
 }
 
 /// @nodoc
@@ -95,13 +82,13 @@ class __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? hitterQuiz = null,
+    Object? normalQuizState = null,
   }) {
     return _then(_$PlayNormalQuizPageStateImpl(
-      hitterQuiz: null == hitterQuiz
-          ? _value.hitterQuiz
-          : hitterQuiz // ignore: cast_nullable_to_non_nullable
-              as HitterQuizState,
+      normalQuizState: null == normalQuizState
+          ? _value.normalQuizState
+          : normalQuizState // ignore: cast_nullable_to_non_nullable
+              as InputQuizState,
     ));
   }
 }
@@ -109,14 +96,14 @@ class __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
-  const _$PlayNormalQuizPageStateImpl({required this.hitterQuiz});
+  const _$PlayNormalQuizPageStateImpl({required this.normalQuizState});
 
   @override
-  final HitterQuizState hitterQuiz;
+  final InputQuizState normalQuizState;
 
   @override
   String toString() {
-    return 'PlayNormalQuizPageState(hitterQuiz: $hitterQuiz)';
+    return 'PlayNormalQuizPageState(normalQuizState: $normalQuizState)';
   }
 
   @override
@@ -124,12 +111,12 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlayNormalQuizPageStateImpl &&
-            (identical(other.hitterQuiz, hitterQuiz) ||
-                other.hitterQuiz == hitterQuiz));
+            (identical(other.normalQuizState, normalQuizState) ||
+                other.normalQuizState == normalQuizState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, hitterQuiz);
+  int get hashCode => Object.hash(runtimeType, normalQuizState);
 
   @JsonKey(ignore: true)
   @override
@@ -141,11 +128,11 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
 
 abstract class _PlayNormalQuizPageState implements PlayNormalQuizPageState {
   const factory _PlayNormalQuizPageState(
-          {required final HitterQuizState hitterQuiz}) =
+          {required final InputQuizState normalQuizState}) =
       _$PlayNormalQuizPageStateImpl;
 
   @override
-  HitterQuizState get hitterQuiz;
+  InputQuizState get normalQuizState;
   @override
   @JsonKey(ignore: true)
   _$$PlayNormalQuizPageStateImplCopyWith<_$PlayNormalQuizPageStateImpl>

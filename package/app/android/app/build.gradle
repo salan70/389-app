@@ -32,10 +32,10 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 // flavor関連
 // dart-define を入れる変数を宣言しています。
 // `Key: Value` 形式で初期値を設定することもできます
-def dartEnvironmentVariables = [:];
+def dartDefines = [:];
 if (project.hasProperty('dart-defines')) {
     // カンマ区切りかつBase64でエンコードされている dart-defines をデコードして変数に格納します。
-    dartEnvironmentVariables = dartEnvironmentVariables + project.property('dart-defines')
+    dartDefines = dartDefines + project.property('dart-defines')
             .split(',')
             .collectEntries { entry ->
                 def pair = new String(entry.decodeBase64(), 'UTF-8').split('=')
@@ -46,7 +46,7 @@ if (project.hasProperty('dart-defines')) {
 // アプリアイコンの設定
 // https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E3%82%92%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%82%BF%E3%82%B9%E3%82%AF%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%99%E3%82%8B
 task copySources(type: Copy) {
-   from "src/$flavor/res"
+   from "src/$dartDefines.flavor/res"
    into 'src/main/res'
 }
 tasks.whenTaskAdded { task ->
@@ -56,7 +56,7 @@ tasks.whenTaskAdded { task ->
 // Firebaseのflavor設定関連
 // https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#android%2Fapp%2Fbuild.gradle-%E3%81%AB%E8%BF%BD%E8%A8%98
 task selectGoogleServicesJson(type: Copy) {
-    from "src/$flavor/google-services.json"
+    from "src/$dartDefines.flavor/google-services.json"
     into './'
 }
 
@@ -86,8 +86,6 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.toda.baseball_quiz_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion 21
@@ -96,8 +94,8 @@ android {
         versionName flutterVersionName
         // flavor関連
         // https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#defaultconfig-%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AAid%E3%81%A8%E3%82%A2%E3%83%97%E3%83%AA%E5%90%8D%E3%82%92%E8%A8%AD%E5%AE%9A
-        applicationIdSuffix appIdSuffix
-        resValue "string", "app_name", appName
+        applicationId dartDefines.appId
+        resValue "string", "app_name", dartDefines.appName
         multiDexEnabled true
     }
 

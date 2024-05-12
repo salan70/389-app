@@ -4,7 +4,6 @@ import 'package:common/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../util/enum/quiz_type.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
 import '../domain/hitter.dart';
@@ -26,32 +25,46 @@ class HitterRepository {
 
   final Supabase supabase;
 
-  Future<HitterQuizState> fetchHitterQuizBySearchCondition(
+  /// ノーマルクイズ用の選手情報を取得する。
+  ///
+  /// 検索条件に合う選手を1人取得し、その選手の成績を取得して返す。
+  Future<InputQuizState> fetchNormalHitterQuizState(
     SearchCondition searchCondition,
   ) async {
-    // 検索条件に合う選手を1人取得
+    // 検索条件に合う選手を1人取得する。
     final supabaseHitter =
         await _searchHitterBySearchCondition(searchCondition);
 
-    return _createHitterQuiz(
-      QuizType.normal,
+    // 取得した選手の成績を取得する。
+    final statsList = await _fetchHittingStats(supabaseHitter.id);
+
+    // InputNormalQuizState に変換して返す。
+    return HitterConverter().toInputNormalQuizState(
       supabaseHitter,
+      statsList,
       searchCondition.selectedStatsList,
     );
   }
 
-  Future<HitterQuizState> fetchHitterQuizById(DailyQuiz dailyQuiz) async {
-    // 検索条件に合う選手を1人取得
+  /// デイリークイズ用の選手情報を取得する。
+  ///
+  /// 指定されたデイリークイズの選手 ID から選手情報を取得し、その選手の成績を取得して返す。
+  Future<InputQuizState> fetchInputDailyQuizState(DailyQuiz dailyQuiz) async {
+    // 検索条件に合う選手を1人取得する。
     final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
 
-    return _createHitterQuiz(
-      QuizType.daily,
+    // 取得した選手の成績を取得する。
+    final statsList = await _fetchHittingStats(supabaseHitter.id);
+
+    // InputDailyQuizState に変換して返す。
+    return HitterConverter().toInputDailyQuizState(
       supabaseHitter,
+      statsList,
       dailyQuiz.selectedStatsList,
     );
   }
 
-  /// 検索条件で選手で検索し、ランダムで1人返す
+  /// 検索条件で選手で検索し、ランダムで1人返す。
   Future<SupabaseHitter> _searchHitterBySearchCondition(
     SearchCondition searchCondition,
   ) async {
@@ -66,20 +79,19 @@ class HitterRepository {
         .gte('hitting_stats_table.安打', searchCondition.minHits)
         .gte('hitting_stats_table.本塁打', searchCondition.minHr) as List<dynamic>;
 
-    // 検索条件に合致する選手がいない場合、例外を返す
+    // 検索条件に合致する選手がいない場合、例外を返す。
     if (responses.isEmpty) {
       throw SupabaseException.notFound();
     }
 
-    // ランダムで1人選出
+    // ランダムで1人選出する。
     final chosenResponse =
         responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
-    final supabaseHitter = SupabaseHitter.fromJson(chosenResponse);
 
-    return supabaseHitter;
+    return SupabaseHitter.fromJson(chosenResponse);
   }
 
-  /// IDで選手を検索する
+  /// ID で選手を検索する。
   Future<SupabaseHitter> _searchHitterById(String id) async {
     final responses = await supabase.client
         .from('hitter_table')
@@ -94,33 +106,10 @@ class HitterRepository {
       throw SupabaseException.notFound();
     }
 
-    final supabaseHitter =
-        SupabaseHitter.fromJson(responses[0] as Map<String, dynamic>);
-
-    return supabaseHitter;
+    return SupabaseHitter.fromJson(responses[0] as Map<String, dynamic>);
   }
 
-  /// SupabaseHitterとSearchConditionからHitterQuizを作成する
-  Future<HitterQuizState> _createHitterQuiz(
-    QuizType quizType,
-    SupabaseHitter supabaseHitter,
-    List<String> selectedStatsList,
-  ) async {
-    // 取得した選手の成績を取得
-    final statsList = await _fetchHittingStats(supabaseHitter.id);
-
-    // HitterQuiz型に変換
-    final hitterQuiz = HitterConverter().toHitterQuiz(
-      quizType,
-      supabaseHitter,
-      statsList,
-      selectedStatsList,
-    );
-
-    return hitterQuiz;
-  }
-
-  /// playerIdから打撃成績のListを取得する
+  /// [playerId] から打撃成績の List を取得するする。
   Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
     final statsList = <HittingStats>[];
     final responses = await supabase.client
@@ -136,9 +125,9 @@ class HitterRepository {
     return statsList;
   }
 
-  /// 解答を入力するテキストフィールドの検索用
-  /// 全選手の名前とIDを取得する
-
+  /// 解答を入力するテキストフィールドの検索用。
+  ///
+  /// 全選手の名前と ID を取得する。
   Future<List<Hitter>> fetchAllHitter() async {
     final responses = await supabase.client
         .from('hitter_table')

@@ -54,7 +54,8 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                 orElse: Container.new,
                 loading: () => const Center(child: CircularProgressIndicator()),
                 data: (pageState) {
-                  final hitterQuiz = pageState.hitterQuiz;
+                  final quizState = pageState.quizState;
+                  final hitterQuiz = quizState.hitterQuiz;
                   return ListView(
                     children: [
                       const BannerAdWidget(),
@@ -80,10 +81,10 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                           width: _buttonWidth,
                           child: SubmitAnswerButton(
                             buttonType: ButtonType.main,
-                            hitter: hitterQuiz.enteredHitter,
+                            hitter: quizState.enteredHitter,
                             onTapSubmitAnswer: () async =>
                                 controller.onTapSubmitAnswer(
-                              hitterQuiz.enteredHitter?.label,
+                              quizState.enteredHitter?.label,
                             ),
                           ),
                         ),

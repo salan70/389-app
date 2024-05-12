@@ -16,7 +16,7 @@ part 'play_normal_quiz_page_controller.g.dart';
 @freezed
 class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
   const factory PlayNormalQuizPageState({
-    required HitterQuizState hitterQuiz,
+    required InputQuizState normalQuizState,
   }) = _PlayNormalQuizPageState;
 }
 
@@ -24,64 +24,66 @@ class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
 class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
   @override
   Future<PlayNormalQuizPageState> build() async {
-    final hitterQuizState = await ref.watch(hitterQuizStateProvider.future);
-    return PlayNormalQuizPageState(hitterQuiz: hitterQuizState);
+    final hitterQuizState = await ref.watch(normalQuizStateProvider.future);
+    return PlayNormalQuizPageState(normalQuizState: hitterQuizState);
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
   /// ランダムに1つ成績を公開する
   void _openRandom() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          unveilCount: value.hitterQuiz.unveilCount + 1,
-        ),
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.normalQuizState;
+
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        unveilCount: currentQuizState.hitterQuiz.unveilCount + 1,
       ),
     );
+    final newValue = currentValue.copyWith(normalQuizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// 全ての閉じている成績を公開する。
   void _openAll() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          unveilCount: value.hitterQuiz.totalStatsCount,
-        ),
-      ),
-    );
-  }
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.normalQuizState;
 
-  /// isCorrect を true にする。
-  void _markCorrect() {
-    state = AsyncData(
-      state.value!.copyWith(
-        hitterQuiz: state.value!.hitterQuiz.copyWith(isCorrect: true),
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        unveilCount: currentQuizState.hitterQuiz.totalStatsCount,
       ),
     );
+    final newValue = currentValue.copyWith(normalQuizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// 不正解数を1増やす。
   void _addIncorrectCount() {
-    final value = state.value!;
-    state = AsyncData(
-      value.copyWith(
-        hitterQuiz: value.hitterQuiz.copyWith(
-          incorrectCount: value.hitterQuiz.incorrectCount + 1,
-        ),
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.normalQuizState;
+
+    final newHitterQuizState = currentQuizState.copyWith(
+      hitterQuiz: currentQuizState.hitterQuiz.copyWith(
+        incorrectCount: currentQuizState.hitterQuiz.incorrectCount + 1,
       ),
     );
+    final newValue = currentValue.copyWith(normalQuizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   /// enteredHitter を更新する。
   void _updateEnteredHitter(Hitter? enteredHitter) {
-    state = AsyncData(
-      state.value!.copyWith(
-        hitterQuiz:
-            state.value!.hitterQuiz.copyWith(enteredHitter: enteredHitter),
-      ),
-    );
+    final currentValue = state.value!;
+    final currentQuizState = currentValue.normalQuizState;
+
+    final newHitterQuizState =
+        currentQuizState.copyWith(enteredHitter: enteredHitter);
+    final newValue = currentValue.copyWith(normalQuizState: newHitterQuizState);
+
+    state = AsyncData(newValue);
   }
 
   // * ---------------------- UI からのイベント ---------------------- * //
@@ -97,21 +99,20 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     // interstitial 広告を作成する。
     await _createInterstitialAd();
 
-    final isCorrect = state.value!.hitterQuiz.isCorrectEnteredHitter;
+    final isCorrect = state.value!.normalQuizState.isCorrectEnteredHitter;
     // * 正解の場合。
     if (isCorrect) {
-      _markCorrect();
-      final hitterQuizState = state.value!.hitterQuiz;
+      final resultQuizState = state.value!.normalQuizState.toResultQuizState();
       await ref
           .read(quizResultServiceProvider)
-          .createNormalQuizResult(hitterQuizState);
+          .createNormalQuizResult(resultQuizState);
 
-      ref.invalidate(hitterQuizStateProvider);
+      ref.invalidate(normalQuizStateProvider);
       ref.invalidateSelf();
 
-      await ref.read(appRouterProvider).push(
-            ResultNormalQuizRoute(hitterQuizState: hitterQuizState),
-          );
+      await ref
+          .read(appRouterProvider)
+          .push(ResultNormalQuizRoute(resultQuizState: resultQuizState));
       return;
     }
 
@@ -138,7 +139,8 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    final isAllStatsUnveiled =
+        state.value!.normalQuizState.hitterQuiz.isAllStatsUnveiled;
     // 非公開の成績が残っている場合、確認ダイアログを表示する。
     if (isAllStatsUnveiled == false) {
       _showConfirmOpenAllDialog();
@@ -149,7 +151,8 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     // 回答入力用の TextField のフォーカスを外す。
     FocusManager.instance.primaryFocus?.unfocus();
 
-    final isAllStatsUnveiled = state.value!.hitterQuiz.isAllStatsUnveiled;
+    final isAllStatsUnveiled =
+        state.value!.normalQuizState.hitterQuiz.isAllStatsUnveiled;
     // 非公開の成績が残っている場合、ランダムで成績1つ公開する。
     if (isAllStatsUnveiled == false) {
       _openRandom();
@@ -171,9 +174,10 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   /// 諦めることの確認ダイアログで、承認した際の処理。
   Future<void> _onAcceptRetire() async {
+    final resultQuizState = state.value!.normalQuizState.toResultQuizState();
     await ref
         .read(quizResultServiceProvider)
-        .createNormalQuizResult(state.value!.hitterQuiz);
+        .createNormalQuizResult(resultQuizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
@@ -181,13 +185,13 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
       context.pop();
     }
 
-    ref.invalidate(hitterQuizStateProvider);
+    ref.invalidate(normalQuizStateProvider);
     ref.invalidateSelf();
 
     /// 画面遷移する。
     await ref
         .read(appRouterProvider)
-        .push(ResultNormalQuizRoute(hitterQuizState: state.value!.hitterQuiz));
+        .push(ResultNormalQuizRoute(resultQuizState: resultQuizState));
   }
 
   void _showIncorrectDialog(String hitterName) {

@@ -45,7 +45,8 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
               orElse: Container.new,
               loading: () => const Center(child: CircularProgressIndicator()),
               data: (pageState) {
-                final hitterQuiz = pageState.hitterQuiz;
+                final normalQuizState = pageState.normalQuizState;
+                final hitterQuiz = normalQuizState.hitterQuiz;
                 return ListView(
                   children: [
                     const BannerAdWidget(),
@@ -69,9 +70,10 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                         width: _buttonWidth,
                         child: SubmitAnswerButton(
                           buttonType: ButtonType.main,
-                          hitter: hitterQuiz.enteredHitter,
-                          onTapSubmitAnswer: () => controller
-                              .onSubmitAnswer(hitterQuiz.enteredHitter?.label),
+                          hitter: normalQuizState.enteredHitter,
+                          onTapSubmitAnswer: () => controller.onSubmitAnswer(
+                            normalQuizState.enteredHitter?.label,
+                          ),
                         ),
                       ),
                     ),

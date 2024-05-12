@@ -78,13 +78,13 @@ class QuizSettingPageController extends _$QuizSettingPageController
         _saveSearchCondition();
 
         // クイズ取得時のエラーをキャッチできるよう、ここで `hitterQuizStateProvider` を取得しておく。
-        await ref.read(hitterQuizStateProvider.future);
+        await ref.read(normalQuizStateProvider.future);
 
         // Analytics に search_condition を送信する。
         await ref.read(analyticsServiceProvider).logSearchCondition();
       },
       onLoadingComplete: () =>
-          ref.read(appRouterProvider).push(PlayNormalQuizRoute()),
+          ref.read(appRouterProvider).push(const PlayNormalQuizRoute()),
     );
   }
 

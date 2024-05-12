@@ -39,10 +39,7 @@ class QuizHistoryNormalPage extends ConsumerWidget {
               const SizedBox(height: 16),
               ResultQuizWidget(
                 globalKey: _globalKey,
-                hitterQuiz: HitterQuizState.fromHitterResult(
-                  quizResult,
-                  QuizType.normal,
-                ),
+                hitterQuiz: HitterQuiz.fromHitterResult(quizResult),
               ),
               const SizedBox(height: 8),
               ResultInfoWidget(quizResult: quizResult),
