@@ -1,4 +1,4 @@
-import 'package:model/src/feature/quiz/domain/hitter_quiz_state.dart';
+import 'package:model/src/feature/quiz/domain/hitter_quiz.dart';
 import 'package:model/src/feature/quiz/domain/stats_value.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/hitting_stats.dart';
 import 'package:model/src/feature/quiz/infrastructure/entity/supabase_hitter.dart';

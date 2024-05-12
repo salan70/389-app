@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 import '../../../util/enum/hitting_stats_type.dart';
+import '../domain/hitter_quiz.dart';
 import '../domain/hitter_quiz_state.dart';
 import '../domain/stats_value.dart';
 import 'entity/hitting_stats.dart';
