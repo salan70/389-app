@@ -22,7 +22,7 @@ class ResultNormalQuizPageController with ControllerMixin {
 
   final Ref _ref;
 
-  Future<void> onOpenPage(InputQuizState quizState) async {
+  Future<void> onOpenPage(HitterQuizState quizState) async {
     // 直近のクイズが不正解だった場合、何もしない。
     if (quizState.isCorrectEnteredHitter == false) {
       return;

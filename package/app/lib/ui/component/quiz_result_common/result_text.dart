@@ -4,7 +4,7 @@ import 'package:model/model.dart';
 class ResultText extends StatelessWidget {
   const ResultText({super.key, required this.quizState});
 
-  final InputQuizState quizState;
+  final HitterQuizState quizState;
 
   @override
   Widget build(BuildContext context) {

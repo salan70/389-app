@@ -16,7 +16,7 @@ part 'play_daily_quiz_page_controller.g.dart';
 @freezed
 class PlayDailyQuizPageState with _$PlayDailyQuizPageState {
   const factory PlayDailyQuizPageState({
-    required InputQuizState quizState,
+    required HitterQuizState quizState,
   }) = _PlayDailyQuizPageState;
 }
 

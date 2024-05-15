@@ -253,7 +253,7 @@ class QuizSettingRoute extends PageRouteInfo<void> {
 class ResultDailyQuizRoute extends PageRouteInfo<ResultDailyQuizRouteArgs> {
   ResultDailyQuizRoute({
     Key? key,
-    required InputQuizState quizState,
+    required HitterQuizState quizState,
     List<PageRouteInfo>? children,
   }) : super(
           ResultDailyQuizRoute.name,
@@ -278,7 +278,7 @@ class ResultDailyQuizRouteArgs {
 
   final Key? key;
 
-  final InputQuizState quizState;
+  final HitterQuizState quizState;
 
   @override
   String toString() {
@@ -291,7 +291,7 @@ class ResultDailyQuizRouteArgs {
 class ResultNormalQuizRoute extends PageRouteInfo<ResultNormalQuizRouteArgs> {
   ResultNormalQuizRoute({
     Key? key,
-    required InputQuizState quizState,
+    required HitterQuizState quizState,
     List<PageRouteInfo>? children,
   }) : super(
           ResultNormalQuizRoute.name,
@@ -316,7 +316,7 @@ class ResultNormalQuizRouteArgs {
 
   final Key? key;
 
-  final InputQuizState quizState;
+  final HitterQuizState quizState;
 
   @override
   String toString() {

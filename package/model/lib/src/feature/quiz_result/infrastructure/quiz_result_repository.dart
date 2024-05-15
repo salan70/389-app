@@ -39,7 +39,7 @@ class QuizResultRepository {
   Future<void> updateDailyQuizResult(
     User user,
     DailyQuiz dailyQuiz,
-    InputQuizState quizState,
+    HitterQuizState quizState,
   ) async {
     final hitterQuiz = quizState.hitterQuiz;
     await firestore
@@ -75,7 +75,7 @@ class QuizResultRepository {
 
   Future<void> createNormalQuizResult(
     User user,
-    InputQuizState quizState,
+    HitterQuizState quizState,
     SearchCondition searchCondition,
   ) async {
     final hitterQuiz = quizState.hitterQuiz;

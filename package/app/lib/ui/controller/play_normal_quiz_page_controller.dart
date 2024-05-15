@@ -16,7 +16,7 @@ part 'play_normal_quiz_page_controller.g.dart';
 @freezed
 class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
   const factory PlayNormalQuizPageState({
-    required InputQuizState normalQuizState,
+    required HitterQuizState normalQuizState,
   }) = _PlayNormalQuizPageState;
 }
 
@@ -175,9 +175,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
   /// 諦めることの確認ダイアログで、承認した際の処理。
   Future<void> _onAcceptRetire() async {
     final quizState = state.value!.normalQuizState;
-    await ref
-        .read(quizResultServiceProvider)
-        .createNormalQuizResult(quizState);
+    await ref.read(quizResultServiceProvider).createNormalQuizResult(quizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;

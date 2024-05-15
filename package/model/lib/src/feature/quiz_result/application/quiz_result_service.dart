@@ -33,7 +33,7 @@ class QuizResultService {
   /// dailyQuizResult を更新する。
   Future<void> updateDailyQuizResult(
     DateTime questionedAt,
-    InputQuizState quizState,
+    HitterQuizState quizState,
   ) async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
     final dailyQuiz = await ref.read(dailyQuizProvider(questionedAt).future);
@@ -46,7 +46,7 @@ class QuizResultService {
   }
 
   /// normalQuizResult を作成する。
-  Future<void> createNormalQuizResult(InputQuizState quizState) async {
+  Future<void> createNormalQuizResult(HitterQuizState quizState) async {
     final user = ref.read(authRepositoryProvider).getCurrentUser();
     final searchCondition = ref.read(searchConditionProvider);
 

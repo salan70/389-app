@@ -17,7 +17,7 @@ import '../controller/result_normal_quiz_page_controller.dart';
 class ResultNormalQuizPage extends ConsumerStatefulWidget {
   const ResultNormalQuizPage({super.key, required this.quizState});
 
-  final InputQuizState quizState;
+  final HitterQuizState quizState;
 
   @override
   ConsumerState<ResultNormalQuizPage> createState() =>

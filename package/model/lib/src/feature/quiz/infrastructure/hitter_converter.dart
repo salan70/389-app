@@ -10,8 +10,8 @@ import 'entity/hitting_stats.dart';
 import 'entity/supabase_hitter.dart';
 
 class HitterConverter {
-  /// [InputQuizState.normal] へ変換する。
-  InputQuizState toInputNormalQuizState(
+  /// [HitterQuizState] へ変換する。
+  HitterQuizState toInputNormalQuizState(
     SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
@@ -22,14 +22,14 @@ class HitterConverter {
       selectedStatsList,
     );
 
-    return InputQuizState.normal(
+    return HitterQuizState.normal(
       hitterQuiz: hitterQuiz,
       enteredHitter: null,
     );
   }
 
-  /// [InputQuizState.daily] へ変換する。
-  InputQuizState toInputDailyQuizState(
+  /// [HitterQuizState] へ変換する。
+  HitterQuizState toInputDailyQuizState(
     SupabaseHitter supabaseHitter,
     List<HittingStats> rowStatsList,
     List<String> selectedStatsList,
@@ -40,7 +40,7 @@ class HitterConverter {
       selectedStatsList,
     );
 
-    return InputQuizState.daily(
+    return HitterQuizState.daily(
       hitterQuiz: hitterQuiz,
       enteredHitter: null,
     );
