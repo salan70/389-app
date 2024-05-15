@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../util/extension/date_time_extension.dart';
 import '../../daily_quiz/domain/daily_quiz.dart';
+import '../../quiz/domain/hitter_quiz.dart';
 import '../../quiz/domain/hitter_quiz_state.dart';
 import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
@@ -154,17 +155,30 @@ class QuizResultRepository {
     return DailyHitterQuizResult(resultMap: resultMap);
   }
 
-  /// ドキュメントから [HitterQuizResult] を生成する
+  /// ドキュメントから [HitterQuizResult] を生成する。
   HitterQuizResult _toHitterQuizResult(
     QueryDocumentSnapshot<Object?> document,
   ) {
     final data = document.data()! as Map<String, dynamic>;
+    final hitterQuiz = _toHitterQuiz(document);
 
     return HitterQuizResult(
       docId: document.id,
-      id: data['playerId'] as String,
-      name: data['playerName'] as String,
       updatedAt: (data['updatedAt'] as Timestamp).toDate(),
+      isCorrect: data['isCorrect'] as bool,
+      hitterQuiz: hitterQuiz,
+    );
+  }
+
+  /// ドキュメントから [HitterQuiz] を生成する。
+  HitterQuiz _toHitterQuiz(
+    QueryDocumentSnapshot<Object?> document,
+  ) {
+    final data = document.data()! as Map<String, dynamic>;
+
+    return HitterQuiz(
+      hitterId: data['playerId'] as String,
+      hitterName: data['playerName'] as String,
       yearList:
           (data['yearList'] as List<dynamic>).map((e) => e as String).toList(),
       selectedStatsList: (data['selectedStatsList'] as List<dynamic>)
@@ -179,7 +193,6 @@ class QuizResultRepository {
           )
           .toList(),
       unveilCount: data['unveilCount'] as int,
-      isCorrect: data['isCorrect'] as bool,
       incorrectCount: data['incorrectCount'] as int,
     );
   }

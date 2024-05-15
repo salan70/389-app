@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../quiz_result/domain/hitter_quiz_result.dart';
 import 'stats_value.dart';
 
 part 'hitter_quiz.freezed.dart';
@@ -32,18 +31,6 @@ class HitterQuiz with _$HitterQuiz {
     required int incorrectCount,
   }) = _HitterQuiz;
   const HitterQuiz._();
-
-  factory HitterQuiz.fromHitterResult(HitterQuizResult result) {
-    return HitterQuiz(
-      hitterId: result.id,
-      hitterName: result.name,
-      yearList: result.yearList,
-      selectedStatsList: result.selectedStatsList,
-      statsMapList: result.statsMapList,
-      unveilCount: result.unveilCount,
-      incorrectCount: result.incorrectCount,
-    );
-  }
 
   /// すべての成績数。
   int get totalStatsCount => statsMapList.length * selectedStatsList.length;

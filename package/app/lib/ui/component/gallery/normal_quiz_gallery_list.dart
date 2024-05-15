@@ -64,7 +64,7 @@ class NormalQuizGalleryList extends ConsumerWidget {
                                     FittedBox(
                                       child: Text(
                                           '${quizResult.unveilPercentage}%表示'
-                                          '（${quizResult.unveilCount}/${quizResult.totalStatsCount})'),
+                                          '（${quizResult.hitterQuiz.unveilCount}/${quizResult.totalStatsCount})'),
                                     ),
                                   ],
                                 ),

@@ -43,7 +43,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: QuizHistoryDailyPage(
           key: args.key,
-          hitterQuizResult: args.hitterQuizResult,
+          quizResult: args.hitterQuizResult,
         ),
       );
     },

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../util/enum/hitting_stats_type.dart';
-import '../../quiz/domain/stats_value.dart';
+import '../../quiz/domain/hitter_quiz.dart';
 
 part 'hitter_quiz_result.freezed.dart';
 
@@ -9,15 +9,9 @@ part 'hitter_quiz_result.freezed.dart';
 class HitterQuizResult with _$HitterQuizResult {
   const factory HitterQuizResult({
     required String docId,
-    required String id,
-    required String name,
     required DateTime updatedAt,
-    required List<String> yearList,
-    required List<String> selectedStatsList,
-    required List<Map<String, StatsValue>> statsMapList,
-    required int unveilCount,
     required bool isCorrect,
-    required int incorrectCount,
+    required HitterQuiz hitterQuiz,
   }) = _HitterQuizResult;
 
   const HitterQuizResult._();
@@ -26,19 +20,21 @@ class HitterQuizResult with _$HitterQuizResult {
 
   /// 表示しうる成績の数
   int get totalStatsCount =>
-      statsMapList.length * statsMapList.first.keys.length;
+      hitterQuiz.statsMapList.length *
+      hitterQuiz.statsMapList.first.keys.length;
 
   /// 成績を表示した割合
-  double get unveilRate => unveilCount / totalStatsCount;
+  double get unveilRate => hitterQuiz.unveilCount / totalStatsCount;
 
   /// 間違えた数と表示した割合から評価を行う
   ResultRank get resultRank {
-    // 不正解の場合
+    // * 不正解の場合
     if (!isCorrect) {
       return ResultRank.incorrect;
     }
 
-    // 正解の場合
+    // * 正解の場合
+    final incorrectCount = hitterQuiz.incorrectCount;
     if (incorrectCount == 0 && unveilRate <= 0.1) {
       return ResultRank.ss;
     }

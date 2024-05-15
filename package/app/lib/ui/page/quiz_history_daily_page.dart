@@ -15,9 +15,9 @@ import '../controller/quiz_history_daily_page_controller.dart';
 
 @RoutePage()
 class QuizHistoryDailyPage extends ConsumerWidget {
-  QuizHistoryDailyPage({super.key, required this.hitterQuizResult});
+  QuizHistoryDailyPage({super.key, required this.quizResult});
 
-  final HitterQuizResult hitterQuizResult;
+  final HitterQuizResult quizResult;
 
   static const _shareText = '#プロ野球クイズ #389quiz\n$appStoreUrl';
   static const _buttonWidth = 160.0;
@@ -35,22 +35,22 @@ class QuizHistoryDailyPage extends ConsumerWidget {
             children: [
               const BannerAdWidget(),
               const SizedBox(height: 16),
-              ResultRankLabelWidget(quizResult: hitterQuizResult),
+              ResultRankLabelWidget(quizResult: quizResult),
               const SizedBox(height: 16),
               ResultQuizWidget(
                 globalKey: _globalKey,
-                hitterQuiz: HitterQuiz.fromHitterResult(hitterQuizResult),
+                hitterQuiz: quizResult.hitterQuiz,
               ),
               const SizedBox(height: 8),
-              ResultInfoWidget(quizResult: hitterQuizResult),
+              ResultInfoWidget(quizResult: quizResult),
               const SizedBox(height: 8),
               Center(
                 child: SizedBox(
                   width: _buttonWidth,
                   child: ShowAnswerButton(
                     buttonType: ButtonType.main,
-                    onTap: () =>
-                        controller.onTapShowAnswer(hitterQuizResult.name),
+                    onTap: () => controller
+                        .onTapShowAnswer(quizResult.hitterQuiz.hitterName),
                   ),
                 ),
               ),
