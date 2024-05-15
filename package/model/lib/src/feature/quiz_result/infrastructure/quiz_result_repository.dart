@@ -39,9 +39,9 @@ class QuizResultRepository {
   Future<void> updateDailyQuizResult(
     User user,
     DailyQuiz dailyQuiz,
-    ResultQuizState resultHitterQuiz,
+    InputQuizState quizState,
   ) async {
-    final hitterQuiz = resultHitterQuiz.hitterQuiz;
+    final hitterQuiz = quizState.hitterQuiz;
     await firestore
         .collection('users')
         .doc(user.uid)
@@ -68,17 +68,17 @@ class QuizResultRepository {
           )
           .toList(),
       'unveilCount': hitterQuiz.unveilCount,
-      'isCorrect': resultHitterQuiz.isCorrect,
+      'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
     });
   }
 
   Future<void> createNormalQuizResult(
     User user,
-    ResultQuizState resultQuizState,
+    InputQuizState quizState,
     SearchCondition searchCondition,
   ) async {
-    final hitterQuiz = resultQuizState.hitterQuiz;
+    final hitterQuiz = quizState.hitterQuiz;
     await firestore
         .collection('users')
         .doc(user.uid)
@@ -104,7 +104,7 @@ class QuizResultRepository {
           )
           .toList(),
       'unveilCount': hitterQuiz.unveilCount,
-      'isCorrect': resultQuizState.isCorrect,
+      'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
       'searchCondition': searchCondition.toJson(),
     });

@@ -102,17 +102,17 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     final isCorrect = state.value!.normalQuizState.isCorrectEnteredHitter;
     // * 正解の場合。
     if (isCorrect) {
-      final resultQuizState = state.value!.normalQuizState.toResultQuizState();
+      final quizState = state.value!.normalQuizState;
       await ref
           .read(quizResultServiceProvider)
-          .createNormalQuizResult(resultQuizState);
+          .createNormalQuizResult(quizState);
 
       ref.invalidate(normalQuizStateProvider);
       ref.invalidateSelf();
 
       await ref
           .read(appRouterProvider)
-          .push(ResultNormalQuizRoute(resultQuizState: resultQuizState));
+          .push(ResultNormalQuizRoute(quizState: quizState));
       return;
     }
 
@@ -174,10 +174,10 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   /// 諦めることの確認ダイアログで、承認した際の処理。
   Future<void> _onAcceptRetire() async {
-    final resultQuizState = state.value!.normalQuizState.toResultQuizState();
+    final quizState = state.value!.normalQuizState;
     await ref
         .read(quizResultServiceProvider)
-        .createNormalQuizResult(resultQuizState);
+        .createNormalQuizResult(quizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
@@ -191,7 +191,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     /// 画面遷移する。
     await ref
         .read(appRouterProvider)
-        .push(ResultNormalQuizRoute(resultQuizState: resultQuizState));
+        .push(ResultNormalQuizRoute(quizState: quizState));
   }
 
   void _showIncorrectDialog(String hitterName) {
