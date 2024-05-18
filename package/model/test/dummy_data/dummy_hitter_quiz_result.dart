@@ -5,7 +5,7 @@ import 'package:model/src/feature/quiz_result/domain/hitter_quiz_result.dart';
 const dummyHitterQuiz = HitterQuiz(
   hitterId: 'dummyHitterId',
   hitterName: '牧秀悟',
-  yearList: ['2021', '2022', 'NPB：2年'],
+  yearList: ['2019', '2020', '2021', '2022', 'NPB：2年'],
   selectedStatsList: ['球団', '打率', '本塁打', 'OPS'],
   statsMapList: [
     {
@@ -13,6 +13,18 @@ const dummyHitterQuiz = HitterQuiz(
       '本塁打': StatsValue(unveilOrder: 11, data: '22'),
       '打率': StatsValue(unveilOrder: 10, data: '.314'),
       'OPS': StatsValue(unveilOrder: 9, data: '.890'),
+    },
+    {
+      '球団': StatsValue(unveilOrder: 12, data: 'DeNA'),
+      '本塁打': StatsValue(unveilOrder: 11, data: '22'),
+      '打率': StatsValue(unveilOrder: 10, data: '.314'),
+      'OPS': StatsValue(unveilOrder: 9, data: '.890'),
+    },
+    {
+      '球団': StatsValue(unveilOrder: 8, data: 'DeNA'),
+      '本塁打': StatsValue(unveilOrder: 7, data: '24'),
+      '打率': StatsValue(unveilOrder: 6, data: '.291'),
+      'OPS': StatsValue(unveilOrder: 5, data: '.861'),
     },
     {
       '球団': StatsValue(unveilOrder: 8, data: 'DeNA'),
