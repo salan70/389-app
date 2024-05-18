@@ -19,7 +19,7 @@ class ResultInfoWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                '${quizResult.hitterQuiz..incorrectCount}ミス',
+                '${quizResult.hitterQuiz.incorrectCount}ミス',
               ),
               const SizedBox(width: 16),
               Text(
