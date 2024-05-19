@@ -79,14 +79,15 @@ class HitterRepository {
     final hittingStatsTable = seasonType.hittingStatsTable;
     final responses = await supabase.client
         .from(seasonType.hitterTable)
-        .select<dynamic>(
-          'id, name, team, hasData, $hittingStatsTable!inner(*)',
-        )
+        .select<dynamic>('id, name, team, hasData, $hittingStatsTable!inner(*)')
         .eq('hasData', true)
         .filter('team', 'in', searchCondition.teamList)
         .gte('$hittingStatsTable.試合', searchCondition.minGames)
         .gte('$hittingStatsTable.安打', searchCondition.minHits)
-        .gte('$hittingStatsTable.本塁打', searchCondition.minHr) as List<dynamic>;
+        .gte('$hittingStatsTable.本塁打', searchCondition.minHr)
+        // ? なぜか `ascending` は true でも false でも同じ結果になる。
+        // ? UI での挙動的には問題ないので、このままにしておいている。
+        .order('表示順', foreignTable: hittingStatsTable) as List<dynamic>;
 
     // 検索条件に合致する選手がいない場合、例外を返す。
     if (responses.isEmpty) {
