@@ -39,7 +39,7 @@ class QuizHistoryNormalPage extends ConsumerWidget {
               const SizedBox(height: 16),
               ResultQuizWidget(
                 globalKey: _globalKey,
-                hitterQuiz: HitterQuiz.fromHitterResult(quizResult),
+                hitterQuiz: quizResult.hitterQuiz,
               ),
               const SizedBox(height: 8),
               ResultInfoWidget(quizResult: quizResult),
@@ -49,7 +49,8 @@ class QuizHistoryNormalPage extends ConsumerWidget {
                   width: _buttonWidth,
                   child: ShowAnswerButton(
                     buttonType: ButtonType.main,
-                    onTap: () => controller.onTapShowAnswer(quizResult.name),
+                    onTap: () => controller
+                        .onTapShowAnswer(quizResult.hitterQuiz.hitterName),
                   ),
                 ),
               ),

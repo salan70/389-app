@@ -8,8 +8,10 @@ void main() {
   // これをコピーして、isCorrectやincorrectCount,unveilCountを変更してテストを行う
   final baseHitterQuizResult = dummyHitterQuizResult.copyWith(
     isCorrect: true,
-    incorrectCount: 0,
-    unveilCount: 0,
+    hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+      incorrectCount: 0,
+      unveilCount: 0,
+    ),
   );
 
   // 四捨五入するケースのテストができてない懸念あり
@@ -29,8 +31,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 0,
-        unveilCount: 1,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 0,
+          unveilCount: 1,
+        ),
       );
 
       // Act
@@ -45,8 +49,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 0,
-        unveilCount: 20,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 0,
+          unveilCount: 20,
+        ),
       );
 
       // Act
@@ -88,7 +94,9 @@ void main() {
     test('0.35(7/20)', () {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
-        unveilCount: 7,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          unveilCount: 7,
+        ),
       );
 
       // Act
@@ -102,7 +110,9 @@ void main() {
     test('1(20/20)', () {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
-        unveilCount: 20,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          unveilCount: 20,
+        ),
       );
 
       // Act
@@ -131,8 +141,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 0,
-        unveilCount: 1,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 0,
+          unveilCount: 1,
+        ),
       );
 
       // Act
@@ -147,8 +159,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 1,
-        unveilCount: 2,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 1,
+          unveilCount: 2,
+        ),
       );
 
       // Act
@@ -163,8 +177,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 1,
-        unveilCount: 3,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 1,
+          unveilCount: 3,
+        ),
       );
 
       // Act
@@ -179,8 +195,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 2,
-        unveilCount: 4,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 2,
+          unveilCount: 4,
+        ),
       );
 
       // Act
@@ -195,8 +213,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 2,
-        unveilCount: 5,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 2,
+          unveilCount: 5,
+        ),
       );
 
       // Act
@@ -211,8 +231,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 3,
-        unveilCount: 4,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 3,
+          unveilCount: 4,
+        ),
       );
 
       // Act
@@ -227,8 +249,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 4,
-        unveilCount: 10,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 4,
+          unveilCount: 10,
+        ),
       );
 
       // Act
@@ -243,8 +267,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 5,
-        unveilCount: 10,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 5,
+          unveilCount: 10,
+        ),
       );
 
       // Act
@@ -259,8 +285,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 4,
-        unveilCount: 11,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 4,
+          unveilCount: 11,
+        ),
       );
 
       // Act
@@ -275,8 +303,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 9,
-        unveilCount: 14,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 9,
+          unveilCount: 14,
+        ),
       );
 
       // Act
@@ -291,8 +321,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 10,
-        unveilCount: 14,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 10,
+          unveilCount: 14,
+        ),
       );
 
       // Act
@@ -307,8 +339,10 @@ void main() {
       // Arrange
       final hitterQuizResult = baseHitterQuizResult.copyWith(
         isCorrect: true,
-        incorrectCount: 9,
-        unveilCount: 15,
+        hitterQuiz: dummyHitterQuizResult.hitterQuiz.copyWith(
+          incorrectCount: 9,
+          unveilCount: 15,
+        ),
       );
 
       // Act

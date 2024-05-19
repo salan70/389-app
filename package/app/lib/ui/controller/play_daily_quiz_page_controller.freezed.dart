@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PlayDailyQuizPageState {
-  InputQuizState get quizState => throw _privateConstructorUsedError;
+  HitterQuizState get quizState => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PlayDailyQuizPageStateCopyWith<PlayDailyQuizPageState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $PlayDailyQuizPageStateCopyWith<$Res> {
           $Res Function(PlayDailyQuizPageState) then) =
       _$PlayDailyQuizPageStateCopyWithImpl<$Res, PlayDailyQuizPageState>;
   @useResult
-  $Res call({InputQuizState quizState});
+  $Res call({HitterQuizState quizState});
 }
 
 /// @nodoc
@@ -52,7 +52,7 @@ class _$PlayDailyQuizPageStateCopyWithImpl<$Res,
       quizState: null == quizState
           ? _value.quizState
           : quizState // ignore: cast_nullable_to_non_nullable
-              as InputQuizState,
+              as HitterQuizState,
     ) as $Val);
   }
 }
@@ -66,7 +66,7 @@ abstract class _$$PlayDailyQuizPageStateImplCopyWith<$Res>
       __$$PlayDailyQuizPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({InputQuizState quizState});
+  $Res call({HitterQuizState quizState});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class __$$PlayDailyQuizPageStateImplCopyWithImpl<$Res>
       quizState: null == quizState
           ? _value.quizState
           : quizState // ignore: cast_nullable_to_non_nullable
-              as InputQuizState,
+              as HitterQuizState,
     ));
   }
 }
@@ -99,7 +99,7 @@ class _$PlayDailyQuizPageStateImpl implements _PlayDailyQuizPageState {
   const _$PlayDailyQuizPageStateImpl({required this.quizState});
 
   @override
-  final InputQuizState quizState;
+  final HitterQuizState quizState;
 
   @override
   String toString() {
@@ -128,10 +128,11 @@ class _$PlayDailyQuizPageStateImpl implements _PlayDailyQuizPageState {
 
 abstract class _PlayDailyQuizPageState implements PlayDailyQuizPageState {
   const factory _PlayDailyQuizPageState(
-      {required final InputQuizState quizState}) = _$PlayDailyQuizPageStateImpl;
+          {required final HitterQuizState quizState}) =
+      _$PlayDailyQuizPageStateImpl;
 
   @override
-  InputQuizState get quizState;
+  HitterQuizState get quizState;
   @override
   @JsonKey(ignore: true)
   _$$PlayDailyQuizPageStateImplCopyWith<_$PlayDailyQuizPageStateImpl>

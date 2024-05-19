@@ -28,7 +28,7 @@ class HitterRepository {
   /// ノーマルクイズ用の選手情報を取得する。
   ///
   /// 検索条件に合う選手を1人取得し、その選手の成績を取得して返す。
-  Future<InputQuizState> fetchNormalHitterQuizState(
+  Future<HitterQuizState> fetchNormalHitterQuizState(
     SearchCondition searchCondition,
   ) async {
     // 検索条件に合う選手を1人取得する。
@@ -49,7 +49,7 @@ class HitterRepository {
   /// デイリークイズ用の選手情報を取得する。
   ///
   /// 指定されたデイリークイズの選手 ID から選手情報を取得し、その選手の成績を取得して返す。
-  Future<InputQuizState> fetchInputDailyQuizState(DailyQuiz dailyQuiz) async {
+  Future<HitterQuizState> fetchInputDailyQuizState(DailyQuiz dailyQuiz) async {
     // 検索条件に合う選手を1人取得する。
     final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
 

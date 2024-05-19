@@ -19,13 +19,13 @@ class ResultInfoWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                '${quizResult.incorrectCount}ミス',
+                '${quizResult.hitterQuiz.incorrectCount}ミス',
               ),
               const SizedBox(width: 16),
               Text(
                 '${quizResult.unveilPercentage}%'
                 '表示'
-                '（${quizResult.unveilCount}/${quizResult.totalStatsCount}）',
+                '（${quizResult.hitterQuiz..unveilCount}/${quizResult.totalStatsCount}）',
               ),
             ],
           ),

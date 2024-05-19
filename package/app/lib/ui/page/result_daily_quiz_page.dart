@@ -14,9 +14,9 @@ import '../controller/result_daily_quiz_page_controller.dart';
 
 @RoutePage()
 class ResultDailyQuizPage extends ConsumerWidget {
-  ResultDailyQuizPage({super.key, required this.resultQuizState});
+  ResultDailyQuizPage({super.key, required this.quizState});
 
-  final ResultQuizState resultQuizState;
+  final HitterQuizState quizState;
 
   static const _shareText = '#プロ野球クイズ #389quiz #今日の1問\n$appStoreUrl';
   static const _buttonWidth = 160.0;
@@ -36,10 +36,10 @@ class ResultDailyQuizPage extends ConsumerWidget {
                   children: [
                     const BannerAdWidget(),
                     const SizedBox(height: 16),
-                    ResultText(resultQuizState: resultQuizState),
+                    ResultText(quizState: quizState),
                     ResultQuizWidget(
                       globalKey: _globalKey,
-                      hitterQuiz: resultQuizState.hitterQuiz,
+                      hitterQuiz: quizState.hitterQuiz,
                     ),
                     const SizedBox(height: 24),
                     Center(
@@ -67,7 +67,7 @@ class ResultDailyQuizPage extends ConsumerWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CustomConfettiWidget(
-                  isCorrect: resultQuizState.isCorrect,
+                  isCorrect: quizState.isCorrectEnteredHitter,
                 ),
               ),
             ],

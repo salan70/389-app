@@ -28,7 +28,7 @@ class GalleryListPageController with ControllerMixin {
 
     await _ref
         .read(appRouterProvider)
-        .push(QuizHistoryDailyRoute(hitterQuizResult: hitterQuizResult));
+        .push(QuizHistoryDailyRoute(quizResult: hitterQuizResult));
   }
 
   Future<void> onTapNotPlayedDailyQuiz(DateTime date) async {

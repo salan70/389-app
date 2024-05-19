@@ -16,7 +16,7 @@ part 'play_daily_quiz_page_controller.g.dart';
 @freezed
 class PlayDailyQuizPageState with _$PlayDailyQuizPageState {
   const factory PlayDailyQuizPageState({
-    required InputQuizState quizState,
+    required HitterQuizState quizState,
   }) = _PlayDailyQuizPageState;
 }
 
@@ -238,10 +238,10 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
   ///
   /// dailyQuizResult を更新し、結果ページに遷移する。
   Future<void> _finishQuiz() async {
-    final resultQuizState = state.value!.quizState.toResultQuizState();
+    final quizState = state.value!.quizState;
     await ref
         .read(quizResultServiceProvider)
-        .updateDailyQuizResult(questionedAt, resultQuizState);
+        .updateDailyQuizResult(questionedAt, quizState);
 
     // ダイアログを閉じる。
     final context = ref.read(navigatorKeyProvider).currentContext!;
@@ -254,7 +254,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     /// 画面遷移する。
     await ref
         .read(appRouterProvider)
-        .push(ResultDailyQuizRoute(resultQuizState: resultQuizState));
+        .push(ResultDailyQuizRoute(quizState: quizState));
   }
 
   bool get _isFinalAnswer =>
