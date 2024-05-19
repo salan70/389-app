@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,8 +51,11 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               behavior: HitTestBehavior.opaque,
-              child: asyncPageState.maybeWhen(
-                orElse: Container.new,
+              child: asyncPageState.when(
+                error: (e, s) {
+                  logger.e('error: $e, stackTrace: $s');
+                  return Container();
+                },
                 loading: () => const Center(child: CircularProgressIndicator()),
                 data: (pageState) {
                   final quizState = pageState.quizState;

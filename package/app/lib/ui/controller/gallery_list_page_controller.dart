@@ -67,9 +67,17 @@ class GalleryListPageController with ControllerMixin {
         .logTapButton('approved_play_past_daily_quiz');
 
     _ref.read(rewardedAdNotifierProvider.notifier).showAd(
-          onUserEarnedReward: () => _ref
-              .read(appRouterProvider)
-              .push(PlayDailyQuizRoute(questionedAt: questionedAt)),
-        );
+      onUserEarnedReward: () async {
+        // dailyQuizResult ドキュメントを保存（新規作成）する。
+        await _ref
+            .read(quizResultServiceProvider)
+            .createDailyQuizResult(questionedAt);
+
+        // プレイ画面へ遷移する。
+        await _ref
+            .read(appRouterProvider)
+            .push(PlayDailyQuizRoute(questionedAt: questionedAt));
+      },
+    );
   }
 }
