@@ -35,6 +35,7 @@ class QuizResultRepository {
         .set(<String, dynamic>{
       'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
+      'targetSeasonType': dailyQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -72,6 +73,7 @@ class QuizResultRepository {
       'unveilCount': hitterQuiz.unveilCount,
       'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
+      'targetSeasonType': dailyQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -109,6 +111,7 @@ class QuizResultRepository {
       'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
       'searchCondition': searchCondition.toJson(),
+      'targetSeasonType': hitterQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -238,11 +241,12 @@ class QuizResultRepository {
     return snapshot.count!;
   }
 
-  Future<void> deleteNormalQuizResult(User user, String docId) async =>
-      firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('normalQuizResult')
-          .doc(docId)
-          .delete();
+  Future<void> deleteNormalQuizResult(User user, String docId) async {
+    return firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .doc(docId)
+        .delete();
+  }
 }
