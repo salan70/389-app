@@ -43,7 +43,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: QuizHistoryDailyPage(
           key: args.key,
-          quizResult: args.hitterQuizResult,
+          quizResult: args.quizResult,
         ),
       );
     },
@@ -163,13 +163,13 @@ class PlayNormalQuizRoute extends PageRouteInfo<void> {
 class QuizHistoryDailyRoute extends PageRouteInfo<QuizHistoryDailyRouteArgs> {
   QuizHistoryDailyRoute({
     Key? key,
-    required HitterQuizResult hitterQuizResult,
+    required HitterQuizResult quizResult,
     List<PageRouteInfo>? children,
   }) : super(
           QuizHistoryDailyRoute.name,
           args: QuizHistoryDailyRouteArgs(
             key: key,
-            hitterQuizResult: hitterQuizResult,
+            quizResult: quizResult,
           ),
           initialChildren: children,
         );
@@ -183,16 +183,16 @@ class QuizHistoryDailyRoute extends PageRouteInfo<QuizHistoryDailyRouteArgs> {
 class QuizHistoryDailyRouteArgs {
   const QuizHistoryDailyRouteArgs({
     this.key,
-    required this.hitterQuizResult,
+    required this.quizResult,
   });
 
   final Key? key;
 
-  final HitterQuizResult hitterQuizResult;
+  final HitterQuizResult quizResult;
 
   @override
   String toString() {
-    return 'QuizHistoryDailyRouteArgs{key: $key, hitterQuizResult: $hitterQuizResult}';
+    return 'QuizHistoryDailyRouteArgs{key: $key, quizResult: $quizResult}';
   }
 }
 
