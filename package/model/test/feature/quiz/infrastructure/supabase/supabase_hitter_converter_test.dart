@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:model/src/feature/quiz/infrastructure/hitter_converter.dart';
+import 'package:model/src/feature/season/util/season_type.dart';
 import 'package:model/src/util/enum/hitting_stats_type.dart';
 
 import '../../../../dummy_data/dummy_hitter.dart';
@@ -15,6 +16,7 @@ void main() async {
             dummyHitter,
             dummyHittingStatsList,
             dummySearchCondition.selectedStatsList,
+            SeasonType.end2022,
           )
           .hitterQuiz;
 

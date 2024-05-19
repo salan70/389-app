@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:model/src/feature/quiz/application/answer_state.dart';
 import 'package:model/src/feature/quiz/application/hitter_quiz_service.dart';
 import 'package:model/src/feature/quiz/domain/hitter.dart';
+import 'package:model/src/feature/season/util/season_type.dart';
 
 void main() {
   group('filterHitter関数', () {
@@ -16,7 +17,7 @@ void main() {
     test('5文字（カタカナ）, 1選手に該当', () async {
       final container = ProviderContainer(
         overrides: [
-          allHitterListProvider.overrideWith(
+          allHitterListProvider(SeasonType.end2022).overrideWith(
             (ref) => Future.value(hitterList),
           ),
         ],
@@ -24,7 +25,7 @@ void main() {
       const searchWord = 'マーティン';
       final result = await container
           .read(hitterQuizServiceProvider)
-          .searchHitter(searchWord);
+          .searchHitter(searchWord, SeasonType.end2022);
 
       final expected = [
         const Hitter(label: 'レオネス・マーティン', id: '3'),
@@ -36,7 +37,7 @@ void main() {
     test('2文字（漢字）, 2選手に該当', () async {
       final container = ProviderContainer(
         overrides: [
-          allHitterListProvider.overrideWith(
+          allHitterListProvider(SeasonType.end2022).overrideWith(
             (ref) => Future.value(hitterList),
           ),
         ],
@@ -44,7 +45,7 @@ void main() {
       const searchWord = '坂本';
       final result = await container
           .read(hitterQuizServiceProvider)
-          .searchHitter(searchWord);
+          .searchHitter(searchWord, SeasonType.end2022);
 
       final expected = [
         const Hitter(label: '坂本勇人（捕手）', id: '1'),
@@ -57,7 +58,7 @@ void main() {
     test('1文字（アルファベット）, 1選手に該当', () async {
       final container = ProviderContainer(
         overrides: [
-          allHitterListProvider.overrideWith(
+          allHitterListProvider(SeasonType.end2022).overrideWith(
             (ref) => Future.value(hitterList),
           ),
         ],
@@ -65,7 +66,7 @@ void main() {
       const searchWord = 'T';
       final result = await container
           .read(hitterQuizServiceProvider)
-          .searchHitter(searchWord);
+          .searchHitter(searchWord, SeasonType.end2022);
 
       final expected = [
         const Hitter(label: 'T-岡田', id: '4'),
@@ -77,7 +78,7 @@ void main() {
     test('1文字（漢字）, 該当選手なし', () async {
       final container = ProviderContainer(
         overrides: [
-          allHitterListProvider.overrideWith(
+          allHitterListProvider(SeasonType.end2022).overrideWith(
             (ref) => Future.value(hitterList),
           ),
         ],
@@ -85,7 +86,7 @@ void main() {
       const searchWord = '神';
       final result = await container
           .read(hitterQuizServiceProvider)
-          .searchHitter(searchWord);
+          .searchHitter(searchWord, SeasonType.end2022);
 
       final expected = <Hitter>[];
 

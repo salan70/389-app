@@ -9,6 +9,7 @@ import '../../quiz/domain/hitter_quiz.dart';
 import '../../quiz/domain/hitter_quiz_state.dart';
 import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
+import '../../season/util/season_type.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
 
@@ -194,6 +195,7 @@ class QuizResultRepository {
           .toList(),
       unveilCount: data['unveilCount'] as int,
       incorrectCount: data['incorrectCount'] as int,
+      seasonType: SeasonType.fromFirestoreValue(data['seasonType'] as String?),
     );
   }
 

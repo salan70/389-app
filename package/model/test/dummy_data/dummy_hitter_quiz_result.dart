@@ -1,6 +1,7 @@
 import 'package:model/src/feature/quiz/domain/hitter_quiz.dart';
 import 'package:model/src/feature/quiz/domain/stats_value.dart';
 import 'package:model/src/feature/quiz_result/domain/hitter_quiz_result.dart';
+import 'package:model/src/feature/season/util/season_type.dart';
 
 const dummyHitterQuiz = HitterQuiz(
   hitterId: 'dummyHitterId',
@@ -41,6 +42,7 @@ const dummyHitterQuiz = HitterQuiz(
   ],
   unveilCount: 0,
   incorrectCount: 0,
+  seasonType: SeasonType.end2022,
 );
 
 final dummyHitterQuizResult = HitterQuizResult(

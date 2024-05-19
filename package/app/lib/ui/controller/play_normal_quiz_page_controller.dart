@@ -127,7 +127,11 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   Future<List<Hitter>> onSearchHitter(String inputText) async {
     _updateEnteredHitter(null);
-    return ref.read(hitterQuizServiceProvider).searchHitter(inputText);
+
+    final seasonType = state.value!.normalQuizState.hitterQuiz.seasonType;
+    return ref
+        .read(hitterQuizServiceProvider)
+        .searchHitter(inputText, seasonType);
   }
 
   void onSelectedHitter(Hitter? hitter) {
