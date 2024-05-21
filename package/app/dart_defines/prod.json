@@ -1,5 +1,7 @@
 {
     "flavor": "prod",
     "appName": ".389",
-    "appId": "com.toda.baseball_quiz_app"
+    "androidAppId": "com.toda.baseball_quiz_app",
+    "iosAppId": "com.toda.baseballQuizApp",
+    "googleReversedClientId": "com.googleusercontent.apps.286103265357-dgllg9m7fhe8q25vovj3ecqdftq7ar3e"
 }
