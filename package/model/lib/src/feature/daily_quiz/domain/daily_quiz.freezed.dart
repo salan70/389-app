@@ -20,6 +20,7 @@ mixin _$DailyQuiz {
   DateTime get questionedAt => throw _privateConstructorUsedError;
   String get playerId => throw _privateConstructorUsedError;
   List<String> get selectedStatsList => throw _privateConstructorUsedError;
+  SeasonType get seasonType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DailyQuizCopyWith<DailyQuiz> get copyWith =>
@@ -35,7 +36,8 @@ abstract class $DailyQuizCopyWith<$Res> {
       {String dailyQuizId,
       DateTime questionedAt,
       String playerId,
-      List<String> selectedStatsList});
+      List<String> selectedStatsList,
+      SeasonType seasonType});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$DailyQuizCopyWithImpl<$Res, $Val extends DailyQuiz>
     Object? questionedAt = null,
     Object? playerId = null,
     Object? selectedStatsList = null,
+    Object? seasonType = null,
   }) {
     return _then(_value.copyWith(
       dailyQuizId: null == dailyQuizId
@@ -73,6 +76,10 @@ class _$DailyQuizCopyWithImpl<$Res, $Val extends DailyQuiz>
           ? _value.selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      seasonType: null == seasonType
+          ? _value.seasonType
+          : seasonType // ignore: cast_nullable_to_non_nullable
+              as SeasonType,
     ) as $Val);
   }
 }
@@ -89,7 +96,8 @@ abstract class _$$DailyQuizImplCopyWith<$Res>
       {String dailyQuizId,
       DateTime questionedAt,
       String playerId,
-      List<String> selectedStatsList});
+      List<String> selectedStatsList,
+      SeasonType seasonType});
 }
 
 /// @nodoc
@@ -107,6 +115,7 @@ class __$$DailyQuizImplCopyWithImpl<$Res>
     Object? questionedAt = null,
     Object? playerId = null,
     Object? selectedStatsList = null,
+    Object? seasonType = null,
   }) {
     return _then(_$DailyQuizImpl(
       dailyQuizId: null == dailyQuizId
@@ -125,6 +134,10 @@ class __$$DailyQuizImplCopyWithImpl<$Res>
           ? _value._selectedStatsList
           : selectedStatsList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      seasonType: null == seasonType
+          ? _value.seasonType
+          : seasonType // ignore: cast_nullable_to_non_nullable
+              as SeasonType,
     ));
   }
 }
@@ -136,7 +149,8 @@ class _$DailyQuizImpl implements _DailyQuiz {
       {required this.dailyQuizId,
       required this.questionedAt,
       required this.playerId,
-      required final List<String> selectedStatsList})
+      required final List<String> selectedStatsList,
+      required this.seasonType})
       : _selectedStatsList = selectedStatsList;
 
   @override
@@ -155,8 +169,11 @@ class _$DailyQuizImpl implements _DailyQuiz {
   }
 
   @override
+  final SeasonType seasonType;
+
+  @override
   String toString() {
-    return 'DailyQuiz(dailyQuizId: $dailyQuizId, questionedAt: $questionedAt, playerId: $playerId, selectedStatsList: $selectedStatsList)';
+    return 'DailyQuiz(dailyQuizId: $dailyQuizId, questionedAt: $questionedAt, playerId: $playerId, selectedStatsList: $selectedStatsList, seasonType: $seasonType)';
   }
 
   @override
@@ -171,12 +188,19 @@ class _$DailyQuizImpl implements _DailyQuiz {
             (identical(other.playerId, playerId) ||
                 other.playerId == playerId) &&
             const DeepCollectionEquality()
-                .equals(other._selectedStatsList, _selectedStatsList));
+                .equals(other._selectedStatsList, _selectedStatsList) &&
+            (identical(other.seasonType, seasonType) ||
+                other.seasonType == seasonType));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, dailyQuizId, questionedAt,
-      playerId, const DeepCollectionEquality().hash(_selectedStatsList));
+  int get hashCode => Object.hash(
+      runtimeType,
+      dailyQuizId,
+      questionedAt,
+      playerId,
+      const DeepCollectionEquality().hash(_selectedStatsList),
+      seasonType);
 
   @JsonKey(ignore: true)
   @override
@@ -190,7 +214,8 @@ abstract class _DailyQuiz implements DailyQuiz {
       {required final String dailyQuizId,
       required final DateTime questionedAt,
       required final String playerId,
-      required final List<String> selectedStatsList}) = _$DailyQuizImpl;
+      required final List<String> selectedStatsList,
+      required final SeasonType seasonType}) = _$DailyQuizImpl;
 
   @override
   String get dailyQuizId;
@@ -200,6 +225,8 @@ abstract class _DailyQuiz implements DailyQuiz {
   String get playerId;
   @override
   List<String> get selectedStatsList;
+  @override
+  SeasonType get seasonType;
   @override
   @JsonKey(ignore: true)
   _$$DailyQuizImplCopyWith<_$DailyQuizImpl> get copyWith =>

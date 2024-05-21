@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../daily_quiz/domain/daily_quiz.dart';
 import '../../search_condition/domain/search_condition.dart';
+import '../../season/util/season_type.dart';
 import '../domain/hitter.dart';
 import '../domain/hitter_quiz_state.dart';
 import 'entity/hitting_stats.dart';
@@ -30,19 +31,21 @@ class HitterRepository {
   /// 検索条件に合う選手を1人取得し、その選手の成績を取得して返す。
   Future<HitterQuizState> fetchNormalHitterQuizState(
     SearchCondition searchCondition,
+    SeasonType seasonType,
   ) async {
     // 検索条件に合う選手を1人取得する。
     final supabaseHitter =
-        await _searchHitterBySearchCondition(searchCondition);
+        await _searchHitterBySearchCondition(searchCondition, seasonType);
 
     // 取得した選手の成績を取得する。
-    final statsList = await _fetchHittingStats(supabaseHitter.id);
+    final statsList = await _fetchHittingStats(supabaseHitter.id, seasonType);
 
     // InputNormalQuizState に変換して返す。
     return HitterConverter().toInputNormalQuizState(
       supabaseHitter,
       statsList,
       searchCondition.selectedStatsList,
+      seasonType,
     );
   }
 
@@ -50,34 +53,41 @@ class HitterRepository {
   ///
   /// 指定されたデイリークイズの選手 ID から選手情報を取得し、その選手の成績を取得して返す。
   Future<HitterQuizState> fetchInputDailyQuizState(DailyQuiz dailyQuiz) async {
+    final seasonType = dailyQuiz.seasonType;
+
     // 検索条件に合う選手を1人取得する。
-    final supabaseHitter = await _searchHitterById(dailyQuiz.playerId);
+    final supabaseHitter =
+        await _searchHitterById(dailyQuiz.playerId, seasonType);
 
     // 取得した選手の成績を取得する。
-    final statsList = await _fetchHittingStats(supabaseHitter.id);
+    final statsList = await _fetchHittingStats(supabaseHitter.id, seasonType);
 
     // InputDailyQuizState に変換して返す。
     return HitterConverter().toInputDailyQuizState(
       supabaseHitter,
       statsList,
       dailyQuiz.selectedStatsList,
+      seasonType,
     );
   }
 
   /// 検索条件で選手で検索し、ランダムで1人返す。
   Future<SupabaseHitter> _searchHitterBySearchCondition(
     SearchCondition searchCondition,
+    SeasonType seasonType,
   ) async {
+    final hittingStatsTable = seasonType.hittingStatsTable;
     final responses = await supabase.client
-        .from('hitter_table')
-        .select<dynamic>(
-          'id, name, team, hasData, hitting_stats_table!inner(*)',
-        )
+        .from(seasonType.hitterTable)
+        .select<dynamic>('id, name, team, hasData, $hittingStatsTable!inner(*)')
         .eq('hasData', true)
         .filter('team', 'in', searchCondition.teamList)
-        .gte('hitting_stats_table.試合', searchCondition.minGames)
-        .gte('hitting_stats_table.安打', searchCondition.minHits)
-        .gte('hitting_stats_table.本塁打', searchCondition.minHr) as List<dynamic>;
+        .gte('$hittingStatsTable.試合', searchCondition.minGames)
+        .gte('$hittingStatsTable.安打', searchCondition.minHits)
+        .gte('$hittingStatsTable.本塁打', searchCondition.minHr)
+        // ? なぜか `ascending` は true でも false でも同じ結果になる。
+        // ? UI での挙動的には問題ないので、このままにしておいている。
+        .order('表示順', foreignTable: hittingStatsTable) as List<dynamic>;
 
     // 検索条件に合致する選手がいない場合、例外を返す。
     if (responses.isEmpty) {
@@ -92,9 +102,12 @@ class HitterRepository {
   }
 
   /// ID で選手を検索する。
-  Future<SupabaseHitter> _searchHitterById(String id) async {
+  Future<SupabaseHitter> _searchHitterById(
+    String id,
+    SeasonType seasonType,
+  ) async {
     final responses = await supabase.client
-        .from('hitter_table')
+        .from(seasonType.hitterTable)
         .select<dynamic>(
           'id, name, team, hasData',
         )
@@ -110,10 +123,13 @@ class HitterRepository {
   }
 
   /// [playerId] から打撃成績の List を取得するする。
-  Future<List<HittingStats>> _fetchHittingStats(String playerId) async {
+  Future<List<HittingStats>> _fetchHittingStats(
+    String playerId,
+    SeasonType seasonType,
+  ) async {
     final statsList = <HittingStats>[];
     final responses = await supabase.client
-        .from('hitting_stats_table')
+        .from(seasonType.hittingStatsTable)
         .select<dynamic>()
         .eq('playerId', playerId) as List<dynamic>;
 
@@ -128,9 +144,9 @@ class HitterRepository {
   /// 解答を入力するテキストフィールドの検索用。
   ///
   /// 全選手の名前と ID を取得する。
-  Future<List<Hitter>> fetchAllHitter() async {
+  Future<List<Hitter>> fetchAllHitter(SeasonType seasonType) async {
     final responses = await supabase.client
-        .from('hitter_table')
+        .from(seasonType.hitterTable)
         .select<dynamic>() as List<dynamic>;
 
     final allHitterList = <Hitter>[];

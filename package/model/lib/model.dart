@@ -13,4 +13,5 @@ export 'src/feature/push_notification/push_notification.dart';
 export 'src/feature/quiz/quiz.dart';
 export 'src/feature/quiz_result/quiz_result.dart';
 export 'src/feature/search_condition/search_condition.dart';
+export 'src/feature/season/season.dart';
 export 'src/util/util.dart';

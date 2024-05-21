@@ -25,7 +25,7 @@ class ResultInfoWidget extends StatelessWidget {
               Text(
                 '${quizResult.unveilPercentage}%'
                 '表示'
-                '（${quizResult.hitterQuiz..unveilCount}/${quizResult.totalStatsCount}）',
+                '（${quizResult.hitterQuiz.unveilCount}/${quizResult.totalStatsCount}）',
               ),
             ],
           ),

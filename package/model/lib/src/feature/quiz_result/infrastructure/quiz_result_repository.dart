@@ -9,6 +9,7 @@ import '../../quiz/domain/hitter_quiz.dart';
 import '../../quiz/domain/hitter_quiz_state.dart';
 import '../../quiz/domain/stats_value.dart';
 import '../../search_condition/domain/search_condition.dart';
+import '../../season/util/season_type.dart';
 import '../domain/daily_hitter_quiz_result.dart';
 import '../domain/hitter_quiz_result.dart';
 
@@ -34,6 +35,7 @@ class QuizResultRepository {
         .set(<String, dynamic>{
       'createdAt': FieldValue.serverTimestamp(),
       'updatedAt': FieldValue.serverTimestamp(),
+      'targetSeasonType': dailyQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -71,6 +73,7 @@ class QuizResultRepository {
       'unveilCount': hitterQuiz.unveilCount,
       'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
+      'targetSeasonType': dailyQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -108,6 +111,7 @@ class QuizResultRepository {
       'isCorrect': quizState.isCorrectEnteredHitter,
       'incorrectCount': hitterQuiz.incorrectCount,
       'searchCondition': searchCondition.toJson(),
+      'targetSeasonType': hitterQuiz.seasonType.firestoreValue,
     });
   }
 
@@ -194,6 +198,7 @@ class QuizResultRepository {
           .toList(),
       unveilCount: data['unveilCount'] as int,
       incorrectCount: data['incorrectCount'] as int,
+      seasonType: SeasonType.fromFirestoreValue(data['seasonType'] as String?),
     );
   }
 
@@ -236,11 +241,12 @@ class QuizResultRepository {
     return snapshot.count!;
   }
 
-  Future<void> deleteNormalQuizResult(User user, String docId) async =>
-      firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('normalQuizResult')
-          .doc(docId)
-          .delete();
+  Future<void> deleteNormalQuizResult(User user, String docId) async {
+    return firestore
+        .collection('users')
+        .doc(user.uid)
+        .collection('normalQuizResult')
+        .doc(docId)
+        .delete();
+  }
 }

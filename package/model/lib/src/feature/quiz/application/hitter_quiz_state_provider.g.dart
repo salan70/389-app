@@ -6,7 +6,7 @@ part of 'hitter_quiz_state_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$normalQuizStateHash() => r'ffeb9448234053b945629fcff917f96b4d57f45d';
+String _$normalQuizStateHash() => r'c5dec8fbb9e62ecfb91e0ef21ac52417420a43a9';
 
 /// 保存されている検索条件をもとに [HitterQuizState] を取得する。
 ///

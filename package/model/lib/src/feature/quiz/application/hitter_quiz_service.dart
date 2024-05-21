@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../season/util/season_type.dart';
 import '../domain/hitter.dart';
 import 'answer_state.dart';
 
@@ -19,8 +20,12 @@ class HitterQuizService {
   final Ref ref;
 
   /// 選手名で検索する
-  Future<List<Hitter>> searchHitter(String searchWord) async {
-    final allHitterList = await ref.read(allHitterListProvider.future);
+  Future<List<Hitter>> searchHitter(
+    String searchWord,
+    SeasonType seasonType,
+  ) async {
+    final allHitterList =
+        await ref.read(allHitterListProvider(seasonType).future);
     final hitterListAfterSearch = <Hitter>[];
 
     for (final hitter in allHitterList) {
