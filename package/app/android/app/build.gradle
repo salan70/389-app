@@ -94,7 +94,7 @@ android {
         versionName flutterVersionName
         // flavor関連
         // https://zenn.dev/altiveinc/articles/separating-environments-in-flutter#defaultconfig-%E3%81%A7%E3%82%A2%E3%83%97%E3%83%AAid%E3%81%A8%E3%82%A2%E3%83%97%E3%83%AA%E5%90%8D%E3%82%92%E8%A8%AD%E5%AE%9A
-        applicationId dartDefines.appId
+        applicationId dartDefines.androidAppId
         resValue "string", "app_name", dartDefines.appName
         multiDexEnabled true
     }
