@@ -96,10 +96,13 @@ class _ResultNormalQuizPageState extends ConsumerState<ResultNormalQuizPage> {
                     const SizedBox(height: 40),
                   ],
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CustomConfettiWidget(
-                    isCorrect: widget.quizState.isCorrectEnteredHitter,
+                Positioned(
+                  bottom: 24,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: CustomConfettiWidget(
+                      isCorrect: widget.quizState.isCorrectEnteredHitter,
+                    ),
                   ),
                 ),
               ],
