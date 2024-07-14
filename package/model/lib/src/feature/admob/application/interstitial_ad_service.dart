@@ -62,13 +62,13 @@ class InterstitialAdService {
     }
   }
 
-  // TODO(me): 仮置でここのクラスにおいているため、適切なクラスに移動させる
-  /// 結果表示までじらすための処理
-  /// interstitial広告が表示されるために時間を稼ぐという意図もある
+  // TODO(me): 仮置でここのクラスにおいているため、適切なクラスに移動させる。
+  /// 結果表示までじらすための処理。
+  /// interstitial 広告が表示されるために時間を稼ぐという意図もある。
   Future<void> waitResult() async {
     final loadingNotifier = ref.read(loadingNotifierProvider.notifier);
     loadingNotifier.show();
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 2));
     loadingNotifier.hide();
   }
 
