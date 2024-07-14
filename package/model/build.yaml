@@ -1,4 +1,7 @@
-global_options:
-  hive_generator:
-    runs_before:
-      - hive_generator:hive_generator
+targets:
+  $default:
+    builders:
+      hive_generator:
+        options:
+          runs_before:
+            - auto_route_generator
