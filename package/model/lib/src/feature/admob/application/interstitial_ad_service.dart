@@ -10,18 +10,19 @@ import '../../loading/application/loading_notifier.dart';
 
 part 'interstitial_ad_service.g.dart';
 
-@riverpod
+// provide が再生成されると、 _interstitialAd が null になるため、 keepAlive を true にしている。
+@Riverpod(keepAlive: true)
 InterstitialAdService interstitialAdService(InterstitialAdServiceRef ref) =>
     InterstitialAdService(ref);
 
-/// InterstitialAd 関連の処理を行うサービスクラス
+/// Interstitial 広告関連の処理を行うサービスクラス。
 class InterstitialAdService {
   InterstitialAdService(this.ref);
 
   final Ref ref;
   InterstitialAd? _interstitialAd;
 
-  /// 広告を作成する
+  /// 広告を作成する。
   Future<void> createAd() async {
     await InterstitialAd.load(
       adUnitId: ref.read(flavorProvider).interstitialId,
@@ -35,7 +36,7 @@ class InterstitialAdService {
     );
   }
 
-  /// 広告を表示する
+  /// 広告を表示する。
   Future<void> showAd() async {
     if (_interstitialAd == null) {
       return;
@@ -55,7 +56,7 @@ class InterstitialAdService {
     _interstitialAd = null;
   }
 
-  /// ランダムで広告を表示する
+  /// ランダムで広告を表示する。
   Future<void> randomShowAd() async {
     if (isShownAds()) {
       await showAd();
