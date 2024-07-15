@@ -47,8 +47,8 @@ jobs:
       - name: bump up version
         run: |
           echo choice: ${{ github.event.inputs.bump }}
-          flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           cd package/app
+          flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - name: commit pubspec.yaml
