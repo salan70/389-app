@@ -1,5 +1,5 @@
-flavor=dev
-appName=.389 dev
-androidAppId=com.toda.baseball_quiz_app.dev
-iosAppId=com.toda.baseballQuizApp.dev
-googleReversedClientId=com.googleusercontent.apps.763083161403-7hkv9kntl807isnq5gq3v3c6bsskelrb
+flavor=prod
+appName=.389
+androidAppId=com.toda.baseball_quiz_app
+iosAppId=com.toda.baseballQuizApp
+googleReversedClientId=com.googleusercontent.apps.286103265357-dgllg9m7fhe8q25vovj3ecqdftq7ar3e
