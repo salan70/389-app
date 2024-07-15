@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
@@ -25,6 +26,12 @@ class _CustomConfettiWidgetState extends State<CustomConfettiWidget> {
   @override
   void initState() {
     super.initState();
+
+    // iOS の場合は紙吹雪を表示しない。
+    if (Platform.isIOS) {
+      return;
+    }
+
     if (widget.isCorrect) {
       confettiController.play();
     }
