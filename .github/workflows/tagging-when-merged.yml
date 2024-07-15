@@ -21,7 +21,7 @@ jobs:
 
       - name: get version from pubspec.yaml
         run: |
-          echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' pubspec.yaml)" >> $GITHUB_ENV
+          echo "BUMP_VERSION=$(sed -n 's/^version: *\([^ ]*\) *$/\1/p' package/app/pubspec.yaml)" >> $GITHUB_ENV
 
       - name: create tag and release note
         env:
