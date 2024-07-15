@@ -170,7 +170,7 @@ jobs:
         id: build
         run: |
           cd package/app
-          flutter build ipa --dart-define-from-file=dart_defines/prod.json --export-options-plist=ios/ExportOptions.plist
+          flutter build ipa --release --dart-define-from-file=dart_defines/prod.json --export-options-plist=ios/ExportOptions.plist
 
       - name: Detect path for ipa file
         run: |
