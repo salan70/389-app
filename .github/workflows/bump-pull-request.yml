@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup_flutter
 
       - name: Run flutter version
-        run: fvm flutter --version
+        run: flutter --version
 
       - name: run flutter pub get
         run: flutter pub get
