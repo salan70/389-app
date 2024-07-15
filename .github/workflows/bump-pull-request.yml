@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup_flutter
 
       - name: Run flutter version
-        run: fvm flutter --version
+        run: flutter --version
 
       - name: run flutter pub get
         run: flutter pub get
@@ -47,6 +47,7 @@ jobs:
       - name: bump up version
         run: |
           echo choice: ${{ github.event.inputs.bump }}
+          cd package/app
           flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
