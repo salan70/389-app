@@ -74,8 +74,9 @@ jobs:
 
       - name: Build app bundle
         id: build
-        run: flutter build appbundle --dart-define-from-file=dart_defines/prod.json
-        working-directory: package/app
+        run: |
+          cd package/appflutter
+          build appbundle --dart-define-from-file=dart_defines/prod.json
 
       - name: Get Package name
         run: |
@@ -168,8 +169,9 @@ jobs:
 
       - name: Build ipa
         id: build
-        run: flutter build ipa --dart-define-from-file=dart_defines/prod.json --export-options-plist=ios/ExportOptions.plist
-        working-directory: package/app
+        run: |
+          cd package/app
+          flutter build ipa --dart-define-from-file=dart_defines/prod.json --export-options-plist=ios/ExportOptions.plist
 
       - name: Detect path for ipa file
         run: |
