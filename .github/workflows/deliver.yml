@@ -28,25 +28,27 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+        working-directory: package/app
         run: |
-          echo "storeFile=./upload.jks" > package/app/android/key.properties
-          echo "storePassword=$ANDROID_STORE_PASSWORD" >> package/app/android/key.properties
-          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> package/app/android/key.properties
-          echo "keyAlias=$ANDROID_KEY_ALIAS" >> package/app/android/key.properties
+          echo "storeFile=./upload.jks" > android/key.properties
+          echo "storePassword=$ANDROID_STORE_PASSWORD" >> android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
 
       # .env ファイルを作成する。
       - name: Create dot env file
         shell: bash
+        working-directory: package/app
         run: |
-          touch package/app/.env
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> package/app/.env
-          echo "SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }}" >> package/app/.env
-          echo "BANNER_ID_IOS=${{ secrets.BANNER_ID_IOS }}" >> package/app/.env
-          echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> package/app/.env
-          echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> package/app/.env
-          echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> package/app/.env
-          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> package/app/.env
-          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> package/app/.env
+          touch .env
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }}" >> .env
+          echo "BANNER_ID_IOS=${{ secrets.BANNER_ID_IOS }}" >> .env
+          echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> .env
+          echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> .env
+          echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> .env
 
       - name: Setup Flutter
         id: setup-flutter
@@ -55,8 +57,14 @@ jobs:
       - name: Run flutter version
         run: flutter --version
 
-      - name: Run flutter pub get
-        run: flutter pub get
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v3
+
+      - name: Run melos bs
+        run: melos bs
 
       # TODO
       - name: Get Version Number
@@ -66,6 +74,7 @@ jobs:
       - name: Build app bundle
         id: build
         run: flutter build appbundle --dart-define-from-file=dart_defines/prod.json
+        working-directory: package/app
 
       - name: Get Package name
         run: |
@@ -74,8 +83,9 @@ jobs:
       - name: Create google service account file
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 }}
+        working-directory: package/app
         run: |
-          echo $GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 | base64 --decode > package/app/android/service-account.json
+          echo $GOOGLE_SERVICE_ACCOUNT_KEY_JSON_BASE64 | base64 --decode > android/service-account.json
 
       - name: Upload to Google Play
         id: upload
@@ -126,16 +136,17 @@ jobs:
       # .env ファイルを作成する。
       - name: Create dot env file
         shell: bash
+        working-directory: package/app
         run: |
           touch .env
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> package/app/.env
-          echo "SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }}" >> package/app/.env
-          echo "BANNER_ID_IOS=${{ secrets.BANNER_ID_IOS }}" >> package/app/.env
-          echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> package/app/.env
-          echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> package/app/.env
-          echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> package/app/.env
-          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> package/app/.env
-          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> package/app/.env
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "SUPABASE_API_KEY=${{ secrets.SUPABASE_API_KEY }}" >> .env
+          echo "BANNER_ID_IOS=${{ secrets.BANNER_ID_IOS }}" >> .env
+          echo "BANNER_ID_ANDROID=${{ secrets.BANNER_ID_ANDROID }}" >> .env
+          echo "INTERSTITIAL_ID_IOS=${{ secrets.INTERSTITIAL_ID_IOS }}" >> .env
+          echo "INTERSTITIAL_ID_ANDROID=${{ secrets.INTERSTITIAL_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_ANDROID=${{ secrets.REWARD_ID_ANDROID }}" >> .env
+          echo "REWARD_ID_IOS=${{ secrets.REWARD_ID_IOS }}" >> .env
 
 
       - name: Setup Flutter
@@ -145,16 +156,24 @@ jobs:
       - name: Run flutter version
         run: flutter --version
 
-      - name: Run flutter pub get
-        run: flutter pub get
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v3
+
+      - name: Run melos bs
+        run: melos bs
 
       - name: Build ipa
         id: build
         run: flutter build ipa --dart-define-from-file=dart_defines/prod.json --export-options-plist=./ios/ExportOptions.plist
+        working-directory: package/app
 
       - name: Detect path for ipa file
         run: |
-          echo "IPA_PATH=$(find package/app/build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
+          echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
+        working-directory: package/app
 
       - name: Upload to App Store Connect
         id: upload
@@ -165,4 +184,5 @@ jobs:
 
       - name: Upload dsym artifacts to Firebase Crashlytics
         run: |
-          package/app/ios/Pods/FirebaseCrashlytics/upload-symbols -gsp package/app/ios/GoogleService-Info.plist -p ios package/app/build/ios/archive/Runner.xcarchive/dSYMs
+          ios/Pods/FirebaseCrashlytics/upload-symbols -gsp ios/GoogleService-Info.plist -p ios build/ios/archive/Runner.xcarchive/dSYMs
+        working-directory: package/app
