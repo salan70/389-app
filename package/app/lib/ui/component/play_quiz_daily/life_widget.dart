@@ -23,9 +23,9 @@ class LifeWidget extends ConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            favoriteIcon(1),
-            favoriteIcon(2),
             const Icon(Icons.favorite_rounded),
+            favoriteIcon(2),
+            favoriteIcon(1),
           ],
         ),
       ),

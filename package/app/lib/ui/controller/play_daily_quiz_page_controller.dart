@@ -37,8 +37,6 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     return PlayDailyQuizPageState(quizState: hitterQuizState);
   }
 
-  static const _maxCanIncorrectCount = 2;
-
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
   /// ランダムに1つ成績を公開する。
   void _openRandom() {
@@ -261,6 +259,11 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
         .push(ResultDailyQuizRoute(quizState: quizState));
   }
 
-  bool get _isFinalAnswer =>
-      state.value!.quizState.hitterQuiz.incorrectCount == _maxCanIncorrectCount;
+  bool get _isFinalAnswer {
+    // 最大で回答できる数。
+    const maxCanAnswerCount = 3;
+
+    return state.value!.quizState.hitterQuiz.incorrectCount ==
+        maxCanAnswerCount;
+  }
 }

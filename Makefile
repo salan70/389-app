@@ -17,3 +17,8 @@ analytics_debug_view_end:
 melos_setup:
 	melos clean
 	melos bootstrap
+
+.PHONY: clean_gen
+clean_gen:
+	melos clean
+	melos gen
