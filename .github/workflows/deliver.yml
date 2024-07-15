@@ -166,6 +166,11 @@ jobs:
       - name: Run melos bs
         run: melos bs
 
+      - name: Update pod
+        run: |
+          cd package/app/ios
+          pod install --repo-update
+
       - name: Build ipa
         id: build
         run: |
