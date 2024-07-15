@@ -181,7 +181,16 @@ jobs:
       - name: Detect path for ipa file
         run: |
           cd package/app
-          echo "IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')" >> $GITHUB_ENV
+          if [ ! -d "build/ios/ipa" ]; then
+            echo "build/ios/ipa directory does not exist."
+            exit 1
+          fi
+          IPA_PATH=$(find build/ios/ipa -type f -name '*.ipa')
+          if [ -z "$IPA_PATH" ]; then
+            echo "No .ipa file found."
+            exit 1
+          fi
+          echo "IPA_PATH=$IPA_PATH" >> $GITHUB_ENV
           echo $IPA_PATH
 
       - name: Upload to App Store Connect
