@@ -67,7 +67,7 @@ tasks.whenTaskAdded { task ->
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
     compileOptions {
