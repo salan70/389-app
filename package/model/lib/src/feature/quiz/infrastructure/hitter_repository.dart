@@ -17,8 +17,7 @@ part 'hitter_repository.g.dart';
 
 @riverpod
 HitterRepository hitterRepository(HitterRepositoryRef ref) {
-  final supabase = ref.watch(supabaseProvider);
-  return HitterRepository(supabase);
+  return HitterRepository(Supabase.instance);
 }
 
 class HitterRepository {
