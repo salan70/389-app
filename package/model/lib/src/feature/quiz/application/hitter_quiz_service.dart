@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../season/util/season_type.dart';
 import '../domain/hitter.dart';
-import 'answer_state.dart';
+import '../infrastructure/hitter_repository.dart';
 
 part 'hitter_quiz_service.g.dart';
 

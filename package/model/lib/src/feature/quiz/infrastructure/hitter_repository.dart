@@ -139,22 +139,33 @@ class HitterRepository {
 
     return statsList;
   }
+}
 
-  /// 解答を入力するテキストフィールドの検索用。
-  ///
-  /// 全選手の名前と ID を取得する。
-  Future<List<Hitter>> fetchAllHitter(SeasonType seasonType) async {
-    final responses = await supabase.client
-        .from(seasonType.hitterTable)
-        .select<dynamic>() as List<dynamic>;
+/// 解答を入力するテキストフィールドの検索用。
+///
+/// 全選手の名前と ID を取得する。
+///
+/// キャッシュを保持するため、[HitterRepository]から切り出している。
+@Riverpod(keepAlive: true)
+Future<List<Hitter>> allHitterList(
+  AllHitterListRef ref,
+  SeasonType seasonType,
+) async {
+  logger.i('allHitterList called');
+  ref.onDispose(() {
+    logger.i('allHitterList disposed');
+  });
+  
+  final responses = await Supabase.instance.client
+      .from(seasonType.hitterTable)
+      .select<dynamic>() as List<dynamic>;
 
-    final allHitterList = <Hitter>[];
-    for (final response in responses) {
-      final hitterMap = Hitter.fromJson(
-        response as Map<String, dynamic>,
-      );
-      allHitterList.add(hitterMap);
-    }
-    return allHitterList;
+  final allHitterList = <Hitter>[];
+  for (final response in responses) {
+    final hitterMap = Hitter.fromJson(
+      response as Map<String, dynamic>,
+    );
+    allHitterList.add(hitterMap);
   }
+  return allHitterList;
 }
