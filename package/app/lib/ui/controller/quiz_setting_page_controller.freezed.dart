@@ -30,8 +30,6 @@ abstract class $QuizSettingPageStateCopyWith<$Res> {
       _$QuizSettingPageStateCopyWithImpl<$Res, QuizSettingPageState>;
   @useResult
   $Res call({SearchCondition searchCondition});
-
-  $SearchConditionCopyWith<$Res> get searchCondition;
 }
 
 /// @nodoc
@@ -57,14 +55,6 @@ class _$QuizSettingPageStateCopyWithImpl<$Res,
               as SearchCondition,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $SearchConditionCopyWith<$Res> get searchCondition {
-    return $SearchConditionCopyWith<$Res>(_value.searchCondition, (value) {
-      return _then(_value.copyWith(searchCondition: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -76,9 +66,6 @@ abstract class _$$QuizSettingPageStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call({SearchCondition searchCondition});
-
-  @override
-  $SearchConditionCopyWith<$Res> get searchCondition;
 }
 
 /// @nodoc

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:common/common.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -17,8 +15,7 @@ part 'hitter_repository.g.dart';
 
 @riverpod
 HitterRepository hitterRepository(HitterRepositoryRef ref) {
-  final supabase = ref.watch(supabaseProvider);
-  return HitterRepository(supabase);
+  return HitterRepository(Supabase.instance);
 }
 
 class HitterRepository {
@@ -76,29 +73,22 @@ class HitterRepository {
     SearchCondition searchCondition,
     SeasonType seasonType,
   ) async {
-    final hittingStatsTable = seasonType.hittingStatsTable;
-    final responses = await supabase.client
-        .from(seasonType.hitterTable)
-        .select<dynamic>('id, name, team, hasData, $hittingStatsTable!inner(*)')
-        .eq('hasData', true)
+    final response = await supabase.client
+        .from('random_hitters')
+        .select<Map<String, dynamic>?>()
         .filter('team', 'in', searchCondition.teamList)
-        .gte('$hittingStatsTable.試合', searchCondition.minGames)
-        .gte('$hittingStatsTable.安打', searchCondition.minHits)
-        .gte('$hittingStatsTable.本塁打', searchCondition.minHr)
-        // ? なぜか `ascending` は true でも false でも同じ結果になる。
-        // ? UI での挙動的には問題ないので、このままにしておいている。
-        .order('表示順', foreignTable: hittingStatsTable) as List<dynamic>;
+        .gte('試合', searchCondition.minGames)
+        .gte('安打', searchCondition.minHits)
+        .gte('本塁打', searchCondition.minHr)
+        .limit(1)
+        .maybeSingle();
 
     // 検索条件に合致する選手がいない場合、例外を返す。
-    if (responses.isEmpty) {
+    if (response == null) {
       throw SupabaseException.notFound();
     }
 
-    // ランダムで1人選出する。
-    final chosenResponse =
-        responses[Random().nextInt(responses.length)] as Map<String, dynamic>;
-
-    return SupabaseHitter.fromJson(chosenResponse);
+    return SupabaseHitter.fromJson(response);
   }
 
   /// ID で選手を検索する。
@@ -140,22 +130,33 @@ class HitterRepository {
 
     return statsList;
   }
+}
 
-  /// 解答を入力するテキストフィールドの検索用。
-  ///
-  /// 全選手の名前と ID を取得する。
-  Future<List<Hitter>> fetchAllHitter(SeasonType seasonType) async {
-    final responses = await supabase.client
-        .from(seasonType.hitterTable)
-        .select<dynamic>() as List<dynamic>;
+/// 解答を入力するテキストフィールドの検索用。
+///
+/// 全選手の名前と ID を取得する。
+///
+/// キャッシュを保持するため、[HitterRepository]から切り出している。
+@Riverpod(keepAlive: true)
+Future<List<Hitter>> allHitterList(
+  AllHitterListRef ref,
+  SeasonType seasonType,
+) async {
+  logger.i('allHitterList called');
+  ref.onDispose(() {
+    logger.i('allHitterList disposed');
+  });
 
-    final allHitterList = <Hitter>[];
-    for (final response in responses) {
-      final hitterMap = Hitter.fromJson(
-        response as Map<String, dynamic>,
-      );
-      allHitterList.add(hitterMap);
-    }
-    return allHitterList;
+  final responses = await Supabase.instance.client
+      .from(seasonType.hitterTable)
+      .select<dynamic>() as List<dynamic>;
+
+  final allHitterList = <Hitter>[];
+  for (final response in responses) {
+    final hitterMap = Hitter.fromJson(
+      response as Map<String, dynamic>,
+    );
+    allHitterList.add(hitterMap);
   }
+  return allHitterList;
 }
