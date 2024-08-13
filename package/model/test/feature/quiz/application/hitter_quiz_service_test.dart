@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:model/src/feature/quiz/application/answer_state.dart';
 import 'package:model/src/feature/quiz/application/hitter_quiz_service.dart';
 import 'package:model/src/feature/quiz/domain/hitter.dart';
+import 'package:model/src/feature/quiz/infrastructure/hitter_repository.dart';
 import 'package:model/src/feature/season/util/season_type.dart';
 
 void main() {
