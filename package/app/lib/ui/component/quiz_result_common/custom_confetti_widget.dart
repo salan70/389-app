@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
-// ! iOS だと紙吹雪がうまく表示されない。
-// ! どうやらパッケージ側のバグっぽい。
-// ! 参考: https://github.com/funwithflutter/flutter_confetti/issues/55
 class CustomConfettiWidget extends StatefulWidget {
   const CustomConfettiWidget({
     super.key,
@@ -27,14 +23,12 @@ class _CustomConfettiWidgetState extends State<CustomConfettiWidget> {
   void initState() {
     super.initState();
 
-    // iOS の場合は紙吹雪を表示しない。
-    if (Platform.isIOS) {
-      return;
-    }
-
-    if (widget.isCorrect) {
-      confettiController.play();
-    }
+    // 画面が描画されたら紙吹雪を表示する。
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (widget.isCorrect) {
+        confettiController.play();
+      }
+    });
   }
 
   @override
