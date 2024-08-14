@@ -21,7 +21,7 @@ final hitterRepositoryProvider = AutoDisposeProvider<HitterRepository>.internal(
 );
 
 typedef HitterRepositoryRef = AutoDisposeProviderRef<HitterRepository>;
-String _$allHitterListHash() => r'de51752465a28fd063b24f0872dda8c1a55a831f';
+String _$allHitterListHash() => r'ce90e942f6d8620fd2222b08a24727e81ad0ef55';
 
 /// Copied from Dart SDK
 class _SystemHash {
