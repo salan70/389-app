@@ -38,7 +38,9 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
         .fetchInputDailyQuizState(dailyQuiz);
 
     return PlayDailyQuizPageState(
-        quizState: hitterQuizState, showNotEnteredError: false);
+      quizState: hitterQuizState,
+      showNotEnteredError: false,
+    );
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
@@ -158,7 +160,7 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
     FocusManager.instance.primaryFocus?.unfocus();
     // エラーメッセージを非表示にする。
     state = AsyncData(state.value!.copyWith(showNotEnteredError: false));
-    
+
     _updateEnteredHitter(value);
   }
 

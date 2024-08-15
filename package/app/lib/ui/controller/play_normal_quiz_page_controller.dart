@@ -29,7 +29,9 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
   Future<PlayNormalQuizPageState> build() async {
     final hitterQuizState = await ref.watch(normalQuizStateProvider.future);
     return PlayNormalQuizPageState(
-        normalQuizState: hitterQuizState, showNotEnteredError: false);
+      normalQuizState: hitterQuizState,
+      showNotEnteredError: false,
+    );
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
@@ -143,7 +145,7 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
     FocusManager.instance.primaryFocus?.unfocus();
     // エラーメッセージを非表示にする。
     state = AsyncData(state.value!.copyWith(showNotEnteredError: false));
-    
+
     _updateEnteredHitter(hitter);
   }
 
