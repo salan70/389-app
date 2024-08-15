@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayNormalQuizPageState {
   HitterQuizState get normalQuizState => throw _privateConstructorUsedError;
 
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  bool get showNotEnteredError => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $PlayNormalQuizPageStateCopyWith<PlayNormalQuizPageState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -29,7 +32,7 @@ abstract class $PlayNormalQuizPageStateCopyWith<$Res> {
           $Res Function(PlayNormalQuizPageState) then) =
       _$PlayNormalQuizPageStateCopyWithImpl<$Res, PlayNormalQuizPageState>;
   @useResult
-  $Res call({HitterQuizState normalQuizState});
+  $Res call({HitterQuizState normalQuizState, bool showNotEnteredError});
 }
 
 /// @nodoc
@@ -47,12 +50,17 @@ class _$PlayNormalQuizPageStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? normalQuizState = null,
+    Object? showNotEnteredError = null,
   }) {
     return _then(_value.copyWith(
       normalQuizState: null == normalQuizState
           ? _value.normalQuizState
           : normalQuizState // ignore: cast_nullable_to_non_nullable
               as HitterQuizState,
+      showNotEnteredError: null == showNotEnteredError
+          ? _value.showNotEnteredError
+          : showNotEnteredError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -66,7 +74,7 @@ abstract class _$$PlayNormalQuizPageStateImplCopyWith<$Res>
       __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HitterQuizState normalQuizState});
+  $Res call({HitterQuizState normalQuizState, bool showNotEnteredError});
 }
 
 /// @nodoc
@@ -83,12 +91,17 @@ class __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? normalQuizState = null,
+    Object? showNotEnteredError = null,
   }) {
     return _then(_$PlayNormalQuizPageStateImpl(
       normalQuizState: null == normalQuizState
           ? _value.normalQuizState
           : normalQuizState // ignore: cast_nullable_to_non_nullable
               as HitterQuizState,
+      showNotEnteredError: null == showNotEnteredError
+          ? _value.showNotEnteredError
+          : showNotEnteredError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -96,14 +109,19 @@ class __$$PlayNormalQuizPageStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
-  const _$PlayNormalQuizPageStateImpl({required this.normalQuizState});
+  const _$PlayNormalQuizPageStateImpl(
+      {required this.normalQuizState, required this.showNotEnteredError});
 
   @override
   final HitterQuizState normalQuizState;
 
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  @override
+  final bool showNotEnteredError;
+
   @override
   String toString() {
-    return 'PlayNormalQuizPageState(normalQuizState: $normalQuizState)';
+    return 'PlayNormalQuizPageState(normalQuizState: $normalQuizState, showNotEnteredError: $showNotEnteredError)';
   }
 
   @override
@@ -112,11 +130,14 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
         (other.runtimeType == runtimeType &&
             other is _$PlayNormalQuizPageStateImpl &&
             (identical(other.normalQuizState, normalQuizState) ||
-                other.normalQuizState == normalQuizState));
+                other.normalQuizState == normalQuizState) &&
+            (identical(other.showNotEnteredError, showNotEnteredError) ||
+                other.showNotEnteredError == showNotEnteredError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, normalQuizState);
+  int get hashCode =>
+      Object.hash(runtimeType, normalQuizState, showNotEnteredError);
 
   @JsonKey(ignore: true)
   @override
@@ -128,11 +149,15 @@ class _$PlayNormalQuizPageStateImpl implements _PlayNormalQuizPageState {
 
 abstract class _PlayNormalQuizPageState implements PlayNormalQuizPageState {
   const factory _PlayNormalQuizPageState(
-          {required final HitterQuizState normalQuizState}) =
-      _$PlayNormalQuizPageStateImpl;
+      {required final HitterQuizState normalQuizState,
+      required final bool showNotEnteredError}) = _$PlayNormalQuizPageStateImpl;
 
   @override
   HitterQuizState get normalQuizState;
+  @override
+
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  bool get showNotEnteredError;
   @override
   @JsonKey(ignore: true)
   _$$PlayNormalQuizPageStateImplCopyWith<_$PlayNormalQuizPageStateImpl>

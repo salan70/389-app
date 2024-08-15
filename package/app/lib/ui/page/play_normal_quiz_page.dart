@@ -58,6 +58,7 @@ class _PlayNormalQuizPageState extends ConsumerState<PlayNormalQuizPage> {
                       onSearchHitter: () => controller
                           .onSearchHitter(_textEditingController.text),
                       onSelectedHitter: controller.onSelectedHitter,
+                      showErrorText: pageState.showNotEnteredError,
                     ),
                     const SizedBox(height: 16),
                     QuizEventButtons(

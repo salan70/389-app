@@ -17,6 +17,9 @@ part 'play_daily_quiz_page_controller.g.dart';
 class PlayDailyQuizPageState with _$PlayDailyQuizPageState {
   const factory PlayDailyQuizPageState({
     required HitterQuizState quizState,
+
+    /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+    required bool showNotEnteredError,
   }) = _PlayDailyQuizPageState;
 }
 
@@ -34,7 +37,8 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
         .watch(hitterRepositoryProvider)
         .fetchInputDailyQuizState(dailyQuiz);
 
-    return PlayDailyQuizPageState(quizState: hitterQuizState);
+    return PlayDailyQuizPageState(
+        quizState: hitterQuizState, showNotEnteredError: false);
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
@@ -99,10 +103,11 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
 
   /// 今日の1問の回答を送信する際の処理。
   ///
-  /// [hitterName] が null の場合、[ArgumentError] をスローする。
+  /// [hitterName] が null の場合、入力を促すエラーを表示する。
   Future<void> onTapSubmitAnswer(String? hitterName) async {
     if (hitterName == null) {
-      throw ArgumentError.notNull('hitterName');
+      state = AsyncData(state.value!.copyWith(showNotEnteredError: true));
+      return;
     }
 
     // 間違えれる回数が上限に達している（最後の回答を送信している）場合、
@@ -151,6 +156,9 @@ class PlayDailyQuizPageController extends _$PlayDailyQuizPageController {
   void onSelectedHitter(Hitter value) {
     // 回答入力用のTextFieldのフォーカスを外す
     FocusManager.instance.primaryFocus?.unfocus();
+    // エラーメッセージを非表示にする。
+    state = AsyncData(state.value!.copyWith(showNotEnteredError: false));
+    
     _updateEnteredHitter(value);
   }
 

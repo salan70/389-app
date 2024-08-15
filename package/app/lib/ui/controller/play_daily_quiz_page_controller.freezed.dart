@@ -18,6 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PlayDailyQuizPageState {
   HitterQuizState get quizState => throw _privateConstructorUsedError;
 
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  bool get showNotEnteredError => throw _privateConstructorUsedError;
+
   @JsonKey(ignore: true)
   $PlayDailyQuizPageStateCopyWith<PlayDailyQuizPageState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -29,7 +32,7 @@ abstract class $PlayDailyQuizPageStateCopyWith<$Res> {
           $Res Function(PlayDailyQuizPageState) then) =
       _$PlayDailyQuizPageStateCopyWithImpl<$Res, PlayDailyQuizPageState>;
   @useResult
-  $Res call({HitterQuizState quizState});
+  $Res call({HitterQuizState quizState, bool showNotEnteredError});
 }
 
 /// @nodoc
@@ -47,12 +50,17 @@ class _$PlayDailyQuizPageStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? quizState = null,
+    Object? showNotEnteredError = null,
   }) {
     return _then(_value.copyWith(
       quizState: null == quizState
           ? _value.quizState
           : quizState // ignore: cast_nullable_to_non_nullable
               as HitterQuizState,
+      showNotEnteredError: null == showNotEnteredError
+          ? _value.showNotEnteredError
+          : showNotEnteredError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -66,7 +74,7 @@ abstract class _$$PlayDailyQuizPageStateImplCopyWith<$Res>
       __$$PlayDailyQuizPageStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HitterQuizState quizState});
+  $Res call({HitterQuizState quizState, bool showNotEnteredError});
 }
 
 /// @nodoc
@@ -83,12 +91,17 @@ class __$$PlayDailyQuizPageStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? quizState = null,
+    Object? showNotEnteredError = null,
   }) {
     return _then(_$PlayDailyQuizPageStateImpl(
       quizState: null == quizState
           ? _value.quizState
           : quizState // ignore: cast_nullable_to_non_nullable
               as HitterQuizState,
+      showNotEnteredError: null == showNotEnteredError
+          ? _value.showNotEnteredError
+          : showNotEnteredError // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -96,14 +109,19 @@ class __$$PlayDailyQuizPageStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayDailyQuizPageStateImpl implements _PlayDailyQuizPageState {
-  const _$PlayDailyQuizPageStateImpl({required this.quizState});
+  const _$PlayDailyQuizPageStateImpl(
+      {required this.quizState, required this.showNotEnteredError});
 
   @override
   final HitterQuizState quizState;
 
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  @override
+  final bool showNotEnteredError;
+
   @override
   String toString() {
-    return 'PlayDailyQuizPageState(quizState: $quizState)';
+    return 'PlayDailyQuizPageState(quizState: $quizState, showNotEnteredError: $showNotEnteredError)';
   }
 
   @override
@@ -112,11 +130,13 @@ class _$PlayDailyQuizPageStateImpl implements _PlayDailyQuizPageState {
         (other.runtimeType == runtimeType &&
             other is _$PlayDailyQuizPageStateImpl &&
             (identical(other.quizState, quizState) ||
-                other.quizState == quizState));
+                other.quizState == quizState) &&
+            (identical(other.showNotEnteredError, showNotEnteredError) ||
+                other.showNotEnteredError == showNotEnteredError));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, quizState);
+  int get hashCode => Object.hash(runtimeType, quizState, showNotEnteredError);
 
   @JsonKey(ignore: true)
   @override
@@ -128,11 +148,15 @@ class _$PlayDailyQuizPageStateImpl implements _PlayDailyQuizPageState {
 
 abstract class _PlayDailyQuizPageState implements PlayDailyQuizPageState {
   const factory _PlayDailyQuizPageState(
-          {required final HitterQuizState quizState}) =
-      _$PlayDailyQuizPageStateImpl;
+      {required final HitterQuizState quizState,
+      required final bool showNotEnteredError}) = _$PlayDailyQuizPageStateImpl;
 
   @override
   HitterQuizState get quizState;
+  @override
+
+  /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+  bool get showNotEnteredError;
   @override
   @JsonKey(ignore: true)
   _$$PlayDailyQuizPageStateImplCopyWith<_$PlayDailyQuizPageStateImpl>

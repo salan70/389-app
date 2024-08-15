@@ -17,6 +17,9 @@ part 'play_normal_quiz_page_controller.g.dart';
 class PlayNormalQuizPageState with _$PlayNormalQuizPageState {
   const factory PlayNormalQuizPageState({
     required HitterQuizState normalQuizState,
+
+    /// 回答が未入力の旨のエラーメッセージを表示するかどうか。
+    required bool showNotEnteredError,
   }) = _PlayNormalQuizPageState;
 }
 
@@ -25,7 +28,8 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
   @override
   Future<PlayNormalQuizPageState> build() async {
     final hitterQuizState = await ref.watch(normalQuizStateProvider.future);
-    return PlayNormalQuizPageState(normalQuizState: hitterQuizState);
+    return PlayNormalQuizPageState(
+        normalQuizState: hitterQuizState, showNotEnteredError: false);
   }
 
   // * ---------------------- state.hitterQuiz の更新関連 ---------------------- * //
@@ -90,10 +94,11 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   /// 回答を送信する際の処理。
   ///
-  /// [hitterName] が null の場合、[ArgumentError] をスローする。
+  /// [hitterName] が null の場合、入力を促すエラーを表示する。
   Future<void> onSubmitAnswer(String? hitterName) async {
     if (hitterName == null) {
-      throw ArgumentError.notNull('hitterName');
+      state = AsyncData(state.value!.copyWith(showNotEnteredError: true));
+      return;
     }
 
     // interstitial 広告を作成する。
@@ -136,6 +141,9 @@ class PlayNormalQuizPageController extends _$PlayNormalQuizPageController {
 
   void onSelectedHitter(Hitter? hitter) {
     FocusManager.instance.primaryFocus?.unfocus();
+    // エラーメッセージを非表示にする。
+    state = AsyncData(state.value!.copyWith(showNotEnteredError: false));
+    
     _updateEnteredHitter(hitter);
   }
 
