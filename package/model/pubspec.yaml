@@ -1,0 +1,86 @@
+name: model
+description: A new Flutter package project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=3.0.0"
+
+dependencies:
+  # Other packages in the project
+  common:
+    path: ../common
+
+  device_info_plus: ^8.0.0
+  flutter:
+    sdk: flutter
+
+  # Local notifications.
+  flutter_local_notifications: ^17.2.1+2
+
+  # State management.
+  flutter_riverpod: ^2.4.3
+
+  # Code generation.
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  riverpod_annotation: ^2.2.0
+
+  # AdMob.
+  google_mobile_ads: ^4.0.0
+
+  # Local Database.
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  # Static analysis.
+  pedantic_mono: ^1.20.1
+
+  # Supabase.
+  supabase_flutter: ^1.2.2
+
+  # Firebase.
+  cloud_firestore: ^4.4.5
+  firebase_analytics: ^10.1.6
+  firebase_auth: ^4.3.0
+
+  # Utility.
+  flutter_app_badger: ^1.5.0
+  intl: ^0.18.0
+  in_app_review: ^2.0.6  
+  ntp: ^2.0.0 # しばらくメンテされていないという懸念あり
+  package_info_plus: ^4.2.0
+  path_provider: ^2.0.11
+  share_plus: ^7.2.1
+  timezone: ^0.9.2
+  url_launcher: ^6.1.8
+  version: ^3.0.2
+
+# firebase_authと依存関係のエラーが表示するため、回避策としてoverride
+# 参考
+# https://github.com/dart-lang/intl/issues/522#issuecomment-1469961807
+dependency_overrides:
+  # 日付を表示用にフォーマットするために使用
+  intl: ^0.18.0
+
+dev_dependencies:
+  # Code generation.
+  build_runner: ^2.4.7
+  freezed: ^2.4.5
+  hive_generator: ^2.0.1
+  json_serializable: ^6.7.1
+  riverpod_generator: ^2.3.9
+
+  # Static analysis.
+  dependency_validator:
+  custom_lint: ^0.5.0
+  flutter_lints: ^2.0.0
+  riverpod_lint: ^2.3.7
+
+  # Testing.
+  fake_cloud_firestore: ^2.4.1+1
+  flutter_test:
+    sdk: flutter
+
+  # Utility.
+  collection: ^1.16.0
+  

@@ -1,12 +1,3 @@
-.PHONY: setup
-setup:
-	fvm flutter clean
-	fvm flutter pub get
-
-.PHONY: generate
-generate:
-	fvm flutter packages pub run build_runner build --delete-conflicting-outputs
-
 .PHONY: test
 test:
 	fvm flutter test --coverage
@@ -21,3 +12,13 @@ analytics_debug_view_start:
 .PHONY: analytics_debug_view_end
 analytics_debug_view_end:
 	adb shell setprop debug.firebase.analytics.app .none.
+
+.PHONY: melos_setup
+melos_setup:
+	melos clean
+	melos bootstrap
+
+.PHONY: clean_gen
+clean_gen:
+	melos clean
+	melos gen

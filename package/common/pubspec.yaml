@@ -1,0 +1,48 @@
+name: common
+description: A new Flutter package project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Code generation.
+  riverpod_annotation: ^2.2.0
+
+  # Debugging.
+  roggle: ^0.3.0
+
+  # Environment variables.
+  flutter_dotenv: ^5.0.2
+
+  # Firebase.
+  cloud_firestore: ^4.4.5  
+  firebase_crashlytics: ^3.0.17
+  firebase_auth: ^4.3.0
+
+  # State management.
+  flutter_riverpod: ^2.4.3
+
+  # Static analysis.
+  pedantic_mono: ^1.20.1
+  riverpod_lint: ^2.3.7
+
+  # Supabase.
+  supabase_flutter: ^1.2.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  # Code generation.
+  build_runner: ^2.4.7
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
+  hive_generator: ^2.0.1
+  riverpod_generator: ^2.3.9
+
+  # Static analysis.
+  dependency_validator:
+  flutter_lints: ^2.0.0

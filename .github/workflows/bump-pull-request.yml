@@ -29,15 +29,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
 
-      - name: install flutter
-        uses: subosito/flutter-action@v2
-        with:
-          # TODO:  ハードコーディング避けたい。
-          flutter-version: '3.13.6'
-          channel: 'stable'
-          cache: true
+      - name: Setup Flutter
+        id: setup-flutter
+        uses: ./.github/actions/setup_flutter
 
-      - name: run flutter version
+      - name: Run flutter version
         run: flutter --version
 
       - name: run flutter pub get
@@ -51,13 +47,14 @@ jobs:
       - name: bump up version
         run: |
           echo choice: ${{ github.event.inputs.bump }}
+          cd package/app
           flutter pub run cider bump ${{ github.event.inputs.bump }} --bump-build
           echo "BUMP_VERSION=$(flutter pub run cider version)" >> $GITHUB_ENV
 
       - name: commit pubspec.yaml
         run: |
           git checkout develop
-          git add -u pubspec.yaml
+          git add -u package/app/pubspec.yaml
           echo "Bumped version number to $BUMP_VERSION" | git commit --file=-
 
       - name: create release branch

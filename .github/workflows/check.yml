@@ -26,15 +26,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run pre-process script
-        shell: bash
-        env:
-          PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
-        run: |
-          if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ./pre-process.sh && bash ./pre-process.sh
-          fi
-
       # 空の.envを作成
       # 必要あれば、githubのSECRET情報から値を取得して.envに書き込む
       # 参考
@@ -42,29 +33,31 @@ jobs:
       - name: Create dot env file
         shell: bash
         run: |
-          touch .env
+          touch package/app/.env
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          # TODO(me): ハードコーディング避けたい
-          flutter-version: '3.13.6'
-          channel: 'stable'
-          cache: true
+      - name: Setup Flutter
+        id: setup-flutter
+        uses: ./.github/actions/setup_flutter
 
       - name: Run flutter version
         run: flutter --version
 
-      - name: Run flutter pub get
-        run: flutter pub get
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
+
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v3
+
+      - name: Run melos bs
+        run: melos bs
 
       - name: Install matcher
         run: echo "::add-matcher::.github/analyzer-problem-matcher.json"
 
-      - name: Run flutter analyze
+      - name: Run melos analyze
         shell: bash
         run: |
-          flutter analyze | tee ./flutter_analyze_report.txt
+          melos analyze | tee ./flutter_analyze_report.txt
 
       - name: Remove matcher
         if: always()
@@ -95,15 +88,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run pre-process script
-        shell: bash
-        env:
-          PREPROCESS_SCRIPT_BASE64: ${{ secrets.PREPROCESS_SCRIPT_BASE64 }}
-        run: |
-          if [ -n "$PREPROCESS_SCRIPT_BASE64" ]; then
-            echo $PREPROCESS_SCRIPT_BASE64 | base64 --decode > ./pre-process.sh && bash ./pre-process.sh
-          fi
-
       # 空の.envを作成
       # 必要あれば、githubのSECRET情報から値を取得して.envに書き込む
       # 参考
@@ -111,21 +95,23 @@ jobs:
       - name: Create dot env file
         shell: bash
         run: |
-          touch .env
+          touch package/app/.env
 
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          # TODO(me): ハードコーディング避けたい
-          flutter-version: '3.13.6'
-          channel: 'stable'
-          cache: true
+      - name: Setup Flutter
+        id: setup-flutter
+        uses: ./.github/actions/setup_flutter
 
       - name: Run flutter version
         run: flutter --version
 
-      - name: Run flutter pub get
-        run: flutter pub get
+      - name: Prepare Melos
+        run: echo "MELOS_SDK_PATH=${{ steps.setup-flutter.outputs.flutter-path }}" >> "$GITHUB_ENV"
 
-      - name: Run flutter test
-        run: flutter test
+      - name: Install Melos
+        uses: bluefireteam/melos-action@v3
+
+      - name: Run melos bs
+        run: melos bs
+
+      - name: Run melos test
+        run: melos test --no-select
