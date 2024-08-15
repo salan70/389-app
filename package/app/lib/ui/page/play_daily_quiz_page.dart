@@ -73,6 +73,7 @@ class _PlayDailyQuizPageState extends ConsumerState<PlayDailyQuizPage> {
                         onSearchHitter: () async => controller
                             .onSearchHitter(_textEditingController.text),
                         onSelectedHitter: controller.onSelectedHitter,
+                        showErrorText: pageState.showNotEnteredError,
                       ),
                       const SizedBox(height: 16),
                       QuizEventButtons(

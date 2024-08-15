@@ -24,7 +24,7 @@ class SubmitAnswerButton extends StatelessWidget {
     return MyButton(
       buttonName: 'submit_answer_button',
       buttonType: buttonType,
-      onPressed: hitter == null ? null : onTapSubmitAnswer,
+      onPressed: onTapSubmitAnswer,
       child: const Text('回答する'),
     );
   }

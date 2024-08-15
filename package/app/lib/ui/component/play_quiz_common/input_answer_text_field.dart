@@ -8,6 +8,7 @@ class InputAnswerTextField extends StatelessWidget {
     required this.textEditingController,
     required this.onSearchHitter,
     required this.onSelectedHitter,
+    required this.showErrorText,
   });
 
   /// 回答入力用に使用する [TextEditingController].
@@ -23,21 +24,35 @@ class InputAnswerTextField extends StatelessWidget {
   /// 検索結果のリストの中から、選手を選択した際の処理。
   final void Function(Hitter value) onSelectedHitter;
 
+  /// 入力を促すエラーメッセージを表示するかどうか。
+  final bool showErrorText;
+
   final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldSearch(
-      label: '選手名',
-      controller: textEditingController,
-      minStringLength: 0,
-      itemsInView: 5,
-      scrollbarDecoration: ScrollbarDecoration(
-        controller: _scrollController,
-        theme: const ScrollbarThemeData(),
-      ),
-      future: onSearchHitter,
-      getSelectedValue: onSelectedHitter,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFieldSearch(
+          label: '選手名',
+          controller: textEditingController,
+          minStringLength: 0,
+          itemsInView: 5,
+          scrollbarDecoration: ScrollbarDecoration(
+            controller: _scrollController,
+            theme: const ScrollbarThemeData(),
+          ),
+          future: onSearchHitter,
+          getSelectedValue: onSelectedHitter,
+        ),
+        // エラーメッセージ
+        if (showErrorText)
+          Text(
+            '選手を入力して下さい...！',
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+      ],
     );
   }
 }
