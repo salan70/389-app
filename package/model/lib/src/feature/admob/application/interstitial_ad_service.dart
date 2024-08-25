@@ -7,10 +7,11 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../loading/application/loading_notifier.dart';
+import 'consecutive_ad_count_notifier.dart';
 
 part 'interstitial_ad_service.g.dart';
 
-// provide が再生成されると、 _interstitialAd が null になるため、 keepAlive を true にしている。
+// provider が再生成されると、 _interstitialAd が null になるため、 keepAlive を true にしている。
 @Riverpod(keepAlive: true)
 InterstitialAdService interstitialAdService(InterstitialAdServiceRef ref) =>
     InterstitialAdService(ref);
@@ -58,9 +59,14 @@ class InterstitialAdService {
 
   /// ランダムで広告を表示する。
   Future<void> randomShowAd() async {
-    if (isShownAds()) {
+    final notifier = ref.read(consecutiveAdCountNotifierProvider.notifier);
+
+    if (notifier.canShowAd() && isShownAds()) {
       await showAd();
+      notifier.increment();
+      return;
     }
+    notifier.reset();
   }
 
   // TODO(me): 仮置でここのクラスにおいているため、適切なクラスに移動させる。
