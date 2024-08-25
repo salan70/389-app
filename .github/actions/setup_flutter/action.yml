@@ -9,7 +9,7 @@ runs:
   steps:
     - name: Parse Flutter version
       id: fvm-config
-      uses: kuhnroyal/flutter-fvm-config-action@v2
+      uses: kuhnroyal/flutter-fvm-config-action@v2.0
 
     - name: Install Flutter
       id: install-flutter
