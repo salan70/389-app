@@ -107,10 +107,11 @@ class _TopPageState extends ConsumerState<TopPage> {
                           child: ToGalleryButton(buttonType: ButtonType.sub),
                         ),
                         const SizedBox(height: 48),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerRight,
                           child: OpenHideAdDialogButton(
                             buttonWidth: _buttonWidth / 3,
+                            onTap: controller.onTapOpenHideAdDialog,
                           ),
                         ),
                       ],
