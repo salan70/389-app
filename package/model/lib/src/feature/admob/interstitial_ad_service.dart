@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../loading/application/loading_notifier.dart';
+import '../loading/application/loading_notifier.dart';
 import 'consecutive_ad_count_notifier.dart';
 
 part 'interstitial_ad_service.g.dart';

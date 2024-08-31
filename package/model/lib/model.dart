@@ -1,6 +1,7 @@
 library model;
 
 export 'src/feature/admob/admob.dart';
+export 'src/feature/admob/_exporter.dart';
 export 'src/feature/analytics/analytics.dart';
 export 'src/feature/app_info/app_info.dart';
 export 'src/feature/app_review/app_review.dart';
