@@ -1,19 +1,19 @@
 import 'app_exception.dart';
 
-class FistoreException extends AppException {
-  const FistoreException._([
+class FirestoreException extends AppException {
+  const FirestoreException._([
     super.message = 'firestore exception',
     FistoreExceptionCode? code,
   ]) : code = code ?? FistoreExceptionCode.unknown;
 
   /// データが見つからない
-  factory FistoreException.notFound() => const FistoreException._(
+  factory FirestoreException.notFound() => const FirestoreException._(
         'データが見つかりませんでした。',
         FistoreExceptionCode.notFound,
       );
 
   /// 不明なエラー
-  factory FistoreException.unknown() => const FistoreException._(
+  factory FirestoreException.unknown() => const FirestoreException._(
         'An unknown error has occurred.',
         FistoreExceptionCode.unknown,
       );

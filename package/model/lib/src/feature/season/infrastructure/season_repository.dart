@@ -28,7 +28,7 @@ class SeasonRepository {
 
     if (querySnapshot.docs.isEmpty) {
       // * 対象ドキュメントが見つからなかった場合
-      throw FistoreException.notFound();
+      throw FirestoreException.notFound();
     }
     // * 対象ドキュメントが見つかった場合
     final DocumentSnapshot document = querySnapshot.docs.first;
