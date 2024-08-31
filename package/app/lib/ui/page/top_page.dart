@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../component/ad/banner_ad_widget.dart';
+import '../component/ad/open_hide_ad_dialog_button.dart';
 import '../component/common/button/my_button.dart';
 import '../component/common/navigation_button/to_gallery_button.dart';
 import '../component/common/navigation_button/to_quiz_setting_button.dart';
@@ -71,38 +72,49 @@ class _TopPageState extends ConsumerState<TopPage> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 48),
+                const IconWidget(),
                 Expanded(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 48),
-                      const IconWidget(),
-                      const SizedBox(height: 40),
-                      const SizedBox(
-                        width: _buttonWidth,
-                        child: ToQuizSettingButton(buttonType: ButtonType.sub),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: _buttonWidth,
-                        child: StartNormalQuizFromTopButton(
-                          buttonType: ButtonType.main,
-                          onPressed: controller.startNormalQuiz,
+                  child: SizedBox(
+                    width: _buttonWidth,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 40),
+                        const SizedBox(
+                          width: _buttonWidth,
+                          child:
+                              ToQuizSettingButton(buttonType: ButtonType.sub),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: _buttonWidth,
-                        child: StartTodaysDailyQuizButton(
-                          buttonType: ButtonType.sub,
-                          onPressed: controller.onTapPlayTodaysDailyQuiz,
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: _buttonWidth,
+                          child: StartNormalQuizFromTopButton(
+                            buttonType: ButtonType.main,
+                            onPressed: controller.startNormalQuiz,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      const SizedBox(
-                        width: _buttonWidth,
-                        child: ToGalleryButton(buttonType: ButtonType.sub),
-                      ),
-                    ],
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          width: _buttonWidth,
+                          child: StartTodaysDailyQuizButton(
+                            buttonType: ButtonType.sub,
+                            onPressed: controller.onTapPlayTodaysDailyQuiz,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const SizedBox(
+                          width: _buttonWidth,
+                          child: ToGalleryButton(buttonType: ButtonType.sub),
+                        ),
+                        const SizedBox(height: 48),
+                        const Align(
+                          alignment: Alignment.centerRight,
+                          child: OpenHideAdDialogButton(
+                            buttonWidth: _buttonWidth / 3,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const Align(
