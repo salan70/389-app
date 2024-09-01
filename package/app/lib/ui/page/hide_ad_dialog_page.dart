@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
+import '../../core/util/app_constant.dart';
 import '../../core/util/extension/context_extension.dart';
 import '../component/common/button/my_button.dart';
 import '../component/common/sized_circular_indicator.dart';
@@ -41,9 +42,17 @@ class HideAdDialogPage extends ConsumerWidget {
 }
 
 enum _HideAdDialogType {
+  /// 通常の状態。
   normal,
+
+  /// ロード中。
   loading,
-  error;
+
+  /// エラー。
+  error,
+
+  /// すでにリワード広告を上限まで視聴済み。
+  alreadyWatchedMax;
 }
 
 class _HideAdDialog extends StatelessWidget {
@@ -59,7 +68,10 @@ class _HideAdDialog extends StatelessWidget {
     required this.adFreePeriodEndDate,
     required this.isDailyQuizPlayed,
     required this.onTapWatchRewardedAd,
-  }) : type = _HideAdDialogType.normal;
+  }) : type = rewardedAdWatchCount != null &&
+                rewardedAdWatchCount < maxRewardedAdWatchCount
+            ? _HideAdDialogType.normal
+            : _HideAdDialogType.alreadyWatchedMax;
 
   const _HideAdDialog.error()
       : type = _HideAdDialogType.error,
@@ -132,13 +144,16 @@ class _HideAdDialog extends StatelessWidget {
           width: 96,
           child: MyButton(
             buttonName: 'confirm_yes_button',
-            buttonType: ButtonType.alert,
+            buttonType: type == _HideAdDialogType.alreadyWatchedMax
+                ? ButtonType.disabled
+                : ButtonType.alert,
             onPressed: onTapWatchRewardedAd,
             child: switch (type) {
               _HideAdDialogType.normal => const Text('広告を見る'),
               _HideAdDialogType.loading =>
                 const SizedCircularIndicator(size: 24),
               _HideAdDialogType.error => const Text('リトライ'),
+              _HideAdDialogType.alreadyWatchedMax => const Text('視聴済み'),
             },
           ),
         ),

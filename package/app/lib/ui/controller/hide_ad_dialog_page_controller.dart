@@ -4,6 +4,8 @@ import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../core/util/app_constant.dart';
+
 part 'hide_ad_dialog_page_controller.freezed.dart';
 part 'hide_ad_dialog_page_controller.g.dart';
 
@@ -23,9 +25,6 @@ class HideAdDialogPageControllerState with _$HideAdDialogPageControllerState {
     required bool isDailyQuizPlayed,
   }) = _HideAdDialogPageControllerState;
   const HideAdDialogPageControllerState._();
-
-  /// 1日にリワード広告を視聴できる回数の上限。
-  static const int maxRewardedAdWatchCount = 2;
 
   /// これ以上リワード広告を視聴できるかどうか。
   bool get canWatchRewardedAd =>
