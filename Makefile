@@ -18,7 +18,13 @@ melos_setup:
 	melos clean
 	melos bootstrap
 
-.PHONY: clean_gen
-clean_gen:
+# app パッケージ生成前に clean しないとエラーが発生する。
+.PHONY: clean_gen_all
+clean_gen_all:
 	melos clean
+	melos gen --no-select
+
+# app パッケージ生成前に clean しないとエラーが発生する。
+.PHONY: gen
+gen:
 	melos gen
