@@ -24,7 +24,7 @@ class AdFreePeriodRepository {
         .doc('current')
         .get();
 
-    final endTime = doc.data()?['endTime'] as Timestamp?;
+    final endTime = doc.data()?['endAtAdFreePeriod'] as Timestamp?;
     if (!doc.exists || endTime == null) {
       throw FirestoreException.notFound();
     }
