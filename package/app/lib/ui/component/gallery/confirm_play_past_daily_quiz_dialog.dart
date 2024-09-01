@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
 import '../common/dialog/confirm_dialog.dart';
+import '../common/sized_circular_indicator.dart';
 
 class ConfirmPlayPastDailyQuizDialog extends ConsumerStatefulWidget {
   const ConfirmPlayPastDailyQuizDialog({
@@ -50,14 +51,7 @@ class _ConfirmPlayPastDailyQuizDialog
       onAccept: widget.onPressed,
       acceptWidget: rewardedAdState.isLoaded
           ? const Text('はい')
-          : const SizedBox(
-              // 正方形で表示させるため、 _buttonHeight を width に設定。
-              height: _buttonHeight,
-              width: _buttonHeight,
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
+          : const SizedCircularIndicator(size: _buttonHeight),
     );
   }
 }
