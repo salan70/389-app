@@ -46,6 +46,12 @@ enum HideAdDialogPageState {
 class HideAdDialogPageController extends _$HideAdDialogPageController {
   @override
   Future<HideAdDialogPageControllerState> build() async {
+    // リワード広告をロードする。
+    // ロードに時間がかかるのか、 `build()` 内の先頭で実行しないと、
+    // `onTapWatchRewardedAd()` を呼んだ際にロードが完了していないことがある。
+    // 必要であれば、数秒待機させてもいいかもしれない。
+    await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
+
     final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
     final rewardedAdWatchCount = await _fetchRewardedAdWatchCount(userId);
 
@@ -53,9 +59,6 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
 
     final isDailyQuizPlayed =
         await ref.watch(isPlayedTodaysDailyQuizProvider.future);
-
-    // リワード広告をロードする。
-    await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
 
     return HideAdDialogPageControllerState(
       state: HideAdDialogPageState.normal,
