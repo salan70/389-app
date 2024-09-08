@@ -51,9 +51,8 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
 
     final adFreePeriodEndDate = await _fetchEndTime();
 
-    final todayInApp = await _todayInApp();
     final isDailyQuizPlayed =
-        await ref.watch(dailyQuizProvider(todayInApp).future) != null;
+        await ref.watch(isPlayedTodaysDailyQuizProvider.future);
 
     // リワード広告をロードする。
     await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
@@ -91,7 +90,7 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
   }
 
   Future<DateTime?> _fetchEndTime() async {
-    final userId = ref.read(authRepositoryProvider).getCurrentUser()!.uid;
+    final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
     try {
       final endTime =
           await ref.watch(adFreePeriodRepositoryProvider).fetchEndTime(userId);
