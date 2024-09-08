@@ -122,13 +122,13 @@ class _HideAdDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          AdStatusIcons(
+          _AdStatusIcons(
             rewardedAdWatchCount: rewardedAdWatchCount ?? 0,
             isDailyQuizPlayed: isDailyQuizPlayed ?? false,
           ),
           const SizedBox(height: 8),
           adFreePeriodEndDate != null
-              ? AdFreePeriodText(adFreePeriodEndDate: adFreePeriodEndDate!)
+              ? _AdFreePeriodText(adFreePeriodEndDate: adFreePeriodEndDate!)
               // 画面上のズレを防ぐために、空の `Text` を配置する。
               : const Text(''),
         ],
@@ -163,9 +163,8 @@ class _HideAdDialog extends StatelessWidget {
   }
 }
 
-class AdStatusIcons extends StatelessWidget {
-  const AdStatusIcons({
-    super.key,
+class _AdStatusIcons extends StatelessWidget {
+  const _AdStatusIcons({
     required this.rewardedAdWatchCount,
     required this.isDailyQuizPlayed,
   });
@@ -223,11 +222,8 @@ class _AdStatusIcon extends StatelessWidget {
   }
 }
 
-class AdFreePeriodText extends StatelessWidget {
-  const AdFreePeriodText({
-    super.key,
-    required this.adFreePeriodEndDate,
-  });
+class _AdFreePeriodText extends StatelessWidget {
+  const _AdFreePeriodText({required this.adFreePeriodEndDate});
 
   final DateTime adFreePeriodEndDate;
 
