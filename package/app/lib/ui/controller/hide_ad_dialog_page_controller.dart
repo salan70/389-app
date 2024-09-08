@@ -47,10 +47,10 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
   @override
   Future<HideAdDialogPageControllerState> build() async {
     // リワード広告をロードする。
-    // ロードに時間がかかるのか、 `build()` 内の先頭で実行しないと、
-    // `onTapWatchRewardedAd()` を呼んだ際にロードが完了していないことがある。
-    // 必要であれば、数秒待機させてもいいかもしれない。
+    // ロードに時間がかかり `onTapWatchRewardedAd()` を呼んだ際に
+    // ロードが完了していないことがあるため、500ms待機する。
     await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
+    await Future<void>.delayed(const Duration(milliseconds: 500));
 
     final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
     final rewardedAdWatchCount = await _fetchRewardedAdWatchCount(userId);
@@ -76,6 +76,10 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
             .read(rewardedAdHistoryRepositoryProvider)
             .createRewardedAdHistory(userId);
 
+        // `state.adFreePeriodEndDate` の更新に時間がかかるため、500ms待機する。
+        // ※`state.adFreePeriodEndDate` の更新は Cloud Functions で行っている。
+        await Future<void>.delayed(const Duration(milliseconds: 500));
+
         // データを更新するために再生成し、待機する。
         ref.invalidateSelf();
         await future;
@@ -92,6 +96,7 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
         .fetchWatchAdCount(userId, startOfDay, endOfDay);
   }
 
+  // `build()` 内で呼び出されるため、 `ref.watch()` を使っている。
   Future<DateTime?> _fetchEndTime() async {
     final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
     try {
