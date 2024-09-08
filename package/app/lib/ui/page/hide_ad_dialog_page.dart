@@ -80,6 +80,7 @@ class _HideAdDialog extends StatelessWidget {
         isDailyQuizPlayed = null,
         onTapWatchRewardedAd = null;
 
+  /// [_HideAdDialog] の種類。
   final _HideAdDialogType type;
 
   /// リワード広告の視聴回数。
