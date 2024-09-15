@@ -19,10 +19,12 @@ class HideAdDialogPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncState = ref.watch(hideAdDialogPageControllerProvider);
+    final asyncValue = asyncState.value;
+
     return asyncState.when(
       data: (state) {
-        switch (state.pageState) {
-          case HideAdDialogPageState.normal:
+        switch (state.stateType) {
+          case RewardAdStateType.loaded:
             return _HideAdDialog.normal(
               rewardedAdWatchCount: state.rewardedAdWatchCount,
               adFreePeriodEndDate: state.adFreePeriodEndDate,
@@ -35,21 +37,36 @@ class HideAdDialogPage extends ConsumerWidget {
                   : null,
             );
 
-          case HideAdDialogPageState.loading:
-            return const _HideAdDialog.loading();
+          case RewardAdStateType.loading:
+            return _HideAdDialog.loading(
+              rewardedAdWatchCount: state.rewardedAdWatchCount,
+              adFreePeriodEndDate: state.adFreePeriodEndDate,
+              isDailyQuizPlayed: state.isDailyQuizPlayed,
+            );
 
-          case HideAdDialogPageState.error:
+          case RewardAdStateType.error:
+            logger.e('async じゃないほうの error');
             return _HideAdDialog.error(
+              rewardedAdWatchCount: state.rewardedAdWatchCount,
+              adFreePeriodEndDate: state.adFreePeriodEndDate,
+              isDailyQuizPlayed: state.isDailyQuizPlayed,
               onTapRetry: ref
                   .read(hideAdDialogPageControllerProvider.notifier)
                   .onTapRetry,
             );
         }
       },
-      loading: () => const _HideAdDialog.loading(),
+      loading: () => _HideAdDialog.loading(
+        rewardedAdWatchCount: asyncValue?.rewardedAdWatchCount,
+        adFreePeriodEndDate: asyncValue?.adFreePeriodEndDate,
+        isDailyQuizPlayed: asyncValue?.isDailyQuizPlayed,
+      ),
       error: (e, s) {
         logger.e('hideAdDialogPageControllerProvider でエラーが発生。', e, s);
         return _HideAdDialog.error(
+          rewardedAdWatchCount: asyncValue?.rewardedAdWatchCount,
+          adFreePeriodEndDate: asyncValue?.adFreePeriodEndDate,
+          isDailyQuizPlayed: asyncValue?.isDailyQuizPlayed,
           onTapRetry:
               ref.read(hideAdDialogPageControllerProvider.notifier).onTapRetry,
         );
@@ -73,11 +90,11 @@ enum _HideAdDialogType {
 }
 
 class _HideAdDialog extends StatelessWidget {
-  const _HideAdDialog.loading()
-      : type = _HideAdDialogType.loading,
-        rewardedAdWatchCount = null,
-        adFreePeriodEndDate = null,
-        isDailyQuizPlayed = null,
+  const _HideAdDialog.loading({
+    required this.rewardedAdWatchCount,
+    required this.adFreePeriodEndDate,
+    required this.isDailyQuizPlayed,
+  })  : type = _HideAdDialogType.loading,
         onTapWatchRewardedAd = null,
         onTapRetry = null;
 
@@ -93,11 +110,11 @@ class _HideAdDialog extends StatelessWidget {
         onTapRetry = null;
 
   const _HideAdDialog.error({
+    required this.rewardedAdWatchCount,
+    required this.adFreePeriodEndDate,
+    required this.isDailyQuizPlayed,
     required this.onTapRetry,
   })  : type = _HideAdDialogType.error,
-        rewardedAdWatchCount = null,
-        adFreePeriodEndDate = null,
-        isDailyQuizPlayed = null,
         onTapWatchRewardedAd = null;
 
   /// [_HideAdDialog] の種類。
@@ -105,17 +122,17 @@ class _HideAdDialog extends StatelessWidget {
 
   /// リワード広告の視聴回数。
   ///
-  /// [_HideAdDialog.normal] 以外の場合は `null` となる。
+  /// [_HideAdDialog.normal] 以外の場合は `null` となりうる。
   final int? rewardedAdWatchCount;
 
   /// 広告非表示期間の終了日時。
   ///
-  /// [_HideAdDialog.normal] 以外の場合は `null` となる。
+  /// [_HideAdDialog.normal] 以外の場合は `null` となりうる。
   final DateTime? adFreePeriodEndDate;
 
   /// デイリークイズをプレイ済みかどうか。
   ///
-  /// [_HideAdDialog.normal] 以外の場合は `null` となる。
+  /// [_HideAdDialog.normal] 以外の場合は `null` となりうる。
   final bool? isDailyQuizPlayed;
 
   /// 広告を見るボタンを押したときのコールバック。

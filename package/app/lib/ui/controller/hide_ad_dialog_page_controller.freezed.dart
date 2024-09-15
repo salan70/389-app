@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HideAdDialogPageControllerState {
   /// ページの状態。
-  HideAdDialogPageState get pageState => throw _privateConstructorUsedError;
+  RewardAdStateType get stateType => throw _privateConstructorUsedError;
 
   /// リワード広告の視聴数。
   int get rewardedAdWatchCount => throw _privateConstructorUsedError;
@@ -42,7 +42,7 @@ abstract class $HideAdDialogPageControllerStateCopyWith<$Res> {
           HideAdDialogPageControllerState>;
   @useResult
   $Res call(
-      {HideAdDialogPageState pageState,
+      {RewardAdStateType stateType,
       int rewardedAdWatchCount,
       DateTime? adFreePeriodEndDate,
       bool isDailyQuizPlayed});
@@ -62,16 +62,16 @@ class _$HideAdDialogPageControllerStateCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageState = null,
+    Object? stateType = null,
     Object? rewardedAdWatchCount = null,
     Object? adFreePeriodEndDate = freezed,
     Object? isDailyQuizPlayed = null,
   }) {
     return _then(_value.copyWith(
-      pageState: null == pageState
-          ? _value.pageState
-          : pageState // ignore: cast_nullable_to_non_nullable
-              as HideAdDialogPageState,
+      stateType: null == stateType
+          ? _value.stateType
+          : stateType // ignore: cast_nullable_to_non_nullable
+              as RewardAdStateType,
       rewardedAdWatchCount: null == rewardedAdWatchCount
           ? _value.rewardedAdWatchCount
           : rewardedAdWatchCount // ignore: cast_nullable_to_non_nullable
@@ -98,7 +98,7 @@ abstract class _$$HideAdDialogPageControllerStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {HideAdDialogPageState pageState,
+      {RewardAdStateType stateType,
       int rewardedAdWatchCount,
       DateTime? adFreePeriodEndDate,
       bool isDailyQuizPlayed});
@@ -117,16 +117,16 @@ class __$$HideAdDialogPageControllerStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pageState = null,
+    Object? stateType = null,
     Object? rewardedAdWatchCount = null,
     Object? adFreePeriodEndDate = freezed,
     Object? isDailyQuizPlayed = null,
   }) {
     return _then(_$HideAdDialogPageControllerStateImpl(
-      pageState: null == pageState
-          ? _value.pageState
-          : pageState // ignore: cast_nullable_to_non_nullable
-              as HideAdDialogPageState,
+      stateType: null == stateType
+          ? _value.stateType
+          : stateType // ignore: cast_nullable_to_non_nullable
+              as RewardAdStateType,
       rewardedAdWatchCount: null == rewardedAdWatchCount
           ? _value.rewardedAdWatchCount
           : rewardedAdWatchCount // ignore: cast_nullable_to_non_nullable
@@ -148,7 +148,7 @@ class __$$HideAdDialogPageControllerStateImplCopyWithImpl<$Res>
 class _$HideAdDialogPageControllerStateImpl
     extends _HideAdDialogPageControllerState {
   const _$HideAdDialogPageControllerStateImpl(
-      {required this.pageState,
+      {required this.stateType,
       required this.rewardedAdWatchCount,
       required this.adFreePeriodEndDate,
       required this.isDailyQuizPlayed})
@@ -156,7 +156,7 @@ class _$HideAdDialogPageControllerStateImpl
 
   /// ページの状態。
   @override
-  final HideAdDialogPageState pageState;
+  final RewardAdStateType stateType;
 
   /// リワード広告の視聴数。
   @override
@@ -172,7 +172,7 @@ class _$HideAdDialogPageControllerStateImpl
 
   @override
   String toString() {
-    return 'HideAdDialogPageControllerState(pageState: $pageState, rewardedAdWatchCount: $rewardedAdWatchCount, adFreePeriodEndDate: $adFreePeriodEndDate, isDailyQuizPlayed: $isDailyQuizPlayed)';
+    return 'HideAdDialogPageControllerState(stateType: $stateType, rewardedAdWatchCount: $rewardedAdWatchCount, adFreePeriodEndDate: $adFreePeriodEndDate, isDailyQuizPlayed: $isDailyQuizPlayed)';
   }
 
   @override
@@ -180,8 +180,8 @@ class _$HideAdDialogPageControllerStateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HideAdDialogPageControllerStateImpl &&
-            (identical(other.pageState, pageState) ||
-                other.pageState == pageState) &&
+            (identical(other.stateType, stateType) ||
+                other.stateType == stateType) &&
             (identical(other.rewardedAdWatchCount, rewardedAdWatchCount) ||
                 other.rewardedAdWatchCount == rewardedAdWatchCount) &&
             (identical(other.adFreePeriodEndDate, adFreePeriodEndDate) ||
@@ -191,7 +191,7 @@ class _$HideAdDialogPageControllerStateImpl
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pageState, rewardedAdWatchCount,
+  int get hashCode => Object.hash(runtimeType, stateType, rewardedAdWatchCount,
       adFreePeriodEndDate, isDailyQuizPlayed);
 
   @JsonKey(ignore: true)
@@ -206,7 +206,7 @@ class _$HideAdDialogPageControllerStateImpl
 abstract class _HideAdDialogPageControllerState
     extends HideAdDialogPageControllerState {
   const factory _HideAdDialogPageControllerState(
-          {required final HideAdDialogPageState pageState,
+          {required final RewardAdStateType stateType,
           required final int rewardedAdWatchCount,
           required final DateTime? adFreePeriodEndDate,
           required final bool isDailyQuizPlayed}) =
@@ -216,7 +216,7 @@ abstract class _HideAdDialogPageControllerState
   @override
 
   /// ページの状態。
-  HideAdDialogPageState get pageState;
+  RewardAdStateType get stateType;
   @override
 
   /// リワード広告の視聴数。

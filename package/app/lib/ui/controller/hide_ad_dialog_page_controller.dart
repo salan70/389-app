@@ -1,4 +1,3 @@
-import 'package:common/common.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:model/model.dart';
 import 'package:ntp/ntp.dart';
@@ -13,7 +12,7 @@ part 'hide_ad_dialog_page_controller.g.dart';
 class HideAdDialogPageControllerState with _$HideAdDialogPageControllerState {
   const factory HideAdDialogPageControllerState({
     /// ページの状態。
-    required HideAdDialogPageState pageState,
+    required RewardAdStateType stateType,
 
     /// リワード広告の視聴数。
     required int rewardedAdWatchCount,
@@ -31,37 +30,11 @@ class HideAdDialogPageControllerState with _$HideAdDialogPageControllerState {
       rewardedAdWatchCount <= maxRewardedAdWatchCount;
 }
 
-enum HideAdDialogPageState {
-  /// ロード中。
-  loading,
-
-  /// 通常状態。
-  normal,
-
-  /// エラー。
-  error;
-
-  /// [RewardAdState] に応じた [HideAdDialogPageState] を返す。
-  static HideAdDialogPageState fromRewardedAdState(RewardAdState state) {
-    switch (state.stateType) {
-      case RewardAdStateType.loading:
-        return HideAdDialogPageState.loading;
-      case RewardAdStateType.loaded:
-        return HideAdDialogPageState.normal;
-      case RewardAdStateType.error:
-        return HideAdDialogPageState.error;
-    }
-  }
-}
-
 @riverpod
 class HideAdDialogPageController extends _$HideAdDialogPageController {
   @override
   Future<HideAdDialogPageControllerState> build() async {
-    // リワード広告をロードする。
-    final rewardedAdState = ref.watch(rewardedAdNotifierProvider);
-    final pageState =
-        HideAdDialogPageState.fromRewardedAdState(rewardedAdState);
+    final rewardAdState = ref.watch(rewardedAdNotifierProvider);
     await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
 
     final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
@@ -73,7 +46,7 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
         await ref.watch(isPlayedTodaysDailyQuizProvider.future);
 
     return HideAdDialogPageControllerState(
-      pageState: pageState,
+      stateType: rewardAdState.stateType,
       rewardedAdWatchCount: rewardedAdWatchCount,
       adFreePeriodEndDate: adFreePeriodEndDate,
       isDailyQuizPlayed: isDailyQuizPlayed,
@@ -88,9 +61,9 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
             .read(rewardedAdHistoryRepositoryProvider)
             .createRewardedAdHistory(userId);
 
-        // `state.adFreePeriodEndDate` の更新に時間がかかるため、500ms待機する。
+        // `state.adFreePeriodEndDate` の更新に時間がかかるため、1秒待機する。
         // ※`state.adFreePeriodEndDate` の更新は Cloud Functions で行っている。
-        await Future<void>.delayed(const Duration(milliseconds: 500));
+        await Future<void>.delayed(const Duration(seconds: 1));
 
         // 更新を反映させるために再生成する。
         ref.invalidate(endAtAdFreePeriodProvider);
@@ -118,26 +91,20 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
 
   // `build()` 内で呼び出されるため、 `ref.watch()` を使っている。
   Future<DateTime?> _fetchEndTime() async {
-    final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
-    try {
-      final endTime =
-          await ref.watch(adFreePeriodRepositoryProvider).fetchEndTime(userId);
+    final endTime = await ref.watch(endAtAdFreePeriodProvider.future);
 
-      final now = await NTP.now();
-      // * 広告非表示期間が終了している場合。
-      if (endTime.isBefore(now)) {
-        return null;
-      }
-
-      // * 広告非表示期間が終了していない場合。
-      return endTime;
-    } on FirestoreException catch (e) {
-      // * データが存在しない場合。
-      if (e == FirestoreException.notFound()) {
-        return null;
-      }
-      rethrow;
+    if (endTime == null) {
+      return null;
     }
+
+    final now = await NTP.now();
+    // * 広告非表示期間が終了している場合。
+    if (endTime.isBefore(now)) {
+      return null;
+    }
+
+    // * 広告非表示期間が終了していない場合。
+    return endTime;
   }
 
   Future<DateTime> _todayInApp() async {

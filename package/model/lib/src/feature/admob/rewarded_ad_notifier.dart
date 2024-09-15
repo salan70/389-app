@@ -20,9 +20,7 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (Ad ad) {
-          logger.i('リワード広告を読み込みました。');
-
-          // 広告が既に読み込まれている `state` を更新しない。
+          // 広告が既に読み込まれている場合は `state` を更新しない。
           if (state.stateType == RewardAdStateType.loaded) {
             return;
           }
