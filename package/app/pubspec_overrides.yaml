@@ -1,7 +1,0 @@
-# melos_managed_dependency_overrides: common,model,intl
-dependency_overrides:
-  common:
-    path: ../common
-  model:
-    path: ../model
-  intl: ^0.18.0
