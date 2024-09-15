@@ -6,25 +6,27 @@ part of 'ad_free_state.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$endAtAdFreePeriodHash() => r'553cc963706848e364cb6f2fb8fb747e1ae1d5e5';
+String _$endAtAdFreePeriodStreamHash() =>
+    r'6584b9c65896a8dae4e3a16da62dd45ac7262182';
 
 /// 広告非表示期間の終了日時を取得する。
 ///
 /// 広告非表示期間が設定されていない場合は `null` を返す。
 ///
-/// Copied from [endAtAdFreePeriod].
-@ProviderFor(endAtAdFreePeriod)
-final endAtAdFreePeriodProvider = AutoDisposeFutureProvider<DateTime?>.internal(
-  endAtAdFreePeriod,
-  name: r'endAtAdFreePeriodProvider',
+/// Copied from [endAtAdFreePeriodStream].
+@ProviderFor(endAtAdFreePeriodStream)
+final endAtAdFreePeriodStreamProvider =
+    AutoDisposeStreamProvider<DateTime?>.internal(
+  endAtAdFreePeriodStream,
+  name: r'endAtAdFreePeriodStreamProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$endAtAdFreePeriodHash,
+      : _$endAtAdFreePeriodStreamHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef EndAtAdFreePeriodRef = AutoDisposeFutureProviderRef<DateTime?>;
+typedef EndAtAdFreePeriodStreamRef = AutoDisposeStreamProviderRef<DateTime?>;
 String _$isAdFreePeriodHash() => r'9a544532538e1a5d4323583496e827ae2f6472f4';
 
 /// 広告非表示期間中かどうかを返す。

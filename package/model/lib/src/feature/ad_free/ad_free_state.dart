@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -10,19 +11,29 @@ part 'ad_free_state.g.dart';
 ///
 /// 広告非表示期間が設定されていない場合は `null` を返す。
 @riverpod
-Future<DateTime?> endAtAdFreePeriod(EndAtAdFreePeriodRef ref) async {
+Stream<DateTime?> endAtAdFreePeriodStream(EndAtAdFreePeriodStreamRef ref) {
   final adFreePeriodRepository = ref.watch(adFreePeriodRepositoryProvider);
   final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
-  final endTime = await adFreePeriodRepository.fetchEndTime(userId);
 
-  return endTime;
+  try {
+    final endTime = adFreePeriodRepository.streamEndTime(userId);
+    return endTime;
+  } on Exception catch (e) {
+    logger.e(e);
+    return Stream.value(null);
+  }
 }
 
 /// 広告非表示期間中かどうかを返す。
 @riverpod
 Future<bool> isAdFreePeriod(IsAdFreePeriodRef ref) async {
-  final endTime = await ref.watch(endAtAdFreePeriodProvider.future);
+  final asyncEndTime = ref.watch(endAtAdFreePeriodStreamProvider).asData;
 
+  if (asyncEndTime == null) {
+    return false;
+  }
+
+  final endTime = asyncEndTime.value;
   if (endTime == null) {
     return false;
   }

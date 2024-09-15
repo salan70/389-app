@@ -16,19 +16,24 @@ class AdFreePeriodRepository {
   final FirebaseFirestore firestore;
 
   /// 広告非表示期間の終了日時を取得する。
-  Future<DateTime> fetchEndTime(String userId) async {
-    final doc = await firestore
+  Stream<DateTime> streamEndTime(String userId) {
+    final snapshot = firestore
         .collection('users')
         .doc(userId)
         .collection('adFreePeriod')
         .doc('current')
-        .get();
+        .snapshots();
 
-    final endTime = doc.data()?['endAtAdFreePeriod'] as Timestamp?;
-    if (!doc.exists || endTime == null) {
-      throw FirestoreException.notFound();
-    }
+    final endTime = snapshot.map((snapshot) {
+      final endAtAdFreePeriod =
+          snapshot.data()?['endAtAdFreePeriod'] as Timestamp?;
+      if (!snapshot.exists || endAtAdFreePeriod == null) {
+        throw FirestoreException.notFound();
+      }
 
-    return endTime.toDate();
+      return endAtAdFreePeriod.toDate();
+    });
+
+    return endTime;
   }
 }

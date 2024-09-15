@@ -61,13 +61,6 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
             .read(rewardedAdHistoryRepositoryProvider)
             .createRewardedAdHistory(userId);
 
-        // `state.adFreePeriodEndDate` の更新に時間がかかるため、1秒待機する。
-        // ※`state.adFreePeriodEndDate` の更新は Cloud Functions で行っている。
-        await Future<void>.delayed(const Duration(seconds: 1));
-
-        // 更新を反映させるために再生成する。
-        ref.invalidate(endAtAdFreePeriodProvider);
-
         // データを更新するために再生成し、待機する。
         ref.invalidateSelf();
         await future;
@@ -91,7 +84,8 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
 
   // `build()` 内で呼び出されるため、 `ref.watch()` を使っている。
   Future<DateTime?> _fetchEndTime() async {
-    final endTime = await ref.watch(endAtAdFreePeriodProvider.future);
+    final asyncEndTime = ref.watch(endAtAdFreePeriodStreamProvider);
+    final endTime = asyncEndTime.asData?.value;
 
     if (endTime == null) {
       return null;
