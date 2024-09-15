@@ -10,7 +10,8 @@ part 'rewarded_ad_notifier.g.dart';
 @riverpod
 class RewardedAdNotifier extends _$RewardedAdNotifier {
   @override
-  RewardAdState build() => const RewardAdState();
+  RewardAdState build() =>
+      const RewardAdState(stateType: RewardAdStateType.loading);
 
   /// 広告を作成する。
   Future<void> loadAd() async {
@@ -22,18 +23,20 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
           logger.i('リワード広告を読み込みました。');
 
           // 広告が既に読み込まれている `state` を更新しない。
-          if (state.isLoaded) {
+          if (state.stateType == RewardAdStateType.loaded) {
             return;
           }
 
           state = state.copyWith(
             rewardedAd: ad as RewardedAd,
-            isLoaded: true,
+            stateType: RewardAdStateType.loaded,
           );
         },
         onAdFailedToLoad: (LoadAdError error) {
           logger.e('リワード広告の読み込みに失敗しました。', error);
-          throw AdmobException.unknown();
+          state = state.copyWith(
+            stateType: RewardAdStateType.error,
+          );
         },
       ),
     );

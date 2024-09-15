@@ -49,7 +49,7 @@ class _ConfirmPlayPastDailyQuizDialog
           '※1度プレイした日付の「今日の1問」は、2度とプレイできません。\n\n'
           '※プレイ中にアプリが終了された場合、不正解となります。',
       onAccept: widget.onPressed,
-      acceptWidget: rewardedAdState.isLoaded
+      acceptWidget: rewardedAdState.stateType == RewardAdStateType.loaded
           ? const Text('はい')
           : const SizedCircularIndicator(size: _buttonHeight),
     );

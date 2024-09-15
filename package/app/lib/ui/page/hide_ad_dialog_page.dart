@@ -19,29 +19,40 @@ class HideAdDialogPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncState = ref.watch(hideAdDialogPageControllerProvider);
-
     return asyncState.when(
       data: (state) {
-        if (state.pageState == HideAdDialogPageState.loading) {
-          return const _HideAdDialog.loading();
-        }
+        switch (state.pageState) {
+          case HideAdDialogPageState.normal:
+            return _HideAdDialog.normal(
+              rewardedAdWatchCount: state.rewardedAdWatchCount,
+              adFreePeriodEndDate: state.adFreePeriodEndDate,
+              isDailyQuizPlayed: state.isDailyQuizPlayed,
+              // リワード広告が見れる場合のみ、ボタンタップ時に処理を実行する。
+              onTapWatchRewardedAd: state.canWatchRewardedAd
+                  ? () => ref
+                      .read(hideAdDialogPageControllerProvider.notifier)
+                      .onTapWatchRewardedAd()
+                  : null,
+            );
 
-        return _HideAdDialog.normal(
-          rewardedAdWatchCount: state.rewardedAdWatchCount,
-          adFreePeriodEndDate: state.adFreePeriodEndDate,
-          isDailyQuizPlayed: state.isDailyQuizPlayed,
-          // リワード広告が見れる場合のみ、ボタンタップ時に処理を実行する。
-          onTapWatchRewardedAd: state.canWatchRewardedAd
-              ? () => ref
+          case HideAdDialogPageState.loading:
+            return const _HideAdDialog.loading();
+
+          case HideAdDialogPageState.error:
+            return _HideAdDialog.error(
+              onTapRetry: ref
                   .read(hideAdDialogPageControllerProvider.notifier)
-                  .onTapWatchRewardedAd()
-              : null,
-        );
+                  .onTapRetry,
+            );
+        }
       },
       loading: () => const _HideAdDialog.loading(),
       error: (e, s) {
         logger.e('hideAdDialogPageControllerProvider でエラーが発生。', e, s);
-        return const _HideAdDialog.error();
+        return _HideAdDialog.error(
+          onTapRetry:
+              ref.read(hideAdDialogPageControllerProvider.notifier).onTapRetry,
+        );
       },
     );
   }
@@ -67,20 +78,23 @@ class _HideAdDialog extends StatelessWidget {
         rewardedAdWatchCount = null,
         adFreePeriodEndDate = null,
         isDailyQuizPlayed = null,
-        onTapWatchRewardedAd = null;
+        onTapWatchRewardedAd = null,
+        onTapRetry = null;
 
   const _HideAdDialog.normal({
     required this.rewardedAdWatchCount,
     required this.adFreePeriodEndDate,
     required this.isDailyQuizPlayed,
     required this.onTapWatchRewardedAd,
-  }) : type = rewardedAdWatchCount != null &&
+  })  : type = rewardedAdWatchCount != null &&
                 rewardedAdWatchCount < maxRewardedAdWatchCount
             ? _HideAdDialogType.normal
-            : _HideAdDialogType.alreadyWatchedMax;
+            : _HideAdDialogType.alreadyWatchedMax,
+        onTapRetry = null;
 
-  const _HideAdDialog.error()
-      : type = _HideAdDialogType.error,
+  const _HideAdDialog.error({
+    required this.onTapRetry,
+  })  : type = _HideAdDialogType.error,
         rewardedAdWatchCount = null,
         adFreePeriodEndDate = null,
         isDailyQuizPlayed = null,
@@ -108,6 +122,11 @@ class _HideAdDialog extends StatelessWidget {
   ///
   /// [_HideAdDialog.normal] 以外の場合は `null` となる。
   final VoidCallback? onTapWatchRewardedAd;
+
+  /// リトライボタンを押したときのコールバック。
+  ///
+  /// [_HideAdDialog.error] 以外の場合は `null` となる。
+  final VoidCallback? onTapRetry;
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +173,17 @@ class _HideAdDialog extends StatelessWidget {
             buttonType: type == _HideAdDialogType.alreadyWatchedMax
                 ? ButtonType.disabled
                 : ButtonType.alert,
-            onPressed: onTapWatchRewardedAd,
+            onPressed: () {
+              // リワード広告を見るボタンを押したときの処理。
+              if (type == _HideAdDialogType.normal) {
+                onTapWatchRewardedAd?.call();
+              }
+
+              // リトライボタンを押したときの処理。
+              if (type == _HideAdDialogType.error) {
+                onTapRetry?.call();
+              }
+            },
             child: switch (type) {
               _HideAdDialogType.normal => const Text('広告を見る'),
               _HideAdDialogType.loading =>

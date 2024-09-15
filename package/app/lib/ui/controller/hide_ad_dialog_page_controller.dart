@@ -38,15 +38,19 @@ enum HideAdDialogPageState {
   /// 通常状態。
   normal,
 
-  /// リワード広告のロードでエラーが発生。
-  rewardedAdLoadError;
+  /// エラー。
+  error;
 
   /// [RewardAdState] に応じた [HideAdDialogPageState] を返す。
   static HideAdDialogPageState fromRewardedAdState(RewardAdState state) {
-    if (state.isLoaded) {
-      return HideAdDialogPageState.normal;
+    switch (state.stateType) {
+      case RewardAdStateType.loading:
+        return HideAdDialogPageState.loading;
+      case RewardAdStateType.loaded:
+        return HideAdDialogPageState.normal;
+      case RewardAdStateType.error:
+        return HideAdDialogPageState.error;
     }
-    return HideAdDialogPageState.loading;
   }
 }
 
@@ -96,6 +100,11 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
         await future;
       },
     );
+  }
+
+  void onTapRetry() {
+    ref.invalidate(rewardedAdNotifierProvider);
+    ref.invalidateSelf();
   }
 
   Future<int> _fetchRewardedAdWatchCount(String userId) async {

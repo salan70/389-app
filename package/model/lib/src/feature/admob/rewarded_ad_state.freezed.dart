@@ -17,9 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RewardAdState {
   RewardedAd? get rewardedAd => throw _privateConstructorUsedError;
-  bool get isLoaded => throw _privateConstructorUsedError;
-  bool get isWatchCompleted => throw _privateConstructorUsedError;
-  bool get isStartedQuiz => throw _privateConstructorUsedError;
+  RewardAdStateType get stateType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RewardAdStateCopyWith<RewardAdState> get copyWith =>
@@ -32,11 +30,7 @@ abstract class $RewardAdStateCopyWith<$Res> {
           RewardAdState value, $Res Function(RewardAdState) then) =
       _$RewardAdStateCopyWithImpl<$Res, RewardAdState>;
   @useResult
-  $Res call(
-      {RewardedAd? rewardedAd,
-      bool isLoaded,
-      bool isWatchCompleted,
-      bool isStartedQuiz});
+  $Res call({RewardedAd? rewardedAd, RewardAdStateType stateType});
 }
 
 /// @nodoc
@@ -53,27 +47,17 @@ class _$RewardAdStateCopyWithImpl<$Res, $Val extends RewardAdState>
   @override
   $Res call({
     Object? rewardedAd = freezed,
-    Object? isLoaded = null,
-    Object? isWatchCompleted = null,
-    Object? isStartedQuiz = null,
+    Object? stateType = null,
   }) {
     return _then(_value.copyWith(
       rewardedAd: freezed == rewardedAd
           ? _value.rewardedAd
           : rewardedAd // ignore: cast_nullable_to_non_nullable
               as RewardedAd?,
-      isLoaded: null == isLoaded
-          ? _value.isLoaded
-          : isLoaded // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isWatchCompleted: null == isWatchCompleted
-          ? _value.isWatchCompleted
-          : isWatchCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isStartedQuiz: null == isStartedQuiz
-          ? _value.isStartedQuiz
-          : isStartedQuiz // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stateType: null == stateType
+          ? _value.stateType
+          : stateType // ignore: cast_nullable_to_non_nullable
+              as RewardAdStateType,
     ) as $Val);
   }
 }
@@ -86,11 +70,7 @@ abstract class _$$RewardAdStateImplCopyWith<$Res>
       __$$RewardAdStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {RewardedAd? rewardedAd,
-      bool isLoaded,
-      bool isWatchCompleted,
-      bool isStartedQuiz});
+  $Res call({RewardedAd? rewardedAd, RewardAdStateType stateType});
 }
 
 /// @nodoc
@@ -105,27 +85,17 @@ class __$$RewardAdStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? rewardedAd = freezed,
-    Object? isLoaded = null,
-    Object? isWatchCompleted = null,
-    Object? isStartedQuiz = null,
+    Object? stateType = null,
   }) {
     return _then(_$RewardAdStateImpl(
       rewardedAd: freezed == rewardedAd
           ? _value.rewardedAd
           : rewardedAd // ignore: cast_nullable_to_non_nullable
               as RewardedAd?,
-      isLoaded: null == isLoaded
-          ? _value.isLoaded
-          : isLoaded // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isWatchCompleted: null == isWatchCompleted
-          ? _value.isWatchCompleted
-          : isWatchCompleted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isStartedQuiz: null == isStartedQuiz
-          ? _value.isStartedQuiz
-          : isStartedQuiz // ignore: cast_nullable_to_non_nullable
-              as bool,
+      stateType: null == stateType
+          ? _value.stateType
+          : stateType // ignore: cast_nullable_to_non_nullable
+              as RewardAdStateType,
     ));
   }
 }
@@ -133,27 +103,16 @@ class __$$RewardAdStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RewardAdStateImpl implements _RewardAdState {
-  const _$RewardAdStateImpl(
-      {this.rewardedAd,
-      this.isLoaded = false,
-      this.isWatchCompleted = false,
-      this.isStartedQuiz = false});
+  const _$RewardAdStateImpl({this.rewardedAd, required this.stateType});
 
   @override
   final RewardedAd? rewardedAd;
   @override
-  @JsonKey()
-  final bool isLoaded;
-  @override
-  @JsonKey()
-  final bool isWatchCompleted;
-  @override
-  @JsonKey()
-  final bool isStartedQuiz;
+  final RewardAdStateType stateType;
 
   @override
   String toString() {
-    return 'RewardAdState(rewardedAd: $rewardedAd, isLoaded: $isLoaded, isWatchCompleted: $isWatchCompleted, isStartedQuiz: $isStartedQuiz)';
+    return 'RewardAdState(rewardedAd: $rewardedAd, stateType: $stateType)';
   }
 
   @override
@@ -163,17 +122,12 @@ class _$RewardAdStateImpl implements _RewardAdState {
             other is _$RewardAdStateImpl &&
             (identical(other.rewardedAd, rewardedAd) ||
                 other.rewardedAd == rewardedAd) &&
-            (identical(other.isLoaded, isLoaded) ||
-                other.isLoaded == isLoaded) &&
-            (identical(other.isWatchCompleted, isWatchCompleted) ||
-                other.isWatchCompleted == isWatchCompleted) &&
-            (identical(other.isStartedQuiz, isStartedQuiz) ||
-                other.isStartedQuiz == isStartedQuiz));
+            (identical(other.stateType, stateType) ||
+                other.stateType == stateType));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, rewardedAd, isLoaded, isWatchCompleted, isStartedQuiz);
+  int get hashCode => Object.hash(runtimeType, rewardedAd, stateType);
 
   @JsonKey(ignore: true)
   @override
@@ -185,18 +139,12 @@ class _$RewardAdStateImpl implements _RewardAdState {
 abstract class _RewardAdState implements RewardAdState {
   const factory _RewardAdState(
       {final RewardedAd? rewardedAd,
-      final bool isLoaded,
-      final bool isWatchCompleted,
-      final bool isStartedQuiz}) = _$RewardAdStateImpl;
+      required final RewardAdStateType stateType}) = _$RewardAdStateImpl;
 
   @override
   RewardedAd? get rewardedAd;
   @override
-  bool get isLoaded;
-  @override
-  bool get isWatchCompleted;
-  @override
-  bool get isStartedQuiz;
+  RewardAdStateType get stateType;
   @override
   @JsonKey(ignore: true)
   _$$RewardAdStateImplCopyWith<_$RewardAdStateImpl> get copyWith =>
