@@ -7,7 +7,7 @@ part of 'hide_ad_dialog_page_controller.dart';
 // **************************************************************************
 
 String _$hideAdDialogPageControllerHash() =>
-    r'18cf0d1ef4ab3a83a6960f53b5512cb80ad75f32';
+    r'704a05e49da932ac616af351071f8f878f60a5a5';
 
 /// See also [HideAdDialogPageController].
 @ProviderFor(HideAdDialogPageController)

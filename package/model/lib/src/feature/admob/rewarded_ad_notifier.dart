@@ -20,13 +20,20 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (Ad ad) {
           logger.i('リワード広告を読み込みました。');
+
+          // 広告が既に読み込まれている `state` を更新しない。
+          if (state.isLoaded) {
+            return;
+          }
+
           state = state.copyWith(
             rewardedAd: ad as RewardedAd,
             isLoaded: true,
           );
         },
         onAdFailedToLoad: (LoadAdError error) {
-          logger.e('リワード広告の読み込みに失敗しました。: $error');
+          logger.e('リワード広告の読み込みに失敗しました。', error);
+          throw AdmobException.unknown();
         },
       ),
     );
@@ -61,9 +68,9 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       ..show(
         onUserEarnedReward: (ad, reward) {
           logger.i('リワード広告の視聴が完了しました。');
-          // state = state.copyWith(isWatchCompleted: true);
           onUserEarnedReward();
           logger.i('リワード広告の特典を受け取りました');
+          ref.invalidateSelf();
         },
       );
   }

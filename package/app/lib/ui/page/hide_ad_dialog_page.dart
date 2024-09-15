@@ -21,17 +21,23 @@ class HideAdDialogPage extends ConsumerWidget {
     final asyncState = ref.watch(hideAdDialogPageControllerProvider);
 
     return asyncState.when(
-      data: (state) => _HideAdDialog.normal(
-        rewardedAdWatchCount: state.rewardedAdWatchCount,
-        adFreePeriodEndDate: state.adFreePeriodEndDate,
-        isDailyQuizPlayed: state.isDailyQuizPlayed,
-        // リワード広告が見れる場合のみ、ボタンタップ時に処理を実行する。
-        onTapWatchRewardedAd: state.canWatchRewardedAd
-            ? () => ref
-                .read(hideAdDialogPageControllerProvider.notifier)
-                .onTapWatchRewardedAd()
-            : null,
-      ),
+      data: (state) {
+        if (state.pageState == HideAdDialogPageState.loading) {
+          return const _HideAdDialog.loading();
+        }
+
+        return _HideAdDialog.normal(
+          rewardedAdWatchCount: state.rewardedAdWatchCount,
+          adFreePeriodEndDate: state.adFreePeriodEndDate,
+          isDailyQuizPlayed: state.isDailyQuizPlayed,
+          // リワード広告が見れる場合のみ、ボタンタップ時に処理を実行する。
+          onTapWatchRewardedAd: state.canWatchRewardedAd
+              ? () => ref
+                  .read(hideAdDialogPageControllerProvider.notifier)
+                  .onTapWatchRewardedAd()
+              : null,
+        );
+      },
       loading: () => const _HideAdDialog.loading(),
       error: (e, s) {
         logger.e('hideAdDialogPageControllerProvider でエラーが発生。', e, s);

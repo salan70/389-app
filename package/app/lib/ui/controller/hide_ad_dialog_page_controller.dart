@@ -13,7 +13,7 @@ part 'hide_ad_dialog_page_controller.g.dart';
 class HideAdDialogPageControllerState with _$HideAdDialogPageControllerState {
   const factory HideAdDialogPageControllerState({
     /// ページの状態。
-    required HideAdDialogPageState state,
+    required HideAdDialogPageState pageState,
 
     /// リワード広告の視聴数。
     required int rewardedAdWatchCount,
@@ -39,7 +39,15 @@ enum HideAdDialogPageState {
   normal,
 
   /// リワード広告のロードでエラーが発生。
-  rewardedAdLoadError,
+  rewardedAdLoadError;
+
+  /// [RewardAdState] に応じた [HideAdDialogPageState] を返す。
+  static HideAdDialogPageState fromRewardedAdState(RewardAdState state) {
+    if (state.isLoaded) {
+      return HideAdDialogPageState.normal;
+    }
+    return HideAdDialogPageState.loading;
+  }
 }
 
 @riverpod
@@ -47,10 +55,10 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
   @override
   Future<HideAdDialogPageControllerState> build() async {
     // リワード広告をロードする。
-    // ロードに時間がかかり `onTapWatchRewardedAd()` を呼んだ際に
-    // ロードが完了していないことがあるため、500ms待機する。
+    final rewardedAdState = ref.watch(rewardedAdNotifierProvider);
+    final pageState =
+        HideAdDialogPageState.fromRewardedAdState(rewardedAdState);
     await ref.watch(rewardedAdNotifierProvider.notifier).loadAd();
-    await Future<void>.delayed(const Duration(milliseconds: 500));
 
     final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
     final rewardedAdWatchCount = await _fetchRewardedAdWatchCount(userId);
@@ -61,7 +69,7 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
         await ref.watch(isPlayedTodaysDailyQuizProvider.future);
 
     return HideAdDialogPageControllerState(
-      state: HideAdDialogPageState.normal,
+      pageState: pageState,
       rewardedAdWatchCount: rewardedAdWatchCount,
       adFreePeriodEndDate: adFreePeriodEndDate,
       isDailyQuizPlayed: isDailyQuizPlayed,
@@ -79,6 +87,9 @@ class HideAdDialogPageController extends _$HideAdDialogPageController {
         // `state.adFreePeriodEndDate` の更新に時間がかかるため、500ms待機する。
         // ※`state.adFreePeriodEndDate` の更新は Cloud Functions で行っている。
         await Future<void>.delayed(const Duration(milliseconds: 500));
+
+        // 更新を反映させるために再生成する。
+        ref.invalidate(endAtAdFreePeriodProvider);
 
         // データを更新するために再生成し、待機する。
         ref.invalidateSelf();
