@@ -1,4 +1,5 @@
 export 'error_message.dart';
+export 'exception/admob_exception.dart';
 export 'exception/app_exception.dart';
 export 'exception/auth_exception.dart';
 export 'exception/firestore_exception.dart';
