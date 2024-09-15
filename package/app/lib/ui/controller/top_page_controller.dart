@@ -106,6 +106,13 @@ class TopPageController with ControllerMixin {
     // dailyQuizResult ドキュメントを保存（新規作成）する。
     await _ref.read(quizResultServiceProvider).createDailyQuizResult(nowInApp);
 
+    // DB にて dailyQuiz の更新があった際に、広告非表示期間が更新される可能性があるため、
+    // ここで [endAtAdFreePeriodProvider] を再生成する。
+    // dailyQuiz を DB に保存してから広告非表示期間が更新されるまで
+    // 若干ラグがある（ Cloud Functions を使用 ）ため、 500ms 待機する。
+    await Future<void>.delayed(const Duration(milliseconds: 500));
+    _ref.invalidate(endAtAdFreePeriodProvider);
+
     await _ref
         .read(appRouterProvider)
         .push(PlayDailyQuizRoute(questionedAt: nowInApp));
