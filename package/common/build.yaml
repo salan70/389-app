@@ -1,0 +1,8 @@
+targets:
+  $default:
+    builders:
+      riverpod_generator:
+        generate_for:
+          include:
+            - "lib/src/firebase/firebase_instance.dart"
+            - "lib/src/flavor/flavor.dart"

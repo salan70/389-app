@@ -7,7 +7,7 @@ part of 'rewarded_ad_notifier.dart';
 // **************************************************************************
 
 String _$rewardedAdNotifierHash() =>
-    r'0473b1e4378088983ee3799251fe6765d3c11104';
+    r'6f6824433427b9288b8ae2d939af026daec1ef59';
 
 /// [RewardedAd] を保持する [Notifier].
 ///
