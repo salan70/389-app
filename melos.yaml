@@ -45,4 +45,5 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
+      dirExists: lib
       dependsOn: "build_runner"

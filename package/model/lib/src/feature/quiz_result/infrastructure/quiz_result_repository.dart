@@ -50,6 +50,7 @@ class QuizResultRepository {
         .doc(user.uid)
         .collection('dailyQuizResult')
         .doc(dailyQuiz.dailyQuizId)
+        // TODO(me): set 使っているため、 createdAt フィールドが削除されてしまっているかも。
         .set(<String, dynamic>{
       'questionedAt': dailyQuiz.questionedAt,
       'updatedAt': FieldValue.serverTimestamp(),

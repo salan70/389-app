@@ -2,7 +2,7 @@ import 'package:common/common.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../domain/rewarded_ad_state.dart';
+import 'rewarded_ad_state.dart';
 
 part 'rewarded_ad_notifier.g.dart';
 
@@ -10,7 +10,8 @@ part 'rewarded_ad_notifier.g.dart';
 @riverpod
 class RewardedAdNotifier extends _$RewardedAdNotifier {
   @override
-  RewardAdState build() => const RewardAdState();
+  RewardAdState build() =>
+      const RewardAdState(stateType: RewardAdStateType.loading);
 
   /// 広告を作成する。
   Future<void> loadAd() async {
@@ -19,14 +20,21 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (Ad ad) {
-          logger.i('リワード広告を読み込みました。');
+          // 広告が既に読み込まれている場合は `state` を更新しない。
+          if (state.stateType == RewardAdStateType.loaded) {
+            return;
+          }
+
           state = state.copyWith(
             rewardedAd: ad as RewardedAd,
-            isLoaded: true,
+            stateType: RewardAdStateType.loaded,
           );
         },
         onAdFailedToLoad: (LoadAdError error) {
-          logger.e('リワード広告の読み込みに失敗しました。: $error');
+          logger.e('リワード広告の読み込みに失敗しました。', error);
+          state = state.copyWith(
+            stateType: RewardAdStateType.error,
+          );
         },
       ),
     );
@@ -61,9 +69,9 @@ class RewardedAdNotifier extends _$RewardedAdNotifier {
       ..show(
         onUserEarnedReward: (ad, reward) {
           logger.i('リワード広告の視聴が完了しました。');
-          // state = state.copyWith(isWatchCompleted: true);
           onUserEarnedReward();
           logger.i('リワード広告の特典を受け取りました');
+          ref.invalidateSelf();
         },
       );
   }

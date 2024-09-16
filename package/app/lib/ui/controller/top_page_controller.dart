@@ -11,6 +11,7 @@ import '../component/common/dialog/error_dialog.dart';
 import '../component/play_quiz_daily/start_todays_daily_quiz_button.dart';
 import '../component/setting/notification_setting_dialog.dart';
 import '../component/setting/setting_dialog.dart';
+import '../page/hide_ad_dialog_page.dart';
 import 'common/navigator_key_controller.dart';
 
 part 'top_page_controller.g.dart';
@@ -29,6 +30,11 @@ class TopPageController with ControllerMixin {
     _showDialog(
       child: SettingDialog(onTapNotificationSetting: _onTapNotificationSetting),
     );
+  }
+
+  /// リワード広告再生ダイアログを開く。
+  void onTapOpenHideAdDialog() {
+    _showDialog(child: const HideAdDialogPage());
   }
 
   Future<void> startNormalQuiz() async {
@@ -120,6 +126,8 @@ class TopPageController with ControllerMixin {
 
   // * ダイアログ表示関連（ private ）
 
+  // TODO(me): ダイアログ毎に controller を定義して、この関数をその controller に定義してもいいかも。
+
   Future<void> _onTapNotificationSetting() async =>
       _showDialog(child: const NotificationSettingDialog());
 
@@ -140,6 +148,8 @@ class TopPageController with ControllerMixin {
       _showDialog(child: const AlertNotFoundDailyQuizDialog());
 
   void _showConfirmPlayDialog() => _showDialog(
-        child: ConfirmPlayDailyQuizDialog(onPressedYes: _onAcceptPlayDailyQuiz),
+        child: ConfirmPlayDailyQuizDialog(
+          onPressedYes: _onAcceptPlayDailyQuiz,
+        ),
       );
 }

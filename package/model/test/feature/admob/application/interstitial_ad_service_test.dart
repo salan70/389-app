@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:model/src/feature/admob/application/interstitial_ad_service.dart';
+import 'package:model/src/feature/admob/interstitial_ad_service.dart';
 
 void main() {
   group('isShownAds関数', () {

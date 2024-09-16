@@ -7,9 +7,11 @@ part of 'consecutive_ad_count_notifier.dart';
 // **************************************************************************
 
 String _$consecutiveAdCountNotifierHash() =>
-    r'd427ec5d6f7063b8d0d5ff66bd71ef9d0ef10167';
+    r'd29c5fec9b5e8273634c7ed363c1f3c1a6bb908f';
 
 /// 連続してインタースティシャル広告を表示する回数を管理する [Notifier].
+///
+/// 問題が変わっても回数を引き継ぐ（リセットしない）ため、`keepAlive` を `true` にしている。
 ///
 /// Copied from [ConsecutiveAdCountNotifier].
 @ProviderFor(ConsecutiveAdCountNotifier)

@@ -6,7 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../loading/application/loading_notifier.dart';
+import '../ad_free/ad_free_state.dart';
+import '../loading/application/loading_notifier.dart';
 import 'consecutive_ad_count_notifier.dart';
 
 part 'interstitial_ad_service.g.dart';
@@ -59,6 +60,12 @@ class InterstitialAdService {
 
   /// ランダムで広告を表示する。
   Future<void> randomShowAd() async {
+    // 広告非表示期間中の場合は広告を表示しない。
+    final isAdFree = await ref.read(isAdFreePeriodProvider.future);
+    if (isAdFree) {
+      return;
+    }
+
     final notifier = ref.read(consecutiveAdCountNotifierProvider.notifier);
 
     if (notifier.canShowAd() && isShownAds()) {

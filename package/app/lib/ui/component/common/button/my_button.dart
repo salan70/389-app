@@ -28,18 +28,26 @@ class MyButton extends ConsumerWidget {
   ///
   /// スネークケースのアルファベットで記述する。
   final String buttonName;
+
+  /// ボタンのタイプ。
   final ButtonType buttonType;
+
+  /// ボタンが押されたときのコールバック。
   final VoidCallback? onPressed;
+
+  /// ボタンの子要素。
   final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextButton(
       style: buttonType.buttonStyle,
-      onPressed: () async {
-        await ref.read(analyticsServiceProvider).logTapButton(buttonName);
-        onPressed?.call();
-      },
+      onPressed: buttonType == ButtonType.disabled
+          ? null
+          : () async {
+              await ref.read(analyticsServiceProvider).logTapButton(buttonName);
+              onPressed?.call();
+            },
       child: child,
     );
   }
@@ -49,7 +57,8 @@ class MyButton extends ConsumerWidget {
 enum ButtonType {
   main,
   alert,
-  sub;
+  sub,
+  disabled;
 
   ButtonStyle get buttonStyle {
     switch (this) {
@@ -82,6 +91,14 @@ enum ButtonType {
           ),
           backgroundColor: backgroundColor,
           foregroundColor: primaryColor,
+        );
+      case ButtonType.disabled:
+        return TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          backgroundColor: backgroundColor,
+          foregroundColor: backgroundColor,
         );
     }
   }
