@@ -45,7 +45,6 @@ class HideAdDialogPage extends ConsumerWidget {
             );
 
           case RewardAdStateType.error:
-            logger.e('async じゃないほうの error');
             return _HideAdDialog.error(
               rewardedAdWatchCount: state.rewardedAdWatchCount,
               adFreePeriodEndDate: state.adFreePeriodEndDate,

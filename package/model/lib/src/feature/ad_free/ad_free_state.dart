@@ -1,4 +1,3 @@
-import 'package:common/common.dart';
 import 'package:ntp/ntp.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,13 +14,7 @@ Stream<DateTime?> endAtAdFreePeriodStream(EndAtAdFreePeriodStreamRef ref) {
   final adFreePeriodRepository = ref.watch(adFreePeriodRepositoryProvider);
   final userId = ref.watch(authRepositoryProvider).getCurrentUser()!.uid;
 
-  try {
-    final endTime = adFreePeriodRepository.streamEndTime(userId);
-    return endTime;
-  } on Exception catch (e) {
-    logger.e(e);
-    return Stream.value(null);
-  }
+  return adFreePeriodRepository.streamEndTime(userId);
 }
 
 /// 広告非表示期間中かどうかを返す。
