@@ -15,7 +15,7 @@ import '../../../../core/util/colors_constant.dart';
 /// 設置数の制限なしだが、基本的には1画面に1つのとなりそう
 ///
 /// - サブボタンは、メインにもアラートにも該当しないボタンに使用。設置数の制限なし。
-class MyButton extends ConsumerWidget {
+class MyButton extends ConsumerStatefulWidget {
   const MyButton({
     super.key,
     required this.buttonName,
@@ -28,27 +28,58 @@ class MyButton extends ConsumerWidget {
   ///
   /// スネークケースのアルファベットで記述する。
   final String buttonName;
-
-  /// ボタンのタイプ。
   final ButtonType buttonType;
-
-  /// ボタンが押されたときのコールバック。
   final VoidCallback? onPressed;
-
-  /// ボタンの子要素。
   final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
-      style: buttonType.buttonStyle,
-      onPressed: buttonType == ButtonType.disabled
-          ? null
-          : () async {
-              await ref.read(analyticsServiceProvider).logTapButton(buttonName);
-              onPressed?.call();
-            },
-      child: child,
+  ConsumerState<MyButton> createState() => _MyButtonState();
+}
+
+class _MyButtonState extends ConsumerState<MyButton> {
+  bool _isPressed = false;
+
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _isPressed = true;
+    });
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _isPressed = false;
+    });
+  }
+
+  void _onTapCancel() {
+    setState(() {
+      _isPressed = false;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTapDown: _onTapDown,
+      onTapUp: _onTapUp,
+      onTapCancel: _onTapCancel,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        transform: Matrix4.translationValues(0, _isPressed ? 4 : 0, 0),
+        curve: Curves.easeInOut,
+        child: TextButton(
+          style: widget.buttonType.buttonStyle,
+          onPressed: widget.buttonType == ButtonType.disabled
+              ? null
+              : () async {
+                  await ref
+                      .read(analyticsServiceProvider)
+                      .logTapButton(widget.buttonName);
+                  widget.onPressed?.call();
+                },
+          child: widget.child,
+        ),
+      ),
     );
   }
 }
@@ -63,42 +94,60 @@ enum ButtonType {
   ButtonStyle get buttonStyle {
     switch (this) {
       case ButtonType.main:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+        return ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          backgroundColor: primaryColor,
-          disabledBackgroundColor: primaryColor.withOpacity(0.4),
-          foregroundColor: backgroundColor,
+          backgroundColor: MaterialStateProperty.all(primaryColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          splashFactory: NoSplash.splashFactory,
         );
 
       case ButtonType.alert:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+        return ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          backgroundColor: errorColor,
-          foregroundColor: backgroundColor,
+          backgroundColor: MaterialStateProperty.all(errorColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          splashFactory: NoSplash.splashFactory,
         );
+
       case ButtonType.sub:
-        return TextButton.styleFrom(
-          side: const BorderSide(
-            width: 2,
-            color: primaryColor,
+        return ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              width: 2,
+              color: primaryColor,
+            ),
           ),
-          backgroundColor: backgroundColor,
-          foregroundColor: primaryColor,
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          foregroundColor: MaterialStateProperty.all(primaryColor),
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          splashFactory: NoSplash.splashFactory,
         );
+
       case ButtonType.disabled:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+        return ButtonStyle(
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
           ),
-          backgroundColor: backgroundColor,
-          foregroundColor: backgroundColor,
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
+          splashFactory: NoSplash.splashFactory,
         );
     }
   }
