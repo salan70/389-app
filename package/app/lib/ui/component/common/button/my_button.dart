@@ -36,48 +36,79 @@ class MyButton extends ConsumerStatefulWidget {
   ConsumerState<MyButton> createState() => _MyButtonState();
 }
 
-class _MyButtonState extends ConsumerState<MyButton> {
-  bool _isPressed = false;
+class _MyButtonState extends ConsumerState<MyButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animController;
+  late Animation<double> _pressAnim;
+  TickerFuture? _downTicker;
+
+  @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+    _pressAnim = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
 
   void _onTapDown(TapDownDetails details) {
-    setState(() {
-      _isPressed = true;
-    });
+    if (widget.onPressed == null) {
+      return;
+    }
+    _downTicker = _animController.animateTo(1);
   }
 
   void _onTapUp(TapUpDetails details) {
-    setState(() {
-      _isPressed = false;
+    if (widget.onPressed == null) {
+      return;
+    }
+    _downTicker?.whenComplete(() {
+      _animController.animateTo(0).whenCompleteOrCancel(() async {
+        await ref
+            .read(analyticsServiceProvider)
+            .logTapButton(widget.buttonName);
+        widget.onPressed?.call();
+      });
     });
   }
 
   void _onTapCancel() {
-    setState(() {
-      _isPressed = false;
-    });
+    if (widget.onPressed == null) {
+      return;
+    }
+
+    _animController.reset();
   }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
-      onTapCancel: _onTapCancel,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 100),
-        transform: Matrix4.translationValues(0, _isPressed ? 4 : 0, 0),
-        curve: Curves.easeInOut,
-        child: TextButton(
-          style: widget.buttonType.buttonStyle,
-          onPressed: widget.buttonType == ButtonType.disabled
-              ? null
-              : () async {
-                  await ref
-                      .read(analyticsServiceProvider)
-                      .logTapButton(widget.buttonName);
-                  widget.onPressed?.call();
-                },
-          child: widget.child,
+    return RepaintBoundary(
+      child: GestureDetector(
+        onTapDown: _onTapDown,
+        onTapUp: _onTapUp,
+        onTapCancel: _onTapCancel,
+        child: AnimatedBuilder(
+          animation: _pressAnim,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(0, _pressAnim.value * 4),
+              child: child,
+            );
+          },
+          child: TextButton(
+            style: widget.buttonType.buttonStyle,
+            onPressed: null, // GestureDetector で処理するため、ここでは null.
+            child: widget.child,
+          ),
         ),
       ),
     );
