@@ -20,7 +20,7 @@ dependencies:
 
   # UI.
   awesome_select: ^6.0.0
-  confetti: ^0.7.0 # 紙吹雪を出すために使用
+  flutter_confetti: ^0.3.0 # 紙吹雪を出すために使用
   google_fonts: ^6.1.0
   table_calendar: ^3.0.9
   textfield_search: ^0.10.0

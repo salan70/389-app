@@ -1,7 +1,5 @@
-import 'dart:math';
-
-import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 
 class CustomConfettiWidget extends StatefulWidget {
   const CustomConfettiWidget({
@@ -16,9 +14,6 @@ class CustomConfettiWidget extends StatefulWidget {
 }
 
 class _CustomConfettiWidgetState extends State<CustomConfettiWidget> {
-  final confettiController =
-      ConfettiController(duration: const Duration(seconds: 2));
-
   @override
   void initState() {
     super.initState();
@@ -26,24 +21,20 @@ class _CustomConfettiWidgetState extends State<CustomConfettiWidget> {
     // 画面が描画されたら紙吹雪を表示する。
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (widget.isCorrect) {
-        confettiController.play();
+        Confetti.launch(
+          context,
+          options: const ConfettiOptions(
+            particleCount: 500,
+            spread: 70,
+            y: 0.9,
+          ),
+        );
       }
     });
   }
 
   @override
-  void dispose() {
-    confettiController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ConfettiWidget(
-      confettiController: confettiController,
-      emissionFrequency: 0.2,
-      blastDirection: 3 * pi / 2,
-      particleDrag: 0.005,
-    );
+    return const SizedBox.shrink();
   }
 }
