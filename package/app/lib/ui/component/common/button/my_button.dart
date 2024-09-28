@@ -92,40 +92,31 @@ enum ButtonType {
   disabled;
 
   ButtonStyle get buttonStyle {
+    final baseStyle = ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      splashFactory: NoSplash.splashFactory,
+    );
+
     switch (this) {
       case ButtonType.main:
-        return ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+        return baseStyle.copyWith(
           backgroundColor: MaterialStateProperty.all(primaryColor),
           foregroundColor: MaterialStateProperty.all(backgroundColor),
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          splashFactory: NoSplash.splashFactory,
         );
 
       case ButtonType.alert:
-        return ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+        return baseStyle.copyWith(
           backgroundColor: MaterialStateProperty.all(errorColor),
           foregroundColor: MaterialStateProperty.all(backgroundColor),
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          splashFactory: NoSplash.splashFactory,
         );
 
       case ButtonType.sub:
-        return ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+        return baseStyle.copyWith(
           side: MaterialStateProperty.all(
             const BorderSide(
               width: 2,
@@ -134,20 +125,12 @@ enum ButtonType {
           ),
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           foregroundColor: MaterialStateProperty.all(primaryColor),
-          overlayColor: MaterialStateProperty.all(Colors.transparent),
-          splashFactory: NoSplash.splashFactory,
         );
 
       case ButtonType.disabled:
-        return ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-          ),
+        return baseStyle.copyWith(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           foregroundColor: MaterialStateProperty.all(backgroundColor),
-          splashFactory: NoSplash.splashFactory,
         );
     }
   }
