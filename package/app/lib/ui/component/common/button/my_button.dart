@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
@@ -72,6 +73,9 @@ class _MyButtonState extends ConsumerState<MyButton>
       return;
     }
     _downTicker?.whenComplete(() {
+      // 振動を発生させる。
+      HapticFeedback.selectionClick();
+
       _animController.animateTo(0).whenCompleteOrCancel(() async {
         await ref
             .read(analyticsServiceProvider)
