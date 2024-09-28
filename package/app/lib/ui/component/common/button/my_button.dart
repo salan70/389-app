@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:model/model.dart';
 
@@ -15,7 +16,7 @@ import '../../../../core/util/colors_constant.dart';
 /// 設置数の制限なしだが、基本的には1画面に1つのとなりそう
 ///
 /// - サブボタンは、メインにもアラートにも該当しないボタンに使用。設置数の制限なし。
-class MyButton extends ConsumerWidget {
+class MyButton extends ConsumerStatefulWidget {
   const MyButton({
     super.key,
     required this.buttonName,
@@ -28,27 +29,92 @@ class MyButton extends ConsumerWidget {
   ///
   /// スネークケースのアルファベットで記述する。
   final String buttonName;
-
-  /// ボタンのタイプ。
   final ButtonType buttonType;
-
-  /// ボタンが押されたときのコールバック。
   final VoidCallback? onPressed;
-
-  /// ボタンの子要素。
   final Widget child;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
-      style: buttonType.buttonStyle,
-      onPressed: buttonType == ButtonType.disabled
-          ? null
-          : () async {
-              await ref.read(analyticsServiceProvider).logTapButton(buttonName);
-              onPressed?.call();
-            },
-      child: child,
+  ConsumerState<MyButton> createState() => _MyButtonState();
+}
+
+class _MyButtonState extends ConsumerState<MyButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animController;
+  late Animation<double> _pressAnim;
+  TickerFuture? _downTicker;
+
+  @override
+  void initState() {
+    super.initState();
+    _animController = AnimationController(
+      duration: const Duration(milliseconds: 100),
+      vsync: this,
+    );
+    _pressAnim = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animController, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
+
+  void _onTapDown(TapDownDetails details) {
+    if (widget.onPressed == null) {
+      return;
+    }
+    _downTicker = _animController.animateTo(1);
+  }
+
+  void _onTapUp(TapUpDetails details) {
+    if (widget.onPressed == null) {
+      return;
+    }
+    _downTicker?.whenComplete(() {
+      // 振動を発生させる。
+      HapticFeedback.selectionClick();
+
+      _animController.animateTo(0).whenCompleteOrCancel(() async {
+        await ref
+            .read(analyticsServiceProvider)
+            .logTapButton(widget.buttonName);
+        widget.onPressed?.call();
+      });
+    });
+  }
+
+  void _onTapCancel() {
+    if (widget.onPressed == null) {
+      return;
+    }
+
+    _animController.reset();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: GestureDetector(
+        onTapDown: _onTapDown,
+        onTapUp: _onTapUp,
+        onTapCancel: _onTapCancel,
+        child: AnimatedBuilder(
+          animation: _pressAnim,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(0, _pressAnim.value * 4),
+              child: child,
+            );
+          },
+          child: TextButton(
+            style: widget.buttonType.buttonStyle,
+            onPressed: null, // GestureDetector で処理するため、ここでは null.
+            child: widget.child,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -61,44 +127,45 @@ enum ButtonType {
   disabled;
 
   ButtonStyle get buttonStyle {
+    final baseStyle = ButtonStyle(
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      overlayColor: MaterialStateProperty.all(Colors.transparent),
+      splashFactory: NoSplash.splashFactory,
+    );
+
     switch (this) {
       case ButtonType.main:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          backgroundColor: primaryColor,
-          disabledBackgroundColor: primaryColor.withOpacity(0.4),
-          foregroundColor: backgroundColor,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.all(primaryColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
         );
 
       case ButtonType.alert:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          backgroundColor: errorColor,
-          foregroundColor: backgroundColor,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.all(errorColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
         );
+
       case ButtonType.sub:
-        return TextButton.styleFrom(
-          side: const BorderSide(
-            width: 2,
-            color: primaryColor,
+        return baseStyle.copyWith(
+          side: MaterialStateProperty.all(
+            const BorderSide(
+              width: 2,
+              color: primaryColor,
+            ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          backgroundColor: backgroundColor,
-          foregroundColor: primaryColor,
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          foregroundColor: MaterialStateProperty.all(primaryColor),
         );
+
       case ButtonType.disabled:
-        return TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          backgroundColor: backgroundColor,
-          foregroundColor: backgroundColor,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          foregroundColor: MaterialStateProperty.all(backgroundColor),
         );
     }
   }
